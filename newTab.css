@@ -1,0 +1,158 @@
+.newtab-row {
+  margin-bottom: 5px;
+}
+.newtab-cell {
+  -moz-margin-end: 5px;
+}
+#newtab-margin-top {
+  min-height: 10px;
+  max-height: 30px;
+}
+#newtab-margin-bottom {
+  min-height: 10px;
+  max-height: 30px;
+}
+:root.launcherBottom #newtab-margin-bottom {
+  max-height: 10px;
+}
+.newtab-side-margin {
+  min-width: 10px;
+  max-width: 30px;
+}
+
+#launcher {
+  display: none;
+  -moz-box-align: center;
+  -moz-box-pack: center;
+  width: 100%;
+  background-color: hsla(0,0%,0%,.03);
+  border-top: 1px solid hsla(0,0%,0%,.03);
+  box-shadow: 0 1px 2px hsla(0,0%,0%,.02) inset,
+              0 -1px 0 hsla(0,0%,100%,.25);
+  text-align: center;
+  white-space: nowrap; /* prevent navigational buttons from wrapping */
+}
+:root.launcherBottom #launcher {
+  display: block;
+}
+
+.launchButton {
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  margin: 1px 1px;
+  padding: 14px 6px;
+  min-width: 88px;
+  max-width: 176px;
+  max-height: 85px;
+  vertical-align: top;
+  white-space: normal;
+  background: transparent padding-box;
+  border: 1px solid transparent;
+  border-radius: 2.5px;
+  color: #525c66;
+  font-family: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  -moz-transition-property: background-color, border-color, box-shadow;
+  -moz-transition-duration: 150ms;
+}
+
+.launchButton:hover {
+  background-color: hsla(211,79%,6%,.03);
+  border-color: hsla(210,54%,20%,.15) hsla(210,54%,20%,.17) hsla(210,54%,20%,.2);
+}
+
+.launchButton:hover:active {
+  background-image: -moz-linear-gradient(hsla(211,79%,6%,.02), hsla(211,79%,6%,.05));
+  border-color: hsla(210,54%,20%,.2) hsla(210,54%,20%,.23) hsla(210,54%,20%,.25);
+  box-shadow: 0 1px 1px hsla(211,79%,6%,.05) inset,
+              0 0 1px hsla(211,79%,6%,.1) inset;
+  -moz-transition-duration: 0ms;
+}
+
+.launchButton::before {
+  display: block;
+  height: 32px;
+  margin-bottom: 6px;
+  line-height: 0; /* remove extra vertical space due to non-zero font-size */
+}
+
+#downloads::before {
+  content: url("chrome://browser/content/abouthome/downloads.png");
+}
+
+#bookmarks::before {
+  content: url("chrome://browser/content/abouthome/bookmarks.png");
+}
+
+#history::before {
+  content: url("chrome://browser/content/abouthome/history.png");
+}
+
+#addons::before {
+  content: url("chrome://browser/content/abouthome/addons.png");
+}
+
+#sync::before {
+  content: url("chrome://browser/content/abouthome/sync.png");
+}
+
+#settings::before {
+  content: url("chrome://browser/content/abouthome/settings.png");
+}
+
+#newtab-toggle {
+  display: none;
+}
+#config-toggle {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  border: none;
+  background: transparent url(chrome://mozapps/skin/extensions/utilities.png);
+  z-index: 2
+}
+#config-toggle:-moz-locale-dir(rtl) {
+  left: 12px;
+  right: auto;
+}
+/*#config-toggle.shown {
+  background-position: -232px 0;
+}*/
+
+#config-wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 0;
+  overflow: hidden;
+  -moz-transition: width 500ms;
+}
+#config-wrapper.shown {
+  width: 351px;
+}
+
+#config {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 350px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-left: 1px rgba(0, 0, 0, 0.25) solid;
+  z-index: 1;
+  color: #fff;
+  text-shadow: 0 0 3px #000;
+}
+#config-inner {
+  margin: 50px 6px 0;
+  width: 338px;
+}
+#config-morePrefs {
+  margin-top: 2em;
+  text-align: center;
+}

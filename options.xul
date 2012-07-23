@@ -1,0 +1,6 @@
+<?xml version="1.0" ?>
+<vbox xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  <setting pref="extensions.newtabtools.rows" type="integer" title="Rows" max="10" min="1"/>
+  <setting pref="extensions.newtabtools.columns" type="integer" title="Columns" max="10" min="1"/>
+  <setting pref="extensions.newtabtools.launcher" type="boolint" on="3" off="0" title="Show Launcher"/>
+</vbox>
