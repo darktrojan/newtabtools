@@ -14,7 +14,7 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
   %newTabDTD;
   <!ENTITY % aboutHomeDTD SYSTEM "chrome://browser/locale/aboutHome.dtd">
   %aboutHomeDTD;
-  <!ENTITY % browserDTD SYSTEM "chrome://browser/locale/browser.dtd" >
+  <!ENTITY % browserDTD SYSTEM "chrome://browser/locale/browser.dtd">
   %browserDTD;
 ]>
 
@@ -48,17 +48,14 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 
     <div id="newtab-vertical-margin">
       <div id="newtab-margin-top"/>
-
       <div id="newtab-horizontal-margin">
         <div class="newtab-side-margin"/>
-
         <div id="newtab-grid"/>
-
         <div class="newtab-side-margin"/>
       </div>
-
       <div id="newtab-margin-bottom"/>
     </div>
+
     <input id="config-toggle" type="button"/>
     <input id="newtab-toggle" type="button"/>
 

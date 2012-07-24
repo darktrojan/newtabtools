@@ -1,17 +1,9 @@
+/*
+This Source Code Form is subject to the terms of the Mozilla Public
+License, v. 2.0. If a copy of the MPL was not distributed with this file,
+You can obtain one at http://mozilla.org/MPL/2.0/.
+*/
 let newTabTools = {
-  /*get domStorage() {
-    let uri = Services.io.newURI("about:newtab", null, null);
-    let principal = Services.scriptSecurityManager.getCodebasePrincipal(uri);
-
-    let sm = Services.domStorageManager;
-    let storage = sm.getLocalStorageForPrincipal(principal, "");
-
-    // Cache this value, overwrite the getter.
-    let descriptor = {value: storage, enumerable: true};
-    Object.defineProperty(this, "domStorage", descriptor);
-
-    return storage;
-  },*/
   launcherOnClick: function(event) {
     switch (event.originalTarget.id) {
     case "downloads":
