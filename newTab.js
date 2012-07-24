@@ -95,32 +95,34 @@ let newTabTools = {
   },
   removeThumbnail: function(aURL) {
     let file = PageThumbsStorage.getFileForURL(aURL);
-    if (file.exists())
-        file.remove(true);
+    if (file.exists()) {
+      file.permissions = 0644;
+      file.remove(true);
+    }
   },
   setThumbnail: function(aURL, aSrc, aCallback) {
     this.removeThumbnail(aURL);
 
     let image = new Image();
     image.onload = function() {
-        let sw = image.width;
-        let sh = image.height;
-        let [thumbnailWidth, thumbnailHeight] = PageThumbs._getThumbnailSize();
-        let scale = Math.max(thumbnailWidth / sw, thumbnailHeight / sh);
+      let sw = image.width;
+      let sh = image.height;
+      let [thumbnailWidth, thumbnailHeight] = PageThumbs._getThumbnailSize();
+      let scale = Math.max(thumbnailWidth / sw, thumbnailHeight / sh);
 
-        let canvas = PageThumbs._createCanvas();
-        let ctx = canvas.getContext("2d");
-        ctx.scale(scale, scale);
-        ctx.drawImage(image, 0, 0);
-        
-        canvas.mozFetchAsStream(function(aInputStream) {
-            PageThumbsStorage.write(aURL, aInputStream, function(aSuccessful) {
-                let file = PageThumbsStorage.getFileForURL(aURL);
-                file.permissions = 0444;
-                if (aCallback)
-                  aCallback(aSuccessful);
-            });
-        }, "image/png");
+      let canvas = PageThumbs._createCanvas();
+      let ctx = canvas.getContext("2d");
+      ctx.scale(scale, scale);
+      ctx.drawImage(image, 0, 0);
+
+      canvas.mozFetchAsStream(function(aInputStream) {
+          PageThumbsStorage.write(aURL, aInputStream, function(aSuccessful) {
+              let file = PageThumbsStorage.getFileForURL(aURL);
+              file.permissions = 0444;
+              if (aCallback)
+                aCallback(aSuccessful);
+          });
+      }, "image/png");
     }
     image.src = aSrc;
   }
