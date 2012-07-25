@@ -3,6 +3,9 @@ This Source Code Form is subject to the terms of the Mozilla Public
 License, v. 2.0. If a copy of the MPL was not distributed with this file,
 You can obtain one at http://mozilla.org/MPL/2.0/.
 */
+Components.utils.import("resource://gre/modules/FileUtils.jsm");
+Components.utils.import("resource://gre/modules/NetUtil.jsm");
+
 let newTabTools = {
   launcherOnClick: function(event) {
     switch (event.originalTarget.id) {
@@ -26,6 +29,28 @@ let newTabTools = {
       break;
     }
   },
+  get page() {
+    return document.getElementById("newtab-scrollbox");
+  },
+  get backgroundImageFile() {
+    return FileUtils.getFile("ProfD", ["newtab-background"], true);
+  },
+  get backgroundImageURL() {
+    Components.utils.import("resource://gre/modules/Services.jsm");
+    return Services.io.newFileURI(this.backgroundImageFile);
+  },
+  refreshBackgroundImage: function() {
+    if (this.backgroundImageFile.exists()) {
+      this.page.style.backgroundImage =
+        'url("' + this.backgroundImageURL.spec + '?' + Math.random() + '")';
+      this.page.style.backgroundSize = "cover";
+      this.page.classList.add("background");
+    } else {
+      this.page.style.backgroundImage = null;
+      this.page.style.backgroundSize = null;
+      this.page.classList.remove("background");
+    }
+  },
   get configToggleButton() {
     return document.getElementById("config-toggle");
   },
@@ -38,14 +63,21 @@ let newTabTools = {
   get setThumbnailInput() {
     return document.getElementById("config-input");
   },
+  get setBackgroundInput() {
+    return document.getElementById("config-bg-input");
+  },
   configOnClick: function(event) {
-    switch (event.originalTarget.id) {
+    let id = event.originalTarget.id;
+    switch (id) {
     case "config-browseForFile":
+    case "config-bg-browseForFile":
       let fp = Components.classes["@mozilla.org/filepicker;1"].createInstance(Ci.nsIFilePicker);
       fp.init(window, document.title, Ci.nsIFilePicker.modeOpen);
       fp.appendFilters(Ci.nsIFilePicker.filterImages);
-      if (fp.show() == Ci.nsIFilePicker.returnOK)
-        this.setThumbnailInput.value = fp.fileURL.spec;
+      if (fp.show() == Ci.nsIFilePicker.returnOK) {
+        let input = id == "config-browseForFile" ? this.setThumbnailInput : this.setBackgroundInput;
+        input.value = fp.fileURL.spec;
+      }
       break;
     case "config-setThumbnail":
       this.setThumbnail(this.tileSelect.value, this.setThumbnailInput.value, function() {
@@ -55,6 +87,22 @@ let newTabTools = {
     case "config-removeThumbnail":
       this.removeThumbnail(this.tileSelect.value);
       newTabTools.refreshThumbnail(this.tileSelect.value);
+      break;
+    case "config-setBackground":
+      let fos = FileUtils.openSafeFileOutputStream(this.backgroundImageFile);
+      NetUtil.asyncFetch(this.setBackgroundInput.value, function(inputStream, status) {
+        if (!Components.isSuccessCode(status)) {
+          return;
+        }
+        NetUtil.asyncCopy(inputStream, fos, function (aResult) {
+          FileUtils.closeSafeFileOutputStream(fos);
+          this.refreshBackgroundImage();
+        }.bind(this));
+      }.bind(this));
+      break;
+    case "config-removeBackground":
+      this.backgroundImageFile.remove(true);
+      this.refreshBackgroundImage();
       break;
     case "config-morePrefs":
       newTabTools.browserWindow.BrowserOpenAddonsMgr("addons://detail/newtabtools@darktrojan.net/preferences")
@@ -108,12 +156,12 @@ let newTabTools = {
       ctx.drawImage(image, 0, 0);
 
       canvas.mozFetchAsStream(function(aInputStream) {
-          PageThumbsStorage.write(aURL, aInputStream, function(aSuccessful) {
-              let file = PageThumbsStorage.getFileForURL(aURL);
-              file.permissions = 0444;
-              if (aCallback)
-                aCallback(aSuccessful);
-          });
+        PageThumbsStorage.write(aURL, aInputStream, function(aSuccessful) {
+          let file = PageThumbsStorage.getFileForURL(aURL);
+          file.permissions = 0444;
+          if (aCallback)
+            aCallback(aSuccessful);
+        });
       }, "image/png");
     }
     image.src = aSrc;
@@ -133,6 +181,8 @@ let newTabTools = {
                  .getInterface(Ci.nsIDOMWindow)
                  .wrappedJSObject;
   });
+
+  newTabTools.refreshBackgroundImage();
 
   let rows = Services.prefs.getIntPref("extensions.newtabtools.rows");
   let columns = Services.prefs.getIntPref("extensions.newtabtools.columns");

@@ -76,6 +76,15 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
   margin-bottom: 6px;
   line-height: 0;
 }
+.background #launcher {
+  border-top: 1px solid hsla(0,0%,100%,.3);
+  background-color: hsla(0,0%,100%,.3);
+  box-shadow: none;
+}
+.background .launchButton:hover {
+  background-color: hsla(211,80%,100%,.6);
+  border-color: hsla(210,54%,20%,.3) hsla(210,54%,20%,.3) hsla(210,54%,20%,.4);
+}
 #downloads::before {
   content: url("chrome://browser/content/abouthome/downloads.png");
 }
@@ -141,6 +150,5 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
   width: 338px;
 }
 #config-morePrefs {
-  margin-top: 2em;
   text-align: center;
 }

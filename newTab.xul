@@ -26,6 +26,7 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
     <div id="config-wrapper">
       <div id="config">
         <xul:vbox id="config-inner" flex="1">
+          <xul:label class="header" value="Tile images:"/>
           <xul:label value="Select a tile:"/>
           <xul:menulist id="config-select">
             <xul:menupopup/>
@@ -41,6 +42,20 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
             <xul:button flex="1" id="config-removeThumbnail" label="Remove Thumbnail"/>
             <xul:spacer flex="4"/>
           </xul:hbox>
+          <xul:spacer style="height: 3em"/>
+          <xul:label class="header" value="Page Background Image:"/>
+          <xul:label value="Paste an image URL or browse to choose a file:"/>
+          <xul:hbox flex="1" align="center">
+            <xul:textbox id="config-bg-input" flex="1"/>
+            <xul:button id="config-bg-browseForFile" label="Browse&#x2026;"/>
+          </xul:hbox>
+          <xul:hbox flex="1" align="center">
+            <xul:spacer flex="4"/>
+            <xul:button flex="1" id="config-setBackground" label="Set Background"/>
+            <xul:button flex="1" id="config-removeBackground" label="Remove Background"/>
+            <xul:spacer flex="4"/>
+          </xul:hbox>
+          <xul:spacer style="height: 3em"/>
           <xul:label class="text-link" id="config-morePrefs" value="More options&#x2026;"/>
         </xul:vbox>
       </div>
