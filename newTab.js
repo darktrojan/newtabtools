@@ -43,11 +43,9 @@ let newTabTools = {
     if (this.backgroundImageFile.exists()) {
       this.page.style.backgroundImage =
         'url("' + this.backgroundImageURL.spec + '?' + Math.random() + '")';
-      this.page.style.backgroundSize = "cover";
       this.page.classList.add("background");
     } else {
       this.page.style.backgroundImage = null;
-      this.page.style.backgroundSize = null;
       this.page.classList.remove("background");
     }
   },
