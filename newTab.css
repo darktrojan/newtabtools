@@ -33,10 +33,10 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
   -moz-box-align: center;
   -moz-box-pack: center;
   width: 100%;
-  background-color: hsla(0,0%,0%,.03);
-  border-top: 1px solid hsla(0,0%,0%,.03);
-  box-shadow: 0 1px 2px hsla(0,0%,0%,.02) inset,
-              0 -1px 0 hsla(0,0%,100%,.25);
+  background-color: hsla(0, 0%, 0%, .03);
+  border-top: 1px solid hsla(0, 0%, 0%, .03);
+  box-shadow: 0 1px 2px hsla(0, 0%, 0%, .02) inset,
+              0 -1px 0 hsla(0, 0%, 100%, .25);
   text-align: center;
   white-space: nowrap;
 }
@@ -64,14 +64,14 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
   -moz-transition-duration: 150ms;
 }
 .launchButton:hover {
-  background-color: hsla(211,79%,6%,.03);
-  border-color: hsla(210,54%,20%,.15) hsla(210,54%,20%,.17) hsla(210,54%,20%,.2);
+  background-color: hsla(211, 79%, 6%, .03);
+  border-color: hsla(210, 54%, 20%, .15) hsla(210, 54%, 20%, .17) hsla(210, 54%, 20%, .2);
 }
 .launchButton:hover:active {
-  background-image: -moz-linear-gradient(hsla(211,79%,6%,.02), hsla(211,79%,6%,.05));
-  border-color: hsla(210,54%,20%,.2) hsla(210,54%,20%,.23) hsla(210,54%,20%,.25);
-  box-shadow: 0 1px 1px hsla(211,79%,6%,.05) inset,
-              0 0 1px hsla(211,79%,6%,.1) inset;
+  background-image: -moz-linear-gradient(hsla(211, 79%, 6%, .02), hsla(211, 79%, 6%, .05));
+  border-color: hsla(210, 54%, 20%, .2) hsla(210, 54%, 20%, .23) hsla(210, 54%, 20%, .25);
+  box-shadow: 0 1px 1px hsla(211, 79%, 6%, .05) inset,
+              0 0 1px hsla(211, 79%, 6%, .1) inset;
   -moz-transition-duration: 0ms;
 }
 .launchButton::before {
@@ -81,13 +81,13 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
   line-height: 0;
 }
 .background #launcher {
-  border-top: 1px solid hsla(0,0%,100%,.3);
-  background-color: hsla(0,0%,100%,.3);
+  border-top: 1px solid hsla(0, 0%, 100%, .3);
+  background-color: hsla(0, 0%, 100%, .3);
   box-shadow: none;
 }
 .background .launchButton:hover {
-  background-color: hsla(211,80%,100%,.6);
-  border-color: hsla(210,54%,20%,.3) hsla(210,54%,20%,.3) hsla(210,54%,20%,.4);
+  background-color: hsla(211, 80%, 100%, .6);
+  border-color: hsla(210, 54%, 20%, .3) hsla(210, 54%, 20%, .3) hsla(210, 54%, 20%, .4);
 }
 #downloads::before {
   content: url("chrome://browser/content/abouthome/downloads.png");
