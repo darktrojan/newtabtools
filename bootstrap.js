@@ -17,6 +17,7 @@ function startup(params, aReason) {
   defaultPrefs.setIntPref("rows", 3);
   defaultPrefs.setIntPref("columns", 3);
   defaultPrefs.setIntPref("launcher", 3);
+  defaultPrefs.setBoolPref("launcher.dark", false);
 }
 function shutdown(params, aReason) {
 }

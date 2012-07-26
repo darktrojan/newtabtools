@@ -55,6 +55,7 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
             <xul:button flex="1" id="config-removeBackground" label="Remove Background"/>
             <xul:spacer flex="4"/>
           </xul:hbox>
+          <xul:checkbox flex="1" id="config-darkLauncher" label="Use dark background for launcher"/>
           <xul:spacer style="height: 3em"/>
           <xul:label class="text-link" id="config-morePrefs" value="More options&#x2026;"/>
         </xul:vbox>

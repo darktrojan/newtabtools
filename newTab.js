@@ -39,6 +39,12 @@ let newTabTools = {
     Components.utils.import("resource://gre/modules/Services.jsm");
     return Services.io.newFileURI(this.backgroundImageFile);
   },
+  get launcher() {
+    return document.getElementById("launcher");
+  },
+  get darkLauncherCheckbox() {
+    return document.getElementById("config-darkLauncher");
+  },
   refreshBackgroundImage: function() {
     if (this.backgroundImageFile.exists()) {
       this.page.style.backgroundImage =
@@ -101,6 +107,15 @@ let newTabTools = {
     case "config-removeBackground":
       this.backgroundImageFile.remove(true);
       this.refreshBackgroundImage();
+      break;
+    case "config-darkLauncher":
+      let checked = event.originalTarget.checked;
+      Services.prefs.setBoolPref("extensions.newtabtools.launcher.dark", checked);
+      if (checked) {
+        this.launcher.classList.add("dark");
+      } else {
+        this.launcher.classList.remove("dark");
+      }
       break;
     case "config-morePrefs":
       newTabTools.browserWindow.BrowserOpenAddonsMgr("addons://detail/newtabtools@darktrojan.net/preferences")
@@ -205,9 +220,12 @@ let newTabTools = {
   configInner.addEventListener("click", newTabTools.configOnClick.bind(newTabTools), false);
 
   let showLauncher = Services.prefs.getIntPref("extensions.newtabtools.launcher");
-  let launcher = document.getElementById("launcher");
   if (showLauncher == 3) {
-    launcher.addEventListener("click", newTabTools.launcherOnClick, false);
+    newTabTools.launcher.addEventListener("click", newTabTools.launcherOnClick, false);
     document.documentElement.classList.add("launcherBottom");
+    if (Services.prefs.getBoolPref("extensions.newtabtools.launcher.dark")) {
+      newTabTools.launcher.classList.add("dark");
+      newTabTools.darkLauncherCheckbox.checked = true;
+    }
   }
 }
