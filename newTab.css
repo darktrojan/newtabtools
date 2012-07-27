@@ -92,6 +92,14 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
   background-color: hsla(211, 80%, 100%, .6);
   border-color: hsla(210, 54%, 20%, .3) hsla(210, 54%, 20%, .3) hsla(210, 54%, 20%, .4);
 }
+.background #launcher.dark .launchButton {
+  color: #fff;
+  text-shadow: 0 0 2px #000;
+}
+.background #launcher.dark .launchButton:hover {
+  background-color: hsla(0, 0%, 0%, .3);
+  border-color: hsla(0, 0%, 100%, .3);
+}
 #downloads::before {
   content: url("chrome://browser/content/abouthome/downloads.png");
 }
@@ -109,6 +117,24 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 }
 #settings::before {
   content: url("chrome://browser/content/abouthome/settings.png");
+}
+.background #launcher.dark #downloads::before {
+  content: url("chrome://newtabtools/content/downloads.png");
+}
+.background #launcher.dark #bookmarks::before {
+  content: url("chrome://newtabtools/content/bookmarks.png");
+}
+.background #launcher.dark #history::before {
+  content: url("chrome://newtabtools/content/history.png");
+}
+.background #launcher.dark #addons::before {
+  content: url("chrome://newtabtools/content/addons.png");
+}
+.background #launcher.dark #sync::before {
+  content: url("chrome://newtabtools/content/sync.png");
+}
+.background #launcher.dark #settings::before {
+  content: url("chrome://newtabtools/content/settings.png");
 }
 #newtab-toggle {
   display: none;
