@@ -147,11 +147,21 @@ let newTabTools = {
     }
   },
   removeThumbnail: function(aURL) {
-    let file = PageThumbsStorage.getFileForURL(aURL);
-    if (file.exists()) {
-      file.permissions = 0644;
-      file.remove(true);
+    if ('PageThumbsStorage' in window) {
+      let file = PageThumbsStorage.getFileForURL(aURL);
+      if (file.exists()) {
+        file.permissions = 0644;
+        file.remove(true);
+      }
+      return;
     }
+
+    PageThumbsCache.getWriteEntry(aURL, function (aEntry) {
+      if (!aEntry)
+        return;
+
+      aEntry.doom();
+    });
   },
   setThumbnail: function(aURL, aSrc, aCallback) {
     this.removeThumbnail(aURL);
@@ -169,11 +179,35 @@ let newTabTools = {
       ctx.drawImage(image, 0, 0);
 
       canvas.mozFetchAsStream(function(aInputStream) {
-        PageThumbsStorage.write(aURL, aInputStream, function(aSuccessful) {
-          let file = PageThumbsStorage.getFileForURL(aURL);
-          file.permissions = 0444;
-          if (aCallback)
-            aCallback(aSuccessful);
+        if ('PageThumbsStorage' in window) {
+          PageThumbsStorage.write(aURL, aInputStream, function(aSuccessful) {
+            let file = PageThumbsStorage.getFileForURL(aURL);
+            file.permissions = 0444;
+            if (aCallback)
+              aCallback(aSuccessful);
+          });
+          return;
+        }
+
+        PageThumbsCache.getWriteEntry(aURL, function (aEntry) {
+          if (!aEntry) {
+            if (aCallback)
+              aCallback(false);
+            return;
+          }
+
+          let outputStream = aEntry.openOutputStream(0);
+
+          // Write the image data to the cache entry.
+          NetUtil.asyncCopy(aInputStream, outputStream, function (aResult) {
+            let success = Components.isSuccessCode(aResult);
+            if (success)
+              aEntry.markValid();
+            aEntry.close();
+
+            if (aCallback)
+              aCallback(success);
+          });
         });
       }, "image/png");
     }
