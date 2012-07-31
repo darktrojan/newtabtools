@@ -131,9 +131,11 @@ let newTabTools = {
   fillSelect: function() {
     this.tileSelect.removeAllItems();
     for (let cell of gGrid.cells) {
-      let name = cell.site.title || cell.site.url;
-      let description = !cell.site.title ? null : cell.site.url;
-      this.tileSelect.appendItem(name, cell.site.url, description);
+      if (!cell.isEmpty()) {
+        let name = cell.site.title || cell.site.url;
+        let description = !cell.site.title ? null : cell.site.url;
+        this.tileSelect.appendItem(name, cell.site.url, description);
+      }
     }
     this.tileSelect.selectedIndex = 0;
   },
