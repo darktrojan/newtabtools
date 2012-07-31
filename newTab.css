@@ -3,7 +3,7 @@ This Source Code Form is subject to the terms of the Mozilla Public
 License, v. 2.0. If a copy of the MPL was not distributed with this file,
 You can obtain one at http://mozilla.org/MPL/2.0/.
 */
-.background {
+:root.background #newtab-scrollbox {
   background-size: cover;
   background-position: 50% 50%;
 }
@@ -12,6 +12,10 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 }
 .newtab-cell {
   -moz-margin-end: 5px;
+}
+:root.containThumbs .newtab-thumbnail {
+  background-size: contain;
+  background-position: 50% 50%;
 }
 #newtab-margin-top {
   min-height: 10px;
@@ -80,23 +84,23 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
   margin-bottom: 6px;
   line-height: 0;
 }
-.background #launcher {
+:root.background #launcher {
   border-top: 1px solid hsla(0, 0%, 100%, .3);
   background-color: hsla(0, 0%, 100%, .3);
   box-shadow: none;
 }
-.background #launcher.dark {
+:root.background #launcher.dark {
   background-color: hsla(0, 0%, 0%, .3)
 }
-.background .launchButton:hover {
+:root.background .launchButton:hover {
   background-color: hsla(211, 80%, 100%, .6);
   border-color: hsla(210, 54%, 20%, .3) hsla(210, 54%, 20%, .3) hsla(210, 54%, 20%, .4);
 }
-.background #launcher.dark .launchButton {
+:root.background #launcher.dark .launchButton {
   color: #fff;
   text-shadow: 0 0 2px #000;
 }
-.background #launcher.dark .launchButton:hover {
+:root.background #launcher.dark .launchButton:hover {
   background-color: hsla(0, 0%, 0%, .3);
   border-color: hsla(0, 0%, 100%, .3);
 }
@@ -118,22 +122,22 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 #settings::before {
   content: url("chrome://browser/content/abouthome/settings.png");
 }
-.background #launcher.dark #downloads::before {
+:root.background #launcher.dark #downloads::before {
   content: url("chrome://newtabtools/content/downloads.png");
 }
-.background #launcher.dark #bookmarks::before {
+:root.background #launcher.dark #bookmarks::before {
   content: url("chrome://newtabtools/content/bookmarks.png");
 }
-.background #launcher.dark #history::before {
+:root.background #launcher.dark #history::before {
   content: url("chrome://newtabtools/content/history.png");
 }
-.background #launcher.dark #addons::before {
+:root.background #launcher.dark #addons::before {
   content: url("chrome://newtabtools/content/addons.png");
 }
-.background #launcher.dark #sync::before {
+:root.background #launcher.dark #sync::before {
   content: url("chrome://newtabtools/content/sync.png");
 }
-.background #launcher.dark #settings::before {
+:root.background #launcher.dark #settings::before {
   content: url("chrome://newtabtools/content/settings.png");
 }
 #newtab-toggle {

@@ -49,10 +49,10 @@ let newTabTools = {
     if (this.backgroundImageFile.exists()) {
       this.page.style.backgroundImage =
         'url("' + this.backgroundImageURL.spec + '?' + Math.random() + '")';
-      this.page.classList.add("background");
+      document.documentElement.classList.add("background");
     } else {
       this.page.style.backgroundImage = null;
-      this.page.classList.remove("background");
+      document.documentElement.classList.remove("background");
     }
   },
   get configToggleButton() {
@@ -70,8 +70,12 @@ let newTabTools = {
   get setBackgroundInput() {
     return document.getElementById("config-bg-input");
   },
+  get containThumbsCheckbox() {
+    return document.getElementById("config-containThumbs");
+  },
   configOnClick: function(event) {
     let id = event.originalTarget.id;
+    let checked;
     switch (id) {
     case "config-browseForFile":
     case "config-bg-browseForFile":
@@ -92,6 +96,15 @@ let newTabTools = {
       this.removeThumbnail(this.tileSelect.value);
       newTabTools.refreshThumbnail(this.tileSelect.value);
       break;
+    case "config-containThumbs":
+      checked = event.originalTarget.checked;
+      Services.prefs.setBoolPref("extensions.newtabtools.thumbs.contain", checked);
+      if (checked) {
+        document.documentElement.classList.add("containThumbs");
+      } else {
+        document.documentElement.classList.remove("containThumbs");
+      }
+      break;
     case "config-setBackground":
       let fos = FileUtils.openSafeFileOutputStream(this.backgroundImageFile);
       NetUtil.asyncFetch(this.setBackgroundInput.value, function(inputStream, status) {
@@ -109,7 +122,7 @@ let newTabTools = {
       this.refreshBackgroundImage();
       break;
     case "config-darkLauncher":
-      let checked = event.originalTarget.checked;
+      checked = event.originalTarget.checked;
       Services.prefs.setBoolPref("extensions.newtabtools.launcher.dark", checked);
       if (checked) {
         this.launcher.classList.add("dark");
@@ -263,5 +276,10 @@ let newTabTools = {
       newTabTools.launcher.classList.add("dark");
       newTabTools.darkLauncherCheckbox.checked = true;
     }
+  }
+
+  if (Services.prefs.getBoolPref("extensions.newtabtools.thumbs.contain")) {
+    document.documentElement.classList.add("containThumbs");
+    newTabTools.containThumbsCheckbox.checked = true;
   }
 }

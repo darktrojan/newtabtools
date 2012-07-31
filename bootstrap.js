@@ -18,6 +18,7 @@ function startup(params, aReason) {
   defaultPrefs.setIntPref("columns", 3);
   defaultPrefs.setIntPref("launcher", 3);
   defaultPrefs.setBoolPref("launcher.dark", false);
+  defaultPrefs.setBoolPref("thumbs.contain", false);
 }
 function shutdown(params, aReason) {
 }

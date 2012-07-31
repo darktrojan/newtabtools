@@ -42,6 +42,7 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
             <xul:button flex="1" id="config-removeThumbnail" label="Remove Thumbnail"/>
             <xul:spacer flex="4"/>
           </xul:hbox>
+          <xul:checkbox flex="1" id="config-containThumbs" label="Tiles should contain whole thumbnail"/>
           <xul:spacer style="height: 3em"/>
           <xul:label class="header" value="Page Background Image:"/>
           <xul:label value="Paste an image URL or browse to choose a file:"/>
