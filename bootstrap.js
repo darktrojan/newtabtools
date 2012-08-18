@@ -7,18 +7,22 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 const Ci = Components.interfaces;
 const Cu = Components.utils;
 
+const BROWSER_PREFS = "browser.newtabpage.";
+const EXTENSION_PREFS = "extensions.newtabtools.";
+
 Cu.import("resource://gre/modules/Services.jsm");
 
-let prefs;
+let browserPrefs;
+let extensionPrefs;
 let copiedPrefs = ["rows", "columns"];
 let prefsObserver = {
   observe: function(aSubject, aTopic, aData) {
     if (copiedPrefs.indexOf(aData) >= 0) {
       try {
-        let value = aSubject.getIntPref(aData);
-        Services.prefs.setIntPref("browser.newtabpage." + aData, value);
+        let value = extensionPrefs.getIntPref(aData);
+        browserPrefs.setIntPref(aData, value);
       } catch(ex) {
-        Services.prefs.clearUserPref("browser.newtabpage" + aData);
+        browserPrefs.clearUserPref(aData);
       }
     }
   }
@@ -28,28 +32,31 @@ function install(aParams, aReason) {
 }
 function uninstall(aParams, aReason) {
   if (aReason == ADDON_UNINSTALL) {
-    Services.prefs.deleteBranch("extensions.newtabtools.");
+    Services.prefs.deleteBranch(EXTENSION_PREFS);
   }
 }
 function startup(aParams, aReason) {
-  let defaultPrefs = Services.prefs.getDefaultBranch("extensions.newtabtools.");
+  let defaultPrefs = Services.prefs.getDefaultBranch(EXTENSION_PREFS);
   defaultPrefs.setIntPref("rows", 3);
   defaultPrefs.setIntPref("columns", 3);
   defaultPrefs.setIntPref("launcher", 3);
   defaultPrefs.setBoolPref("launcher.dark", false);
   defaultPrefs.setBoolPref("thumbs.contain", false);
 
-  if (Services.prefs.getPrefType("browser.newtabpage.rows") == Ci.nsIPrefBranch.PREF_INT) {
-    prefs = Services.prefs.getBranch("extensions.newtabtools.");
+  if (Services.prefs.getPrefType(BROWSER_PREFS + "rows") == Ci.nsIPrefBranch.PREF_INT) {
+    browserPrefs = Services.prefs.getBranch(BROWSER_PREFS);
+    extensionPrefs = Services.prefs.getBranch(EXTENSION_PREFS);
+
     for (let copiedPref of copiedPrefs) {
-      if (prefs.prefHasUserValue(copiedPref) &&
-          prefs.getPrefType(copiedPref) == Ci.nsIPrefBranch.PREF_INT) {
-        Services.prefs.setIntPref("browser.newtabpage." + copiedPref, prefs.getIntPref(copiedPref));
+      if (extensionPrefs.prefHasUserValue(copiedPref)) {
+        browserPrefs.setIntPref(copiedPref, extensionPrefs.getIntPref(copiedPref));
+      } else if (browserPrefs.prefHasUserValue(copiedPref)) {
+        extensionPrefs.setIntPref(copiedPref, browserPrefs.getIntPref(copiedPref));
       }
     }
-    prefs.addObserver("", prefsObserver, false);
+    extensionPrefs.addObserver("", prefsObserver, false);
   }
 }
 function shutdown(aParams, aReason) {
-  Services.prefs.removeObserver("extensions.newtabtools.", prefsObserver)
+  extensionPrefs.removeObserver(EXTENSION_PREFS, prefsObserver)
 }

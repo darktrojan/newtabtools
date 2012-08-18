@@ -250,16 +250,19 @@ let newTabTools = {
   let columns = Services.prefs.getIntPref("extensions.newtabtools.columns");
   let HTML_NAMESPACE = "http://www.w3.org/1999/xhtml";
 
-  let grid = document.getElementById("newtab-grid");
-  for (let i = 0; i < rows; i++) {
-    let row = document.createElementNS(HTML_NAMESPACE, "div");
-    row.className = "newtab-row";
-    for (let j = 0; j < columns; j++) {
-      let cell = document.createElementNS(HTML_NAMESPACE, "div");
-      cell.className = "newtab-cell";
-      row.appendChild(cell);
+  if (Services.prefs.getPrefType("browser.newtabpage.rows") ==
+      Components.interfaces.nsIPrefBranch.PREF_INVALID) {
+    let grid = document.getElementById("newtab-grid");
+    for (let i = 0; i < rows; i++) {
+      let row = document.createElementNS(HTML_NAMESPACE, "div");
+      row.className = "newtab-row";
+      for (let j = 0; j < columns; j++) {
+        let cell = document.createElementNS(HTML_NAMESPACE, "div");
+        cell.className = "newtab-cell";
+        row.appendChild(cell);
+      }
+      grid.appendChild(row);
     }
-    grid.appendChild(row);
   }
 
   let configButton = newTabTools.configToggleButton;
