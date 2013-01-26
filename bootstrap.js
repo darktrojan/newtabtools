@@ -42,6 +42,7 @@ function startup(aParams, aReason) {
   defaultPrefs.setIntPref("launcher", 3);
   defaultPrefs.setBoolPref("launcher.dark", false);
   defaultPrefs.setBoolPref("thumbs.contain", false);
+  defaultPrefs.setBoolPref("thumbs.hidebuttons", false);
 
   if (Services.prefs.getPrefType(BROWSER_PREFS + "rows") == Ci.nsIPrefBranch.PREF_INT) {
     browserPrefs = Services.prefs.getBranch(BROWSER_PREFS);

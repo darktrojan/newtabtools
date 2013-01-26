@@ -254,4 +254,8 @@ let newTabTools = {
     document.documentElement.classList.add("containThumbs");
     newTabTools.containThumbsCheckbox.checked = true;
   }
+
+  if (Services.prefs.getBoolPref("extensions.newtabtools.thumbs.hidebuttons")) {
+    document.documentElement.classList.add("hideButtons");
+  }
 }
