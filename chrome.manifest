@@ -1,2 +1,3 @@
 content newtabtools ./
 override chrome://browser/content/newtab/newTab.xul chrome://newtabtools/content/newTab.xul
+override chrome://browser/content/newtab/newTab.xul chrome://newtabtools/content/newTab-20.xul appversion<21.0a1
