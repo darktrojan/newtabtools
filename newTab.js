@@ -106,19 +106,22 @@ let newTabTools = {
       }
       break;
     case "config-setBackground":
-      let fos = FileUtils.openSafeFileOutputStream(this.backgroundImageFile);
-      NetUtil.asyncFetch(this.setBackgroundInput.value, function(inputStream, status) {
-        if (!Components.isSuccessCode(status)) {
-          return;
-        }
-        NetUtil.asyncCopy(inputStream, fos, function (aResult) {
-          FileUtils.closeSafeFileOutputStream(fos);
-          this.refreshBackgroundImage();
+      if (this.setBackgroundInput.value) {
+        let fos = FileUtils.openSafeFileOutputStream(this.backgroundImageFile);
+        NetUtil.asyncFetch(this.setBackgroundInput.value, function(inputStream, status) {
+          if (!Components.isSuccessCode(status)) {
+            return;
+          }
+          NetUtil.asyncCopy(inputStream, fos, function (aResult) {
+            FileUtils.closeSafeFileOutputStream(fos);
+            this.refreshBackgroundImage();
+          }.bind(this));
         }.bind(this));
-      }.bind(this));
+      }
       break;
     case "config-removeBackground":
-      this.backgroundImageFile.remove(true);
+      if (this.backgroundImageFile.exists())
+        this.backgroundImageFile.remove(true);
       this.refreshBackgroundImage();
       break;
     case "config-darkLauncher":
