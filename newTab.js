@@ -222,12 +222,19 @@ let newTabTools = {
   configInner.addEventListener("click", newTabTools.configOnClick.bind(newTabTools), false);
 
   let showLauncher = Services.prefs.getIntPref("extensions.newtabtools.launcher");
-  if (showLauncher == 3) {
+  if (showLauncher) {
     newTabTools.launcher.addEventListener("click", newTabTools.launcherOnClick, false);
-    document.documentElement.classList.add("launcherBottom");
     if (Services.prefs.getBoolPref("extensions.newtabtools.launcher.dark")) {
       newTabTools.launcher.classList.add("dark");
       newTabTools.darkLauncherCheckbox.checked = true;
+    }
+    switch (showLauncher) {
+    case 1:
+      document.documentElement.classList.add("launcherTop");
+      break;
+    case 3:
+      document.documentElement.classList.add("launcherBottom");
+      break;
     }
   }
 
