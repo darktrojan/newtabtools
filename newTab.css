@@ -3,6 +3,13 @@ This Source Code Form is subject to the terms of the Mozilla Public
 License, v. 2.0. If a copy of the MPL was not distributed with this file,
 You can obtain one at http://mozilla.org/MPL/2.0/.
 */
+#newtab-scrollbox {
+  -moz-box-orient: vertical;
+}
+:root[launcher="left"] #newtab-scrollbox,
+:root[launcher="right"] #newtab-scrollbox {
+  -moz-box-orient: horizontal;
+}
 :root.background #newtab-scrollbox {
   background-size: cover;
   background-position: 50% 50%;
@@ -28,10 +35,10 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
   min-height: 10px;
   max-height: 30px;
 }
-:root.launcherTop #newtab-margin-top {
+:root[launcher="top"] #newtab-margin-top {
   max-height: 10px;
 }
-:root.launcherBottom #newtab-margin-bottom {
+:root[launcher="bottom"] #newtab-margin-bottom {
   max-height: 10px;
 }
 .newtab-side-margin {
@@ -40,25 +47,48 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 }
 #launcher {
   display: none;
+}
+:root[launcher] #launcher {
+  display: -moz-box;
+  border-width: 0;
+  border-style: solid;
+  border-color: hsla(0, 0%, 0%, .03);
   -moz-box-align: center;
   -moz-box-pack: center;
-  width: 100%;
   background-color: hsla(0, 0%, 0%, .03);
   text-align: center;
-  white-space: nowrap;
 }
-:root.launcherTop #launcher {
-  display: block;
-  border-bottom: 1px solid hsla(0, 0%, 0%, .03);
+:root[launcher="top"] #launcher,
+:root[launcher="bottom"] #launcher {
+  -moz-box-orient: horizontal;
+  width: 100%;
+}
+:root[launcher="right"] #launcher,
+:root[launcher="left"] #launcher {
+  -moz-box-orient: vertical;
+  width: 90px;
+}
+:root[launcher="top"] #launcher {
+  border-bottom-width: 1px;
   box-shadow: 0 -1px 2px hsla(0, 0%, 0%, .02) inset,
               0 1px 0 hsla(0, 0%, 100%, .25);
   -moz-box-ordinal-group: 0;
 }
-:root.launcherBottom #launcher {
-  display: block;
-  border-top: 1px solid hsla(0, 0%, 0%, .03);
+:root[launcher="right"] #launcher {
+  border-left-width: 1px;
+  box-shadow: 1px 0 2px hsla(0, 0%, 0%, .02) inset,
+              -1px 0 0 hsla(0, 0%, 100%, .25);
+}
+:root[launcher="bottom"] #launcher {
+  border-top-width: 1px;
   box-shadow: 0 1px 2px hsla(0, 0%, 0%, .02) inset,
               0 -1px 0 hsla(0, 0%, 100%, .25);
+}
+:root[launcher="left"] #launcher {
+  border-right-width: 1px;
+  box-shadow: -1px 0 2px hsla(0, 0%, 0%, .02) inset,
+              1px 0 0 hsla(0, 0%, 100%, .25);
+  -moz-box-ordinal-group: 0;
 }
 .launchButton {
   display: -moz-box;

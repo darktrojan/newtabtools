@@ -22,7 +22,7 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
             xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
             disablefastfind="true" title="&newtab.pageTitle;">
 
-  <div id="newtab-scrollbox" orient="vertical">
+  <div id="newtab-scrollbox">
     <div id="config-wrapper">
       <div id="config">
         <xul:vbox id="config-inner" flex="1">

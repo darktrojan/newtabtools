@@ -48,7 +48,7 @@ let newTabTools = {
   refreshBackgroundImage: function() {
     if (this.backgroundImageFile.exists()) {
       this.page.style.backgroundImage =
-        'url("' + this.backgroundImageURL.spec + '?' + Math.random() + '")';
+        'url("' + this.backgroundImageURL.spec + '?' + this.backgroundImageFile.lastModifiedTime + '")';
       document.documentElement.classList.add("background");
     } else {
       this.page.style.backgroundImage = null;
@@ -98,12 +98,7 @@ let newTabTools = {
       break;
     case "config-containThumbs":
       checked = event.originalTarget.checked;
-      Services.prefs.setBoolPref("extensions.newtabtools.thumbs.contain", checked);
-      if (checked) {
-        document.documentElement.classList.add("containThumbs");
-      } else {
-        document.documentElement.classList.remove("containThumbs");
-      }
+      this.prefs.setBoolPref("thumbs.contain", checked);
       break;
     case "config-setBackground":
       if (this.setBackgroundInput.value) {
@@ -114,7 +109,7 @@ let newTabTools = {
           }
           NetUtil.asyncCopy(inputStream, fos, function (aResult) {
             FileUtils.closeSafeFileOutputStream(fos);
-            this.refreshBackgroundImage();
+            gAllPages.update();
           }.bind(this));
         }.bind(this));
       }
@@ -122,16 +117,11 @@ let newTabTools = {
     case "config-removeBackground":
       if (this.backgroundImageFile.exists())
         this.backgroundImageFile.remove(true);
-      this.refreshBackgroundImage();
+      gAllPages.update();
       break;
     case "config-darkLauncher":
       checked = event.originalTarget.checked;
-      Services.prefs.setBoolPref("extensions.newtabtools.launcher.dark", checked);
-      if (checked) {
-        this.launcher.classList.add("dark");
-      } else {
-        this.launcher.classList.remove("dark");
-      }
+      this.prefs.setBoolPref("launcher.dark", checked);
       break;
     case "config-morePrefs":
       newTabTools.browserWindow.BrowserOpenAddonsMgr("addons://detail/newtabtools@darktrojan.net/preferences")
@@ -196,6 +186,28 @@ let newTabTools = {
       }, "image/png");
     }
     image.src = aSrc;
+  },
+  updateUI: function() {
+    this.refreshBackgroundImage();
+
+    let launcherPosition = this.prefs.getIntPref("launcher");
+    if (launcherPosition) {
+      let positionNames = ["top", "right", "bottom", "left"];
+      document.documentElement.setAttribute("launcher", positionNames[launcherPosition - 1]);
+    } else {
+      document.documentElement.removeAttribute("launcher");
+    }
+
+    let launcherDark = this.prefs.getBoolPref("launcher.dark");
+    this.launcher.classList[launcherDark ? "add" : "remove"]("dark");
+    this.darkLauncherCheckbox.checked = launcherDark;
+
+    let containThumbs = this.prefs.getBoolPref("thumbs.contain");
+    document.documentElement.classList[containThumbs ? "add" : "remove"]("containThumbs");
+    this.containThumbsCheckbox.checked = containThumbs;
+
+    let hideButtons = this.prefs.getBoolPref("thumbs.hidebuttons");
+    document.documentElement.classList[hideButtons ? "add" : "remove"]("hideButtons");
   }
 };
 
@@ -213,7 +225,9 @@ let newTabTools = {
                  .wrappedJSObject;
   });
 
-  newTabTools.refreshBackgroundImage();
+  XPCOMUtils.defineLazyGetter(newTabTools, "prefs", function() {
+    return Services.prefs.getBranch("extensions.newtabtools.");
+  });
 
   let configButton = newTabTools.configToggleButton;
   configButton.addEventListener("click", newTabTools.toggleConfig.bind(newTabTools), false);
@@ -221,29 +235,16 @@ let newTabTools = {
   let configInner = document.getElementById("config-inner");
   configInner.addEventListener("click", newTabTools.configOnClick.bind(newTabTools), false);
 
-  let showLauncher = Services.prefs.getIntPref("extensions.newtabtools.launcher");
-  if (showLauncher) {
-    newTabTools.launcher.addEventListener("click", newTabTools.launcherOnClick, false);
-    if (Services.prefs.getBoolPref("extensions.newtabtools.launcher.dark")) {
-      newTabTools.launcher.classList.add("dark");
-      newTabTools.darkLauncherCheckbox.checked = true;
-    }
-    switch (showLauncher) {
-    case 1:
-      document.documentElement.classList.add("launcherTop");
-      break;
-    case 3:
-      document.documentElement.classList.add("launcherBottom");
-      break;
-    }
-  }
+  newTabTools.launcher.addEventListener("click", newTabTools.launcherOnClick, false);
 
-  if (Services.prefs.getBoolPref("extensions.newtabtools.thumbs.contain")) {
-    document.documentElement.classList.add("containThumbs");
-    newTabTools.containThumbsCheckbox.checked = true;
-  }
+  newTabTools.updateUI();
 
-  if (Services.prefs.getBoolPref("extensions.newtabtools.thumbs.hidebuttons")) {
-    document.documentElement.classList.add("hideButtons");
-  }
+  window.addEventListener("load", function window_load() {
+    window.removeEventListener("load", window_load, false);
+    gPage.oldUpdate = gPage.update;
+    gPage.update = function() {
+      gPage.oldUpdate();
+      newTabTools.updateUI();
+    };
+  }, false);
 }

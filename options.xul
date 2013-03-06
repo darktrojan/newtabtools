@@ -7,12 +7,14 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 <vbox xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
   <setting pref="browser.newtabpage.rows" type="integer" title="Rows" max="10" min="1"/>
   <setting pref="browser.newtabpage.columns" type="integer" title="Columns" max="10" min="1"/>
-  <setting pref="extensions.newtabtools.launcher" type="menulist" title="Show Launcher">
+  <setting pref="extensions.newtabtools.launcher" type="menulist" title="Launcher">
     <menulist sizetopopup="always">
       <menupopup>
         <menuitem label="Do not show" value="0" />
-        <menuitem label="Top of page" value="1" />
-        <menuitem label="Bottom of page" value="3" />
+        <menuitem label="Top" value="1" />
+        <menuitem label="Bottom" value="3" />
+        <menuitem label="Left" value="4" />
+        <menuitem label="Right" value="2" />
       </menupopup>
     </menulist>
   </setting>
