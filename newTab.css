@@ -27,23 +27,22 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 :root.hideButtons .newtab-site > input {
   display: none;
 }
-#newtab-margin-top {
-  min-height: 10px;
-  max-height: 30px;
-}
+#newtab-margin-top,
 #newtab-margin-bottom {
   min-height: 10px;
   max-height: 30px;
 }
-:root[launcher="top"] #newtab-margin-top {
-  max-height: 10px;
-}
+:root[launcher="top"] #newtab-margin-top,
 :root[launcher="bottom"] #newtab-margin-bottom {
   max-height: 10px;
 }
 .newtab-side-margin {
   min-width: 10px;
   max-width: 30px;
+}
+:root[launcher="right"] .newtab-side-margin:last-child,
+:root[launcher="left"] .newtab-side-margin:first-child {
+  max-width: 10px;
 }
 #launcher {
   display: none;
