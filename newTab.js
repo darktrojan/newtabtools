@@ -246,5 +246,42 @@ let newTabTools = {
       gPage.oldUpdate();
       newTabTools.updateUI();
     };
+
+    gTransformation.oldGetNodePosition = gTransformation.getNodePosition;
+    gTransformation.getNodePosition = function(aNode) {
+      let {offsetLeft, offsetTop} = document.getElementById("newtab-vertical-margin");
+      let position = this.oldGetNodePosition(aNode);
+      position.left -= offsetLeft;
+      position.top -= offsetTop;
+      return position;
+    };
+
+    gDrag.oldStart = gDrag.start;
+    gDrag.start = function(aSite, aEvent) {
+      gDrag.oldStart(aSite, aEvent);
+      let {offsetLeft, offsetTop} = document.getElementById("newtab-vertical-margin");
+      this._offsetX += offsetLeft;
+      this._offsetY += offsetTop;
+    };
+
+    gDrag.drag = function(aSite, aEvent) {
+      // Get the viewport size.
+      let {clientWidth, clientHeight} = document.documentElement;
+      let {offsetLeft, offsetTop} = document.getElementById("newtab-vertical-margin");
+
+      // We'll want a padding of 5px.
+      let border = 5;
+
+      // Enforce minimum constraints to keep the drag image inside the window.
+      let left = Math.max(scrollX + aEvent.clientX - this._offsetX, border - offsetLeft);
+      let top = Math.max(scrollY + aEvent.clientY - this._offsetY, border - offsetTop);
+
+      // Enforce maximum constraints to keep the drag image inside the window.
+      left = Math.min(left, scrollX + clientWidth - this.cellWidth - border - offsetLeft);
+      top = Math.min(top, scrollY + clientHeight - this.cellHeight - border - offsetTop);
+
+      // Update the drag image's position.
+      gTransformation.setSitePosition(aSite, {left: left, top: top});
+    };
   }, false);
 }
