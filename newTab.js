@@ -283,5 +283,28 @@ let newTabTools = {
       // Update the drag image's position.
       gTransformation.setSitePosition(aSite, {left: left, top: top});
     };
+
+    let oldVersion = newTabTools.prefs.getIntPref("donationreminder");
+    let currentVersion = newTabTools.prefs.getIntPref("version");
+    if (oldVersion > 0 && oldVersion < 7) {
+      setTimeout(function() {
+        let notifyBox = newTabTools.browserWindow.getNotificationBox(window);
+        let label = 'New Tab Tools has been updated to version ' + currentVersion + '. ' +
+            'Please consider making a donation.';
+        let value = "newtabtools-donate";
+        let buttons = [{
+          label: "Donate",
+          accessKey: "D",
+          popup: null,
+          callback: function() {
+            let url = "https://addons.mozilla.org/addon/new-tab-tools/about";
+            newTabTools.browserWindow.openLinkIn(url, "current", {});
+          }
+        }];
+        newTabTools.prefs.setIntPref("donationreminder", currentVersion);
+        notifyBox.appendNotification(label, value, null, notifyBox.PRIORITY_INFO_LOW, buttons);
+      }, 1000)
+    }
+
   }, false);
 }

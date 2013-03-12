@@ -27,6 +27,10 @@ function startup(aParams, aReason) {
   defaultPrefs.setBoolPref("thumbs.hidebuttons", false);
 
   userPrefs = Services.prefs.getBranch(EXTENSION_PREFS);
+  userPrefs.setIntPref("version", parseInt(aParams.version));
+  if (!userPrefs.prefHasUserValue("donationreminder")) {
+    userPrefs.setIntPref("donationreminder", aReason == ADDON_UPGRADE ? 1 : 0);
+  }
   userPrefs.addObserver("", prefObserver, false);
 
   reloadTabs();
