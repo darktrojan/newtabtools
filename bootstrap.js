@@ -13,6 +13,10 @@ Cu.import("resource://gre/modules/NewTabUtils.jsm");
 Cu.import("resource://gre/modules/AddonManager.jsm");
 
 function install(aParams, aReason) {
+  if (aReason == ADDON_UPGRADE) {
+    Services.prefs.deleteBranch(EXTENSION_PREFS + "rows");
+    Services.prefs.deleteBranch(EXTENSION_PREFS + "columns");
+  }
 }
 function uninstall(aParams, aReason) {
   if (aReason == ADDON_UNINSTALL) {
