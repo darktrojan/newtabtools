@@ -21,6 +21,7 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
   -moz-margin-end: 5px;
 }
 .favicon {
+  margin-top: -2px;
   -moz-margin-end: 3px;
   vertical-align: middle;
 }
