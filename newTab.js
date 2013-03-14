@@ -29,21 +29,12 @@ let newTabTools = {
       break;
     }
   },
-  get page() {
-    return document.getElementById("newtab-scrollbox");
-  },
   get backgroundImageFile() {
     return FileUtils.getFile("ProfD", ["newtab-background"], true);
   },
   get backgroundImageURL() {
     Components.utils.import("resource://gre/modules/Services.jsm");
     return Services.io.newFileURI(this.backgroundImageFile);
-  },
-  get launcher() {
-    return document.getElementById("launcher");
-  },
-  get darkLauncherCheckbox() {
-    return document.getElementById("config-darkLauncher");
   },
   refreshBackgroundImage: function() {
     if (this.backgroundImageFile.exists()) {
@@ -54,24 +45,6 @@ let newTabTools = {
       this.page.style.backgroundImage = null;
       document.documentElement.classList.remove("background");
     }
-  },
-  get configToggleButton() {
-    return document.getElementById("config-toggle");
-  },
-  get configWrapper() {
-    return document.getElementById("config-wrapper");
-  },
-  get tileSelect() {
-    return document.getElementById("config-select");
-  },
-  get setThumbnailInput() {
-    return document.getElementById("config-input");
-  },
-  get setBackgroundInput() {
-    return document.getElementById("config-bg-input");
-  },
-  get containThumbsCheckbox() {
-    return document.getElementById("config-containThumbs");
   },
   configOnClick: function(event) {
     let id = event.originalTarget.id;
@@ -99,6 +72,12 @@ let newTabTools = {
     case "config-containThumbs":
       checked = event.originalTarget.checked;
       this.prefs.setBoolPref("thumbs.contain", checked);
+      break;
+    case "config-setTitle":
+      this.setTitle(this.tileSelect.selectedIndex, this.setTitleInput.value);
+      break;
+    case "config-removeTitle":
+      this.setTitle(this.tileSelect.selectedIndex, null);
       break;
     case "config-setBackground":
       if (this.setBackgroundInput.value) {
@@ -187,6 +166,20 @@ let newTabTools = {
     }
     image.src = aSrc;
   },
+  setTitle: function(aIndex, aTitle) {
+    let cell = gGrid.cells[aIndex];
+    let site = cell.site;
+    let uri = Services.io.newURI(site.url, null, null);
+    if (aTitle) {
+      this.annoService.setPageAnnotation(uri, "newtabtools/title",
+        this.setTitleInput.value, 0, this.annoService.EXPIRE_WITH_HISTORY);
+    } else {
+      this.annoService.removePageAnnotation(uri, "newtabtools/title");
+      aTitle = site.title;
+    }
+    let titleElement = site.node.querySelector(".newtab-title");
+    titleElement.lastChild.nodeValue = aTitle;
+  },
   updateUI: function() {
     this.refreshBackgroundImage();
 
@@ -233,14 +226,39 @@ let newTabTools = {
   });
 
   XPCOMUtils.defineLazyGetter(newTabTools, "faviconService", function() {
-    return Components.classes['@mozilla.org/browser/favicon-service;1']
+    return Components.classes["@mozilla.org/browser/favicon-service;1"]
                      .getService(Ci.mozIAsyncFavicons);
   });
+
+  XPCOMUtils.defineLazyGetter(newTabTools, "annoService", function() {
+    return Components.classes["@mozilla.org/browser/annotation-service;1"]
+                     .getService(Components.interfaces.nsIAnnotationService);
+  });
+
+  let uiElements = {
+    "page": "newtab-scrollbox",
+    "launcher": "launcher",
+    "darkLauncherCheckbox": "config-darkLauncher",
+    "configToggleButton": "config-toggle",
+    "configWrapper": "config-wrapper",
+    "configInner": "config-inner",
+    "tileSelect": "config-select",
+    "setThumbnailInput": "config-thumb-input",
+    "setTitleInput": "config-title-input",
+    "setBackgroundInput": "config-bg-input",
+    "containThumbsCheckbox": "config-containThumbs"
+  };
+  for (let key in uiElements) {
+    let value = uiElements[key];
+    XPCOMUtils.defineLazyGetter(newTabTools, key, function() {
+      return document.getElementById(value);
+    });
+  }
 
   let configButton = newTabTools.configToggleButton;
   configButton.addEventListener("click", newTabTools.toggleConfig.bind(newTabTools), false);
 
-  let configInner = document.getElementById("config-inner");
+  let configInner = newTabTools.configInner;
   configInner.addEventListener("click", newTabTools.configOnClick.bind(newTabTools), false);
 
   newTabTools.launcher.addEventListener("click", newTabTools.launcherOnClick, false);
@@ -295,24 +313,32 @@ let newTabTools = {
     Site.prototype._oldRender = Site.prototype._render;
     Site.prototype._render = function() {
       this._oldRender();
-      this._addFavicon();
+      this._addTitleAndFavicon();
     };
-    Site.prototype._addFavicon = function() {
-      let title = this.node.querySelector('.newtab-title');
+    Site.prototype._addTitleAndFavicon = function() {
+      let titleElement = this.node.querySelector(".newtab-title");
       let uri = Services.io.newURI(this.url, null, null);
+
+      try {
+        let title = newTabTools.annoService.getPageAnnotation(uri, "newtabtools/title");
+        titleElement.textContent = title;
+      } catch(e) {
+      }
+
       newTabTools.faviconService.getFaviconURLForPage(uri, function(aURI) {
         if (!aURI)
           return;
 
-        let icon = document.createElementNS(HTML_NAMESPACE, 'img');
-        icon.src = 'moz-anno:favicon:' + aURI.spec;
-        icon.className = 'favicon';
-        title.insertBefore(icon, title.firstChild);
+        let icon = document.createElementNS(HTML_NAMESPACE, "img");
+        icon.src = "moz-anno:favicon:" + aURI.spec;
+        icon.className = "favicon";
+        titleElement.insertBefore(icon, titleElement.firstChild);
       });
     };
 
     for (let cell of gGrid.cells) {
-      cell.site._addFavicon();
+      if (cell.site)
+        cell.site._addTitleAndFavicon();
     }
 
     let oldVersion = newTabTools.prefs.getIntPref("donationreminder");
@@ -320,8 +346,8 @@ let newTabTools = {
     if (oldVersion > 0 && oldVersion < 7) {
       setTimeout(function() {
         let notifyBox = newTabTools.browserWindow.getNotificationBox(window);
-        let label = 'New Tab Tools has been updated to version ' + currentVersion + '. ' +
-            'Please consider making a donation.';
+        let label = "New Tab Tools has been updated to version " + currentVersion + ". " +
+            "Please consider making a donation.";
         let value = "newtabtools-donate";
         let buttons = [{
           label: "Donate",
