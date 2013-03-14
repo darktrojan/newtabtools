@@ -233,8 +233,13 @@ let newTabTools = {
   });
 
   XPCOMUtils.defineLazyGetter(newTabTools, "faviconService", function() {
-    return Components.classes['@mozilla.org/browser/favicon-service;1']
+    return Components.classes["@mozilla.org/browser/favicon-service;1"]
                      .getService(Ci.mozIAsyncFavicons);
+  });
+
+  XPCOMUtils.defineLazyGetter(newTabTools, "annoService", function() {
+    return Components.classes["@mozilla.org/browser/annotation-service;1"]
+                     .getService(Components.interfaces.nsIAnnotationService);
   });
 
   let configButton = newTabTools.configToggleButton;
@@ -295,24 +300,32 @@ let newTabTools = {
     Site.prototype._oldRender = Site.prototype._render;
     Site.prototype._render = function() {
       this._oldRender();
-      this._addFavicon();
+      this._addTitleAndFavicon();
     };
-    Site.prototype._addFavicon = function() {
-      let title = this.node.querySelector('.newtab-title');
+    Site.prototype._addTitleAndFavicon = function() {
+      let titleElement = this.node.querySelector(".newtab-title");
       let uri = Services.io.newURI(this.url, null, null);
+
+      try {
+        let title = newTabTools.annoService.getPageAnnotation(uri, "newtabtools/title");
+        titleElement.textContent = title;
+      } catch(e) {
+      }
+
       newTabTools.faviconService.getFaviconURLForPage(uri, function(aURI) {
         if (!aURI)
           return;
 
-        let icon = document.createElementNS(HTML_NAMESPACE, 'img');
-        icon.src = 'moz-anno:favicon:' + aURI.spec;
-        icon.className = 'favicon';
-        title.insertBefore(icon, title.firstChild);
+        let icon = document.createElementNS(HTML_NAMESPACE, "img");
+        icon.src = "moz-anno:favicon:" + aURI.spec;
+        icon.className = "favicon";
+        titleElement.insertBefore(icon, titleElement.firstChild);
       });
     };
 
     for (let cell of gGrid.cells) {
-      cell.site._addFavicon();
+      if (cell.site)
+        cell.site._addTitleAndFavicon();
     }
 
     let oldVersion = newTabTools.prefs.getIntPref("donationreminder");
@@ -320,8 +333,8 @@ let newTabTools = {
     if (oldVersion > 0 && oldVersion < 7) {
       setTimeout(function() {
         let notifyBox = newTabTools.browserWindow.getNotificationBox(window);
-        let label = 'New Tab Tools has been updated to version ' + currentVersion + '. ' +
-            'Please consider making a donation.';
+        let label = "New Tab Tools has been updated to version " + currentVersion + ". " +
+            "Please consider making a donation.";
         let value = "newtabtools-donate";
         let buttons = [{
           label: "Donate",
