@@ -65,6 +65,7 @@ let prefObserver = {
     switch (aData) {
     case "launcher":
     case "launcher.dark":
+    case "thumbs.contain":
     case "thumbs.hidebuttons":
     case "thumbs.hidefavicons":
       NewTabUtils.allPages.update();
