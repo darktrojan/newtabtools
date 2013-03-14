@@ -33,7 +33,7 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
           </xul:menulist>
           <xul:label value="Paste an image URL or browse to choose a file:"/>
           <xul:hbox flex="1" align="center">
-            <xul:textbox id="config-input" flex="1"/>
+            <xul:textbox id="config-thumb-input" flex="1"/>
             <xul:button id="config-browseForFile" label="Browse&#x2026;"/>
           </xul:hbox>
           <xul:hbox flex="1" align="center">
@@ -43,6 +43,14 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
             <xul:spacer flex="4"/>
           </xul:hbox>
           <xul:checkbox flex="1" id="config-containThumbs" label="Tiles should contain whole thumbnail"/>
+          <xul:label value="Type a new tile title:"/>
+          <xul:textbox id="config-title-input" flex="1"/>
+          <xul:hbox flex="1" align="center">
+            <xul:spacer flex="4"/>
+            <xul:button flex="1" id="config-setTitle" label="Set Title"/>
+            <xul:button flex="1" id="config-removeTitle" label="Reset Title"/>
+            <xul:spacer flex="4"/>
+          </xul:hbox>
           <xul:spacer style="height: 3em"/>
           <xul:label class="header" value="Page Background Image:"/>
           <xul:label value="Paste an image URL or browse to choose a file:"/>
