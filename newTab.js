@@ -208,6 +208,9 @@ let newTabTools = {
 
     let hideButtons = this.prefs.getBoolPref("thumbs.hidebuttons");
     document.documentElement.classList[hideButtons ? "add" : "remove"]("hideButtons");
+
+    let hideFavicons = this.prefs.getBoolPref("thumbs.hidefavicons");
+    document.documentElement.classList[hideFavicons ? "add" : "remove"]("hideFavicons");
   }
 };
 
@@ -303,8 +306,7 @@ let newTabTools = {
 
         let icon = document.createElementNS(HTML_NAMESPACE, 'img');
         icon.src = 'moz-anno:favicon:' + aURI.spec;
-        icon.style.margin = '0 4px 0 0';
-        icon.style.verticalAlign = 'middle';
+        icon.className = 'favicon';
         title.insertBefore(icon, title.firstChild);
       });
     };

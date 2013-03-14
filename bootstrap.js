@@ -29,6 +29,7 @@ function startup(aParams, aReason) {
   defaultPrefs.setBoolPref("launcher.dark", false);
   defaultPrefs.setBoolPref("thumbs.contain", false);
   defaultPrefs.setBoolPref("thumbs.hidebuttons", false);
+  defaultPrefs.setBoolPref("thumbs.hidefavicons", false);
 
   userPrefs = Services.prefs.getBranch(EXTENSION_PREFS);
   userPrefs.setIntPref("version", parseInt(aParams.version));
@@ -65,6 +66,7 @@ let prefObserver = {
     case "launcher":
     case "launcher.dark":
     case "thumbs.hidebuttons":
+    case "thumbs.hidefavicons":
       NewTabUtils.allPages.update();
       break;
     }

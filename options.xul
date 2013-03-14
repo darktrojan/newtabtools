@@ -19,4 +19,5 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
     </menulist>
   </setting>
   <setting pref="extensions.newtabtools.thumbs.hidebuttons" type="bool" title="Hide Thumbnail Buttons"/>
+  <setting pref="extensions.newtabtools.thumbs.hidefavicons" type="bool" title="Hide Site Icons"/>
 </vbox>
