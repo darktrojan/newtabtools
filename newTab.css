@@ -173,22 +173,22 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
   content: url("chrome://browser/content/abouthome/settings.png");
 }
 :root.background #launcher.dark #downloads::before {
-  content: url("chrome://newtabtools/content/downloads.png");
+  content: url("chrome://newtabtools/content/launcher/downloads.png");
 }
 :root.background #launcher.dark #bookmarks::before {
-  content: url("chrome://newtabtools/content/bookmarks.png");
+  content: url("chrome://newtabtools/content/launcher/bookmarks.png");
 }
 :root.background #launcher.dark #history::before {
-  content: url("chrome://newtabtools/content/history.png");
+  content: url("chrome://newtabtools/content/launcher/history.png");
 }
 :root.background #launcher.dark #addons::before {
-  content: url("chrome://newtabtools/content/addons.png");
+  content: url("chrome://newtabtools/content/launcher/addons.png");
 }
 :root.background #launcher.dark #sync::before {
-  content: url("chrome://newtabtools/content/sync.png");
+  content: url("chrome://newtabtools/content/launcher/sync.png");
 }
 :root.background #launcher.dark #settings::before {
-  content: url("chrome://newtabtools/content/settings.png");
+  content: url("chrome://newtabtools/content/launcher/settings.png");
 }
 #newtab-toggle {
   display: none;
