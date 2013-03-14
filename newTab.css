@@ -20,11 +20,19 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 .newtab-cell {
   -moz-margin-end: 5px;
 }
+.favicon {
+  margin-top: -2px;
+  -moz-margin-end: 3px;
+  vertical-align: middle;
+}
 :root.containThumbs .newtab-thumbnail {
   background-size: contain;
   background-position: 50% 50%;
 }
 :root.hideButtons .newtab-site > input {
+  display: none;
+}
+:root.hideFavicons .favicon {
   display: none;
 }
 #newtab-margin-top,

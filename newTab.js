@@ -208,6 +208,9 @@ let newTabTools = {
 
     let hideButtons = this.prefs.getBoolPref("thumbs.hidebuttons");
     document.documentElement.classList[hideButtons ? "add" : "remove"]("hideButtons");
+
+    let hideFavicons = this.prefs.getBoolPref("thumbs.hidefavicons");
+    document.documentElement.classList[hideFavicons ? "add" : "remove"]("hideFavicons");
   }
 };
 
@@ -227,6 +230,11 @@ let newTabTools = {
 
   XPCOMUtils.defineLazyGetter(newTabTools, "prefs", function() {
     return Services.prefs.getBranch("extensions.newtabtools.");
+  });
+
+  XPCOMUtils.defineLazyGetter(newTabTools, "faviconService", function() {
+    return Components.classes['@mozilla.org/browser/favicon-service;1']
+                     .getService(Ci.mozIAsyncFavicons);
   });
 
   let configButton = newTabTools.configToggleButton;
@@ -283,6 +291,29 @@ let newTabTools = {
       // Update the drag image's position.
       gTransformation.setSitePosition(aSite, {left: left, top: top});
     };
+
+    Site.prototype._oldRender = Site.prototype._render;
+    Site.prototype._render = function() {
+      this._oldRender();
+      this._addFavicon();
+    };
+    Site.prototype._addFavicon = function() {
+      let title = this.node.querySelector('.newtab-title');
+      let uri = Services.io.newURI(this.url, null, null);
+      newTabTools.faviconService.getFaviconURLForPage(uri, function(aURI) {
+        if (!aURI)
+          return;
+
+        let icon = document.createElementNS(HTML_NAMESPACE, 'img');
+        icon.src = 'moz-anno:favicon:' + aURI.spec;
+        icon.className = 'favicon';
+        title.insertBefore(icon, title.firstChild);
+      });
+    };
+
+    for (let cell of gGrid.cells) {
+      cell.site._addFavicon();
+    }
 
     let oldVersion = newTabTools.prefs.getIntPref("donationreminder");
     let currentVersion = newTabTools.prefs.getIntPref("version");
