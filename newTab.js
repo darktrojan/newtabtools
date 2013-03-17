@@ -202,6 +202,69 @@ let newTabTools = {
 
     let hideFavicons = this.prefs.getBoolPref("thumbs.hidefavicons");
     document.documentElement.classList[hideFavicons ? "add" : "remove"]("hideFavicons");
+  },
+  startRecent: function() {
+    let tabContainer = this.browserWindow.gBrowser.tabContainer;
+    let handler = this.refreshRecent.bind(this);
+    tabContainer.addEventListener("TabOpen", handler, false);
+    tabContainer.addEventListener("TabClose", handler, false);
+
+    window.addEventListener("unload", function() {
+      tabContainer.removeEventListener("TabOpen", handler, false);
+      tabContainer.removeEventListener("TabClose", handler, false);
+    }, false);
+    handler();
+  },
+  refreshRecent: function(aEvent) {
+    if (aEvent && aEvent.originalTarget.linkedBrowser.contentWindow == window) {
+      return;
+    }
+
+    for (let element of this.recentList.querySelectorAll("a")) {
+      this.recentList.removeChild(element);
+    }
+
+    let undoItems = JSON.parse(this.ss.getClosedTabData(this.browserWindow));
+    for (let i = 0; i < undoItems.length; i++) {
+      let item = undoItems[i];
+      let index = i;
+      let iconURL;
+      let url;
+
+      if (item.image) {
+        iconURL = item.image;
+        if (/^https?:/.test(iconURL)) {
+          iconURL = "moz-anno:favicon:" + iconURL;
+        }
+      } else {
+        iconURL = "chrome://mozapps/skin/places/defaultFavicon.png";
+      }
+
+      let tabData = item.state;
+      let activeIndex = (tabData.index || tabData.entries.length) - 1;
+      if (activeIndex >= 0 && tabData.entries[activeIndex]) {
+        url = tabData.entries[activeIndex].url;
+        if (url == "about:newtab" && tabData.entries.length == 1) {
+          continue;
+        }
+      }
+
+      let a = document.createElementNS(HTML_NAMESPACE, "a");
+      a.href = url;
+      a.className = "recent";
+      a.title = (item.title == url ? item.title : item.title + "\n" + url);
+      a.onclick = function() {
+        newTabTools.browserWindow.undoCloseTab(index);
+        return false;
+      }
+      let img = document.createElementNS(HTML_NAMESPACE, "img");
+      img.className = "favicon";
+      img.src = iconURL;
+      a.appendChild(img);
+      a.appendChild(document.createTextNode(item.title));
+      this.recentList.appendChild(a);
+    }
+    this.recentList.hidden = this.recentList.children.length == 1;
   }
 };
 
@@ -223,15 +286,14 @@ let newTabTools = {
     return Services.prefs.getBranch("extensions.newtabtools.");
   });
 
-  XPCOMUtils.defineLazyGetter(newTabTools, "faviconService", function() {
-    return Components.classes["@mozilla.org/browser/favicon-service;1"]
-                     .getService(Ci.mozIAsyncFavicons);
-  });
+  XPCOMUtils.defineLazyServiceGetter(newTabTools,
+    "faviconService", "@mozilla.org/browser/favicon-service;1", "mozIAsyncFavicons");
 
-  XPCOMUtils.defineLazyGetter(newTabTools, "annoService", function() {
-    return Components.classes["@mozilla.org/browser/annotation-service;1"]
-                     .getService(Components.interfaces.nsIAnnotationService);
-  });
+  XPCOMUtils.defineLazyServiceGetter(newTabTools,
+    "annoService", "@mozilla.org/browser/annotation-service;1", "nsIAnnotationService");
+
+  XPCOMUtils.defineLazyServiceGetter(newTabTools,
+    "ss", "@mozilla.org/browser/sessionstore;1", "nsISessionStore");
 
   let uiElements = {
     "page": "newtab-scrollbox",
@@ -244,7 +306,8 @@ let newTabTools = {
     "setThumbnailInput": "config-thumb-input",
     "setTitleInput": "config-title-input",
     "setBackgroundInput": "config-bg-input",
-    "containThumbsCheckbox": "config-containThumbs"
+    "containThumbsCheckbox": "config-containThumbs",
+    "recentList": "newtab-recent"
   };
   for (let key in uiElements) {
     let value = uiElements[key];
@@ -365,5 +428,6 @@ let newTabTools = {
       }, 1000)
     }
 
+    newTabTools.startRecent();
   }, false);
 }

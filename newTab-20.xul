@@ -73,6 +73,13 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 
     <div id="newtab-vertical-margin">
       <div id="newtab-margin-top"/>
+      <div id="newtab-recent-outer">
+        <div class="newtab-side-margin"/>
+        <div id="newtab-recent">
+          <span>Recently closed tabs:</span>
+        </div>
+        <div class="newtab-side-margin"/>
+      </div>
       <div id="newtab-horizontal-margin">
         <div class="newtab-side-margin"/>
         <div id="newtab-grid"/>

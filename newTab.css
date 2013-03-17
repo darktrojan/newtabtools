@@ -14,6 +14,37 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
   background-size: cover;
   background-position: 50% 50%;
 }
+#newtab-recent-outer {
+  display: -moz-box;
+}
+#newtab-recent {
+  -moz-box-flex: 1;
+  margin-top: -20px;
+}
+#newtab-recent > span {
+  vertical-align: middle;
+}
+.recent {
+  padding: 4px;
+  background-color: rgba(255, 255, 255, 0.2);
+  display: inline-block;
+  line-height: 16px;
+  border-radius: 4px;
+  margin: 2px;
+  cursor: pointer;
+  transition: background-color 100ms ease-out, color 100ms ease-out;
+  text-decoration: none;
+  color: rgb(31, 54, 76);
+  text-overflow: ellipsis;
+  max-width: 200px;
+  overflow-x: hidden;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+.recent:hover {
+  background-color: highlight;
+  color: highlighttext;
+}
 .newtab-row {
   margin-bottom: 5px;
 }
