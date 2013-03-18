@@ -27,6 +27,7 @@ function startup(aParams, aReason) {
   let defaultPrefs = Services.prefs.getDefaultBranch(EXTENSION_PREFS);
   defaultPrefs.setIntPref("launcher", 3);
   defaultPrefs.setBoolPref("launcher.dark", false);
+  defaultPrefs.setIntPref("recent.count", 5);
   defaultPrefs.setBoolPref("thumbs.contain", false);
   defaultPrefs.setBoolPref("thumbs.hidebuttons", false);
   defaultPrefs.setBoolPref("thumbs.hidefavicons", false);

@@ -220,12 +220,18 @@ let newTabTools = {
       return;
     }
 
+    let count = this.prefs.getIntPref("recent.count");
+    if (count == 0) {
+      this.recentList.hidden = true;
+      return;
+    }
+
     for (let element of this.recentList.querySelectorAll("a")) {
       this.recentList.removeChild(element);
     }
 
     let undoItems = JSON.parse(this.ss.getClosedTabData(this.browserWindow));
-    for (let i = 0; i < undoItems.length; i++) {
+    for (let i = 0, added = 0; added < count && i < undoItems.length; i++) {
       let item = undoItems[i];
       let index = i;
       let iconURL;
@@ -263,8 +269,9 @@ let newTabTools = {
       a.appendChild(img);
       a.appendChild(document.createTextNode(item.title));
       this.recentList.appendChild(a);
+      added++;
     }
-    this.recentList.hidden = this.recentList.children.length == 1;
+    this.recentList.hidden = !added;
   }
 };
 

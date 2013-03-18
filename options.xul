@@ -7,6 +7,7 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 <vbox xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
   <setting pref="browser.newtabpage.rows" type="integer" title="Rows" max="10" min="1"/>
   <setting pref="browser.newtabpage.columns" type="integer" title="Columns" max="10" min="1"/>
+  <setting pref="extensions.newtabtools.recent.count" type="integer" title="Recently Closed Tabs"/>
   <setting pref="extensions.newtabtools.launcher" type="menulist" title="Launcher">
     <menulist sizetopopup="always">
       <menupopup>
