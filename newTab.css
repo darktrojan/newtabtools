@@ -24,6 +24,8 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
   margin-top: -2px;
   -moz-margin-end: 3px;
   vertical-align: middle;
+  width: 16px;
+  height: 16px;
 }
 :root.containThumbs .newtab-thumbnail {
   background-size: contain;
