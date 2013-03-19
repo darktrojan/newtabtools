@@ -79,6 +79,10 @@ let prefObserver = {
         aWindow.newTabTools.updateUI();
       });
       break;
+    case "recent.count":
+      enumerateTabs(function(aWindow) {
+        aWindow.newTabTools.refreshRecent();
+      });
     }
   }
 };

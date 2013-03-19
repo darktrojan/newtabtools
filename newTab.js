@@ -230,8 +230,9 @@ let newTabTools = {
       this.recentList.removeChild(element);
     }
 
+    let added = 0;
     let undoItems = JSON.parse(this.ss.getClosedTabData(this.browserWindow));
-    for (let i = 0, added = 0; added < count && i < undoItems.length; i++) {
+    for (let i = 0; added < count && i < undoItems.length; i++) {
       let item = undoItems[i];
       let index = i;
       let iconURL;
