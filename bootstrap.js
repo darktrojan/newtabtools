@@ -37,16 +37,21 @@ function startup(aParams, aReason) {
     userPrefs.setIntPref("donationreminder", aReason == ADDON_UPGRADE ? 1 : 0);
   }
   userPrefs.addObserver("", prefObserver, false);
+  Services.obs.addObserver(notificationObserver, "newtabtools-change", false);
 
-  reloadTabs();
+  enumerateTabs(function(aWindow) {
+    aWindow.location.reload();
+  });
 
   AddonManager.addAddonListener({
-    // If we call reloadTabs in shutdown, the page override is
+    // If we call reload in shutdown, the page override is
     // still in place, and we don't want that.
     onDisabled: function(aAddon) {
       AddonManager.removeAddonListener(this);
       if (aAddon.id == "newtabtools@darktrojan.net") {
-        reloadTabs();
+        enumerateTabs(function(aWindow) {
+          aWindow.location.reload();
+        });
       }
     }
   });
@@ -57,6 +62,7 @@ function shutdown(aParams, aReason) {
   }
 
   userPrefs.removeObserver("", prefObserver);
+  Services.obs.removeObserver(notificationObserver, "newtabtools-change");
 }
 
 let userPrefs;
@@ -68,19 +74,33 @@ let prefObserver = {
     case "thumbs.contain":
     case "thumbs.hidebuttons":
     case "thumbs.hidefavicons":
-      NewTabUtils.allPages.update();
+      enumerateTabs(function(aWindow) {
+        aWindow.newTabTools.updateUI();
+      });
       break;
     }
   }
-}
+};
 
-function reloadTabs() {
+let notificationObserver = {
+  observe: function(aSubject, aTopic, aData) {
+    switch (aData) {
+    case "background":
+      enumerateTabs(function(aWindow) {
+        aWindow.newTabTools.refreshBackgroundImage();
+      });
+      break;
+    }
+  }
+};
+
+function enumerateTabs(aCallback) {
   let windowEnum = Services.wm.getEnumerator("navigator:browser");
   while (windowEnum.hasMoreElements()) {
     let browserWindow = windowEnum.getNext();
     for (let browser of browserWindow.gBrowser.browsers) {
       if (browser.contentWindow.location.href == "about:newtab") {
-        browser.contentWindow.location.reload();
+        aCallback(browser.contentWindow);
       }
     }
   }

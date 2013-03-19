@@ -88,7 +88,7 @@ let newTabTools = {
           }
           NetUtil.asyncCopy(inputStream, fos, function (aResult) {
             FileUtils.closeSafeFileOutputStream(fos);
-            gAllPages.update();
+            Services.obs.notifyObservers(null, "newtabtools-change", "background");
           }.bind(this));
         }.bind(this));
       }
@@ -96,7 +96,7 @@ let newTabTools = {
     case "config-removeBackground":
       if (this.backgroundImageFile.exists())
         this.backgroundImageFile.remove(true);
-      gAllPages.update();
+      Services.obs.notifyObservers(null, "newtabtools-change", "background");
       break;
     case "config-darkLauncher":
       checked = event.originalTarget.checked;
@@ -181,8 +181,6 @@ let newTabTools = {
     titleElement.lastChild.nodeValue = aTitle;
   },
   updateUI: function() {
-    this.refreshBackgroundImage();
-
     let launcherPosition = this.prefs.getIntPref("launcher");
     if (launcherPosition) {
       let positionNames = ["top", "right", "bottom", "left"];
@@ -263,15 +261,11 @@ let newTabTools = {
 
   newTabTools.launcher.addEventListener("click", newTabTools.launcherOnClick, false);
 
+  newTabTools.refreshBackgroundImage();
   newTabTools.updateUI();
 
   window.addEventListener("load", function window_load() {
     window.removeEventListener("load", window_load, false);
-    gPage.oldUpdate = gPage.update;
-    gPage.update = function() {
-      gPage.oldUpdate();
-      newTabTools.updateUI();
-    };
 
     gTransformation.oldGetNodePosition = gTransformation.getNodePosition;
     gTransformation.getNodePosition = function(aNode) {
