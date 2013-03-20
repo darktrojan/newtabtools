@@ -330,10 +330,12 @@ let newTabTools = {
       });
     };
 
-    for (let cell of gGrid.cells) {
-      if (cell.site)
-        cell.site._addTitleAndFavicon();
-    }
+    gLinks.populateCache(function() {
+      for (let cell of gGrid.cells) {
+        if (cell.site)
+          cell.site._addTitleAndFavicon();
+      }
+    }, false);
 
     let oldVersion = newTabTools.prefs.getIntPref("donationreminder");
     let currentVersion = newTabTools.prefs.getIntPref("version");
