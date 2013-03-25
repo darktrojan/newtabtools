@@ -323,7 +323,13 @@ let newTabTools = {
         if (!aURI)
           return;
 
-        let icon = document.createElementNS(HTML_NAMESPACE, "img");
+        let icon;
+        if (titleElement.firstChild.nodeType == Node.ELEMENT_NODE) {
+          // This shouldn't happen, but sometimes it does.
+          icon = titleElement.firstChild;
+        } else {
+          icon = document.createElementNS(HTML_NAMESPACE, "img");
+        }
         icon.src = "moz-anno:favicon:" + aURI.spec;
         icon.className = "favicon";
         titleElement.insertBefore(icon, titleElement.firstChild);
