@@ -133,9 +133,16 @@ let newTabTools = {
       }
     }
   },
+  getFileForURL: function(aURL) {
+    if ('getFilePathForURL' in PageThumbsStorage) {
+      let path = PageThumbsStorage.getFilePathForURL(aURL);
+      return FileUtils.File(path);
+    } else {
+      return PageThumbsStorage.getFileForURL(aURL);
+    }
+  },
   removeThumbnail: function(aURL) {
-    let path = PageThumbsStorage.getFilePathForURL(aURL);
-    let file = FileUtils.File(path);
+    let file = this.getFileForURL(aURL);
     if (file.exists()) {
       file.permissions = 0644;
       file.remove(true);
@@ -144,6 +151,7 @@ let newTabTools = {
   setThumbnail: function(aURL, aSrc, aCallback) {
     this.removeThumbnail(aURL);
 
+    let file = this.getFileForURL(aURL);
     let image = new Image();
     image.onload = function() {
       let [thumbnailWidth, thumbnailHeight] = PageThumbs._getThumbnailSize();
@@ -157,10 +165,7 @@ let newTabTools = {
       ctx.drawImage(image, 0, 0);
 
       canvas.mozFetchAsStream(function(aInputStream) {
-        let path = PageThumbsStorage.getFilePathForURL(aURL);
-        let file = FileUtils.File(path);
         let outputStream = FileUtils.openSafeFileOutputStream(file);
-
         NetUtil.asyncCopy(aInputStream, outputStream, function(aSuccessful) {
           FileUtils.closeSafeFileOutputStream(outputStream);
           file.permissions = 0444;
