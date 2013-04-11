@@ -134,7 +134,8 @@ let newTabTools = {
     }
   },
   removeThumbnail: function(aURL) {
-    let file = PageThumbsStorage.getFileForURL(aURL);
+    let path = PageThumbsStorage.getFilePathForURL(aURL);
+    let file = FileUtils.File(path);
     if (file.exists()) {
       file.permissions = 0644;
       file.remove(true);
@@ -156,8 +157,12 @@ let newTabTools = {
       ctx.drawImage(image, 0, 0);
 
       canvas.mozFetchAsStream(function(aInputStream) {
-        PageThumbsStorage.write(aURL, aInputStream, function(aSuccessful) {
-          let file = PageThumbsStorage.getFileForURL(aURL);
+        let path = PageThumbsStorage.getFilePathForURL(aURL);
+        let file = FileUtils.File(path);
+        let outputStream = FileUtils.openSafeFileOutputStream(file);
+
+        NetUtil.asyncCopy(aInputStream, outputStream, function(aSuccessful) {
+          FileUtils.closeSafeFileOutputStream(outputStream);
           file.permissions = 0444;
           if (aCallback)
             aCallback(aSuccessful);
