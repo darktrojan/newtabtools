@@ -88,7 +88,7 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
       </div>
       <div id="newtab-recent-outer">
         <div class="newtab-side-margin"/>
-        <div id="newtab-recent">
+        <div id="newtab-recent" hidden="true">
           <span>Recently closed tabs:</span>
         </div>
         <div class="newtab-side-margin"/>

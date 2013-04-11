@@ -20,15 +20,17 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 #newtab-recent {
   -moz-box-flex: 1;
   margin-top: -20px;
+  height: 28px;
+  overflow: hidden;
 }
 #newtab-recent > span {
   vertical-align: middle;
 }
 .recent {
-  padding: 4px;
+  padding: 2px 4px;
   background-color: rgba(255, 255, 255, 0.2);
   display: inline-block;
-  line-height: 16px;
+  line-height: 20px;
   border-radius: 4px;
   margin: 2px;
   cursor: pointer;
@@ -78,11 +80,12 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
   max-height: 10px;
 }
 .newtab-side-margin {
-  min-width: 10px;
+  min-width: 30px;
   max-width: 30px;
 }
 :root[launcher="right"] .newtab-side-margin:last-child,
 :root[launcher="left"] .newtab-side-margin:first-child {
+  min-width: 10px;
   max-width: 10px;
 }
 #launcher {
