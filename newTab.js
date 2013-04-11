@@ -416,7 +416,7 @@ let newTabTools = {
 
     let oldVersion = newTabTools.prefs.getIntPref("donationreminder");
     let currentVersion = newTabTools.prefs.getIntPref("version");
-    if (oldVersion > 0 && oldVersion < 7) {
+    if (oldVersion > 0 && oldVersion < 10) {
       setTimeout(function() {
         let notifyBox = newTabTools.browserWindow.getNotificationBox(window);
         let label = "New Tab Tools has been updated to version " + currentVersion + ". " +
