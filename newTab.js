@@ -146,12 +146,12 @@ let newTabTools = {
 
     let image = new Image();
     image.onload = function() {
-      let sw = image.width;
-      let sh = image.height;
       let [thumbnailWidth, thumbnailHeight] = PageThumbs._getThumbnailSize();
-      let scale = Math.max(thumbnailWidth / sw, thumbnailHeight / sh);
+      let scale = Math.max(thumbnailWidth / image.width, thumbnailHeight / image.height);
 
       let canvas = PageThumbs._createCanvas();
+      canvas.width = image.width * scale;
+      canvas.height = image.height * scale;
       let ctx = canvas.getContext("2d");
       ctx.scale(scale, scale);
       ctx.drawImage(image, 0, 0);
