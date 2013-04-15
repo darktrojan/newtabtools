@@ -226,6 +226,9 @@ let newTabTools = {
     handler();
   },
   refreshRecent: function(aEvent) {
+    // Redefine this because this function is called before it is defined
+    let HTML_NAMESPACE = "http://www.w3.org/1999/xhtml";
+
     if (aEvent && aEvent.originalTarget.linkedBrowser.contentWindow == window) {
       return;
     }
@@ -287,8 +290,11 @@ let newTabTools = {
 };
 
 {
-  Components.utils.import("resource://gre/modules/Services.jsm");
-  Components.utils.import("resource://gre/modules/XPCOMUtils.jsm");
+  let Ci = Components.interfaces;
+  let Cu = Components.utils;
+
+  Cu.import("resource://gre/modules/Services.jsm");
+  Cu.import("resource://gre/modules/XPCOMUtils.jsm");
 
   XPCOMUtils.defineLazyGetter(newTabTools, "browserWindow", function() {
     return window.QueryInterface(Ci.nsIInterfaceRequestor)
@@ -344,6 +350,7 @@ let newTabTools = {
 
   newTabTools.refreshBackgroundImage();
   newTabTools.updateUI();
+  newTabTools.startRecent();
 
   window.addEventListener("load", function window_load() {
     window.removeEventListener("load", window_load, false);
@@ -445,7 +452,5 @@ let newTabTools = {
         notifyBox.appendNotification(label, value, null, notifyBox.PRIORITY_INFO_LOW, buttons);
       }, 1000)
     }
-
-    newTabTools.startRecent();
   }, false);
 }
