@@ -44,6 +44,12 @@ function startup(aParams, aReason) {
     aWindow.location.reload();
   });
 
+  let windowEnum = Services.wm.getEnumerator("navigator:browser");
+  while (windowEnum.hasMoreElements()) {
+    windowObserver.paint(windowEnum.getNext());
+  }
+  Services.ww.registerNotification(windowObserver);
+
   AddonManager.addAddonListener({
     // If we call reload in shutdown, the page override is
     // still in place, and we don't want that.
@@ -61,6 +67,12 @@ function shutdown(aParams, aReason) {
   if (aReason == APP_SHUTDOWN) {
     return;
   }
+
+  let windowEnum = Services.wm.getEnumerator("navigator:browser");
+  while (windowEnum.hasMoreElements()) {
+    windowObserver.unpaint(windowEnum.getNext());
+  }
+  Services.ww.unregisterNotification(windowObserver);
 
   userPrefs.removeObserver("", prefObserver);
   Services.obs.removeObserver(notificationObserver, "newtabtools-change");
@@ -95,6 +107,30 @@ let notificationObserver = {
         aWindow.newTabTools.refreshBackgroundImage();
       });
       break;
+    }
+  }
+};
+
+let windowObserver = {
+  observe: function(aSubject, aTopic, aData) {
+    aSubject.addEventListener("load", function() {
+      windowObserver.paint(aSubject);
+    }, false);
+  },
+  paint: function(aWindow) {
+    if (aWindow.location == "chrome://browser/content/browser.xul") {
+      aWindow.document.addEventListener("TabSelect", this.onTabSelect, false);
+    }
+  },
+  unpaint: function(aWindow) {
+    if (aWindow.location == "chrome://browser/content/browser.xul") {
+      aWindow.document.removeEventListener("TabSelect", this.onTabSelect, false);
+    }
+  },
+  onTabSelect: function(aEvent) {
+    let browser = aEvent.target.linkedBrowser;
+    if (browser.currentURI.spec == "about:newtab") {
+        browser.contentWindow.newTabTools.onVisible();
     }
   }
 };

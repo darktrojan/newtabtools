@@ -286,6 +286,32 @@ let newTabTools = {
       added++;
     }
     this.recentList.hidden = !added;
+  },
+  onVisible: function() {
+    this.startRecent();
+
+    let oldVersion = newTabTools.prefs.getIntPref("donationreminder");
+    let currentVersion = newTabTools.prefs.getIntPref("version");
+    if (oldVersion > 0 && oldVersion < 10) {
+      setTimeout(function() {
+        let notifyBox = newTabTools.browserWindow.getNotificationBox(window);
+        let label = "New Tab Tools has been updated to version " + currentVersion + ". " +
+            "Please consider making a donation.";
+        let value = "newtabtools-donate";
+        let buttons = [{
+          label: "Donate",
+          accessKey: "D",
+          popup: null,
+          callback: function() {
+            let url = "https://addons.mozilla.org/addon/new-tab-tools/about";
+            newTabTools.browserWindow.openLinkIn(url, "current", {});
+          }
+        }];
+        newTabTools.prefs.setIntPref("donationreminder", currentVersion);
+        notifyBox.appendNotification(label, value, null, notifyBox.PRIORITY_INFO_LOW, buttons);
+      }, 1000)
+    }
+    this.onVisible = function() {};
   }
 };
 
@@ -296,7 +322,7 @@ let newTabTools = {
   Cu.import("resource://gre/modules/Services.jsm");
   Cu.import("resource://gre/modules/XPCOMUtils.jsm");
 
-  XPCOMUtils.defineLazyGetter(newTabTools, "browserWindow", function() {
+  function getTopWindow() {
     return window.QueryInterface(Ci.nsIInterfaceRequestor)
                  .getInterface(Ci.nsIWebNavigation)
                  .QueryInterface(Ci.nsIDocShellTreeItem)
@@ -304,6 +330,10 @@ let newTabTools = {
                  .QueryInterface(Ci.nsIInterfaceRequestor)
                  .getInterface(Ci.nsIDOMWindow)
                  .wrappedJSObject;
+  }
+
+  XPCOMUtils.defineLazyGetter(newTabTools, "browserWindow", function() {
+    return getTopWindow();
   });
 
   XPCOMUtils.defineLazyGetter(newTabTools, "prefs", function() {
@@ -350,7 +380,11 @@ let newTabTools = {
 
   newTabTools.refreshBackgroundImage();
   newTabTools.updateUI();
-  newTabTools.startRecent();
+
+  newTabTools.preloaded = getTopWindow().location != "chrome://browser/content/browser.xul";
+  if (!newTabTools.preloaded) {
+    newTabTools.onVisible();
+  }
 
   window.addEventListener("load", function window_load() {
     window.removeEventListener("load", window_load, false);
@@ -430,27 +464,5 @@ let newTabTools = {
           cell.site._addTitleAndFavicon();
       }
     }, false);
-
-    let oldVersion = newTabTools.prefs.getIntPref("donationreminder");
-    let currentVersion = newTabTools.prefs.getIntPref("version");
-    if (oldVersion > 0 && oldVersion < 10) {
-      setTimeout(function() {
-        let notifyBox = newTabTools.browserWindow.getNotificationBox(window);
-        let label = "New Tab Tools has been updated to version " + currentVersion + ". " +
-            "Please consider making a donation.";
-        let value = "newtabtools-donate";
-        let buttons = [{
-          label: "Donate",
-          accessKey: "D",
-          popup: null,
-          callback: function() {
-            let url = "https://addons.mozilla.org/addon/new-tab-tools/about";
-            newTabTools.browserWindow.openLinkIn(url, "current", {});
-          }
-        }];
-        newTabTools.prefs.setIntPref("donationreminder", currentVersion);
-        notifyBox.appendNotification(label, value, null, notifyBox.PRIORITY_INFO_LOW, buttons);
-      }, 1000)
-    }
   }, false);
 }
