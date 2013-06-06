@@ -1,0 +1,10 @@
+bootstrap.js
+chrome.manifest
+icon64.png
+icon.png
+install.rdf
+launcher/*
+newTab.css
+newTab.js
+newTab.xul
+options.xul
