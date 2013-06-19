@@ -50,6 +50,12 @@ function startup(aParams, aReason) {
   }
   Services.ww.registerNotification(windowObserver);
 
+  // Flipping this pref reloads the preloaded page. Ugly but effective.
+  if (Services.prefs.getBoolPref("browser.newtab.preload")) {
+    Services.prefs.setBoolPref("browser.newtab.preload", false);
+    Services.prefs.setBoolPref("browser.newtab.preload", true);
+  }
+
   AddonManager.addAddonListener({
     // If we call reload in shutdown, the page override is
     // still in place, and we don't want that.
@@ -59,6 +65,12 @@ function startup(aParams, aReason) {
         enumerateTabs(function(aWindow) {
           aWindow.location.reload();
         });
+      }
+
+      // Flipping this pref reloads the preloaded page. Ugly but effective.
+      if (Services.prefs.getBoolPref("browser.newtab.preload")) {
+        Services.prefs.setBoolPref("browser.newtab.preload", false);
+        Services.prefs.setBoolPref("browser.newtab.preload", true);
       }
     }
   });
@@ -130,7 +142,7 @@ let windowObserver = {
   onTabSelect: function(aEvent) {
     let browser = aEvent.target.linkedBrowser;
     if (browser.currentURI.spec == "about:newtab") {
-        browser.contentWindow.newTabTools.onVisible();
+      browser.contentWindow.newTabTools.onVisible();
     }
   }
 };
