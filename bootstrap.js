@@ -131,15 +131,15 @@ let windowObserver = {
   },
   paint: function(aWindow) {
     if (aWindow.location == "chrome://browser/content/browser.xul") {
-      aWindow.document.addEventListener("TabSelect", this.onTabSelect, false);
+      aWindow.document.addEventListener("TabOpen", this.onTabOpen, false);
     }
   },
   unpaint: function(aWindow) {
     if (aWindow.location == "chrome://browser/content/browser.xul") {
-      aWindow.document.removeEventListener("TabSelect", this.onTabSelect, false);
+      aWindow.document.removeEventListener("TabOpen", this.onTabOpen, false);
     }
   },
-  onTabSelect: function(aEvent) {
+  onTabOpen: function(aEvent) {
     let browser = aEvent.target.linkedBrowser;
     if (browser.currentURI.spec == "about:newtab") {
       browser.contentWindow.newTabTools.onVisible();
