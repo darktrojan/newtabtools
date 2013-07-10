@@ -295,7 +295,7 @@ let newTabTools = {
     if (oldVersion > 0 && oldVersion < 10) {
       setTimeout(function() {
         let notifyBox = newTabTools.browserWindow.getNotificationBox(window);
-        let label = newTabTools.strings.formatStringFromName("newversion");
+        let label = newTabTools.strings.formatStringFromName("newversion", [currentVersion], 1);
         let value = "newtabtools-donate";
         let buttons = [{
           label: newTabTools.strings.GetStringFromName("donate.label"),
