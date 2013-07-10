@@ -295,12 +295,11 @@ let newTabTools = {
     if (oldVersion > 0 && oldVersion < 10) {
       setTimeout(function() {
         let notifyBox = newTabTools.browserWindow.getNotificationBox(window);
-        let label = "New Tab Tools has been updated to version " + currentVersion + ". " +
-            "Please consider making a donation.";
+        let label = newTabTools.strings.formatStringFromName("newversion");
         let value = "newtabtools-donate";
         let buttons = [{
-          label: "Donate",
-          accessKey: "D",
+          label: newTabTools.strings.GetStringFromName("donate.label"),
+          accessKey: newTabTools.strings.GetStringFromName("donate.accesskey"),
           popup: null,
           callback: function() {
             let url = "https://addons.mozilla.org/addon/new-tab-tools/about";
@@ -338,6 +337,10 @@ let newTabTools = {
 
   XPCOMUtils.defineLazyGetter(newTabTools, "prefs", function() {
     return Services.prefs.getBranch("extensions.newtabtools.");
+  });
+
+  XPCOMUtils.defineLazyGetter(newTabTools, "strings", function() {
+    return Services.strings.createBundle("chrome://newtabtools/locale/newTabTools.properties");
   });
 
   XPCOMUtils.defineLazyServiceGetter(newTabTools,

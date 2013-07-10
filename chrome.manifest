@@ -1,2 +1,3 @@
 content newtabtools ./
+locale newtabtools en-US locale/en-US/
 override chrome://browser/content/newtab/newTab.xul chrome://newtabtools/content/newTab.xul

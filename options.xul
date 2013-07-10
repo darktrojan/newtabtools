@@ -4,21 +4,22 @@ This Source Code Form is subject to the terms of the Mozilla Public
 License, v. 2.0. If a copy of the MPL was not distributed with this file,
 You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
+<!DOCTYPE vbox SYSTEM "chrome://newtabtools/locale/options.dtd">
 <vbox xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-  <setting pref="browser.newtabpage.rows" type="integer" title="Rows" max="10" min="1"/>
-  <setting pref="browser.newtabpage.columns" type="integer" title="Columns" max="10" min="1"/>
-  <setting pref="extensions.newtabtools.recent.count" type="integer" title="Recently Closed Tabs"/>
-  <setting pref="extensions.newtabtools.launcher" type="menulist" title="Launcher">
+  <setting pref="browser.newtabpage.rows" type="integer" title="&newtabtools.options.rows;" max="10" min="1"/>
+  <setting pref="browser.newtabpage.columns" type="integer" title="&newtabtools.options.columns;" max="10" min="1"/>
+  <setting pref="extensions.newtabtools.recent.count" type="integer" title="&newtabtools.options.recent.count;"/>
+  <setting pref="extensions.newtabtools.launcher" type="menulist" title="&newtabtools.options.launcher;">
     <menulist sizetopopup="always">
       <menupopup>
-        <menuitem label="Do not show" value="0" />
-        <menuitem label="Top" value="1" />
-        <menuitem label="Bottom" value="3" />
-        <menuitem label="Left" value="4" />
-        <menuitem label="Right" value="2" />
+        <menuitem label="&newtabtools.options.launcher.hidden;" value="0" />
+        <menuitem label="&newtabtools.options.launcher.top;" value="1" />
+        <menuitem label="&newtabtools.options.launcher.bottom;" value="3" />
+        <menuitem label="&newtabtools.options.launcher.left;" value="4" />
+        <menuitem label="&newtabtools.options.launcher.right;" value="2" />
       </menupopup>
     </menulist>
   </setting>
-  <setting pref="extensions.newtabtools.thumbs.hidebuttons" type="bool" title="Hide Thumbnail Buttons"/>
-  <setting pref="extensions.newtabtools.thumbs.hidefavicons" type="bool" title="Hide Site Icons"/>
+  <setting pref="extensions.newtabtools.thumbs.hidebuttons" type="bool" title="&newtabtools.options.thumbs.hidebuttons;"/>
+  <setting pref="extensions.newtabtools.thumbs.hidefavicons" type="bool" title="&newtabtools.options.thumbs.hidefavicons;"/>
 </vbox>

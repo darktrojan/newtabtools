@@ -16,6 +16,8 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
   %aboutHomeDTD;
   <!ENTITY % browserDTD SYSTEM "chrome://browser/locale/browser.dtd">
   %browserDTD;
+  <!ENTITY % newTabToolsDTD SYSTEM "chrome://newtabtools/locale/newTab.dtd">
+  %newTabToolsDTD;
 ]>
 
 <xul:window id="newtab-window" xmlns="http://www.w3.org/1999/xhtml"
@@ -26,47 +28,47 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
     <div id="config-wrapper">
       <div id="config">
         <xul:vbox id="config-inner" flex="1">
-          <xul:label class="header" value="Tile images:"/>
-          <xul:label value="Select a tile:"/>
+          <xul:label class="header" value="&newtabtools.tile-header;"/>
+          <xul:label value="&newtabtools.tile-select.label;"/>
           <xul:menulist id="config-select">
             <xul:menupopup/>
           </xul:menulist>
-          <xul:label value="Paste an image URL or browse to choose a file:"/>
+          <xul:label value="&newtabtools.tile-thumbnail-url.label;"/>
           <xul:hbox flex="1" align="center">
             <xul:textbox id="config-thumb-input" flex="1"/>
-            <xul:button id="config-browseForFile" label="Browse&#x2026;"/>
+            <xul:button id="config-browseForFile" label="&newtabtools.tile-thumbnail-url.browse;"/>
           </xul:hbox>
           <xul:hbox flex="1" align="center">
             <xul:spacer flex="4"/>
-            <xul:button flex="1" id="config-setThumbnail" label="Set Thumbnail"/>
-            <xul:button flex="1" id="config-removeThumbnail" label="Remove Thumbnail"/>
+            <xul:button flex="1" id="config-setThumbnail" label="&newtabtools.tile-thumbnail.set;"/>
+            <xul:button flex="1" id="config-removeThumbnail" label="&newtabtools.tile-thumbnail.remove;"/>
             <xul:spacer flex="4"/>
           </xul:hbox>
-          <xul:checkbox flex="1" id="config-containThumbs" label="Tiles should contain whole thumbnail"/>
-          <xul:label value="Type a new tile title:"/>
+          <xul:checkbox flex="1" id="config-containThumbs" label="&newtabtools.tile-thumbnails.contain;"/>
+          <xul:label value="&newtabtools.tile-title.input.label;"/>
           <xul:textbox id="config-title-input" flex="1"/>
           <xul:hbox flex="1" align="center">
             <xul:spacer flex="4"/>
-            <xul:button flex="1" id="config-setTitle" label="Set Title"/>
-            <xul:button flex="1" id="config-removeTitle" label="Reset Title"/>
+            <xul:button flex="1" id="config-setTitle" label="&newtabtools.tile-title.set;"/>
+            <xul:button flex="1" id="config-removeTitle" label="&newtabtools.tile-title.reset;"/>
             <xul:spacer flex="4"/>
           </xul:hbox>
           <xul:spacer style="height: 3em"/>
-          <xul:label class="header" value="Page Background Image:"/>
-          <xul:label value="Paste an image URL or browse to choose a file:"/>
+          <xul:label class="header" value="&newtabtools.bg-header;"/>
+          <xul:label value="&newtabtools.bg-url.label;"/>
           <xul:hbox flex="1" align="center">
             <xul:textbox id="config-bg-input" flex="1"/>
-            <xul:button id="config-bg-browseForFile" label="Browse&#x2026;"/>
+            <xul:button id="config-bg-browseForFile" label="&newtabtools.bg-url.browse;"/>
           </xul:hbox>
           <xul:hbox flex="1" align="center">
             <xul:spacer flex="4"/>
-            <xul:button flex="1" id="config-setBackground" label="Set Background"/>
-            <xul:button flex="1" id="config-removeBackground" label="Remove Background"/>
+            <xul:button flex="1" id="config-setBackground" label="&newtabtools.bg.set;"/>
+            <xul:button flex="1" id="config-removeBackground" label="&newtabtools.bg.remove;"/>
             <xul:spacer flex="4"/>
           </xul:hbox>
-          <xul:checkbox flex="1" id="config-darkLauncher" label="Use dark background for launcher"/>
+          <xul:checkbox flex="1" id="config-darkLauncher" label="&newtabtools.bg.dark-launcher;"/>
           <xul:spacer style="height: 3em"/>
-          <xul:label class="text-link" id="config-morePrefs" value="More options&#x2026;"/>
+          <xul:label class="text-link" id="config-morePrefs" value="&newtabtools.more-options;"/>
         </xul:vbox>
       </div>
     </div>
