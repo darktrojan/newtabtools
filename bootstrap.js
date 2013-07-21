@@ -25,6 +25,7 @@ function uninstall(aParams, aReason) {
 }
 function startup(aParams, aReason) {
   let defaultPrefs = Services.prefs.getDefaultBranch(EXTENSION_PREFS);
+  defaultPrefs.setIntPref("donationreminder", 0);
   defaultPrefs.setIntPref("launcher", 3);
   defaultPrefs.setBoolPref("launcher.dark", false);
   defaultPrefs.setIntPref("recent.count", 5);
@@ -34,9 +35,11 @@ function startup(aParams, aReason) {
 
   userPrefs = Services.prefs.getBranch(EXTENSION_PREFS);
   userPrefs.setIntPref("version", parseInt(aParams.version));
-  if (!userPrefs.prefHasUserValue("donationreminder")) {
-    userPrefs.setIntPref("donationreminder", aReason == ADDON_UPGRADE ? 1 : 0);
+
+  if (userPrefs.getIntPref("donationreminder") == 0 && aReason == ADDON_UPGRADE) {
+    userPrefs.setIntPref("donationreminder", 1);
   }
+
   userPrefs.addObserver("", prefObserver, false);
   Services.obs.addObserver(notificationObserver, "newtabtools-change", false);
 
