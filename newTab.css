@@ -227,9 +227,6 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 :root.background #launcher.dark #settings::before {
   content: url("chrome://newtabtools/content/launcher/settings.png");
 }
-#newtab-toggle {
-  display: none;
-}
 #config-toggle {
   position: absolute;
   top: 10px;
@@ -275,4 +272,12 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 }
 #config-morePrefs {
   text-align: center;
+}
+
+#newtab-scrollbox[page-disabled] #config-wrapper,
+#newtab-scrollbox[page-disabled] #config-toggle,
+#newtab-scrollbox[page-disabled] #launcher,
+#newtab-scrollbox[page-disabled] #newtab-recent-outer,
+#newtab-scrollbox:not([page-disabled]) #newtab-toggle {
+  display: none;
 }
