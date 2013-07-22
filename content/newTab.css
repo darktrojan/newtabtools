@@ -14,6 +14,9 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
   background-size: cover;
   background-position: 50% 50%;
 }
+#newtab-recent-outer {
+  white-space: nowrap;
+}
 #newtab-recent > span {
   display: inline-block;
   vertical-align: middle;
@@ -27,7 +30,7 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
   border-radius: 4px;
   -moz-margin-end: 4px;
   cursor: pointer;
-  transition: background-color 100ms ease-out, color 100ms ease-out;
+  transition: background-color 200ms, color 200ms;
   text-decoration: none;
   color: rgb(31, 54, 76);
   text-overflow: ellipsis;
@@ -42,8 +45,7 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 }
 #newtab-undo-container {
   margin-left: 1em;
-  transition: opacity 100ms ease-out 0s,
-    display 0s ease-out 100ms;
+  transition: opacity 200ms, display 0s 200ms;
 }
 #newtab-undo-container[undo-disabled] {
   display: none;
@@ -151,19 +153,19 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
   font-family: inherit;
   font-size: 12px;
   cursor: pointer;
-  -moz-transition-property: background-color, border-color, box-shadow;
-  -moz-transition-duration: 150ms;
+  transition-property: background-color, border-color, box-shadow;
+  transition-duration: 150ms;
 }
 .launchButton:hover {
   background-color: hsla(211, 79%, 6%, .03);
   border-color: hsla(210, 54%, 20%, .15) hsla(210, 54%, 20%, .17) hsla(210, 54%, 20%, .2);
 }
 .launchButton:hover:active {
-  background-image: -moz-linear-gradient(hsla(211, 79%, 6%, .02), hsla(211, 79%, 6%, .05));
+  background-image: linear-gradient(hsla(211, 79%, 6%, .02), hsla(211, 79%, 6%, .05));
   border-color: hsla(210, 54%, 20%, .2) hsla(210, 54%, 20%, .23) hsla(210, 54%, 20%, .25);
   box-shadow: 0 1px 1px hsla(211, 79%, 6%, .05) inset,
               0 0 1px hsla(211, 79%, 6%, .1) inset;
-  -moz-transition-duration: 0ms;
+  transition-duration: 0ms;
 }
 .launchButton::before {
   display: block;
@@ -243,16 +245,19 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
   right: auto;
 }
 #config-wrapper {
+  visibility: hidden;
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   width: 0;
   overflow: hidden;
-  -moz-transition: width 500ms;
+  transition: width 500ms, visibility 0s 500ms;
 }
 #config-wrapper.shown {
+  visibility: visible;
   width: 351px;
+  transition: width 500ms;
 }
 #config {
   position: absolute;
