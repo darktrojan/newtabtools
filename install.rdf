@@ -17,12 +17,14 @@
         <em:maxVersion>25.0a1</em:maxVersion>
       </Description>
     </em:targetApplication>
-      <em:localized>
+
+    <em:localized>
       <Description>
         <em:locale>de</em:locale>
         <em:name>Neuer-Tab-Tools</em:name>
         <em:description>Passt die Neuer-Tab-Seite an. Sie können neue Schaltflächen anlegen, die Schnellstartleiste versetzen, oder ein Hintergrundbild verwenden. Außerdem sind nun die Bilder der Schaltflächen und die Titel veränderbar.</em:description>
       </Description>
     </em:localized>
+
   </Description>
 </RDF>
