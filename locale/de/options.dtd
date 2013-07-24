@@ -1,0 +1,11 @@
+<!ENTITY newtabtools.options.rows "Reihen">
+<!ENTITY newtabtools.options.columns "Spalten">
+<!ENTITY newtabtools.options.recent.count "Geschlossene Tabs">
+<!ENTITY newtabtools.options.launcher "Schnellstartleiste">
+<!ENTITY newtabtools.options.launcher.hidden "Nicht anzeigen">
+<!ENTITY newtabtools.options.launcher.top "Oben">
+<!ENTITY newtabtools.options.launcher.bottom "Unten">
+<!ENTITY newtabtools.options.launcher.left "Links">
+<!ENTITY newtabtools.options.launcher.right "Rechts">
+<!ENTITY newtabtools.options.thumbs.hidebuttons "Miniaturbild-Knöpfe verstecken">
+<!ENTITY newtabtools.options.thumbs.hidefavicons "Seitenlogos verstecken">
