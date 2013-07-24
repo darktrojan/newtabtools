@@ -1,0 +1,21 @@
+<!ENTITY newtabtools.tile-header "Schaltflächenbilder:">
+<!ENTITY newtabtools.tile-select.label "Schaltfläche:">
+<!ENTITY newtabtools.tile-thumbnail-url.label "Bild-Link einfügen oder nach einer Datei suchen:">
+<!ENTITY newtabtools.tile-thumbnail-url.browse "Suchen&#x2026;">
+<!ENTITY newtabtools.tile-thumbnail.set "Miniaturbild verwenden">
+<!ENTITY newtabtools.tile-thumbnail.remove "Miniaturbild entfernen">
+<!ENTITY newtabtools.tile-thumbnails.contain "Schaltfläche soll mit Bild ausgefüllt werden">
+<!ENTITY newtabtools.tile-title.input.label "Neuen Titel eingeben:">
+<!ENTITY newtabtools.tile-title.set "Titel verwenden">
+<!ENTITY newtabtools.tile-title.reset "Titel zurücksetzen">
+
+<!ENTITY newtabtools.bg-header "Hintergrundbild:">
+<!ENTITY newtabtools.bg-url.label "Bild-Link einfügen oder nach einer Datei suchen:">
+<!ENTITY newtabtools.bg-url.browse "Suchen&#x2026;">
+<!ENTITY newtabtools.bg.set "Hintergrund verwenden">
+<!ENTITY newtabtools.bg.remove "Hintergrund entfernen">
+<!ENTITY newtabtools.bg.dark-launcher "Dunkler Hintergrund für Schnellstartleiste">
+
+<!ENTITY newtabtools.more-options "Mehr Optionen&#x2026;">
+
+<!ENTITY newtabtools.recently-closed-tabs "Geschlossene Tabs:">
