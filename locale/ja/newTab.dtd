@@ -1,0 +1,21 @@
+<!ENTITY newtabtools.tile-header "タイルの画像:">
+<!ENTITY newtabtools.tile-select.label "タイルを選択:">
+<!ENTITY newtabtools.tile-thumbnail-url.label "画像のURLを貼り付けまたは選択したファイルを参照:">
+<!ENTITY newtabtools.tile-thumbnail-url.browse "参照&#x2026;">
+<!ENTITY newtabtools.tile-thumbnail.set "サムネイルを設定">
+<!ENTITY newtabtools.tile-thumbnail.remove "サムネイルを削除">
+<!ENTITY newtabtools.tile-thumbnails.contain "タイルは全体のサムネイルが含まれている必要があります">
+<!ENTITY newtabtools.tile-title.input.label "新しいタイルのタイトルを入力:">
+<!ENTITY newtabtools.tile-title.set "タイトルを設定">
+<!ENTITY newtabtools.tile-title.reset "タイトルをリセット">
+
+<!ENTITY newtabtools.bg-header "新しいタブページの背景画像:">
+<!ENTITY newtabtools.bg-url.label "画像のURLを貼り付けまたは選択したファイルを参照:">
+<!ENTITY newtabtools.bg-url.browse "参照&#x2026;">
+<!ENTITY newtabtools.bg.set "背景画像を設定">
+<!ENTITY newtabtools.bg.remove "背景画像を削除">
+<!ENTITY newtabtools.bg.dark-launcher "ランチャーに暗い背景を使用">
+
+<!ENTITY newtabtools.more-options "その他のオプション&#x2026;">
+
+<!ENTITY newtabtools.recently-closed-tabs "最近閉じたタブ:">
