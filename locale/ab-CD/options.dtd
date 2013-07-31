@@ -1,11 +1,11 @@
-<!ENTITY newtabtools.options.rows "Rows">
-<!ENTITY newtabtools.options.columns "Columns">
-<!ENTITY newtabtools.options.recent.count "Recently Closed Tabs">
-<!ENTITY newtabtools.options.launcher "Launcher">
-<!ENTITY newtabtools.options.launcher.hidden "Do not show">
-<!ENTITY newtabtools.options.launcher.top "Top">
-<!ENTITY newtabtools.options.launcher.bottom "Bottom">
-<!ENTITY newtabtools.options.launcher.left "Left">
-<!ENTITY newtabtools.options.launcher.right "Right">
-<!ENTITY newtabtools.options.thumbs.hidebuttons "Hide Thumbnail Buttons">
-<!ENTITY newtabtools.options.thumbs.hidefavicons "Hide Site Icons">
+<!ENTITY newtabtools.options.rows "Rōws">
+<!ENTITY newtabtools.options.columns "Còŀūmñs">
+<!ENTITY newtabtools.options.recent.count "Rēćêńtŀy Cłòsêd Tãbs">
+<!ENTITY newtabtools.options.launcher "Låųņćhĕr">
+<!ENTITY newtabtools.options.launcher.hidden "Dō ŋöt shòw">
+<!ENTITY newtabtools.options.launcher.top "Tòp">
+<!ENTITY newtabtools.options.launcher.bottom "Bóttõm">
+<!ENTITY newtabtools.options.launcher.left "Lĕft">
+<!ENTITY newtabtools.options.launcher.right "Rıght">
+<!ENTITY newtabtools.options.thumbs.hidebuttons "Hıdė Thúmbŉäīľ Bùttôņs">
+<!ENTITY newtabtools.options.thumbs.hidefavicons "Hīdè Sĭtę Iċōŋs">
