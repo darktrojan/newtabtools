@@ -232,6 +232,9 @@ let newTabTools = {
       tabContainer.removeEventListener("TabClose", handler, false);
     }, false);
     handler();
+
+    window.addEventListener("resize", this.trimRecent.bind(this));
+    this.recentListOuter.addEventListener("overflow", this.trimRecent.bind(this));
   },
   refreshRecent: function(aEvent) {
     // Redefine this because this function is called before it is defined
@@ -293,7 +296,23 @@ let newTabTools = {
       this.recentList.appendChild(a);
       added++;
     }
+    this.trimRecent();
     this.recentList.hidden = !added;
+  },
+  trimRecent: function() {
+    let width = this.recentListOuter.clientWidth;
+    let elements = document.querySelectorAll(".recent");
+    let hiding = false;
+
+    for (let recent of elements) {
+      recent.style.display = null;
+    }
+    for (let recent of elements) {
+      if (hiding || recent.offsetLeft + recent.offsetWidth > width) {
+        recent.style.display = "none";
+        hiding = true;
+      }
+    }
   },
   onVisible: function() {
     this.startRecent();
@@ -372,7 +391,8 @@ let newTabTools = {
     "setTitleInput": "config-title-input",
     "setBackgroundInput": "config-bg-input",
     "containThumbsCheckbox": "config-containThumbs",
-    "recentList": "newtab-recent"
+    "recentList": "newtab-recent",
+    "recentListOuter": "newtab-recent-outer"
   };
   for (let key in uiElements) {
     let value = uiElements[key];
@@ -476,5 +496,11 @@ let newTabTools = {
           cell.site._addTitleAndFavicon();
       }
     }, false);
+
+    gUndoDialog.oldHide = gUndoDialog.hide;
+    gUndoDialog.hide = function() {
+      gUndoDialog.oldHide();
+      newTabTools.trimRecent();
+    }
   }, false);
 }
