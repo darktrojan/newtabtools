@@ -107,6 +107,9 @@ let newTabTools = {
       break;
     }
   },
+  onTileSelect: function() {
+    this.setTitleInput.value = this.tileSelect.selectedItem.label;
+  },
   toggleConfig: function() {
     this.configWrapper.classList.toggle("shown");
     this.configToggleButton.classList.toggle("shown");
@@ -117,12 +120,14 @@ let newTabTools = {
     this.tileSelect.removeAllItems();
     for (let cell of gGrid.cells) {
       if (!cell.isEmpty()) {
-        let name = cell.site.title || cell.site.url;
-        let description = !cell.site.title ? null : cell.site.url;
+        let title = cell.site._annoTitle || cell.site.title;
+        let name = title || cell.site.url;
+        let description = title ? cell.site.url : null;
         this.tileSelect.appendItem(name, cell.site.url, description);
       }
     }
     this.tileSelect.selectedIndex = 0;
+    this.onTileSelect();
   },
   refreshThumbnail: function(aURL) {
     let newThumbnailURL = PageThumbs.getThumbnailURL(aURL) + "&" + Math.random();
@@ -183,12 +188,15 @@ let newTabTools = {
     if (aTitle) {
       this.annoService.setPageAnnotation(uri, "newtabtools/title",
         this.setTitleInput.value, 0, this.annoService.EXPIRE_WITH_HISTORY);
+      site._annoTitle = aTitle;
     } else {
       this.annoService.removePageAnnotation(uri, "newtabtools/title");
-      aTitle = site.title;
+      this.setTitleInput.value = aTitle = site.title;
+      delete site._annoTitle;
     }
     let titleElement = site.node.querySelector(".newtab-title");
     titleElement.lastChild.nodeValue = aTitle;
+    this.tileSelect.selectedItem.label = aTitle;
   },
   updateUI: function() {
     let launcherPosition = this.prefs.getIntPref("launcher");
@@ -224,6 +232,9 @@ let newTabTools = {
       tabContainer.removeEventListener("TabClose", handler, false);
     }, false);
     handler();
+
+    window.addEventListener("resize", this.trimRecent.bind(this));
+    this.recentListOuter.addEventListener("overflow", this.trimRecent.bind(this));
   },
   refreshRecent: function(aEvent) {
     // Redefine this because this function is called before it is defined
@@ -285,7 +296,23 @@ let newTabTools = {
       this.recentList.appendChild(a);
       added++;
     }
+    this.trimRecent();
     this.recentList.hidden = !added;
+  },
+  trimRecent: function() {
+    let width = this.recentListOuter.clientWidth;
+    let elements = document.querySelectorAll(".recent");
+    let hiding = false;
+
+    for (let recent of elements) {
+      recent.style.display = null;
+    }
+    for (let recent of elements) {
+      if (hiding || recent.offsetLeft + recent.offsetWidth > width) {
+        recent.style.display = "none";
+        hiding = true;
+      }
+    }
   },
   onVisible: function() {
     this.startRecent();
@@ -364,7 +391,8 @@ let newTabTools = {
     "setTitleInput": "config-title-input",
     "setBackgroundInput": "config-bg-input",
     "containThumbsCheckbox": "config-containThumbs",
-    "recentList": "newtab-recent"
+    "recentList": "newtab-recent",
+    "recentListOuter": "newtab-recent-outer"
   };
   for (let key in uiElements) {
     let value = uiElements[key];
@@ -378,6 +406,7 @@ let newTabTools = {
 
   let configInner = newTabTools.configInner;
   configInner.addEventListener("click", newTabTools.configOnClick.bind(newTabTools), false);
+  newTabTools.tileSelect.addEventListener("command", newTabTools.onTileSelect.bind(newTabTools), false);
 
   newTabTools.launcher.addEventListener("click", newTabTools.launcherOnClick, false);
 
@@ -439,8 +468,8 @@ let newTabTools = {
       let uri = Services.io.newURI(this.url, null, null);
 
       try {
-        let title = newTabTools.annoService.getPageAnnotation(uri, "newtabtools/title");
-        titleElement.textContent = title;
+        this._annoTitle = newTabTools.annoService.getPageAnnotation(uri, "newtabtools/title");
+        titleElement.textContent = this._annoTitle;
       } catch(e) {
       }
 
@@ -467,5 +496,11 @@ let newTabTools = {
           cell.site._addTitleAndFavicon();
       }
     }, false);
+
+    gUndoDialog.oldHide = gUndoDialog.hide;
+    gUndoDialog.hide = function() {
+      gUndoDialog.oldHide();
+      newTabTools.trimRecent();
+    }
   }, false);
 }
