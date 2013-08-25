@@ -26,7 +26,6 @@
       </Description>
     </em:localized>
 
-    </em:localized>
     <em:localized>
       <Description>
         <em:locale>ja</em:locale>
@@ -34,6 +33,6 @@
         <em:description>新しいタブページをカスタマイズします。新しいタブページのタイル追加や Firefox スタートページのランチャーを表示したり、背景画像を追加することができます。また、新しいタイル画像やタイトルを設定することができます。</em:description>
       </Description>
     </em:localized>
-    
+
   </Description>
 </RDF>
