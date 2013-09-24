@@ -1,0 +1,11 @@
+<!ENTITY newtabtools.options.rows "Linhas">
+<!ENTITY newtabtools.options.columns "Colunas">
+<!ENTITY newtabtools.options.recent.count "Abas fechadas recentemente">
+<!ENTITY newtabtools.options.launcher "Iniciador">
+<!ENTITY newtabtools.options.launcher.hidden "Não mostrar">
+<!ENTITY newtabtools.options.launcher.top "Acima">
+<!ENTITY newtabtools.options.launcher.bottom "Abaixo">
+<!ENTITY newtabtools.options.launcher.left "Esquerda">
+<!ENTITY newtabtools.options.launcher.right "Direita">
+<!ENTITY newtabtools.options.thumbs.hidebuttons "Ocultar botões de miniatura">
+<!ENTITY newtabtools.options.thumbs.hidefavicons "Ocultar ícones do site">
