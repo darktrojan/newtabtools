@@ -1,7 +1,7 @@
 <!ENTITY newtabtools.tile-header "Imagem do bloco:">
 <!ENTITY newtabtools.tile-select.label "Selecione um bloco:">
 <!ENTITY newtabtools.tile-thumbnail-url.label "Cole a URL da imagem ou escolha um arquivo:">
-<!ENTITY newtabtools.tile-thumbnail-url.browse "Procurar...">
+<!ENTITY newtabtools.tile-thumbnail-url.browse "Procurar…">
 <!ENTITY newtabtools.tile-thumbnail.set "Definir">
 <!ENTITY newtabtools.tile-thumbnail.remove "Remover">
 <!ENTITY newtabtools.tile-thumbnails.contain "Blocos devem conter toda a miniatura">
@@ -11,11 +11,11 @@
 
 <!ENTITY newtabtools.bg-header "Imagem de fundo da página">
 <!ENTITY newtabtools.bg-url.label "Cole a URL da imagem ou escolha um arquivo:">
-<!ENTITY newtabtools.bg-url.browse "Procurar...">
+<!ENTITY newtabtools.bg-url.browse "Procurar…">
 <!ENTITY newtabtools.bg.set "Definir">
 <!ENTITY newtabtools.bg.remove "Remover">
 <!ENTITY newtabtools.bg.dark-launcher "Usar fundo escuro para o iniciador">
 
-<!ENTITY newtabtools.more-options "Mais opções...">
+<!ENTITY newtabtools.more-options "Mais opções…">
 
 <!ENTITY newtabtools.recently-closed-tabs "Abas fechadas recentemente:">
