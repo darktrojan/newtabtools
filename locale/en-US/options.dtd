@@ -1,6 +1,6 @@
 <!ENTITY newtabtools.options.rows "Rows">
 <!ENTITY newtabtools.options.columns "Columns">
-<!ENTITY newtabtools.options.recent.count "Recently Closed Tabs">
+<!ENTITY newtabtools.options.recent.show "Show Recently Closed Tabs">
 <!ENTITY newtabtools.options.launcher "Launcher">
 <!ENTITY newtabtools.options.launcher.hidden "Do not show">
 <!ENTITY newtabtools.options.launcher.top "Top">

@@ -1,6 +1,6 @@
 <!ENTITY newtabtools.options.rows "列">
 <!ENTITY newtabtools.options.columns "欄">
-<!ENTITY newtabtools.options.recent.count "最近關閉的分頁">
+<!ENTITY newtabtools.options.recent.show "Show Recently Closed Tabs">
 <!ENTITY newtabtools.options.launcher "捷徑列">
 <!ENTITY newtabtools.options.launcher.hidden "不顯示">
 <!ENTITY newtabtools.options.launcher.top "頂端">

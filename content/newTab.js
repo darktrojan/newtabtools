@@ -244,8 +244,7 @@ let newTabTools = {
       return;
     }
 
-    let count = this.prefs.getIntPref("recent.count");
-    if (count == 0) {
+    if (!this.prefs.getBoolPref("recent.show")) {
       this.recentList.hidden = true;
       return;
     }
@@ -256,7 +255,7 @@ let newTabTools = {
 
     let added = 0;
     let undoItems = JSON.parse(this.ss.getClosedTabData(this.browserWindow));
-    for (let i = 0; added < count && i < undoItems.length; i++) {
+    for (let i = 0; i < undoItems.length; i++) {
       let item = undoItems[i];
       let index = i;
       let iconURL;

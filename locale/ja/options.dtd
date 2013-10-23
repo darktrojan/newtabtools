@@ -1,6 +1,6 @@
 <!ENTITY newtabtools.options.rows "行">
 <!ENTITY newtabtools.options.columns "列">
-<!ENTITY newtabtools.options.recent.count "最近閉じたタブ">
+<!ENTITY newtabtools.options.recent.show "Show Recently Closed Tabs">
 <!ENTITY newtabtools.options.launcher "ランチャーを表示">
 <!ENTITY newtabtools.options.launcher.hidden "表示しない">
 <!ENTITY newtabtools.options.launcher.top "上">

@@ -16,6 +16,13 @@ function install(aParams, aReason) {
   if (aReason == ADDON_UPGRADE) {
     Services.prefs.deleteBranch(EXTENSION_PREFS + "rows");
     Services.prefs.deleteBranch(EXTENSION_PREFS + "columns");
+
+    let showRecent = true;
+    if (Services.prefs.prefHasUserValue(EXTENSION_PREFS + "recent.count")) {
+      showRecent = Services.prefs.getIntPref(EXTENSION_PREFS + "recent.count") != 0;
+      Services.prefs.deleteBranch(EXTENSION_PREFS + "recent.count");
+      Services.prefs.setBoolPref(EXTENSION_PREFS + "recent.show", showRecent);
+    }
   }
 }
 function uninstall(aParams, aReason) {
@@ -28,7 +35,7 @@ function startup(aParams, aReason) {
   defaultPrefs.setIntPref("donationreminder", 0);
   defaultPrefs.setIntPref("launcher", 3);
   defaultPrefs.setBoolPref("launcher.dark", false);
-  defaultPrefs.setIntPref("recent.count", 5);
+  defaultPrefs.setBoolPref("recent.show", true);
   defaultPrefs.setBoolPref("thumbs.contain", false);
   defaultPrefs.setBoolPref("thumbs.hidebuttons", false);
   defaultPrefs.setBoolPref("thumbs.hidefavicons", false);
@@ -106,7 +113,7 @@ let prefObserver = {
         aWindow.newTabTools.updateUI();
       });
       break;
-    case "recent.count":
+    case "recent.show":
       enumerateTabs(function(aWindow) {
         aWindow.newTabTools.refreshRecent();
       });
