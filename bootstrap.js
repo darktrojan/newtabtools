@@ -60,12 +60,6 @@ function startup(aParams, aReason) {
   }
   Services.ww.registerNotification(windowObserver);
 
-  // Flipping this pref reloads the preloaded page. Ugly but effective.
-  if (Services.prefs.getBoolPref("browser.newtab.preload")) {
-    Services.prefs.setBoolPref("browser.newtab.preload", false);
-    Services.prefs.setBoolPref("browser.newtab.preload", true);
-  }
-
   AddonManager.addAddonListener({
     // If we call reload in shutdown, the page override is
     // still in place, and we don't want that.
@@ -75,12 +69,6 @@ function startup(aParams, aReason) {
         enumerateTabs(function(aWindow) {
           aWindow.location.reload();
         });
-      }
-
-      // Flipping this pref reloads the preloaded page. Ugly but effective.
-      if (Services.prefs.getBoolPref("browser.newtab.preload")) {
-        Services.prefs.setBoolPref("browser.newtab.preload", false);
-        Services.prefs.setBoolPref("browser.newtab.preload", true);
       }
     }
   });
@@ -158,13 +146,12 @@ let windowObserver = {
 };
 
 function enumerateTabs(aCallback) {
-  let windowEnum = Services.wm.getEnumerator("navigator:browser");
-  while (windowEnum.hasMoreElements()) {
-    let browserWindow = windowEnum.getNext();
-    for (let browser of browserWindow.gBrowser.browsers) {
-      if (browser.contentWindow.location.href == "about:newtab") {
-        aCallback(browser.contentWindow);
-      }
+  for (let page of NewTabUtils.allPages._pages) {
+    try {
+      let global = Components.utils.getGlobalForObject(page);
+      aCallback(global);
+    } catch(e) {
+      Cu.reportError(e);
     }
   }
 }
