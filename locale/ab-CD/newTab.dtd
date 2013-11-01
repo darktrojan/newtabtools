@@ -1,0 +1,21 @@
+<!ENTITY newtabtools.tile-header "Tïłë ĭmãgēŝ:">
+<!ENTITY newtabtools.tile-select.label "Sèłėċt ã tìľė:">
+<!ENTITY newtabtools.tile-thumbnail-url.label "Păştě ăň ĭmāgę URL ör brówŝė tō çhōŏśë á fıłĕ:">
+<!ENTITY newtabtools.tile-thumbnail-url.browse "Brőwşę…">
+<!ENTITY newtabtools.tile-thumbnail.set "Sėt Thũmbñăıľ">
+<!ENTITY newtabtools.tile-thumbnail.remove "Rėmōvè Thūmbńâìľ">
+<!ENTITY newtabtools.tile-thumbnails.contain "Tıľèŝ śhōùłd ċôñtãıň whöľė thūmbŉąìł">
+<!ENTITY newtabtools.tile-title.input.label "Typĕ ã ñęw tĩļė tįtĺė:">
+<!ENTITY newtabtools.tile-title.set "Sět Tĩtľė">
+<!ENTITY newtabtools.tile-title.reset "Rèśët Tįtĺê">
+
+<!ENTITY newtabtools.bg-header "Pàgė Bäčkgrøůňd Imägë:">
+<!ENTITY newtabtools.bg-url.label "Pãştě äŋ ímăgé URL ōr brőwŝē tø ċhøóŝě â fïľĕ:">
+<!ENTITY newtabtools.bg-url.browse "Brōwŝę…">
+<!ENTITY newtabtools.bg.set "Sęt Bãċkgróúņd">
+<!ENTITY newtabtools.bg.remove "Rĕmővė Băĉkgrŏúņd">
+<!ENTITY newtabtools.bg.dark-launcher "Uşê dârk bãčkgrŏûñd för ļãùńčhêr">
+
+<!ENTITY newtabtools.more-options "Mörē õptĭõņŝ…">
+
+<!ENTITY newtabtools.recently-closed-tabs "Rèċěŉtľy çľóŝéd tąbş:">
