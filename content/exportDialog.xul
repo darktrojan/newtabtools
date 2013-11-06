@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<dialog ondialogaccept="return onDialogAccept();" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	<label value="Choose what to export:" />
+	<groupbox>
+		<caption label="Prefs"/>
+		<checkbox label="browser.newtabpage.blocked" />
+		<checkbox label="browser.newtabpage.columns" />
+		<checkbox label="browser.newtabpage.pinned" />
+		<checkbox label="browser.newtabpage.rows" />
+		<checkbox label="extensions.newtabtools.launcher" />
+		<checkbox label="extensions.newtabtools.launcher.dark" />
+		<checkbox label="extensions.newtabtools.recent.show" />
+		<checkbox label="extensions.newtabtools.thumbs.contain" />
+		<checkbox label="extensions.newtabtools.thumbs.hidebuttons" />
+		<checkbox label="extensions.newtabtools.thumbs.hidefavicons" />
+	<!-- </groupbox> -->
+	<!-- <groupbox> -->
+		<!-- <caption label="Tile Metadata"/> -->
+		<checkbox label="Thumbnails" />
+		<checkbox label="Customized Titles" />
+		<checkbox label="Page Background" />
+	</groupbox>
+
+	<script type="application/javascript" src="exportDialog.js" />
+</dialog>
