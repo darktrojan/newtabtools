@@ -1,3 +1,5 @@
+const EXPORTED_SYMBOLS = ["NewTabToolsExporter"];
+
 const PR_RDWR = 0x04;
 const PR_CREATE_FILE = 0x08;
 const PR_TRUNCATE = 0x20;
@@ -5,6 +7,24 @@ const PR_TRUNCATE = 0x20;
 Components.utils.import("resource://gre/modules/FileUtils.jsm");
 Components.utils.import("resource://gre/modules/PageThumbs.jsm");
 Components.utils.import("resource://gre/modules/Promise.jsm");
+Components.utils.import("resource://gre/modules/XPCOMUtils.jsm");
+
+XPCOMUtils.defineLazyServiceGetter(this, "annoService", "@mozilla.org/browser/annotation-service;1", Components.interfaces.nsIAnnotationService);
+
+let NewTabToolsExporter = {
+	doExport: function doExport() {
+		exportShowOptionDialog()
+			.then(exportShowFilePicker)
+			.then(exportSave, exportCancelled)
+			.then(null, Components.utils.reportError);
+	},
+	doImport: function doImport() {
+		importShowFilePicker()
+			.then(importLoad)
+			.then(importSave, importCancelled)
+			.then(null, Components.utils.reportError);
+	}
+};
 
 function exportShowOptionDialog() {
 	let deferred = Promise.defer();
@@ -49,7 +69,6 @@ function exportSave(aReturnValues) {
 	zipWriter.open(aReturnValues.file, PR_RDWR | PR_CREATE_FILE | PR_TRUNCATE);
 
 	{
-		let annoService = Components.classes["@mozilla.org/browser/annotation-service;1"].getService(Components.interfaces.nsIAnnotationService);
 		let annos = [];
 		for (let [name, enabled] of Iterator(aReturnValues.options.annos)) {
 			if (enabled) {
@@ -137,13 +156,6 @@ function exportCancelled() {
 	alert("export cancelled");
 }
 
-function doExport() {
-	exportShowOptionDialog()
-		.then(exportShowFilePicker)
-		.then(exportSave, exportCancelled)
-		.then(null, Components.utils.reportError);
-}
-
 function importShowFilePicker() {
 	let deferred = Promise.defer();
 
@@ -228,7 +240,6 @@ function importSave(aReturnValues) {
 		zipReader.open(aReturnValues.file);
 
 		{
-			let annoService = Components.classes["@mozilla.org/browser/annotation-service;1"].getService(Components.interfaces.nsIAnnotationService);
 			for (let [name, enabled] of Iterator(aReturnValues.options.annos)) {
 				// can't be enabled and not in aReturnValues.annos, but check anyway
 				if (!enabled || !(name in aReturnValues.annos)) {
@@ -299,11 +310,4 @@ function importSave(aReturnValues) {
 
 function importCancelled() {
 	alert("import cancelled");
-}
-
-function doImport() {
-	importShowFilePicker()
-		.then(importLoad)
-		.then(importSave, importCancelled)
-		.then(null, Components.utils.reportError);
 }
