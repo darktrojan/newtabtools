@@ -153,6 +153,7 @@ function importLoad(aFile) {
 	let deferred = Promise.defer();
 
 	let returnValues = {
+		importing: true,
 		cancelled: true,
 		file: aFile
 	};
@@ -215,7 +216,12 @@ function importSave(aReturnValues) {
 
 		{
 			let annoService = Components.classes["@mozilla.org/browser/annotation-service;1"].getService(Components.interfaces.nsIAnnotationService);
-			for (let [name, data] of Iterator(aReturnValues.annos)) {
+			for (let [name, enabled] of Iterator(aReturnValues.options.annos)) {
+				// can't be enabled and not in aReturnValues.annos, but check anyway
+				if (!enabled || !(name in aReturnValues.annos)) {
+					continue;
+				}
+				let data = aReturnValues.annos[name];
 				for (let [page, value] of Iterator(data)) {
 					try {
 						let uri = Services.io.newURI(page, null, null);
@@ -227,25 +233,41 @@ function importSave(aReturnValues) {
 			}
 		}
 		{
-			for (let [name, value] of Iterator(aReturnValues.prefs)) {
+			function copyPref(aName) {
+				let value = aReturnValues.prefs[aName];
 				try {
 					switch (typeof value) {
 					case "string":
-						Services.prefs.setCharPref(name, value);
+						Services.prefs.setCharPref(aName, value);
 						break;
 					case "number":
-						Services.prefs.setIntPref(name, value);
+						Services.prefs.setIntPref(aName, value);
 						break;
 					case "boolean":
-						Services.prefs.setBoolPref(name, value);
+						Services.prefs.setBoolPref(aName, value);
 						break;
 					}
 				} catch(e) {
 					Components.utils.reportError(e);
 				}
 			}
+
+			for (let [name, enabled] of Iterator(aReturnValues.options.prefs)) {
+				if (!enabled) {
+					continue;
+				}
+				if (name == "gridsize") {
+					copyPref("browser.newtabpage.columns");
+					copyPref("browser.newtabpage.rows");
+				}
+				if (("browser.newtabpage." + name) in aReturnValues.prefs) {
+					copyPref("browser.newtabpage." + name);
+				} else if (("extensions.newtabtools." + name) in aReturnValues.prefs) {
+					copyPref("extensions.newtabtools." + name);
+				}
+			}
 		}
-		{
+		if (aReturnValues.options.tiles.thumbs) {
 			let thumbsDirectory = new FileUtils.File(PageThumbsStorage.path);
 			for (let file of aReturnValues.thumbnails) {
 				let thumbFile = thumbsDirectory.clone();
@@ -253,7 +275,8 @@ function importSave(aReturnValues) {
 				zipReader.extract(file, thumbFile);
 			}
 		}
-		if (aReturnValues.hasBackgroundImage) {
+		// can't be enabled and not exist, but check anyway
+		if (aReturnValues.options.page.background && aReturnValues.hasBackgroundImage) {
 			zipReader.extract("newtab-background", FileUtils.getFile("ProfD", ["newtab-background"]));
 		}
 	} finally {

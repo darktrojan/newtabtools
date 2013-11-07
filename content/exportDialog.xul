@@ -1,26 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
 
-<dialog ondialogaccept="return onDialogAccept();" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+<dialog ondialogaccept="return onDialogAccept();" ondialogcancel="return onDialogCancel();" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 	<label value="Choose what to export:" />
 	<groupbox>
-		<caption label="Prefs"/>
-		<checkbox label="browser.newtabpage.blocked" />
-		<checkbox label="browser.newtabpage.columns" />
-		<checkbox label="browser.newtabpage.pinned" />
-		<checkbox label="browser.newtabpage.rows" />
-		<checkbox label="extensions.newtabtools.launcher" />
-		<checkbox label="extensions.newtabtools.launcher.dark" />
-		<checkbox label="extensions.newtabtools.recent.show" />
-		<checkbox label="extensions.newtabtools.thumbs.contain" />
-		<checkbox label="extensions.newtabtools.thumbs.hidebuttons" />
-		<checkbox label="extensions.newtabtools.thumbs.hidefavicons" />
-	<!-- </groupbox> -->
-	<!-- <groupbox> -->
-		<!-- <caption label="Tile Metadata"/> -->
-		<checkbox label="Thumbnails" />
-		<checkbox label="Customized Titles" />
-		<checkbox label="Page Background" />
+		<caption label="Tiles"/>
+		<checkbox id="prefs.pinned" label="Pinned Tiles" />
+		<checkbox id="prefs.blocked" label="Removed Tiles" />
+		<checkbox id="prefs.gridsize" label="Number of Rows and Columns" />
+		<checkbox id="tiles.thumbs" label="Thumbnails" />
+		<checkbox id="prefs.thumbs.contain" label="Thumbnail Positioning" />
+		<checkbox id="annos.title" label="Customized Tile Titles" />
+		<checkbox id="prefs.thumbs.hidebuttons" label="Thumbnail Button Visibility" />
+		<checkbox id="prefs.thumbs.hidefavicons" label="Site Icon Visibility" />
+	</groupbox>
+	<groupbox>
+		<caption label="Page" />
+		<checkbox id="prefs.launcher" label="Position of Launcher" />
+		<!-- <checkbox id="prefs.launcher.dark" label="extensions.newtabtools.launcher.dark" /> -->
+		<checkbox id="prefs.recent.show" label="Recently Closed Tabs Visibility" />
+		<checkbox id="page.background" label="Page Background" />
 	</groupbox>
 
 	<script type="application/javascript" src="exportDialog.js" />
