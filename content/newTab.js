@@ -232,6 +232,9 @@ let newTabTools = {
     this.setFrameSize("bottom", frameSize[2]);
     this.setFrameSize("left-bottom", frameSize[3]);
     this.setFrameSize("left-top", frameSize[3]);
+
+    let gridSpacing = this.prefs.getCharPref("spacing");
+    document.documentElement.setAttribute("spacing", gridSpacing);
   },
   setFrameSize: function(aPiece, aSize) {
     let pieceElement = document.getElementById("newtab-margin-" + aPiece);

@@ -37,6 +37,7 @@ function startup(aParams, aReason) {
   defaultPrefs.setIntPref("launcher", 3);
   defaultPrefs.setBoolPref("launcher.dark", false);
   defaultPrefs.setBoolPref("recent.show", true);
+  defaultPrefs.setCharPref("spacing", "small");
   defaultPrefs.setBoolPref("thumbs.contain", false);
   defaultPrefs.setBoolPref("thumbs.hidebuttons", false);
   defaultPrefs.setBoolPref("thumbs.hidefavicons", false);
@@ -96,6 +97,7 @@ let prefObserver = {
     case "frame.size":
     case "launcher":
     case "launcher.dark":
+    case "spacing":
     case "thumbs.contain":
     case "thumbs.hidebuttons":
     case "thumbs.hidefavicons":
