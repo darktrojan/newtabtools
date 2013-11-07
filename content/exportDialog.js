@@ -36,6 +36,10 @@ if (returnValues.importing) {
 		}
 		checkbox.checked = !checkbox.disabled;
 	}
+} else {
+	for (let checkbox of document.querySelectorAll("checkbox")) {
+		checkbox.checked = true;
+	}
 }
 
 window.addEventListener("load", function onLoad() {

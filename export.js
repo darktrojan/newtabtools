@@ -50,9 +50,12 @@ function exportSave(aReturnValues) {
 
 	{
 		let annoService = Components.classes["@mozilla.org/browser/annotation-service;1"].getService(Components.interfaces.nsIAnnotationService);
-		let annos = [
-			"newtabtools/title"
-		];
+		let annos = [];
+		for (let [name, enabled] of Iterator(aReturnValues.options.annos)) {
+			if (enabled) {
+				annos.push("newtabtools/" + name);
+			}
+		}
 		let pages = {};
 		for (let a of annos) {
 			pages[a] = {};
@@ -67,18 +70,28 @@ function exportSave(aReturnValues) {
 		zipWriter.addEntryStream("annos.json", Date.now() * 1000, Components.interfaces.nsIZipWriter.COMPRESSION_DEFAULT, stream, false);
 	}
 	{
-		let keys = [
-			"browser.newtabpage.blocked",
-			"browser.newtabpage.columns",
-			"browser.newtabpage.pinned",
-			"browser.newtabpage.rows",
-			"extensions.newtabtools.launcher",
-			"extensions.newtabtools.launcher.dark",
-			"extensions.newtabtools.recent.show",
-			"extensions.newtabtools.thumbs.contain",
-			"extensions.newtabtools.thumbs.hidebuttons",
-			"extensions.newtabtools.thumbs.hidefavicons"
-		];
+		let keys = []
+		for (let [name, enabled] of Iterator(aReturnValues.options.prefs)) {
+			if (enabled) {
+				switch (name) {
+				case "gridsize":
+					keys.push("browser.newtabpage.columns", "browser.newtabpage.rows");
+					break;
+				case "blocked":
+				case "pinned":
+					keys.push("browser.newtabpage." + name);
+					break;
+				case "launcher":
+				case "launcher.dark":
+				case "recent.show":
+				case "thumbs.contain":
+				case "thumbs.hidebuttons":
+				case "thumbs.hidefavicons":
+					keys.push("extensions.newtabtools." + name);
+					break;
+				}
+			}
+		}
 		let prefs = {};
 		for (let k of keys) {
 			switch (Services.prefs.getPrefType(k)) {
@@ -99,7 +112,7 @@ function exportSave(aReturnValues) {
 		stream.setData(data, data.length);
 		zipWriter.addEntryStream("prefs.json", Date.now() * 1000, Components.interfaces.nsIZipWriter.COMPRESSION_DEFAULT, stream, false);
 	}
-	{
+	if (aReturnValues.options.tiles.thumbs) {
 		zipWriter.addEntryDirectory("thumbnails/", Date.now() * 1000, false);
 
 		for (let l of NewTabUtils.links.getLinks().slice(0, Math.floor(gGrid.cells.length * 1.5))) {
@@ -112,7 +125,7 @@ function exportSave(aReturnValues) {
 			}
 		}
 	}
-	{
+	if (aReturnValues.options.page.background) {
 		let backgroundFile = FileUtils.getFile("ProfD", ["newtab-background"]);
 		zipWriter.addEntryFile("newtab-background", Components.interfaces.nsIZipWriter.COMPRESSION_DEFAULT, backgroundFile, false);
 	}
