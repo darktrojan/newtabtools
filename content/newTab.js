@@ -220,6 +220,26 @@ let newTabTools = {
 
     let hideFavicons = this.prefs.getBoolPref("thumbs.hidefavicons");
     document.documentElement.classList[hideFavicons ? "add" : "remove"]("hideFavicons");
+
+    let frameSize = ["small", "small", "small", "small"];
+    let prefFrameSize = this.prefs.getCharPref("frame.size").split(" ", 4);
+    if (prefFrameSize.length == 4) {
+      frameSize = prefFrameSize;
+    }
+    this.setFrameSize("top", frameSize[0]);
+    this.setFrameSize("right-top", frameSize[1]);
+    this.setFrameSize("right-bottom", frameSize[1]);
+    this.setFrameSize("bottom", frameSize[2]);
+    this.setFrameSize("left-bottom", frameSize[3]);
+    this.setFrameSize("left-top", frameSize[3]);
+  },
+  setFrameSize: function(aPiece, aSize) {
+    let pieceElement = document.getElementById("newtab-margin-" + aPiece);
+    pieceElement.classList.remove("medium");
+    pieceElement.classList.remove("large");
+    if (aSize == "medium" || aSize == "large") {
+      pieceElement.classList.add(aSize);
+    }
   },
   startRecent: function() {
     let tabContainer = this.browserWindow.gBrowser.tabContainer;

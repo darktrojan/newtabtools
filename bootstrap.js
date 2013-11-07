@@ -33,6 +33,7 @@ function uninstall(aParams, aReason) {
 function startup(aParams, aReason) {
   let defaultPrefs = Services.prefs.getDefaultBranch(EXTENSION_PREFS);
   defaultPrefs.setIntPref("donationreminder", 0);
+  defaultPrefs.setCharPref("frame.size", "small small small small");
   defaultPrefs.setIntPref("launcher", 3);
   defaultPrefs.setBoolPref("launcher.dark", false);
   defaultPrefs.setBoolPref("recent.show", true);
@@ -92,6 +93,7 @@ let userPrefs;
 let prefObserver = {
   observe: function(aSubject, aTopic, aData) {
     switch (aData) {
+    case "frame.size":
     case "launcher":
     case "launcher.dark":
     case "thumbs.contain":
