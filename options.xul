@@ -8,6 +8,24 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 <vbox xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
   <setting pref="browser.newtabpage.rows" type="integer" title="&newtabtools.options.rows;" max="10" min="1"/>
   <setting pref="browser.newtabpage.columns" type="integer" title="&newtabtools.options.columns;" max="10" min="1"/>
+  <setting pref="extensions.newtabtools.grid.margin" type="menulist" title="&newtabtools.options.grid.margin;">
+    <menulist sizetopopup="always">
+      <menupopup>
+        <menuitem label="&newtabtools.options.size.small;" value="small small small small" />
+        <menuitem label="&newtabtools.options.size.medium;" value="medium medium medium medium" />
+        <menuitem label="&newtabtools.options.size.large;" value="large large large large" />
+      </menupopup>
+    </menulist>
+  </setting>
+  <setting pref="extensions.newtabtools.grid.spacing" type="menulist" title="&newtabtools.options.grid.spacing;">
+    <menulist sizetopopup="always">
+      <menupopup>
+        <menuitem label="&newtabtools.options.size.small;" value="small" />
+        <menuitem label="&newtabtools.options.size.medium;" value="medium" />
+        <menuitem label="&newtabtools.options.size.large;" value="large" />
+      </menupopup>
+    </menulist>
+  </setting>
   <setting pref="extensions.newtabtools.recent.show" type="bool" title="&newtabtools.options.recent.show;"/>
   <setting pref="extensions.newtabtools.launcher" type="menulist" title="&newtabtools.options.launcher;">
     <menulist sizetopopup="always">

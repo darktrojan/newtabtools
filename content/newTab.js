@@ -221,22 +221,22 @@ let newTabTools = {
     let hideFavicons = this.prefs.getBoolPref("thumbs.hidefavicons");
     document.documentElement.classList[hideFavicons ? "add" : "remove"]("hideFavicons");
 
-    let frameSize = ["small", "small", "small", "small"];
-    let prefFrameSize = this.prefs.getCharPref("frame.size").split(" ", 4);
-    if (prefFrameSize.length == 4) {
-      frameSize = prefFrameSize;
+    let gridMargin = ["small", "small", "small", "small"];
+    let prefGridMargin = this.prefs.getCharPref("grid.margin").split(" ", 4);
+    if (prefGridMargin.length == 4) {
+      gridMargin = prefGridMargin;
     }
-    this.setFrameSize("top", frameSize[0]);
-    this.setFrameSize("right-top", frameSize[1]);
-    this.setFrameSize("right-bottom", frameSize[1]);
-    this.setFrameSize("bottom", frameSize[2]);
-    this.setFrameSize("left-bottom", frameSize[3]);
-    this.setFrameSize("left-top", frameSize[3]);
+    this.setGridMargin("top", gridMargin[0]);
+    this.setGridMargin("right-top", gridMargin[1]);
+    this.setGridMargin("right-bottom", gridMargin[1]);
+    this.setGridMargin("bottom", gridMargin[2]);
+    this.setGridMargin("left-bottom", gridMargin[3]);
+    this.setGridMargin("left-top", gridMargin[3]);
 
-    let gridSpacing = this.prefs.getCharPref("spacing");
+    let gridSpacing = this.prefs.getCharPref("grid.spacing");
     document.documentElement.setAttribute("spacing", gridSpacing);
   },
-  setFrameSize: function(aPiece, aSize) {
+  setGridMargin: function(aPiece, aSize) {
     let pieceElement = document.getElementById("newtab-margin-" + aPiece);
     pieceElement.classList.remove("medium");
     pieceElement.classList.remove("large");
