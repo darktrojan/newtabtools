@@ -16,6 +16,7 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 }
 #newtab-recent-outer {
   white-space: nowrap;
+  height: 30px;
 }
 #newtab-recent > span {
   display: inline-block;
@@ -95,7 +96,8 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
   -moz-box-flex: 0;
 }
 #newtab-margin-top,
-#newtab-margin-bottom {
+#newtab-margin-bottom,
+:root[launcher="top"] #newtab-margin-top.medium {
   height: 30px;
 }
 #newtab-margin-top.medium,

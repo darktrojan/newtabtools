@@ -74,9 +74,9 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
     </div>
 
     <div id="newtab-vertical-margin">
-      <div id="newtab-margin-top">
+      <div id="newtab-margin-top" align="end">
         <div id="newtab-margin-left-top" class="newtab-side-margin"/>
-        <xul:scrollbox id="newtab-recent-outer" flex="1">
+        <xul:scrollbox id="newtab-recent-outer" flex="1" align="center">
           <div id="newtab-recent" hidden="true"><span>&newtabtools.recently-closed-tabs;</span></div>
         </xul:scrollbox>
         <div id="newtab-undo-container" undo-disabled="true">
