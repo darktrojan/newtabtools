@@ -16,6 +16,7 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 }
 #newtab-recent-outer {
   white-space: nowrap;
+  height: 30px;
 }
 #newtab-recent > span {
   display: inline-block;
@@ -53,8 +54,20 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 .newtab-row {
   margin-bottom: 5px;
 }
+:root[spacing="medium"] .newtab-row:not(:last-child) {
+  margin-bottom: 10px;
+}
+:root[spacing="large"] .newtab-row:not(:last-child) {
+  margin-bottom: 20px;
+}
 .newtab-cell {
   -moz-margin-end: 5px;
+}
+:root[spacing="medium"] .newtab-cell:not(:last-child) {
+  -moz-margin-end: 10px;
+}
+:root[spacing="large"] .newtab-cell:not(:last-child) {
+  -moz-margin-end: 20px;
 }
 .favicon {
   margin-top: -2px;
@@ -74,22 +87,57 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
   display: none;
 }
 #newtab-margin-top,
-#newtab-margin-bottom {
-  min-height: 10px;
-  max-height: 30px;
+#newtab-margin-bottom,
+.newtab-side-margin {
+  min-height: 0;
+  max-height: none;
+  min-width: 0;
+  max-width: none;
+  -moz-box-flex: 0;
 }
-:root[launcher="top"] #newtab-margin-top,
+#newtab-margin-top,
+#newtab-margin-bottom,
+:root[launcher="top"] #newtab-margin-top.medium {
+  height: 30px;
+}
+#newtab-margin-top.medium,
+#newtab-margin-bottom.medium {
+  height: 60px;
+}
+#newtab-margin-top.large,
+#newtab-margin-bottom.large {
+  height: 120px;
+}
 :root[launcher="bottom"] #newtab-margin-bottom {
-  max-height: 10px;
+  height: 10px;
+}
+:root[launcher="bottom"] #newtab-margin-bottom.medium {
+  height: 20px;
+}
+:root[launcher="top"] #newtab-margin-top.large,
+:root[launcher="bottom"] #newtab-margin-bottom.large {
+  height: 40px;
 }
 .newtab-side-margin {
-  min-width: 30px;
-  max-width: 30px;
+  width: 30px;
+}
+.newtab-side-margin.medium {
+  width: 60px;
+}
+.newtab-side-margin.large {
+  width: 120px;
 }
 :root[launcher="right"] .newtab-side-margin:last-child,
 :root[launcher="left"] .newtab-side-margin:first-child {
-  min-width: 10px;
-  max-width: 10px;
+  width: 10px;
+}
+:root[launcher="right"] .newtab-side-margin:last-child.medium,
+:root[launcher="left"] .newtab-side-margin:first-child.medium {
+  width: 20px;
+}
+:root[launcher="right"] .newtab-side-margin:last-child.large,
+:root[launcher="left"] .newtab-side-margin:first-child.large {
+  width: 40px;
 }
 #launcher {
   display: none;

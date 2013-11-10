@@ -74,9 +74,9 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
     </div>
 
     <div id="newtab-vertical-margin">
-      <div id="newtab-margin-top">
-        <div class="newtab-side-margin"/>
-        <xul:scrollbox id="newtab-recent-outer" flex="1">
+      <div id="newtab-margin-top" align="end">
+        <div id="newtab-margin-left-top" class="newtab-side-margin"/>
+        <xul:scrollbox id="newtab-recent-outer" flex="1" align="center">
           <div id="newtab-recent" hidden="true"><span>&newtabtools.recently-closed-tabs;</span></div>
         </xul:scrollbox>
         <div id="newtab-undo-container" undo-disabled="true">
@@ -91,12 +91,12 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
           <xul:toolbarbutton id="newtab-undo-close-button" tabindex="-1"
                              title="&newtab.undo.closeTooltip;" />
         </div>
-        <div class="newtab-side-margin"/>
+        <div id="newtab-margin-right-top" class="newtab-side-margin"/>
       </div>
       <div id="newtab-horizontal-margin">
-        <div class="newtab-side-margin"/>
+        <div id="newtab-margin-left-bottom" class="newtab-side-margin"/>
         <div id="newtab-grid"/>
-        <div class="newtab-side-margin"/>
+        <div id="newtab-margin-right-bottom" class="newtab-side-margin"/>
       </div>
       <div id="newtab-margin-bottom"/>
     </div>

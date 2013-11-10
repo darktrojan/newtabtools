@@ -220,6 +220,29 @@ let newTabTools = {
 
     let hideFavicons = this.prefs.getBoolPref("thumbs.hidefavicons");
     document.documentElement.classList[hideFavicons ? "add" : "remove"]("hideFavicons");
+
+    let gridMargin = ["small", "small", "small", "small"];
+    let prefGridMargin = this.prefs.getCharPref("grid.margin").split(" ", 4);
+    if (prefGridMargin.length == 4) {
+      gridMargin = prefGridMargin;
+    }
+    this.setGridMargin("top", gridMargin[0]);
+    this.setGridMargin("right-top", gridMargin[1]);
+    this.setGridMargin("right-bottom", gridMargin[1]);
+    this.setGridMargin("bottom", gridMargin[2]);
+    this.setGridMargin("left-bottom", gridMargin[3]);
+    this.setGridMargin("left-top", gridMargin[3]);
+
+    let gridSpacing = this.prefs.getCharPref("grid.spacing");
+    document.documentElement.setAttribute("spacing", gridSpacing);
+  },
+  setGridMargin: function(aPiece, aSize) {
+    let pieceElement = document.getElementById("newtab-margin-" + aPiece);
+    pieceElement.classList.remove("medium");
+    pieceElement.classList.remove("large");
+    if (aSize == "medium" || aSize == "large") {
+      pieceElement.classList.add(aSize);
+    }
   },
   startRecent: function() {
     let tabContainer = this.browserWindow.gBrowser.tabContainer;
