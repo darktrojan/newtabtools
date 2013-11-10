@@ -55,19 +55,19 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
   margin-bottom: 5px;
 }
 :root[spacing="medium"] .newtab-row:not(:last-child) {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 :root[spacing="large"] .newtab-row:not(:last-child) {
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 .newtab-cell {
   -moz-margin-end: 5px;
 }
 :root[spacing="medium"] .newtab-cell:not(:last-child) {
-  -moz-margin-end: 20px;
+  -moz-margin-end: 10px;
 }
 :root[spacing="large"] .newtab-cell:not(:last-child) {
-  -moz-margin-end: 40px;
+  -moz-margin-end: 20px;
 }
 .favicon {
   margin-top: -2px;
@@ -137,7 +137,7 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 }
 :root[launcher="right"] .newtab-side-margin:last-child.large,
 :root[launcher="left"] .newtab-side-margin:first-child.large {
-  width: 30px;
+  width: 40px;
 }
 #launcher {
   display: none;
