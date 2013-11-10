@@ -1,5 +1,10 @@
 <!ENTITY newtabtools.options.rows "Linhas">
 <!ENTITY newtabtools.options.columns "Colunas">
+<!ENTITY newtabtools.options.grid.margin "Grid Margin">
+<!ENTITY newtabtools.options.grid.spacing "Grid Spacing">
+<!ENTITY newtabtools.options.size.small "Small">
+<!ENTITY newtabtools.options.size.medium "Medium">
+<!ENTITY newtabtools.options.size.large "Large">
 <!ENTITY newtabtools.options.recent.show "Show Recently Closed Tabs">
 <!ENTITY newtabtools.options.launcher "Iniciador">
 <!ENTITY newtabtools.options.launcher.hidden "Não mostrar">
