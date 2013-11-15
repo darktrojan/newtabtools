@@ -1,11 +1,11 @@
 <!ENTITY newtabtools.options.rows "Linhas">
 <!ENTITY newtabtools.options.columns "Colunas">
-<!ENTITY newtabtools.options.grid.margin "Grid Margin">
-<!ENTITY newtabtools.options.grid.spacing "Grid Spacing">
-<!ENTITY newtabtools.options.size.small "Small">
-<!ENTITY newtabtools.options.size.medium "Medium">
-<!ENTITY newtabtools.options.size.large "Large">
-<!ENTITY newtabtools.options.recent.show "Show Recently Closed Tabs">
+<!ENTITY newtabtools.options.grid.margin "Margem da grade">
+<!ENTITY newtabtools.options.grid.spacing "Espaçamento da grade">
+<!ENTITY newtabtools.options.size.small "Pequeno">
+<!ENTITY newtabtools.options.size.medium "Médio">
+<!ENTITY newtabtools.options.size.large "Grande">
+<!ENTITY newtabtools.options.recent.show "Mostrar abas recentemente fechadas">
 <!ENTITY newtabtools.options.launcher "Iniciador">
 <!ENTITY newtabtools.options.launcher.hidden "Não mostrar">
 <!ENTITY newtabtools.options.launcher.top "Acima">
