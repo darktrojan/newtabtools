@@ -45,6 +45,32 @@ function startup(aParams, aReason) {
   userPrefs = Services.prefs.getBranch(EXTENSION_PREFS);
   userPrefs.setIntPref("version", parseInt(aParams.version));
 
+  NewTabUtils.links._oldGetLinks = NewTabUtils.links.getLinks;
+  NewTabUtils.links.getLinks = function() {
+    let list = NewTabUtils.links._oldGetLinks();
+    if (userPrefs.prefHasUserValue("filter")) {
+      let countPref = userPrefs.getCharPref("filter");
+      let counts = JSON.parse(countPref);
+      return list.filter(function(aItem) {
+        if (NewTabUtils.pinnedLinks.isPinned(aItem))
+          return true;
+        let match = /^https?:\/\/([^\/]+)\//.exec(aItem.url);
+        if (!match)
+          return true;
+        if (match[1] in counts) {
+          if (counts[match[1]]) {
+            counts[match[1]]--;
+            return true;
+          }
+          return false;
+        }
+        return true;
+      });
+    } else {
+      return list;
+    }
+  }
+
   if (userPrefs.getIntPref("donationreminder") == 0 && aReason == ADDON_UPGRADE) {
     userPrefs.setIntPref("donationreminder", 1);
   }
@@ -80,6 +106,9 @@ function shutdown(aParams, aReason) {
     return;
   }
 
+  NewTabUtils.links.getLinks = NewTabUtils.links._oldGetLinks;
+  delete NewTabUtils.links._oldGetLinks;
+
   let windowEnum = Services.wm.getEnumerator("navigator:browser");
   while (windowEnum.hasMoreElements()) {
     windowObserver.unpaint(windowEnum.getNext());
@@ -108,6 +137,10 @@ let prefObserver = {
     case "recent.show":
       enumerateTabs(function(aWindow) {
         aWindow.newTabTools.refreshRecent();
+      });
+    case "filter":
+      enumerateTabs(function(aWindow) {
+        aWindow.gGrid.refresh();
       });
     }
   }
