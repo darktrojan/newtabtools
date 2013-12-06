@@ -49,6 +49,7 @@ let newTabTools = {
   configOnClick: function(event) {
     let id = event.originalTarget.id;
     let checked;
+    let tileURL;
     switch (id) {
     case "config-browseForFile":
     case "config-bg-browseForFile":
@@ -62,12 +63,16 @@ let newTabTools = {
       break;
     case "config-setThumbnail":
       this.setThumbnail(this.tileSelect.value, this.setThumbnailInput.value, function() {
-        newTabTools.refreshThumbnail(this.tileSelect.value);
+        tileURL = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
+        tileURL.data = this.tileSelect.value;
+        Services.obs.notifyObservers(tileURL, "newtabtools-change", "thumbnail");
       }.bind(this));
       break;
     case "config-removeThumbnail":
       this.removeThumbnail(this.tileSelect.value);
-      newTabTools.refreshThumbnail(this.tileSelect.value);
+      tileURL = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
+      tileURL.data = this.tileSelect.value;
+      Services.obs.notifyObservers(tileURL, "newtabtools-change", "thumbnail");
       break;
     case "config-containThumbs":
       checked = event.originalTarget.checked;

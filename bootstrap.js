@@ -4,7 +4,7 @@ License, v. 2.0. If a copy of the MPL was not distributed with this file,
 You can obtain one at http://mozilla.org/MPL/2.0/.
 */
 
-const Cu = Components.utils;
+const { interfaces: Ci, utils: Cu } = Components;
 
 const EXTENSION_PREFS = "extensions.newtabtools.";
 
@@ -154,6 +154,11 @@ let notificationObserver = {
         aWindow.newTabTools.refreshBackgroundImage();
       });
       break;
+    case "thumbnail":
+      enumerateTabs(function(aWindow) {
+        let tileURL = aSubject.QueryInterface(Ci.nsISupportsString);
+        aWindow.newTabTools.refreshThumbnail(aSubject.data);
+      });
     }
   }
 };
