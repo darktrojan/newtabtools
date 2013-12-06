@@ -190,7 +190,7 @@ let windowObserver = {
 function enumerateTabs(aCallback) {
   for (let page of NewTabUtils.allPages._pages) {
     try {
-      let global = Components.utils.getGlobalForObject(page);
+      let global = Cu.getGlobalForObject(page);
       aCallback(global);
     } catch(e) {
       Cu.reportError(e);

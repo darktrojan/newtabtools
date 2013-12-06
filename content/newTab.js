@@ -3,8 +3,13 @@ This Source Code Form is subject to the terms of the Mozilla Public
 License, v. 2.0. If a copy of the MPL was not distributed with this file,
 You can obtain one at http://mozilla.org/MPL/2.0/.
 */
-Components.utils.import("resource://gre/modules/FileUtils.jsm");
-Components.utils.import("resource://gre/modules/NetUtil.jsm");
+
+let { classes: Cc, interfaces: Ci, utils: Cu } = Components;
+
+Cu.import("resource://gre/modules/FileUtils.jsm");
+Cu.import("resource://gre/modules/NetUtil.jsm");
+Cu.import("resource://gre/modules/Services.jsm");
+Cu.import("resource://gre/modules/XPCOMUtils.jsm");
 
 let newTabTools = {
   launcherOnClick: function(event) {
@@ -33,7 +38,6 @@ let newTabTools = {
     return FileUtils.getFile("ProfD", ["newtab-background"], true);
   },
   get backgroundImageURL() {
-    Components.utils.import("resource://gre/modules/Services.jsm");
     return Services.io.newFileURI(this.backgroundImageFile);
   },
   refreshBackgroundImage: function() {
@@ -53,7 +57,7 @@ let newTabTools = {
     switch (id) {
     case "config-browseForFile":
     case "config-bg-browseForFile":
-      let fp = Components.classes["@mozilla.org/filepicker;1"].createInstance(Ci.nsIFilePicker);
+      let fp = Cc["@mozilla.org/filepicker;1"].createInstance(Ci.nsIFilePicker);
       fp.init(window, document.title, Ci.nsIFilePicker.modeOpen);
       fp.appendFilters(Ci.nsIFilePicker.filterImages);
       if (fp.show() == Ci.nsIFilePicker.returnOK) {
@@ -63,14 +67,14 @@ let newTabTools = {
       break;
     case "config-setThumbnail":
       this.setThumbnail(this.tileSelect.value, this.setThumbnailInput.value, function() {
-        tileURL = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
+        tileURL = Cc["@mozilla.org/supports-string;1"].createInstance(Ci.nsISupportsString);
         tileURL.data = this.tileSelect.value;
         Services.obs.notifyObservers(tileURL, "newtabtools-change", "thumbnail");
       }.bind(this));
       break;
     case "config-removeThumbnail":
       this.removeThumbnail(this.tileSelect.value);
-      tileURL = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
+      tileURL = Cc["@mozilla.org/supports-string;1"].createInstance(Ci.nsISupportsString);
       tileURL.data = this.tileSelect.value;
       Services.obs.notifyObservers(tileURL, "newtabtools-change", "thumbnail");
       break;
@@ -369,12 +373,6 @@ let newTabTools = {
 };
 
 {
-  let Ci = Components.interfaces;
-  let Cu = Components.utils;
-
-  Cu.import("resource://gre/modules/Services.jsm");
-  Cu.import("resource://gre/modules/XPCOMUtils.jsm");
-
   function getTopWindow() {
     return window.QueryInterface(Ci.nsIInterfaceRequestor)
                  .getInterface(Ci.nsIWebNavigation)
