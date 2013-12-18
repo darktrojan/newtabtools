@@ -3,5 +3,6 @@ locale newtabtools en-US locale/en-US/
 locale newtabtools de locale/de/
 locale newtabtools ja locale/ja/
 locale newtabtools pt-BR locale/pt-BR/
+locale newtabtools zh-CN locale/zh-CN/
 locale newtabtools zh-TW locale/zh-TW/
 override chrome://browser/content/newtab/newTab.xul chrome://newtabtools/content/newTab.xul
