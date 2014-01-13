@@ -45,6 +45,7 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
             <xul:spacer flex="4"/>
           </xul:hbox>
           <xul:checkbox flex="1" id="config-containThumbs" label="&newtabtools.tile-thumbnails.contain;"/>
+          <xul:checkbox flex="1" id="config-overlapTitle" label="&newtabtools.tile-thumbnails.overlapTitle;"/>
           <xul:label value="&newtabtools.tile-title.input.label;"/>
           <xul:textbox id="config-title-input" flex="1"/>
           <xul:hbox flex="1" align="center">

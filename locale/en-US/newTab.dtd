@@ -5,6 +5,7 @@
 <!ENTITY newtabtools.tile-thumbnail.set "Set Thumbnail">
 <!ENTITY newtabtools.tile-thumbnail.remove "Remove Thumbnail">
 <!ENTITY newtabtools.tile-thumbnails.contain "Tiles should contain whole thumbnail">
+<!ENTITY newtabtools.tile-thumbnails.overlapTitle "Titles should overlap thumbnails">
 <!ENTITY newtabtools.tile-title.input.label "Type a new tile title:">
 <!ENTITY newtabtools.tile-title.set "Set Title">
 <!ENTITY newtabtools.tile-title.reset "Reset Title">
