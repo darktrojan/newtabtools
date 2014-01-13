@@ -82,6 +82,10 @@ let newTabTools = {
       checked = event.originalTarget.checked;
       this.prefs.setBoolPref("thumbs.contain", checked);
       break;
+    case "config-overlapTitle":
+      checked = event.originalTarget.checked;
+      this.prefs.setBoolPref("thumbs.overlapTitle", checked);
+      break;
     case "config-setTitle":
       this.setTitle(this.tileSelect.selectedIndex, this.setTitleInput.value);
       break;
@@ -223,6 +227,10 @@ let newTabTools = {
     let containThumbs = this.prefs.getBoolPref("thumbs.contain");
     document.documentElement.classList[containThumbs ? "add" : "remove"]("containThumbs");
     this.containThumbsCheckbox.checked = containThumbs;
+
+    let overlapTitle = this.prefs.getBoolPref("thumbs.overlapTitle");
+    document.documentElement.classList[overlapTitle ? "add" : "remove"]("overlapTitle");
+    this.overlapTitleCheckbox.checked = overlapTitle;
 
     let hideButtons = this.prefs.getBoolPref("thumbs.hidebuttons");
     document.documentElement.classList[hideButtons ? "add" : "remove"]("hideButtons");
@@ -416,6 +424,7 @@ let newTabTools = {
     "setTitleInput": "config-title-input",
     "setBackgroundInput": "config-bg-input",
     "containThumbsCheckbox": "config-containThumbs",
+    "overlapTitleCheckbox": "config-overlapTitle",
     "recentList": "newtab-recent",
     "recentListOuter": "newtab-recent-outer"
   };
