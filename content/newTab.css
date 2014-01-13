@@ -80,6 +80,20 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
   background-size: contain;
   background-position: 50% 50%;
 }
+:root .newtab-thumbnail {
+  margin-bottom: 24px;
+}
+:root .newtab-title {
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-top-color: rgba(8, 22, 37, 0.12);
+}
+:root.overlapTitle .newtab-thumbnail {
+  margin-bottom: 0;
+}
+:root.overlapTitle .newtab-title {
+  border-top-width: 0;
+}
 :root.hideButtons .newtab-site > input {
   display: none;
 }
