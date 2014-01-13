@@ -39,7 +39,7 @@ function startup(aParams, aReason) {
   defaultPrefs.setBoolPref("launcher.dark", false);
   defaultPrefs.setBoolPref("recent.show", true);
   defaultPrefs.setBoolPref("thumbs.contain", false);
-  defaultPrefs.setBoolPref("thumbs.overlapTitle", false);
+  defaultPrefs.setBoolPref("thumbs.overlaptitle", true);
   defaultPrefs.setBoolPref("thumbs.hidebuttons", false);
   defaultPrefs.setBoolPref("thumbs.hidefavicons", false);
 
@@ -129,7 +129,7 @@ let prefObserver = {
     case "launcher":
     case "launcher.dark":
     case "thumbs.contain":
-    case "thumbs.overlapTitle":
+    case "thumbs.overlaptitle":
     case "thumbs.hidebuttons":
     case "thumbs.hidefavicons":
       enumerateTabs(function(aWindow) {
