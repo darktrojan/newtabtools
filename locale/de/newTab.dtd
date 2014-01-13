@@ -5,6 +5,7 @@
 <!ENTITY newtabtools.tile-thumbnail.set "Miniaturbild verwenden">
 <!ENTITY newtabtools.tile-thumbnail.remove "Miniaturbild entfernen">
 <!ENTITY newtabtools.tile-thumbnails.contain "Schaltfläche soll mit Bild ausgefüllt werden">
+<!ENTITY newtabtools.tile-thumbnails.overlapTitle "Tile titles overlap thumbnails">
 <!ENTITY newtabtools.tile-title.input.label "Neuen Titel eingeben:">
 <!ENTITY newtabtools.tile-title.set "Titel verwenden">
 <!ENTITY newtabtools.tile-title.reset "Titel zurücksetzen">

@@ -5,6 +5,7 @@
 <!ENTITY newtabtools.tile-thumbnail.set "设为缩略图">
 <!ENTITY newtabtools.tile-thumbnail.remove "移除缩略图">
 <!ENTITY newtabtools.tile-thumbnails.contain "磁贴应包含整个缩略图">
+<!ENTITY newtabtools.tile-thumbnails.overlapTitle "Tile titles overlap thumbnails">
 <!ENTITY newtabtools.tile-title.input.label "为磁贴输入一个新标题：">
 <!ENTITY newtabtools.tile-title.set "设为标题">
 <!ENTITY newtabtools.tile-title.reset "重置标题">

@@ -5,6 +5,7 @@
 <!ENTITY newtabtools.tile-thumbnail.set "Definir">
 <!ENTITY newtabtools.tile-thumbnail.remove "Remover">
 <!ENTITY newtabtools.tile-thumbnails.contain "Blocos devem conter toda a miniatura">
+<!ENTITY newtabtools.tile-thumbnails.overlapTitle "Tile titles overlap thumbnails">
 <!ENTITY newtabtools.tile-title.input.label "Digite o novo nome do bloco:">
 <!ENTITY newtabtools.tile-title.set "Definir">
 <!ENTITY newtabtools.tile-title.reset "Restaurar">

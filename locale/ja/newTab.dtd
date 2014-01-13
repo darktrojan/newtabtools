@@ -5,6 +5,7 @@
 <!ENTITY newtabtools.tile-thumbnail.set "サムネイルを設定">
 <!ENTITY newtabtools.tile-thumbnail.remove "サムネイルを削除">
 <!ENTITY newtabtools.tile-thumbnails.contain "タイルは全体のサムネイルが含まれている必要があります">
+<!ENTITY newtabtools.tile-thumbnails.overlapTitle "Tile titles overlap thumbnails">
 <!ENTITY newtabtools.tile-title.input.label "新しいタイルのタイトルを入力:">
 <!ENTITY newtabtools.tile-title.set "タイトルを設定">
 <!ENTITY newtabtools.tile-title.reset "タイトルをリセット">
