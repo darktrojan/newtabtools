@@ -5,8 +5,10 @@ const PR_CREATE_FILE = 0x08;
 const PR_TRUNCATE = 0x20;
 
 Components.utils.import("resource://gre/modules/FileUtils.jsm");
+Components.utils.import("resource://gre/modules/NewTabUtils.jsm");
 Components.utils.import("resource://gre/modules/PageThumbs.jsm");
 Components.utils.import("resource://gre/modules/Promise.jsm");
+Components.utils.import("resource://gre/modules/Services.jsm");
 Components.utils.import("resource://gre/modules/XPCOMUtils.jsm");
 
 XPCOMUtils.defineLazyServiceGetter(this, "annoService", "@mozilla.org/browser/annotation-service;1", Components.interfaces.nsIAnnotationService);
@@ -26,6 +28,10 @@ let NewTabToolsExporter = {
 	}
 };
 
+function getWindow() {
+	return Services.wm.getMostRecentWindow("navigator:browser");
+}
+
 function exportShowOptionDialog() {
 	let deferred = Promise.defer();
 
@@ -40,7 +46,7 @@ function exportShowOptionDialog() {
 		}
 	};
 
-	let dialog = window.openDialog("chrome://newtabtools/content/exportDialog.xul", "newtabtools-export", "centerscreen", returnValues, done);
+	let dialog = getWindow().openDialog("chrome://newtabtools/content/exportDialog.xul", "newtabtools-export", "centerscreen", returnValues, done);
 	return deferred.promise;
 }
 
@@ -48,7 +54,7 @@ function exportShowFilePicker(aReturnValues) {
 	let deferred = Promise.defer();
 
 	let picker = Components.classes["@mozilla.org/filepicker;1"].createInstance(Components.interfaces.nsIFilePicker);
-	picker.init(window, "title", Components.interfaces.nsIFilePicker.modeSave);
+	picker.init(getWindow(), "title", Components.interfaces.nsIFilePicker.modeSave);
 	picker.appendFilter("Zip Archive", "*.zip");
 	picker.defaultExtension = "zip";
 	picker.defaultString = "newtabtools.zip";
@@ -136,7 +142,9 @@ function exportSave(aReturnValues) {
 	if (aReturnValues.options.tiles.thumbs) {
 		zipWriter.addEntryDirectory("thumbnails/", Date.now() * 1000, false);
 
-		for (let l of NewTabUtils.links.getLinks().slice(0, Math.floor(gGrid.cells.length * 1.5))) {
+		let count = Math.floor(Services.prefs.getIntPref("browser.newtabpage.columns") * Services.prefs.getIntPref("browser.newtabpage.rows") * 1.5);
+
+		for (let l of NewTabUtils.links.getLinks().slice(0, count)) {
 			let f = new FileUtils.File(PageThumbsStorage.getFilePathForURL(l.url));
 			if (f.exists() && !f.isWritable()) {
 				if (zipWriter.hasEntry("thumbnails/" + f.leafName)) {
@@ -162,7 +170,7 @@ function importShowFilePicker() {
 	let deferred = Promise.defer();
 
 	let picker = Components.classes["@mozilla.org/filepicker;1"].createInstance(Components.interfaces.nsIFilePicker);
-	picker.init(window, "title", Components.interfaces.nsIFilePicker.modeOpen);
+	picker.init(getWindow(), "title", Components.interfaces.nsIFilePicker.modeOpen);
 	picker.appendFilter("Zip Archive", "*.zip");
 	picker.defaultExtension = "zip";
 	picker.open(function(aResult) {
@@ -220,7 +228,7 @@ function importLoad(aFile) {
 		}
 	};
 
-	let dialog = window.openDialog("chrome://newtabtools/content/exportDialog.xul", "newtabtools-export", "centerscreen", returnValues, done);
+	let dialog = getWindow().openDialog("chrome://newtabtools/content/exportDialog.xul", "newtabtools-export", "centerscreen", returnValues, done);
 	return deferred.promise;
 }
 
