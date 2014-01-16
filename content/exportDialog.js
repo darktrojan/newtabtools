@@ -13,7 +13,9 @@ if (returnValues.importing) {
 		case "prefs.gridsize":
 			checkbox.disabled = !("browser.newtabpage.columns" in returnValues.prefs) || !("browser.newtabpage.rows" in returnValues.prefs);
 			break;
-		case "prefs.thumbs.contain":
+		case "prefs.thumbs.position":
+			checkbox.disabled = !("extensions.newtabtools.thumbs.contain" in returnValues.prefs) || !("extensions.newtabtools.thumbs.overlaptitle" in returnValues.prefs);
+			break;
 		case "prefs.thumbs.hidebuttons":
 		case "prefs.thumbs.hidefavicons":
 		case "prefs.launcher":

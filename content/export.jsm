@@ -96,6 +96,9 @@ function exportSave(aReturnValues) {
 				case "gridsize":
 					keys.push("browser.newtabpage.columns", "browser.newtabpage.rows");
 					break;
+				case "thumbs.position":
+					keys.push("extensions.newtabtools.thumbs.contain", "extensions.newtabtools.thumbs.overlaptitle");
+					break;
 				case "blocked":
 				case "pinned":
 					keys.push("browser.newtabpage." + name);
@@ -103,7 +106,6 @@ function exportSave(aReturnValues) {
 				case "launcher":
 				case "launcher.dark":
 				case "recent.show":
-				case "thumbs.contain":
 				case "thumbs.hidebuttons":
 				case "thumbs.hidefavicons":
 					keys.push("extensions.newtabtools." + name);
@@ -283,8 +285,10 @@ function importSave(aReturnValues) {
 				if (name == "gridsize") {
 					copyPref("browser.newtabpage.columns");
 					copyPref("browser.newtabpage.rows");
-				}
-				if (("browser.newtabpage." + name) in aReturnValues.prefs) {
+				} else if (name == "thumbs.position") {
+					copyPref("extensions.newtabtools.thumbs.contain");
+					copyPref("extensions.newtabtools.thumbs.overlaptitle");
+				} else if (("browser.newtabpage." + name) in aReturnValues.prefs) {
 					copyPref("browser.newtabpage." + name);
 				} else if (("extensions.newtabtools." + name) in aReturnValues.prefs) {
 					copyPref("extensions.newtabtools." + name);

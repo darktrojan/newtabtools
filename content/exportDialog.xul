@@ -9,7 +9,7 @@
 		<checkbox id="prefs.blocked" label="Removed Tiles" />
 		<checkbox id="prefs.gridsize" label="Number of Rows and Columns" />
 		<checkbox id="tiles.thumbs" label="Thumbnails" />
-		<checkbox id="prefs.thumbs.contain" label="Thumbnail Positioning" />
+		<checkbox id="prefs.thumbs.position" label="Thumbnail Positioning" />
 		<checkbox id="annos.title" label="Customized Tile Titles" />
 		<checkbox id="prefs.thumbs.hidebuttons" label="Thumbnail Button Visibility" />
 		<checkbox id="prefs.thumbs.hidefavicons" label="Site Icon Visibility" />
