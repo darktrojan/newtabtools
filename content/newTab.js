@@ -34,8 +34,7 @@ let newTabTools = {
       newTabTools.browserWindow.openPreferences();
       break;
     case "restorePreviousSession":
-      newTabTools.launcher.removeAttribute("session");
-      console.log("restore session now");
+      SessionStore.restoreLastSession();
       break;
     }
   },
@@ -464,6 +463,12 @@ let newTabTools = {
     SessionStore.promiseInitialized.then(function() {
       if (SessionStore.canRestoreLastSession && !PrivateBrowsingUtils.isWindowPrivate(window)) {
         newTabTools.launcher.setAttribute("session", "true");
+        Services.obs.addObserver({
+          observe: function() {
+            newTabTools.launcher.removeAttribute("session");
+          },
+          QueryInterface: XPCOMUtils.generateQI([Ci.nsIObserver, Ci.nsISupportsWeakReference])
+        }, "sessionstore-last-session-cleared", true);
       }
     });
 
