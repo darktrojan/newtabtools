@@ -10,6 +10,7 @@ Cu.import("resource://gre/modules/FileUtils.jsm");
 Cu.import("resource://gre/modules/NetUtil.jsm");
 Cu.import("resource://gre/modules/Services.jsm");
 Cu.import("resource://gre/modules/XPCOMUtils.jsm");
+Cu.import("resource:///modules/sessionstore/SessionStore.jsm")
 
 let newTabTools = {
   launcherOnClick: function(event) {
@@ -31,6 +32,10 @@ let newTabTools = {
       break;
     case "settings":
       newTabTools.browserWindow.openPreferences();
+      break;
+    case "restorePreviousSession":
+      newTabTools.launcher.removeAttribute("session");
+      console.log("restore session now");
       break;
     }
   },
@@ -455,6 +460,12 @@ let newTabTools = {
 
   window.addEventListener("load", function window_load() {
     window.removeEventListener("load", window_load, false);
+
+    SessionStore.promiseInitialized.then(function() {
+      if (SessionStore.canRestoreLastSession && !PrivateBrowsingUtils.isWindowPrivate(window)) {
+        newTabTools.launcher.setAttribute("session", "true");
+      }
+    });
 
     gTransformation.oldGetNodePosition = gTransformation.getNodePosition;
     gTransformation.getNodePosition = function(aNode) {

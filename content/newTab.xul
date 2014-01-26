@@ -112,6 +112,7 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
       <button class="launchButton" id="addons">&abouthome.addonsButton.label;</button>
       <button class="launchButton" id="sync">&abouthome.syncButton.label;</button>
       <button class="launchButton" id="settings">&abouthome.settingsButton.label;</button>
+      <button class="launchButton" id="restorePreviousSession">&historyRestoreLastSession.label;</button>
     </div>
   </div>
 

@@ -255,6 +255,9 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
   background-color: hsla(0, 0%, 0%, .3);
   border-color: hsla(0, 0%, 100%, .3);
 }
+#launcher:not([session]) > #restorePreviousSession {
+  display: none;
+}
 #downloads::before {
   content: url("chrome://browser/content/abouthome/downloads.png");
 }
@@ -272,6 +275,12 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 }
 #settings::before {
   content: url("chrome://browser/content/abouthome/settings.png");
+}
+#restorePreviousSession::before {
+  content: url("chrome://browser/content/abouthome/restore.png");
+}
+#restorePreviousSession:-moz-dir(rtl)::before {
+  transform: scaleX(-1);
 }
 :root.background #launcher.dark #downloads::before {
   content: url("chrome://newtabtools/content/launcher/downloads.png");
