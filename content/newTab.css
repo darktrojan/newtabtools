@@ -282,6 +282,11 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 #restorePreviousSession:-moz-dir(rtl)::before {
   transform: scaleX(-1);
 }
+:root[launcher="left"] #restorePreviousSession,
+:root[launcher="right"] #restorePreviousSession {
+  height: calc(3.75em + 74px);
+  max-height: none;
+}
 :root.background #launcher.dark #downloads::before {
   content: url("chrome://newtabtools/content/launcher/downloads.png");
 }
@@ -299,6 +304,9 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 }
 :root.background #launcher.dark #settings::before {
   content: url("chrome://newtabtools/content/launcher/settings.png");
+}
+:root.background #launcher.dark #restorePreviousSession::before {
+  content: url("chrome://newtabtools/content/launcher/restore.png");
 }
 #config-toggle {
   position: absolute;
