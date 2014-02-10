@@ -6,11 +6,15 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 
 const { interfaces: Ci, utils: Cu } = Components;
 
+const ADDON_ID = "newtabtools@darktrojan.net";
 const EXTENSION_PREFS = "extensions.newtabtools.";
 
 Cu.import("resource://gre/modules/Services.jsm");
 Cu.import("resource://gre/modules/NewTabUtils.jsm");
 Cu.import("resource://gre/modules/AddonManager.jsm");
+Cu.import("resource://gre/modules/XPCOMUtils.jsm");
+
+XPCOMUtils.defineLazyModuleGetter(this, "NewTabToolsExporter", "chrome://newtabtools/content/export.jsm");
 
 function install(aParams, aReason) {
   if (aReason == ADDON_UPGRADE) {
@@ -89,12 +93,14 @@ function startup(aParams, aReason) {
   }
   Services.ww.registerNotification(windowObserver);
 
+  Services.obs.addObserver(optionsObserver, "addon-options-displayed", false);
+
   AddonManager.addAddonListener({
     // If we call reload in shutdown, the page override is
     // still in place, and we don't want that.
     onDisabled: function(aAddon) {
       AddonManager.removeAddonListener(this);
-      if (aAddon.id == "newtabtools@darktrojan.net") {
+      if (aAddon.id == ADDON_ID) {
         enumerateTabs(function(aWindow) {
           aWindow.location.reload();
         });
@@ -118,6 +124,9 @@ function shutdown(aParams, aReason) {
 
   userPrefs.removeObserver("", prefObserver);
   Services.obs.removeObserver(notificationObserver, "newtabtools-change");
+
+  Services.obs.removeObserver(optionsObserver, "addon-options-displayed");
+  Cu.unload("chrome://newtabtools/content/export.jsm");
 }
 
 let userPrefs;
@@ -202,3 +211,21 @@ function enumerateTabs(aCallback) {
     }
   }
 }
+
+let optionsObserver = {
+  observe: function(aDocument, aTopic, aData) {
+    switch(aTopic) {
+    case "addon-options-displayed":
+      if (aData != ADDON_ID) {
+        return;
+      }
+
+      aDocument.getElementById("newtabtools.export").addEventListener("command", () => {
+        NewTabToolsExporter.doExport();
+      });
+      aDocument.getElementById("newtabtools.import").addEventListener("command", () => {
+        NewTabToolsExporter.doImport();
+      });
+    }
+  },
+};

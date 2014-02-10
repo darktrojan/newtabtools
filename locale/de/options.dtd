@@ -14,3 +14,5 @@
 <!ENTITY newtabtools.options.launcher.right "Rechts">
 <!ENTITY newtabtools.options.thumbs.hidebuttons "Miniaturbild-Knöpfe verstecken">
 <!ENTITY newtabtools.options.thumbs.hidefavicons "Seitenlogos verstecken">
+<!ENTITY newtabtools.export "Export Settings&#x2026;">
+<!ENTITY newtabtools.import "Import Settings&#x2026;">

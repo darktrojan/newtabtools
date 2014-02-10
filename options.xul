@@ -40,4 +40,8 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
   </setting>
   <setting pref="extensions.newtabtools.thumbs.hidebuttons" type="bool" title="&newtabtools.options.thumbs.hidebuttons;"/>
   <setting pref="extensions.newtabtools.thumbs.hidefavicons" type="bool" title="&newtabtools.options.thumbs.hidefavicons;"/>
+  <setting type="control">
+    <button id="newtabtools.export" label="&newtabtools.export;" />
+    <button id="newtabtools.import" label="&newtabtools.import;" />
+  </setting>
 </vbox>

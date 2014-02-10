@@ -14,3 +14,5 @@
 <!ENTITY newtabtools.options.launcher.right "右側">
 <!ENTITY newtabtools.options.thumbs.hidebuttons "隱藏縮圖上的按鈕">
 <!ENTITY newtabtools.options.thumbs.hidefavicons "隱藏網站圖示">
+<!ENTITY newtabtools.export "Export Settings&#x2026;">
+<!ENTITY newtabtools.import "Import Settings&#x2026;">
