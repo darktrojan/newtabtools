@@ -159,7 +159,9 @@ function exportSave(aReturnValues) {
 	}
 	if (aReturnValues.options.page.background) {
 		let backgroundFile = FileUtils.getFile("ProfD", ["newtab-background"]);
-		zipWriter.addEntryFile("newtab-background", Components.interfaces.nsIZipWriter.COMPRESSION_DEFAULT, backgroundFile, false);
+		if (backgroundFile.exists()) {
+			zipWriter.addEntryFile("newtab-background", Components.interfaces.nsIZipWriter.COMPRESSION_DEFAULT, backgroundFile, false);
+		}
 	}
 
 	zipWriter.close();
