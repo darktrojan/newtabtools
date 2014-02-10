@@ -12,6 +12,9 @@ Components.utils.import("resource://gre/modules/Services.jsm");
 Components.utils.import("resource://gre/modules/XPCOMUtils.jsm");
 
 XPCOMUtils.defineLazyServiceGetter(this, "annoService", "@mozilla.org/browser/annotation-service;1", Components.interfaces.nsIAnnotationService);
+XPCOMUtils.defineLazyGetter(this, "strings", function() {
+	return Services.strings.createBundle("chrome://newtabtools/locale/export.properties");
+});
 
 let NewTabToolsExporter = {
 	doExport: function doExport() {
@@ -54,8 +57,8 @@ function exportShowFilePicker(aReturnValues) {
 	let deferred = Promise.defer();
 
 	let picker = Components.classes["@mozilla.org/filepicker;1"].createInstance(Components.interfaces.nsIFilePicker);
-	picker.init(getWindow(), "title", Components.interfaces.nsIFilePicker.modeSave);
-	picker.appendFilter("Zip Archive", "*.zip");
+	picker.init(getWindow(), strings.GetStringFromName("picker.title.export"), Components.interfaces.nsIFilePicker.modeSave);
+	picker.appendFilter(strings.GetStringFromName("picker.filter"), "*.zip");
 	picker.defaultExtension = "zip";
 	picker.defaultString = "newtabtools.zip";
 	picker.open(function(aResult) {
@@ -166,8 +169,8 @@ function importShowFilePicker() {
 	let deferred = Promise.defer();
 
 	let picker = Components.classes["@mozilla.org/filepicker;1"].createInstance(Components.interfaces.nsIFilePicker);
-	picker.init(getWindow(), "title", Components.interfaces.nsIFilePicker.modeOpen);
-	picker.appendFilter("Zip Archive", "*.zip");
+	picker.init(getWindow(), strings.GetStringFromName("picker.title.import"), Components.interfaces.nsIFilePicker.modeOpen);
+	picker.appendFilter(strings.GetStringFromName("picker.filter"), "*.zip");
 	picker.defaultExtension = "zip";
 	picker.open(function(aResult) {
 		if (aResult == Components.interfaces.nsIFilePicker.returnCancel) {

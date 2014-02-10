@@ -1,25 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
 
-<dialog ondialogaccept="return onDialogAccept();" ondialogcancel="return onDialogCancel();" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-	<label value="Choose what to export:" />
+<!DOCTYPE dialog SYSTEM "chrome://newtabtools/locale/export.dtd">
+
+<dialog title="&newtabtools.export.title;"
+		ondialogaccept="return onDialogAccept();"
+		ondialogcancel="return onDialogCancel();"
+		xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	<label id="export-header" value="&newtabtools.export.header;" />
+	<label id="import-header" value="&newtabtools.import.header;" />
 	<groupbox>
-		<caption label="Tiles"/>
-		<checkbox id="prefs.pinned" label="Pinned Tiles" />
-		<checkbox id="prefs.blocked" label="Removed Tiles" />
-		<checkbox id="prefs.gridsize" label="Number of Rows and Columns" />
-		<checkbox id="tiles.thumbs" label="Thumbnails" />
-		<checkbox id="prefs.thumbs.position" label="Thumbnail Positioning" />
-		<checkbox id="annos.title" label="Customized Tile Titles" />
-		<checkbox id="prefs.thumbs.hidebuttons" label="Thumbnail Button Visibility" />
-		<checkbox id="prefs.thumbs.hidefavicons" label="Site Icon Visibility" />
+		<caption label="&newtabtools.export.tiles.caption;"/>
+		<checkbox id="prefs.pinned" label="&newtabtools.export.prefs.pinned;" />
+		<checkbox id="prefs.blocked" label="&newtabtools.export.prefs.blocked;" />
+		<checkbox id="prefs.gridsize" label="&newtabtools.export.prefs.gridsize;" />
+		<checkbox id="tiles.thumbs" label="&newtabtools.export.tiles.thumbs;" />
+		<checkbox id="prefs.thumbs.position" label="&newtabtools.export.prefs.thumbs.position;" />
+		<checkbox id="annos.title" label="&newtabtools.export.annos.title;" />
+		<checkbox id="prefs.thumbs.hidebuttons" label="&newtabtools.export.prefs.thumbs.hidebuttons;" />
+		<checkbox id="prefs.thumbs.hidefavicons" label="&newtabtools.export.prefs.thumbs.hidefavicons;" />
 	</groupbox>
 	<groupbox>
-		<caption label="Page" />
-		<checkbox id="prefs.launcher" label="Position of Launcher" />
-		<!-- <checkbox id="prefs.launcher.dark" label="extensions.newtabtools.launcher.dark" /> -->
-		<checkbox id="prefs.recent.show" label="Recently Closed Tabs Visibility" />
-		<checkbox id="page.background" label="Page Background" />
+		<caption label="&newtabtools.export.page.caption;" />
+		<checkbox id="prefs.launcher" label="&newtabtools.export.prefs.launcher;" />
+		<checkbox id="prefs.recent.show" label="&newtabtools.export.prefs.recent.show;" />
+		<checkbox id="page.background" label="&newtabtools.export.page.background;" />
 	</groupbox>
 
 	<script type="application/javascript" src="exportDialog.js" />

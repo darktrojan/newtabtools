@@ -2,6 +2,7 @@ let returnValues = window.arguments[0];
 let done = window.arguments[1];
 
 if (returnValues.importing) {
+	document.getElementById("export-header").setAttribute("hidden", "true");
 	for (let checkbox of document.querySelectorAll("checkbox")) {
 		switch (checkbox.id) {
 		case "prefs.pinned":
@@ -39,6 +40,7 @@ if (returnValues.importing) {
 		checkbox.checked = !checkbox.disabled;
 	}
 } else {
+	document.getElementById("import-header").setAttribute("hidden", "true");
 	for (let checkbox of document.querySelectorAll("checkbox")) {
 		checkbox.checked = true;
 	}
