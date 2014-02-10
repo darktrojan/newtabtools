@@ -122,6 +122,10 @@ let newTabTools = {
     case "config-morePrefs":
       newTabTools.browserWindow.BrowserOpenAddonsMgr("addons://detail/newtabtools@darktrojan.net/preferences")
       break;
+    case "config-donate":
+      let url = "https://addons.mozilla.org/addon/new-tab-tools/about";
+      newTabTools.browserWindow.openLinkIn(url, "current", {});
+      break;
     }
   },
   onTileSelect: function() {

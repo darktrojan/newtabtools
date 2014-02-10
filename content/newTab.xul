@@ -71,6 +71,7 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
           <xul:spacer style="height: 3em"/>
           <xul:hbox pack="center">
             <xul:button id="config-morePrefs" label="&newtabtools.more-options;"/>
+            <xul:button id="config-donate" label="&newtabtools.donate;"/>
           </xul:hbox>
         </xul:vbox>
       </div>
