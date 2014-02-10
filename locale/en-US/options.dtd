@@ -14,3 +14,5 @@
 <!ENTITY newtabtools.options.launcher.right "Right">
 <!ENTITY newtabtools.options.thumbs.hidebuttons "Hide Thumbnail Buttons">
 <!ENTITY newtabtools.options.thumbs.hidefavicons "Hide Site Icons">
+<!ENTITY newtabtools.export "Export Settings&#x2026;">
+<!ENTITY newtabtools.import "Import Settings&#x2026;">

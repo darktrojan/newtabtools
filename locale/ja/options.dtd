@@ -14,3 +14,5 @@
 <!ENTITY newtabtools.options.launcher.right "右">
 <!ENTITY newtabtools.options.thumbs.hidebuttons "サムネイルのボタンを隠す">
 <!ENTITY newtabtools.options.thumbs.hidefavicons "サイトのアイコンを隠す">
+<!ENTITY newtabtools.export "Export Settings&#x2026;">
+<!ENTITY newtabtools.import "Import Settings&#x2026;">
