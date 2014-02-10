@@ -69,7 +69,9 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
           </xul:hbox>
           <xul:checkbox flex="1" id="config-darkLauncher" label="&newtabtools.bg.dark-launcher;"/>
           <xul:spacer style="height: 3em"/>
-          <xul:label class="text-link" id="config-morePrefs" value="&newtabtools.more-options;"/>
+          <xul:hbox pack="center">
+            <xul:button id="config-morePrefs" label="&newtabtools.more-options;"/>
+          </xul:hbox>
         </xul:vbox>
       </div>
     </div>
