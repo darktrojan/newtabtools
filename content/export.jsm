@@ -105,6 +105,9 @@ function exportSave(aReturnValues) {
 				case "gridsize":
 					keys.push("browser.newtabpage.columns", "browser.newtabpage.rows");
 					break;
+				case "gridmargin":
+					keys.push("extensions.newtabtools.grid.margin", "extensions.newtabtools.grid.spacing");
+					break;
 				case "thumbs.position":
 					keys.push("extensions.newtabtools.thumbs.contain", "extensions.newtabtools.thumbs.overlaptitle");
 					break;
@@ -294,6 +297,9 @@ function importSave(aReturnValues) {
 				if (name == "gridsize") {
 					copyPref("browser.newtabpage.columns");
 					copyPref("browser.newtabpage.rows");
+				} else if (name == "gridmargin") {
+					copyPref("extensions.newtabtools.grid.margin");
+					copyPref("extensions.newtabtools.grid.spacing");
 				} else if (name == "thumbs.position") {
 					copyPref("extensions.newtabtools.thumbs.contain");
 					copyPref("extensions.newtabtools.thumbs.overlaptitle");

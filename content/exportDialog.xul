@@ -14,6 +14,7 @@
 		<checkbox id="prefs.pinned" label="&newtabtools.export.prefs.pinned;" />
 		<checkbox id="prefs.blocked" label="&newtabtools.export.prefs.blocked;" />
 		<checkbox id="prefs.gridsize" label="&newtabtools.export.prefs.gridsize;" />
+		<checkbox id="prefs.gridmargin" label="&newtabtools.export.prefs.gridmargin;" />
 		<checkbox id="tiles.thumbs" label="&newtabtools.export.tiles.thumbs;" />
 		<checkbox id="prefs.thumbs.position" label="&newtabtools.export.prefs.thumbs.position;" />
 		<checkbox id="annos.title" label="&newtabtools.export.annos.title;" />

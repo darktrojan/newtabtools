@@ -14,6 +14,9 @@ if (returnValues.importing) {
 		case "prefs.gridsize":
 			checkbox.disabled = !("browser.newtabpage.columns" in returnValues.prefs) || !("browser.newtabpage.rows" in returnValues.prefs);
 			break;
+		case "prefs.gridmargin":
+			checkbox.disabled = !("extensions.newtabtools.grid.margin" in returnValues.prefs) || !("extensions.newtabtools.grid.spacing" in returnValues.prefs);
+			break;
 		case "prefs.thumbs.position":
 			checkbox.disabled = !("extensions.newtabtools.thumbs.contain" in returnValues.prefs) || !("extensions.newtabtools.thumbs.overlaptitle" in returnValues.prefs);
 			break;

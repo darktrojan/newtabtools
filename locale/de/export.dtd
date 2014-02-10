@@ -5,6 +5,7 @@
 <!ENTITY newtabtools.export.prefs.pinned "Pinned Tiles">
 <!ENTITY newtabtools.export.prefs.blocked "Removed Tiles">
 <!ENTITY newtabtools.export.prefs.gridsize "Number of Rows and Columns">
+<!ENTITY newtabtools.export.prefs.gridmargin "Grid Margin and Spacing">
 <!ENTITY newtabtools.export.tiles.thumbs "Customized Thumbnails">
 <!ENTITY newtabtools.export.prefs.thumbs.position "Thumbnail Positioning">
 <!ENTITY newtabtools.export.annos.title "Customized Tile Titles">
