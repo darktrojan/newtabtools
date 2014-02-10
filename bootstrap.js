@@ -140,10 +140,12 @@ let prefObserver = {
       enumerateTabs(function(aWindow) {
         aWindow.newTabTools.refreshRecent();
       });
+      break;
     case "filter":
       enumerateTabs(function(aWindow) {
         aWindow.gGrid.refresh();
       });
+      break;
     }
   }
 };
@@ -161,6 +163,7 @@ let notificationObserver = {
         let tileURL = aSubject.QueryInterface(Ci.nsISupportsString);
         aWindow.newTabTools.refreshThumbnail(aSubject.data);
       });
+      break;
     }
   }
 };
