@@ -17,13 +17,13 @@ let NewTabToolsExporter = {
 	doExport: function doExport() {
 		exportShowOptionDialog()
 			.then(exportShowFilePicker)
-			.then(exportSave, exportCancelled)
+			.then(exportSave)
 			.then(null, Components.utils.reportError);
 	},
 	doImport: function doImport() {
 		importShowFilePicker()
 			.then(importLoad)
-			.then(importSave, importCancelled)
+			.then(importSave)
 			.then(null, Components.utils.reportError);
 	}
 };
@@ -40,7 +40,7 @@ function exportShowOptionDialog() {
 	};
 	let done = function() {
 		if (returnValues.cancelled) {
-			deferred.reject();
+			deferred.reject("New Tab Tools export cancelled.");
 		} else {
 			deferred.resolve(returnValues);
 		}
@@ -60,7 +60,7 @@ function exportShowFilePicker(aReturnValues) {
 	picker.defaultString = "newtabtools.zip";
 	picker.open(function(aResult) {
 		if (aResult == Components.interfaces.nsIFilePicker.returnCancel) {
-			deferred.reject();
+			deferred.reject("New Tab Tools export cancelled.");
 		} else {
 			aReturnValues.file = picker.file;
 			deferred.resolve(aReturnValues);
@@ -162,10 +162,6 @@ function exportSave(aReturnValues) {
 	zipWriter.close();
 }
 
-function exportCancelled() {
-	alert("export cancelled");
-}
-
 function importShowFilePicker() {
 	let deferred = Promise.defer();
 
@@ -175,7 +171,7 @@ function importShowFilePicker() {
 	picker.defaultExtension = "zip";
 	picker.open(function(aResult) {
 		if (aResult == Components.interfaces.nsIFilePicker.returnCancel) {
-			deferred.reject();
+			deferred.reject("New Tab Tools import cancelled.");
 		} else {
 			deferred.resolve(picker.file);
 		}
@@ -222,7 +218,7 @@ function importLoad(aFile) {
 
 	let done = function() {
 		if (returnValues.cancelled) {
-			deferred.reject();
+			deferred.reject("New Tab Tools import cancelled.");
 		} else {
 			deferred.resolve(returnValues);
 		}
@@ -318,8 +314,4 @@ function importSave(aReturnValues) {
 	} finally {
 		zipReader.close();
 	}
-}
-
-function importCancelled() {
-	alert("import cancelled");
 }
