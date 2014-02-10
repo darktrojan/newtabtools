@@ -13,8 +13,6 @@
 		<caption label="&newtabtools.export.tiles.caption;"/>
 		<checkbox id="prefs.pinned" label="&newtabtools.export.prefs.pinned;" />
 		<checkbox id="prefs.blocked" label="&newtabtools.export.prefs.blocked;" />
-		<checkbox id="prefs.gridsize" label="&newtabtools.export.prefs.gridsize;" />
-		<checkbox id="prefs.gridmargin" label="&newtabtools.export.prefs.gridmargin;" />
 		<checkbox id="tiles.thumbs" label="&newtabtools.export.tiles.thumbs;" />
 		<checkbox id="prefs.thumbs.position" label="&newtabtools.export.prefs.thumbs.position;" />
 		<checkbox id="annos.title" label="&newtabtools.export.annos.title;" />
@@ -23,6 +21,8 @@
 	</groupbox>
 	<groupbox>
 		<caption label="&newtabtools.export.page.caption;" />
+		<checkbox id="prefs.gridsize" label="&newtabtools.export.prefs.gridsize;" />
+		<checkbox id="prefs.gridmargin" label="&newtabtools.export.prefs.gridmargin;" />
 		<checkbox id="prefs.launcher" label="&newtabtools.export.prefs.launcher;" />
 		<checkbox id="prefs.recent.show" label="&newtabtools.export.prefs.recent.show;" />
 		<checkbox id="page.background" label="&newtabtools.export.page.background;" />
