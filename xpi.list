@@ -1,12 +1,15 @@
 bootstrap.js
 chrome.manifest
 content
+content/export.jsm
+content/exportDialog.js
+content/exportDialog.xul
+content/launcher/*
 content/newTab.css
 content/newTab.js
 content/newTab.xul
-content/launcher/*
-icon64.png
 icon.png
+icon64.png
 install.rdf
 locale/*
 options.xul
