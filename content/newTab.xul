@@ -28,47 +28,54 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
     <div id="config-wrapper">
       <div id="config">
         <xul:vbox id="config-inner" flex="1">
-          <xul:label class="header" value="&newtabtools.tile-header;"/>
-          <xul:label value="&newtabtools.tile-select.label;"/>
-          <xul:menulist id="config-select">
-            <xul:menupopup/>
-          </xul:menulist>
-          <xul:label value="&newtabtools.tile-thumbnail-url.label;"/>
-          <xul:hbox flex="1" align="center">
-            <xul:textbox id="config-thumb-input" flex="1"/>
-            <xul:button id="config-browseForFile" label="&newtabtools.tile-thumbnail-url.browse;"/>
-          </xul:hbox>
-          <xul:hbox flex="1" align="center">
-            <xul:spacer flex="4"/>
-            <xul:button flex="1" id="config-setThumbnail" label="&newtabtools.tile-thumbnail.set;"/>
-            <xul:button flex="1" id="config-removeThumbnail" label="&newtabtools.tile-thumbnail.remove;"/>
-            <xul:spacer flex="4"/>
-          </xul:hbox>
-          <xul:checkbox flex="1" id="config-containThumbs" label="&newtabtools.tile-thumbnails.contain;"/>
-          <xul:checkbox flex="1" id="config-overlapTitle" label="&newtabtools.tile-thumbnails.overlapTitle;"/>
-          <xul:label value="&newtabtools.tile-title.input.label;"/>
-          <xul:textbox id="config-title-input" flex="1"/>
-          <xul:hbox flex="1" align="center">
-            <xul:spacer flex="4"/>
-            <xul:button flex="1" id="config-setTitle" label="&newtabtools.tile-title.set;"/>
-            <xul:button flex="1" id="config-removeTitle" label="&newtabtools.tile-title.reset;"/>
-            <xul:spacer flex="4"/>
-          </xul:hbox>
-          <xul:spacer style="height: 3em"/>
-          <xul:label class="header" value="&newtabtools.bg-header;"/>
-          <xul:label value="&newtabtools.bg-url.label;"/>
-          <xul:hbox flex="1" align="center">
-            <xul:textbox id="config-bg-input" flex="1"/>
-            <xul:button id="config-bg-browseForFile" label="&newtabtools.bg-url.browse;"/>
-          </xul:hbox>
-          <xul:hbox flex="1" align="center">
-            <xul:spacer flex="4"/>
-            <xul:button flex="1" id="config-setBackground" label="&newtabtools.bg.set;"/>
-            <xul:button flex="1" id="config-removeBackground" label="&newtabtools.bg.remove;"/>
-            <xul:spacer flex="4"/>
-          </xul:hbox>
-          <xul:checkbox flex="1" id="config-darkLauncher" label="&newtabtools.bg.dark-launcher;"/>
-          <xul:spacer style="height: 3em"/>
+          <xul:groupbox>
+            <xul:caption label="&newtabtools.pin-url.header;"/>
+            <xul:label control="config-pinURL-input" value="&newtabtools.pin-url.label;" />
+            <xul:textbox id="config-pinURL-input" flex="1" type="autocomplete" completeselectedindex="true" autocompletesearch="history" enablehistory="true" showcommentcolumn="true"/>
+            <xul:hbox pack="center">
+              <xul:button id="config-pinURL" label="&newtabtools.pin-url.button;" />
+            </xul:hbox>
+          </xul:groupbox>
+          <xul:spacer class="config-spacing" />
+          <xul:groupbox>
+            <xul:caption label="&newtabtools.tile-header2;"/>
+            <xul:label control="config-select" value="&newtabtools.tile-select.label;"/>
+            <xul:menulist id="config-select">
+              <xul:menupopup/>
+            </xul:menulist>
+            <xul:label control="config-thumb-input" value="&newtabtools.tile-thumbnail-url.label;"/>
+            <xul:hbox flex="1" align="center">
+              <xul:textbox id="config-thumb-input" flex="1"/>
+              <xul:button id="config-browseForFile" label="&newtabtools.tile-thumbnail-url.browse;"/>
+            </xul:hbox>
+            <xul:hbox pack="center">
+              <xul:button id="config-setThumbnail" label="&newtabtools.tile-thumbnail.set;"/>
+              <xul:button id="config-removeThumbnail" label="&newtabtools.tile-thumbnail.remove;"/>
+            </xul:hbox>
+            <xul:label control="config-title-input" value="&newtabtools.tile-title.input.label;"/>
+            <xul:textbox id="config-title-input" flex="1"/>
+            <xul:hbox pack="center">
+              <xul:button id="config-setTitle" label="&newtabtools.tile-title.set;"/>
+              <xul:button id="config-removeTitle" label="&newtabtools.tile-title.reset;"/>
+            </xul:hbox>
+            <xul:checkbox flex="1" id="config-containThumbs" label="&newtabtools.tile-thumbnails.contain;"/>
+            <xul:checkbox flex="1" id="config-overlapTitle" label="&newtabtools.tile-thumbnails.overlapTitle;"/>
+          </xul:groupbox>
+          <xul:spacer class="config-spacing" />
+          <xul:groupbox>
+            <xul:caption label="&newtabtools.bg-header;"/>
+            <xul:label control="config-bg-input" value="&newtabtools.bg-url.label;"/>
+            <xul:hbox flex="1" align="center">
+              <xul:textbox id="config-bg-input" flex="1"/>
+              <xul:button id="config-bg-browseForFile" label="&newtabtools.bg-url.browse;"/>
+            </xul:hbox>
+            <xul:hbox pack="center">
+              <xul:button id="config-setBackground" label="&newtabtools.bg.set;"/>
+              <xul:button id="config-removeBackground" label="&newtabtools.bg.remove;"/>
+            </xul:hbox>
+            <xul:checkbox flex="1" id="config-darkLauncher" label="&newtabtools.bg.dark-launcher;"/>
+          </xul:groupbox>
+          <xul:spacer class="config-spacing" />
           <xul:hbox pack="center">
             <xul:button id="config-morePrefs" label="&newtabtools.more-options;"/>
             <xul:button id="config-donate" label="&newtabtools.donate;"/>

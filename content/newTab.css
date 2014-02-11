@@ -354,8 +354,13 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
   margin: 50px 6px 0;
   width: 338px;
 }
-#config-morePrefs {
-  text-align: center;
+.config-spacing {
+  height: 1em;
+}
+@media screen and (min-height: 1080px) {
+  .config-spacing {
+    height: 3em;
+  }
 }
 
 #newtab-scrollbox[page-disabled] #config-wrapper,

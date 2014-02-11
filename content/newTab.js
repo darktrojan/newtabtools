@@ -59,6 +59,14 @@ let newTabTools = {
     let checked;
     let tileURL;
     switch (id) {
+    case "config-pinURL":
+      let link = this.pinURLInput.value;
+      newTabTools.PlacesUtils.promisePlaceInfo(Services.io.newURI(link, null, null)).then(function(info) {
+        newTabTools.pinURL(link, info.title);
+      }, function() {
+        newTabTools.pinURL(link, "");
+      }).then(null, Cu.reportError);
+      break;
     case "config-browseForFile":
     case "config-bg-browseForFile":
       let fp = Cc["@mozilla.org/filepicker;1"].createInstance(Ci.nsIFilePicker);
@@ -149,6 +157,12 @@ let newTabTools = {
     }
     this.tileSelect.selectedIndex = 0;
     this.onTileSelect();
+  },
+  pinURL: function(link, title) {
+    gBlockedLinks.unblock(link);
+    gPinnedLinks.pin({url: link, title: title}, 0);
+    gUpdater.updateGrid();
+    gGrid.sites[0]._updateAttributes(true);
   },
   refreshThumbnail: function(aURL) {
     let newThumbnailURL = PageThumbs.getThumbnailURL(aURL) + "&" + Math.random();
@@ -421,6 +435,9 @@ let newTabTools = {
   XPCOMUtils.defineLazyServiceGetter(newTabTools,
     "ss", "@mozilla.org/browser/sessionstore;1", "nsISessionStore");
 
+  XPCOMUtils.defineLazyModuleGetter(newTabTools,
+    "PlacesUtils", "resource://gre/modules/PlacesUtils.jsm");
+
   let uiElements = {
     "page": "newtab-scrollbox",
     "launcher": "launcher",
@@ -428,6 +445,7 @@ let newTabTools = {
     "configToggleButton": "config-toggle",
     "configWrapper": "config-wrapper",
     "configInner": "config-inner",
+    "pinURLInput": "config-pinURL-input",
     "tileSelect": "config-select",
     "setThumbnailInput": "config-thumb-input",
     "setTitleInput": "config-title-input",

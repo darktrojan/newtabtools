@@ -1,4 +1,8 @@
-<!ENTITY newtabtools.tile-header "Imagem do bloco:">
+<!ENTITY newtabtools.pin-url.header "Add tile:">
+<!ENTITY newtabtools.pin-url.label "Type or select a URL:">
+<!ENTITY newtabtools.pin-url.button "Add">
+
+<!ENTITY newtabtools.tile-header2 "Tiles:">
 <!ENTITY newtabtools.tile-select.label "Selecione um bloco:">
 <!ENTITY newtabtools.tile-thumbnail-url.label "Cole a URL da imagem ou escolha um arquivo:">
 <!ENTITY newtabtools.tile-thumbnail-url.browse "Procurar…">

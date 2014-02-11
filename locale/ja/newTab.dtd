@@ -1,4 +1,8 @@
-<!ENTITY newtabtools.tile-header "タイルの画像:">
+<!ENTITY newtabtools.pin-url.header "Add tile:">
+<!ENTITY newtabtools.pin-url.label "Type or select a URL:">
+<!ENTITY newtabtools.pin-url.button "Add">
+
+<!ENTITY newtabtools.tile-header2 "Tiles:">
 <!ENTITY newtabtools.tile-select.label "タイルを選択:">
 <!ENTITY newtabtools.tile-thumbnail-url.label "画像のURLを貼り付けまたは選択したファイルを参照:">
 <!ENTITY newtabtools.tile-thumbnail-url.browse "参照&#x2026;">

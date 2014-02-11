@@ -1,4 +1,8 @@
-<!ENTITY newtabtools.tile-header "磁贴图片：">
+<!ENTITY newtabtools.pin-url.header "Add tile:">
+<!ENTITY newtabtools.pin-url.label "Type or select a URL:">
+<!ENTITY newtabtools.pin-url.button "Add">
+
+<!ENTITY newtabtools.tile-header2 "Tiles:">
 <!ENTITY newtabtools.tile-select.label "选择一个磁贴：">
 <!ENTITY newtabtools.tile-thumbnail-url.label "贴入图片网址或选择一个文件：">
 <!ENTITY newtabtools.tile-thumbnail-url.browse "浏览…">
