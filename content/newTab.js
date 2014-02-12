@@ -159,6 +159,13 @@ let newTabTools = {
     this.onTileSelect();
   },
   pinURL: function(link, title) {
+    let sites = gGrid.sites;
+    sites.unshift(null);
+    gTransformation.rearrangeSites(sites);
+
+    let pinnedSites = sites.filter(function (aSite) { return aSite && aSite.isPinned(); });
+    pinnedSites.forEach(function (aSite) { aSite.pin(sites.indexOf(aSite)); }, this);
+
     gBlockedLinks.unblock(link);
     gPinnedLinks.pin({url: link, title: title}, 0);
     gUpdater.updateGrid();
