@@ -48,6 +48,9 @@ function startup(aParams, aReason) {
   defaultPrefs.setBoolPref("thumbs.hidefavicons", false);
 
   userPrefs = Services.prefs.getBranch(EXTENSION_PREFS);
+  if (userPrefs.getIntPref("donationreminder") == 0 && userPrefs.prefHasUserValue("version")) {
+    userPrefs.setIntPref("donationreminder", 1);
+  }
   userPrefs.setIntPref("version", parseInt(aParams.version));
 
   NewTabUtils.links._oldGetLinks = NewTabUtils.links.getLinks;
@@ -74,10 +77,6 @@ function startup(aParams, aReason) {
     } else {
       return list;
     }
-  }
-
-  if (userPrefs.getIntPref("donationreminder") == 0 && aReason == ADDON_UPGRADE) {
-    userPrefs.setIntPref("donationreminder", 1);
   }
 
   userPrefs.addObserver("", prefObserver, false);
