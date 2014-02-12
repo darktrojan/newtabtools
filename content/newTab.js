@@ -61,10 +61,16 @@ let newTabTools = {
     switch (id) {
     case "config-pinURL":
       let link = this.pinURLInput.value;
-      newTabTools.PlacesUtils.promisePlaceInfo(Services.io.newURI(link, null, null)).then(function(info) {
+      let linkURI = Services.io.newURI(link, null, null);
+      event.originalTarget.disabled = true;
+      newTabTools.PlacesUtils.promisePlaceInfo(linkURI).then(function(info) {
         newTabTools.pinURL(link, info.title);
+        newTabTools.pinURLInput.value = "";
+        event.originalTarget.disabled = false;
       }, function() {
         newTabTools.pinURL(link, "");
+        newTabTools.pinURLInput.value = "";
+        event.originalTarget.disabled = false;
       }).then(null, Cu.reportError);
       break;
     case "config-browseForFile":
@@ -169,7 +175,6 @@ let newTabTools = {
     gBlockedLinks.unblock(link);
     gPinnedLinks.pin({url: link, title: title}, 0);
     gUpdater.updateGrid();
-    gGrid.sites[0]._updateAttributes(true);
   },
   refreshThumbnail: function(aURL) {
     let newThumbnailURL = PageThumbs.getThumbnailURL(aURL) + "&" + Math.random();
