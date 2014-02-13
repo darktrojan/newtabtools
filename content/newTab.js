@@ -175,6 +175,8 @@ let newTabTools = {
     gBlockedLinks.unblock(link);
     gPinnedLinks.pin({url: link, title: title}, 0);
     gUpdater.updateGrid();
+
+    fillSelect();
   },
   refreshThumbnail: function(aURL) {
     let newThumbnailURL = PageThumbs.getThumbnailURL(aURL) + "&" + Math.random();
