@@ -1,17 +1,17 @@
 <!ENTITY newtabtools.export.title "New Tab Tools">
-<!ENTITY newtabtools.export.header "Choose what to export:">
-<!ENTITY newtabtools.import.header "Choose what to import:">
-<!ENTITY newtabtools.export.tiles.caption "Tiles">
-<!ENTITY newtabtools.export.prefs.pinned "Pinned Tiles">
-<!ENTITY newtabtools.export.prefs.blocked "Removed Tiles">
-<!ENTITY newtabtools.export.prefs.gridsize "Number of Rows and Columns">
-<!ENTITY newtabtools.export.prefs.gridmargin "Grid Margin and Spacing">
-<!ENTITY newtabtools.export.tiles.thumbs "Customized Thumbnails">
-<!ENTITY newtabtools.export.prefs.thumbs.position "Thumbnail Positioning">
-<!ENTITY newtabtools.export.annos.title "Customized Tile Titles">
-<!ENTITY newtabtools.export.prefs.thumbs.hidebuttons "Thumbnail Button Visibility">
-<!ENTITY newtabtools.export.prefs.thumbs.hidefavicons "Site Icon Visibility">
-<!ENTITY newtabtools.export.page.caption "Page">
-<!ENTITY newtabtools.export.prefs.launcher "Position of Launcher">
-<!ENTITY newtabtools.export.prefs.recent.show "Recently Closed Tabs Visibility">
-<!ENTITY newtabtools.export.page.background "Page Background">
+<!ENTITY newtabtools.export.header "選擇匯出項目:">
+<!ENTITY newtabtools.import.header "選擇匯入項目:">
+<!ENTITY newtabtools.export.tiles.caption "方塊磚">
+<!ENTITY newtabtools.export.prefs.pinned "釘選的方塊磚">
+<!ENTITY newtabtools.export.prefs.blocked "移除的方塊磚">
+<!ENTITY newtabtools.export.prefs.gridsize "欄列數目">
+<!ENTITY newtabtools.export.prefs.gridmargin "網格邊界與間距">
+<!ENTITY newtabtools.export.tiles.thumbs "自訂縮圖">
+<!ENTITY newtabtools.export.prefs.thumbs.position "縮圖擺放位置">
+<!ENTITY newtabtools.export.annos.title "自訂的方塊磚標題">
+<!ENTITY newtabtools.export.prefs.thumbs.hidebuttons "縮圖上按鈕的顯示設定">
+<!ENTITY newtabtools.export.prefs.thumbs.hidefavicons "網站圖示的顯示設定">
+<!ENTITY newtabtools.export.page.caption "頁面">
+<!ENTITY newtabtools.export.prefs.launcher "捷徑列位置">
+<!ENTITY newtabtools.export.prefs.recent.show "最近關閉的分頁的顯示設定">
+<!ENTITY newtabtools.export.page.background "頁面背景">
