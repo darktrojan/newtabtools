@@ -1,6 +1,6 @@
 <!ENTITY newtabtools.export.title "[New Tab Tools]">
-<!ENTITY newtabtools.export.header "Escolha o que exportar">
-<!ENTITY newtabtools.import.header "Escolha o que importar">
+<!ENTITY newtabtools.export.header "Escolha o que exportar:">
+<!ENTITY newtabtools.import.header "Escolha o que importar:">
 <!ENTITY newtabtools.export.tiles.caption "Blocos">
 <!ENTITY newtabtools.export.prefs.pinned "Blocos fixados">
 <!ENTITY newtabtools.export.prefs.blocked "Blocos removidos">
