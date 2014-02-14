@@ -1,15 +1,15 @@
-<!ENTITY newtabtools.pin-url.header "Add tile:">
-<!ENTITY newtabtools.pin-url.label "Type or select a URL:">
-<!ENTITY newtabtools.pin-url.button "Add">
+<!ENTITY newtabtools.pin-url.header "Adicionar título:">
+<!ENTITY newtabtools.pin-url.label "Digite ou selecione uma URL:">
+<!ENTITY newtabtools.pin-url.button "Adicionar">
 
-<!ENTITY newtabtools.tile-header2 "Tiles:">
+<!ENTITY newtabtools.tile-header2 "Blocos:">
 <!ENTITY newtabtools.tile-select.label "Selecione um bloco:">
 <!ENTITY newtabtools.tile-thumbnail-url.label "Cole a URL da imagem ou escolha um arquivo:">
 <!ENTITY newtabtools.tile-thumbnail-url.browse "Procurar…">
 <!ENTITY newtabtools.tile-thumbnail.set "Definir">
 <!ENTITY newtabtools.tile-thumbnail.remove "Remover">
 <!ENTITY newtabtools.tile-thumbnails.contain "Blocos devem conter toda a miniatura">
-<!ENTITY newtabtools.tile-thumbnails.overlapTitle "Tile titles overlap thumbnails">
+<!ENTITY newtabtools.tile-thumbnails.overlapTitle "Título do bloco soprepõe miniatura">
 <!ENTITY newtabtools.tile-title.input.label "Digite o novo nome do bloco:">
 <!ENTITY newtabtools.tile-title.set "Definir">
 <!ENTITY newtabtools.tile-title.reset "Restaurar">
@@ -22,6 +22,6 @@
 <!ENTITY newtabtools.bg.dark-launcher "Usar fundo escuro para o iniciador">
 
 <!ENTITY newtabtools.more-options "Mais opções…">
-<!ENTITY newtabtools.donate "Doar&#x2026;">
+<!ENTITY newtabtools.donate "Doar…">
 
 <!ENTITY newtabtools.recently-closed-tabs "Abas fechadas recentemente:">
