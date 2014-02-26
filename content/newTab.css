@@ -236,7 +236,6 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
   line-height: 0;
 }
 :root.background #launcher {
-  border-top: 1px solid hsla(0, 0%, 100%, .3);
   background-color: hsla(0, 0%, 100%, .3);
   box-shadow: none;
 }
