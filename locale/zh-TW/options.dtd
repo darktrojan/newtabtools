@@ -1,11 +1,11 @@
 <!ENTITY newtabtools.options.rows "列">
 <!ENTITY newtabtools.options.columns "欄">
-<!ENTITY newtabtools.options.grid.margin "Grid Margin">
-<!ENTITY newtabtools.options.grid.spacing "Grid Spacing">
-<!ENTITY newtabtools.options.size.small "Small">
-<!ENTITY newtabtools.options.size.medium "Medium">
-<!ENTITY newtabtools.options.size.large "Large">
-<!ENTITY newtabtools.options.recent.show "Show Recently Closed Tabs">
+<!ENTITY newtabtools.options.grid.margin "網格邊界">
+<!ENTITY newtabtools.options.grid.spacing "網格間距">
+<!ENTITY newtabtools.options.size.small "小">
+<!ENTITY newtabtools.options.size.medium "中">
+<!ENTITY newtabtools.options.size.large "大">
+<!ENTITY newtabtools.options.recent.show "顯示最近關閉的分頁">
 <!ENTITY newtabtools.options.launcher "捷徑列">
 <!ENTITY newtabtools.options.launcher.hidden "不顯示">
 <!ENTITY newtabtools.options.launcher.top "頂端">
@@ -14,5 +14,5 @@
 <!ENTITY newtabtools.options.launcher.right "右側">
 <!ENTITY newtabtools.options.thumbs.hidebuttons "隱藏縮圖上的按鈕">
 <!ENTITY newtabtools.options.thumbs.hidefavicons "隱藏網站圖示">
-<!ENTITY newtabtools.export "Export Settings&#x2026;">
-<!ENTITY newtabtools.import "Import Settings&#x2026;">
+<!ENTITY newtabtools.export "匯出設定…">
+<!ENTITY newtabtools.import "匯入設定…">

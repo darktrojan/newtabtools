@@ -1,16 +1,16 @@
-<!ENTITY newtabtools.pin-url.header "Add tile:">
-<!ENTITY newtabtools.pin-url.label "Type or select a URL:">
-<!ENTITY newtabtools.pin-url.button "Add">
+<!ENTITY newtabtools.pin-url.header "新增方塊磚:">
+<!ENTITY newtabtools.pin-url.label "輸入或選擇網址:">
+<!ENTITY newtabtools.pin-url.button "新增">
 
-<!ENTITY newtabtools.tile-header2 "Tiles:">
-<!ENTITY newtabtools.tile-select.label "選擇一個方格:">
+<!ENTITY newtabtools.tile-header2 "方塊磚:">
+<!ENTITY newtabtools.tile-select.label "選擇一個方塊磚:">
 <!ENTITY newtabtools.tile-thumbnail-url.label "貼上圖片網址或選擇檔案:">
 <!ENTITY newtabtools.tile-thumbnail-url.browse "瀏覽…">
 <!ENTITY newtabtools.tile-thumbnail.set "設為縮圖">
 <!ENTITY newtabtools.tile-thumbnail.remove "移除縮圖">
-<!ENTITY newtabtools.tile-thumbnails.contain "方格須包含整個縮圖">
-<!ENTITY newtabtools.tile-thumbnails.overlapTitle "Tile titles overlap thumbnails">
-<!ENTITY newtabtools.tile-title.input.label "輸入新的方格標題:">
+<!ENTITY newtabtools.tile-thumbnails.contain "方塊磚須包含整個縮圖">
+<!ENTITY newtabtools.tile-thumbnails.overlapTitle "方塊磚標題與縮圖重疊">
+<!ENTITY newtabtools.tile-title.input.label "輸入新的方塊磚標題:">
 <!ENTITY newtabtools.tile-title.set "設為標題">
 <!ENTITY newtabtools.tile-title.reset "重設標題">
 
@@ -22,6 +22,6 @@
 <!ENTITY newtabtools.bg.dark-launcher "在捷徑列使用暗色背景">
 
 <!ENTITY newtabtools.more-options "更多選項…">
-<!ENTITY newtabtools.donate "捐款&#x2026;">
+<!ENTITY newtabtools.donate "捐款…">
 
 <!ENTITY newtabtools.recently-closed-tabs "最近關閉的分頁:">

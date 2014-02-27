@@ -174,7 +174,7 @@ let newTabTools = {
 
     gBlockedLinks.unblock(link);
     gPinnedLinks.pin({url: link, title: title}, 0);
-    gUpdater.updateGrid();
+    gUpdater.updateGrid(this.fillSelect.bind(this));
   },
   refreshThumbnail: function(aURL) {
     let newThumbnailURL = PageThumbs.getThumbnailURL(aURL) + "&" + Math.random();
@@ -214,8 +214,7 @@ let newTabTools = {
       canvas.width = image.width * scale;
       canvas.height = image.height * scale;
       let ctx = canvas.getContext("2d");
-      ctx.scale(scale, scale);
-      ctx.drawImage(image, 0, 0);
+      ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
 
       canvas.mozFetchAsStream(function(aInputStream) {
         let outputStream = FileUtils.openSafeFileOutputStream(file);
