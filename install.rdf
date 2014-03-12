@@ -1,6 +1,5 @@
-<?xml version="1.0" ?>
-<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-     xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+<?xml version="1.0" encoding="utf-8"?>
+<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:em="http://www.mozilla.org/2004/em-rdf#">
 
   <Description about="urn:mozilla:install-manifest">
     <em:id>newtabtools@darktrojan.net</em:id>
@@ -34,5 +33,12 @@
       </Description>
     </em:localized>
 
+    <em:localized>
+      <Description>
+        <em:locale>pt-BR</em:locale>
+        <em:name>[New Tab Tools]</em:name>
+        <em:description>Personaliza a página 'Nova Aba'. Você pode adicionar mais blocos, o iniciador do Firefox, ou uma imagem de fundo. E você pode definir novos blocos e suas imagens.</em:description>
+      </Description>
+    </em:localized>
   </Description>
 </RDF>
