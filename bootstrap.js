@@ -15,6 +15,7 @@ Cu.import("resource://gre/modules/AddonManager.jsm");
 Cu.import("resource://gre/modules/XPCOMUtils.jsm");
 
 XPCOMUtils.defineLazyModuleGetter(this, "NewTabToolsExporter", "chrome://newtabtools/content/export.jsm");
+XPCOMUtils.defineLazyModuleGetter(this, "PageThumbs", "resource://gre/modules/PageThumbs.jsm");
 
 function install(aParams, aReason) {
   if (aReason == ADDON_UPGRADE) {
@@ -93,6 +94,7 @@ function startup(aParams, aReason) {
   Services.ww.registerNotification(windowObserver);
 
   Services.obs.addObserver(optionsObserver, "addon-options-displayed", false);
+  expirationFilter.init();
 
   AddonManager.addAddonListener({
     // If we call reload in shutdown, the page override is
@@ -126,6 +128,8 @@ function shutdown(aParams, aReason) {
 
   Services.obs.removeObserver(optionsObserver, "addon-options-displayed");
   Cu.unload("chrome://newtabtools/content/export.jsm");
+
+  expirationFilter.cleanup();
 }
 
 let userPrefs;
@@ -227,4 +231,37 @@ let optionsObserver = {
       });
     }
   },
+};
+
+let expirationFilter = {
+  init: function() {
+    PageThumbs.addExpirationFilter(this);
+  },
+
+  cleanup: function() {
+    PageThumbs.removeExpirationFilter(this);
+  },
+
+  filterForThumbnailExpiration: function(aCallback) {
+    let columns = Services.prefs.getIntPref("browser.newtabpage.columns");
+    let rows = Services.prefs.getIntPref("browser.newtabpage.rows");
+    let count = columns * rows + 10;
+
+    if (count <= 25) {
+      aCallback([]);
+      return;
+    }
+
+    NewTabUtils.links.populateCache(function () {
+      let urls = [];
+
+      // Add all URLs to the list that we want to keep thumbnails for.
+      for (let link of NewTabUtils.links.getLinks().slice(25, count)) {
+        if (link && link.url)
+          urls.push(link.url);
+      }
+
+      aCallback(urls);
+    });
+  }
 };
