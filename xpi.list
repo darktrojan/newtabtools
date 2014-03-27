@@ -8,6 +8,7 @@ content/launcher/*
 content/newTab.css
 content/newTab.js
 content/newTab.xul
+content/temp.css
 icon.png
 icon64.png
 install.rdf
