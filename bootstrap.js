@@ -14,8 +14,12 @@ Cu.import("resource://gre/modules/NewTabUtils.jsm");
 Cu.import("resource://gre/modules/AddonManager.jsm");
 Cu.import("resource://gre/modules/XPCOMUtils.jsm");
 
+XPCOMUtils.defineLazyModuleGetter(this, "FileUtils", "resource://gre/modules/FileUtils.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "NewTabToolsExporter", "chrome://newtabtools/content/export.jsm");
+XPCOMUtils.defineLazyModuleGetter(this, "OS", "resource://gre/modules/osfile.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "PageThumbs", "resource://gre/modules/PageThumbs.jsm");
+XPCOMUtils.defineLazyModuleGetter(this, "PageThumbsStorage", "resource://gre/modules/PageThumbs.jsm");
+XPCOMUtils.defineLazyModuleGetter(this, "Task", "resource://gre/modules/Task.jsm");
 
 function install(aParams, aReason) {
   if (aReason == ADDON_UPGRADE) {
@@ -108,6 +112,30 @@ function startup(aParams, aReason) {
       }
     }
   });
+
+  Services.tm.currentThread.dispatch(function () {
+    let iterator = new OS.File.DirectoryIterator(PageThumbsStorage.path);
+
+    Task.spawn(function(){
+      while (true) {
+        let entry = yield iterator.next();
+        let file = new FileUtils.File(entry.path);
+        if (!file.isWritable()) {
+          Services.console.logStringMessage("Updating timestamp of " + file.leafName);
+          yield OS.File.setDates(entry.path);
+        }
+      }
+    }).then(
+      null,
+      // Clean up and return
+      function onFailure(reason) {
+        iterator.close();
+        if (reason != StopIteration) {
+          throw reason;
+        }
+      }
+    );
+  }.bind(this), Ci.nsIThread.DISPATCH_NORMAL);
 }
 function shutdown(aParams, aReason) {
   if (aReason == APP_SHUTDOWN) {
