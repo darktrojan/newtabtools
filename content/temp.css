@@ -1,4 +1,12 @@
+#newtab-grid {
+  display: -moz-box;
+  -moz-box-orient: vertical;
+}
 .newtab-row {
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-direction: normal;
+  -moz-box-pack: center;
   -moz-box-flex: 1;
 }
 .newtab-row:last-child {

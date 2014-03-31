@@ -129,5 +129,5 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
   <xul:script type="text/javascript;version=1.8"
               src="chrome://newtabtools/content/newTab.js"/>
   <xul:script type="text/javascript;version=1.8"
-              src="chrome://browser/content/newtab/newTab.js"/>
+              src="chrome://newtabtools/content/temp.js"/>
 </xul:window>
