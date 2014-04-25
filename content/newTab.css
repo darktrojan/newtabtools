@@ -110,6 +110,7 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
   min-width: 0;
   max-width: none;
   -moz-box-flex: 0;
+  background-color: transparent !important;
 }
 #newtab-margin-top,
 #newtab-margin-bottom,
