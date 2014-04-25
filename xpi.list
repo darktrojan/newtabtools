@@ -9,6 +9,7 @@ content/newTab.css
 content/newTab.js
 content/newTab.xul
 content/temp.css
+content/temp.js
 icon.png
 icon64.png
 install.rdf
