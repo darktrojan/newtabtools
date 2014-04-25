@@ -40,5 +40,13 @@
         <em:description>Personaliza a página 'Nova Aba'. Você pode adicionar mais blocos, o iniciador do Firefox, ou uma imagem de fundo. E você pode definir novos blocos e suas imagens.</em:description>
       </Description>
     </em:localized>
+
+    <em:localized>
+      <Description>
+        <em:locale>zh-CN</em:locale>
+        <em:name>New Tab Tools</em:name>
+        <em:description>自定义新标签页。您可以添加更多的磁贴，一个 Firefox 的快速启动栏，以及设置背景图片。您还可以设定新建磁贴的图片和标题。</em:description>
+      </Description>
+    </em:localized>
   </Description>
 </RDF>

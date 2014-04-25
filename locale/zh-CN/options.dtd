@@ -14,5 +14,5 @@
 <!ENTITY newtabtools.options.launcher.right "右侧">
 <!ENTITY newtabtools.options.thumbs.hidebuttons "隐藏操作按钮">
 <!ENTITY newtabtools.options.thumbs.hidefavicons "隐藏网站图标">
-<!ENTITY newtabtools.export "Export Settings&#x2026;">
-<!ENTITY newtabtools.import "Import Settings&#x2026;">
+<!ENTITY newtabtools.export "导出设置…">
+<!ENTITY newtabtools.import "导入设置…">
