@@ -33,3 +33,6 @@
   font-size: inherit;
   line-height: 24px;
 }
+input {
+  font-size: unset !important;
+}
