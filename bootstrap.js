@@ -136,6 +136,17 @@ function startup(aParams, aReason) {
       }
     );
   }.bind(this), Ci.nsIThread.DISPATCH_NORMAL);
+
+  try {
+    Cu.import("resource://gre/modules/DirectoryLinksProvider.jsm");
+    if (NewTabUtils.links._providers.size > 0) {
+      NewTabUtils.links.removeProvider(DirectoryLinksProvider);
+    } else {
+      Services.obs.addObserver(startupObserver, "browser-ui-startup-complete", false);
+    }
+  } catch(e) {
+    // DirectoryLinksProvider.jsm might not exist.
+  }
 }
 function shutdown(aParams, aReason) {
   if (aReason == APP_SHUTDOWN) {
@@ -158,6 +169,12 @@ function shutdown(aParams, aReason) {
   Cu.unload("chrome://newtabtools/content/export.jsm");
 
   expirationFilter.cleanup();
+
+  if (DirectoryLinksProvider) {
+    // Removing a startup observer at shutdown is absurd, but oh well.
+    Services.obs.removeObserver(startupObserver, "browser-ui-startup-complete");
+    NewTabUtils.links.addProvider(DirectoryLinksProvider);
+  }
 }
 
 let userPrefs;
@@ -291,5 +308,12 @@ let expirationFilter = {
 
       aCallback(urls);
     });
+  }
+};
+
+// Observes browser-ui-startup-complete.
+let startupObserver = {
+  observe: function(aSubject, aTopic, aData) {
+    NewTabUtils.links.removeProvider(DirectoryLinksProvider);
   }
 };
