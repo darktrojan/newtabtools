@@ -4,14 +4,15 @@ content
 content/export.jsm
 content/exportDialog.js
 content/exportDialog.xul
+content/fx-newTab.css
+content/fx-newTab.js
 content/launcher/*
 content/newTab.css
 content/newTab.js
 content/newTab.xul
-content/temp.css
-content/temp.js
 icon.png
 icon64.png
 install.rdf
 locale/*
+skin/*
 options.xul

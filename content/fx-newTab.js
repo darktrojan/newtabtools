@@ -41,6 +41,8 @@ function inPrivateBrowsingMode() {
 
 const HTML_NAMESPACE = "http://www.w3.org/1999/xhtml";
 
+//@line 6 "/builds/slave/rel-m-beta-lx_bld-000000000000/build/browser/base/content/newtab/transformations.js"
+
 /**
  * This singleton allows to transform the grid by repositioning a site's node
  * in the DOM and by showing or hiding the node. It additionally provides
@@ -305,6 +307,7 @@ let gTransformation = {
     return aSite.node.hasAttribute("frozen");
   }
 };
+//@line 6 "/builds/slave/rel-m-beta-lx_bld-000000000000/build/browser/base/content/newtab/page.js"
 
 /**
  * This singleton represents the whole 'New Tab Page' and takes care of
@@ -408,6 +411,7 @@ let gPage = {
       // Initialize the drop target shim.
       gDropTargetShim.init();
 
+//@line 114 "/builds/slave/rel-m-beta-lx_bld-000000000000/build/browser/base/content/newtab/page.js"
     }.bind(this));
   },
 
@@ -428,7 +432,7 @@ let gPage = {
     // Enables/disables the control and link elements.
     let inputSelector = ".newtab-control, .newtab-link";
     for (let input of document.querySelectorAll(inputSelector)) {
-      if (aValue)
+      if (aValue) 
         input.removeAttribute("tabindex");
       else
         input.setAttribute("tabindex", "-1");
@@ -465,6 +469,7 @@ let gPage = {
     }
   }
 };
+//@line 6 "/builds/slave/rel-m-beta-lx_bld-000000000000/build/browser/base/content/newtab/grid.js"
 
 /**
  * This singleton represents the grid that contains all sites.
@@ -631,6 +636,7 @@ let gGrid = {
             cellsLength != (gGridPrefs.gridRows * gGridPrefs.gridColumns));
   }
 };
+//@line 6 "/builds/slave/rel-m-beta-lx_bld-000000000000/build/browser/base/content/newtab/cells.js"
 
 /**
  * This class manages a cell's DOM node (not the actually cell content, a site).
@@ -752,6 +758,7 @@ Cell.prototype = {
     }
   }
 };
+//@line 6 "/builds/slave/rel-m-beta-lx_bld-000000000000/build/browser/base/content/newtab/sites.js"
 
 /**
  * This class represents a site that is contained in a cell and can be pinned,
@@ -981,6 +988,7 @@ Site.prototype = {
     }
   }
 };
+//@line 6 "/builds/slave/rel-m-beta-lx_bld-000000000000/build/browser/base/content/newtab/drag.js"
 
 /**
  * This singleton implements site dragging functionality.
@@ -1127,6 +1135,7 @@ let gDrag = {
     setTimeout(function () scrollbox.removeChild(dragElement), 0);
   }
 };
+//@line 6 "/builds/slave/rel-m-beta-lx_bld-000000000000/build/browser/base/content/newtab/dragDataHelper.js"
 
 let gDragDataHelper = {
   get mimeType() {
@@ -1144,6 +1153,7 @@ let gDragDataHelper = {
     return {url: url, title: title};
   }
 };
+//@line 6 "/builds/slave/rel-m-beta-lx_bld-000000000000/build/browser/base/content/newtab/drop.js"
 
 // A little delay that prevents the grid from being too sensitive when dragging
 // sites around.
@@ -1289,6 +1299,7 @@ let gDrop = {
     gTransformation.rearrangeSites(sites, {unfreeze: !aCell});
   }
 };
+//@line 6 "/builds/slave/rel-m-beta-lx_bld-000000000000/build/browser/base/content/newtab/dropTargetShim.js"
 
 /**
  * This singleton provides a custom drop target detection. We need this because
@@ -1511,6 +1522,7 @@ let gDropTargetShim = {
     node.dispatchEvent(event);
   }
 };
+//@line 6 "/builds/slave/rel-m-beta-lx_bld-000000000000/build/browser/base/content/newtab/dropPreview.js"
 
 /**
  * This singleton provides the ability to re-arrange the current grid to
@@ -1728,6 +1740,7 @@ let gDropPreview = {
     return -1;
   }
 };
+//@line 6 "/builds/slave/rel-m-beta-lx_bld-000000000000/build/browser/base/content/newtab/updater.js"
 
 /**
  * This singleton provides functionality to update the current grid to a new
@@ -1909,6 +1922,7 @@ let gUpdater = {
     wait.apply(null, batch);
   }
 };
+//@line 6 "/builds/slave/rel-m-beta-lx_bld-000000000000/build/browser/base/content/newtab/undo.js"
 
 /**
  * Dialog allowing to undo the removal of single site or to completely restore
@@ -2020,6 +2034,7 @@ let gUndoDialog = {
 };
 
 gUndoDialog.init();
+//@line 56 "/builds/slave/rel-m-beta-lx_bld-000000000000/build/browser/base/content/newtab/newTab.js"
 
 // Everything is loaded. Initialize the New Tab Page.
 gPage.init();
