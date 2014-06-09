@@ -474,7 +474,7 @@ let newTabTools = {
     });
   }
 
-  if (Services.appinfo.OS == "WINNT" || Services.appinfo.OS == "Darwin") {
+  if (Services.appinfo.OS == "WINNT") {
     document.getElementById("settingsUnix").style.visibility = "collapse";
   } else {
     document.getElementById("settingsWin").style.visibility = "collapse";

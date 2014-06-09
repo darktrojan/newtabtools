@@ -4,14 +4,14 @@
 <!ENTITY % syncBrandDTD SYSTEM "chrome://browser/locale/syncBrand.dtd">
 %syncBrandDTD;
 
-<!ENTITY abouthome.bookmarksButton.label "Bookmarks">
-<!ENTITY abouthome.historyButton.label   "History">
+<!ENTITY abouthome.bookmarksButton.label "Lesezeichen">
+<!ENTITY abouthome.historyButton.label   "Chronik">
 <!-- LOCALIZATION NOTE (abouthome.preferencesButtonWin.label): The label for the
      preferences/options item on about:home on Windows -->
-<!ENTITY abouthome.preferencesButtonWin.label  "Options">
+<!ENTITY abouthome.preferencesButtonWin.label  "Einstellungen">
 <!-- LOCALIZATION NOTE (abouthome.preferencesButtonUnix.label): The label for the
      preferences/options item on about:home on Linux and OS X -->
-<!ENTITY abouthome.preferencesButtonUnix.label  "Preferences">
+<!ENTITY abouthome.preferencesButtonUnix.label  "Einstellungen">
 <!ENTITY abouthome.addonsButton.label    "Add-ons">
 <!ENTITY abouthome.appsButton.label      "Marketplace">
 <!ENTITY abouthome.downloadsButton.label "Downloads">
