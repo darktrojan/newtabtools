@@ -273,7 +273,8 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 #sync::before {
   content: url("chrome://browser/content/abouthome/sync.png");
 }
-#settings::before {
+#settingsWin::before,
+#settingsUnix::before {
   content: url("chrome://browser/content/abouthome/settings.png");
 }
 #restorePreviousSession::before {
@@ -302,7 +303,8 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 :root.background #launcher.dark #sync::before {
   content: url("chrome://newtabtools/content/launcher/sync.png");
 }
-:root.background #launcher.dark #settings::before {
+:root.background #launcher.dark #settingsWin::before,
+:root.background #launcher.dark #settingsUnix::before {
   content: url("chrome://newtabtools/content/launcher/settings.png");
 }
 :root.background #launcher.dark #restorePreviousSession::before {

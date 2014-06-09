@@ -30,7 +30,8 @@ let newTabTools = {
     case "sync":
       newTabTools.browserWindow.openPreferences("paneSync");
       break;
-    case "settings":
+    case "settingsWin":
+    case "settingsUnix":
       newTabTools.browserWindow.openPreferences();
       break;
     case "restorePreviousSession":
@@ -471,6 +472,12 @@ let newTabTools = {
     XPCOMUtils.defineLazyGetter(newTabTools, key, function() {
       return document.getElementById(value);
     });
+  }
+
+  if (Services.appinfo.OS == "WINNT" || Services.appinfo.OS == "Darwin") {
+    document.getElementById("settingsUnix").style.visibility = "collapse";
+  } else {
+    document.getElementById("settingsWin").style.visibility = "collapse";
   }
 
   let configButton = newTabTools.configToggleButton;

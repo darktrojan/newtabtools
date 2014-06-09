@@ -12,7 +12,7 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 <!DOCTYPE window [
   <!ENTITY % newTabDTD SYSTEM "chrome://browser/locale/newTab.dtd">
   %newTabDTD;
-  <!ENTITY % aboutHomeDTD SYSTEM "chrome://browser/locale/aboutHome.dtd">
+  <!ENTITY % aboutHomeDTD SYSTEM "chrome://newtabtools/locale/aboutHome.dtd">
   %aboutHomeDTD;
   <!ENTITY % browserDTD SYSTEM "chrome://browser/locale/browser.dtd">
   %browserDTD;
@@ -121,7 +121,8 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
       <button class="launchButton" id="history">&abouthome.historyButton.label;</button>
       <button class="launchButton" id="addons">&abouthome.addonsButton.label;</button>
       <button class="launchButton" id="sync">&abouthome.syncButton.label;</button>
-      <button class="launchButton" id="settings">&abouthome.settingsButton.label;</button>
+      <button class="launchButton" id="settingsWin">&abouthome.preferencesButtonWin.label;</button>
+      <button class="launchButton" id="settingsUnix">&abouthome.preferencesButtonUnix.label;</button>
       <button class="launchButton" id="restorePreviousSession">&historyRestoreLastSession.label;</button>
     </div>
   </div>
