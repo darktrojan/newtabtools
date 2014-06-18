@@ -1,5 +1,8 @@
-
-<!ENTITY syncBrandDTD "&quot;chrome://browser/locale/syncBrand.dtd&quot;">
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
+<!ENTITY % syncBrandDTD SYSTEM "chrome://browser/locale/syncBrand.dtd">
+%syncBrandDTD;
 
 <!ENTITY abouthome.bookmarksButton.label "Favoritos">
 <!ENTITY abouthome.historyButton.label "Histórico">
@@ -12,4 +15,4 @@
 <!ENTITY abouthome.addonsButton.label "Complementos">
 <!ENTITY abouthome.appsButton.label "Marketplace">
 <!ENTITY abouthome.downloadsButton.label "Downloads">
-<!ENTITY abouthome.syncButton.label "&amp;syncBrand.shortName.label;">
+<!ENTITY abouthome.syncButton.label "&syncBrand.shortName.label;">
