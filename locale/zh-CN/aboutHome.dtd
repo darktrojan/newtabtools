@@ -1,9 +1,3 @@
-<!-- This Source Code Form is subject to the terms of the Mozilla Public
-   - License, v. 2.0. If a copy of the MPL was not distributed with this
-   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
-<!ENTITY % syncBrandDTD SYSTEM "chrome://browser/locale/syncBrand.dtd">
-%syncBrandDTD;
-
 <!ENTITY abouthome.bookmarksButton.label "书签">
 <!ENTITY abouthome.historyButton.label   "历史">
 <!-- LOCALIZATION NOTE (abouthome.preferencesButtonWin.label): The label for the
@@ -15,4 +9,4 @@
 <!ENTITY abouthome.addonsButton.label    "附加组件">
 <!ENTITY abouthome.appsButton.label      "应用市场">
 <!ENTITY abouthome.downloadsButton.label "下载">
-<!ENTITY abouthome.syncButton.label      "&syncBrand.shortName.label;">
+<!ENTITY abouthome.syncButton.label      "同步">
