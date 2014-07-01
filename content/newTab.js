@@ -475,9 +475,9 @@ let newTabTools = {
   }
 
   if (Services.appinfo.OS == "WINNT") {
-    document.getElementById("settingsUnix").style.visibility = "collapse";
+    document.getElementById("settingsUnix").style.display = "none";
   } else {
-    document.getElementById("settingsWin").style.visibility = "collapse";
+    document.getElementById("settingsWin").style.display = "none";
   }
 
   let configButton = newTabTools.configToggleButton;
