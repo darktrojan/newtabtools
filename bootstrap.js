@@ -140,7 +140,9 @@ function startup(aParams, aReason) {
   try {
     Cu.import("resource://gre/modules/DirectoryLinksProvider.jsm");
     if (NewTabUtils.links._providers.size > 0) {
+      // DirectoryLinksProvider is already loaded.
       NewTabUtils.links.removeProvider(DirectoryLinksProvider);
+      NewTabUtils.links.resetCache();
     } else {
       Services.obs.addObserver(startupObserver, "browser-ui-startup-complete", false);
     }
@@ -314,6 +316,8 @@ let expirationFilter = {
 // Observes browser-ui-startup-complete.
 let startupObserver = {
   observe: function(aSubject, aTopic, aData) {
+    // DirectoryLinksProvider removed at startup.
     NewTabUtils.links.removeProvider(DirectoryLinksProvider);
+    NewTabUtils.links.resetCache();
   }
 };
