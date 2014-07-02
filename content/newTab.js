@@ -6,11 +6,17 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 
 let { classes: Cc, interfaces: Ci, utils: Cu } = Components;
 
-Cu.import("resource://gre/modules/FileUtils.jsm");
-Cu.import("resource://gre/modules/NetUtil.jsm");
 Cu.import("resource://gre/modules/Services.jsm");
 Cu.import("resource://gre/modules/XPCOMUtils.jsm");
-Cu.import("resource:///modules/sessionstore/SessionStore.jsm")
+
+XPCOMUtils.defineLazyModuleGetter(this, "AddonManager", "resource://gre/modules/AddonManager.jsm");
+XPCOMUtils.defineLazyModuleGetter(this, "FileUtils", "resource://gre/modules/FileUtils.jsm");
+XPCOMUtils.defineLazyModuleGetter(this, "NetUtil", "resource://gre/modules/NetUtil.jsm");
+XPCOMUtils.defineLazyModuleGetter(this, "SessionStore", "resource:///modules/sessionstore/SessionStore.jsm");
+XPCOMUtils.defineLazyModuleGetter(this, "PlacesUtils", "resource://gre/modules/PlacesUtils.jsm");
+
+XPCOMUtils.defineLazyServiceGetter(this, "faviconService", "@mozilla.org/browser/favicon-service;1", "mozIAsyncFavicons");
+XPCOMUtils.defineLazyServiceGetter(this, "annoService", "@mozilla.org/browser/annotation-service;1", "nsIAnnotationService");
 
 let newTabTools = {
   launcherOnClick: function(event) {
@@ -64,7 +70,7 @@ let newTabTools = {
       let link = this.pinURLInput.value;
       let linkURI = Services.io.newURI(link, null, null);
       event.originalTarget.disabled = true;
-      newTabTools.PlacesUtils.promisePlaceInfo(linkURI).then(function(info) {
+      PlacesUtils.promisePlaceInfo(linkURI).then(function(info) {
         newTabTools.pinURL(linkURI.spec, info.title);
         newTabTools.pinURLInput.value = "";
         event.originalTarget.disabled = false;
@@ -187,7 +193,7 @@ let newTabTools = {
     }
   },
   getFileForURL: function(aURL) {
-    if ('getFilePathForURL' in PageThumbsStorage) {
+    if ("getFilePathForURL" in PageThumbsStorage) {
       let path = PageThumbsStorage.getFilePathForURL(aURL);
       return FileUtils.File(path);
     } else {
@@ -234,11 +240,11 @@ let newTabTools = {
     let site = cell.site;
     let uri = Services.io.newURI(site.url, null, null);
     if (aTitle) {
-      this.annoService.setPageAnnotation(uri, "newtabtools/title",
-        this.setTitleInput.value, 0, this.annoService.EXPIRE_WITH_HISTORY);
+      annoService.setPageAnnotation(uri, "newtabtools/title",
+        this.setTitleInput.value, 0, annoService.EXPIRE_WITH_HISTORY);
       site._annoTitle = aTitle;
     } else {
-      this.annoService.removePageAnnotation(uri, "newtabtools/title");
+      annoService.removePageAnnotation(uri, "newtabtools/title");
       this.setTitleInput.value = aTitle = site.title;
       delete site._annoTitle;
     }
@@ -329,7 +335,7 @@ let newTabTools = {
     }
 
     let added = 0;
-    let undoItems = JSON.parse(this.ss.getClosedTabData(this.browserWindow));
+    let undoItems = JSON.parse(SessionStore.getClosedTabData(this.browserWindow));
     for (let i = 0; i < undoItems.length; i++) {
       let item = undoItems[i];
       let index = i;
@@ -437,18 +443,6 @@ let newTabTools = {
   XPCOMUtils.defineLazyGetter(newTabTools, "strings", function() {
     return Services.strings.createBundle("chrome://newtabtools/locale/newTabTools.properties");
   });
-
-  XPCOMUtils.defineLazyServiceGetter(newTabTools,
-    "faviconService", "@mozilla.org/browser/favicon-service;1", "mozIAsyncFavicons");
-
-  XPCOMUtils.defineLazyServiceGetter(newTabTools,
-    "annoService", "@mozilla.org/browser/annotation-service;1", "nsIAnnotationService");
-
-  XPCOMUtils.defineLazyServiceGetter(newTabTools,
-    "ss", "@mozilla.org/browser/sessionstore;1", "nsISessionStore");
-
-  XPCOMUtils.defineLazyModuleGetter(newTabTools,
-    "PlacesUtils", "resource://gre/modules/PlacesUtils.jsm");
 
   let uiElements = {
     "page": "newtab-scrollbox",
@@ -559,12 +553,12 @@ let newTabTools = {
       let uri = Services.io.newURI(this.url, null, null);
 
       try {
-        this._annoTitle = newTabTools.annoService.getPageAnnotation(uri, "newtabtools/title");
+        this._annoTitle = annoService.getPageAnnotation(uri, "newtabtools/title");
         titleElement.textContent = this._annoTitle;
       } catch(e) {
       }
 
-      newTabTools.faviconService.getFaviconURLForPage(uri, function(aURI) {
+      faviconService.getFaviconURLForPage(uri, function(aURI) {
         if (!aURI)
           return;
 
