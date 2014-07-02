@@ -223,6 +223,11 @@ let notificationObserver = {
         aWindow.newTabTools.refreshThumbnail(aSubject.data);
       });
       break;
+    case "title":
+      enumerateTabs(function(aWindow) {
+        let tileURL = aSubject.QueryInterface(Ci.nsISupportsString);
+        aWindow.newTabTools.refreshTitle(aSubject.data);
+      });
     }
   }
 };

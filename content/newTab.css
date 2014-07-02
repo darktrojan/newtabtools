@@ -372,3 +372,102 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 #newtab-scrollbox:not([page-disabled]) #newtab-toggle {
   display: none;
 }
+
+#newtab-options {
+  background-color: #f2f2f2;
+  border: 1px solid #b2aeaa;
+  position: fixed;
+  /*top: 100px;*/
+  top: 2em;
+  left: 50%;
+  /*left: 2em;*/
+  /*width: -moz-calc(702px + 2em);*/
+  transform: translateX(-moz-calc(-350px - 2em));
+  padding: 1em;
+  box-sizing: border-box;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+#newtab-options toolbarbutton {
+  -moz-appearance: none;
+}
+
+#newtab-options-close {
+  position: absolute;
+  top: 0.5em;
+  right: 0.5em;
+  line-height: 0;
+  z-index: 1;
+}
+
+#newtab-options-tile {
+  /*width: -moz-calc(340px - 1em);*/
+/*  right: 1em;
+  top: 1em;
+  position: absolute;
+  background-color: blue;
+*/
+  -moz-margin-end: 2em;
+}
+
+#config-previous-tile {
+  list-style-image: url('chrome://newtabtools/content/arrow.svg');
+}
+
+#config-thumbnail {
+  width: 200px;
+  height: 150px;
+  margin: 0 auto;
+  border: 1px #b2aeaa solid;
+  opacity: 1;
+  position: static;
+  -moz-box-flex: 1;
+}
+
+#config-next-tile {
+  list-style-image: url('chrome://newtabtools/content/arrow.svg');
+  transform: scalex(-1);
+}
+
+#newtab-options-tile button {
+  min-width: 0;
+  -moz-margin-start: 0;
+  -moz-margin-end: 0;
+}
+
+setting {
+  display: -moz-grid-line;
+  -moz-box-align: baseline;
+  /*width: -moz-calc(380px - 2em);*/
+  /*border-right: 1px threedshadow solid;*/
+}
+
+setting[type="bool"] {
+  -moz-binding: url("chrome://mozapps/content/extensions/setting.xml#setting-bool");
+}
+
+setting[type="integer"] {
+  -moz-binding: url("chrome://mozapps/content/extensions/setting.xml#setting-integer");
+}
+
+setting[type="control"] {
+  -moz-binding: url("chrome://mozapps/content/extensions/setting.xml#setting-control");
+}
+
+setting[type="menulist"] {
+  -moz-binding: url("chrome://newtabtools/content/setting.xml#setting-multi");
+}
+
+.preferences-alignment {
+  min-height: 28px;
+  -moz-box-align: center;
+}
+
+groupbox {
+  -moz-appearance: none;
+  border: none;
+}
+caption {
+  margin: 0;
+  font-weight: bold;
+}

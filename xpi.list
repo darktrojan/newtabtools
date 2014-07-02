@@ -1,6 +1,7 @@
 bootstrap.js
 chrome.manifest
 content
+content/arrow.svg
 content/export.jsm
 content/exportDialog.js
 content/exportDialog.xul
@@ -10,6 +11,7 @@ content/launcher/*
 content/newTab.css
 content/newTab.js
 content/newTab.xul
+content/setting.xml
 icon.png
 icon64.png
 install.rdf

@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<bindings xmlns="http://www.mozilla.org/xbl">
+	<binding id="setting-multi" extends="chrome://mozapps/content/extensions/setting.xml#setting-multi">
+		<implementation>
+			<field name="control">
+				this.getElementsByTagNameNS(
+					"http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul",
+					this.getAttribute("type") == "radio" ? "radiogroup" : "menulist"
+				)[0];
+			</field>
+		</implementation>
+	</binding>
+</bindings>

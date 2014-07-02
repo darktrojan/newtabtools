@@ -18,6 +18,7 @@ XPCOMUtils.defineLazyModuleGetter(this, "Rect",
   "resource://gre/modules/Geometry.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "PrivateBrowsingUtils",
   "resource://gre/modules/PrivateBrowsingUtils.jsm");
+XPCOMUtils.defineLazyServiceGetter(this, "annoService", "@mozilla.org/browser/annotation-service;1", "nsIAnnotationService");
 
 let {
   links: gLinks,
@@ -436,6 +437,7 @@ let gPage = {
 
     // Update the toggle button's title.
     let toggle = document.getElementById("newtab-toggle");
+    // TODO broken
     toggle.setAttribute("title", newTabString(aValue ? "hide" : "show"));
   },
 
@@ -877,7 +879,7 @@ Site.prototype = {
     let link = this._querySelector(".newtab-link");
     link.setAttribute("title", tooltip);
     link.setAttribute("href", url);
-    this._querySelector(".newtab-title").textContent = title;
+    // this._querySelector(".newtab-title").textContent = title;
 
     if (this.isPinned())
       this._updateAttributes(true);
@@ -886,6 +888,35 @@ Site.prototype = {
     this.captureIfMissing();
     // but still display whatever thumbnail might be available now.
     this.refreshThumbnail();
+    this._addTitleAndFavicon();
+  },
+
+  _addTitleAndFavicon: function() {
+    let titleElement = this.node.querySelector(".newtab-title");
+    let uri = Services.io.newURI(this.url, null, null);
+
+    delete this._annoTitle;
+    try {
+      this._annoTitle = annoService.getPageAnnotation(uri, "newtabtools/title");
+    } catch(e) {
+    }
+    titleElement.textContent = this._annoTitle || this.title || this.url;
+
+    faviconService.getFaviconURLForPage(uri, function(aURI) {
+      if (!aURI)
+        return;
+
+      let icon;
+      if (titleElement.firstChild && titleElement.firstChild.nodeType == Node.ELEMENT_NODE) {
+        // This shouldn't happen, but sometimes it does.
+        icon = titleElement.firstChild;
+      } else {
+        icon = document.createElementNS(HTML_NAMESPACE, "img");
+      }
+      icon.src = "moz-anno:favicon:" + aURI.spec;
+      icon.className = "favicon";
+      titleElement.insertBefore(icon, titleElement.firstChild);
+    });
   },
 
   /**

@@ -45,26 +45,11 @@ let newTabTools = {
       break;
     }
   },
-  get backgroundImageFile() {
-    return FileUtils.getFile("ProfD", ["newtab-background"], true);
-  },
-  get backgroundImageURL() {
-    return Services.io.newFileURI(this.backgroundImageFile);
-  },
-  refreshBackgroundImage: function() {
-    if (this.backgroundImageFile.exists()) {
-      this.page.style.backgroundImage =
-        'url("' + this.backgroundImageURL.spec + '?' + this.backgroundImageFile.lastModifiedTime + '")';
-      document.documentElement.classList.add("background");
-    } else {
-      this.page.style.backgroundImage = null;
-      document.documentElement.classList.remove("background");
-    }
+  get selectedSite() {
+    return gGrid.cells[this._selectedSiteIndex]._node.firstChild._newtabSite;
   },
   configOnClick: function(event) {
     let id = event.originalTarget.id;
-    let checked;
-    let tileURL;
     switch (id) {
     case "config-pinURL":
       let link = this.pinURLInput.value;
@@ -80,6 +65,12 @@ let newTabTools = {
         event.originalTarget.disabled = false;
       }).then(null, Cu.reportError);
       break;
+    case "config-previous-tile":
+      this.selectedSiteIndex = (this._selectedSiteIndex - 1 + gGrid.cells.length) % gGrid.cells.length;
+      break;
+    case "config-next-tile":
+      this.selectedSiteIndex = (this._selectedSiteIndex + 1) % gGrid.cells.length;
+      break;
     case "config-browseForFile":
     case "config-bg-browseForFile":
       let fp = Cc["@mozilla.org/filepicker;1"].createInstance(Ci.nsIFilePicker);
@@ -91,31 +82,16 @@ let newTabTools = {
       }
       break;
     case "config-setThumbnail":
-      this.setThumbnail(this.tileSelect.value, this.setThumbnailInput.value, function() {
-        tileURL = Cc["@mozilla.org/supports-string;1"].createInstance(Ci.nsISupportsString);
-        tileURL.data = this.tileSelect.value;
-        Services.obs.notifyObservers(tileURL, "newtabtools-change", "thumbnail");
-      }.bind(this));
+      this.setThumbnail(this.selectedSite, this.setThumbnailInput.value);
       break;
     case "config-removeThumbnail":
-      this.removeThumbnail(this.tileSelect.value);
-      tileURL = Cc["@mozilla.org/supports-string;1"].createInstance(Ci.nsISupportsString);
-      tileURL.data = this.tileSelect.value;
-      Services.obs.notifyObservers(tileURL, "newtabtools-change", "thumbnail");
-      break;
-    case "config-containThumbs":
-      checked = event.originalTarget.checked;
-      this.prefs.setBoolPref("thumbs.contain", checked);
-      break;
-    case "config-overlapTitle":
-      checked = event.originalTarget.checked;
-      this.prefs.setBoolPref("thumbs.overlaptitle", checked);
+      this.setThumbnail(this.selectedSite, null);
       break;
     case "config-setTitle":
-      this.setTitle(this.tileSelect.selectedIndex, this.setTitleInput.value);
+      this.setTitle(this.selectedSite, this.setTitleInput.value);
       break;
     case "config-removeTitle":
-      this.setTitle(this.tileSelect.selectedIndex, null);
+      this.setTitle(this.selectedSite, null);
       break;
     case "config-setBackground":
       if (this.setBackgroundInput.value) {
@@ -136,40 +112,11 @@ let newTabTools = {
         this.backgroundImageFile.remove(true);
       Services.obs.notifyObservers(null, "newtabtools-change", "background");
       break;
-    case "config-darkLauncher":
-      checked = event.originalTarget.checked;
-      this.prefs.setBoolPref("launcher.dark", checked);
-      break;
-    case "config-morePrefs":
-      newTabTools.browserWindow.BrowserOpenAddonsMgr("addons://detail/newtabtools@darktrojan.net/preferences")
-      break;
     case "config-donate":
       let url = "https://addons.mozilla.org/addon/new-tab-tools/about";
       newTabTools.browserWindow.openLinkIn(url, "current", {});
       break;
     }
-  },
-  onTileSelect: function() {
-    this.setTitleInput.value = this.tileSelect.selectedItem.label;
-  },
-  toggleConfig: function() {
-    this.configWrapper.classList.toggle("shown");
-    this.configToggleButton.classList.toggle("shown");
-    if (this.tileSelect.itemCount == 0)
-      this.fillSelect();
-  },
-  fillSelect: function() {
-    this.tileSelect.removeAllItems();
-    for (let cell of gGrid.cells) {
-      if (!cell.isEmpty()) {
-        let title = cell.site._annoTitle || cell.site.title;
-        let name = title || cell.site.url;
-        let description = title ? cell.site.url : null;
-        this.tileSelect.appendItem(name, cell.site.url, description);
-      }
-    }
-    this.tileSelect.selectedIndex = 0;
-    this.onTileSelect();
   },
   pinURL: function(link, title) {
     let sites = gGrid.sites;
@@ -181,7 +128,16 @@ let newTabTools = {
 
     gBlockedLinks.unblock(link);
     gPinnedLinks.pin({url: link, title: title}, 0);
-    gUpdater.updateGrid(this.fillSelect.bind(this));
+    gUpdater.updateGrid();
+  },
+  notifyTileChanged: function(url, whatChanged) {
+    let urlString = Cc["@mozilla.org/supports-string;1"].createInstance(Ci.nsISupportsString);
+    urlString.data = url;
+    Services.obs.notifyObservers(urlString, "newtabtools-change", whatChanged);
+
+    if (whatChanged == "thumbnail") {
+      this.selectedSiteIndex = this._selectedSiteIndex;
+    }
   },
   refreshThumbnail: function(aURL) {
     let newThumbnailURL = PageThumbs.getThumbnailURL(aURL) + "&" + Math.random();
@@ -192,25 +148,19 @@ let newTabTools = {
       }
     }
   },
-  getFileForURL: function(aURL) {
-    if ("getFilePathForURL" in PageThumbsStorage) {
-      let path = PageThumbsStorage.getFilePathForURL(aURL);
-      return FileUtils.File(path);
-    } else {
-      return PageThumbsStorage.getFileForURL(aURL);
-    }
-  },
-  removeThumbnail: function(aURL) {
-    let file = this.getFileForURL(aURL);
+  setThumbnail: function(site, src) {
+    let path = PageThumbsStorage.getFilePathForURL(site.url);
+    let file = FileUtils.File(path);
     if (file.exists()) {
       file.permissions = 0644;
       file.remove(true);
     }
-  },
-  setThumbnail: function(aURL, aSrc, aCallback) {
-    this.removeThumbnail(aURL);
 
-    let file = this.getFileForURL(aURL);
+    if (!src) {
+      this.notifyTileChanged(site.url, "thumbnail");
+      return;
+    }
+
     let image = new Image();
     image.onload = function() {
       let [thumbnailWidth, thumbnailHeight] = PageThumbs._getThumbnailSize();
@@ -228,29 +178,47 @@ let newTabTools = {
         NetUtil.asyncCopy(aInputStream, outputStream, function(aSuccessful) {
           FileUtils.closeSafeFileOutputStream(outputStream);
           file.permissions = 0444;
-          if (aCallback)
-            aCallback(aSuccessful);
+          newTabTools.notifyTileChanged(site.url, "thumbnail");
         });
       }, "image/png");
     }
-    image.src = aSrc;
+    image.src = src;
   },
-  setTitle: function(aIndex, aTitle) {
-    let cell = gGrid.cells[aIndex];
-    let site = cell.site;
+  refreshTitle: function(aURL) {
+    for (let cell of gGrid.cells) {
+      if (cell.site.url == aURL) {
+        cell.site._addTitleAndFavicon();
+      }
+    }
+  },
+  setTitle: function(site, title) {
     let uri = Services.io.newURI(site.url, null, null);
-    if (aTitle) {
+    if (title) {
       annoService.setPageAnnotation(uri, "newtabtools/title",
         this.setTitleInput.value, 0, annoService.EXPIRE_WITH_HISTORY);
-      site._annoTitle = aTitle;
+      site._annoTitle = title;
     } else {
       annoService.removePageAnnotation(uri, "newtabtools/title");
-      this.setTitleInput.value = aTitle = site.title;
+      this.setTitleInput.value = title = site.title;
       delete site._annoTitle;
     }
-    let titleElement = site.node.querySelector(".newtab-title");
-    titleElement.lastChild.nodeValue = aTitle;
-    this.tileSelect.selectedItem.label = aTitle;
+    this.notifyTileChanged(site.url, "title");
+  },
+  get backgroundImageFile() {
+    return FileUtils.getFile("ProfD", ["newtab-background"], true);
+  },
+  get backgroundImageURL() {
+    return Services.io.newFileURI(this.backgroundImageFile);
+  },
+  refreshBackgroundImage: function() {
+    if (this.backgroundImageFile.exists()) {
+      this.page.style.backgroundImage =
+        'url("' + this.backgroundImageURL.spec + '?' + this.backgroundImageFile.lastModifiedTime + '")';
+      document.documentElement.classList.add("background");
+    } else {
+      this.page.style.backgroundImage = null;
+      document.documentElement.classList.remove("background");
+    }
   },
   updateUI: function() {
     let launcherPosition = this.prefs.getIntPref("launcher");
@@ -263,15 +231,12 @@ let newTabTools = {
 
     let launcherDark = this.prefs.getBoolPref("launcher.dark");
     this.launcher.classList[launcherDark ? "add" : "remove"]("dark");
-    this.darkLauncherCheckbox.checked = launcherDark;
 
     let containThumbs = this.prefs.getBoolPref("thumbs.contain");
     document.documentElement.classList[containThumbs ? "add" : "remove"]("containThumbs");
-    this.containThumbsCheckbox.checked = containThumbs;
 
     let overlapTitle = this.prefs.getBoolPref("thumbs.overlaptitle");
     document.documentElement.classList[overlapTitle ? "add" : "remove"]("overlapTitle");
-    this.overlapTitleCheckbox.checked = overlapTitle;
 
     let hideButtons = this.prefs.getBoolPref("thumbs.hidebuttons");
     document.documentElement.classList[hideButtons ? "add" : "remove"]("hideButtons");
@@ -418,6 +383,20 @@ let newTabTools = {
       }, 1000)
     }
     this.onVisible = function() {};
+  },
+  set selectedSiteIndex(index) {
+    this._selectedSiteIndex = index;
+    let site = this.selectedSite;
+    let thumbnail = PageThumbs.getThumbnailURL(site.url) + "&" + Math.random();
+    this.siteThumbnail.style.backgroundImage = 'url("' + thumbnail + '")';
+    this.setTitleInput.value = site._annoTitle || site.title || site.url;
+  },
+  showOptions: function() {
+    this.optionsPane.hidden = false;
+    this.selectedSiteIndex = 0;
+  },
+  hideOptions: function() {
+    this.optionsPane.hidden = true;
   }
 };
 
@@ -447,19 +426,15 @@ let newTabTools = {
   let uiElements = {
     "page": "newtab-scrollbox",
     "launcher": "launcher",
-    "darkLauncherCheckbox": "config-darkLauncher",
     "configToggleButton": "config-toggle",
-    "configWrapper": "config-wrapper",
-    "configInner": "config-inner",
     "pinURLInput": "config-pinURL-input",
-    "tileSelect": "config-select",
+    "siteThumbnail": "config-thumbnail",
     "setThumbnailInput": "config-thumb-input",
     "setTitleInput": "config-title-input",
     "setBackgroundInput": "config-bg-input",
-    "containThumbsCheckbox": "config-containThumbs",
-    "overlapTitleCheckbox": "config-overlapTitle",
     "recentList": "newtab-recent",
-    "recentListOuter": "newtab-recent-outer"
+    "recentListOuter": "newtab-recent-outer",
+    "optionsPane": "newtab-options"
   };
   for (let key in uiElements) {
     let value = uiElements[key];
@@ -474,12 +449,9 @@ let newTabTools = {
     document.getElementById("settingsWin").style.display = "none";
   }
 
-  let configButton = newTabTools.configToggleButton;
-  configButton.addEventListener("click", newTabTools.toggleConfig.bind(newTabTools), false);
+  newTabTools.configToggleButton.addEventListener("click", newTabTools.showOptions.bind(newTabTools), false);
 
-  let configInner = newTabTools.configInner;
-  configInner.addEventListener("click", newTabTools.configOnClick.bind(newTabTools), false);
-  newTabTools.tileSelect.addEventListener("command", newTabTools.onTileSelect.bind(newTabTools), false);
+  newTabTools.optionsPane.addEventListener("click", newTabTools.configOnClick.bind(newTabTools), false);
 
   newTabTools.launcher.addEventListener("click", newTabTools.launcherOnClick, false);
 
@@ -542,45 +514,6 @@ let newTabTools = {
       // Update the drag image's position.
       gTransformation.setSitePosition(aSite, {left: left, top: top});
     };
-
-    Site.prototype._oldRender = Site.prototype._render;
-    Site.prototype._render = function() {
-      this._oldRender();
-      this._addTitleAndFavicon();
-    };
-    Site.prototype._addTitleAndFavicon = function() {
-      let titleElement = this.node.querySelector(".newtab-title");
-      let uri = Services.io.newURI(this.url, null, null);
-
-      try {
-        this._annoTitle = annoService.getPageAnnotation(uri, "newtabtools/title");
-        titleElement.textContent = this._annoTitle;
-      } catch(e) {
-      }
-
-      faviconService.getFaviconURLForPage(uri, function(aURI) {
-        if (!aURI)
-          return;
-
-        let icon;
-        if (titleElement.firstChild.nodeType == Node.ELEMENT_NODE) {
-          // This shouldn't happen, but sometimes it does.
-          icon = titleElement.firstChild;
-        } else {
-          icon = document.createElementNS(HTML_NAMESPACE, "img");
-        }
-        icon.src = "moz-anno:favicon:" + aURI.spec;
-        icon.className = "favicon";
-        titleElement.insertBefore(icon, titleElement.firstChild);
-      });
-    };
-
-    gLinks.populateCache(function() {
-      for (let cell of gGrid.cells) {
-        if (cell.site)
-          cell.site._addTitleAndFavicon();
-      }
-    }, false);
 
     gUndoDialog.oldHide = gUndoDialog.hide;
     gUndoDialog.hide = function() {
