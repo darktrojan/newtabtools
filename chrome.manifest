@@ -1,6 +1,7 @@
 content newtabtools content/
 locale newtabtools en-US locale/en-US/
 locale newtabtools de locale/de/
+locale newtabtools fr locale/fr/
 locale newtabtools ja locale/ja/
 locale newtabtools pt-BR locale/pt-BR/
 locale newtabtools zh-CN locale/zh-CN/
