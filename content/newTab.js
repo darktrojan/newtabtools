@@ -65,11 +65,11 @@ let newTabTools = {
       let linkURI = Services.io.newURI(link, null, null);
       event.originalTarget.disabled = true;
       newTabTools.PlacesUtils.promisePlaceInfo(linkURI).then(function(info) {
-        newTabTools.pinURL(link, info.title);
+        newTabTools.pinURL(linkURI.spec, info.title);
         newTabTools.pinURLInput.value = "";
         event.originalTarget.disabled = false;
       }, function() {
-        newTabTools.pinURL(link, "");
+        newTabTools.pinURL(linkURI.spec, "");
         newTabTools.pinURLInput.value = "";
         event.originalTarget.disabled = false;
       }).then(null, Cu.reportError);
