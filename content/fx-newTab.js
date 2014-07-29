@@ -588,10 +588,11 @@ let gGrid = {
       '  <span class="newtab-thumbnail"/>' +
       '  <span class="newtab-title"/>' +
       '</a>' +
-      '<input type="button" title="' + newTabString("pin") + '"' +
-      '       class="newtab-control newtab-control-pin"/>' +
-      '<input type="button" title="' + newTabString("block") + '"' +
-      '       class="newtab-control newtab-control-block"/>';
+      '<input type="button" class="newtab-control newtab-control-pin"/>' +
+      '<input type="button" class="newtab-control newtab-control-block"/>';
+
+    site.querySelector("input.newtab-control-pin").title = newTabString("pin");
+    site.querySelector("input.newtab-control-block").title = newTabString("block");
 
     this._siteFragment = document.createDocumentFragment();
     this._siteFragment.appendChild(site);
@@ -1112,6 +1113,9 @@ let gDrag = {
     dt.setData("text/plain", url);
     dt.setData("text/uri-list", url);
     dt.setData("text/x-moz-url", url + "\n" + title);
+    if (url.indexOf('"') >= 0 && url.indexOf('<') >= 0) {
+      url = url.replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
     dt.setData("text/html", "<a href=\"" + url + "\">" + url + "</a>");
 
     // Create and use an empty drag element. We don't want to use the default
