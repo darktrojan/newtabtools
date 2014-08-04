@@ -85,11 +85,12 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
         </xul:groupbox>
         <xul:groupbox>
           <xul:caption label="&newtabtools.tile-header2;"/>
-          <xul:hbox pack="center" align="center" style="margin: 0px 0px 0.5em;">
+          <xul:hbox pack="center" align="center" style="margin: 0.5em 0;">
             <xul:toolbarbutton id="config-previous-tile" style="list-style-image: url('chrome://newtabtools/content/arrow.svg');" />
             <div id="config-thumbnail" class="newtab-thumbnail" flex="1"></div>
             <xul:toolbarbutton id="config-next-tile"/>
           </xul:hbox>
+          <xul:label id="config-url" flex="1" style="text-align: center;" value="" crop="center" />
           <xul:label control="config-thumb-input" value="Image:"/>
           <xul:hbox align="baseline">
             <xul:textbox id="config-thumb-input" flex="1"
@@ -169,6 +170,7 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
             </xul:rows>
           </xul:grid>
         </xul:groupbox>
+        <xul:spacer flex="1" />
         <xul:groupbox align="center" id="newtab-options-donate">
           <xul:hbox align="baseline">
             <xul:label value="New Tab Tools is funded by user donations."/>

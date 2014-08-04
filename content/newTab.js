@@ -402,7 +402,8 @@ let newTabTools = {
     let site = this.selectedSite;
     let thumbnail = PageThumbs.getThumbnailURL(site.url) + "&" + Math.random();
     this.siteThumbnail.style.backgroundImage = 'url("' + thumbnail + '")';
-    OS.File.exists(PageThumbs.getFilePathForURL(site.url)).then((exists) => {
+    this.siteURL.value = site.url;
+    OS.File.exists(PageThumbsStorage.getFilePathForURL(site.url)).then((exists) => {
       this.removeThumbnailButton.disabled = !exists;
     });
     this.setTitleInput.value = site._annoTitle || site.title || site.url;
@@ -446,6 +447,7 @@ let newTabTools = {
     "configToggleButton": "config-toggle",
     "pinURLInput": "config-pinURL-input",
     "siteThumbnail": "config-thumbnail",
+    "siteURL": "config-url",
     "setThumbnailInput": "config-thumb-input",
     "setThumbnailButton": "config-setThumbnail",
     "removeThumbnailButton": "config-removeThumbnail",
