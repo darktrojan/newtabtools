@@ -92,27 +92,31 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
           </xul:hbox>
           <xul:label control="config-thumb-input" value="Image:"/>
           <xul:hbox align="baseline">
-            <xul:textbox id="config-thumb-input" flex="1" placeholder="Paste an image URL or browse to choose a file" />
+            <xul:textbox id="config-thumb-input" flex="1"
+              placeholder="Paste an image URL or browse to choose a file"
+              onkeyup="newTabTools.setThumbnailButton.disabled = !this.value.startsWith('file://');" />
           </xul:hbox>
           <xul:hbox pack="center" align="baseline">
             <xul:button id="config-browseForFile" label="Browse…"/>
-            <xul:button id="config-setThumbnail" label="Set" />
-            <xul:button id="config-removeThumbnail" label="Remove"/>
+            <xul:button id="config-setThumbnail" label="Set" disabled="true" />
+            <xul:button id="config-removeThumbnail" label="Remove" disabled="true" />
           </xul:hbox>
           <xul:label control="config-title-input" value="Title:"/>
           <xul:hbox align="baseline">
             <xul:textbox id="config-title-input" flex="1" />
             <xul:button id="config-setTitle" label="Set"/>
-            <xul:button id="config-removeTitle" label="Reset"/>
+            <xul:button id="config-resetTitle" label="Reset" disabled="true"/>
           </xul:hbox>
         </xul:groupbox>
         <xul:groupbox>
           <xul:caption label="&newtabtools.bg-header;"/>
-          <xul:textbox id="config-bg-input" flex="1" placeholder="Paste an image URL or browse to choose a file"/>
+          <xul:textbox id="config-bg-input" flex="1"
+            placeholder="Paste an image URL or browse to choose a file"
+            onkeyup="newTabTools.setBackgroundButton.disabled = !this.value.startsWith('file://');" />
           <xul:hbox pack="center">
             <xul:button id="config-bg-browseForFile" label="&newtabtools.bg-url.browse;"/>
-            <xul:button id="config-setBackground" label="Set"/>
-            <xul:button id="config-removeBackground" label="Remove"/>
+            <xul:button id="config-setBackground" label="Set" disabled="true"/>
+            <xul:button id="config-removeBackground" label="Remove" disabled="true"/>
           </xul:hbox>
         </xul:groupbox>
       </xul:vbox>

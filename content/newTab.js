@@ -13,6 +13,7 @@ XPCOMUtils.defineLazyModuleGetter(this, "AddonManager", "resource://gre/modules/
 XPCOMUtils.defineLazyModuleGetter(this, "FileUtils", "resource://gre/modules/FileUtils.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "NetUtil", "resource://gre/modules/NetUtil.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "SessionStore", "resource:///modules/sessionstore/SessionStore.jsm");
+XPCOMUtils.defineLazyModuleGetter(this, "OS", "resource://gre/modules/osfile.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "PlacesUtils", "resource://gre/modules/PlacesUtils.jsm");
 
 XPCOMUtils.defineLazyServiceGetter(this, "faviconService", "@mozilla.org/browser/favicon-service;1", "mozIAsyncFavicons");
@@ -77,8 +78,13 @@ let newTabTools = {
       fp.init(window, document.title, Ci.nsIFilePicker.modeOpen);
       fp.appendFilters(Ci.nsIFilePicker.filterImages);
       if (fp.show() == Ci.nsIFilePicker.returnOK) {
-        let input = id == "config-browseForFile" ? this.setThumbnailInput : this.setBackgroundInput;
-        input.value = fp.fileURL.spec;
+        if (id == "config-browseForFile") {
+          this.setThumbnailInput.value = fp.fileURL.spec;
+          newTabTools.setThumbnailButton.disabled = false;
+        } else {
+          this.setBackgroundInput.value = fp.fileURL.spec;
+          newTabTools.setBackgroundButton.disabled = false;
+        }
       }
       break;
     case "config-setThumbnail":
@@ -90,7 +96,7 @@ let newTabTools = {
     case "config-setTitle":
       this.setTitle(this.selectedSite, this.setTitleInput.value);
       break;
-    case "config-removeTitle":
+    case "config-resetTitle":
       this.setTitle(this.selectedSite, null);
       break;
     case "config-setBackground":
@@ -158,6 +164,7 @@ let newTabTools = {
 
     if (!src) {
       this.notifyTileChanged(site.url, "thumbnail");
+      this.removeThumbnailButton.blur();
       return;
     }
 
@@ -197,10 +204,13 @@ let newTabTools = {
       annoService.setPageAnnotation(uri, "newtabtools/title",
         this.setTitleInput.value, 0, annoService.EXPIRE_WITH_HISTORY);
       site._annoTitle = title;
+      this.resetTitleButton.disabled = false;
     } else {
       annoService.removePageAnnotation(uri, "newtabtools/title");
       this.setTitleInput.value = title = site.title;
       delete site._annoTitle;
+      this.resetTitleButton.disabled = true;
+      this.resetTitleButton.blur();
     }
     this.notifyTileChanged(site.url, "title");
   },
@@ -215,9 +225,12 @@ let newTabTools = {
       this.page.style.backgroundImage =
         'url("' + this.backgroundImageURL.spec + '?' + this.backgroundImageFile.lastModifiedTime + '")';
       document.documentElement.classList.add("background");
+      this.removeBackgroundButton.disabled = false;
     } else {
       this.page.style.backgroundImage = null;
       document.documentElement.classList.remove("background");
+      this.removeBackgroundButton.disabled = true;
+      this.removeBackgroundButton.blur();
     }
   },
   updateUI: function() {
@@ -389,7 +402,11 @@ let newTabTools = {
     let site = this.selectedSite;
     let thumbnail = PageThumbs.getThumbnailURL(site.url) + "&" + Math.random();
     this.siteThumbnail.style.backgroundImage = 'url("' + thumbnail + '")';
+    OS.File.exists(PageThumbs.getFilePathForURL(site.url)).then((exists) => {
+      this.removeThumbnailButton.disabled = !exists;
+    });
     this.setTitleInput.value = site._annoTitle || site.title || site.url;
+    this.resetTitleButton.disabled = !('_annoTitle' in site);
   },
   showOptions: function() {
     this.optionsPane.hidden = false;
@@ -430,8 +447,13 @@ let newTabTools = {
     "pinURLInput": "config-pinURL-input",
     "siteThumbnail": "config-thumbnail",
     "setThumbnailInput": "config-thumb-input",
+    "setThumbnailButton": "config-setThumbnail",
+    "removeThumbnailButton": "config-removeThumbnail",
     "setTitleInput": "config-title-input",
+    "resetTitleButton": "config-resetTitle",
     "setBackgroundInput": "config-bg-input",
+    "setBackgroundButton": "config-setBackground",
+    "removeBackgroundButton": "config-removeBackground",
     "recentList": "newtab-recent",
     "recentListOuter": "newtab-recent-outer",
     "optionsPane": "newtab-options"
