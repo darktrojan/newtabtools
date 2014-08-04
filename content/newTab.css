@@ -322,50 +322,10 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
   z-index: 2
 }
 #config-toggle:-moz-locale-dir(rtl) {
-  left: 12px;
+  left: 10px;
   right: auto;
 }
-#config-wrapper {
-  visibility: hidden;
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: 0;
-  overflow: hidden;
-  transition: width 500ms, visibility 0s 500ms;
-}
-#config-wrapper.shown {
-  visibility: visible;
-  width: 351px;
-  transition: width 500ms;
-}
-#config {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  width: 350px;
-  background-color: rgba(0, 0, 0, 0.5);
-  border-left: 1px rgba(0, 0, 0, 0.25) solid;
-  z-index: 1;
-  color: #fff;
-  text-shadow: 0 0 3px #000;
-}
-#config-inner {
-  margin: 50px 6px 0;
-  width: 338px;
-}
-.config-spacing {
-  height: 1em;
-}
-@media screen and (min-height: 1080px) {
-  .config-spacing {
-    height: 3em;
-  }
-}
 
-#newtab-scrollbox[page-disabled] #config-wrapper,
 #newtab-scrollbox[page-disabled] #config-toggle,
 #newtab-scrollbox[page-disabled] #launcher,
 #newtab-scrollbox[page-disabled] #newtab-recent-outer,
