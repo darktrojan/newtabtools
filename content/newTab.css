@@ -431,3 +431,14 @@ caption {
   margin: 0;
   font-weight: bold;
 }
+
+#newtab-options-donate {
+  border: 1px #b2aeaa solid;
+  background-color: #f9f9f9;
+}
+#newtab-options-donate > :first-child {
+  margin: 0.5em 0.5em 0;
+}
+#newtab-options-donate > :last-child {
+  margin: 0 0.5em 0.5em;
+}

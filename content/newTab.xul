@@ -116,54 +116,65 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
           </xul:hbox>
         </xul:groupbox>
       </xul:vbox>
-      <xul:groupbox width="400">
-        <xul:caption label="Options:" />
-        <xul:grid>
-          <xul:columns>
-            <xul:column flex="1"/>
-            <xul:column flex="2"/>
-          </xul:columns>
-          <xul:rows id="rows">
-            <xul:setting pref="browser.newtabpage.rows" type="integer" title="&newtabtools.options.rows;" max="10" min="1" size="2"/>
-            <xul:setting pref="browser.newtabpage.columns" type="integer" title="&newtabtools.options.columns;" max="10" min="1" size="2"/>
-            <xul:setting pref="extensions.newtabtools.grid.margin" type="menulist" title="&newtabtools.options.grid.margin;">
-              <xul:menulist sizetopopup="always">
-                <xul:menupopup>
-                  <xul:menuitem label="&newtabtools.options.size.small;" value="small small small small" />
-                  <xul:menuitem label="&newtabtools.options.size.medium;" value="medium medium medium medium" />
-                  <xul:menuitem label="&newtabtools.options.size.large;" value="large large large large" />
-                </xul:menupopup>
-              </xul:menulist>
-            </xul:setting>
-            <xul:setting pref="extensions.newtabtools.grid.spacing" type="menulist" title="&newtabtools.options.grid.spacing;">
-              <xul:menulist sizetopopup="always">
-                <xul:menupopup>
-                  <xul:menuitem label="&newtabtools.options.size.small;" value="small" />
-                  <xul:menuitem label="&newtabtools.options.size.medium;" value="medium" />
-                  <xul:menuitem label="&newtabtools.options.size.large;" value="large" />
-                </xul:menupopup>
-              </xul:menulist>
-            </xul:setting>
-            <xul:setting pref="extensions.newtabtools.recent.show" type="bool" title="&newtabtools.options.recent.show;"/>
-            <xul:setting pref="extensions.newtabtools.launcher" type="menulist" title="&newtabtools.options.launcher;">
-              <xul:menulist sizetopopup="always">
-                <xul:menupopup>
-                  <xul:menuitem label="&newtabtools.options.launcher.hidden;" value="0" />
-                  <xul:menuitem label="&newtabtools.options.launcher.top;" value="1" />
-                  <xul:menuitem label="&newtabtools.options.launcher.bottom;" value="3" />
-                  <xul:menuitem label="&newtabtools.options.launcher.left;" value="4" />
-                  <xul:menuitem label="&newtabtools.options.launcher.right;" value="2" />
-                </xul:menupopup>
-              </xul:menulist>
-            </xul:setting>
-            <xul:setting pref="extensions.newtabtools.launcher.dark" type="bool" title="&newtabtools.bg.dark-launcher;"/>
-            <xul:setting pref="extensions.newtabtools.thumbs.hidebuttons" type="bool" title="&newtabtools.options.thumbs.hidebuttons;"/>
-            <xul:setting pref="extensions.newtabtools.thumbs.hidefavicons" type="bool" title="&newtabtools.options.thumbs.hidefavicons;"/>
-            <xul:setting pref="extensions.newtabtools.thumbs.overlaptitle" type="bool" title="&newtabtools.tile-thumbnails.overlapTitle;"/>
-            <xul:setting pref="extensions.newtabtools.thumbs.contain" type="bool" title="&newtabtools.tile-thumbnails.contain;"/>
-          </xul:rows>
-        </xul:grid>
-      </xul:groupbox>
+      <xul:vbox width="400">
+        <xul:groupbox>
+          <xul:caption label="Options:" />
+          <xul:grid>
+            <xul:columns>
+              <xul:column flex="1"/>
+              <xul:column flex="2"/>
+            </xul:columns>
+            <xul:rows id="rows">
+              <xul:setting pref="browser.newtabpage.rows" type="integer" title="&newtabtools.options.rows;" max="10" min="1" size="2"/>
+              <xul:setting pref="browser.newtabpage.columns" type="integer" title="&newtabtools.options.columns;" max="10" min="1" size="2"/>
+              <xul:setting pref="extensions.newtabtools.grid.margin" type="menulist" title="&newtabtools.options.grid.margin;">
+                <xul:menulist sizetopopup="always">
+                  <xul:menupopup>
+                    <xul:menuitem label="&newtabtools.options.size.small;" value="small small small small" />
+                    <xul:menuitem label="&newtabtools.options.size.medium;" value="medium medium medium medium" />
+                    <xul:menuitem label="&newtabtools.options.size.large;" value="large large large large" />
+                  </xul:menupopup>
+                </xul:menulist>
+              </xul:setting>
+              <xul:setting pref="extensions.newtabtools.grid.spacing" type="menulist" title="&newtabtools.options.grid.spacing;">
+                <xul:menulist sizetopopup="always">
+                  <xul:menupopup>
+                    <xul:menuitem label="&newtabtools.options.size.small;" value="small" />
+                    <xul:menuitem label="&newtabtools.options.size.medium;" value="medium" />
+                    <xul:menuitem label="&newtabtools.options.size.large;" value="large" />
+                  </xul:menupopup>
+                </xul:menulist>
+              </xul:setting>
+              <xul:setting pref="extensions.newtabtools.recent.show" type="bool" title="&newtabtools.options.recent.show;"/>
+              <xul:setting pref="extensions.newtabtools.launcher" type="menulist" title="&newtabtools.options.launcher;">
+                <xul:menulist sizetopopup="always">
+                  <xul:menupopup>
+                    <xul:menuitem label="&newtabtools.options.launcher.hidden;" value="0" />
+                    <xul:menuitem label="&newtabtools.options.launcher.top;" value="1" />
+                    <xul:menuitem label="&newtabtools.options.launcher.bottom;" value="3" />
+                    <xul:menuitem label="&newtabtools.options.launcher.left;" value="4" />
+                    <xul:menuitem label="&newtabtools.options.launcher.right;" value="2" />
+                  </xul:menupopup>
+                </xul:menulist>
+              </xul:setting>
+              <xul:setting pref="extensions.newtabtools.launcher.dark" type="bool" title="&newtabtools.bg.dark-launcher;"/>
+              <xul:setting pref="extensions.newtabtools.thumbs.hidebuttons" type="bool" title="&newtabtools.options.thumbs.hidebuttons;"/>
+              <xul:setting pref="extensions.newtabtools.thumbs.hidefavicons" type="bool" title="&newtabtools.options.thumbs.hidefavicons;"/>
+              <xul:setting pref="extensions.newtabtools.thumbs.overlaptitle" type="bool" title="&newtabtools.tile-thumbnails.overlapTitle;"/>
+              <xul:setting pref="extensions.newtabtools.thumbs.contain" type="bool" title="&newtabtools.tile-thumbnails.contain;"/>
+            </xul:rows>
+          </xul:grid>
+        </xul:groupbox>
+        <xul:groupbox align="center" id="newtab-options-donate">
+          <xul:hbox align="baseline">
+            <xul:label value="New Tab Tools is funded by user donations."/>
+            <xul:button id="config-donate" label="Donate" />
+          </xul:hbox>
+          <xul:hbox align="baseline" pack="center">
+            <xul:label class="text-link" value="New Tab Tools on GitHub" href="https://github.com/darktrojan/newtabtools"/>
+          </xul:hbox>
+        </xul:groupbox>
+      </xul:vbox>
     </xul:hbox>
   </div>
 
