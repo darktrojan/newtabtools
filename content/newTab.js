@@ -409,9 +409,13 @@ let newTabTools = {
     this.setTitleInput.value = site._annoTitle || site.title || site.url;
     this.resetTitleButton.disabled = !('_annoTitle' in site);
   },
-  showOptions: function() {
-    this.optionsPane.hidden = false;
-    this.selectedSiteIndex = 0;
+  toggleOptions: function() {
+    if (this.optionsPane.hidden) {
+      this.optionsPane.hidden = false;
+      this.selectedSiteIndex = 0;
+    } else {
+      this.hideOptions();
+    }
   },
   hideOptions: function() {
     this.optionsPane.hidden = true;
@@ -473,7 +477,7 @@ let newTabTools = {
     document.getElementById("settingsWin").style.display = "none";
   }
 
-  newTabTools.configToggleButton.addEventListener("click", newTabTools.showOptions.bind(newTabTools), false);
+  newTabTools.configToggleButton.addEventListener("click", newTabTools.toggleOptions.bind(newTabTools), false);
 
   newTabTools.optionsPane.addEventListener("click", newTabTools.configOnClick.bind(newTabTools), false);
 

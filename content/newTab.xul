@@ -87,12 +87,12 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
         </xul:groupbox>
         <xul:groupbox>
           <xul:caption label="&newtabtools.tile-header;" />
-          <xul:hbox pack="center" align="center" style="margin: 0.5em 0;">
+          <xul:hbox id="config-thumbnail-wrap" pack="center" align="center">
             <xul:toolbarbutton id="config-previous-tile" />
             <div id="config-thumbnail" class="newtab-thumbnail" flex="1"></div>
             <xul:toolbarbutton id="config-next-tile" />
           </xul:hbox>
-          <xul:label id="config-url" flex="1" style="text-align: center;" value="" crop="center" />
+          <xul:label id="config-url" flex="1" value="" crop="center" />
           <xul:label control="config-thumb-input" value="&newtabtools.tile-thumbnail.label;" />
           <xul:hbox align="baseline">
             <xul:textbox id="config-thumb-input" flex="1"
