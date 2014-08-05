@@ -55,7 +55,7 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
       <div id="newtab-margin-bottom"/>
     </div>
 
-    <input id="config-toggle" type="button"/>
+    <input id="options-toggle" type="button"/>
     <input id="newtab-toggle" type="button"/>
 
     <div id="launcher">
@@ -70,56 +70,56 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
     </div>
   </div>
 
-  <div id="newtab-options" hidden="true">
-    <div id="newtab-options-close">
+  <div id="options" hidden="true">
+    <div id="options-close">
       <xul:toolbarbutton class="close-icon" oncommand="newTabTools.hideOptions();" />
     </div>
     <xul:hbox>
-      <xul:vbox width="300" id="newtab-options-tile">
+      <xul:vbox width="300" id="options-tile">
         <xul:groupbox>
           <xul:caption label="&newtabtools.pin-url.header;" />
           <xul:hbox align="baseline">
-            <xul:textbox id="config-pinURL-input" flex="1" type="autocomplete"
+            <xul:textbox id="options-pinURL-input" flex="1" type="autocomplete"
               completeselectedindex="true" autocompletesearch="history"
               enablehistory="true" showcommentcolumn="true" placeholder="&newtabtools.pin-url.placeholder;" />
-            <xul:button id="config-pinURL" label="&newtabtools.pin-url.button;" />
+            <xul:button id="options-pinURL" label="&newtabtools.pin-url.button;" />
           </xul:hbox>
         </xul:groupbox>
         <xul:groupbox>
           <xul:caption label="&newtabtools.tile-header;" />
-          <xul:hbox id="config-thumbnail-wrap" pack="center" align="center">
-            <xul:toolbarbutton id="config-previous-tile" />
-            <div id="config-thumbnail" class="newtab-thumbnail" flex="1"></div>
-            <xul:toolbarbutton id="config-next-tile" />
+          <xul:hbox id="options-thumbnail-wrap" pack="center" align="center">
+            <xul:toolbarbutton id="options-previous-tile" />
+            <div id="options-thumbnail" class="newtab-thumbnail" flex="1"></div>
+            <xul:toolbarbutton id="options-next-tile" />
           </xul:hbox>
-          <xul:label id="config-url" flex="1" value="" crop="center" />
-          <xul:label control="config-thumb-input" value="&newtabtools.tile-thumbnail.label;" />
+          <xul:label id="options-url" flex="1" value="" crop="center" />
+          <xul:label control="options-thumbnail-input" value="&newtabtools.tile-thumbnail.label;" />
           <xul:hbox align="baseline">
-            <xul:textbox id="config-thumb-input" flex="1"
+            <xul:textbox id="options-thumbnail-input" flex="1"
               placeholder="&newtabtools.tile-thumbnail.placeholder;"
               onkeyup="newTabTools.setThumbnailButton.disabled = !this.value.startsWith('file://');" />
           </xul:hbox>
           <xul:hbox pack="center" align="baseline">
-            <xul:button id="config-browseForFile" label="&newtabtools.tile-thumbnail.browse;" />
-            <xul:button id="config-setThumbnail" label="&newtabtools.tile-thumbnail.set;" disabled="true" />
-            <xul:button id="config-removeThumbnail" label="&newtabtools.tile-thumbnail.remove;" disabled="true" />
+            <xul:button id="options-thumbnail-browse" label="&newtabtools.tile-thumbnail.browse;" />
+            <xul:button id="options-thumbnail-set" label="&newtabtools.tile-thumbnail.set;" disabled="true" />
+            <xul:button id="options-thumbnail-remove" label="&newtabtools.tile-thumbnail.remove;" disabled="true" />
           </xul:hbox>
-          <xul:label control="config-title-input" value="&newtabtools.tile-title.label;" />
+          <xul:label control="options-title-input" value="&newtabtools.tile-title.label;" />
           <xul:hbox align="baseline">
-            <xul:textbox id="config-title-input" flex="1" placeholder="&newtabtools.tile-title.placeholder;" />
-            <xul:button id="config-setTitle" label="&newtabtools.tile-title.set;" />
-            <xul:button id="config-resetTitle" label="&newtabtools.tile-title.reset;" disabled="true" />
+            <xul:textbox id="options-title-input" flex="1" placeholder="&newtabtools.tile-title.placeholder;" />
+            <xul:button id="options-title-set" label="&newtabtools.tile-title.set;" />
+            <xul:button id="options-title-reset" label="&newtabtools.tile-title.reset;" disabled="true" />
           </xul:hbox>
         </xul:groupbox>
         <xul:groupbox>
           <xul:caption label="&newtabtools.bg-header;" />
-          <xul:textbox id="config-bg-input" flex="1"
+          <xul:textbox id="options-bg-input" flex="1"
             placeholder="&newtabtools.bg.placeholder;"
             onkeyup="newTabTools.setBackgroundButton.disabled = !this.value.startsWith('file://');" />
           <xul:hbox pack="center">
-            <xul:button id="config-bg-browseForFile" label="&newtabtools.bg.browse;" />
-            <xul:button id="config-setBackground" label="&newtabtools.bg.set;" disabled="true" />
-            <xul:button id="config-removeBackground" label="&newtabtools.bg.remove;" disabled="true" />
+            <xul:button id="options-bg-browse" label="&newtabtools.bg.browse;" />
+            <xul:button id="options-bg-set" label="&newtabtools.bg.set;" disabled="true" />
+            <xul:button id="options-bg-remove" label="&newtabtools.bg.remove;" disabled="true" />
           </xul:hbox>
         </xul:groupbox>
       </xul:vbox>
@@ -131,7 +131,7 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
               <xul:column flex="1" />
               <xul:column flex="2" />
             </xul:columns>
-            <xul:rows id="rows">
+            <xul:rows>
               <xul:setting pref="browser.newtabpage.rows" type="integer"
                 title="&newtabtools.options.rows;" max="10" min="1" size="2" />
               <xul:setting pref="browser.newtabpage.columns" type="integer"
@@ -184,10 +184,10 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
           </xul:grid>
         </xul:groupbox>
         <xul:spacer flex="1" />
-        <xul:groupbox align="center" id="newtab-options-donate">
+        <xul:groupbox align="center" id="options-donate-wrap">
           <xul:hbox align="baseline">
             <xul:label value="&newtabtools.donate.label;" />
-            <xul:button id="config-donate" label="&newtabtools.donate;" />
+            <xul:button id="options-donate" label="&newtabtools.donate;" />
           </xul:hbox>
           <xul:hbox align="baseline" pack="center">
             <xul:label class="text-link" value="&newtabtools.github;" href="https://github.com/darktrojan/newtabtools" />

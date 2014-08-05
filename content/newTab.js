@@ -49,10 +49,10 @@ let newTabTools = {
   get selectedSite() {
     return gGrid.cells[this._selectedSiteIndex]._node.firstChild._newtabSite;
   },
-  configOnClick: function(event) {
+  optionsOnClick: function(event) {
     let id = event.originalTarget.id;
     switch (id) {
-    case "config-pinURL":
+    case "options-pinURL":
       let link = this.pinURLInput.value;
       let linkURI = Services.io.newURI(link, null, null);
       event.originalTarget.disabled = true;
@@ -66,19 +66,19 @@ let newTabTools = {
         event.originalTarget.disabled = false;
       }).then(null, Cu.reportError);
       break;
-    case "config-previous-tile":
+    case "options-previous-tile":
       this.selectedSiteIndex = (this._selectedSiteIndex - 1 + gGrid.cells.length) % gGrid.cells.length;
       break;
-    case "config-next-tile":
+    case "options-next-tile":
       this.selectedSiteIndex = (this._selectedSiteIndex + 1) % gGrid.cells.length;
       break;
-    case "config-browseForFile":
-    case "config-bg-browseForFile":
+    case "options-thumbnail-browse":
+    case "options-bg-browse":
       let fp = Cc["@mozilla.org/filepicker;1"].createInstance(Ci.nsIFilePicker);
       fp.init(window, document.title, Ci.nsIFilePicker.modeOpen);
       fp.appendFilters(Ci.nsIFilePicker.filterImages);
       if (fp.show() == Ci.nsIFilePicker.returnOK) {
-        if (id == "config-browseForFile") {
+        if (id == "options-thumbnail-browse") {
           this.setThumbnailInput.value = fp.fileURL.spec;
           newTabTools.setThumbnailButton.disabled = false;
         } else {
@@ -87,19 +87,19 @@ let newTabTools = {
         }
       }
       break;
-    case "config-setThumbnail":
+    case "options-thumbnail-set":
       this.setThumbnail(this.selectedSite, this.setThumbnailInput.value);
       break;
-    case "config-removeThumbnail":
+    case "options-thumbnail-remove":
       this.setThumbnail(this.selectedSite, null);
       break;
-    case "config-setTitle":
+    case "options-title-set":
       this.setTitle(this.selectedSite, this.setTitleInput.value);
       break;
-    case "config-resetTitle":
+    case "options-title-reset":
       this.setTitle(this.selectedSite, null);
       break;
-    case "config-setBackground":
+    case "options-bg-set":
       if (this.setBackgroundInput.value) {
         let fos = FileUtils.openSafeFileOutputStream(this.backgroundImageFile);
         NetUtil.asyncFetch(this.setBackgroundInput.value, function(inputStream, status) {
@@ -113,12 +113,12 @@ let newTabTools = {
         }.bind(this));
       }
       break;
-    case "config-removeBackground":
+    case "options-bg-remove":
       if (this.backgroundImageFile.exists())
         this.backgroundImageFile.remove(true);
       Services.obs.notifyObservers(null, "newtabtools-change", "background");
       break;
-    case "config-donate":
+    case "options-donate":
       let url = "https://addons.mozilla.org/addon/new-tab-tools/about";
       newTabTools.browserWindow.openLinkIn(url, "current", {});
       break;
@@ -448,21 +448,21 @@ let newTabTools = {
   let uiElements = {
     "page": "newtab-scrollbox",
     "launcher": "launcher",
-    "configToggleButton": "config-toggle",
-    "pinURLInput": "config-pinURL-input",
-    "siteThumbnail": "config-thumbnail",
-    "siteURL": "config-url",
-    "setThumbnailInput": "config-thumb-input",
-    "setThumbnailButton": "config-setThumbnail",
-    "removeThumbnailButton": "config-removeThumbnail",
-    "setTitleInput": "config-title-input",
-    "resetTitleButton": "config-resetTitle",
-    "setBackgroundInput": "config-bg-input",
-    "setBackgroundButton": "config-setBackground",
-    "removeBackgroundButton": "config-removeBackground",
+    "optionsToggleButton": "options-toggle",
+    "pinURLInput": "options-pinURL-input",
+    "siteThumbnail": "options-thumbnail",
+    "siteURL": "options-url",
+    "setThumbnailInput": "options-thumbnail-input",
+    "setThumbnailButton": "options-thumbnail-set",
+    "removeThumbnailButton": "options-thumbnail-remove",
+    "setTitleInput": "options-title-input",
+    "resetTitleButton": "options-title-reset",
+    "setBackgroundInput": "options-bg-input",
+    "setBackgroundButton": "options-bg-set",
+    "removeBackgroundButton": "options-bg-remove",
     "recentList": "newtab-recent",
     "recentListOuter": "newtab-recent-outer",
-    "optionsPane": "newtab-options"
+    "optionsPane": "options"
   };
   for (let key in uiElements) {
     let value = uiElements[key];
@@ -477,9 +477,9 @@ let newTabTools = {
     document.getElementById("settingsWin").style.display = "none";
   }
 
-  newTabTools.configToggleButton.addEventListener("click", newTabTools.toggleOptions.bind(newTabTools), false);
+  newTabTools.optionsToggleButton.addEventListener("click", newTabTools.toggleOptions.bind(newTabTools), false);
 
-  newTabTools.optionsPane.addEventListener("click", newTabTools.configOnClick.bind(newTabTools), false);
+  newTabTools.optionsPane.addEventListener("click", newTabTools.optionsOnClick.bind(newTabTools), false);
 
   newTabTools.launcher.addEventListener("click", newTabTools.launcherOnClick, false);
 

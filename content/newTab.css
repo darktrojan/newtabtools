@@ -310,7 +310,7 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 :root.background #launcher.dark #restorePreviousSession::before {
   content: url("chrome://newtabtools/content/launcher/restore.png");
 }
-#config-toggle {
+#options-toggle {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -321,17 +321,17 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
   background: transparent url("chrome://mozapps/skin/extensions/utilities.png");
   z-index: 2
 }
-#config-toggle:-moz-locale-dir(rtl) {
+#options-toggle:-moz-locale-dir(rtl) {
   left: 10px;
   right: auto;
 }
-#newtab-scrollbox[page-disabled] #config-toggle,
+#newtab-scrollbox[page-disabled] #options-toggle,
 #newtab-scrollbox[page-disabled] #launcher,
 #newtab-scrollbox[page-disabled] #newtab-recent-outer,
 #newtab-scrollbox:not([page-disabled]) #newtab-toggle {
   display: none;
 }
-#newtab-options {
+#options {
   background-color: #f2f2f2;
   border: 1px solid #b2aeaa;
   position: fixed;
@@ -342,40 +342,40 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
   box-sizing: border-box;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5);
 }
-#newtab-options toolbarbutton {
+#options toolbarbutton {
   -moz-appearance: none;
   border: none;
 }
-#newtab-options groupbox {
+#options groupbox {
   -moz-appearance: none;
   border: none;
 }
-#newtab-options caption {
+#options caption {
   margin: 0;
   font-weight: bold;
 }
-#newtab-options button {
+#options button {
   min-width: 0;
   -moz-margin-start: 0;
   -moz-margin-end: 0;
 }
-#newtab-options-close {
+#options-close {
   position: absolute;
   top: 0.5em;
   right: 0.5em;
   line-height: 0;
   z-index: 1;
 }
-#newtab-options-tile {
+#options-tile {
   -moz-margin-end: 2em;
 }
-#config-previous-tile {
+#options-previous-tile {
   list-style-image: url("chrome://newtabtools/content/arrow.svg");
 }
-#config-thumbnail-wrap {
+#options-thumbnail-wrap {
   margin: 0.5em 0;
 }
-#config-thumbnail {
+#options-thumbnail {
   width: 200px;
   height: 150px;
   margin: 0 auto;
@@ -384,11 +384,11 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
   position: static;
   -moz-box-flex: 1;
 }
-#config-next-tile {
+#options-next-tile {
   list-style-image: url("chrome://newtabtools/content/arrow.svg");
   transform: scalex(-1);
 }
-#config-url {
+#options-url {
   text-align: center;
 }
 setting {
@@ -411,13 +411,13 @@ setting[type="menulist"] {
   min-height: 28px;
   -moz-box-align: center;
 }
-#newtab-options-donate {
+#options-donate-wrap {
   border: 1px #b2aeaa solid;
   background-color: #f9f9f9;
 }
-#newtab-options-donate > :first-child {
+#options-donate-wrap > :first-child {
   margin: 0.5em 0.5em 0;
 }
-#newtab-options-donate > :last-child {
+#options-donate-wrap > :last-child {
   margin: 0 0.5em 0.5em;
 }
