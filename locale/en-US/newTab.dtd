@@ -1,27 +1,33 @@
 <!ENTITY newtabtools.pin-url.header "Add tile:">
-<!ENTITY newtabtools.pin-url.label "Type or select a URL:">
+<!ENTITY newtabtools.pin-url.placeholder "Type or select a URL">
 <!ENTITY newtabtools.pin-url.button "Add">
 
-<!ENTITY newtabtools.tile-header2 "Tiles:">
-<!ENTITY newtabtools.tile-select.label "Select a tile:">
-<!ENTITY newtabtools.tile-thumbnail-url.label "Paste an image URL or browse to choose a file:">
-<!ENTITY newtabtools.tile-thumbnail-url.browse "Browse&#x2026;">
-<!ENTITY newtabtools.tile-thumbnail.set "Set Thumbnail">
-<!ENTITY newtabtools.tile-thumbnail.remove "Remove Thumbnail">
-<!ENTITY newtabtools.tile-thumbnails.contain "Tiles should contain whole thumbnail">
-<!ENTITY newtabtools.tile-thumbnails.overlapTitle "Tile titles overlap thumbnails">
-<!ENTITY newtabtools.tile-title.input.label "Type a new tile title:">
-<!ENTITY newtabtools.tile-title.set "Set Title">
-<!ENTITY newtabtools.tile-title.reset "Reset Title">
+<!ENTITY newtabtools.tile-header "Tiles:">
+
+<!ENTITY newtabtools.tile-thumbnail.label "Image:">
+<!ENTITY newtabtools.tile-thumbnail.placeholder "Paste an image URL or browse to choose a file">
+<!ENTITY newtabtools.tile-thumbnail.browse "Browse&#x2026;">
+<!ENTITY newtabtools.tile-thumbnail.set "Set">
+<!ENTITY newtabtools.tile-thumbnail.remove "Remove">
+
+<!ENTITY newtabtools.tile-title.label "Title:">
+<!ENTITY newtabtools.tile-title.placeholder "Type a new tile title">
+<!ENTITY newtabtools.tile-title.set "Set">
+<!ENTITY newtabtools.tile-title.reset "Reset">
 
 <!ENTITY newtabtools.bg-header "Page Background Image:">
-<!ENTITY newtabtools.bg-url.label "Paste an image URL or browse to choose a file:">
-<!ENTITY newtabtools.bg-url.browse "Browse&#x2026;">
-<!ENTITY newtabtools.bg.set "Set Background">
-<!ENTITY newtabtools.bg.remove "Remove Background">
-<!ENTITY newtabtools.bg.dark-launcher "Use dark background for launcher">
+<!ENTITY newtabtools.bg.placeholder "Paste an image URL or browse to choose a file">
+<!ENTITY newtabtools.bg.browse "Browse&#x2026;">
+<!ENTITY newtabtools.bg.set "Set">
+<!ENTITY newtabtools.bg.remove "Remove">
 
-<!ENTITY newtabtools.more-options "More options&#x2026;">
+<!ENTITY newtabtools.options-header "Options:">
+<!ENTITY newtabtools.bg.dark-launcher "Use dark background for launcher">
+<!ENTITY newtabtools.tile-thumbnails.contain "Tiles should contain whole thumbnail">
+<!ENTITY newtabtools.tile-thumbnails.overlapTitle "Tile titles overlap thumbnails">
+
+<!ENTITY newtabtools.donate.label "New Tab Tools is funded by user donations.">
 <!ENTITY newtabtools.donate "Donate&#x2026;">
+<!ENTITY newtabtools.github "New Tab Tools on GitHub">
 
 <!ENTITY newtabtools.recently-closed-tabs "Recently closed tabs:">

@@ -1,27 +1,33 @@
 <!ENTITY newtabtools.pin-url.header "Ajouter un site">
-<!ENTITY newtabtools.pin-url.label "Tapez ou sélectionnez une URL:">
+<!ENTITY newtabtools.pin-url.placeholder "Tapez ou sélectionnez une URL">
 <!ENTITY newtabtools.pin-url.button "Ajouter">
 
-<!ENTITY newtabtools.tile-header2 "Sites">
-<!ENTITY newtabtools.tile-select.label "Sélectionnez un site:">
-<!ENTITY newtabtools.tile-thumbnail-url.label "Collez l'URL d'une image ou sélectionnez un fichier:">
-<!ENTITY newtabtools.tile-thumbnail-url.browse "Parcourir&#x2026;">
+<!ENTITY newtabtools.tile-header "Tiles:">
+
+<!ENTITY newtabtools.tile-thumbnail.label "Image:">
+<!ENTITY newtabtools.tile-thumbnail.placeholder "Collez l'URL d'une image ou sélectionnez un fichier">
+<!ENTITY newtabtools.tile-thumbnail.browse "Parcourir&#x2026;">
 <!ENTITY newtabtools.tile-thumbnail.set "Appliquer">
-<!ENTITY newtabtools.tile-thumbnail.remove "Supprimer la miniature">
+<!ENTITY newtabtools.tile-thumbnail.remove "Remove">
+
+<!ENTITY newtabtools.tile-title.label "Title:">
+<!ENTITY newtabtools.tile-title.placeholder "Tapez un nouveau titre">
+<!ENTITY newtabtools.tile-title.set "Appliquer">
+<!ENTITY newtabtools.tile-title.reset "Reset">
+
+<!ENTITY newtabtools.bg-header "Arrière-plan:">
+<!ENTITY newtabtools.bg.placeholder "Collez l'URL d'une image ou sélectionnez un fichier">
+<!ENTITY newtabtools.bg.browse "Parcourir&#x2026;">
+<!ENTITY newtabtools.bg.set "Appliquer">
+<!ENTITY newtabtools.bg.remove "Remove">
+
+<!ENTITY newtabtools.options-header "Options:">
+<!ENTITY newtabtools.bg.dark-launcher "Appliquer un thème foncé sur la barre de raccourcis">
 <!ENTITY newtabtools.tile-thumbnails.contain "Afficher la miniature en entier">
 <!ENTITY newtabtools.tile-thumbnails.overlapTitle "Titre en surimpression sur la miniature">
-<!ENTITY newtabtools.tile-title.input.label "Tapez un nouveau titre:">
-<!ENTITY newtabtools.tile-title.set "Appliquer">
-<!ENTITY newtabtools.tile-title.reset "Réinitialiser le titre">
 
-<!ENTITY newtabtools.bg-header "Arrière-plan">
-<!ENTITY newtabtools.bg-url.label "Collez l'URL d'une image ou sélectionnez un fichier:">
-<!ENTITY newtabtools.bg-url.browse "Parcourir&#x2026;">
-<!ENTITY newtabtools.bg.set "Appliquer">
-<!ENTITY newtabtools.bg.remove "Supprimer l'arrière-plan">
-<!ENTITY newtabtools.bg.dark-launcher "Appliquer un thème foncé sur la barre de raccourcis">
-
-<!ENTITY newtabtools.more-options "Plus d'options&#x2026;">
+<!ENTITY newtabtools.donate.label "New Tab Tools is funded by user donations.">
 <!ENTITY newtabtools.donate "Faire un don&#x2026;">
+<!ENTITY newtabtools.github "New Tab Tools on GitHub">
 
 <!ENTITY newtabtools.recently-closed-tabs "Onglets récemment fermés:">

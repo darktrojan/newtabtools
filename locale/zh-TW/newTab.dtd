@@ -1,27 +1,33 @@
 <!ENTITY newtabtools.pin-url.header "新增方塊磚:">
-<!ENTITY newtabtools.pin-url.label "輸入或選擇網址:">
+<!ENTITY newtabtools.pin-url.placeholder "輸入或選擇網址">
 <!ENTITY newtabtools.pin-url.button "新增">
 
-<!ENTITY newtabtools.tile-header2 "方塊磚:">
-<!ENTITY newtabtools.tile-select.label "選擇一個方塊磚:">
-<!ENTITY newtabtools.tile-thumbnail-url.label "貼上圖片網址或選擇檔案:">
-<!ENTITY newtabtools.tile-thumbnail-url.browse "瀏覽…">
+<!ENTITY newtabtools.tile-header "方塊磚:">
+
+<!ENTITY newtabtools.tile-thumbnail.label "Image:">
+<!ENTITY newtabtools.tile-thumbnail.placeholder "貼上圖片網址或選擇檔案">
+<!ENTITY newtabtools.tile-thumbnail.browse "瀏覽…">
 <!ENTITY newtabtools.tile-thumbnail.set "設為縮圖">
 <!ENTITY newtabtools.tile-thumbnail.remove "移除縮圖">
-<!ENTITY newtabtools.tile-thumbnails.contain "方塊磚須包含整個縮圖">
-<!ENTITY newtabtools.tile-thumbnails.overlapTitle "方塊磚標題與縮圖重疊">
-<!ENTITY newtabtools.tile-title.input.label "輸入新的方塊磚標題:">
+
+<!ENTITY newtabtools.tile-title.label "Title:">
+<!ENTITY newtabtools.tile-title.placeholder "輸入新的方塊磚標題">
 <!ENTITY newtabtools.tile-title.set "設為標題">
 <!ENTITY newtabtools.tile-title.reset "重設標題">
 
 <!ENTITY newtabtools.bg-header "背景圖片:">
-<!ENTITY newtabtools.bg-url.label "貼上圖片網址或選擇檔案:">
-<!ENTITY newtabtools.bg-url.browse "瀏覽…">
+<!ENTITY newtabtools.bg.placeholder "貼上圖片網址或選擇檔案">
+<!ENTITY newtabtools.bg.browse "瀏覽…">
 <!ENTITY newtabtools.bg.set "設為背景">
 <!ENTITY newtabtools.bg.remove "移除背景">
-<!ENTITY newtabtools.bg.dark-launcher "在捷徑列使用暗色背景">
 
-<!ENTITY newtabtools.more-options "更多選項…">
+<!ENTITY newtabtools.options-header "Options:">
+<!ENTITY newtabtools.bg.dark-launcher "在捷徑列使用暗色背景">
+<!ENTITY newtabtools.tile-thumbnails.contain "方塊磚須包含整個縮圖">
+<!ENTITY newtabtools.tile-thumbnails.overlapTitle "方塊磚標題與縮圖重疊">
+
+<!ENTITY newtabtools.donate.label "New Tab Tools is funded by user donations.">
 <!ENTITY newtabtools.donate "捐款…">
+<!ENTITY newtabtools.github "New Tab Tools on GitHub">
 
 <!ENTITY newtabtools.recently-closed-tabs "最近關閉的分頁:">

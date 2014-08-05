@@ -1,27 +1,33 @@
 <!ENTITY newtabtools.pin-url.header "Add tile:">
-<!ENTITY newtabtools.pin-url.label "Type or select a URL:">
+<!ENTITY newtabtools.pin-url.placeholder "Type or select a URL">
 <!ENTITY newtabtools.pin-url.button "Add">
 
-<!ENTITY newtabtools.tile-header2 "Tiles:">
-<!ENTITY newtabtools.tile-select.label "タイルを選択:">
-<!ENTITY newtabtools.tile-thumbnail-url.label "画像のURLを貼り付けまたは選択したファイルを参照:">
-<!ENTITY newtabtools.tile-thumbnail-url.browse "参照&#x2026;">
-<!ENTITY newtabtools.tile-thumbnail.set "サムネイルを設定">
-<!ENTITY newtabtools.tile-thumbnail.remove "サムネイルを削除">
-<!ENTITY newtabtools.tile-thumbnails.contain "タイルは全体のサムネイルが含まれている必要があります">
-<!ENTITY newtabtools.tile-thumbnails.overlapTitle "Tile titles overlap thumbnails">
-<!ENTITY newtabtools.tile-title.input.label "新しいタイルのタイトルを入力:">
-<!ENTITY newtabtools.tile-title.set "タイトルを設定">
-<!ENTITY newtabtools.tile-title.reset "タイトルをリセット">
+<!ENTITY newtabtools.tile-header "Tiles:">
+
+<!ENTITY newtabtools.tile-thumbnail.label "Image:">
+<!ENTITY newtabtools.tile-thumbnail.placeholder "画像のURLを貼り付けまたは選択したファイルを参照">
+<!ENTITY newtabtools.tile-thumbnail.browse "参照&#x2026;">
+<!ENTITY newtabtools.tile-thumbnail.set "Set">
+<!ENTITY newtabtools.tile-thumbnail.remove "Remove">
+
+<!ENTITY newtabtools.tile-title.label "Title:">
+<!ENTITY newtabtools.tile-title.placeholder "新しいタイルのタイトルを入力">
+<!ENTITY newtabtools.tile-title.set "Set">
+<!ENTITY newtabtools.tile-title.reset "Reset">
 
 <!ENTITY newtabtools.bg-header "新しいタブページの背景画像:">
-<!ENTITY newtabtools.bg-url.label "画像のURLを貼り付けまたは選択したファイルを参照:">
-<!ENTITY newtabtools.bg-url.browse "参照&#x2026;">
-<!ENTITY newtabtools.bg.set "背景画像を設定">
-<!ENTITY newtabtools.bg.remove "背景画像を削除">
-<!ENTITY newtabtools.bg.dark-launcher "ランチャーに暗い背景を使用">
+<!ENTITY newtabtools.bg.placeholder "画像のURLを貼り付けまたは選択したファイルを参照">
+<!ENTITY newtabtools.bg.browse "参照&#x2026;">
+<!ENTITY newtabtools.bg.set "Set">
+<!ENTITY newtabtools.bg.remove "Remove">
 
-<!ENTITY newtabtools.more-options "その他のオプション&#x2026;">
+<!ENTITY newtabtools.options-header "Options:">
+<!ENTITY newtabtools.bg.dark-launcher "ランチャーに暗い背景を使用">
+<!ENTITY newtabtools.tile-thumbnails.contain "タイルは全体のサムネイルが含まれている必要があります">
+<!ENTITY newtabtools.tile-thumbnails.overlapTitle "Tile titles overlap thumbnails">
+
+<!ENTITY newtabtools.donate.label "New Tab Tools is funded by user donations.">
 <!ENTITY newtabtools.donate "寄付する&#x2026;">
+<!ENTITY newtabtools.github "New Tab Tools on GitHub">
 
 <!ENTITY newtabtools.recently-closed-tabs "最近閉じたタブ:">
