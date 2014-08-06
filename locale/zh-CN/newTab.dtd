@@ -4,13 +4,13 @@
 
 <!ENTITY newtabtools.tile-header "磁贴:">
 
-<!ENTITY newtabtools.tile-thumbnail.label "Image:">
+<!ENTITY newtabtools.tile-thumbnail.label "图片:">
 <!ENTITY newtabtools.tile-thumbnail.placeholder "贴入图片网址或选择一个文件">
 <!ENTITY newtabtools.tile-thumbnail.browse "浏览…">
 <!ENTITY newtabtools.tile-thumbnail.set "设为缩略图">
 <!ENTITY newtabtools.tile-thumbnail.remove "移除缩略图">
 
-<!ENTITY newtabtools.tile-title.label "Title:">
+<!ENTITY newtabtools.tile-title.label "标题:">
 <!ENTITY newtabtools.tile-title.placeholder "为磁贴输入一个新标题">
 <!ENTITY newtabtools.tile-title.set "设为标题">
 <!ENTITY newtabtools.tile-title.reset "重置标题">
@@ -21,13 +21,13 @@
 <!ENTITY newtabtools.bg.set "设为背景">
 <!ENTITY newtabtools.bg.remove "移除背景">
 
-<!ENTITY newtabtools.options-header "Options:">
+<!ENTITY newtabtools.options-header "选项:">
 <!ENTITY newtabtools.bg.dark-launcher "对启动列使用深色背景">
 <!ENTITY newtabtools.tile-thumbnails.contain "磁贴应包含整个缩略图">
 <!ENTITY newtabtools.tile-thumbnails.overlapTitle "磁贴标题覆盖缩略图">
 
-<!ENTITY newtabtools.donate.label "New Tab Tools is funded by user donations.">
+<!ENTITY newtabtools.donate.label "New Tab Tools 依靠用户捐助维持。">
 <!ENTITY newtabtools.donate "捐助…">
-<!ENTITY newtabtools.github "New Tab Tools on GitHub">
+<!ENTITY newtabtools.github "New Tab Tools 在 GitHub 上">
 
 <!ENTITY newtabtools.recently-closed-tabs "最近关闭的标签页：">
