@@ -7,6 +7,6 @@
      preferences/options item on about:home on Linux and OS X -->
 <!ENTITY abouthome.preferencesButtonUnix.label  "Préférences">
 <!ENTITY abouthome.addonsButton.label    "Modules">
-<!ENTITY abouthome.appsButton.label      "Catalogue">
+<!ENTITY abouthome.appsButton.label      "Marketplace">
 <!ENTITY abouthome.downloadsButton.label "Téléchargements">
 <!ENTITY abouthome.syncButton.label      "Synchroniser">
