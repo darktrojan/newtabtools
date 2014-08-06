@@ -1,33 +1,33 @@
-<!ENTITY newtabtools.pin-url.header "Add tile:">
-<!ENTITY newtabtools.pin-url.placeholder "Type or select a URL">
-<!ENTITY newtabtools.pin-url.button "Add">
+<!ENTITY newtabtools.pin-url.header "Schaltfläche hinzufügen:">
+<!ENTITY newtabtools.pin-url.placeholder "Adresse eingeben oder auswählen">
+<!ENTITY newtabtools.pin-url.button "Hinzufügen">
 
-<!ENTITY newtabtools.tile-header "Tiles:">
+<!ENTITY newtabtools.tile-header "Schaltflächen:">
 
-<!ENTITY newtabtools.tile-thumbnail.label "Image:">
+<!ENTITY newtabtools.tile-thumbnail.label "Bild:">
 <!ENTITY newtabtools.tile-thumbnail.placeholder "Bild-Link einfügen oder nach einer Datei suchen">
 <!ENTITY newtabtools.tile-thumbnail.browse "Suchen&#x2026;">
-<!ENTITY newtabtools.tile-thumbnail.set "Set">
-<!ENTITY newtabtools.tile-thumbnail.remove "Remove">
+<!ENTITY newtabtools.tile-thumbnail.set "Übernehmen">
+<!ENTITY newtabtools.tile-thumbnail.remove "Entfernen">
 
-<!ENTITY newtabtools.tile-title.label "Title:">
+<!ENTITY newtabtools.tile-title.label "Titel:">
 <!ENTITY newtabtools.tile-title.placeholder "Neuen Titel eingeben">
-<!ENTITY newtabtools.tile-title.set "Set">
-<!ENTITY newtabtools.tile-title.reset "Reset">
+<!ENTITY newtabtools.tile-title.set "Übernehmen">
+<!ENTITY newtabtools.tile-title.reset "Zurücksetzen">
 
 <!ENTITY newtabtools.bg-header "Hintergrundbild:">
 <!ENTITY newtabtools.bg.placeholder "Bild-Link einfügen oder nach einer Datei suchen">
 <!ENTITY newtabtools.bg.browse "Suchen&#x2026;">
-<!ENTITY newtabtools.bg.set "Set">
-<!ENTITY newtabtools.bg.remove "Remove">
+<!ENTITY newtabtools.bg.set "Übernehmen">
+<!ENTITY newtabtools.bg.remove "Entfernen">
 
-<!ENTITY newtabtools.options-header "Options:">
+<!ENTITY newtabtools.options-header "Einstellungen:">
 <!ENTITY newtabtools.bg.dark-launcher "Dunkler Hintergrund für Schnellstartleiste">
 <!ENTITY newtabtools.tile-thumbnails.contain "Schaltfläche soll mit Bild ausgefüllt werden">
-<!ENTITY newtabtools.tile-thumbnails.overlapTitle "Tile titles overlap thumbnails">
+<!ENTITY newtabtools.tile-thumbnails.overlapTitle "Titel dürfen mit Miniaturbild überlappen">
 
-<!ENTITY newtabtools.donate.label "New Tab Tools is funded by user donations.">
+<!ENTITY newtabtools.donate.label "Neuer-Tab-Tools wird durch Spenden finanziert.">
 <!ENTITY newtabtools.donate "Spenden&#x2026;">
-<!ENTITY newtabtools.github "New Tab Tools on GitHub">
+<!ENTITY newtabtools.github "Neuer-Tab-Tools auf GitHub">
 
 <!ENTITY newtabtools.recently-closed-tabs "Geschlossene Tabs:">
