@@ -4,13 +4,13 @@
 
 <!ENTITY newtabtools.tile-header "Blocos:">
 
-<!ENTITY newtabtools.tile-thumbnail.label "Image:">
+<!ENTITY newtabtools.tile-thumbnail.label "Imagem:">
 <!ENTITY newtabtools.tile-thumbnail.placeholder "Cole a URL da imagem ou escolha um arquivo">
 <!ENTITY newtabtools.tile-thumbnail.browse "Procurar…">
 <!ENTITY newtabtools.tile-thumbnail.set "Definir">
 <!ENTITY newtabtools.tile-thumbnail.remove "Remover">
 
-<!ENTITY newtabtools.tile-title.label "Title:">
+<!ENTITY newtabtools.tile-title.label "Título:">
 <!ENTITY newtabtools.tile-title.placeholder "Digite o novo nome do bloco">
 <!ENTITY newtabtools.tile-title.set "Definir">
 <!ENTITY newtabtools.tile-title.reset "Restaurar">
@@ -21,13 +21,13 @@
 <!ENTITY newtabtools.bg.set "Definir">
 <!ENTITY newtabtools.bg.remove "Remover">
 
-<!ENTITY newtabtools.options-header "Options:">
+<!ENTITY newtabtools.options-header "Opções:">
 <!ENTITY newtabtools.bg.dark-launcher "Usar fundo escuro para o iniciador">
 <!ENTITY newtabtools.tile-thumbnails.contain "Blocos devem conter toda a miniatura">
 <!ENTITY newtabtools.tile-thumbnails.overlapTitle "Título do bloco soprepõe miniatura">
 
-<!ENTITY newtabtools.donate.label "New Tab Tools is funded by user donations.">
+<!ENTITY newtabtools.donate.label "O New Tab Tools é mantido com doações de usuários.">
 <!ENTITY newtabtools.donate "Doar…">
-<!ENTITY newtabtools.github "New Tab Tools on GitHub">
+<!ENTITY newtabtools.github "New Tab Tools no GitHub">
 
 <!ENTITY newtabtools.recently-closed-tabs "Abas fechadas recentemente:">
