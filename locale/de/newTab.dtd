@@ -24,7 +24,7 @@
 <!ENTITY newtabtools.options-header "Einstellungen:">
 <!ENTITY newtabtools.bg.dark-launcher "Dunkler Hintergrund für Schnellstartleiste">
 <!ENTITY newtabtools.tile-thumbnails.contain "Schaltfläche soll mit Bild ausgefüllt werden">
-<!ENTITY newtabtools.tile-thumbnails.overlapTitle "Titel dürfen mit Miniaturbild überlappen">
+<!ENTITY newtabtools.tile-thumbnails.overlapTitle "Titel dürfen das Miniaturbild überlappen">
 
 <!ENTITY newtabtools.donate.label "Neuer-Tab-Tools wird durch Spenden finanziert.">
 <!ENTITY newtabtools.donate "Spenden&#x2026;">
