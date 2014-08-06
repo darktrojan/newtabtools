@@ -1,33 +1,33 @@
-<!ENTITY newtabtools.pin-url.header "Ajouter un site">
+<!ENTITY newtabtools.pin-url.header "Ajouter un site :">
 <!ENTITY newtabtools.pin-url.placeholder "Tapez ou sélectionnez une URL">
 <!ENTITY newtabtools.pin-url.button "Ajouter">
 
-<!ENTITY newtabtools.tile-header "Tiles:">
+<!ENTITY newtabtools.tile-header "Sites :">
 
-<!ENTITY newtabtools.tile-thumbnail.label "Image:">
+<!ENTITY newtabtools.tile-thumbnail.label "Image :">
 <!ENTITY newtabtools.tile-thumbnail.placeholder "Collez l'URL d'une image ou sélectionnez un fichier">
 <!ENTITY newtabtools.tile-thumbnail.browse "Parcourir&#x2026;">
 <!ENTITY newtabtools.tile-thumbnail.set "Appliquer">
-<!ENTITY newtabtools.tile-thumbnail.remove "Remove">
+<!ENTITY newtabtools.tile-thumbnail.remove "Supprimer">
 
-<!ENTITY newtabtools.tile-title.label "Title:">
+<!ENTITY newtabtools.tile-title.label "Titre :">
 <!ENTITY newtabtools.tile-title.placeholder "Tapez un nouveau titre">
 <!ENTITY newtabtools.tile-title.set "Appliquer">
-<!ENTITY newtabtools.tile-title.reset "Reset">
+<!ENTITY newtabtools.tile-title.reset "Réinitialiser">
 
-<!ENTITY newtabtools.bg-header "Arrière-plan:">
+<!ENTITY newtabtools.bg-header "Arrière-plan :">
 <!ENTITY newtabtools.bg.placeholder "Collez l'URL d'une image ou sélectionnez un fichier">
 <!ENTITY newtabtools.bg.browse "Parcourir&#x2026;">
 <!ENTITY newtabtools.bg.set "Appliquer">
-<!ENTITY newtabtools.bg.remove "Remove">
+<!ENTITY newtabtools.bg.remove "Supprimer">
 
-<!ENTITY newtabtools.options-header "Options:">
+<!ENTITY newtabtools.options-header "Options :">
 <!ENTITY newtabtools.bg.dark-launcher "Appliquer un thème foncé sur la barre de raccourcis">
-<!ENTITY newtabtools.tile-thumbnails.contain "Afficher la miniature en entier">
-<!ENTITY newtabtools.tile-thumbnails.overlapTitle "Titre en surimpression sur la miniature">
+<!ENTITY newtabtools.tile-thumbnails.contain "Afficher les miniatures en entier">
+<!ENTITY newtabtools.tile-thumbnails.overlapTitle "Titres en surimpression sur les miniatures">
 
-<!ENTITY newtabtools.donate.label "New Tab Tools is funded by user donations.">
+<!ENTITY newtabtools.donate.label "New Tab Tools est financé par vos dons.">
 <!ENTITY newtabtools.donate "Faire un don&#x2026;">
-<!ENTITY newtabtools.github "New Tab Tools on GitHub">
+<!ENTITY newtabtools.github "New Tab Tools sur GitHub">
 
-<!ENTITY newtabtools.recently-closed-tabs "Onglets récemment fermés:">
+<!ENTITY newtabtools.recently-closed-tabs "Onglets récemment fermés :">
