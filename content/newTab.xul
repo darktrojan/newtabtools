@@ -105,8 +105,8 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
             <xul:button id="options-thumbnail-remove" label="&newtabtools.tile-thumbnail.remove;" disabled="true" />
           </xul:hbox>
           <xul:label control="options-title-input" value="&newtabtools.tile-title.label;" />
-          <xul:hbox align="baseline">
-            <xul:textbox id="options-title-input" flex="1" placeholder="&newtabtools.tile-title.placeholder;" />
+          <xul:textbox id="options-title-input" flex="1" placeholder="&newtabtools.tile-title.placeholder;" />
+          <xul:hbox pack="center">
             <xul:button id="options-title-set" label="&newtabtools.tile-title.set;" />
             <xul:button id="options-title-reset" label="&newtabtools.tile-title.reset;" disabled="true" />
           </xul:hbox>
