@@ -1,11 +1,11 @@
 <!ENTITY newtabtools.options.rows "Reihen">
 <!ENTITY newtabtools.options.columns "Spalten">
-<!ENTITY newtabtools.options.grid.margin "Grid Margin">
-<!ENTITY newtabtools.options.grid.spacing "Grid Spacing">
-<!ENTITY newtabtools.options.size.small "Small">
-<!ENTITY newtabtools.options.size.medium "Medium">
-<!ENTITY newtabtools.options.size.large "Large">
-<!ENTITY newtabtools.options.recent.show "Show Recently Closed Tabs">
+<!ENTITY newtabtools.options.grid.margin "Raster - Äußerer Rand">
+<!ENTITY newtabtools.options.grid.spacing "Raster - Zwischenräume">
+<!ENTITY newtabtools.options.size.small "Klein">
+<!ENTITY newtabtools.options.size.medium "Mittel">
+<!ENTITY newtabtools.options.size.large "Groß">
+<!ENTITY newtabtools.options.recent.show "Geschlossene Tabs anzeigen">
 <!ENTITY newtabtools.options.launcher "Schnellstartleiste">
 <!ENTITY newtabtools.options.launcher.hidden "Nicht anzeigen">
 <!ENTITY newtabtools.options.launcher.top "Oben">
@@ -14,5 +14,5 @@
 <!ENTITY newtabtools.options.launcher.right "Rechts">
 <!ENTITY newtabtools.options.thumbs.hidebuttons "Miniaturbild-Knöpfe verstecken">
 <!ENTITY newtabtools.options.thumbs.hidefavicons "Seitenlogos verstecken">
-<!ENTITY newtabtools.export "Export Settings&#x2026;">
-<!ENTITY newtabtools.import "Import Settings&#x2026;">
+<!ENTITY newtabtools.export "Einstellungen exportieren&#x2026;">
+<!ENTITY newtabtools.import "Einstellungen importieren&#x2026;">
