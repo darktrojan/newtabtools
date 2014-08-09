@@ -411,14 +411,16 @@ let newTabTools = {
   },
   toggleOptions: function() {
     if (this.optionsPane.hidden) {
-      this.optionsPane.hidden = false;
+      this.optionsBackground.hidden = this.optionsPane.hidden = false;
+      this.optionsToggleButton.hidden = true;
       this.selectedSiteIndex = 0;
     } else {
       this.hideOptions();
     }
   },
   hideOptions: function() {
-    this.optionsPane.hidden = true;
+    this.optionsBackground.hidden = this.optionsPane.hidden = true;
+    this.optionsToggleButton.hidden = false;
   }
 };
 
@@ -462,6 +464,7 @@ let newTabTools = {
     "removeBackgroundButton": "options-bg-remove",
     "recentList": "newtab-recent",
     "recentListOuter": "newtab-recent-outer",
+    "optionsBackground": "options-bg",
     "optionsPane": "options"
   };
   for (let key in uiElements) {
@@ -473,8 +476,10 @@ let newTabTools = {
 
   if (Services.appinfo.OS == "WINNT") {
     document.getElementById("settingsUnix").style.display = "none";
+    newTabTools.optionsToggleButton.title = document.getElementById("settingsWin").textContent;
   } else {
     document.getElementById("settingsWin").style.display = "none";
+    newTabTools.optionsToggleButton.title = document.getElementById("settingsUnix").textContent;
   }
 
   newTabTools.optionsToggleButton.addEventListener("click", newTabTools.toggleOptions.bind(newTabTools), false);

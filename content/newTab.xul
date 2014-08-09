@@ -70,6 +70,8 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
     </div>
   </div>
 
+  <div id="options-bg" hidden="true" onclick="newTabTools.hideOptions();"></div>
+
   <div id="options" hidden="true">
     <div id="options-close">
       <xul:toolbarbutton class="close-icon" oncommand="newTabTools.hideOptions();" />
