@@ -491,6 +491,11 @@ let newTabTools = {
   newTabTools.setBackgroundInput.addEventListener("keyup", function() {
     newTabTools.setBackgroundButton.disabled = !/^(file|ftp|http|https):\/\//.exec(this.value);
   });
+  window.addEventListener("keypress", function(event) {
+    if (event.keyCode == 27) {
+      newTabTools.hideOptions();
+    }
+  });
 
   newTabTools.refreshBackgroundImage();
   newTabTools.updateUI();
