@@ -483,10 +483,14 @@ let newTabTools = {
   }
 
   newTabTools.optionsToggleButton.addEventListener("click", newTabTools.toggleOptions.bind(newTabTools), false);
-
   newTabTools.optionsPane.addEventListener("click", newTabTools.optionsOnClick.bind(newTabTools), false);
-
   newTabTools.launcher.addEventListener("click", newTabTools.launcherOnClick, false);
+  newTabTools.setThumbnailInput.addEventListener("keyup", function() {
+    newTabTools.setThumbnailButton.disabled = !/^(file|ftp|http|https):\/\//.exec(this.value);
+  });
+  newTabTools.setBackgroundInput.addEventListener("keyup", function() {
+    newTabTools.setBackgroundButton.disabled = !/^(file|ftp|http|https):\/\//.exec(this.value);
+  });
 
   newTabTools.refreshBackgroundImage();
   newTabTools.updateUI();

@@ -97,9 +97,7 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
           <xul:label id="options-url" flex="1" value="" crop="center" />
           <xul:label control="options-thumbnail-input" value="&newtabtools.tile-thumbnail.label;" />
           <xul:hbox align="baseline">
-            <xul:textbox id="options-thumbnail-input" flex="1"
-              placeholder="&newtabtools.tile-thumbnail.placeholder;"
-              onkeyup="newTabTools.setThumbnailButton.disabled = !this.value.startsWith('file://');" />
+            <xul:textbox id="options-thumbnail-input" flex="1" placeholder="&newtabtools.tile-thumbnail.placeholder;" />
           </xul:hbox>
           <xul:hbox pack="center" align="baseline">
             <xul:button id="options-thumbnail-browse" label="&newtabtools.tile-thumbnail.browse;" />
@@ -115,9 +113,7 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
         </xul:groupbox>
         <xul:groupbox>
           <xul:caption label="&newtabtools.bg-header;" />
-          <xul:textbox id="options-bg-input" flex="1"
-            placeholder="&newtabtools.bg.placeholder;"
-            onkeyup="newTabTools.setBackgroundButton.disabled = !this.value.startsWith('file://');" />
+          <xul:textbox id="options-bg-input" flex="1" placeholder="&newtabtools.bg.placeholder;" />
           <xul:hbox pack="center">
             <xul:button id="options-bg-browse" label="&newtabtools.bg.browse;" />
             <xul:button id="options-bg-set" label="&newtabtools.bg.set;" disabled="true" />
