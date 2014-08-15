@@ -25,9 +25,17 @@ let {
   allPages: gAllPages,
   linkChecker: gLinkChecker,
   pinnedLinks: gPinnedLinks,
-  blockedLinks: gBlockedLinks,
-  gridPrefs: gGridPrefs
+  blockedLinks: gBlockedLinks
 } = NewTabUtils;
+
+let gGridPrefs = {
+  get gridRows() {
+    return Math.max(1, Services.prefs.getIntPref("extensions.newtabtools.rows"));
+  },
+  get gridColumns() {
+    return Math.max(1, Services.prefs.getIntPref("extensions.newtabtools.columns"));
+  }
+};
 
 XPCOMUtils.defineLazyGetter(this, "gStringBundle", function() {
   return Services.strings.

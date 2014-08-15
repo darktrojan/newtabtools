@@ -2,6 +2,15 @@ let returnValues = window.arguments[0];
 let done = window.arguments[1];
 
 if (returnValues.importing) {
+	if ("browser.newtabpage.columns" in returnValues.prefs) {
+		returnValues.prefs["extensions.newtabtools.columns"] = returnValues.prefs["browser.newtabpage.columns"];
+		delete returnValues.prefs["browser.newtabpage.columns"];
+	}
+	if ("browser.newtabpage.rows" in returnValues.prefs) {
+		returnValues.prefs["extensions.newtabtools.rows"] = returnValues.prefs["browser.newtabpage.rows"];
+		delete returnValues.prefs["browser.newtabpage.rows"];
+	}
+
 	document.getElementById("export-header").setAttribute("hidden", "true");
 	for (let checkbox of document.querySelectorAll("checkbox")) {
 		switch (checkbox.id) {
@@ -12,7 +21,7 @@ if (returnValues.importing) {
 			break;
 		}
 		case "prefs.gridsize":
-			checkbox.disabled = !("browser.newtabpage.columns" in returnValues.prefs) || !("browser.newtabpage.rows" in returnValues.prefs);
+			checkbox.disabled = !("extensions.newtabtools.columns" in returnValues.prefs) || !("extensions.newtabtools.rows" in returnValues.prefs);
 			break;
 		case "prefs.gridmargin":
 			checkbox.disabled = !("extensions.newtabtools.grid.margin" in returnValues.prefs) || !("extensions.newtabtools.grid.spacing" in returnValues.prefs);

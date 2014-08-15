@@ -7,6 +7,7 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 const { interfaces: Ci, utils: Cu } = Components;
 
 const ADDON_ID = "newtabtools@darktrojan.net";
+const BROWSER_PREFS = "browser.newtabpage.";
 const EXTENSION_PREFS = "extensions.newtabtools.";
 
 Cu.import("resource://gre/modules/Services.jsm");
@@ -21,16 +22,23 @@ XPCOMUtils.defineLazyModuleGetter(this, "PageThumbs", "resource://gre/modules/Pa
 XPCOMUtils.defineLazyModuleGetter(this, "PageThumbsStorage", "resource://gre/modules/PageThumbs.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "Task", "resource://gre/modules/Task.jsm");
 
+let browserPrefs = Services.prefs.getBranch(BROWSER_PREFS);
+let userPrefs = Services.prefs.getBranch(EXTENSION_PREFS);
+
 function install(aParams, aReason) {
   if (aReason == ADDON_UPGRADE) {
-    Services.prefs.deleteBranch(EXTENSION_PREFS + "rows");
-    Services.prefs.deleteBranch(EXTENSION_PREFS + "columns");
 
     let showRecent = true;
-    if (Services.prefs.prefHasUserValue(EXTENSION_PREFS + "recent.count")) {
-      showRecent = Services.prefs.getIntPref(EXTENSION_PREFS + "recent.count") != 0;
-      Services.prefs.deleteBranch(EXTENSION_PREFS + "recent.count");
-      Services.prefs.setBoolPref(EXTENSION_PREFS + "recent.show", showRecent);
+    if (userPrefs.prefHasUserValue("recent.count")) {
+      showRecent = userPrefs.getIntPref("recent.count") != 0;
+      userPrefs.deleteBranch("recent.count");
+      userPrefs.setBoolPref("recent.show", showRecent);
+    }
+    if (browserPrefs.prefHasUserValue("rows") && !userPrefs.prefHasUserValue("rows")) {
+      userPrefs.setIntPref("rows", browserPrefs.getIntPref("rows"));
+    }
+    if (browserPrefs.prefHasUserValue("columns") && !userPrefs.prefHasUserValue("columns")) {
+      userPrefs.setIntPref("columns", browserPrefs.getIntPref("columns"));
     }
   }
 }
@@ -41,6 +49,8 @@ function uninstall(aParams, aReason) {
 }
 function startup(aParams, aReason) {
   let defaultPrefs = Services.prefs.getDefaultBranch(EXTENSION_PREFS);
+  defaultPrefs.setIntPref("rows", 3);
+  defaultPrefs.setIntPref("columns", 3);
   defaultPrefs.setIntPref("donationreminder", 0);
   defaultPrefs.setCharPref("grid.margin", "small small small small");
   defaultPrefs.setCharPref("grid.spacing", "small");
@@ -52,7 +62,6 @@ function startup(aParams, aReason) {
   defaultPrefs.setBoolPref("thumbs.hidebuttons", false);
   defaultPrefs.setBoolPref("thumbs.hidefavicons", false);
 
-  userPrefs = Services.prefs.getBranch(EXTENSION_PREFS);
   if (userPrefs.getIntPref("donationreminder") == 0 && userPrefs.prefHasUserValue("version")) {
     userPrefs.setIntPref("donationreminder", 1);
   }
@@ -179,7 +188,6 @@ function shutdown(aParams, aReason) {
   }
 }
 
-let userPrefs;
 let prefObserver = {
   observe: function(aSubject, aTopic, aData) {
     switch (aData) {
@@ -200,6 +208,8 @@ let prefObserver = {
         aWindow.newTabTools.refreshRecent();
       });
       break;
+    case "columns":
+    case "rows":
     case "filter":
       enumerateTabs(function(aWindow) {
         aWindow.gGrid.refresh();
@@ -295,8 +305,8 @@ let expirationFilter = {
   },
 
   filterForThumbnailExpiration: function(aCallback) {
-    let columns = Services.prefs.getIntPref("browser.newtabpage.columns");
-    let rows = Services.prefs.getIntPref("browser.newtabpage.rows");
+    let columns = userPrefs.getIntPref("columns");
+    let rows = userPrefs.getIntPref("rows");
     let count = columns * rows + 10;
 
     if (count <= 25) {

@@ -103,7 +103,7 @@ function exportSave(aReturnValues) {
 			if (enabled) {
 				switch (name) {
 				case "gridsize":
-					keys.push("browser.newtabpage.columns", "browser.newtabpage.rows");
+					keys.push("extensions.newtabtools.columns", "extensions.newtabtools.rows");
 					break;
 				case "gridmargin":
 					keys.push("extensions.newtabtools.grid.margin", "extensions.newtabtools.grid.spacing");
@@ -148,7 +148,7 @@ function exportSave(aReturnValues) {
 	if (aReturnValues.options.tiles.thumbs) {
 		zipWriter.addEntryDirectory("thumbnails/", Date.now() * 1000, false);
 
-		let count = Math.floor(Services.prefs.getIntPref("browser.newtabpage.columns") * Services.prefs.getIntPref("browser.newtabpage.rows") * 1.5);
+		let count = Math.floor(Services.prefs.getIntPref("extensions.newtabtools.columns") * Services.prefs.getIntPref("extensions.newtabtools.rows") * 1.5);
 
 		for (let l of NewTabUtils.links.getLinks().slice(0, count)) {
 			let f = new FileUtils.File(PageThumbsStorage.getFilePathForURL(l.url));
@@ -295,8 +295,8 @@ function importSave(aReturnValues) {
 					continue;
 				}
 				if (name == "gridsize") {
-					copyPref("browser.newtabpage.columns");
-					copyPref("browser.newtabpage.rows");
+					copyPref("extensions.newtabtools.columns");
+					copyPref("extensions.newtabtools.rows");
 				} else if (name == "gridmargin") {
 					copyPref("extensions.newtabtools.grid.margin");
 					copyPref("extensions.newtabtools.grid.spacing");
