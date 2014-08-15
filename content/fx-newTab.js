@@ -396,8 +396,6 @@ let gPage = {
 
     this._mutationObserver = new MutationObserver(() => {
       if (this.allowBackgroundCaptures) {
-        Services.telemetry.getHistogramById("NEWTAB_PAGE_SHOWN").add(true);
-
         for (let site of gGrid.sites) {
           if (site) {
             site.captureIfMissing();
@@ -966,28 +964,12 @@ Site.prototype = {
   },
 
   /**
-   * Record interaction with site using telemetry.
-   */
-  _recordSiteClicked: function Site_recordSiteClicked(aIndex) {
-    if (Services.prefs.prefHasUserValue("browser.newtabpage.rows") ||
-        Services.prefs.prefHasUserValue("browser.newtabpage.columns") ||
-        aIndex > 8) {
-      // We only want to get indices for the default configuration, everything
-      // else goes in the same bucket.
-      aIndex = 9;
-    }
-    Services.telemetry.getHistogramById("NEWTAB_PAGE_SITE_CLICKED")
-                      .add(aIndex);
-  },
-
-  /**
    * Handles site click events.
    */
   _onClick: function Site_onClick(aEvent) {
     let target = aEvent.target;
     if (target.classList.contains("newtab-link") ||
         target.parentElement.classList.contains("newtab-link")) {
-      this._recordSiteClicked(this.cell.index);
       return;
     }
 
