@@ -1,3 +1,5 @@
+<!ENTITY newtabtools.page.show "Seite für neuen Tab anzeigen">
+
 <!ENTITY newtabtools.pin-url.header "Schaltfläche hinzufügen:">
 <!ENTITY newtabtools.pin-url.placeholder "Adresse eingeben oder auswählen">
 <!ENTITY newtabtools.pin-url.button "Hinzufügen">

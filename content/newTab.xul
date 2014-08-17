@@ -56,7 +56,7 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
     </div>
 
     <input id="options-toggle" type="button"/>
-    <input id="newtab-toggle" type="button"/>
+    <input id="newtab-toggle" type="button" title="&newtabtools.page.show;" />
 
     <div id="launcher">
       <button class="launchButton" id="downloads">&abouthome.downloadsButton.label;</button>

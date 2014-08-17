@@ -1,3 +1,5 @@
+<!ENTITY newtabtools.page.show "显示新标签页">
+
 <!ENTITY newtabtools.pin-url.header "添加磁贴:">
 <!ENTITY newtabtools.pin-url.placeholder "输入或选择一个 URL">
 <!ENTITY newtabtools.pin-url.button "添加">

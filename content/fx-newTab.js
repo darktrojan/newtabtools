@@ -440,11 +440,6 @@ let gPage = {
       else
         input.setAttribute("tabindex", "-1");
     }
-
-    // Update the toggle button's title.
-    let toggle = document.getElementById("newtab-toggle");
-    // TODO broken
-    toggle.setAttribute("title", newTabString(aValue ? "hide" : "show"));
   },
 
   /**

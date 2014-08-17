@@ -6,6 +6,9 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 #newtab-scrollbox {
   -moz-box-orient: vertical;
 }
+#newtab-scrollbox[page-disabled] {
+  background-image: none !important;
+}
 :root[launcher="left"] #newtab-scrollbox,
 :root[launcher="right"] #newtab-scrollbox {
   -moz-box-orient: horizontal;
