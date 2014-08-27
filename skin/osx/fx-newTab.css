@@ -67,7 +67,7 @@
   height: 16px;
   padding: 0;
   border: none;
-  background: -216px 0 transparent url(chrome://browser/skin/newtab/controls.png);
+  background: -216px 0 transparent url(chrome://newtabtools/skin/controls.png);
 }
 
 #newtab-toggle[page-disabled] {
@@ -76,7 +76,7 @@
 
 @media (min-resolution: 2dppx) {
   #newtab-toggle {
-    background-image: url(chrome://browser/skin/newtab/controls@2x.png);
+    background-image: url(chrome://newtabtools/skin/controls@2x.png);
     background-size: 248px;
   }
 }
@@ -151,12 +151,12 @@
   height: 24px;
   padding: 1px 2px 3px;
   border: none;
-  background: transparent url(chrome://browser/skin/newtab/controls.png);
+  background: transparent url(chrome://newtabtools/skin/controls.png);
 }
 
 @media (min-resolution: 2dppx) {
   .newtab-control {
-    background-image: url(chrome://browser/skin/newtab/controls@2x.png);
+    background-image: url(chrome://newtabtools/skin/controls@2x.png);
     background-size: 248px;
   }
 }
