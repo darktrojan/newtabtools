@@ -68,12 +68,28 @@ function startup(aParams, aReason) {
   userPrefs.setIntPref("version", parseInt(aParams.version));
 
   NewTabUtils.links._oldGetLinks = NewTabUtils.links.getLinks;
-  NewTabUtils.links.getLinks = function() {
-    let list = NewTabUtils.links._oldGetLinks();
+  NewTabUtils.links.getLinks = function Links_getLinks() {
+    let pinnedLinks = Array.slice(NewTabUtils.pinnedLinks.links);
+    let links = this._getMergedProviderLinks();
+
+    // Filter blocked and pinned links.
+    links = links.filter(function (link) {
+      return !NewTabUtils.blockedLinks.isBlocked(link) && !NewTabUtils.pinnedLinks.isPinned(link);
+    });
+
+    // Try to fill the gaps between pinned links.
+    for (let i = 0; i < pinnedLinks.length && links.length; i++)
+      if (!pinnedLinks[i])
+        pinnedLinks[i] = links.shift();
+
+    // Append the remaining links if any.
+    if (links.length)
+      pinnedLinks = pinnedLinks.concat(links);
+
     if (userPrefs.prefHasUserValue("filter")) {
       let countPref = userPrefs.getCharPref("filter");
       let counts = JSON.parse(countPref);
-      return list.filter(function(aItem) {
+      return pinnedLinks.filter(function(aItem) {
         if (NewTabUtils.pinnedLinks.isPinned(aItem))
           return true;
         let match = /^https?:\/\/([^\/]+)\//.exec(aItem.url);
@@ -89,7 +105,7 @@ function startup(aParams, aReason) {
         return true;
       });
     } else {
-      return list;
+      return pinnedLinks;
     }
   }
 
