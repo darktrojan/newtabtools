@@ -1,0 +1,35 @@
+<!ENTITY newtabtools.page.show "Mostra la pagina nuona scheda">
+
+<!ENTITY newtabtools.pin-url.header "Aggiungi icona:">
+<!ENTITY newtabtools.pin-url.placeholder "Scrivi o seleziona un indirizzo web">
+<!ENTITY newtabtools.pin-url.button "Aggiungi">
+
+<!ENTITY newtabtools.tile-header "Icone:">
+
+<!ENTITY newtabtools.tile-thumbnail.label "Immagine:">
+<!ENTITY newtabtools.tile-thumbnail.placeholder "Incolla un indirizzo web o sfoglia tra i file immagine">
+<!ENTITY newtabtools.tile-thumbnail.browse "Sfoglia&#x2026;">
+<!ENTITY newtabtools.tile-thumbnail.set "Imposta">
+<!ENTITY newtabtools.tile-thumbnail.remove "Rimuovi">
+
+<!ENTITY newtabtools.tile-title.label "Icona:">
+<!ENTITY newtabtools.tile-title.placeholder "Scrivi il nuovo titolo dell'icona">
+<!ENTITY newtabtools.tile-title.set "Imposta">
+<!ENTITY newtabtools.tile-title.reset "Ripristina">
+
+<!ENTITY newtabtools.bg-header "Immagine di sfondo della pagina:">
+<!ENTITY newtabtools.bg.placeholder "Incolla un indirizzo web o sfoglia tra i file immagine">
+<!ENTITY newtabtools.bg.browse "Sfoglia&#x2026;">
+<!ENTITY newtabtools.bg.set "Imposta">
+<!ENTITY newtabtools.bg.remove "Rimuovi">
+
+<!ENTITY newtabtools.options-header "Opzioni:">
+<!ENTITY newtabtools.bg.dark-launcher "Usa sfondo scuro per la barra strumenti">
+<!ENTITY newtabtools.tile-thumbnails.contain "Mostra anteprima completa nelle icone">
+<!ENTITY newtabtools.tile-thumbnails.overlapTitle "Sovrapponi titoli delle icone alle anteprime">
+
+<!ENTITY newtabtools.donate.label "New Tab Tools si sostiene con le donazioni degli utenti.">
+<!ENTITY newtabtools.donate "Fai una donazione&#x2026;">
+<!ENTITY newtabtools.github "New Tab Tools su GitHub">
+
+<!ENTITY newtabtools.recently-closed-tabs "Schede chiuse di recente:">
