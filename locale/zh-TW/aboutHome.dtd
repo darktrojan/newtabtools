@@ -1,12 +1,12 @@
 <!ENTITY abouthome.bookmarksButton.label "書籤">
-<!ENTITY abouthome.historyButton.label   "歷史記錄">
+<!ENTITY abouthome.historyButton.label "歷史記錄">
 <!-- LOCALIZATION NOTE (abouthome.preferencesButtonWin.label): The label for the
      preferences/options item on about:home on Windows -->
-<!ENTITY abouthome.preferencesButtonWin.label  "選項">
+<!ENTITY abouthome.preferencesButtonWin.label "選項">
 <!-- LOCALIZATION NOTE (abouthome.preferencesButtonUnix.label): The label for the
      preferences/options item on about:home on Linux and OS X -->
-<!ENTITY abouthome.preferencesButtonUnix.label  "偏好設定">
-<!ENTITY abouthome.addonsButton.label    "附加元件">
-<!ENTITY abouthome.appsButton.label      "Marketplace">
+<!ENTITY abouthome.preferencesButtonUnix.label "偏好設定">
+<!ENTITY abouthome.addonsButton.label "附加元件">
+<!ENTITY abouthome.appsButton.label "市集">
 <!ENTITY abouthome.downloadsButton.label "下載項目">
-<!ENTITY abouthome.syncButton.label      "Sync">
+<!ENTITY abouthome.syncButton.label "同步">
