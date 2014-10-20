@@ -1,18 +1,18 @@
 <!ENTITY newtabtools.options.rows "Righe">
 <!ENTITY newtabtools.options.columns "Colonne">
-<!ENTITY newtabtools.options.grid.margin "Cornice griglia">
-<!ENTITY newtabtools.options.grid.spacing "Ampiezza griglia">
+<!ENTITY newtabtools.options.grid.margin "Cornice della griglia">
+<!ENTITY newtabtools.options.grid.spacing "Ampiezza della griglia">
 <!ENTITY newtabtools.options.size.small "Piccola">
 <!ENTITY newtabtools.options.size.medium "Media">
 <!ENTITY newtabtools.options.size.large "Grande">
-<!ENTITY newtabtools.options.recent.show "Mostra schede chiuse di recente">
+<!ENTITY newtabtools.options.recent.show "Mostra le schede chiuse di recente">
 <!ENTITY newtabtools.options.launcher "Barra degli strumenti">
 <!ENTITY newtabtools.options.launcher.hidden "Non mostrare">
 <!ENTITY newtabtools.options.launcher.top "In alto">
 <!ENTITY newtabtools.options.launcher.bottom "In basso">
 <!ENTITY newtabtools.options.launcher.left "A sinistra">
 <!ENTITY newtabtools.options.launcher.right "A destra">
-<!ENTITY newtabtools.options.thumbs.hidebuttons "Nascondi tasti anteprime">
+<!ENTITY newtabtools.options.thumbs.hidebuttons "Nascondi i tasti anteprime">
 <!ENTITY newtabtools.options.thumbs.hidefavicons "Nascondi le icone dei siti">
 <!ENTITY newtabtools.export "Esporta opzioni&#x2026;">
 <!ENTITY newtabtools.import "Importa opzioni&#x2026;">

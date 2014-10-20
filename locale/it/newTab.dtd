@@ -24,9 +24,9 @@
 <!ENTITY newtabtools.bg.remove "Rimuovi">
 
 <!ENTITY newtabtools.options-header "Opzioni:">
-<!ENTITY newtabtools.bg.dark-launcher "Usa sfondo scuro per la barra strumenti">
-<!ENTITY newtabtools.tile-thumbnails.contain "Mostra anteprima completa nelle icone">
-<!ENTITY newtabtools.tile-thumbnails.overlapTitle "Sovrapponi titoli delle icone alle anteprime">
+<!ENTITY newtabtools.bg.dark-launcher "Usa uno sfondo scuro per la barra strumenti">
+<!ENTITY newtabtools.tile-thumbnails.contain "Mostra l'anteprima completa nelle icone">
+<!ENTITY newtabtools.tile-thumbnails.overlapTitle "Sovrapponi i titoli delle icone alle anteprime">
 
 <!ENTITY newtabtools.donate.label "New Tab Tools si sostiene con le donazioni degli utenti.">
 <!ENTITY newtabtools.donate "Fai una donazione&#x2026;">
