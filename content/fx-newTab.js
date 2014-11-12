@@ -933,9 +933,13 @@ Site.prototype = {
    * Refreshes the thumbnail for the site.
    */
   refreshThumbnail: function Site_refreshThumbnail() {
-    let thumbnailURL = PageThumbs.getThumbnailURL(this.url);
-    let thumbnail = this._querySelector(".newtab-thumbnail");
-    thumbnail.style.backgroundImage = "url(" + thumbnailURL + ")";
+    let leafName = PageThumbsStorage.getLeafNameForURL(this.url);
+    let path = OS.Path.join(OS.Constants.Path.profileDir, "newtab-savedthumbs", leafName);
+    OS.File.exists(path).then((exists) => {
+      let thumbnailURL = exists ? Services.io.newFileURI(new FileUtils.File(path)).spec : PageThumbs.getThumbnailURL(this.url);
+      let thumbnail = this._querySelector(".newtab-thumbnail");
+      thumbnail.style.backgroundImage = "url(" + thumbnailURL + ")";
+    });
   },
 
   /**

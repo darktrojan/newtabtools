@@ -15,6 +15,10 @@ Cu.import("resource://gre/modules/NewTabUtils.jsm");
 Cu.import("resource://gre/modules/AddonManager.jsm");
 Cu.import("resource://gre/modules/XPCOMUtils.jsm");
 
+XPCOMUtils.defineLazyGetter(this, "thumbDir", function() {
+  return OS.Path.join(OS.Constants.Path.profileDir, "newtab-savedthumbs");
+});
+
 XPCOMUtils.defineLazyModuleGetter(this, "FileUtils", "resource://gre/modules/FileUtils.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "NewTabToolsExporter", "chrome://newtabtools/content/export.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "OS", "resource://gre/modules/osfile.jsm");
@@ -27,7 +31,6 @@ let userPrefs = Services.prefs.getBranch(EXTENSION_PREFS);
 
 function install(aParams, aReason) {
   if (aReason == ADDON_UPGRADE) {
-
     let showRecent = true;
     if (userPrefs.prefHasUserValue("recent.count")) {
       showRecent = userPrefs.getIntPref("recent.count") != 0;
@@ -40,6 +43,38 @@ function install(aParams, aReason) {
     if (browserPrefs.prefHasUserValue("columns") && !userPrefs.prefHasUserValue("columns")) {
       userPrefs.setIntPref("columns", browserPrefs.getIntPref("columns"));
     }
+
+    Services.tm.currentThread.dispatch(function () {
+      Task.spawn(function() {
+        let iterator = new OS.File.DirectoryIterator(PageThumbsStorage.path);
+        if (yield OS.File.exists(thumbDir)) {
+          let stat = yield OS.File.stat(thumbDir);
+          if (!stat.isDir) {
+            yield OS.File.remove(thumbDir);
+            yield OS.File.makeDir(thumbDir);
+          }
+        } else {
+          yield OS.File.makeDir(thumbDir);
+        }
+
+        while (true) {
+          let entry = yield iterator.next();
+          let file = new FileUtils.File(entry.path);
+          if (!file.isWritable()) {
+            yield OS.File.move(entry.path, OS.Path.join(thumbDir, entry.name));
+          }
+        }
+      }).then(
+        null,
+        // Clean up and return
+        function onFailure(reason) {
+          iterator.close();
+          if (reason != StopIteration) {
+            throw reason;
+          }
+        }
+      );
+    }.bind(this), Ci.nsIThread.DISPATCH_NORMAL);
   }
 }
 function uninstall(aParams, aReason) {
@@ -137,30 +172,6 @@ function startup(aParams, aReason) {
       }
     }
   });
-
-  Services.tm.currentThread.dispatch(function () {
-    let iterator = new OS.File.DirectoryIterator(PageThumbsStorage.path);
-
-    Task.spawn(function(){
-      while (true) {
-        let entry = yield iterator.next();
-        let file = new FileUtils.File(entry.path);
-        if (!file.isWritable()) {
-          Services.console.logStringMessage("Updating timestamp of " + file.leafName);
-          yield OS.File.setDates(entry.path);
-        }
-      }
-    }).then(
-      null,
-      // Clean up and return
-      function onFailure(reason) {
-        iterator.close();
-        if (reason != StopIteration) {
-          throw reason;
-        }
-      }
-    );
-  }.bind(this), Ci.nsIThread.DISPATCH_NORMAL);
 
   try {
     Cu.import("resource://gre/modules/DirectoryLinksProvider.jsm");
