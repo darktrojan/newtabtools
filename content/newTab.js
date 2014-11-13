@@ -161,12 +161,22 @@ let newTabTools = {
     let leafName = PageThumbsStorage.getLeafNameForURL(site.url);
     let path = OS.Path.join(OS.Constants.Path.profileDir, "newtab-savedthumbs", leafName);
     let file = FileUtils.File(path);
-    if (file.exists()) {
+    let existed = file.exists();
+    if (existed) {
       file.permissions = 0644;
       file.remove(true);
     }
 
     if (!src) {
+      if (!existed) {
+        path = PageThumbsStorage.getFilePathForURL(site.url);
+        file = FileUtils.File(path);
+        if (file.exists()) {
+          file.permissions = 0644;
+          file.remove(true);
+        }
+      }
+
       this.notifyTileChanged(site.url, "thumbnail");
       this.removeThumbnailButton.blur();
       return;
