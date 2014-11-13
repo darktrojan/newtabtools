@@ -14,6 +14,8 @@ XPCOMUtils.defineLazyModuleGetter(this, "FileUtils", "resource://gre/modules/Fil
 XPCOMUtils.defineLazyModuleGetter(this, "NetUtil", "resource://gre/modules/NetUtil.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "SessionStore", "resource:///modules/sessionstore/SessionStore.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "OS", "resource://gre/modules/osfile.jsm");
+XPCOMUtils.defineLazyModuleGetter(this, "Promise", "resource://gre/modules/Promise.jsm");
+XPCOMUtils.defineLazyModuleGetter(this, "PageThumbUtils", "resource://gre/modules/PageThumbUtils.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "PlacesUtils", "resource://gre/modules/PlacesUtils.jsm");
 
 XPCOMUtils.defineLazyServiceGetter(this, "faviconService", "@mozilla.org/browser/favicon-service;1", "mozIAsyncFavicons");
@@ -146,16 +148,18 @@ let newTabTools = {
     }
   },
   refreshThumbnail: function(aURL) {
-    let newThumbnailURL = PageThumbs.getThumbnailURL(aURL) + "&" + Math.random();
-    for (let cell of gGrid.cells) {
-      if (cell.site.url == aURL) {
-        let thumbnail = cell._node.querySelector("span.newtab-thumbnail");
-        thumbnail.style.backgroundImage = 'url("' + newThumbnailURL + '")';
+    this.getThumbnailURL(aURL).then((newThumbnailURL) => {
+      for (let cell of gGrid.cells) {
+        if (cell.site.url == aURL) {
+          let thumbnail = cell._node.querySelector("span.newtab-thumbnail");
+          thumbnail.style.backgroundImage = 'url("' + newThumbnailURL + '")';
+        };
       }
-    }
+    });
   },
   setThumbnail: function(site, src) {
-    let path = PageThumbsStorage.getFilePathForURL(site.url);
+    let leafName = PageThumbsStorage.getLeafNameForURL(site.url);
+    let path = OS.Path.join(OS.Constants.Path.profileDir, "newtab-savedthumbs", leafName);
     let file = FileUtils.File(path);
     if (file.exists()) {
       file.permissions = 0644;
@@ -170,7 +174,7 @@ let newTabTools = {
 
     let image = new Image();
     image.onload = function() {
-      let [thumbnailWidth, thumbnailHeight] = PageThumbs._getThumbnailSize();
+      let [thumbnailWidth, thumbnailHeight] = "_getThumbnailSize" in PageThumbs ? PageThumbs._getThumbnailSize() : PageThumbUtils.getThumbnailSize();
       let scale = Math.max(thumbnailWidth / image.width, thumbnailHeight / image.height);
 
       let canvas = document.createElementNS(HTML_NAMESPACE, "canvas");
@@ -185,7 +189,6 @@ let newTabTools = {
         let outputStream = FileUtils.openSafeFileOutputStream(file);
         NetUtil.asyncCopy(aInputStream, outputStream, function(aSuccessful) {
           FileUtils.closeSafeFileOutputStream(outputStream);
-          file.permissions = 0444;
           newTabTools.notifyTileChanged(site.url, "thumbnail");
         });
       }, "image/png");
@@ -401,12 +404,17 @@ let newTabTools = {
   set selectedSiteIndex(index) {
     this._selectedSiteIndex = index;
     let site = this.selectedSite;
-    let thumbnail = PageThumbs.getThumbnailURL(site.url) + "&" + Math.random();
-    this.siteThumbnail.style.backgroundImage = 'url("' + thumbnail + '")';
-    this.siteURL.value = site.url;
-    OS.File.exists(PageThumbsStorage.getFilePathForURL(site.url)).then((exists) => {
-      this.removeThumbnailButton.disabled = !exists;
+    this.getThumbnailURL(site.url).then((thumbnail) => {
+      this.siteThumbnail.style.backgroundImage = 'url("' + thumbnail + '")';
+      if (thumbnail.startsWith('file:')) {
+        this.removeThumbnailButton.disabled = false;
+      } else {
+        OS.File.exists(PageThumbsStorage.getFilePathForURL(site.url)).then((exists) => {
+          this.removeThumbnailButton.disabled = !exists;
+        });
+      }
     });
+    this.siteURL.value = site.url;
     this.setTitleInput.value = site._annoTitle || site.title || site.url;
     this.resetTitleButton.disabled = !('_annoTitle' in site);
   },
@@ -422,6 +430,21 @@ let newTabTools = {
   hideOptions: function() {
     this.optionsBackground.hidden = this.optionsPane.hidden = true;
     this.optionsToggleButton.hidden = false;
+  },
+  getThumbnailURL: function(url) {
+    let deferred = Promise.defer();
+
+    let leafName = PageThumbsStorage.getLeafNameForURL(url);
+    let path = OS.Path.join(OS.Constants.Path.profileDir, "newtab-savedthumbs", leafName);
+    OS.File.exists(path).then((exists) => {
+      if (exists) {
+        deferred.resolve(Services.io.newFileURI(new FileUtils.File(path)).spec + '?' + Math.random());
+      } else {
+        deferred.resolve(PageThumbs.getThumbnailURL(url) + '&' + Math.random());
+      }
+    });
+
+    return deferred.promise;
   }
 };
 
