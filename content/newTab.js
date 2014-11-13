@@ -49,7 +49,10 @@ let newTabTools = {
     }
   },
   get selectedSite() {
-    return gGrid.cells[this._selectedSiteIndex]._node.firstChild._newtabSite;
+    let node = gGrid.cells[this._selectedSiteIndex]._node;
+    if (node.firstChild)
+      return node.firstChild._newtabSite;
+    return null;
   },
   optionsOnClick: function(event) {
     let id = event.originalTarget.id;
@@ -414,6 +417,26 @@ let newTabTools = {
   set selectedSiteIndex(index) {
     this._selectedSiteIndex = index;
     let site = this.selectedSite;
+    let disabled = site == null;
+
+    this.browseThumbnailButton.disabled = disabled;
+    this.setThumbnailInput.value = '';
+    this.setThumbnailInput.disabled = disabled;
+    this.setTitleInput.disabled = disabled;
+    this.setTitleButton.disabled = disabled;
+    this.browseBackgroundButton.disabled = disabled;
+    this.setBackgroundInput.value = '';
+    this.setBackgroundInput.disabled = disabled;
+
+    if (disabled) {
+      this.siteThumbnail.style.backgroundImage = null;
+      this.removeThumbnailButton.disabled = true;
+      this.siteURL.value = '';
+      this.setTitleInput.value = '';
+      this.resetTitleButton.disabled = true;
+      return;
+    }
+
     this.getThumbnailURL(site.url).then((thumbnail) => {
       this.siteThumbnail.style.backgroundImage = 'url("' + thumbnail + '")';
       if (thumbnail.startsWith('file:')) {
@@ -488,11 +511,14 @@ let newTabTools = {
     "pinURLInput": "options-pinURL-input",
     "siteThumbnail": "options-thumbnail",
     "siteURL": "options-url",
+    "browseThumbnailButton": "options-thumbnail-browse",
     "setThumbnailInput": "options-thumbnail-input",
     "setThumbnailButton": "options-thumbnail-set",
     "removeThumbnailButton": "options-thumbnail-remove",
     "setTitleInput": "options-title-input",
     "resetTitleButton": "options-title-reset",
+    "setTitleButton": "options-title-set",
+    "browseBackgroundButton": "options-bg-browse",
     "setBackgroundInput": "options-bg-input",
     "setBackgroundButton": "options-bg-set",
     "removeBackgroundButton": "options-bg-remove",
