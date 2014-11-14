@@ -14,7 +14,6 @@ XPCOMUtils.defineLazyModuleGetter(this, "FileUtils", "resource://gre/modules/Fil
 XPCOMUtils.defineLazyModuleGetter(this, "NetUtil", "resource://gre/modules/NetUtil.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "SessionStore", "resource:///modules/sessionstore/SessionStore.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "OS", "resource://gre/modules/osfile.jsm");
-XPCOMUtils.defineLazyModuleGetter(this, "Promise", "resource://gre/modules/Promise.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "PageThumbUtils", "resource://gre/modules/PageThumbUtils.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "PlacesUtils", "resource://gre/modules/PlacesUtils.jsm");
 
@@ -127,15 +126,17 @@ let newTabTools = {
     }
   },
   pinURL: function(link, title) {
-    let sites = gGrid.sites;
-    sites.unshift(null);
-    gTransformation.rearrangeSites(sites);
-
-    let pinnedSites = sites.filter(function (aSite) { return aSite && aSite.isPinned(); });
-    pinnedSites.forEach(function (aSite) { aSite.pin(sites.indexOf(aSite)); }, this);
+    let index = gGrid.sites.length - 1;
+    for (var i = 0; i < gGrid.sites.length; i++) {
+      let s = gGrid.sites[i];
+      if (s && !s.isPinned()) {
+        index = i;
+        break;
+      }
+    }
 
     gBlockedLinks.unblock(link);
-    gPinnedLinks.pin({url: link, title: title}, 0);
+    gPinnedLinks.pin({url: link, title: title}, index);
     gUpdater.updateGrid();
   },
   notifyTileChanged: function(url, whatChanged) {
