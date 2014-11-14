@@ -49,10 +49,7 @@ let newTabTools = {
     }
   },
   get selectedSite() {
-    let node = gGrid.cells[this._selectedSiteIndex]._node;
-    if (node.firstChild)
-      return node.firstChild._newtabSite;
-    return null;
+    return gGrid.sites[this._selectedSiteIndex];
   },
   optionsOnClick: function(event) {
     let id = event.originalTarget.id;
