@@ -8,6 +8,7 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 <?xml-stylesheet href="chrome://newtabtools/content/fx-newTab.css" type="text/css"?>
 <?xml-stylesheet href="chrome://newtabtools/skin/fx-newTab.css" type="text/css"?>
 <?xml-stylesheet href="chrome://newtabtools/content/newTab.css" type="text/css"?>
+<?xml-stylesheet href="chrome://newtabtools/content/hidden.css" type="text/css"?>
 
 <!DOCTYPE window [
   <!ENTITY % newTabDTD SYSTEM "chrome://browser/locale/newTab.dtd">
@@ -27,7 +28,7 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
             disablefastfind="true" title="&newtab.pageTitle;">
 
   <div id="newtab-scrollbox">
-    <div id="newtab-vertical-margin">
+    <div id="newtab-vertical-margin" autohide="true">
       <div id="newtab-margin-top" align="end">
         <div id="newtab-margin-left-top" class="newtab-side-margin"/>
         <xul:scrollbox id="newtab-recent-outer" flex="1" align="center">
@@ -58,7 +59,7 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
     <input id="options-toggle" type="button"/>
     <input id="newtab-toggle" type="button" title="&newtabtools.page.show;" />
 
-    <div id="launcher">
+    <div id="launcher" autohide="true">
       <button class="launchButton" id="downloads">&abouthome.downloadsButton.label;</button>
       <button class="launchButton" id="bookmarks">&abouthome.bookmarksButton.label;</button>
       <button class="launchButton" id="history">&abouthome.historyButton.label;</button>

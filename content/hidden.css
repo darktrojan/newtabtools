@@ -1,0 +1,61 @@
+[autohide] {
+  opacity: 0;
+  transition: opacity 500ms !important;
+}
+[autohide]:hover {
+  opacity: 1;
+  transition: opacity 250ms;
+}
+#newtab-recent > span {
+  /*color: rgba(255, 255, 255, 0.8);*/
+  color: rgba(31, 54, 76, 0.8);
+  /*text-shadow: 0 0 3px black;*/
+  text-shadow: 0 0 3px white;
+}
+.recent {
+  /*background-color: rgba(0, 0, 0, 0.1);*/
+  background-color: rgba(255, 255, 255, 0.1);
+  /*color: rgba(255, 255, 255, 0.8);*/
+  color: rgba(31, 54, 76, 0.8);
+  /*text-shadow: 0 0 3px black;*/
+  text-shadow: 0 0 3px white;
+}
+.recent:hover {
+  text-shadow: none;
+}
+.newtab-cell {
+  border: none;
+  background-color: transparent;
+}
+.newtab-site:hover {
+  box-shadow: none;
+}
+.newtab-thumbnail {
+  /*background-color: rgba(0, 0, 0, 0.2);*/
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.newtab-site:hover .newtab-thumbnail {
+  box-shadow: 0px 0px 10px rgba(8, 22, 37, 0.3);
+}
+.newtab-title {
+  background: none;
+  /*color: rgba(255, 255, 255, 0.8);*/
+  color: rgba(31, 54, 76, 0.8);
+  text-align: center;
+  /*text-shadow: 0 0 3px black;*/
+  text-shadow: 0 0 3px white;
+  border-top: none;
+}
+.newtab-site:hover .newtab-title {
+  /*color: #fff;*/
+  color: #1F364C;
+}
+.newtab-title > .favicon {
+  opacity: 0.8;
+}
+.newtab-site:hover .newtab-title > .favicon {
+  opacity: 1;
+}
+.newtab-site[dragged] {
+  background-color: transparent;
+}
