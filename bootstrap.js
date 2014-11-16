@@ -220,7 +220,7 @@ function shutdown(aParams, aReason) {
 
   expirationFilter.cleanup();
 
-  if (DirectoryLinksProvider) {
+  if ("DirectoryLinksProvider" in this) {
     // Removing a startup observer at shutdown is absurd, but oh well.
     Services.obs.removeObserver(startupObserver, "browser-ui-startup-complete");
     NewTabUtils.links.addProvider(DirectoryLinksProvider);
