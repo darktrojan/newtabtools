@@ -196,7 +196,7 @@ function startup(aParams, aReason) {
     // DirectoryLinksProvider.jsm might not exist.
   }
 
-  if (aReason != ADDON_INSTALL && Services.vc.compare(userPrefs.getIntPref("donationreminder"), aParams.version) == -1) {
+  if (aReason != ADDON_INSTALL && userPrefs.getIntPref("donationreminder") < parseInt(aParams.version)) {
     idleService.addIdleObserver(idleObserver, IDLE_TIMEOUT);
   }
 }
