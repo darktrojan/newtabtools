@@ -151,7 +151,7 @@ let newTabTools = {
   refreshThumbnail: function(aURL) {
     this.getThumbnailURL(aURL).then((newThumbnailURL) => {
       for (let cell of gGrid.cells) {
-        if (cell.site.url == aURL) {
+        if (cell.site && cell.site.url == aURL) {
           let thumbnail = cell._node.querySelector("span.newtab-thumbnail");
           thumbnail.style.backgroundImage = 'url("' + newThumbnailURL + '")';
         };

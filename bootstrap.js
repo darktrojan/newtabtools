@@ -51,20 +51,22 @@ function install(aParams, aReason) {
     if (browserPrefs.prefHasUserValue("columns") && !userPrefs.prefHasUserValue("columns")) {
       userPrefs.setIntPref("columns", browserPrefs.getIntPref("columns"));
     }
+  }
 
-    Services.tm.currentThread.dispatch(function () {
-      Task.spawn(function() {
-        let iterator = new OS.File.DirectoryIterator(PageThumbsStorage.path);
-        if (yield OS.File.exists(thumbDir)) {
-          let stat = yield OS.File.stat(thumbDir);
-          if (!stat.isDir) {
-            yield OS.File.remove(thumbDir);
-            yield OS.File.makeDir(thumbDir);
-          }
-        } else {
+  Services.tm.currentThread.dispatch(function () {
+    Task.spawn(function() {
+      if (yield OS.File.exists(thumbDir)) {
+        let stat = yield OS.File.stat(thumbDir);
+        if (!stat.isDir) {
+          yield OS.File.remove(thumbDir);
           yield OS.File.makeDir(thumbDir);
         }
+      } else {
+        yield OS.File.makeDir(thumbDir);
+      }
 
+      if (aReason == ADDON_UPGRADE) {
+        let iterator = new OS.File.DirectoryIterator(PageThumbsStorage.path);
         while (true) {
           let entry = yield iterator.next();
           let file = new FileUtils.File(entry.path);
@@ -72,18 +74,18 @@ function install(aParams, aReason) {
             yield OS.File.move(entry.path, OS.Path.join(thumbDir, entry.name));
           }
         }
-      }).then(
-        null,
-        // Clean up and return
-        function onFailure(reason) {
-          iterator.close();
-          if (reason != StopIteration) {
-            throw reason;
-          }
+      }
+    }).then(
+      null,
+      // Clean up and return
+      function onFailure(reason) {
+        iterator.close();
+        if (reason != StopIteration) {
+          throw reason;
         }
-      );
-    }.bind(this), Ci.nsIThread.DISPATCH_NORMAL);
-  }
+      }
+    );
+  }.bind(this), Ci.nsIThread.DISPATCH_NORMAL);
 }
 function uninstall(aParams, aReason) {
   if (aReason == ADDON_UNINSTALL) {
@@ -188,7 +190,7 @@ function startup(aParams, aReason) {
       NewTabUtils.links.removeProvider(DirectoryLinksProvider);
       NewTabUtils.links.resetCache();
     } else {
-      Services.obs.addObserver(startupObserver, "browser-ui-startup-complete", false);
+      startupObserver.add();
     }
   } catch(e) {
     // DirectoryLinksProvider.jsm might not exist.
@@ -222,7 +224,7 @@ function shutdown(aParams, aReason) {
 
   if ("DirectoryLinksProvider" in this) {
     // Removing a startup observer at shutdown is absurd, but oh well.
-    Services.obs.removeObserver(startupObserver, "browser-ui-startup-complete");
+    startupObserver.remove();
     NewTabUtils.links.addProvider(DirectoryLinksProvider);
   }
 
@@ -374,6 +376,16 @@ let expirationFilter = {
 
 // Observes browser-ui-startup-complete.
 let startupObserver = {
+  added: false,
+  add: function() {
+    Services.obs.addObserver(this, "browser-ui-startup-complete", false);
+    this.added = true;
+  },
+  remove: function() {
+    if (this.added) {
+      Services.obs.removeObserver(startupObserver, "browser-ui-startup-complete");
+    }
+  },
   observe: function(aSubject, aTopic, aData) {
     // DirectoryLinksProvider removed at startup.
     NewTabUtils.links.removeProvider(DirectoryLinksProvider);
