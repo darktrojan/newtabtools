@@ -389,27 +389,6 @@ let newTabTools = {
   },
   onVisible: function() {
     this.startRecent();
-
-    let oldVersion = newTabTools.prefs.getIntPref("donationreminder");
-    let currentVersion = newTabTools.prefs.getIntPref("version");
-    if (oldVersion > 0 && oldVersion < 29) {
-      setTimeout(function() {
-        let notifyBox = newTabTools.browserWindow.getNotificationBox(window);
-        let label = newTabTools.strings.formatStringFromName("newversion", [currentVersion], 1);
-        let value = "newtabtools-donate";
-        let buttons = [{
-          label: newTabTools.strings.GetStringFromName("donate.label"),
-          accessKey: newTabTools.strings.GetStringFromName("donate.accesskey"),
-          popup: null,
-          callback: function() {
-            let url = "https://addons.mozilla.org/addon/new-tab-tools/about";
-            newTabTools.browserWindow.openLinkIn(url, "current", {});
-          }
-        }];
-        newTabTools.prefs.setIntPref("donationreminder", currentVersion);
-        notifyBox.appendNotification(label, value, null, notifyBox.PRIORITY_INFO_LOW, buttons);
-      }, 1000)
-    }
     this.onVisible = function() {};
   },
   set selectedSiteIndex(index) {

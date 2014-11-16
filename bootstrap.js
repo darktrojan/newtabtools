@@ -10,6 +10,9 @@ const ADDON_ID = "newtabtools@darktrojan.net";
 const BROWSER_PREFS = "browser.newtabpage.";
 const EXTENSION_PREFS = "extensions.newtabtools.";
 
+const BROWSER_WINDOW = "navigator:browser";
+const IDLE_TIMEOUT = 10;
+
 Cu.import("resource://gre/modules/Services.jsm");
 Cu.import("resource://gre/modules/NewTabUtils.jsm");
 Cu.import("resource://gre/modules/AddonManager.jsm");
@@ -18,6 +21,9 @@ Cu.import("resource://gre/modules/XPCOMUtils.jsm");
 XPCOMUtils.defineLazyGetter(this, "thumbDir", function() {
   return OS.Path.join(OS.Constants.Path.profileDir, "newtab-savedthumbs");
 });
+XPCOMUtils.defineLazyGetter(this, "strings", function() {
+  return Services.strings.createBundle("chrome://newtabtools/locale/newTabTools.properties");
+});
 
 XPCOMUtils.defineLazyModuleGetter(this, "FileUtils", "resource://gre/modules/FileUtils.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "NewTabToolsExporter", "chrome://newtabtools/content/export.jsm");
@@ -25,6 +31,8 @@ XPCOMUtils.defineLazyModuleGetter(this, "OS", "resource://gre/modules/osfile.jsm
 XPCOMUtils.defineLazyModuleGetter(this, "PageThumbs", "resource://gre/modules/PageThumbs.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "PageThumbsStorage", "resource://gre/modules/PageThumbs.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "Task", "resource://gre/modules/Task.jsm");
+
+XPCOMUtils.defineLazyServiceGetter(this, "idleService", "@mozilla.org/widget/idleservice;1", "nsIIdleService");
 
 let browserPrefs = Services.prefs.getBranch(BROWSER_PREFS);
 let userPrefs = Services.prefs.getBranch(EXTENSION_PREFS);
@@ -151,7 +159,7 @@ function startup(aParams, aReason) {
     aWindow.location.reload();
   });
 
-  let windowEnum = Services.wm.getEnumerator("navigator:browser");
+  let windowEnum = Services.wm.getEnumerator(BROWSER_WINDOW);
   while (windowEnum.hasMoreElements()) {
     windowObserver.paint(windowEnum.getNext());
   }
@@ -185,6 +193,10 @@ function startup(aParams, aReason) {
   } catch(e) {
     // DirectoryLinksProvider.jsm might not exist.
   }
+
+  if (aReason != ADDON_INSTALL && Services.vc.compare(userPrefs.getIntPref("donationreminder"), aParams.version) == -1) {
+    idleService.addIdleObserver(idleObserver, IDLE_TIMEOUT);
+  }
 }
 function shutdown(aParams, aReason) {
   if (aReason == APP_SHUTDOWN) {
@@ -194,7 +206,7 @@ function shutdown(aParams, aReason) {
   NewTabUtils.links.getLinks = NewTabUtils.links._oldGetLinks;
   delete NewTabUtils.links._oldGetLinks;
 
-  let windowEnum = Services.wm.getEnumerator("navigator:browser");
+  let windowEnum = Services.wm.getEnumerator(BROWSER_WINDOW);
   while (windowEnum.hasMoreElements()) {
     windowObserver.unpaint(windowEnum.getNext());
   }
@@ -212,6 +224,11 @@ function shutdown(aParams, aReason) {
     // Removing a startup observer at shutdown is absurd, but oh well.
     Services.obs.removeObserver(startupObserver, "browser-ui-startup-complete");
     NewTabUtils.links.addProvider(DirectoryLinksProvider);
+  }
+
+  try {
+    idleService.removeIdleObserver(idleObserver, IDLE_TIMEOUT);
+  } catch (e) { // might be already removed
   }
 }
 
@@ -361,5 +378,29 @@ let startupObserver = {
     // DirectoryLinksProvider removed at startup.
     NewTabUtils.links.removeProvider(DirectoryLinksProvider);
     NewTabUtils.links.resetCache();
+  }
+};
+
+let idleObserver = {
+  observe: function(aSubject, aTopic, aData) {
+    idleService.removeIdleObserver(this, IDLE_TIMEOUT);
+
+    let version = userPrefs.getIntPref("version");
+    let recentWindow = Services.wm.getMostRecentWindow(BROWSER_WINDOW);
+    let browser = recentWindow.gBrowser;
+    let notificationBox = browser.getNotificationBox();
+    let message = strings.formatStringFromName("newversion", [version], 1);
+    let label = strings.GetStringFromName("donate.label");
+    let accessKey = strings.GetStringFromName("donate.accesskey");
+
+    notificationBox.appendNotification(message, "newtabtools-donate", null, notificationBox.PRIORITY_INFO_MEDIUM, [{
+      label: label,
+      accessKey: accessKey,
+      callback: function() {
+        browser.selectedTab = browser.addTab("https://addons.mozilla.org/addon/new-tab-tools/contribute/installed/");
+      }
+    }]);
+
+    userPrefs.setIntPref("donationreminder", version);
   }
 };
