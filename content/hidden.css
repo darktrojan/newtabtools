@@ -1,8 +1,27 @@
-[autohide] {
+#launcher[autohide] {
   opacity: 0;
   transition: opacity 500ms !important;
 }
-[autohide]:hover {
+[autohide] #newtab-recent-outer,
+[autohide] .newtab-row:nth-child(1) {
+  opacity: 0;
+  transition: opacity 500ms 300ms;
+}
+[autohide] .newtab-row:nth-child(2) {
+  opacity: 0;
+  transition: opacity 500ms 200ms;
+}
+[autohide] .newtab-row:nth-child(3) {
+  opacity: 0;
+  transition: opacity 500ms 100ms;
+}
+[autohide] .newtab-row:nth-child(4) {
+  opacity: 0;
+  transition: opacity 500ms;
+}
+#launcher[autohide]:hover,
+[autohide]:hover #newtab-recent-outer,
+[autohide]:hover .newtab-row {
   opacity: 1;
   transition: opacity 250ms;
 }
