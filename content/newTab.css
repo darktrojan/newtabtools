@@ -162,12 +162,8 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 }
 :root[launcher] #launcher {
   display: -moz-box;
-  border-width: 0;
-  border-style: solid;
-  border-color: hsla(0, 0%, 0%, .03);
   -moz-box-align: center;
   -moz-box-pack: center;
-  background-color: hsla(0, 0%, 0%, .03);
   text-align: center;
 }
 :root[launcher="top"] #launcher,
@@ -180,138 +176,102 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
   -moz-box-orient: vertical;
   width: 90px;
 }
-:root[launcher="top"] #launcher {
-  border-bottom-width: 1px;
-  box-shadow: 0 -1px 2px hsla(0, 0%, 0%, .02) inset,
-              0 1px 0 hsla(0, 0%, 100%, .25);
-  -moz-box-ordinal-group: 0;
-}
-:root[launcher="right"] #launcher {
-  border-left-width: 1px;
-  box-shadow: 1px 0 2px hsla(0, 0%, 0%, .02) inset,
-              -1px 0 0 hsla(0, 0%, 100%, .25);
-}
-:root[launcher="bottom"] #launcher {
-  border-top-width: 1px;
-  box-shadow: 0 1px 2px hsla(0, 0%, 0%, .02) inset,
-              0 -1px 0 hsla(0, 0%, 100%, .25);
-}
+:root[launcher="top"] #launcher,
 :root[launcher="left"] #launcher {
-  border-right-width: 1px;
-  box-shadow: -1px 0 2px hsla(0, 0%, 0%, .02) inset,
-              1px 0 0 hsla(0, 0%, 100%, .25);
   -moz-box-ordinal-group: 0;
 }
 .launchButton {
   display: -moz-box;
   -moz-box-orient: vertical;
   margin: 1px 1px;
-  padding: 14px 6px;
+  padding: 10px 6px;
   min-width: 88px;
   max-width: 176px;
   max-height: 85px;
   vertical-align: top;
   white-space: normal;
-  background: transparent padding-box;
-  border: 1px solid transparent;
-  border-radius: 2.5px;
-  color: #525c66;
+  background: none;
+  border: none;
+  /*color: rgba(255, 255, 255, 0.8);*/
+  color: rgba(31, 54, 76, 0.8);
+  /*text-shadow: 0 0 3px black;*/
+  text-shadow: 0 0 3px white;
   font-family: inherit;
   font-size: 12px;
   cursor: pointer;
-  transition-property: background-color, border-color, box-shadow;
-  transition-duration: 150ms;
 }
 .launchButton:hover {
-  background-color: hsla(211, 79%, 6%, .03);
-  border-color: hsla(210, 54%, 20%, .15) hsla(210, 54%, 20%, .17) hsla(210, 54%, 20%, .2);
-}
-.launchButton:hover:active {
-  background-image: linear-gradient(hsla(211, 79%, 6%, .02), hsla(211, 79%, 6%, .05));
-  border-color: hsla(210, 54%, 20%, .2) hsla(210, 54%, 20%, .23) hsla(210, 54%, 20%, .25);
-  box-shadow: 0 1px 1px hsla(211, 79%, 6%, .05) inset,
-              0 0 1px hsla(211, 79%, 6%, .1) inset;
-  transition-duration: 0ms;
+  /*color: rgba(255, 255, 255, 1);*/
+  color: rgba(31, 54, 76, 1);
 }
 .launchButton::before {
   display: block;
-  height: 32px;
-  margin-bottom: 6px;
+  height: 36px;
   line-height: 0;
+  opacity: 0.8;
+  background-position: center;
+  background-repeat: no-repeat;
+  content: "";
+  margin-bottom: 2px;
 }
-:root.background #launcher {
-  background-color: hsla(0, 0%, 100%, .3);
-  box-shadow: none;
-}
-:root.background #launcher.dark {
-  background-color: hsla(0, 0%, 0%, .3)
-}
-:root.background .launchButton:hover {
-  background-color: hsla(211, 80%, 100%, .6);
-  border-color: hsla(210, 54%, 20%, .3) hsla(210, 54%, 20%, .3) hsla(210, 54%, 20%, .4);
-}
-:root.background #launcher.dark .launchButton {
-  color: #fff;
-  text-shadow: 0 0 2px #000;
-}
-:root.background #launcher.dark .launchButton:hover {
-  background-color: hsla(0, 0%, 0%, .3);
-  border-color: hsla(0, 0%, 100%, .3);
+.launchButton:hover::before {
+  opacity: 1;
 }
 #launcher:not([session]) > #restorePreviousSession {
   display: none;
 }
 #downloads::before {
-  content: url("chrome://browser/content/abouthome/downloads.png");
+  background-image: url("chrome://newtabtools/content/launcher/light/downloads.png");
 }
 #bookmarks::before {
-  content: url("chrome://browser/content/abouthome/bookmarks.png");
+  background-image: url("chrome://newtabtools/content/launcher/light/bookmarks.png");
 }
 #history::before {
-  content: url("chrome://browser/content/abouthome/history.png");
+  background-image: url("chrome://newtabtools/content/launcher/light/history.png");
 }
 #addons::before {
-  content: url("chrome://browser/content/abouthome/addons.png");
+  background-image: url("chrome://newtabtools/content/launcher/light/addons.png");
 }
 #sync::before {
-  content: url("chrome://browser/content/abouthome/sync.png");
+  background-image: url("chrome://newtabtools/content/launcher/light/sync.png");
 }
 #settingsWin::before,
 #settingsUnix::before {
-  content: url("chrome://browser/content/abouthome/settings.png");
+  background-image: url("chrome://newtabtools/content/launcher/light/settings.png");
 }
 #restorePreviousSession::before {
-  content: url("chrome://browser/content/abouthome/restore.png");
+  background-image: url("chrome://newtabtools/content/launcher/light/restore.png");
 }
 #restorePreviousSession:-moz-dir(rtl)::before {
   transform: scaleX(-1);
 }
 :root[launcher="left"] #restorePreviousSession,
 :root[launcher="right"] #restorePreviousSession {
-  height: calc(3.75em + 74px);
+  /*height: calc(3.75em + 74px);*/
+  height: 105px;
   max-height: none;
 }
 :root.background #launcher.dark #downloads::before {
-  content: url("chrome://newtabtools/content/launcher/downloads.png");
+  background-image: url("chrome://newtabtools/content/launcher/dark/downloads.png");
 }
 :root.background #launcher.dark #bookmarks::before {
-  content: url("chrome://newtabtools/content/launcher/bookmarks.png");
+  background-image: url("chrome://newtabtools/content/launcher/dark/bookmarks.png");
 }
 :root.background #launcher.dark #history::before {
-  content: url("chrome://newtabtools/content/launcher/history.png");
+  background-image: url("chrome://newtabtools/content/launcher/dark/history.png");
 }
 :root.background #launcher.dark #addons::before {
-  content: url("chrome://newtabtools/content/launcher/addons.png");
+  background-image: url("chrome://newtabtools/content/launcher/dark/addons.png");
 }
 :root.background #launcher.dark #sync::before {
-  content: url("chrome://newtabtools/content/launcher/sync.png");
+  background-image: url("chrome://newtabtools/content/launcher/dark/sync.png");
 }
 :root.background #launcher.dark #settingsWin::before,
 :root.background #launcher.dark #settingsUnix::before {
-  content: url("chrome://newtabtools/content/launcher/settings.png");
+  background-image: url("chrome://newtabtools/content/launcher/dark/settings.png");
 }
 :root.background #launcher.dark #restorePreviousSession::before {
-  content: url("chrome://newtabtools/content/launcher/restore.png");
+  background-image: url("chrome://newtabtools/content/launcher/dark/restore.png");
 }
 #options-toggle {
   position: absolute;
