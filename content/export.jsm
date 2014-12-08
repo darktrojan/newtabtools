@@ -109,15 +109,15 @@ function exportSave(aReturnValues) {
 					keys.push("extensions.newtabtools.grid.margin", "extensions.newtabtools.grid.spacing");
 					break;
 				case "thumbs.position":
-					keys.push("extensions.newtabtools.thumbs.contain", "extensions.newtabtools.thumbs.overlaptitle");
+					keys.push("extensions.newtabtools.thumbs.contain");
 					break;
 				case "blocked":
 				case "pinned":
 					keys.push("browser.newtabpage." + name);
 					break;
 				case "launcher":
-				case "launcher.dark":
 				case "recent.show":
+				case "theme":
 				case "thumbs.hidebuttons":
 				case "thumbs.hidefavicons":
 					keys.push("extensions.newtabtools." + name);
@@ -302,7 +302,6 @@ function importSave(aReturnValues) {
 					copyPref("extensions.newtabtools.grid.spacing");
 				} else if (name == "thumbs.position") {
 					copyPref("extensions.newtabtools.thumbs.contain");
-					copyPref("extensions.newtabtools.thumbs.overlaptitle");
 				} else if (("browser.newtabpage." + name) in aReturnValues.prefs) {
 					copyPref("browser.newtabpage." + name);
 				} else if (("extensions.newtabtools." + name) in aReturnValues.prefs) {

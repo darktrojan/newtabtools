@@ -91,12 +91,6 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
   background-size: contain;
   background-position: 50% 50%;
 }
-:root.overlapTitle .newtab-thumbnail {
-  margin-bottom: 0;
-}
-:root.overlapTitle .newtab-title {
-  border-top-width: 0;
-}
 :root.hideButtons .newtab-site > input {
   display: none;
 }
@@ -192,17 +186,21 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
   white-space: normal;
   background: none;
   border: none;
-  /*color: rgba(255, 255, 255, 0.8);*/
   color: rgba(31, 54, 76, 0.8);
-  /*text-shadow: 0 0 3px black;*/
   text-shadow: 0 0 3px white;
   font-family: inherit;
   font-size: 12px;
   cursor: pointer;
 }
+:root[theme="dark"] .launchButton {
+  color: rgba(255, 255, 255, 0.8);
+  text-shadow: 0 0 3px black;
+}
 .launchButton:hover {
-  /*color: rgba(255, 255, 255, 1);*/
   color: rgba(31, 54, 76, 1);
+}
+:root[theme="dark"] .launchButton:hover {
+  color: rgba(255, 255, 255, 1);
 }
 .launchButton::before {
   display: block;
@@ -251,26 +249,26 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
   height: 105px;
   max-height: none;
 }
-:root.background #launcher.dark #downloads::before {
+:root[theme="dark"] #downloads::before {
   background-image: url("chrome://newtabtools/content/launcher/dark/downloads.png");
 }
-:root.background #launcher.dark #bookmarks::before {
+:root[theme="dark"] #bookmarks::before {
   background-image: url("chrome://newtabtools/content/launcher/dark/bookmarks.png");
 }
-:root.background #launcher.dark #history::before {
+:root[theme="dark"] #history::before {
   background-image: url("chrome://newtabtools/content/launcher/dark/history.png");
 }
-:root.background #launcher.dark #addons::before {
+:root[theme="dark"] #addons::before {
   background-image: url("chrome://newtabtools/content/launcher/dark/addons.png");
 }
-:root.background #launcher.dark #sync::before {
+:root[theme="dark"] #sync::before {
   background-image: url("chrome://newtabtools/content/launcher/dark/sync.png");
 }
-:root.background #launcher.dark #settingsWin::before,
-:root.background #launcher.dark #settingsUnix::before {
+:root[theme="dark"] #settingsWin::before,
+:root[theme="dark"] #settingsUnix::before {
   background-image: url("chrome://newtabtools/content/launcher/dark/settings.png");
 }
-:root.background #launcher.dark #restorePreviousSession::before {
+:root[theme="dark"] #restorePreviousSession::before {
   background-image: url("chrome://newtabtools/content/launcher/dark/restore.png");
 }
 #options-toggle {
@@ -375,7 +373,8 @@ setting[type="integer"] {
 setting[type="control"] {
   -moz-binding: url("chrome://mozapps/content/extensions/setting.xml#setting-control");
 }
-setting[type="menulist"] {
+setting[type="menulist"],
+setting[type="radio"] {
   -moz-binding: url("chrome://newtabtools/content/setting.xml#setting-multi");
 }
 .preferences-alignment {

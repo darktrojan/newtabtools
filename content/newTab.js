@@ -257,14 +257,11 @@ let newTabTools = {
       document.documentElement.removeAttribute("launcher");
     }
 
-    let launcherDark = this.prefs.getBoolPref("launcher.dark");
-    this.launcher.classList[launcherDark ? "add" : "remove"]("dark");
+    let theme = this.prefs.getCharPref("theme");
+    document.documentElement.setAttribute("theme", theme);
 
     let containThumbs = this.prefs.getBoolPref("thumbs.contain");
     document.documentElement.classList[containThumbs ? "add" : "remove"]("containThumbs");
-
-    let overlapTitle = this.prefs.getBoolPref("thumbs.overlaptitle");
-    document.documentElement.classList[overlapTitle ? "add" : "remove"]("overlapTitle");
 
     let hideButtons = this.prefs.getBoolPref("thumbs.hidebuttons");
     document.documentElement.classList[hideButtons ? "add" : "remove"]("hideButtons");

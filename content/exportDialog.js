@@ -27,7 +27,7 @@ if (returnValues.importing) {
 			checkbox.disabled = !("extensions.newtabtools.grid.margin" in returnValues.prefs) || !("extensions.newtabtools.grid.spacing" in returnValues.prefs);
 			break;
 		case "prefs.thumbs.position":
-			checkbox.disabled = !("extensions.newtabtools.thumbs.contain" in returnValues.prefs) || !("extensions.newtabtools.thumbs.overlaptitle" in returnValues.prefs);
+			checkbox.disabled = !("extensions.newtabtools.thumbs.contain" in returnValues.prefs);
 			break;
 		case "prefs.thumbs.hidebuttons":
 		case "prefs.thumbs.hidefavicons":

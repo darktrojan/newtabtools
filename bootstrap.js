@@ -100,10 +100,9 @@ function startup(aParams, aReason) {
   defaultPrefs.setCharPref("grid.margin", "small small small small");
   defaultPrefs.setCharPref("grid.spacing", "small");
   defaultPrefs.setIntPref("launcher", 3);
-  defaultPrefs.setBoolPref("launcher.dark", false);
   defaultPrefs.setBoolPref("recent.show", true);
+  defaultPrefs.setCharPref("theme", "light");
   defaultPrefs.setBoolPref("thumbs.contain", false);
-  defaultPrefs.setBoolPref("thumbs.overlaptitle", true);
   defaultPrefs.setBoolPref("thumbs.hidebuttons", false);
   defaultPrefs.setBoolPref("thumbs.hidefavicons", false);
 
@@ -240,9 +239,8 @@ let prefObserver = {
     case "grid.margin":
     case "grid.spacing":
     case "launcher":
-    case "launcher.dark":
+    case "theme":
     case "thumbs.contain":
-    case "thumbs.overlaptitle":
     case "thumbs.hidebuttons":
     case "thumbs.hidefavicons":
       enumerateTabs(function(aWindow) {

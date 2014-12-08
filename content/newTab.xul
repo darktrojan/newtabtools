@@ -169,14 +169,16 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
                   </xul:menupopup>
                 </xul:menulist>
               </xul:setting>
-              <xul:setting pref="extensions.newtabtools.launcher.dark" type="bool"
-                title="&newtabtools.bg.dark-launcher;" />
+              <xul:setting pref="extensions.newtabtools.theme" type="radio" title="XXX Theme">
+                <xul:radiogroup orient="horizontal">
+                  <xul:radio label="XXX Light Theme" value="light" />
+                  <xul:radio label="XXX Dark Theme" value="dark" />
+                </xul:radiogroup>
+              </xul:setting>
               <xul:setting pref="extensions.newtabtools.thumbs.hidebuttons" type="bool"
                 title="&newtabtools.options.thumbs.hidebuttons;" />
               <xul:setting pref="extensions.newtabtools.thumbs.hidefavicons" type="bool"
                 title="&newtabtools.options.thumbs.hidefavicons;" />
-              <xul:setting pref="extensions.newtabtools.thumbs.overlaptitle" type="bool"
-                title="&newtabtools.tile-thumbnails.overlapTitle;" />
               <xul:setting pref="extensions.newtabtools.thumbs.contain" type="bool"
                 title="&newtabtools.tile-thumbnails.contain;" />
             </xul:rows>
