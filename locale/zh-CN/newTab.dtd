@@ -24,9 +24,10 @@
 <!ENTITY newtabtools.bg.remove "移除背景">
 
 <!ENTITY newtabtools.options-header "选项:">
-<!ENTITY newtabtools.bg.dark-launcher "对启动列使用深色背景">
+<!ENTITY newtabtools.options.theme "Theme">
+<!ENTITY newtabtools.options.theme.light "Light Theme">
+<!ENTITY newtabtools.options.theme.dark "Dark Theme">
 <!ENTITY newtabtools.tile-thumbnails.contain "磁贴应包含整个缩略图">
-<!ENTITY newtabtools.tile-thumbnails.overlapTitle "磁贴标题覆盖缩略图">
 
 <!ENTITY newtabtools.donate.label "New Tab Tools 依靠用户捐助维持。">
 <!ENTITY newtabtools.donate "捐助…">

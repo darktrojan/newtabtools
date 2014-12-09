@@ -169,10 +169,10 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
                   </xul:menupopup>
                 </xul:menulist>
               </xul:setting>
-              <xul:setting pref="extensions.newtabtools.theme" type="radio" title="XXX Theme">
+              <xul:setting pref="extensions.newtabtools.theme" type="radio" title="&newtabtools.options.theme;">
                 <xul:radiogroup orient="horizontal">
-                  <xul:radio label="XXX Light Theme" value="light" />
-                  <xul:radio label="XXX Dark Theme" value="dark" />
+                  <xul:radio label="&newtabtools.options.theme.light;" value="light" />
+                  <xul:radio label="&newtabtools.options.theme.dark;" value="dark" />
                 </xul:radiogroup>
               </xul:setting>
               <xul:setting pref="extensions.newtabtools.thumbs.hidebuttons" type="bool"

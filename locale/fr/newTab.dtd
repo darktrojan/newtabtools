@@ -24,9 +24,10 @@
 <!ENTITY newtabtools.bg.remove "Supprimer">
 
 <!ENTITY newtabtools.options-header "Options :">
-<!ENTITY newtabtools.bg.dark-launcher "Appliquer un thème foncé sur la barre de raccourcis">
+<!ENTITY newtabtools.options.theme "Theme">
+<!ENTITY newtabtools.options.theme.light "Light Theme">
+<!ENTITY newtabtools.options.theme.dark "Dark Theme">
 <!ENTITY newtabtools.tile-thumbnails.contain "Afficher les miniatures en entier">
-<!ENTITY newtabtools.tile-thumbnails.overlapTitle "Titres en surimpression sur les miniatures">
 
 <!ENTITY newtabtools.donate.label "New Tab Tools est financé par vos dons.">
 <!ENTITY newtabtools.donate "Faire un don&#x2026;">

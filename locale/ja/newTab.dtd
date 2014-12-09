@@ -24,9 +24,10 @@
 <!ENTITY newtabtools.bg.remove "Remove">
 
 <!ENTITY newtabtools.options-header "Options:">
-<!ENTITY newtabtools.bg.dark-launcher "ランチャーに暗い背景を使用">
+<!ENTITY newtabtools.options.theme "Theme">
+<!ENTITY newtabtools.options.theme.light "Light Theme">
+<!ENTITY newtabtools.options.theme.dark "Dark Theme">
 <!ENTITY newtabtools.tile-thumbnails.contain "タイルは全体のサムネイルが含まれている必要があります">
-<!ENTITY newtabtools.tile-thumbnails.overlapTitle "Tile titles overlap thumbnails">
 
 <!ENTITY newtabtools.donate.label "New Tab Tools is funded by user donations.">
 <!ENTITY newtabtools.donate "寄付する&#x2026;">

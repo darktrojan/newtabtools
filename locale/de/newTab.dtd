@@ -24,9 +24,10 @@
 <!ENTITY newtabtools.bg.remove "Entfernen">
 
 <!ENTITY newtabtools.options-header "Einstellungen:">
-<!ENTITY newtabtools.bg.dark-launcher "Dunkler Hintergrund für Schnellstartleiste">
+<!ENTITY newtabtools.options.theme "Theme">
+<!ENTITY newtabtools.options.theme.light "Light Theme">
+<!ENTITY newtabtools.options.theme.dark "Dark Theme">
 <!ENTITY newtabtools.tile-thumbnails.contain "Schaltfläche soll mit Bild ausgefüllt werden">
-<!ENTITY newtabtools.tile-thumbnails.overlapTitle "Titel dürfen das Miniaturbild überlappen">
 
 <!ENTITY newtabtools.donate.label "Neuer-Tab-Tools wird durch Spenden finanziert.">
 <!ENTITY newtabtools.donate "Spenden&#x2026;">
