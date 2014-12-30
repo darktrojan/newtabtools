@@ -7,11 +7,9 @@
   font-size: 75%;
   background-color: transparent;
 }
-
 input[type=button] {
   cursor: pointer;
 }
-
 /* SCROLLBOX */
 #newtab-scrollbox {
   display: -moz-box;
@@ -20,42 +18,40 @@ input[type=button] {
   -moz-user-focus: normal;
   -moz-box-orient: vertical;
 }
-
 :root[launcher="left"] #newtab-scrollbox,
 :root[launcher="right"] #newtab-scrollbox {
   -moz-box-orient: horizontal;
 }
-
 :root.background #newtab-scrollbox {
   background-size: cover;
   background-position: 50% 50%;
 }
-
 #newtab-scrollbox[page-disabled] {
   background-image: none !important;
 }
-
 #newtab-scrollbox:not([page-disabled]) {
   overflow: auto;
-  color: rgb(0,0,0);
-  background-color: hsl(0,0%,95%);
+  color: rgb(0, 0, 0);
+  background-color: hsl(0, 0%, 95%);
 }
-
 /* RECENT TABS */
 #newtab-recent-outer {
   white-space: nowrap;
   height: 30px;
 }
-
 #newtab-recent > span {
   display: inline-block;
   vertical-align: middle;
   -moz-margin-end: 4px;
+  color: rgba(31, 54, 76, 0.8);
+  text-shadow: 0 0 3px white;
 }
-
+:root[theme="dark"] #newtab-recent > span {
+  color: rgba(255, 255, 255, 0.8);
+  text-shadow: 0 0 3px black;
+}
 .recent {
   padding: 2px 4px;
-  background-color: rgba(255, 255, 255, 0.2);
   display: inline-block;
   line-height: 20px;
   border-radius: 4px;
@@ -63,19 +59,25 @@ input[type=button] {
   cursor: pointer;
   transition: background-color 200ms, color 200ms;
   text-decoration: none;
-  color: rgb(31, 54, 76);
   text-overflow: ellipsis;
   max-width: 200px;
   overflow-x: hidden;
   white-space: nowrap;
   vertical-align: middle;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: rgba(31, 54, 76, 0.8);
+  text-shadow: 0 0 3px white;
 }
-
+:root[theme="dark"] .recent {
+  background-color: rgba(0, 0, 0, 0.1);
+  color: rgba(255, 255, 255, 0.8);
+  text-shadow: 0 0 3px black;
+}
 .recent:hover {
   background-color: highlight;
   color: highlighttext;
+  text-shadow: none;
 }
-
 /* UNDO */
 #newtab-undo-container {
   display: -moz-box;
@@ -83,24 +85,21 @@ input[type=button] {
   -moz-box-pack: center;
   padding: 4px 3px;
   border: 1px solid;
-  border-color: rgba(8,22,37,.12) rgba(8,22,37,.14) rgba(8,22,37,.16);
-  background-color: rgba(255,255,255,.4);
+  border-color: rgba(8, 22, 37, 0.12) rgba(8, 22, 37, 0.14) rgba(8, 22, 37, 0.16);
+  background-color: rgba(255, 255, 255, 0.4);
   color: #525e69;
   margin-left: 1em;
   transition: opacity 200ms, display 0s 200ms;
 }
-
 #newtab-undo-container[undo-disabled] {
   opacity: 0;
   pointer-events: none;
   display: none;
 }
-
 #newtab-undo-label {
   margin-top: 0;
   margin-bottom: 0;
 }
-
 .newtab-undo-button {
   -moz-appearance: none;
   cursor: pointer;
@@ -111,28 +110,22 @@ input[type=button] {
   text-decoration: none;
   min-width: 0;
 }
-
 .newtab-undo-button:hover {
   text-decoration: underline;
 }
-
 .newtab-undo-button:-moz-focusring {
   outline: 1px dotted;
 }
-
 #newtab-undo-close-button {
   padding: 0;
   border: none;
 }
-
 #newtab-undo-close-button > .toolbarbutton-text {
   display: none;
 }
-
 #newtab-undo-close-button:-moz-focusring {
   outline: 1px dotted;
 }
-
 /* TOGGLE */
 #newtab-toggle {
   position: absolute;
@@ -144,23 +137,19 @@ input[type=button] {
   border: none;
   background: -216px 0 transparent url("controls.png");
 }
-
 #newtab-toggle:-moz-locale-dir(rtl) {
   left: 12px;
   right: auto;
 }
-
 #newtab-toggle[page-disabled] {
   background-position: -232px 0;
 }
-
 @media (min-resolution: 2dppx) {
   #newtab-toggle {
     background-image: url("controls@2x.png");
     background-size: 248px;
   }
 }
-
 /* MARGINS */
 #newtab-vertical-margin {
   display: -moz-box;
@@ -168,12 +157,10 @@ input[type=button] {
   -moz-box-flex: 1;
   -moz-box-orient: vertical;
 }
-
 #newtab-horizontal-margin {
   display: -moz-box;
   -moz-box-flex: 5;
 }
-
 #newtab-margin-top,
 #newtab-margin-bottom,
 .newtab-side-margin {
@@ -182,92 +169,74 @@ input[type=button] {
   -moz-box-pack: center;
   -moz-box-flex: 0;
 }
-
 #newtab-margin-top,
 #newtab-margin-bottom,
 :root[launcher="top"] #newtab-margin-top.medium {
   height: 30px;
 }
-
 #newtab-margin-top.medium,
 #newtab-margin-bottom.medium {
   height: 60px;
 }
-
 #newtab-margin-top.large,
 #newtab-margin-bottom.large {
   height: 120px;
 }
-
 :root[launcher="bottom"] #newtab-margin-bottom {
   height: 10px;
 }
-
 :root[launcher="bottom"] #newtab-margin-bottom.medium {
   height: 20px;
 }
-
 :root[launcher="top"] #newtab-margin-top.large,
 :root[launcher="bottom"] #newtab-margin-bottom.large {
   height: 40px;
 }
-
 .newtab-side-margin {
   width: 30px;
 }
-
 .newtab-side-margin.medium {
   width: 60px;
 }
-
 .newtab-side-margin.large {
   width: 120px;
 }
-
 :root[launcher="right"] .newtab-side-margin:last-child,
 :root[launcher="left"] .newtab-side-margin:first-child {
   width: 10px;
 }
-
 :root[launcher="right"] .newtab-side-margin:last-child.medium,
 :root[launcher="left"] .newtab-side-margin:first-child.medium {
   width: 20px;
 }
-
 :root[launcher="right"] .newtab-side-margin:last-child.large,
 :root[launcher="left"] .newtab-side-margin:first-child.large {
   width: 40px;
 }
-
 /* LAUNCHER */
 #launcher {
   display: none;
 }
-
 :root[launcher] #launcher {
   display: -moz-box;
   -moz-box-align: center;
   -moz-box-pack: center;
   text-align: center;
 }
-
 :root[launcher="top"] #launcher,
 :root[launcher="bottom"] #launcher {
   -moz-box-orient: horizontal;
   width: 100%;
 }
-
 :root[launcher="right"] #launcher,
 :root[launcher="left"] #launcher {
   -moz-box-orient: vertical;
   width: 90px;
 }
-
 :root[launcher="top"] #launcher,
 :root[launcher="left"] #launcher {
   -moz-box-ordinal-group: 0;
 }
-
 /* LAUNCH BUTTONS */
 .launchButton {
   display: -moz-box;
@@ -340,7 +309,6 @@ input[type=button] {
 }
 :root[launcher="left"] #restorePreviousSession,
 :root[launcher="right"] #restorePreviousSession {
-  /*height: calc(3.75em + 74px);*/
   height: 105px;
   max-height: none;
 }
@@ -366,7 +334,6 @@ input[type=button] {
 :root[theme="dark"] #restorePreviousSession::before {
   background-image: url("chrome://newtabtools/content/launcher/dark/restore.png");
 }
-
 /* GRID */
 #newtab-grid {
   display: -moz-box;
@@ -377,16 +344,13 @@ input[type=button] {
   transition: 100ms ease-out;
   transition-property: opacity;
 }
-
 #newtab-grid[page-disabled] {
   opacity: 0;
 }
-
 #newtab-grid[locked],
 #newtab-grid[page-disabled] {
   pointer-events: none;
 }
-
 /* ROWS */
 .newtab-row {
   display: -moz-box;
@@ -395,77 +359,46 @@ input[type=button] {
   -moz-box-flex: 1;
   margin-bottom: 5px;
 }
-
 :root[spacing="medium"] .newtab-row:not(:last-child) {
   margin-bottom: 10px;
 }
-
 :root[spacing="large"] .newtab-row:not(:last-child) {
   margin-bottom: 20px;
 }
-
 .newtab-row:last-child {
   margin-bottom: 0;
 }
-
 /* CELLS */
 .newtab-cell {
   display: -moz-box;
   -moz-box-flex: 1;
-  background-color: rgba(255,255,255,.2);
-  border: 1px solid;
-  border-color: rgba(8,22,37,.12) rgba(8,22,37,.14) rgba(8,22,37,.16);
-  border-radius: 1px;
-  transition: border-color 100ms ease-out;
   -moz-margin-end: 5px;
 }
-
-.newtab-cell:empty {
-  border: 1px dashed;
-  border-color: rgba(8,22,37,.15) rgba(8,22,37,.17) rgba(8,22,37,.19);
-}
-
 :root[spacing="medium"] .newtab-cell:not(:last-child) {
   -moz-margin-end: 10px;
 }
-
 :root[spacing="large"] .newtab-cell:not(:last-child) {
   -moz-margin-end: 20px;
 }
-
 .newtab-cell:last-child {
   -moz-margin-end: 0;
 }
-
-.newtab-cell:hover:not(:empty):not([dragged]) {
-  border-color: rgba(8,22,37,.25) rgba(8,22,37,.27) rgba(8,22,37,.3);
-}
-
 /* SITES */
 .newtab-site {
   position: relative;
   -moz-box-flex: 1;
   transition: 100ms ease-out;
   text-decoration: none;
-  transition-property: top, left, opacity, box-shadow, background-color;
+  transition-property: top, left, opacity;
 }
-
-.newtab-site:hover,
-.newtab-site[dragged] {
-  box-shadow: 0 0 10px rgba(8,22,37,.3);
-}
-
 .newtab-site[frozen] {
   position: absolute;
   pointer-events: none;
 }
-
 .newtab-site[dragged] {
   z-index: 10;
-  transition-property: box-shadow, background-color;
-  background-color: rgb(242,242,242);
+  transition-property: none;
 }
-
 /* FAVICON + LINK + THUMBNAIL */
 .favicon {
   margin-top: -2px;
@@ -473,12 +406,15 @@ input[type=button] {
   vertical-align: middle;
   width: 16px;
   height: 16px;
+  opacity: 0.8;
 }
-
+.recent:hover > .favicon,
+.newtab-site:hover .newtab-title > .favicon {
+  opacity: 1;
+}
 :root.hideFavicons .favicon {
   display: none;
 }
-
 .newtab-link,
 .newtab-thumbnail {
   position: absolute;
@@ -487,28 +423,29 @@ input[type=button] {
   right: 0;
   bottom: 0;
 }
-
 .newtab-thumbnail {
-  opacity: .8;
+  opacity: 0.8;
   transition: opacity 100ms ease-out;
   background-origin: padding-box;
   background-clip: padding-box;
   background-repeat: no-repeat;
   background-size: cover;
+  background-color: rgba(255, 255, 255, 0.2);
   margin-bottom: 24px;
 }
-
+:root[theme="dark"] .newtab-thumbnail {
+  background-color: rgba(0, 0, 0, 0.2);
+}
 :root.containThumbs .newtab-thumbnail {
   background-size: contain;
   background-position: 50% 50%;
 }
-
 .newtab-thumbnail[dragged],
 .newtab-link:-moz-focusring > .newtab-thumbnail,
 .newtab-site:hover > .newtab-link > .newtab-thumbnail {
   opacity: 1;
+  box-shadow: 0px 0px 10px rgba(8, 22, 37, 0.3);
 }
-
 /* TITLES */
 .newtab-title {
   position: absolute;
@@ -519,16 +456,21 @@ input[type=button] {
   overflow: hidden;
   text-overflow: ellipsis;
   padding: 0 8px;
-  background-color: rgba(248,249,251,.95);
-  color: #1f364c;
   line-height: 24px;
+  color: rgba(31, 54, 76, 0.8);
+  text-align: center;
+  text-shadow: 0 0 3px white;
 }
-.newtab-title {
-  border-top-width: 1px;
-  border-top-style: solid;
-  border-top-color: rgba(8, 22, 37, 0.12);
+.newtab-site:hover .newtab-title {
+  color: rgba(31, 54, 76, 1);
 }
-
+:root[theme="dark"] .newtab-title {
+  color: rgba(255, 255, 255, 0.8);
+  text-shadow: 0 0 3px black;
+}
+:root[theme="dark"] .newtab-site:hover .newtab-title {
+  color: rgba(255, 255, 255, 1);
+}
 /* CONTROLS */
 .newtab-control {
   position: absolute;
@@ -541,78 +483,60 @@ input[type=button] {
   border: none;
   background: transparent url("controls.png");
 }
-
 :root.hideButtons .newtab-control {
   display: none;
 }
-
 .newtab-control:-moz-focusring,
 .newtab-site:hover > .newtab-control {
   opacity: 1;
 }
-
 .newtab-control[dragged] {
   opacity: 0 !important;
 }
-
 @media (-moz-touch-enabled) {
   .newtab-control {
     opacity: 1;
   }
 }
-
 @media (min-resolution: 2dppx) {
   .newtab-control {
     background-image: url("controls@2x.png");
     background-size: 248px;
   }
 }
-
 .newtab-control-pin:-moz-locale-dir(ltr),
 .newtab-control-block:-moz-locale-dir(rtl) {
   left: 4px;
 }
-
 .newtab-control-block:-moz-locale-dir(ltr),
 .newtab-control-pin:-moz-locale-dir(rtl) {
   right: 4px;
 }
-
 .newtab-control-pin:hover {
   background-position: -24px 0;
 }
-
 .newtab-control-pin:active {
   background-position: -48px 0;
 }
-
 .newtab-control-pin[pinned] {
   background-position: -72px 0;
 }
-
 .newtab-control-pin[pinned]:hover {
   background-position: -96px 0;
 }
-
 .newtab-control-pin[pinned]:active {
   background-position: -120px 0;
 }
-
 .newtab-control-block {
   background-position: -144px 0;
 }
-
 .newtab-control-block:hover {
   background-position: -168px 0;
 }
-
 .newtab-control-block:active {
   background-position: -192px 0;
 }
-
-/* DRAG & DROP */
-
-/*
+/* DRAG & DROP
  * This is just a temporary drag element used for dataTransfer.setDragImage()
  * so that we can use custom drag images and elements. It needs an opacity of
  * 0.01 so that the core code detects that it's in fact a visible element.
@@ -623,7 +547,6 @@ input[type=button] {
   background-color: #fff;
   opacity: 0.01;
 }
-
 /* OPTIONS */
 #options-toggle {
   position: absolute;

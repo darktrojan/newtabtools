@@ -7,7 +7,6 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
 <?xml-stylesheet href="chrome://newtabtools/content/fx-newTab.css" type="text/css"?>
 <?xml-stylesheet href="chrome://newtabtools/skin/fx-newTab.css" type="text/css"?>
-<?xml-stylesheet href="chrome://newtabtools/content/hidden.css" type="text/css"?>
 
 <!DOCTYPE window [
   <!ENTITY % newTabDTD SYSTEM "chrome://browser/locale/newTab.dtd">
