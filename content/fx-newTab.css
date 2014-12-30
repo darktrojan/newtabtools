@@ -2,6 +2,12 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
+:root {
+  -moz-appearance: none;
+  font-size: 75%;
+  background-color: transparent;
+}
+
 input[type=button] {
   cursor: pointer;
 }
@@ -16,6 +22,8 @@ input[type=button] {
 
 #newtab-scrollbox:not([page-disabled]) {
   overflow: auto;
+  color: rgb(0,0,0);
+  background-color: hsl(0,0%,95%);
 }
 
 /* UNDO */
@@ -24,6 +32,11 @@ input[type=button] {
   display: -moz-box;
   -moz-box-align: center;
   -moz-box-pack: center;
+  padding: 4px 3px;
+  border: 1px solid;
+  border-color: rgba(8,22,37,.12) rgba(8,22,37,.14) rgba(8,22,37,.16);
+  background-color: rgba(255,255,255,.4);
+  color: #525e69;
 }
 
 #newtab-undo-container[undo-disabled] {
@@ -31,16 +44,69 @@ input[type=button] {
   pointer-events: none;
 }
 
+#newtab-undo-label {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.newtab-undo-button {
+  -moz-appearance: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0 4px;
+  border: 0;
+  background: transparent;
+  text-decoration: none;
+  min-width: 0;
+}
+
+.newtab-undo-button:hover {
+  text-decoration: underline;
+}
+
+.newtab-undo-button:-moz-focusring {
+  outline: 1px dotted;
+}
+
+#newtab-undo-close-button {
+  padding: 0;
+  border: none;
+}
+
+#newtab-undo-close-button > .toolbarbutton-text {
+  display: none;
+}
+
+#newtab-undo-close-button:-moz-focusring {
+  outline: 1px dotted;
+}
+
 /* TOGGLE */
 #newtab-toggle {
   position: absolute;
   top: 12px;
   right: 12px;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  border: none;
+  background: -216px 0 transparent url("controls.png");
 }
 
 #newtab-toggle:-moz-locale-dir(rtl) {
   left: 12px;
   right: auto;
+}
+
+#newtab-toggle[page-disabled] {
+  background-position: -232px 0;
+}
+
+@media (min-resolution: 2dppx) {
+  #newtab-toggle {
+    background-image: url("controls@2x.png");
+    background-size: 248px;
+  }
 }
 
 /* MARGINS */
@@ -103,12 +169,36 @@ input[type=button] {
   -moz-box-orient: horizontal;
   -moz-box-direction: normal;
   -moz-box-flex: 1;
+  margin-bottom: 20px;
+}
+
+.newtab-row:last-child {
+  margin-bottom: 0;
 }
 
 /* CELLS */
 .newtab-cell {
   display: -moz-box;
   -moz-box-flex: 1;
+  -moz-margin-end: 20px;
+  background-color: rgba(255,255,255,.2);
+  border: 1px solid;
+  border-color: rgba(8,22,37,.12) rgba(8,22,37,.14) rgba(8,22,37,.16);
+  border-radius: 1px;
+  transition: border-color 100ms ease-out;
+}
+
+.newtab-cell:empty {
+  border: 1px dashed;
+  border-color: rgba(8,22,37,.15) rgba(8,22,37,.17) rgba(8,22,37,.19);
+}
+
+.newtab-cell:last-child {
+  -moz-margin-end: 0;
+}
+
+.newtab-cell:hover:not(:empty):not([dragged]) {
+  border-color: rgba(8,22,37,.25) rgba(8,22,37,.27) rgba(8,22,37,.3);
 }
 
 /* SITES */
@@ -116,7 +206,13 @@ input[type=button] {
   position: relative;
   -moz-box-flex: 1;
   transition: 100ms ease-out;
-  transition-property: top, left, opacity;
+  text-decoration: none;
+  transition-property: top, left, opacity, box-shadow, background-color;
+}
+
+.newtab-site:hover,
+.newtab-site[dragged] {
+  box-shadow: 0 0 10px rgba(8,22,37,.3);
 }
 
 .newtab-site[frozen] {
@@ -125,8 +221,9 @@ input[type=button] {
 }
 
 .newtab-site[dragged] {
-  transition-property: none;
   z-index: 10;
+  transition-property: box-shadow, background-color;
+  background-color: rgb(242,242,242);
 }
 
 /* LINK + THUMBNAILS */
@@ -142,6 +239,10 @@ input[type=button] {
 .newtab-thumbnail {
   opacity: .8;
   transition: opacity 100ms ease-out;
+  background-origin: padding-box;
+  background-clip: padding-box;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .newtab-thumbnail[dragged],
@@ -159,6 +260,10 @@ input[type=button] {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  padding: 0 8px;
+  background-color: rgba(248,249,251,.95);
+  color: #1f364c;
+  line-height: 24px;
 }
 
 /* CONTROLS */
@@ -167,6 +272,11 @@ input[type=button] {
   top: 4px;
   opacity: 0;
   transition: opacity 100ms ease-out;
+  width: 24px;
+  height: 24px;
+  padding: 1px 2px 3px;
+  border: none;
+  background: transparent url("controls.png");
 }
 
 .newtab-control:-moz-focusring,
@@ -184,6 +294,13 @@ input[type=button] {
   }
 }
 
+@media (min-resolution: 2dppx) {
+  .newtab-control {
+    background-image: url("controls@2x.png");
+    background-size: 248px;
+  }
+}
+
 .newtab-control-pin:-moz-locale-dir(ltr),
 .newtab-control-block:-moz-locale-dir(rtl) {
   left: 4px;
@@ -192,6 +309,38 @@ input[type=button] {
 .newtab-control-block:-moz-locale-dir(ltr),
 .newtab-control-pin:-moz-locale-dir(rtl) {
   right: 4px;
+}
+
+.newtab-control-pin:hover {
+  background-position: -24px 0;
+}
+
+.newtab-control-pin:active {
+  background-position: -48px 0;
+}
+
+.newtab-control-pin[pinned] {
+  background-position: -72px 0;
+}
+
+.newtab-control-pin[pinned]:hover {
+  background-position: -96px 0;
+}
+
+.newtab-control-pin[pinned]:active {
+  background-position: -120px 0;
+}
+
+.newtab-control-block {
+  background-position: -144px 0;
+}
+
+.newtab-control-block:hover {
+  background-position: -168px 0;
+}
+
+.newtab-control-block:active {
+  background-position: -192px 0;
 }
 
 /* DRAG & DROP */
