@@ -659,7 +659,7 @@ setting[type="radio"] {
   -moz-box-align: center;
 }
 #options-donate-wrap {
-  border: 1px #b2aeaa solid;
+  border: 1px #b2aeaa solid !important;
   background-color: #f9f9f9;
 }
 #options-donate-wrap > :first-child {

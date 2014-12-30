@@ -7,9 +7,9 @@ content/controls@2x.png
 content/export.jsm
 content/exportDialog.js
 content/exportDialog.xul
-content/fx-newTab.css
 content/fx-newTab.js
 content/launcher/*
+content/newTab.css
 content/newTab.js
 content/newTab.xul
 content/setting.xml
