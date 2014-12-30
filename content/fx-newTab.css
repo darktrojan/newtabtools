@@ -283,26 +283,26 @@ input[type=button] {
   display: none;
 }
 #downloads::before {
-  background-image: url("chrome://newtabtools/content/launcher/light/downloads.png");
+  background-image: url("launcher/light/downloads.png");
 }
 #bookmarks::before {
-  background-image: url("chrome://newtabtools/content/launcher/light/bookmarks.png");
+  background-image: url("launcher/light/bookmarks.png");
 }
 #history::before {
-  background-image: url("chrome://newtabtools/content/launcher/light/history.png");
+  background-image: url("launcher/light/history.png");
 }
 #addons::before {
-  background-image: url("chrome://newtabtools/content/launcher/light/addons.png");
+  background-image: url("launcher/light/addons.png");
 }
 #sync::before {
-  background-image: url("chrome://newtabtools/content/launcher/light/sync.png");
+  background-image: url("launcher/light/sync.png");
 }
 #settingsWin::before,
 #settingsUnix::before {
-  background-image: url("chrome://newtabtools/content/launcher/light/settings.png");
+  background-image: url("launcher/light/settings.png");
 }
 #restorePreviousSession::before {
-  background-image: url("chrome://newtabtools/content/launcher/light/restore.png");
+  background-image: url("launcher/light/restore.png");
 }
 #restorePreviousSession:-moz-dir(rtl)::before {
   transform: scaleX(-1);
@@ -313,26 +313,26 @@ input[type=button] {
   max-height: none;
 }
 :root[theme="dark"] #downloads::before {
-  background-image: url("chrome://newtabtools/content/launcher/dark/downloads.png");
+  background-image: url("launcher/dark/downloads.png");
 }
 :root[theme="dark"] #bookmarks::before {
-  background-image: url("chrome://newtabtools/content/launcher/dark/bookmarks.png");
+  background-image: url("launcher/dark/bookmarks.png");
 }
 :root[theme="dark"] #history::before {
-  background-image: url("chrome://newtabtools/content/launcher/dark/history.png");
+  background-image: url("launcher/dark/history.png");
 }
 :root[theme="dark"] #addons::before {
-  background-image: url("chrome://newtabtools/content/launcher/dark/addons.png");
+  background-image: url("launcher/dark/addons.png");
 }
 :root[theme="dark"] #sync::before {
-  background-image: url("chrome://newtabtools/content/launcher/dark/sync.png");
+  background-image: url("launcher/dark/sync.png");
 }
 :root[theme="dark"] #settingsWin::before,
 :root[theme="dark"] #settingsUnix::before {
-  background-image: url("chrome://newtabtools/content/launcher/dark/settings.png");
+  background-image: url("launcher/dark/settings.png");
 }
 :root[theme="dark"] #restorePreviousSession::before {
-  background-image: url("chrome://newtabtools/content/launcher/dark/restore.png");
+  background-image: url("launcher/dark/restore.png");
 }
 /* GRID */
 #newtab-grid {
@@ -616,7 +616,7 @@ input[type=button] {
   -moz-margin-end: 2em;
 }
 #options-previous-tile {
-  list-style-image: url("chrome://newtabtools/content/arrow.svg");
+  list-style-image: url("arrow.svg");
 }
 #options-thumbnail-wrap {
   margin: 0.5em 0;
@@ -631,7 +631,7 @@ input[type=button] {
   -moz-box-flex: 1;
 }
 #options-next-tile {
-  list-style-image: url("chrome://newtabtools/content/arrow.svg");
+  list-style-image: url("arrow.svg");
   transform: scalex(-1);
 }
 #options-url {
@@ -652,7 +652,7 @@ setting[type="control"] {
 }
 setting[type="menulist"],
 setting[type="radio"] {
-  -moz-binding: url("chrome://newtabtools/content/setting.xml#setting-multi");
+  -moz-binding: url("setting.xml#setting-multi");
 }
 .preferences-alignment {
   min-height: 28px;
