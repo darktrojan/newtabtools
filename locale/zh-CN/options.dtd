@@ -15,7 +15,7 @@
 <!ENTITY newtabtools.options.launcher.left "左侧">
 <!ENTITY newtabtools.options.launcher.right "右侧">
 <!ENTITY newtabtools.options.recent "Recently Closed Tabs">
-<!ENTITY newtabtools.options.thumb-buttons "Pin/Remove Thumbnail Buttons">
+<!ENTITY newtabtools.options.thumb-buttons "Pin Tile and Remove Tile Buttons">
 <!ENTITY newtabtools.options.favicons "Site Icons">
 <!ENTITY newtabtools.options.thumb-contain "Whole Thumbnail in Tiles">
 <!ENTITY newtabtools.export "导出设置…">
