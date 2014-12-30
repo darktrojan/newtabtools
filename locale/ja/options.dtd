@@ -1,3 +1,6 @@
+<!ENTITY newtabtools.options.theme "Theme">
+<!ENTITY newtabtools.options.theme.light "Light Theme">
+<!ENTITY newtabtools.options.theme.dark "Dark Theme">
 <!ENTITY newtabtools.options.rows "行">
 <!ENTITY newtabtools.options.columns "列">
 <!ENTITY newtabtools.options.grid.margin "Grid Margin">
@@ -14,5 +17,9 @@
 <!ENTITY newtabtools.options.launcher.right "右">
 <!ENTITY newtabtools.options.thumbs.hidebuttons "サムネイルのボタンを隠す">
 <!ENTITY newtabtools.options.thumbs.hidefavicons "サイトのアイコンを隠す">
+<!ENTITY newtabtools.options.recent "Recently Closed Tabs">
+<!ENTITY newtabtools.options.thumb-buttons "Pin/Remove Thumbnail Buttons">
+<!ENTITY newtabtools.options.favicons "Site Icons">
+<!ENTITY newtabtools.options.thumb-contain "Whole Thumbnail in Tiles">
 <!ENTITY newtabtools.export "Export Settings&#x2026;">
 <!ENTITY newtabtools.import "Import Settings&#x2026;">

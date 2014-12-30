@@ -1,3 +1,6 @@
+<!ENTITY newtabtools.options.theme "Theme">
+<!ENTITY newtabtools.options.theme.light "Light Theme">
+<!ENTITY newtabtools.options.theme.dark "Dark Theme">
 <!ENTITY newtabtools.options.rows "纵向列">
 <!ENTITY newtabtools.options.columns "横向行">
 <!ENTITY newtabtools.options.grid.margin "磁贴周围留白">
@@ -5,14 +8,15 @@
 <!ENTITY newtabtools.options.size.small "小">
 <!ENTITY newtabtools.options.size.medium "中">
 <!ENTITY newtabtools.options.size.large "大">
-<!ENTITY newtabtools.options.recent.show "显示最近关闭的标签页">
 <!ENTITY newtabtools.options.launcher "启动列">
 <!ENTITY newtabtools.options.launcher.hidden "不显示">
 <!ENTITY newtabtools.options.launcher.top "顶部">
 <!ENTITY newtabtools.options.launcher.bottom "底部">
 <!ENTITY newtabtools.options.launcher.left "左侧">
 <!ENTITY newtabtools.options.launcher.right "右侧">
-<!ENTITY newtabtools.options.thumbs.hidebuttons "隐藏操作按钮">
-<!ENTITY newtabtools.options.thumbs.hidefavicons "隐藏网站图标">
+<!ENTITY newtabtools.options.recent "Recently Closed Tabs">
+<!ENTITY newtabtools.options.thumb-buttons "Pin/Remove Thumbnail Buttons">
+<!ENTITY newtabtools.options.favicons "Site Icons">
+<!ENTITY newtabtools.options.thumb-contain "Whole Thumbnail in Tiles">
 <!ENTITY newtabtools.export "导出设置…">
 <!ENTITY newtabtools.import "导入设置…">

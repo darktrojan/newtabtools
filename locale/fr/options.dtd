@@ -1,3 +1,6 @@
+<!ENTITY newtabtools.options.theme "Theme">
+<!ENTITY newtabtools.options.theme.light "Light Theme">
+<!ENTITY newtabtools.options.theme.dark "Dark Theme">
 <!ENTITY newtabtools.options.rows "Lignes">
 <!ENTITY newtabtools.options.columns "Colonnes">
 <!ENTITY newtabtools.options.grid.margin "Marge autour de la grille">
@@ -5,14 +8,15 @@
 <!ENTITY newtabtools.options.size.small "Réduite">
 <!ENTITY newtabtools.options.size.medium "Moyenne">
 <!ENTITY newtabtools.options.size.large "Grande">
-<!ENTITY newtabtools.options.recent.show "Afficher les onglets récemment fermés">
 <!ENTITY newtabtools.options.launcher "Barre de raccourcis">
 <!ENTITY newtabtools.options.launcher.hidden "Ne pas afficher">
 <!ENTITY newtabtools.options.launcher.top "En haut">
 <!ENTITY newtabtools.options.launcher.bottom "En bas">
 <!ENTITY newtabtools.options.launcher.left "À gauche">
 <!ENTITY newtabtools.options.launcher.right "À droite">
-<!ENTITY newtabtools.options.thumbs.hidebuttons "Ne pas afficher les boutons Relâcher et Supprimer">
-<!ENTITY newtabtools.options.thumbs.hidefavicons "Ne pas afficher les favicons">
+<!ENTITY newtabtools.options.recent "Recently Closed Tabs">
+<!ENTITY newtabtools.options.thumb-buttons "Pin/Remove Thumbnail Buttons">
+<!ENTITY newtabtools.options.favicons "Site Icons">
+<!ENTITY newtabtools.options.thumb-contain "Whole Thumbnail in Tiles">
 <!ENTITY newtabtools.export "Exporter les paramètres&#x2026;">
 <!ENTITY newtabtools.import "Importer des paramètres&#x2026;">

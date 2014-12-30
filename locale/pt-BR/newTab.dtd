@@ -24,10 +24,6 @@
 <!ENTITY newtabtools.bg.remove "Remover">
 
 <!ENTITY newtabtools.options-header "Opções:">
-<!ENTITY newtabtools.options.theme "Theme">
-<!ENTITY newtabtools.options.theme.light "Light Theme">
-<!ENTITY newtabtools.options.theme.dark "Dark Theme">
-<!ENTITY newtabtools.tile-thumbnails.contain "Blocos devem conter toda a miniatura">
 
 <!ENTITY newtabtools.donate.label "O New Tab Tools é mantido com doações de usuários.">
 <!ENTITY newtabtools.donate "Doar…">
