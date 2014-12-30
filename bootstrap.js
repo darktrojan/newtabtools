@@ -183,7 +183,11 @@ function startup(aParams, aReason) {
   });
 
   try {
-    Cu.import("resource://gre/modules/DirectoryLinksProvider.jsm");
+    try {
+      Cu.import("resource:///modules/DirectoryLinksProvider.jsm");
+    } catch(e) {
+      Cu.import("resource://gre/modules/DirectoryLinksProvider.jsm");
+    }
     if (NewTabUtils.links._providers.size > 0) {
       // DirectoryLinksProvider is already loaded.
       NewTabUtils.links.removeProvider(DirectoryLinksProvider);
