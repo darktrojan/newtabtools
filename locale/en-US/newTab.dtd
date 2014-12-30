@@ -24,10 +24,6 @@
 <!ENTITY newtabtools.bg.remove "Remove">
 
 <!ENTITY newtabtools.options-header "Options:">
-<!ENTITY newtabtools.options.theme "Theme">
-<!ENTITY newtabtools.options.theme.light "Light Theme">
-<!ENTITY newtabtools.options.theme.dark "Dark Theme">
-<!ENTITY newtabtools.tile-thumbnails.contain "Tiles should contain whole thumbnail">
 
 <!ENTITY newtabtools.donate.label "New Tab Tools is funded by user donations.">
 <!ENTITY newtabtools.donate "Donate&#x2026;">

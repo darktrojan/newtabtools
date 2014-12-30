@@ -1,3 +1,6 @@
+<!ENTITY newtabtools.options.theme "Theme">
+<!ENTITY newtabtools.options.theme.light "Light Theme">
+<!ENTITY newtabtools.options.theme.dark "Dark Theme">
 <!ENTITY newtabtools.options.rows "Rows">
 <!ENTITY newtabtools.options.columns "Columns">
 <!ENTITY newtabtools.options.grid.margin "Grid Margin">
@@ -5,14 +8,15 @@
 <!ENTITY newtabtools.options.size.small "Small">
 <!ENTITY newtabtools.options.size.medium "Medium">
 <!ENTITY newtabtools.options.size.large "Large">
-<!ENTITY newtabtools.options.recent.show "Show Recently Closed Tabs">
 <!ENTITY newtabtools.options.launcher "Launcher">
 <!ENTITY newtabtools.options.launcher.hidden "Do not show">
 <!ENTITY newtabtools.options.launcher.top "Top">
 <!ENTITY newtabtools.options.launcher.bottom "Bottom">
 <!ENTITY newtabtools.options.launcher.left "Left">
 <!ENTITY newtabtools.options.launcher.right "Right">
-<!ENTITY newtabtools.options.thumbs.hidebuttons "Hide Thumbnail Buttons">
-<!ENTITY newtabtools.options.thumbs.hidefavicons "Hide Site Icons">
+<!ENTITY newtabtools.options.recent "Recently Closed Tabs">
+<!ENTITY newtabtools.options.thumb-buttons "Pin/Remove Thumbnail Buttons">
+<!ENTITY newtabtools.options.favicons "Site Icons">
+<!ENTITY newtabtools.options.thumb-contain "Whole Thumbnail in Tiles">
 <!ENTITY newtabtools.export "Export Settings&#x2026;">
 <!ENTITY newtabtools.import "Import Settings&#x2026;">

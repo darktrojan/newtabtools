@@ -6,6 +6,12 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 <!DOCTYPE vbox SYSTEM "chrome://newtabtools/locale/options.dtd">
 <vbox xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  <setting pref="extensions.newtabtools.theme" type="radio" title="&newtabtools.options.theme;">
+    <radiogroup orient="horizontal">
+      <radio label="&newtabtools.options.theme.light;" value="light" />
+      <radio label="&newtabtools.options.theme.dark;" value="dark" />
+    </radiogroup>
+  </setting>
   <setting pref="extensions.newtabtools.rows" type="integer" title="&newtabtools.options.rows;" max="10" min="1" size="2"/>
   <setting pref="extensions.newtabtools.columns" type="integer" title="&newtabtools.options.columns;" max="10" min="1" size="2"/>
   <setting pref="extensions.newtabtools.grid.margin" type="menulist" title="&newtabtools.options.grid.margin;">
@@ -26,7 +32,6 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
       </menupopup>
     </menulist>
   </setting>
-  <setting pref="extensions.newtabtools.recent.show" type="bool" title="&newtabtools.options.recent.show;"/>
   <setting pref="extensions.newtabtools.launcher" type="menulist" title="&newtabtools.options.launcher;">
     <menulist sizetopopup="always">
       <menupopup>
@@ -38,8 +43,10 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
       </menupopup>
     </menulist>
   </setting>
-  <setting pref="extensions.newtabtools.thumbs.hidebuttons" type="bool" title="&newtabtools.options.thumbs.hidebuttons;"/>
-  <setting pref="extensions.newtabtools.thumbs.hidefavicons" type="bool" title="&newtabtools.options.thumbs.hidefavicons;"/>
+  <setting pref="extensions.newtabtools.recent.show" type="bool" checkboxlabel="&newtabtools.options.recent;" />
+  <setting pref="extensions.newtabtools.thumbs.hidebuttons" type="bool" inverted="true" checkboxlabel="&newtabtools.options.thumb-buttons;" />
+  <setting pref="extensions.newtabtools.thumbs.hidefavicons" type="bool" inverted="true" checkboxlabel="&newtabtools.options.favicons;" />
+  <setting pref="extensions.newtabtools.thumbs.contain" type="bool" checkboxlabel="&newtabtools.options.thumb-contain;" />
   <setting type="control">
     <button id="newtabtools.export" label="&newtabtools.export;" />
     <button id="newtabtools.import" label="&newtabtools.import;" />

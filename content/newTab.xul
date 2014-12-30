@@ -129,6 +129,12 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
               <xul:column flex="2" />
             </xul:columns>
             <xul:rows>
+              <xul:setting pref="extensions.newtabtools.theme" type="radio" title="&newtabtools.options.theme;">
+                <xul:radiogroup orient="horizontal">
+                  <xul:radio label="&newtabtools.options.theme.light;" value="light" />
+                  <xul:radio label="&newtabtools.options.theme.dark;" value="dark" />
+                </xul:radiogroup>
+              </xul:setting>
               <xul:setting pref="extensions.newtabtools.rows" type="integer"
                 title="&newtabtools.options.rows;" max="10" min="1" size="2" />
               <xul:setting pref="extensions.newtabtools.columns" type="integer"
@@ -153,8 +159,6 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
                   </xul:menupopup>
                 </xul:menulist>
               </xul:setting>
-              <xul:setting pref="extensions.newtabtools.recent.show" type="bool"
-                title="&newtabtools.options.recent.show;" />
               <xul:setting pref="extensions.newtabtools.launcher" type="menulist"
                 title="&newtabtools.options.launcher;">
                 <xul:menulist sizetopopup="always">
@@ -167,18 +171,14 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
                   </xul:menupopup>
                 </xul:menulist>
               </xul:setting>
-              <xul:setting pref="extensions.newtabtools.theme" type="radio" title="&newtabtools.options.theme;">
-                <xul:radiogroup orient="horizontal">
-                  <xul:radio label="&newtabtools.options.theme.light;" value="light" />
-                  <xul:radio label="&newtabtools.options.theme.dark;" value="dark" />
-                </xul:radiogroup>
-              </xul:setting>
-              <xul:setting pref="extensions.newtabtools.thumbs.hidebuttons" type="bool"
-                title="&newtabtools.options.thumbs.hidebuttons;" />
-              <xul:setting pref="extensions.newtabtools.thumbs.hidefavicons" type="bool"
-                title="&newtabtools.options.thumbs.hidefavicons;" />
+              <xul:setting pref="extensions.newtabtools.recent.show" type="bool"
+                checkboxlabel="&newtabtools.options.recent;" />
+              <xul:setting pref="extensions.newtabtools.thumbs.hidebuttons" type="bool" inverted="true"
+                checkboxlabel="&newtabtools.options.thumb-buttons;" />
+              <xul:setting pref="extensions.newtabtools.thumbs.hidefavicons" type="bool" inverted="true"
+                checkboxlabel="&newtabtools.options.favicons;" />
               <xul:setting pref="extensions.newtabtools.thumbs.contain" type="bool"
-                title="&newtabtools.tile-thumbnails.contain;" />
+                checkboxlabel="&newtabtools.options.thumb-contain;" />
             </xul:rows>
           </xul:grid>
         </xul:groupbox>
