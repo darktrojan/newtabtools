@@ -8,7 +8,7 @@
 
 <!ENTITY newtabtools.tile-thumbnail.label "Immagine:">
 <!ENTITY newtabtools.tile-thumbnail.placeholder "Incolla un indirizzo web o sfoglia tra i file immagine">
-<!ENTITY newtabtools.tile-thumbnail.browse "Sfoglia&#x2026;">
+<!ENTITY newtabtools.tile-thumbnail.browse "Sfoglia…">
 <!ENTITY newtabtools.tile-thumbnail.set "Imposta">
 <!ENTITY newtabtools.tile-thumbnail.remove "Rimuovi">
 
@@ -19,14 +19,14 @@
 
 <!ENTITY newtabtools.bg-header "Immagine di sfondo della pagina:">
 <!ENTITY newtabtools.bg.placeholder "Incolla un indirizzo web o sfoglia tra i file immagine">
-<!ENTITY newtabtools.bg.browse "Sfoglia&#x2026;">
+<!ENTITY newtabtools.bg.browse "Sfoglia…">
 <!ENTITY newtabtools.bg.set "Imposta">
 <!ENTITY newtabtools.bg.remove "Rimuovi">
 
 <!ENTITY newtabtools.options-header "Opzioni:">
 
 <!ENTITY newtabtools.donate.label "New Tab Tools si sostiene con le donazioni degli utenti.">
-<!ENTITY newtabtools.donate "Fai una donazione&#x2026;">
+<!ENTITY newtabtools.donate "Fai una donazione…">
 <!ENTITY newtabtools.github "New Tab Tools su GitHub">
 
 <!ENTITY newtabtools.recently-closed-tabs "Schede chiuse di recente:">

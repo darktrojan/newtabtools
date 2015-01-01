@@ -8,7 +8,7 @@
 
 <!ENTITY newtabtools.tile-thumbnail.label "Bild:">
 <!ENTITY newtabtools.tile-thumbnail.placeholder "Bild-Link einfügen oder nach einer Datei suchen">
-<!ENTITY newtabtools.tile-thumbnail.browse "Suchen&#x2026;">
+<!ENTITY newtabtools.tile-thumbnail.browse "Suchen…">
 <!ENTITY newtabtools.tile-thumbnail.set "Übernehmen">
 <!ENTITY newtabtools.tile-thumbnail.remove "Entfernen">
 
@@ -19,14 +19,14 @@
 
 <!ENTITY newtabtools.bg-header "Hintergrundbild:">
 <!ENTITY newtabtools.bg.placeholder "Bild-Link einfügen oder nach einer Datei suchen">
-<!ENTITY newtabtools.bg.browse "Suchen&#x2026;">
+<!ENTITY newtabtools.bg.browse "Suchen…">
 <!ENTITY newtabtools.bg.set "Übernehmen">
 <!ENTITY newtabtools.bg.remove "Entfernen">
 
 <!ENTITY newtabtools.options-header "Einstellungen:">
 
 <!ENTITY newtabtools.donate.label "Neuer-Tab-Tools wird durch Spenden finanziert.">
-<!ENTITY newtabtools.donate "Spenden&#x2026;">
+<!ENTITY newtabtools.donate "Spenden…">
 <!ENTITY newtabtools.github "Neuer-Tab-Tools auf GitHub">
 
 <!ENTITY newtabtools.recently-closed-tabs "Geschlossene Tabs:">

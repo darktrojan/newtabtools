@@ -18,5 +18,5 @@
 <!ENTITY newtabtools.options.thumb-buttons "Pin Tile and Remove Tile Buttons">
 <!ENTITY newtabtools.options.favicons "Site Icons">
 <!ENTITY newtabtools.options.thumb-contain "Whole Thumbnail in Tiles">
-<!ENTITY newtabtools.export "Einstellungen exportieren&#x2026;">
-<!ENTITY newtabtools.import "Einstellungen importieren&#x2026;">
+<!ENTITY newtabtools.export "Einstellungen exportieren…">
+<!ENTITY newtabtools.import "Einstellungen importieren…">

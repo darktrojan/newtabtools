@@ -1,12 +1,12 @@
 <!ENTITY abouthome.bookmarksButton.label "Lesezeichen">
-<!ENTITY abouthome.historyButton.label   "Chronik">
+<!ENTITY abouthome.historyButton.label "Chronik">
 <!-- LOCALIZATION NOTE (abouthome.preferencesButtonWin.label): The label for the
      preferences/options item on about:home on Windows -->
-<!ENTITY abouthome.preferencesButtonWin.label  "Einstellungen">
+<!ENTITY abouthome.preferencesButtonWin.label "Einstellungen">
 <!-- LOCALIZATION NOTE (abouthome.preferencesButtonUnix.label): The label for the
      preferences/options item on about:home on Linux and OS X -->
-<!ENTITY abouthome.preferencesButtonUnix.label  "Einstellungen">
-<!ENTITY abouthome.addonsButton.label    "Add-ons">
-<!ENTITY abouthome.appsButton.label      "Marketplace">
+<!ENTITY abouthome.preferencesButtonUnix.label "Einstellungen">
+<!ENTITY abouthome.addonsButton.label "Add-ons">
+<!ENTITY abouthome.appsButton.label "Marketplace">
 <!ENTITY abouthome.downloadsButton.label "Downloads">
-<!ENTITY abouthome.syncButton.label      "Sync">
+<!ENTITY abouthome.syncButton.label "Sync">

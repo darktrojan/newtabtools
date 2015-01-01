@@ -8,7 +8,7 @@
 
 <!ENTITY newtabtools.tile-thumbnail.label "Image :">
 <!ENTITY newtabtools.tile-thumbnail.placeholder "Collez l'URL d'une image ou sélectionnez un fichier">
-<!ENTITY newtabtools.tile-thumbnail.browse "Parcourir&#x2026;">
+<!ENTITY newtabtools.tile-thumbnail.browse "Parcourir…">
 <!ENTITY newtabtools.tile-thumbnail.set "Appliquer">
 <!ENTITY newtabtools.tile-thumbnail.remove "Supprimer">
 
@@ -19,14 +19,14 @@
 
 <!ENTITY newtabtools.bg-header "Arrière-plan :">
 <!ENTITY newtabtools.bg.placeholder "Collez l'URL d'une image ou sélectionnez un fichier">
-<!ENTITY newtabtools.bg.browse "Parcourir&#x2026;">
+<!ENTITY newtabtools.bg.browse "Parcourir…">
 <!ENTITY newtabtools.bg.set "Appliquer">
 <!ENTITY newtabtools.bg.remove "Supprimer">
 
 <!ENTITY newtabtools.options-header "Options :">
 
 <!ENTITY newtabtools.donate.label "New Tab Tools est financé par vos dons.">
-<!ENTITY newtabtools.donate "Faire un don&#x2026;">
+<!ENTITY newtabtools.donate "Faire un don…">
 <!ENTITY newtabtools.github "New Tab Tools sur GitHub">
 
 <!ENTITY newtabtools.recently-closed-tabs "Onglets récemment fermés :">
