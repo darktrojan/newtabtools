@@ -1,6 +1,6 @@
-<!ENTITY newtabtools.options.theme "Theme">
-<!ENTITY newtabtools.options.theme.light "Light Theme">
-<!ENTITY newtabtools.options.theme.dark "Dark Theme">
+<!ENTITY newtabtools.options.theme "Thème">
+<!ENTITY newtabtools.options.theme.light "Thème clair">
+<!ENTITY newtabtools.options.theme.dark "Thème sombre">
 <!ENTITY newtabtools.options.rows "Lignes">
 <!ENTITY newtabtools.options.columns "Colonnes">
 <!ENTITY newtabtools.options.grid.margin "Marge autour de la grille">
@@ -14,9 +14,9 @@
 <!ENTITY newtabtools.options.launcher.bottom "En bas">
 <!ENTITY newtabtools.options.launcher.left "À gauche">
 <!ENTITY newtabtools.options.launcher.right "À droite">
-<!ENTITY newtabtools.options.recent "Recently Closed Tabs">
-<!ENTITY newtabtools.options.thumb-buttons "Pin Tile and Remove Tile Buttons">
-<!ENTITY newtabtools.options.favicons "Site Icons">
-<!ENTITY newtabtools.options.thumb-contain "Whole Thumbnail in Tiles">
+<!ENTITY newtabtools.options.recent "Onglets récemment fermés">
+<!ENTITY newtabtools.options.thumb-buttons "Boutons Relâcher et Supprimer">
+<!ENTITY newtabtools.options.favicons "Favicons">
+<!ENTITY newtabtools.options.thumb-contain "Miniatures non rognées">
 <!ENTITY newtabtools.export "Exporter les paramètres…">
 <!ENTITY newtabtools.import "Importer des paramètres…">
