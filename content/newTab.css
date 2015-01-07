@@ -437,6 +437,7 @@ input[type=button] {
   background-size: cover;
   background-color: rgba(255, 255, 255, 0.2);
   margin-bottom: 24px;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
 }
 :root[theme="dark"] .newtab-thumbnail {
   background-color: rgba(0, 0, 0, 0.2);
@@ -449,7 +450,7 @@ input[type=button] {
 .newtab-link:-moz-focusring > .newtab-thumbnail,
 .newtab-site:hover > .newtab-link > .newtab-thumbnail {
   opacity: 1;
-  box-shadow: 0px 0px 10px rgba(8, 22, 37, 0.3);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.5), 0px 0px 10px rgba(8, 22, 37, 0.3);
 }
 /* TITLES */
 .newtab-title {
