@@ -243,9 +243,6 @@ input[type=button] {
   -moz-box-orient: vertical;
   margin: 1px 1px;
   padding: 10px 6px;
-  min-width: 88px;
-  max-width: 176px;
-  max-height: 85px;
   vertical-align: top;
   white-space: normal;
   background: none;
@@ -255,6 +252,15 @@ input[type=button] {
   font-family: inherit;
   font-size: 12px;
   cursor: pointer;
+}
+:root[launcher="left"] .launchButton,
+:root[launcher="right"] .launchButton {
+  width: 88px;
+  height: 85px;
+}
+:root[launcher="top"] .launchButton,
+:root[launcher="bottom"] .launchButton {
+  min-width: 88px;
 }
 :root[theme="dark"] .launchButton {
   color: rgba(255, 255, 255, 0.8);
@@ -310,7 +316,6 @@ input[type=button] {
 :root[launcher="left"] #restorePreviousSession,
 :root[launcher="right"] #restorePreviousSession {
   height: 105px;
-  max-height: none;
 }
 :root[theme="dark"] #downloads::before {
   background-image: url("launcher/dark/downloads.png");
