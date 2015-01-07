@@ -256,7 +256,7 @@ input[type=button] {
 :root[launcher="left"] .launchButton,
 :root[launcher="right"] .launchButton {
   width: 88px;
-  height: 85px;
+  height: 75px;
 }
 :root[launcher="top"] .launchButton,
 :root[launcher="bottom"] .launchButton {
