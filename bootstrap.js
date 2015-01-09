@@ -31,8 +31,10 @@ XPCOMUtils.defineLazyModuleGetter(this, "OS", "resource://gre/modules/osfile.jsm
 XPCOMUtils.defineLazyModuleGetter(this, "PageThumbs", "resource://gre/modules/PageThumbs.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "PageThumbsStorage", "resource://gre/modules/PageThumbs.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "Task", "resource://gre/modules/Task.jsm");
+XPCOMUtils.defineLazyModuleGetter(this, "TileData", "chrome://newtabtools/content/newTabTools.jsm");
 
 XPCOMUtils.defineLazyServiceGetter(this, "idleService", "@mozilla.org/widget/idleservice;1", "nsIIdleService");
+XPCOMUtils.defineLazyServiceGetter(this, "annoService", "@mozilla.org/browser/annotation-service;1", "nsIAnnotationService");
 
 let browserPrefs = Services.prefs.getBranch(BROWSER_PREFS);
 let userPrefs = Services.prefs.getBranch(EXTENSION_PREFS);
@@ -111,6 +113,13 @@ function startup(aParams, aReason) {
     userPrefs.setIntPref("donationreminder", 1);
   }
   userPrefs.setIntPref("version", parseInt(aParams.version));
+
+  if (aReason == ADDON_UPGRADE) {
+    for (let url of annoService.getPagesWithAnnotation("newtabtools/title")) {
+      TileData.set(url.spec, "title", annoService.getPageAnnotation(url, "newtabtools/title"));
+      annoService.removePageAnnotation(url, "newtabtools/title");
+    }
+  }
 
   NewTabUtils.links._oldGetLinks = NewTabUtils.links.getLinks;
   NewTabUtils.links.getLinks = function Links_getLinks() {
