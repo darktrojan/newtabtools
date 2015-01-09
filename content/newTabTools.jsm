@@ -3,37 +3,36 @@ const PREF = "extensions.newtabtools.tiledata";
 
 Components.utils.import("resource://gre/modules/Services.jsm");
 
-let data;
+let data = new Map();
 try {
   let value = Services.prefs.getCharPref(PREF);
   let json = JSON.parse(value);
-  data = new Map(Iterator(json));
+  for (let [url, urlData] in Iterator(json)) {
+    data.set(url, new Map(Iterator(urlData)));
+  }
 } catch(e) {
   Components.utils.reportError(e);
-  data = new Map();
 }
 
 let TileData = {
   get: function(url, key) {
-    try {
     if (data.has(url)) {
-      return data.get(url)[key] || null;
+      return data.get(url).get(key) || null;
     }
     return null;
-  } catch(e) { Components.utils.reportError(e)}
   },
   set: function(url, key, value) {
-    let siteData = data.get(url) || {};
+    let urlData = data.get(url) || new Map();
 
     if (value === null) {
-      delete siteData[key];
-      if (siteData.length == 0) {
+      urlData.delete(key);
+      if (urlData.size == 0) {
         data.delete(url);
       }
     } else {
-      siteData[key] = value;
+      urlData.set(key, value);
       if (!data.has(url)) {
-        data.set(url, siteData);
+        data.set(url, urlData);
       }
     }
 
@@ -43,8 +42,11 @@ let TileData = {
 
 function setPref() {
   let obj = {};
-  for (let [url, siteData] of data.entries()) {
-    obj[url] = siteData;
+  for (let [url, urlData] of data.entries()) {
+    obj[url] = {};
+    for (let [key, value] of urlData.entries()) {
+      obj[url][key] = value;
+    }
   }
   Services.prefs.setCharPref(PREF, JSON.stringify(obj));
 }
