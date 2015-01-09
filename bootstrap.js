@@ -273,11 +273,6 @@ let prefObserver = {
         aWindow.gGrid.refresh();
       });
       break;
-    case "tiledata":
-      enumerateTabs(function(aWindow) {
-        aWindow.newTabTools.updateTileData();
-      });
-      break;
     }
   }
 };
@@ -290,17 +285,14 @@ let notificationObserver = {
         aWindow.newTabTools.refreshBackgroundImage();
       });
       break;
+    case "backgroundColor":
     case "thumbnail":
-      enumerateTabs(function(aWindow) {
-        let tileURL = aSubject.QueryInterface(Ci.nsISupportsString);
-        aWindow.newTabTools.refreshThumbnail(aSubject.data);
-      });
-      break;
     case "title":
       enumerateTabs(function(aWindow) {
         let tileURL = aSubject.QueryInterface(Ci.nsISupportsString);
-        aWindow.newTabTools.refreshTitle(aSubject.data);
+        aWindow.newTabTools.onTileChanged(aSubject.data, aData);
       });
+      break;
     }
   }
 };

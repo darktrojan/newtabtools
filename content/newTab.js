@@ -16,9 +16,9 @@ XPCOMUtils.defineLazyModuleGetter(this, "SessionStore", "resource:///modules/ses
 XPCOMUtils.defineLazyModuleGetter(this, "OS", "resource://gre/modules/osfile.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "PageThumbUtils", "resource://gre/modules/PageThumbUtils.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "PlacesUtils", "resource://gre/modules/PlacesUtils.jsm");
+XPCOMUtils.defineLazyModuleGetter(this, "TileData", "chrome://newtabtools/content/newTabTools.jsm");
 
 XPCOMUtils.defineLazyServiceGetter(this, "faviconService", "@mozilla.org/browser/favicon-service;1", "mozIAsyncFavicons");
-XPCOMUtils.defineLazyServiceGetter(this, "annoService", "@mozilla.org/browser/annotation-service;1", "nsIAnnotationService");
 
 let newTabTools = {
   launcherOnClick: function(event) {
@@ -148,15 +148,22 @@ let newTabTools = {
       this.selectedSiteIndex = this._selectedSiteIndex;
     }
   },
-  refreshThumbnail: function(aURL) {
-    this.getThumbnailURL(aURL).then((newThumbnailURL) => {
-      for (let cell of gGrid.cells) {
-        if (cell.site && cell.site.url == aURL) {
-          let thumbnail = cell._node.querySelector("span.newtab-thumbnail");
-          thumbnail.style.backgroundImage = 'url("' + newThumbnailURL + '")';
-        };
+  onTileChanged: function(url, whatChanged) {
+    for (let site of gGrid.sites) {
+      if (site.url == url) {
+        switch (whatChanged) {
+        case "backgroundColor":
+          site._querySelector(".newtab-thumbnail").style.backgroundColor = TileData.get(url, "backgroundColor");
+          break;
+        case "thumbnail":
+          site.refreshThumbnail();
+          break;
+        case "title":
+          site._addTitleAndFavicon();
+          break;
+        }
       }
-    });
+    }
   },
   setThumbnail: function(site, src) {
     let leafName = PageThumbsStorage.getLeafNameForURL(site.url);
@@ -206,28 +213,8 @@ let newTabTools = {
     }
     image.src = src;
   },
-  refreshTitle: function(aURL) {
-    for (let cell of gGrid.cells) {
-      if (cell.site.url == aURL) {
-        cell.site._addTitleAndFavicon();
-      }
-    }
-  },
   setTitle: function(site, title) {
-    let uri = Services.io.newURI(site.url, null, null);
-    if (title) {
-      annoService.setPageAnnotation(uri, "newtabtools/title",
-        this.setTitleInput.value, 0, annoService.EXPIRE_WITH_HISTORY);
-      site._annoTitle = title;
-      this.resetTitleButton.disabled = false;
-    } else {
-      annoService.removePageAnnotation(uri, "newtabtools/title");
-      this.setTitleInput.value = title = site.title;
-      delete site._annoTitle;
-      this.resetTitleButton.disabled = true;
-      this.resetTitleButton.blur();
-    }
-    this.notifyTileChanged(site.url, "title");
+    TileData.set(site.url, "title", title);
   },
   get backgroundImageFile() {
     return FileUtils.getFile("ProfD", ["newtab-background"], true);
@@ -394,26 +381,26 @@ let newTabTools = {
     let disabled = site == null;
 
     this.browseThumbnailButton.disabled = disabled;
-    this.setThumbnailInput.value = '';
+    this.setThumbnailInput.value = "";
     this.setThumbnailInput.disabled = disabled;
     this.setTitleInput.disabled = disabled;
     this.setTitleButton.disabled = disabled;
     this.browseBackgroundButton.disabled = disabled;
-    this.setBackgroundInput.value = '';
+    this.setBackgroundInput.value = "";
     this.setBackgroundInput.disabled = disabled;
 
     if (disabled) {
       this.siteThumbnail.style.backgroundImage = null;
       this.removeThumbnailButton.disabled = true;
-      this.siteURL.value = '';
-      this.setTitleInput.value = '';
+      this.siteURL.value = "";
+      this.setTitleInput.value = "";
       this.resetTitleButton.disabled = true;
       return;
     }
 
     this.getThumbnailURL(site.url).then((thumbnail) => {
       this.siteThumbnail.style.backgroundImage = 'url("' + thumbnail + '")';
-      if (thumbnail.startsWith('file:')) {
+      if (thumbnail.startsWith("file:")) {
         this.removeThumbnailButton.disabled = false;
       } else {
         OS.File.exists(PageThumbsStorage.getFilePathForURL(site.url)).then((exists) => {
@@ -421,9 +408,11 @@ let newTabTools = {
         });
       }
     });
+    this.siteThumbnail.style.backgroundColor = TileData.get(site.url, "backgroundColor");
     this.siteURL.value = site.url;
-    this.setTitleInput.value = site._annoTitle || site.title || site.url;
-    this.resetTitleButton.disabled = !('_annoTitle' in site);
+    let title = TileData.get(site.url, "title");
+    this.setTitleInput.value = title || site.title || site.url;
+    this.resetTitleButton.disabled = title === null;
   },
   toggleOptions: function() {
     if (this.optionsPane.hidden) {
@@ -445,18 +434,13 @@ let newTabTools = {
     let path = OS.Path.join(OS.Constants.Path.profileDir, "newtab-savedthumbs", leafName);
     OS.File.exists(path).then((exists) => {
       if (exists) {
-        deferred.resolve(Services.io.newFileURI(new FileUtils.File(path)).spec + '?' + Math.random());
+        deferred.resolve(Services.io.newFileURI(new FileUtils.File(path)).spec + "?" + Math.random());
       } else {
-        deferred.resolve(PageThumbs.getThumbnailURL(url) + '&' + Math.random());
+        deferred.resolve(PageThumbs.getThumbnailURL(url) + "&" + Math.random());
       }
     });
 
     return deferred.promise;
-  },
-  updateTileData: function() {
-    for (let site of gGrid.sites) {
-      site._render();
-    }
   }
 };
 

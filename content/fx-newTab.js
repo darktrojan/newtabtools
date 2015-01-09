@@ -20,7 +20,6 @@ XPCOMUtils.defineLazyModuleGetter(this, "Rect",
   "resource://gre/modules/Geometry.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "PrivateBrowsingUtils",
   "resource://gre/modules/PrivateBrowsingUtils.jsm");
-XPCOMUtils.defineLazyServiceGetter(this, "annoService", "@mozilla.org/browser/annotation-service;1", "nsIAnnotationService");
 
 let {
   links: gLinks,
