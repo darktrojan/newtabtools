@@ -105,6 +105,7 @@ function startup(aParams, aReason) {
   defaultPrefs.setBoolPref("thumbs.contain", false);
   defaultPrefs.setBoolPref("thumbs.hidebuttons", false);
   defaultPrefs.setBoolPref("thumbs.hidefavicons", false);
+  defaultPrefs.setCharPref("tiledata", "{}");
 
   if (userPrefs.getIntPref("donationreminder") == 0 && userPrefs.prefHasUserValue("version")) {
     userPrefs.setIntPref("donationreminder", 1);
@@ -261,6 +262,11 @@ let prefObserver = {
     case "filter":
       enumerateTabs(function(aWindow) {
         aWindow.gGrid.refresh();
+      });
+      break;
+    case "tiledata":
+      enumerateTabs(function(aWindow) {
+        aWindow.newTabTools.updateTileData();
       });
       break;
     }

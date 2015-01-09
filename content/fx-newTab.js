@@ -14,6 +14,8 @@ Cu.import("resource://gre/modules/BackgroundPageThumbs.jsm");
 Cu.import("resource://gre/modules/NewTabUtils.jsm");
 Cu.import("resource://gre/modules/commonjs/sdk/core/promise.js");
 
+Cu.import("chrome://newtabtools/content/newTabTools.jsm");
+
 XPCOMUtils.defineLazyModuleGetter(this, "Rect",
   "resource://gre/modules/Geometry.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "PrivateBrowsingUtils",
@@ -896,12 +898,8 @@ Site.prototype = {
     let titleElement = this.node.querySelector(".newtab-title");
     let uri = Services.io.newURI(this.url, null, null);
 
-    delete this._annoTitle;
-    try {
-      this._annoTitle = annoService.getPageAnnotation(uri, "newtabtools/title");
-    } catch(e) {
-    }
-    titleElement.textContent = this._annoTitle || this.title || this.url;
+    let title = TileData.get(this.url, "title");
+    titleElement.textContent = title || this.title || this.url;
 
     faviconService.getFaviconURLForPage(uri, function(aURI) {
       if (!aURI)
@@ -939,6 +937,7 @@ Site.prototype = {
       let thumbnailURL = exists ? Services.io.newFileURI(new FileUtils.File(path)).spec : PageThumbs.getThumbnailURL(this.url);
       let thumbnail = this._querySelector(".newtab-thumbnail");
       thumbnail.style.backgroundImage = "url(" + thumbnailURL + ")";
+      thumbnail.style.backgroundColor = TileData.get(this.url, "backgroundColor");
     });
   },
 

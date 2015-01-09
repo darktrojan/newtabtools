@@ -452,6 +452,11 @@ let newTabTools = {
     });
 
     return deferred.promise;
+  },
+  updateTileData: function() {
+    for (let site of gGrid.sites) {
+      site._render();
+    }
   }
 };
 
