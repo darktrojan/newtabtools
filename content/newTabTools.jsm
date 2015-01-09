@@ -1,7 +1,14 @@
-const EXPORTED_SYMBOLS = ["TileData"];
+const EXPORTED_SYMBOLS = ["TileData", "SavedThumbs"];
 const PREF = "extensions.newtabtools.tiledata";
 
 Components.utils.import("resource://gre/modules/Services.jsm");
+Components.utils.import("resource://gre/modules/XPCOMUtils.jsm");
+
+XPCOMUtils.defineLazyModuleGetter(this, "FileUtils", "resource://gre/modules/FileUtils.jsm");
+XPCOMUtils.defineLazyModuleGetter(this, "OS", "resource://gre/modules/osfile.jsm");
+XPCOMUtils.defineLazyModuleGetter(this, "PageThumbs", "resource://gre/modules/PageThumbs.jsm");
+XPCOMUtils.defineLazyModuleGetter(this, "PageThumbsStorage", "resource://gre/modules/PageThumbs.jsm");
+XPCOMUtils.defineLazyModuleGetter(this, "Promise", "resource://gre/modules/Promise.jsm");
 
 let TileData = {
   _data: new Map(),
@@ -58,3 +65,50 @@ let TileData = {
   }
 };
 TileData._getPref();
+
+let SavedThumbs = {
+  _ready: false,
+  _list: new Set(),
+  getThumbnailURL: function(url) {
+    let deferred = Promise.defer();
+    this._readDir().then(() => {
+      let leafName = PageThumbsStorage.getLeafNameForURL(url);
+      if (this.hasSavedThumb(url, leafName)) {
+        let path = this.getThumbnailPath(url, leafName)
+        deferred.resolve(Services.io.newFileURI(new FileUtils.File(path)).spec + "?" + Math.random());
+      } else {
+        deferred.resolve(PageThumbs.getThumbnailURL(url) + "&" + Math.random());
+      }
+    });
+    return deferred.promise;
+  },
+  // These functions assume _readDir has already been called.
+  getThumbnailPath: function(url, leafName=PageThumbsStorage.getLeafNameForURL(url)) {
+    return OS.Path.join(OS.Constants.Path.profileDir, "newtab-savedthumbs", leafName);
+  },
+  addSavedThumb: function(url, leafName=PageThumbsStorage.getLeafNameForURL(url)) {
+    this._list.add(leafName);
+  },
+  hasSavedThumb: function(url, leafName=PageThumbsStorage.getLeafNameForURL(url)) {
+    return this._list.has(leafName);
+  },
+  removeSavedThumb: function(url, leafName=PageThumbsStorage.getLeafNameForURL(url)) {
+    this._list.delete(leafName);
+  },
+  _readDir: function() {
+    let deferred = Promise.defer();
+    if (this.ready) {
+      deferred.resolve();
+    }
+    let thumbDir = OS.Path.join(OS.Constants.Path.profileDir, "newtab-savedthumbs");
+    let iterator = new OS.File.DirectoryIterator(thumbDir);
+    iterator.forEach((entry) => {
+      this._list.add(entry.name)
+    }).then(() => {
+      iterator.close();
+      this.ready = true;
+      deferred.resolve();
+    });
+    return deferred.promise;
+  }
+};

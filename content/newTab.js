@@ -16,6 +16,7 @@ XPCOMUtils.defineLazyModuleGetter(this, "SessionStore", "resource:///modules/ses
 XPCOMUtils.defineLazyModuleGetter(this, "OS", "resource://gre/modules/osfile.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "PageThumbUtils", "resource://gre/modules/PageThumbUtils.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "PlacesUtils", "resource://gre/modules/PlacesUtils.jsm");
+XPCOMUtils.defineLazyModuleGetter(this, "SavedThumbs", "chrome://newtabtools/content/newTabTools.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "TileData", "chrome://newtabtools/content/newTabTools.jsm");
 
 XPCOMUtils.defineLazyServiceGetter(this, "faviconService", "@mozilla.org/browser/favicon-service;1", "mozIAsyncFavicons");
@@ -169,7 +170,7 @@ let newTabTools = {
     let leafName = PageThumbsStorage.getLeafNameForURL(site.url);
     let path = OS.Path.join(OS.Constants.Path.profileDir, "newtab-savedthumbs", leafName);
     let file = FileUtils.File(path);
-    let existed = file.exists();
+    let existed = SavedThumbs.hasSavedThumb(site.url);
     if (existed) {
       file.permissions = 0644;
       file.remove(true);
@@ -185,6 +186,7 @@ let newTabTools = {
         }
       }
 
+      SavedThumbs.removeSavedThumb(site.url);
       this.notifyTileChanged(site.url, "thumbnail");
       this.removeThumbnailButton.blur();
       return;
@@ -207,6 +209,7 @@ let newTabTools = {
         let outputStream = FileUtils.openSafeFileOutputStream(file);
         NetUtil.asyncCopy(aInputStream, outputStream, function(aSuccessful) {
           FileUtils.closeSafeFileOutputStream(outputStream);
+          SavedThumbs.addSavedThumb(site.url);
           newTabTools.notifyTileChanged(site.url, "thumbnail");
         });
       }, "image/png");
@@ -398,7 +401,7 @@ let newTabTools = {
       return;
     }
 
-    this.getThumbnailURL(site.url).then((thumbnail) => {
+    SavedThumbs.getThumbnailURL(site.url).then((thumbnail) => {
       this.siteThumbnail.style.backgroundImage = 'url("' + thumbnail + '")';
       if (thumbnail.startsWith("file:")) {
         this.removeThumbnailButton.disabled = false;
@@ -426,21 +429,6 @@ let newTabTools = {
   hideOptions: function() {
     this.optionsBackground.hidden = this.optionsPane.hidden = true;
     this.optionsToggleButton.hidden = false;
-  },
-  getThumbnailURL: function(url) {
-    let deferred = Promise.defer();
-
-    let leafName = PageThumbsStorage.getLeafNameForURL(url);
-    let path = OS.Path.join(OS.Constants.Path.profileDir, "newtab-savedthumbs", leafName);
-    OS.File.exists(path).then((exists) => {
-      if (exists) {
-        deferred.resolve(Services.io.newFileURI(new FileUtils.File(path)).spec + "?" + Math.random());
-      } else {
-        deferred.resolve(PageThumbs.getThumbnailURL(url) + "&" + Math.random());
-      }
-    });
-
-    return deferred.promise;
   }
 };
 
