@@ -11,10 +11,10 @@ Components.utils.import("resource://gre/modules/Promise.jsm");
 Components.utils.import("resource://gre/modules/Services.jsm");
 Components.utils.import("resource://gre/modules/XPCOMUtils.jsm");
 
-XPCOMUtils.defineLazyServiceGetter(this, "annoService", "@mozilla.org/browser/annotation-service;1", Components.interfaces.nsIAnnotationService);
 XPCOMUtils.defineLazyGetter(this, "strings", function() {
 	return Services.strings.createBundle("chrome://newtabtools/locale/export.properties");
 });
+XPCOMUtils.defineLazyModuleGetter(this, "TileData", "chrome://newtabtools/content/newTabTools.jsm");
 
 let NewTabToolsExporter = {
 	doExport: function doExport() {
@@ -78,26 +78,6 @@ function exportSave(aReturnValues) {
 	zipWriter.open(aReturnValues.file, PR_RDWR | PR_CREATE_FILE | PR_TRUNCATE);
 
 	{
-		let annos = [];
-		for (let [name, enabled] of Iterator(aReturnValues.options.annos)) {
-			if (enabled) {
-				annos.push("newtabtools/" + name);
-			}
-		}
-		let pages = {};
-		for (let a of annos) {
-			pages[a] = {};
-			for (let p of annoService.getPagesWithAnnotation(a)) {
-					pages[a][p.spec] = annoService.getPageAnnotation(p, a);
-			}
-		}
-
-		let stream = Components.classes["@mozilla.org/io/string-input-stream;1"].createInstance(Components.interfaces.nsIStringInputStream);
-		let data = JSON.stringify(pages);
-		stream.setData(data, data.length);
-		zipWriter.addEntryStream("annos.json", Date.now() * 1000, Components.interfaces.nsIZipWriter.COMPRESSION_DEFAULT, stream, false);
-	}
-	{
 		let keys = []
 		for (let [name, enabled] of Iterator(aReturnValues.options.prefs)) {
 			if (enabled) {
@@ -120,6 +100,7 @@ function exportSave(aReturnValues) {
 				case "theme":
 				case "thumbs.hidebuttons":
 				case "thumbs.hidefavicons":
+				case "tiledata":
 					keys.push("extensions.newtabtools." + name);
 					break;
 				}
@@ -254,23 +235,6 @@ function importSave(aReturnValues) {
 		zipReader.open(aReturnValues.file);
 
 		{
-			for (let [name, enabled] of Iterator(aReturnValues.options.annos)) {
-				// can't be enabled and not in aReturnValues.annos, but check anyway
-				if (!enabled || !(name in aReturnValues.annos)) {
-					continue;
-				}
-				let data = aReturnValues.annos[name];
-				for (let [page, value] of Iterator(data)) {
-					try {
-						let uri = Services.io.newURI(page, null, null);
-						annoService.setPageAnnotation(uri, name, value, 0, annoService.EXPIRE_WITH_HISTORY);
-					} catch(e) {
-						Components.utils.reportError(e);
-					}
-				}
-			}
-		}
-		{
 			function copyPref(aName) {
 				let value = aReturnValues.prefs[aName];
 				try {
@@ -302,6 +266,20 @@ function importSave(aReturnValues) {
 					copyPref("extensions.newtabtools.grid.spacing");
 				} else if (name == "thumbs.position") {
 					copyPref("extensions.newtabtools.thumbs.contain");
+				} else if (name == "tiledata") {
+					if (aReturnValues.annos["newtabtools/title"]) {
+						let data = aReturnValues.annos["newtabtools/title"];
+						for (let [url, value] of Iterator(data)) {
+							TileData.set(url, "title", value);
+						}
+					} else if (aReturnValues.prefs["extensions.newtabtools.tiledata"]) {
+						let data = JSON.parse(aReturnValues.prefs["extensions.newtabtools.tiledata"]);
+						for (let [url, urlData] of Iterator(data)) {
+							for (let [key, value] of Iterator(urlData)) {
+								TileData.set(url, key, value);
+							}
+						}
+					}
 				} else if (("browser.newtabpage." + name) in aReturnValues.prefs) {
 					copyPref("browser.newtabpage." + name);
 				} else if (("extensions.newtabtools." + name) in aReturnValues.prefs) {

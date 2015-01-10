@@ -36,8 +36,9 @@ if (returnValues.importing) {
 			let prefName = "extensions.newtabtools." + checkbox.id.substring(6); // length of "prefs."
 			checkbox.disabled = !(prefName in returnValues.prefs);
 			break;
-		case "annos.title":
-			checkbox.disabled = !("newtabtools/title" in returnValues.annos);
+		case "prefs.tiledata":
+			checkbox.disabled = !("newtabtools/title" in returnValues.annos) && !("extensions.newtabtools.tiledata" in returnValues.prefs);
+			break;
 		case "tiles.thumbs":
 			checkbox.disabled = returnValues.thumbnails.length == 0;
 			break;

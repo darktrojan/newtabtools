@@ -15,7 +15,7 @@
 		<checkbox id="prefs.blocked" label="&newtabtools.export.prefs.blocked;" />
 		<checkbox id="tiles.thumbs" label="&newtabtools.export.tiles.thumbs;" />
 		<checkbox id="prefs.thumbs.position" label="&newtabtools.export.prefs.thumbs.position;" />
-		<checkbox id="annos.title" label="&newtabtools.export.annos.title;" />
+		<checkbox id="prefs.tiledata" label="&newtabtools.export.annos.title;" />
 		<checkbox id="prefs.thumbs.hidebuttons" label="&newtabtools.export.prefs.thumbs.hidebuttons;" />
 		<checkbox id="prefs.thumbs.hidefavicons" label="&newtabtools.export.prefs.thumbs.hidefavicons;" />
 	</groupbox>
