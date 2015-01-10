@@ -232,6 +232,7 @@ function shutdown(aParams, aReason) {
 
   Services.obs.removeObserver(optionsObserver, "addon-options-displayed");
   Cu.unload("chrome://newtabtools/content/export.jsm");
+  Cu.unload("chrome://newtabtools/content/newTabTools.jsm");
 
   expirationFilter.cleanup();
 

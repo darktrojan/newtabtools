@@ -140,15 +140,6 @@ let newTabTools = {
     gPinnedLinks.pin({url: link, title: title}, index);
     gUpdater.updateGrid();
   },
-  notifyTileChanged: function(url, whatChanged) {
-    let urlString = Cc["@mozilla.org/supports-string;1"].createInstance(Ci.nsISupportsString);
-    urlString.data = url;
-    Services.obs.notifyObservers(urlString, "newtabtools-change", whatChanged);
-
-    if (whatChanged == "thumbnail") {
-      this.selectedSiteIndex = this._selectedSiteIndex;
-    }
-  },
   onTileChanged: function(url, whatChanged) {
     for (let site of gGrid.sites) {
       if (site.url == url) {
@@ -158,6 +149,7 @@ let newTabTools = {
           break;
         case "thumbnail":
           site.refreshThumbnail();
+          this.selectedSiteIndex = this._selectedSiteIndex;
           break;
         case "title":
           site._addTitleAndFavicon();
@@ -167,10 +159,10 @@ let newTabTools = {
     }
   },
   setThumbnail: function(site, src) {
-    let leafName = PageThumbsStorage.getLeafNameForURL(site.url);
-    let path = OS.Path.join(OS.Constants.Path.profileDir, "newtab-savedthumbs", leafName);
+    let leafName = SavedThumbs.getThumbnailLeafName(site.url);
+    let path = SavedThumbs.getThumbnailPath(site.url, leafName);
     let file = FileUtils.File(path);
-    let existed = SavedThumbs.hasSavedThumb(site.url);
+    let existed = SavedThumbs.hasSavedThumb(site.url, leafName);
     if (existed) {
       file.permissions = 0644;
       file.remove(true);
@@ -186,8 +178,7 @@ let newTabTools = {
         }
       }
 
-      SavedThumbs.removeSavedThumb(site.url);
-      this.notifyTileChanged(site.url, "thumbnail");
+      SavedThumbs.removeSavedThumb(site.url, leafName);
       this.removeThumbnailButton.blur();
       return;
     }
@@ -209,8 +200,7 @@ let newTabTools = {
         let outputStream = FileUtils.openSafeFileOutputStream(file);
         NetUtil.asyncCopy(aInputStream, outputStream, function(aSuccessful) {
           FileUtils.closeSafeFileOutputStream(outputStream);
-          SavedThumbs.addSavedThumb(site.url);
-          newTabTools.notifyTileChanged(site.url, "thumbnail");
+          SavedThumbs.addSavedThumb(site.url, leafName);
         });
       }, "image/png");
     }

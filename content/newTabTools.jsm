@@ -10,6 +10,13 @@ XPCOMUtils.defineLazyModuleGetter(this, "PageThumbs", "resource://gre/modules/Pa
 XPCOMUtils.defineLazyModuleGetter(this, "PageThumbsStorage", "resource://gre/modules/PageThumbs.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "Promise", "resource://gre/modules/Promise.jsm");
 
+function notifyTileChanged(url, key) {
+  let urlString = Components.classes["@mozilla.org/supports-string;1"]
+    .createInstance(Components.interfaces.nsISupportsString);
+  urlString.data = url;
+  Services.obs.notifyObservers(urlString, "newtabtools-change", key);
+}
+
 let TileData = {
   _data: new Map(),
   get: function(url, key) {
@@ -33,14 +40,8 @@ let TileData = {
       }
     }
 
-    this._notifyTileChanged(url, key);
+    notifyTileChanged(url, key);
     this._setPref();
-  },
-  _notifyTileChanged: function(url, key) {
-    let urlString = Components.classes["@mozilla.org/supports-string;1"]
-      .createInstance(Components.interfaces.nsISupportsString);
-    urlString.data = url;
-    Services.obs.notifyObservers(urlString, "newtabtools-change", key);
   },
   _getPref: function() {
     try {
@@ -72,7 +73,7 @@ let SavedThumbs = {
   getThumbnailURL: function(url) {
     let deferred = Promise.defer();
     this._readDir().then(() => {
-      let leafName = PageThumbsStorage.getLeafNameForURL(url);
+      let leafName = this.getThumbnailLeafName(url);
       if (this.hasSavedThumb(url, leafName)) {
         let path = this.getThumbnailPath(url, leafName)
         deferred.resolve(Services.io.newFileURI(new FileUtils.File(path)).spec + "?" + Math.random());
@@ -82,18 +83,23 @@ let SavedThumbs = {
     });
     return deferred.promise;
   },
-  // These functions assume _readDir has already been called.
-  getThumbnailPath: function(url, leafName=PageThumbsStorage.getLeafNameForURL(url)) {
+  getThumbnailLeafName: function(url) {
+    return PageThumbsStorage.getLeafNameForURL(url);
+  },
+  getThumbnailPath: function(url, leafName=this.getThumbnailLeafName(url)) {
     return OS.Path.join(OS.Constants.Path.profileDir, "newtab-savedthumbs", leafName);
   },
-  addSavedThumb: function(url, leafName=PageThumbsStorage.getLeafNameForURL(url)) {
+  // These functions assume _readDir has already been called.
+  addSavedThumb: function(url, leafName=this.getThumbnailLeafName(url)) {
     this._list.add(leafName);
+    notifyTileChanged(url, "thumbnail");
   },
-  hasSavedThumb: function(url, leafName=PageThumbsStorage.getLeafNameForURL(url)) {
+  hasSavedThumb: function(url, leafName=this.getThumbnailLeafName(url)) {
     return this._list.has(leafName);
   },
-  removeSavedThumb: function(url, leafName=PageThumbsStorage.getLeafNameForURL(url)) {
+  removeSavedThumb: function(url, leafName=this.getThumbnailLeafName(url)) {
     this._list.delete(leafName);
+    notifyTileChanged(url, "thumbnail");
   },
   _readDir: function() {
     let deferred = Promise.defer();
