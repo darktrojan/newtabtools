@@ -83,11 +83,14 @@ let SavedThumbs = {
     });
     return deferred.promise;
   },
+  get thumbnailDirectory() {
+    return OS.Path.join(OS.Constants.Path.profileDir, "newtab-savedthumbs");
+  },
   getThumbnailLeafName: function(url) {
     return PageThumbsStorage.getLeafNameForURL(url);
   },
   getThumbnailPath: function(url, leafName=this.getThumbnailLeafName(url)) {
-    return OS.Path.join(OS.Constants.Path.profileDir, "newtab-savedthumbs", leafName);
+    return OS.Path.join(this.thumbnailDirectory, leafName);
   },
   // These functions assume _readDir has already been called.
   addSavedThumb: function(url, leafName=this.getThumbnailLeafName(url)) {
@@ -106,7 +109,7 @@ let SavedThumbs = {
     if (this.ready) {
       deferred.resolve();
     }
-    let thumbDir = OS.Path.join(OS.Constants.Path.profileDir, "newtab-savedthumbs");
+    let thumbDir = OS.Path.join(this.thumbnailDirectory);
     let iterator = new OS.File.DirectoryIterator(thumbDir);
     iterator.forEach((entry) => {
       this._list.add(entry.name)

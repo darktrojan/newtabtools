@@ -14,6 +14,8 @@ Components.utils.import("resource://gre/modules/XPCOMUtils.jsm");
 XPCOMUtils.defineLazyGetter(this, "strings", function() {
 	return Services.strings.createBundle("chrome://newtabtools/locale/export.properties");
 });
+XPCOMUtils.defineLazyModuleGetter(this, "OS", "resource://gre/modules/osfile.jsm");
+XPCOMUtils.defineLazyModuleGetter(this, "SavedThumbs", "chrome://newtabtools/content/newTabTools.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "TileData", "chrome://newtabtools/content/newTabTools.jsm");
 
 let NewTabToolsExporter = {
@@ -74,6 +76,7 @@ function exportShowFilePicker(aReturnValues) {
 }
 
 function exportSave(aReturnValues) {
+	let deferred = Promise.defer();
 	let zipWriter = Components.classes["@mozilla.org/zipwriter;1"].createInstance(Components.interfaces.nsIZipWriter);
 	zipWriter.open(aReturnValues.file, PR_RDWR | PR_CREATE_FILE | PR_TRUNCATE);
 
@@ -126,29 +129,36 @@ function exportSave(aReturnValues) {
 		stream.setData(data, data.length);
 		zipWriter.addEntryStream("prefs.json", Date.now() * 1000, Components.interfaces.nsIZipWriter.COMPRESSION_DEFAULT, stream, false);
 	}
-	if (aReturnValues.options.tiles.thumbs) {
-		zipWriter.addEntryDirectory("thumbnails/", Date.now() * 1000, false);
-
-		let count = Math.floor(Services.prefs.getIntPref("extensions.newtabtools.columns") * Services.prefs.getIntPref("extensions.newtabtools.rows") * 1.5);
-
-		for (let l of NewTabUtils.links.getLinks().slice(0, count)) {
-			let f = new FileUtils.File(PageThumbsStorage.getFilePathForURL(l.url));
-			if (f.exists() && !f.isWritable()) {
-				if (zipWriter.hasEntry("thumbnails/" + f.leafName)) {
-					zipWriter.removeEntry("thumbnails/" + f.leafName, false);
-				}
-				zipWriter.addEntryFile("thumbnails/" + f.leafName, Components.interfaces.nsIZipWriter.COMPRESSION_DEFAULT, f, false);
-			}
-		}
-	}
 	if (aReturnValues.options.page.background) {
 		let backgroundFile = FileUtils.getFile("ProfD", ["newtab-background"]);
 		if (backgroundFile.exists()) {
 			zipWriter.addEntryFile("newtab-background", Components.interfaces.nsIZipWriter.COMPRESSION_DEFAULT, backgroundFile, false);
 		}
 	}
+	if (aReturnValues.options.tiles.thumbs) {
+		zipWriter.addEntryDirectory("thumbnails/", Date.now() * 1000, false);
 
-	zipWriter.close();
+		let thumbDir = SavedThumbs.thumbnailDirectory;
+		let iterator = new OS.File.DirectoryIterator(thumbDir);
+		iterator.forEach((entry) => {
+			let f = new FileUtils.File(entry.path);
+			if (zipWriter.hasEntry("thumbnails/" + entry.name)) {
+				zipWriter.removeEntry("thumbnails/" + entry.name, false);
+			}
+			zipWriter.addEntryFile("thumbnails/" + entry.name, Components.interfaces.nsIZipWriter.COMPRESSION_DEFAULT, f, false);
+		}).then(() => {
+			iterator.close();
+			finish();
+		});
+	} else {
+		finish();
+	}
+
+	function finish() {
+		zipWriter.close();
+		deferred.resolve();
+	}
+	return deferred.promise;
 }
 
 function importShowFilePicker() {
@@ -288,7 +298,7 @@ function importSave(aReturnValues) {
 			}
 		}
 		if (aReturnValues.options.tiles.thumbs) {
-			let thumbsDirectory = new FileUtils.File(PageThumbsStorage.path);
+			let thumbsDirectory = new FileUtils.File(SavedThumbs.thumbnailDirectory);
 			for (let file of aReturnValues.thumbnails) {
 				let thumbFile = thumbsDirectory.clone();
 				thumbFile.append(file.substring(11)); // length of "thumbnails/"
