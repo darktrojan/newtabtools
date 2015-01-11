@@ -208,6 +208,11 @@ let newTabTools = {
   },
   setTitle: function(site, title) {
     TileData.set(site.url, "title", title);
+    this.resetTitleButton.disabled = !title;
+    if (!title) {
+      this.setTitleInput.value = site.title;
+      this.resetTitleButton.blur();
+    }
   },
   get backgroundImageFile() {
     return FileUtils.getFile("ProfD", ["newtab-background"], true);
