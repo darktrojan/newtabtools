@@ -631,7 +631,6 @@ input[type=button] {
   width: 200px;
   height: 150px;
   margin: 0 auto;
-  border: 1px #b2aeaa solid;
   opacity: 1;
   position: static;
   -moz-box-flex: 1;
