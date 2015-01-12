@@ -52,6 +52,9 @@ let newTabTools = {
     return gGrid.sites[this._selectedSiteIndex];
   },
   optionsOnClick: function(event) {
+    if (event.originalTarget.disabled) {
+      return;
+    }
     let id = event.originalTarget.id;
     switch (id) {
     case "options-pinURL":
