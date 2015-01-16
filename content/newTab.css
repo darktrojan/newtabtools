@@ -575,6 +575,14 @@ input[type=button] {
 #newtab-scrollbox:not([page-disabled]) #newtab-toggle {
   display: none;
 }
+:root[options-hidden] #options,
+:root[options-hidden] #options-bg,
+:root:not([options-hidden]) #options-toggle {
+  display: none;
+}
+:root:not([options-hidden]) #newtab-scrollbox {
+  filter: blur(1px);
+}
 #options-bg {
   position: fixed;
   top: 0;

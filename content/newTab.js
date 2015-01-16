@@ -416,17 +416,15 @@ let newTabTools = {
     this.resetTitleButton.disabled = title === null;
   },
   toggleOptions: function() {
-    if (this.optionsPane.hidden) {
-      this.optionsBackground.hidden = this.optionsPane.hidden = false;
-      this.optionsToggleButton.hidden = true;
+    if (document.documentElement.hasAttribute("options-hidden")) {
+      document.documentElement.removeAttribute("options-hidden");
       this.selectedSiteIndex = 0;
     } else {
       this.hideOptions();
     }
   },
   hideOptions: function() {
-    this.optionsBackground.hidden = this.optionsPane.hidden = true;
-    this.optionsToggleButton.hidden = false;
+    document.documentElement.setAttribute("options-hidden", "true");
   }
 };
 
