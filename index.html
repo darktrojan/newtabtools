@@ -15,29 +15,41 @@
     </div>
 
     <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
+      <div id="main_content" class="inner">
         <a id="forkme_banner" href="https://github.com/darktrojan/newtabtools">View on GitHub</a>
 
         <h2 id="page_title"><img src="newtabtools128.png" />New Tab Tools</h2>
 
-        <h3>Releases</h3>
-        <p>Released versions can be downloaded from <a href="https://addons.mozilla.org/firefox/addon/new-tab-tools/">https://addons.mozilla.org/firefox/addon/new-tab-tools/</a></p>
+        <section id="main_left">
+          <h3>About</h3>
+          <p>This add-on replaces you "new tab" page with what is essentially a clone of the new tab page from Firefox version 30. It also adds functionality for adding, modifying and hiding tiles, as well as a variety of customisations.</p>
+          <h3>Common Problems</h3>
+          <h5><q>Any new tab I open shows up as blank.</q></h5>
+          <p>Does your new tab page have 9 little grey squares in the top corner? If it does, click it.</p>
+          <p>If it doesn't, your new tab page isn't set to the default page for some reason. You'll need to reset it: visit the page <code>about:config</code>, find the pref called <code>browser.newtab.url</code> and reset it to <code>about:newtab</code>.</p>
+          <h5><q>The text is hard to read against my background picture.</q></h5>
+          <p>Get a better background picture.</p>
+          <p>That probably seems harsh, but do you open a new tab to look at the background, or to click on things?</p>
+        </section><section id="main_right">
+          <h3>Releases</h3>
+          <p>Released versions can be downloaded from <a href="https://addons.mozilla.org/firefox/addon/new-tab-tools/">https://addons.mozilla.org/firefox/addon/new-tab-tools/</a></p>
 
-        <h3>Localization</h3>
-        <p>You might be here because you'd like to see New Tab Tools in your language. Great!</p>
-        <p>To translate, you can:</p>
-        <ul>
-          <li>Fork the Git repository, translate, and send me a pull request. Some knowledge of creating Mozilla add-ons is required.</li>
-          <li>Or, visit <a href="http://zoo.darktrojan.net/darktrojan/newtabtools/repo.php">the project's page on Zoo</a>, a website for add-on translation. (Please note that Zoo is under development, and could break at any time. It's mostly stable though.)</li>
-        </ul>
-        <h3>Contribute code</h3>
-        <p>Want to add some functionality to New Tab Tools? Feel free to send me a pull request.</p>
-        <p>To get a working version of this repo in your Firefox profile, clone it into your extensions directory as <code>newtabtools@darktrojan.net</code> and start Firefox.</p>
-        <pre>cd [your profile dir]/extensions
+          <h3>Localization</h3>
+          <p>You might be here because you'd like to see New Tab Tools in your language. Great!</p>
+          <p>To translate, you can:</p>
+          <ul>
+            <li>Fork the Git repository, translate, and send me a pull request. Some knowledge of creating Mozilla add-ons is required.</li>
+            <li>Or, visit <a href="http://zoo.darktrojan.net/darktrojan/newtabtools/repo.php">the project's page on Zoo</a>, a website for add-on translation. (Please note that Zoo is under development, and could break at any time. It's mostly stable though.)</li>
+          </ul>
+          <h3>Contribute code</h3>
+          <p>Want to add some functionality to New Tab Tools? Feel free to send me a pull request.</p>
+          <p>To get a working version of this repo in your Firefox profile, clone it into your extensions directory as <code>newtabtools@darktrojan.net</code> and start Firefox.</p>
+          <pre>cd [your profile dir]/extensions
 git clone git://github.com/darktrojan/newtabtools.git newtabtools@darktrojan.net</pre>
-        <h3>Contribute money</h3>
-        <p>Add-ons are available for free, but developing and supporting them does take a considerable amount of time. Please consider making a donation to help me pay my bills. You can contribute any amount you like <a href="https://addons.mozilla.org/addon/new-tab-tools/contribute/installed/">through PayPal via addons.mozilla.org</a>. (Note though that for amounts smaller than about US$1, PayPal takes most of it.)</p>
-      </section>
+          <h3>Contribute money</h3>
+          <p>Add-ons are available for free, but developing and supporting them does take a considerable amount of time. Please consider making a donation to help me pay my bills. You can contribute any amount you like <a href="https://addons.mozilla.org/addon/new-tab-tools/contribute/installed/">through PayPal via addons.mozilla.org</a>. (Note though that for amounts smaller than about US$1, PayPal takes most of it.)</p>
+        </section>
+      </div>
     </div>
   </body>
 </html>
