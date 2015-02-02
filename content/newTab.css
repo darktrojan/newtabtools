@@ -147,7 +147,7 @@ input[type=button] {
 @media (min-resolution: 2dppx) {
   #newtab-toggle {
     background-image: url("controls@2x.png");
-    background-size: 248px;
+    background-size: 296px;
   }
 }
 /* MARGINS */
@@ -507,7 +507,7 @@ input[type=button] {
 @media (min-resolution: 2dppx) {
   .newtab-control {
     background-image: url("controls@2x.png");
-    background-size: 248px;
+    background-size: 296px;
   }
 }
 .newtab-control-pin:-moz-locale-dir(ltr),
