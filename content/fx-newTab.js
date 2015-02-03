@@ -378,7 +378,15 @@ let gPage = {
   /**
    * Updates the whole page and the grid when the storage has changed.
    */
-  update: function Page_update() {
+  update: function Page_update(reason) {
+    if (!document.hidden) {
+      if (typeof reason == "boolean" && reason) { // Fx <= 35
+        return;
+      } else if (reason == "links-changed") { // Fx >= 36
+        return;
+      }
+    }
+
     // The grid might not be ready yet as we initialize it asynchronously.
     if (gGrid.ready) {
       gGrid.refresh();
