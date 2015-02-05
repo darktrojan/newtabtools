@@ -1,19 +1,19 @@
 <!ENTITY newtabtools.page.show "Show the new tab page">
 
-<!ENTITY newtabtools.pin-url.header "Добавить эскиз:">
+<!ENTITY newtabtools.pin-url.header "Добавить плитку:">
 <!ENTITY newtabtools.pin-url.placeholder "Введите или выберите ссылку из списка">
 <!ENTITY newtabtools.pin-url.button "Добавить">
 
-<!ENTITY newtabtools.tile-header "Эскизы Экспресс-панели:">
+<!ENTITY newtabtools.tile-header "Плитки Экспресс-панели:">
 
-<!ENTITY newtabtools.tile-thumbnail.label "Изображение эскиза:                                                                          ">
+<!ENTITY newtabtools.tile-thumbnail.label "Изображение плитки:                                                                          ">
 <!ENTITY newtabtools.tile-thumbnail.placeholder "Вставьте ссылку на изображение или выберите файл">
 <!ENTITY newtabtools.tile-thumbnail.browse "Выбрать…">
 <!ENTITY newtabtools.tile-thumbnail.set "Применить">
 <!ENTITY newtabtools.tile-thumbnail.remove "Удалить">
 
-<!ENTITY newtabtools.tile-title.label "Название эскиза:">
-<!ENTITY newtabtools.tile-title.placeholder "Введите новое название эскиза">
+<!ENTITY newtabtools.tile-title.label "Название плитки:">
+<!ENTITY newtabtools.tile-title.placeholder "Введите новое название плитки">
 <!ENTITY newtabtools.tile-title.set "Применить">
 <!ENTITY newtabtools.tile-title.reset "Сбросить">
 
