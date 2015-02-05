@@ -4,7 +4,7 @@
 <!ENTITY newtabtools.options.rows "Количество Строк">
 <!ENTITY newtabtools.options.columns "Количество Столбцов">
 <!ENTITY newtabtools.options.grid.margin "Отступ от края">
-<!ENTITY newtabtools.options.grid.spacing "Отступ между закладками">
+<!ENTITY newtabtools.options.grid.spacing "Отступ между эскизами">
 <!ENTITY newtabtools.options.size.small "Небольшой">
 <!ENTITY newtabtools.options.size.medium "Средний">
 <!ENTITY newtabtools.options.size.large "Большой">
@@ -15,8 +15,8 @@
 <!ENTITY newtabtools.options.launcher.left "Слева">
 <!ENTITY newtabtools.options.launcher.right "Справа">
 <!ENTITY newtabtools.options.recent "Закрытые вкладки">
-<!ENTITY newtabtools.options.thumb-buttons "Кнопки Закрепления и Удаления закладок">
+<!ENTITY newtabtools.options.thumb-buttons "Кнопки Закрепления и Удаления эскизов">
 <!ENTITY newtabtools.options.favicons "Иконки сайта">
-<!ENTITY newtabtools.options.thumb-contain "Изображения закладок во весь размер">
+<!ENTITY newtabtools.options.thumb-contain "Изображения эскизов во весь размер">
 <!ENTITY newtabtools.export "Экспортировать Настройки…">
 <!ENTITY newtabtools.import "Импортировать Настройки…">
