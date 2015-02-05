@@ -1,19 +1,19 @@
 <!ENTITY newtabtools.page.show "Show the new tab page">
 
-<!ENTITY newtabtools.pin-url.header "Добавить вкладку:">
+<!ENTITY newtabtools.pin-url.header "Добавить визуальную закладку:">
 <!ENTITY newtabtools.pin-url.placeholder "Введите или выберите ссылку">
 <!ENTITY newtabtools.pin-url.button "Добавить">
 
-<!ENTITY newtabtools.tile-header "Вкладки:">
+<!ENTITY newtabtools.tile-header "Закладки:">
 
-<!ENTITY newtabtools.tile-thumbnail.label "Изображение вкладки:                                                                          ">
+<!ENTITY newtabtools.tile-thumbnail.label "Изображение закладки:                                                                          ">
 <!ENTITY newtabtools.tile-thumbnail.placeholder "Вставьте ссылку на изображение или выберите файл">
 <!ENTITY newtabtools.tile-thumbnail.browse "Выбрать…">
 <!ENTITY newtabtools.tile-thumbnail.set "Применить">
 <!ENTITY newtabtools.tile-thumbnail.remove "Удалить">
 
-<!ENTITY newtabtools.tile-title.label "Название вкладки:">
-<!ENTITY newtabtools.tile-title.placeholder "Введите новое название вкладки">
+<!ENTITY newtabtools.tile-title.label "Название закладки:">
+<!ENTITY newtabtools.tile-title.placeholder "Введите новое название закладки">
 <!ENTITY newtabtools.tile-title.set "Применить">
 <!ENTITY newtabtools.tile-title.reset "Сбросить">
 

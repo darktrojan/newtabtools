@@ -1,15 +1,15 @@
 <!ENTITY newtabtools.export.title "New Tab Tools">
 <!ENTITY newtabtools.export.header "Выберите настройки для экспорта:">
 <!ENTITY newtabtools.import.header "Выберите настройки для импорта:">
-<!ENTITY newtabtools.export.tiles.caption "Настройки Вкладок">
-<!ENTITY newtabtools.export.prefs.pinned "Прикрепленные вкладки">
-<!ENTITY newtabtools.export.prefs.blocked "Удаленные вкладки">
+<!ENTITY newtabtools.export.tiles.caption "Настройки Визуальных закладок">
+<!ENTITY newtabtools.export.prefs.pinned "Закрепленные закладки">
+<!ENTITY newtabtools.export.prefs.blocked "Удаленные закладки">
 <!ENTITY newtabtools.export.prefs.gridsize "Количество Строк и Столбцов">
-<!ENTITY newtabtools.export.prefs.gridmargin "Отступ от края и Расстояние между вкладок">
-<!ENTITY newtabtools.export.tiles.thumbs "Измененные изображения вкладок">
-<!ENTITY newtabtools.export.prefs.thumbs.position "Положение изображений вкладок">
-<!ENTITY newtabtools.export.annos.title "Измененные Названия вкладок">
-<!ENTITY newtabtools.export.prefs.thumbs.hidebuttons "Видимость кнопок Закрепления и Удаления вкладок">
+<!ENTITY newtabtools.export.prefs.gridmargin "Отступ от края и Расстояние между закладками">
+<!ENTITY newtabtools.export.tiles.thumbs "Измененные изображения закладок">
+<!ENTITY newtabtools.export.prefs.thumbs.position "Положение изображений закладок">
+<!ENTITY newtabtools.export.annos.title "Измененные Названия закладок">
+<!ENTITY newtabtools.export.prefs.thumbs.hidebuttons "Видимость кнопок Закрепления и Удаления на закладках">
 <!ENTITY newtabtools.export.prefs.thumbs.hidefavicons "Видимость Иконок сайтов">
 <!ENTITY newtabtools.export.page.caption "Настройки Экспресс-панели">
 <!ENTITY newtabtools.export.prefs.launcher "Позиция панели быстрого достуа">
