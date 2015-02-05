@@ -1,17 +1,17 @@
 <!ENTITY newtabtools.export.title "New Tab Tools">
-<!ENTITY newtabtools.export.header "Choose what to export:">
-<!ENTITY newtabtools.import.header "Choose what to import:">
-<!ENTITY newtabtools.export.tiles.caption "Tiles">
-<!ENTITY newtabtools.export.prefs.pinned "Pinned Tiles">
-<!ENTITY newtabtools.export.prefs.blocked "Removed Tiles">
-<!ENTITY newtabtools.export.prefs.gridsize "Number of Rows and Columns">
-<!ENTITY newtabtools.export.prefs.gridmargin "Grid Margin and Spacing">
-<!ENTITY newtabtools.export.tiles.thumbs "Customized Thumbnails">
-<!ENTITY newtabtools.export.prefs.thumbs.position "Thumbnail Positioning">
-<!ENTITY newtabtools.export.annos.title "Customized Tile Titles">
-<!ENTITY newtabtools.export.prefs.thumbs.hidebuttons "Thumbnail Button Visibility">
-<!ENTITY newtabtools.export.prefs.thumbs.hidefavicons "Site Icon Visibility">
-<!ENTITY newtabtools.export.page.caption "Page">
-<!ENTITY newtabtools.export.prefs.launcher "Position of Launcher">
-<!ENTITY newtabtools.export.prefs.recent.show "Recently Closed Tabs Visibility">
-<!ENTITY newtabtools.export.page.background "Page Background">
+<!ENTITY newtabtools.export.header "Выберите настройки для экспорта:">
+<!ENTITY newtabtools.import.header "Выберите настройки для импорта:">
+<!ENTITY newtabtools.export.tiles.caption "Настройки Вкладок">
+<!ENTITY newtabtools.export.prefs.pinned "Прикрепленные вкладки">
+<!ENTITY newtabtools.export.prefs.blocked "Удаленные вкладки">
+<!ENTITY newtabtools.export.prefs.gridsize "Количество Строк и Столбцов">
+<!ENTITY newtabtools.export.prefs.gridmargin "Отступ от края и Расстояние между вкладок">
+<!ENTITY newtabtools.export.tiles.thumbs "Измененные изображения вкладок">
+<!ENTITY newtabtools.export.prefs.thumbs.position "Положение изображений вкладок">
+<!ENTITY newtabtools.export.annos.title "Измененные Названия вкладок">
+<!ENTITY newtabtools.export.prefs.thumbs.hidebuttons "Видимость кнопок Закрепления и Удаления вкладок">
+<!ENTITY newtabtools.export.prefs.thumbs.hidefavicons "Видимость Иконок сайтов">
+<!ENTITY newtabtools.export.page.caption "Настройки Экспресс-панели">
+<!ENTITY newtabtools.export.prefs.launcher "Позиция панели быстрого достуа">
+<!ENTITY newtabtools.export.prefs.recent.show "Видимость закрытых вкладок">
+<!ENTITY newtabtools.export.page.background "Фоновое изображение">
