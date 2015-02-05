@@ -64,5 +64,13 @@
         <em:description>自訂新分頁頁面。你可以在新分頁增加更多方塊磚、加入 Firefox 開始頁的捷徑列或是自訂背景圖片，你也能為方塊磚設定新的圖片和標題。</em:description>
       </Description>
     </em:localized>
+
+    <em:localized>
+      <Description>
+        <em:locale>ru</em:locale>
+        <em:name>New Tab Tools</em:name>
+        <em:description>Настраиваемая Экспресс-панель. На Экспресс-панель можно добавлять новые вкладки, установить фоновое изображение. А так же, можно изменять название и изображение вкладок.</em:description>
+      </Description>
+    </em:localized>
   </Description>
 </RDF>
