@@ -5,6 +5,7 @@ locale newtabtools fr locale/fr/
 locale newtabtools it locale/it/
 locale newtabtools ja locale/ja/
 locale newtabtools pt-BR locale/pt-BR/
+locale newtabtools ru locale/ru/
 locale newtabtools zh-CN locale/zh-CN/
 locale newtabtools zh-TW locale/zh-TW/
 skin newtabtools classic/1.0 skin/linux/ os!=WINNT os!=Darwin
