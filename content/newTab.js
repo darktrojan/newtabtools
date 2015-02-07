@@ -386,9 +386,6 @@ let newTabTools = {
     this.setThumbnailInput.disabled = disabled;
     this.setTitleInput.disabled = disabled;
     this.setTitleButton.disabled = disabled;
-    this.browseBackgroundButton.disabled = disabled;
-    this.setBackgroundInput.value = "";
-    this.setBackgroundInput.disabled = disabled;
 
     if (disabled) {
       this.siteThumbnail.style.backgroundImage = null;
@@ -465,7 +462,6 @@ let newTabTools = {
     "setTitleInput": "options-title-input",
     "resetTitleButton": "options-title-reset",
     "setTitleButton": "options-title-set",
-    "browseBackgroundButton": "options-bg-browse",
     "setBackgroundInput": "options-bg-input",
     "setBackgroundButton": "options-bg-set",
     "removeBackgroundButton": "options-bg-remove",
