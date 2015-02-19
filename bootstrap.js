@@ -67,7 +67,7 @@ function install(aParams, aReason) {
         yield OS.File.makeDir(thumbDir);
       }
 
-      if (aReason == ADDON_UPGRADE) {
+      if (aReason == ADDON_UPGRADE && Services.vc.compare(aParams.oldVersion, 34) < 0) {
         let iterator = new OS.File.DirectoryIterator(PageThumbsStorage.path);
         while (true) {
           let entry = yield iterator.next();
