@@ -502,7 +502,7 @@ let gGrid = {
   /**
    * All sites contained in the grid's cells. Sites may be empty.
    */
-  get sites() [cell.site for each (cell in this.cells)],
+  get sites() [cell.site for (cell of this.cells)],
 
   // Tells whether the grid has already been initialized.
   get ready() !!this._node,
