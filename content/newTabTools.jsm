@@ -71,17 +71,15 @@ let SavedThumbs = {
   _ready: false,
   _list: new Set(),
   getThumbnailURL: function(url) {
-    let deferred = Promise.defer();
-    this._readDir().then(() => {
+    return this._readDir().then(() => {
       let leafName = this.getThumbnailLeafName(url);
       if (this.hasSavedThumb(url, leafName)) {
-        let path = this.getThumbnailPath(url, leafName)
-        deferred.resolve(Services.io.newFileURI(new FileUtils.File(path)).spec + "?" + Math.random());
+        let path = this.getThumbnailPath(url, leafName);
+        return Services.io.newFileURI(new FileUtils.File(path)).spec + "?" + Math.random();
       } else {
-        deferred.resolve(PageThumbs.getThumbnailURL(url) + "&" + Math.random());
+        return PageThumbs.getThumbnailURL(url) + "&" + Math.random();
       }
     });
-    return deferred.promise;
   },
   get thumbnailDirectory() {
     return OS.Path.join(OS.Constants.Path.profileDir, "newtab-savedthumbs");
@@ -104,20 +102,26 @@ let SavedThumbs = {
     this._list.delete(leafName);
     notifyTileChanged(url, "thumbnail");
   },
+  _readDirPromises: [],
   _readDir: function() {
-    let deferred = Promise.defer();
-    if (this.ready) {
-      deferred.resolve();
-    }
-    let thumbDir = OS.Path.join(this.thumbnailDirectory);
-    let iterator = new OS.File.DirectoryIterator(thumbDir);
-    iterator.forEach((entry) => {
-      this._list.add(entry.name)
-    }).then(() => {
-      iterator.close();
-      this.ready = true;
-      deferred.resolve();
+    return new Promise((resolve, reject) => {
+      if (this.ready) {
+        resolve();
+        return;
+      }
+      this._readDirPromises.push(resolve);
+      if (this._readDirPromises.length == 1) {
+        let thumbDir = OS.Path.join(this.thumbnailDirectory);
+        let iterator = new OS.File.DirectoryIterator(thumbDir);
+        iterator.forEach((entry) => {
+          this._list.add(entry.name);
+        }).then(() => {
+          iterator.close();
+          this.ready = true;
+          this._readDirPromises.forEach((d) => d.call());
+          delete this._readDirPromises;
+        });
+      }
     });
-    return deferred.promise;
   }
 };
