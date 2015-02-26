@@ -562,7 +562,7 @@ input[type=button] {
   height: 18px;
   padding: 0;
   border: none;
-  background: transparent url("chrome://mozapps/skin/extensions/utilities.png");
+  background: transparent url("utilities.png");
   z-index: 2
 }
 #options-toggle:-moz-locale-dir(rtl) {
