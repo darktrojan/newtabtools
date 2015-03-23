@@ -882,15 +882,6 @@ Site.prototype = {
    * Renders the site's data (fills the HTML fragment).
    */
   _render: function Site_render() {
-    let url = this.url;
-    let title = this.title || url;
-    let tooltip = (title == url ? title : title + "\n" + url);
-
-    let link = this._querySelector(".newtab-link");
-    link.setAttribute("title", tooltip);
-    link.setAttribute("href", url);
-    // this._querySelector(".newtab-title").textContent = title;
-
     if (this.isPinned())
       this._updateAttributes(true);
     // Capture the page if the thumbnail is missing, which will cause page.js
@@ -902,11 +893,18 @@ Site.prototype = {
   },
 
   _addTitleAndFavicon: function() {
-    let titleElement = this.node.querySelector(".newtab-title");
-    let uri = Services.io.newURI(this.url, null, null);
+    let url = this.url;
+    let title = TileData.get(this.url, "title") || this.title || url;
+    let tooltip = title == url ? title : title + "\n" + url;
 
-    let title = TileData.get(this.url, "title");
-    titleElement.textContent = title || this.title || this.url;
+    let uri = Services.io.newURI(url, null, null);
+
+    let titleElement = this.node.querySelector(".newtab-title");
+    titleElement.textContent = title;
+
+    let link = this._querySelector(".newtab-link");
+    link.setAttribute("title", tooltip);
+    link.setAttribute("href", url);
 
     faviconService.getFaviconURLForPage(uri, function(aURI) {
       if (!aURI)
