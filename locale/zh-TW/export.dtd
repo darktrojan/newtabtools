@@ -1,14 +1,14 @@
 <!ENTITY newtabtools.export.title "New Tab Tools">
 <!ENTITY newtabtools.export.header "選擇匯出項目:">
 <!ENTITY newtabtools.import.header "選擇匯入項目:">
-<!ENTITY newtabtools.export.tiles.caption "方塊磚">
-<!ENTITY newtabtools.export.prefs.pinned "釘選的方塊磚">
-<!ENTITY newtabtools.export.prefs.blocked "移除的方塊磚">
+<!ENTITY newtabtools.export.tiles.caption "首頁磚">
+<!ENTITY newtabtools.export.prefs.pinned "釘選的首頁磚">
+<!ENTITY newtabtools.export.prefs.blocked "移除的首頁磚">
 <!ENTITY newtabtools.export.prefs.gridsize "欄列數目">
 <!ENTITY newtabtools.export.prefs.gridmargin "網格邊界與間距">
 <!ENTITY newtabtools.export.tiles.thumbs "自訂縮圖">
 <!ENTITY newtabtools.export.prefs.thumbs.position "縮圖擺放位置">
-<!ENTITY newtabtools.export.annos.title "自訂的方塊磚標題">
+<!ENTITY newtabtools.export.annos.title "自訂的首頁磚標題">
 <!ENTITY newtabtools.export.prefs.thumbs.hidebuttons "縮圖上按鈕的顯示設定">
 <!ENTITY newtabtools.export.prefs.thumbs.hidefavicons "網站圖示的顯示設定">
 <!ENTITY newtabtools.export.page.caption "頁面">

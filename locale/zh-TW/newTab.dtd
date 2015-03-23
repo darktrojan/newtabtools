@@ -1,10 +1,10 @@
 <!ENTITY newtabtools.page.show "顯示新分頁頁面">
 
-<!ENTITY newtabtools.pin-url.header "新增方塊磚:">
+<!ENTITY newtabtools.pin-url.header "新增首頁磚:">
 <!ENTITY newtabtools.pin-url.placeholder "輸入或選擇網址">
 <!ENTITY newtabtools.pin-url.button "新增">
 
-<!ENTITY newtabtools.tile-header "方塊磚:">
+<!ENTITY newtabtools.tile-header "首頁磚:">
 
 <!ENTITY newtabtools.tile-thumbnail.label "圖片:">
 <!ENTITY newtabtools.tile-thumbnail.placeholder "貼上圖片網址或選擇檔案">
@@ -13,7 +13,7 @@
 <!ENTITY newtabtools.tile-thumbnail.remove "移除縮圖">
 
 <!ENTITY newtabtools.tile-title.label "標題:">
-<!ENTITY newtabtools.tile-title.placeholder "輸入新的方塊磚標題">
+<!ENTITY newtabtools.tile-title.placeholder "輸入新的首頁磚標題">
 <!ENTITY newtabtools.tile-title.set "設為標題">
 <!ENTITY newtabtools.tile-title.reset "重設標題">
 
