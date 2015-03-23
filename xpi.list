@@ -14,6 +14,7 @@ content/newTab.js
 content/newTab.xul
 content/newTabTools.jsm
 content/setting.xml
+content/utilities.png
 icon.png
 icon64.png
 install.rdf
