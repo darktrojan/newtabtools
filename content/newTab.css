@@ -657,6 +657,9 @@ setting {
 setting[type="bool"] {
   -moz-binding: url("chrome://mozapps/content/extensions/setting.xml#setting-bool");
 }
+setting[type="bool"]:not([learnmore]) .preferences-learnmore {
+  visibility: collapse;
+}
 setting[type="integer"] {
   -moz-binding: url("chrome://mozapps/content/extensions/setting.xml#setting-integer");
 }
