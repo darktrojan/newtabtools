@@ -5,10 +5,10 @@
 <!ENTITY newtabtools.options.columns "Στήλες">
 <!ENTITY newtabtools.options.grid.margin "Περιθώριο Πλέγματος">
 <!ENTITY newtabtools.options.grid.spacing "Απόσταση Πλέγματος">
-<!ENTITY newtabtools.options.size.small "Μικά">
+<!ENTITY newtabtools.options.size.small "Μικρά">
 <!ENTITY newtabtools.options.size.medium "Μεσαία">
 <!ENTITY newtabtools.options.size.large "Μεγάλα">
-<!ENTITY newtabtools.options.launcher "Launcher">
+<!ENTITY newtabtools.options.launcher "Μπάρα Ενέργειας">
 <!ENTITY newtabtools.options.launcher.hidden "Να Μήν Εμφανίζεται">
 <!ENTITY newtabtools.options.launcher.top "Επάνω">
 <!ENTITY newtabtools.options.launcher.bottom "Κάτω">
@@ -17,6 +17,6 @@
 <!ENTITY newtabtools.options.recent "Πρόσφατα Κλεισμένες Καρτέλες">
 <!ENTITY newtabtools.options.thumb-buttons "Καρφίτσωμα Πλακιδίου και Αφαίρεση Κουμπιών Πλακιδίου">
 <!ENTITY newtabtools.options.favicons "Εικονίδια Ιστοσελίδων">
-<!ENTITY newtabtools.options.thumb-contain "Ολόκληδη Μικρογραφία στα Πλακίδια">
+<!ENTITY newtabtools.options.thumb-contain "Ολόκληρη Μικρογραφία στα Πλακίδια">
 <!ENTITY newtabtools.export "Εξαγωγή Ρυθμίσεων&#x2026;">
 <!ENTITY newtabtools.import "Εισαγωγή Ρυθμίσεων&#x2026;">
