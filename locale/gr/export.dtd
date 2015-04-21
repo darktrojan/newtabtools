@@ -1,0 +1,17 @@
+<!ENTITY newtabtools.export.title "New Tab Tools">
+<!ENTITY newtabtools.export.header "Επιλέξτε τί θα εξάγετε:">
+<!ENTITY newtabtools.import.header "Επιλέξτε τί θα εισάγετε:">
+<!ENTITY newtabtools.export.tiles.caption "Πλακίδια">
+<!ENTITY newtabtools.export.prefs.pinned "Καρφιτσωμένα Πλακίδια">
+<!ENTITY newtabtools.export.prefs.blocked "Πλακίδια που Αφαιρέθηκαν">
+<!ENTITY newtabtools.export.prefs.gridsize "Αριθμός Γραμμών και Στηλών">
+<!ENTITY newtabtools.export.prefs.gridmargin "Περιθώρια και Αποστάσεις Πλέγματος">
+<!ENTITY newtabtools.export.tiles.thumbs "Παραμετροποιημένες Μικρογραφίες">
+<!ENTITY newtabtools.export.prefs.thumbs.position "Τοποθέτηση Μικρογραφιών">
+<!ENTITY newtabtools.export.annos.title "Παραμετροποίηση Τίτλων Πλακιδίων">
+<!ENTITY newtabtools.export.prefs.thumbs.hidebuttons "Ορατότητα Κουμπιών Ενέργειας Μικρογραφιών">
+<!ENTITY newtabtools.export.prefs.thumbs.hidefavicons "Ορατότητα Εικονιδίου Ιστοσελίδας">
+<!ENTITY newtabtools.export.page.caption "Σελίδα">
+<!ENTITY newtabtools.export.prefs.launcher "Θέση του Launcher">
+<!ENTITY newtabtools.export.prefs.recent.show "Ορατότητα Πρόσφατα Κλεισμένων Καρτελών">
+<!ENTITY newtabtools.export.page.background "Φόντο Σελίδας">
