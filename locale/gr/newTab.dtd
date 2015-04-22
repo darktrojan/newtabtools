@@ -8,7 +8,7 @@
 
 <!ENTITY newtabtools.tile-thumbnail.label "Εικόνα:">
 <!ENTITY newtabtools.tile-thumbnail.placeholder "Επικόλληση URL εικόνας ή αναζητήστε τοπικά το αρχείο εικόνας">
-<!ENTITY newtabtools.tile-thumbnail.browse "Αναζήτηση&#x2026;">
+<!ENTITY newtabtools.tile-thumbnail.browse "Αναζήτηση…">
 <!ENTITY newtabtools.tile-thumbnail.set "Σετάρισμα">
 <!ENTITY newtabtools.tile-thumbnail.remove "Αφαίρεση">
 
@@ -19,14 +19,14 @@
 
 <!ENTITY newtabtools.bg-header "Εικόνα φόντου σελίδας:">
 <!ENTITY newtabtools.bg.placeholder "Επικόλληση URL εικόνας ή αναζητήστε τοπικά το αρχείο εικόνας">
-<!ENTITY newtabtools.bg.browse "Αναζήτηση&#x2026;">
+<!ENTITY newtabtools.bg.browse "Αναζήτηση…">
 <!ENTITY newtabtools.bg.set "Σετάρισμα">
 <!ENTITY newtabtools.bg.remove "Αφαίρεση">
 
 <!ENTITY newtabtools.options-header "Επιλογές:">
 
 <!ENTITY newtabtools.donate.label "To New Tab Tools χρηματοδοτείται απο δωρεές χρηστών.">
-<!ENTITY newtabtools.donate "Δωρήστε&#x2026;">
+<!ENTITY newtabtools.donate "Δωρήστε…">
 <!ENTITY newtabtools.github "Το New Tab Tools στο GitHub">
 
 <!ENTITY newtabtools.recently-closed-tabs "Πρόσφατα κλεισμένες καρτέλες:">

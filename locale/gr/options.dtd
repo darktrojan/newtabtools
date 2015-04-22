@@ -18,5 +18,5 @@
 <!ENTITY newtabtools.options.thumb-buttons "Καρφίτσωμα Πλακιδίου και Αφαίρεση Κουμπιών Πλακιδίου">
 <!ENTITY newtabtools.options.favicons "Εικονίδια Ιστοσελίδων">
 <!ENTITY newtabtools.options.thumb-contain "Ολόκληρη Μικρογραφία στα Πλακίδια">
-<!ENTITY newtabtools.export "Εξαγωγή Ρυθμίσεων&#x2026;">
-<!ENTITY newtabtools.import "Εισαγωγή Ρυθμίσεων&#x2026;">
+<!ENTITY newtabtools.export "Εξαγωγή Ρυθμίσεων…">
+<!ENTITY newtabtools.import "Εισαγωγή Ρυθμίσεων…">
