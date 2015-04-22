@@ -15,8 +15,8 @@
 <!ENTITY newtabtools.options.launcher.left "左侧">
 <!ENTITY newtabtools.options.launcher.right "右侧">
 <!ENTITY newtabtools.options.recent "最近关闭的标签页">
-<!ENTITY newtabtools.options.thumb-buttons "固定磁贴并移除磁贴按钮">
+<!ENTITY newtabtools.options.thumb-buttons "固定磁贴与移除磁贴按钮">
 <!ENTITY newtabtools.options.favicons "网站图标">
-<!ENTITY newtabtools.options.thumb-contain "磁贴中应显示完整缩略图">
+<!ENTITY newtabtools.options.thumb-contain "在磁贴中显示完整缩略图">
 <!ENTITY newtabtools.export "导出设置…">
 <!ENTITY newtabtools.import "导入设置…">
