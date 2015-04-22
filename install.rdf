@@ -72,5 +72,14 @@
         <em:description>Настраиваемая Экспресс-панель. Вы можете добавить больше плиток, включить панель быстрого доступа, и настроить фоновое изображение. А так же, можете менять названия и изображения плиток.</em:description>
       </Description>
     </em:localized>
+    
+    <em:localized>
+      <Description>
+        <em:locale>gr</em:locale>
+        <em:name>New Tab Tools</em:name>
+        <em:description>Παραμετροποιεί την σελίδα της νέας καρτέλας.Μπορείτε να προσθέσετε περισσότερους τίτλους, μπάρα εκκίνησης του Firefox, ή εικόνας φόντου. Επίσης μπορείτε να προσθέσετε νέες εικόνες πλακιδίων και τίτλους.</em:description>
+      </Description>
+    </em:localized>
+    
   </Description>
 </RDF>
