@@ -35,6 +35,14 @@
 
     <em:localized>
       <Description>
+        <em:locale>gr</em:locale>
+        <em:name>New Tab Tools</em:name>
+        <em:description>Παραμετροποιεί την σελίδα της νέας καρτέλας.Μπορείτε να προσθέσετε περισσότερους τίτλους, μπάρα εκκίνησης του Firefox, ή εικόνας φόντου. Επίσης μπορείτε να προσθέσετε νέες εικόνες πλακιδίων και τίτλους.</em:description>
+      </Description>
+    </em:localized>
+
+    <em:localized>
+      <Description>
         <em:locale>ja</em:locale>
         <em:name>New Tab Tools</em:name>
         <em:description>新しいタブページをカスタマイズします。新しいタブページのタイル追加や Firefox スタートページのランチャーを表示したり、背景画像を追加することができます。また、新しいタイル画像やタイトルを設定することができます。</em:description>
@@ -51,6 +59,14 @@
 
     <em:localized>
       <Description>
+        <em:locale>ru</em:locale>
+        <em:name>New Tab Tools</em:name>
+        <em:description>Настраиваемая Экспресс-панель. Вы можете добавить больше плиток, включить панель быстрого доступа, и настроить фоновое изображение. А так же, можете менять названия и изображения плиток.</em:description>
+      </Description>
+    </em:localized>
+
+    <em:localized>
+      <Description>
         <em:locale>zh-CN</em:locale>
         <em:name>New Tab Tools</em:name>
         <em:description>自定义新标签页。您可以添加更多的磁贴，一个 Firefox 的快速启动栏，以及设置背景图片。您还可以设定新建磁贴的图片和标题。</em:description>
@@ -62,22 +78,6 @@
         <em:locale>zh-TW</em:locale>
         <em:name>New Tab Tools</em:name>
         <em:description>自訂新分頁頁面。你可以在新分頁增加更多首頁磚、加入 Firefox 開始頁的捷徑列或是自訂背景圖片，你也能為首頁磚設定新的圖片和標題。</em:description>
-      </Description>
-    </em:localized>
-
-    <em:localized>
-      <Description>
-        <em:locale>ru</em:locale>
-        <em:name>New Tab Tools</em:name>
-        <em:description>Настраиваемая Экспресс-панель. Вы можете добавить больше плиток, включить панель быстрого доступа, и настроить фоновое изображение. А так же, можете менять названия и изображения плиток.</em:description>
-      </Description>
-    </em:localized>
-
-    <em:localized>
-      <Description>
-        <em:locale>gr</em:locale>
-        <em:name>New Tab Tools</em:name>
-        <em:description>Παραμετροποιεί την σελίδα της νέας καρτέλας.Μπορείτε να προσθέσετε περισσότερους τίτλους, μπάρα εκκίνησης του Firefox, ή εικόνας φόντου. Επίσης μπορείτε να προσθέσετε νέες εικόνες πλακιδίων και τίτλους.</em:description>
       </Description>
     </em:localized>
 

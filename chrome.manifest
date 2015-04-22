@@ -2,11 +2,11 @@ content newtabtools content/
 locale newtabtools en-US locale/en-US/
 locale newtabtools de locale/de/
 locale newtabtools fr locale/fr/
+locale newtabtools gr locale/gr/
 locale newtabtools it locale/it/
 locale newtabtools ja locale/ja/
 locale newtabtools pt-BR locale/pt-BR/
 locale newtabtools ru locale/ru/
-locale newtabtools gr locale/gr/
 locale newtabtools zh-CN locale/zh-CN/
 locale newtabtools zh-TW locale/zh-TW/
 skin newtabtools classic/1.0 skin/linux/ os!=WINNT os!=Darwin
