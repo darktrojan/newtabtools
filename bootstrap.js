@@ -257,6 +257,10 @@ let prefObserver = {
     case "theme":
     case "thumbs.contain":
     case "thumbs.hidebuttons":
+      enumerateTabs(function(aWindow) {
+        aWindow.newTabTools.updateUI();
+      });
+      break;
     case "thumbs.hidefavicons":
       enumerateTabs(function(aWindow) {
         aWindow.newTabTools.updateUI();
