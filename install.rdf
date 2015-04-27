@@ -27,17 +27,17 @@
 
     <em:localized>
       <Description>
-        <em:locale>fr</em:locale>
+        <em:locale>el</em:locale>
         <em:name>New Tab Tools</em:name>
-        <em:description>Personnalise la page Nouvel onglet. Permet d'ajouter un nombre plus important de sites, des raccourcis vers les menus de Firefox et une image d'arrière-plan. Permet également de personnaliser les titres et miniatures donnés aux sites.</em:description>
+        <em:description>Παραμετροποιεί την σελίδα της νέας καρτέλας.Μπορείτε να προσθέσετε περισσότερους τίτλους, μπάρα εκκίνησης του Firefox, ή εικόνας φόντου. Επίσης μπορείτε να προσθέσετε νέες εικόνες πλακιδίων και τίτλους.</em:description>
       </Description>
     </em:localized>
 
     <em:localized>
       <Description>
-        <em:locale>gr</em:locale>
+        <em:locale>fr</em:locale>
         <em:name>New Tab Tools</em:name>
-        <em:description>Παραμετροποιεί την σελίδα της νέας καρτέλας.Μπορείτε να προσθέσετε περισσότερους τίτλους, μπάρα εκκίνησης του Firefox, ή εικόνας φόντου. Επίσης μπορείτε να προσθέσετε νέες εικόνες πλακιδίων και τίτλους.</em:description>
+        <em:description>Personnalise la page Nouvel onglet. Permet d'ajouter un nombre plus important de sites, des raccourcis vers les menus de Firefox et une image d'arrière-plan. Permet également de personnaliser les titres et miniatures donnés aux sites.</em:description>
       </Description>
     </em:localized>
 
