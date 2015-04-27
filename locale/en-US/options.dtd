@@ -15,7 +15,7 @@
 <!ENTITY newtabtools.options.launcher.left "Left">
 <!ENTITY newtabtools.options.launcher.right "Right">
 <!ENTITY newtabtools.options.recent "Recently Closed Tabs">
-<!ENTITY newtabtools.options.thumb-buttons "Pin Tile and Remove Tile Buttons">
+<!ENTITY newtabtools.options.thumb-buttons "&quot;Pin Tile&quot; and &quot;Remove Tile&quot; Buttons">
 <!ENTITY newtabtools.options.favicons "Site Icons">
 <!ENTITY newtabtools.options.thumb-contain "Whole Thumbnail in Tiles">
 <!ENTITY newtabtools.export "Export Settings&#x2026;">
