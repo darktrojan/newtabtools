@@ -124,7 +124,12 @@ function startup(aParams, aReason) {
   NewTabUtils.links._oldGetLinks = NewTabUtils.links.getLinks;
   NewTabUtils.links.getLinks = function Links_getLinks() {
     let pinnedLinks = Array.slice(NewTabUtils.pinnedLinks.links);
-    let links = this._getMergedProviderLinks();
+    let links;
+    if ("_providerLinks" in this) { // Fx <= 38
+      links = this._providerLinks.values().next().value.sortedLinks;
+    } else {
+      links = this._providers.values().next().value.sortedLinks;
+    }
 
     // Filter blocked and pinned links.
     links = links.filter(function (link) {
@@ -190,23 +195,6 @@ function startup(aParams, aReason) {
     }
   });
 
-  try {
-    try {
-      Cu.import("resource:///modules/DirectoryLinksProvider.jsm");
-    } catch(e) {
-      Cu.import("resource://gre/modules/DirectoryLinksProvider.jsm");
-    }
-    if (NewTabUtils.links._providers.size > 0) {
-      // DirectoryLinksProvider is already loaded.
-      NewTabUtils.links.removeProvider(DirectoryLinksProvider);
-      NewTabUtils.links.resetCache();
-    } else {
-      startupObserver.add();
-    }
-  } catch(e) {
-    // DirectoryLinksProvider.jsm might not exist.
-  }
-
   if (aReason != ADDON_INSTALL && userPrefs.getIntPref("donationreminder") < parseInt(aParams.version)) {
     idleService.addIdleObserver(idleObserver, IDLE_TIMEOUT);
   }
@@ -233,12 +221,6 @@ function shutdown(aParams, aReason) {
   Cu.unload("chrome://newtabtools/content/newTabTools.jsm");
 
   expirationFilter.cleanup();
-
-  if ("DirectoryLinksProvider" in this) {
-    // Removing a startup observer at shutdown is absurd, but oh well.
-    startupObserver.remove();
-    NewTabUtils.links.addProvider(DirectoryLinksProvider);
-  }
 
   try {
     idleService.removeIdleObserver(idleObserver, IDLE_TIMEOUT);
@@ -379,25 +361,6 @@ let expirationFilter = {
 
       aCallback(urls);
     });
-  }
-};
-
-// Observes browser-ui-startup-complete.
-let startupObserver = {
-  added: false,
-  add: function() {
-    Services.obs.addObserver(this, "browser-ui-startup-complete", false);
-    this.added = true;
-  },
-  remove: function() {
-    if (this.added) {
-      Services.obs.removeObserver(startupObserver, "browser-ui-startup-complete");
-    }
-  },
-  observe: function(aSubject, aTopic, aData) {
-    // DirectoryLinksProvider removed at startup.
-    NewTabUtils.links.removeProvider(DirectoryLinksProvider);
-    NewTabUtils.links.resetCache();
   }
 };
 
