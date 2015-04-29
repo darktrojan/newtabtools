@@ -81,5 +81,12 @@
       </Description>
     </em:localized>
 
+    <em:localized>
+      <Description>
+        <em:locale>lv</em:locale>
+        <em:name>New Tab Tools</em:name>
+        <em:description></em:description>
+      </Description>
+    </em:localized>
   </Description>
 </RDF>
