@@ -131,21 +131,10 @@ function startup(aParams, aReason) {
       return !NewTabUtils.blockedLinks.isBlocked(link) && !NewTabUtils.pinnedLinks.isPinned(link);
     });
 
-    // Try to fill the gaps between pinned links.
-    for (let i = 0; i < pinnedLinks.length && links.length; i++)
-      if (!pinnedLinks[i])
-        pinnedLinks[i] = links.shift();
-
-    // Append the remaining links if any.
-    if (links.length)
-      pinnedLinks = pinnedLinks.concat(links);
-
     if (userPrefs.prefHasUserValue("filter")) {
       let countPref = userPrefs.getCharPref("filter");
       let counts = JSON.parse(countPref);
-      return pinnedLinks.filter(function(aItem) {
-        if (NewTabUtils.pinnedLinks.isPinned(aItem))
-          return true;
+      links = links.filter(function(aItem) {
         let match = /^https?:\/\/([^\/]+)\//.exec(aItem.url);
         if (!match)
           return true;
@@ -158,9 +147,18 @@ function startup(aParams, aReason) {
         }
         return true;
       });
-    } else {
-      return pinnedLinks;
     }
+
+    // Try to fill the gaps between pinned links.
+    for (let i = 0; i < pinnedLinks.length && links.length; i++)
+      if (!pinnedLinks[i])
+        pinnedLinks[i] = links.shift();
+
+    // Append the remaining links if any.
+    if (links.length)
+      pinnedLinks = pinnedLinks.concat(links);
+
+    return pinnedLinks;
   }
 
   userPrefs.addObserver("", prefObserver, false);
