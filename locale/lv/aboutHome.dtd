@@ -5,7 +5,7 @@
 <!ENTITY abouthome.preferencesButtonWin.label "Iestatījumi">
 <!-- LOCALIZATION NOTE (abouthome.preferencesButtonUnix.label): The label for the
      preferences/options item on about:home on Linux and OS X -->
-<!ENTITY abouthome.preferencesButtonUnix.label "Preferences">
+<!ENTITY abouthome.preferencesButtonUnix.label "Iestatījumi">
 <!ENTITY abouthome.addonsButton.label "Papildinājumi">
 <!ENTITY abouthome.appsButton.label "Tirgus">
 <!ENTITY abouthome.downloadsButton.label "Lejuplādes">
