@@ -18,5 +18,5 @@
 <!ENTITY newtabtools.options.thumb-buttons "Pogas &quot;Piespraust&quot; un &quot;Noņemt&quot; elementu">
 <!ENTITY newtabtools.options.favicons "Vietņu ikonas">
 <!ENTITY newtabtools.options.thumb-contain "Viss sīktēls elementā">
-<!ENTITY newtabtools.export "Eksportēt">
-<!ENTITY newtabtools.import "Importēt">
+<!ENTITY newtabtools.export "Eksportēt iestatījumus">
+<!ENTITY newtabtools.import "Importēt iestatījumus">
