@@ -1,0 +1,32 @@
+<!ENTITY newtabtools.page.show "Rādīt new tab lapu">
+
+<!ENTITY newtabtools.pin-url.header "Pievienot lapu:">
+<!ENTITY newtabtools.pin-url.placeholder "Ierakstiet vai atlasiet URL">
+<!ENTITY newtabtools.pin-url.button "Pievienot">
+
+<!ENTITY newtabtools.tile-header "Elementi:">
+
+<!ENTITY newtabtools.tile-thumbnail.label "Attēls:">
+<!ENTITY newtabtools.tile-thumbnail.placeholder "Ielīmējiet attēla URL vai izvēlieties failu">
+<!ENTITY newtabtools.tile-thumbnail.browse "Pārlūkot…">
+<!ENTITY newtabtools.tile-thumbnail.set "Iestatīt">
+<!ENTITY newtabtools.tile-thumbnail.remove "Noņemt">
+
+<!ENTITY newtabtools.tile-title.label "Nosaukums:">
+<!ENTITY newtabtools.tile-title.placeholder "Ierakstiet jauno nosaukumu">
+<!ENTITY newtabtools.tile-title.set "Iestatīt">
+<!ENTITY newtabtools.tile-title.reset "Noņemt">
+
+<!ENTITY newtabtools.bg-header "Cilnes fona attēls:">
+<!ENTITY newtabtools.bg.placeholder "Ielīmējiet attēla URL vai izvēlieties failu">
+<!ENTITY newtabtools.bg.browse "Pārlūkot…">
+<!ENTITY newtabtools.bg.set "Iestatīt">
+<!ENTITY newtabtools.bg.remove "Noņemt">
+
+<!ENTITY newtabtools.options-header "Opcijas:">
+
+<!ENTITY newtabtools.donate.label "New Tab Tools tiek finansēts no lietotāju ziedojumiem.">
+<!ENTITY newtabtools.donate "Ziedot…">
+<!ENTITY newtabtools.github "New Tab Tools on GitHub">
+
+<!ENTITY newtabtools.recently-closed-tabs "Nesen aizvērtās cilnes:">
