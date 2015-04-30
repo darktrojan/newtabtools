@@ -124,16 +124,13 @@ function startup(aParams, aReason) {
   NewTabUtils.links._oldGetLinks = NewTabUtils.links.getLinks;
   NewTabUtils.links.getLinks = function Links_getLinks() {
     let pinnedLinks = Array.slice(NewTabUtils.pinnedLinks.links);
-    let links;
-    if ("_providerLinks" in this) { // Fx <= 38
-      links = this._providerLinks.values().next().value.sortedLinks;
-    } else {
-      links = this._providers.values().next().value.sortedLinks;
-    }
+    let links = this._getMergedProviderLinks();
 
     // Filter blocked and pinned links.
     links = links.filter(function (link) {
-      return !NewTabUtils.blockedLinks.isBlocked(link) && !NewTabUtils.pinnedLinks.isPinned(link);
+      return link.type == "history" &&
+          !NewTabUtils.blockedLinks.isBlocked(link) &&
+          !NewTabUtils.pinnedLinks.isPinned(link);
     });
 
     if (userPrefs.prefHasUserValue("filter")) {
