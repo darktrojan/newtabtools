@@ -1,6 +1,6 @@
 <!ENTITY newtabtools.page.show "Rādīt new tab lapu">
 
-<!ENTITY newtabtools.pin-url.header "Pievienot lapu:">
+<!ENTITY newtabtools.pin-url.header "Pievienot vietni:">
 <!ENTITY newtabtools.pin-url.placeholder "Ierakstiet vai atlasiet URL">
 <!ENTITY newtabtools.pin-url.button "Pievienot">
 
@@ -25,8 +25,8 @@
 
 <!ENTITY newtabtools.options-header "Opcijas:">
 
-<!ENTITY newtabtools.donate.label "New Tab Tools tiek finansēts no lietotāju ziedojumiem.">
+<!ENTITY newtabtools.donate.label "NewTabTools tiek finansēts no lietotāju ziedojumiem.">
 <!ENTITY newtabtools.donate "Ziedot…">
-<!ENTITY newtabtools.github "New Tab Tools on GitHub">
+<!ENTITY newtabtools.github "NewTabTools on GitHub">
 
 <!ENTITY newtabtools.recently-closed-tabs "Nesen aizvērtās cilnes:">
