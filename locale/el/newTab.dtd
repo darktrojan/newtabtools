@@ -1,26 +1,26 @@
 <!ENTITY newtabtools.page.show "Εμφάνιση της σελίδας της νέας καρτέλας">
 
 <!ENTITY newtabtools.pin-url.header "Προσθήκη τίτλου:">
-<!ENTITY newtabtools.pin-url.placeholder "Πληκτρολογήστε ή επιλέξτε ένα μία ιστοσελίδα">
+<!ENTITY newtabtools.pin-url.placeholder "Πληκτρολογήστε ή επιλέξτε μία ιστοσελίδα">
 <!ENTITY newtabtools.pin-url.button "Προσθήκη">
 
-<!ENTITY newtabtools.tile-header "Τίτλοι:">
+<!ENTITY newtabtools.tile-header "Πλακίδιο:">
 
 <!ENTITY newtabtools.tile-thumbnail.label "Εικόνα:">
-<!ENTITY newtabtools.tile-thumbnail.placeholder "Επικόλληση URL εικόνας ή αναζητήστε τοπικά το αρχείο εικόνας">
+<!ENTITY newtabtools.tile-thumbnail.placeholder "URL εικόνας ή αναζητήστε τοπικά το αρχείο εικόνας">
 <!ENTITY newtabtools.tile-thumbnail.browse "Αναζήτηση…">
-<!ENTITY newtabtools.tile-thumbnail.set "Σετάρισμα">
+<!ENTITY newtabtools.tile-thumbnail.set "Εφαρμογή">
 <!ENTITY newtabtools.tile-thumbnail.remove "Αφαίρεση">
 
 <!ENTITY newtabtools.tile-title.label "Τίτλος:">
 <!ENTITY newtabtools.tile-title.placeholder "Πληκτρολογήστε νέο τίτλο πλακιδίου">
-<!ENTITY newtabtools.tile-title.set "Σετάρισμα">
+<!ENTITY newtabtools.tile-title.set "Εφαρμογή">
 <!ENTITY newtabtools.tile-title.reset "Επαναφορά">
 
 <!ENTITY newtabtools.bg-header "Εικόνα φόντου σελίδας:">
-<!ENTITY newtabtools.bg.placeholder "Επικόλληση URL εικόνας ή αναζητήστε τοπικά το αρχείο εικόνας">
+<!ENTITY newtabtools.bg.placeholder "URL εικόνας ή αναζητήστε τοπικά το αρχείο εικόνας">
 <!ENTITY newtabtools.bg.browse "Αναζήτηση…">
-<!ENTITY newtabtools.bg.set "Σετάρισμα">
+<!ENTITY newtabtools.bg.set "Εφαρμογή">
 <!ENTITY newtabtools.bg.remove "Αφαίρεση">
 
 <!ENTITY newtabtools.options-header "Επιλογές:">
