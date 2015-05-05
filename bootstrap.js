@@ -107,6 +107,7 @@ function startup(aParams, aReason) {
   defaultPrefs.setBoolPref("thumbs.contain", false);
   defaultPrefs.setBoolPref("thumbs.hidebuttons", false);
   defaultPrefs.setBoolPref("thumbs.hidefavicons", false);
+  defaultPrefs.setCharPref("thumbs.titlesize", "small");
   defaultPrefs.setCharPref("tiledata", "{}");
 
   if (userPrefs.getIntPref("donationreminder") == 0 && userPrefs.prefHasUserValue("version")) {
@@ -235,6 +236,7 @@ let prefObserver = {
     case "thumbs.contain":
     case "thumbs.hidebuttons":
     case "thumbs.hidefavicons":
+    case "thumbs.titlesize":
       enumerateTabs(function(aWindow) {
         aWindow.newTabTools.updateUI();
       });

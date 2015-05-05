@@ -14,6 +14,7 @@
 <!ENTITY newtabtools.options.launcher.bottom "Снизу">
 <!ENTITY newtabtools.options.launcher.left "Слева">
 <!ENTITY newtabtools.options.launcher.right "Справа">
+<!ENTITY newtabtools.options.thumb-titlesize "Tile title size">
 <!ENTITY newtabtools.options.recent "Закрытые вкладки">
 <!ENTITY newtabtools.options.thumb-buttons "Кнопки Закрепления и Удаления плиток">
 <!ENTITY newtabtools.options.favicons "Иконки сайтов">

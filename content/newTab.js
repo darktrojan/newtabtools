@@ -257,6 +257,9 @@ let newTabTools = {
     let hideFavicons = this.prefs.getBoolPref("thumbs.hidefavicons");
     document.documentElement.classList[hideFavicons ? "add" : "remove"]("hideFavicons");
 
+    let titleSize = this.prefs.getCharPref("thumbs.titlesize");
+    document.documentElement.setAttribute("titlesize", titleSize);
+
     let gridMargin = ["small", "small", "small", "small"];
     let prefGridMargin = this.prefs.getCharPref("grid.margin").split(" ", 4);
     if (prefGridMargin.length == 4) {

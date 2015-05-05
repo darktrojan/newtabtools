@@ -14,6 +14,7 @@
 <!ENTITY newtabtools.options.launcher.bottom "Abaixo">
 <!ENTITY newtabtools.options.launcher.left "Esquerda">
 <!ENTITY newtabtools.options.launcher.right "Direita">
+<!ENTITY newtabtools.options.thumb-titlesize "Tile title size">
 <!ENTITY newtabtools.options.recent "Abas Recentemente Fechadas">
 <!ENTITY newtabtools.options.thumb-buttons "Fixar Bloco e Remover Botões do Bloco">
 <!ENTITY newtabtools.options.favicons "Ícones de Sites">

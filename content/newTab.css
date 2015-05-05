@@ -4,7 +4,7 @@
 
 :root {
   -moz-appearance: none;
-  font-size: 75%;
+  font-size: 12px;
   background-color: transparent;
 }
 input[type=button] {
@@ -452,6 +452,15 @@ input[type=button] {
   opacity: 1;
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.5), 0px 0px 10px rgba(8, 22, 37, 0.3);
 }
+:root[titlesize="hidden"] .newtab-thumbnail {
+  margin-bottom: 0;
+}
+:root[titlesize="medium"] .newtab-thumbnail {
+  margin-bottom: 27px;
+}
+:root[titlesize="large"] .newtab-thumbnail {
+  margin-bottom: 30px;
+}
 /* TITLES */
 .newtab-title {
   position: absolute;
@@ -476,6 +485,15 @@ input[type=button] {
 }
 :root[theme="dark"] .newtab-site:hover .newtab-title {
   color: rgba(255, 255, 255, 1);
+}
+:root[titlesize="hidden"] .newtab-title {
+  visibility: collapse;
+}
+:root[titlesize="medium"] .newtab-title {
+  font-size: 15px;
+}
+:root[titlesize="large"] .newtab-title {
+  font-size: 18px;
 }
 /* CONTROLS */
 .newtab-control {

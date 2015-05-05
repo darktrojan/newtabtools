@@ -14,6 +14,7 @@
 <!ENTITY newtabtools.options.launcher.bottom "En bas">
 <!ENTITY newtabtools.options.launcher.left "À gauche">
 <!ENTITY newtabtools.options.launcher.right "À droite">
+<!ENTITY newtabtools.options.thumb-titlesize "Tile title size">
 <!ENTITY newtabtools.options.recent "Onglets récemment fermés">
 <!ENTITY newtabtools.options.thumb-buttons "Boutons Relâcher et Supprimer">
 <!ENTITY newtabtools.options.favicons "Favicons">
