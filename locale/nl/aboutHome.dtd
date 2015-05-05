@@ -1,0 +1,12 @@
+<!ENTITY abouthome.bookmarksButton.label "Bladwijzers">
+<!ENTITY abouthome.historyButton.label "Geschiedenis">
+<!-- LOCALIZATION NOTE (abouthome.preferencesButtonWin.label): The label for the
+     preferences/options item on about:home on Windows -->
+<!ENTITY abouthome.preferencesButtonWin.label "Opties">
+<!-- LOCALIZATION NOTE (abouthome.preferencesButtonUnix.label): The label for the
+     preferences/options item on about:home on Linux and OS X -->
+<!ENTITY abouthome.preferencesButtonUnix.label "Voorkeuren">
+<!ENTITY abouthome.addonsButton.label "Add-ons">
+<!ENTITY abouthome.appsButton.label "Apps">
+<!ENTITY abouthome.downloadsButton.label "Downloads">
+<!ENTITY abouthome.syncButton.label "Synchroniseren">

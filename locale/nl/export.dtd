@@ -1,0 +1,17 @@
+<!ENTITY newtabtools.export.title "New Tab Tools">
+<!ENTITY newtabtools.export.header "Kies wat er geëxporteerd moet worden:">
+<!ENTITY newtabtools.import.header "Kies wat er geïmporteerd moet worden:">
+<!ENTITY newtabtools.export.tiles.caption "Tegels">
+<!ENTITY newtabtools.export.prefs.pinned "Vastgezette tegels">
+<!ENTITY newtabtools.export.prefs.blocked "Verwijderde tegels">
+<!ENTITY newtabtools.export.prefs.gridsize "Het aantal regels en kolommen">
+<!ENTITY newtabtools.export.prefs.gridmargin "Rasterafmeting en -tussenruimte">
+<!ENTITY newtabtools.export.tiles.thumbs "Aangepaste minatuurafbeeldingen">
+<!ENTITY newtabtools.export.prefs.thumbs.position "Posities van minatuurafbeeldingen">
+<!ENTITY newtabtools.export.annos.title "Aangepaste tegeltitels">
+<!ENTITY newtabtools.export.prefs.thumbs.hidebuttons "Zichtbaarheid van minatuurafbeeldingenknop">
+<!ENTITY newtabtools.export.prefs.thumbs.hidefavicons "Zichtbaarheid van websitepictogram">
+<!ENTITY newtabtools.export.page.caption "Pagina">
+<!ENTITY newtabtools.export.prefs.launcher "Positie van de starter">
+<!ENTITY newtabtools.export.prefs.recent.show "Zichtbaarheid van onlangs gesloten tabbladen">
+<!ENTITY newtabtools.export.page.background "Pagina-achtergrond">
