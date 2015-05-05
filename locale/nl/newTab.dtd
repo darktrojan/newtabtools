@@ -8,7 +8,7 @@
 
 <!ENTITY newtabtools.tile-thumbnail.label "Afbeelding:">
 <!ENTITY newtabtools.tile-thumbnail.placeholder "Plak een afbeeldings-URL of blader naar een lokaal bestand">
-<!ENTITY newtabtools.tile-thumbnail.browse "Bladeren...">
+<!ENTITY newtabtools.tile-thumbnail.browse "Bladeren…">
 <!ENTITY newtabtools.tile-thumbnail.set "Instellen">
 <!ENTITY newtabtools.tile-thumbnail.remove "Verwijderen">
 
@@ -19,14 +19,14 @@
 
 <!ENTITY newtabtools.bg-header "Achtergrondafbeelding van pagina:">
 <!ENTITY newtabtools.bg.placeholder "Plak een afbeeldings-URL of blader naar een lokaal bestand">
-<!ENTITY newtabtools.bg.browse "Bladeren...">
+<!ENTITY newtabtools.bg.browse "Bladeren…">
 <!ENTITY newtabtools.bg.set "Instellen">
 <!ENTITY newtabtools.bg.remove "Verwijderen">
 
 <!ENTITY newtabtools.options-header "Opties:">
 
 <!ENTITY newtabtools.donate.label "New Tab Tools wordt gefinancierd door gebruikersdonaties.">
-<!ENTITY newtabtools.donate "Doneren...">
+<!ENTITY newtabtools.donate "Doneren…">
 <!ENTITY newtabtools.github "New Tab Tools op GitHub">
 
 <!ENTITY newtabtools.recently-closed-tabs "Onlangs gesloten tabbladen:">

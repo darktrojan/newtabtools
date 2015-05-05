@@ -51,6 +51,22 @@
 
     <em:localized>
       <Description>
+        <em:locale>lv</em:locale>
+        <em:name>NewTabTools</em:name>
+        <em:description>Personalizē jaunas cilnes lapu. Jūs varat pievienot vairāk elementus, palaidējjoslu no Firefox sākumlapas vai fona attēlu, kā arī mainīt vietņu attēlus un nosaukumus.</em:description>
+      </Description>
+    </em:localized>
+
+    <em:localized>
+      <Description>
+        <em:locale>nl</em:locale>
+        <em:name>New Tab Tools</em:name>
+        <em:description>Maakt de nieuwe tabblad-pagina aanpasbaar. U kunt meer tegels toevoegen, de starter van de Firefox-homepage of een achtergrond. En natuurlijk nieuwe tegels en tegelafbeeldingen.</em:description>
+      </Description>
+    </em:localized>
+
+    <em:localized>
+      <Description>
         <em:locale>pt-BR</em:locale>
         <em:name>New Tab Tools</em:name>
         <em:description>Personaliza a página 'Nova Aba'. Você pode adicionar mais blocos, o iniciador do Firefox, ou uma imagem de fundo. E você pode definir novos blocos e suas imagens.</em:description>
@@ -78,22 +94,6 @@
         <em:locale>zh-TW</em:locale>
         <em:name>New Tab Tools</em:name>
         <em:description>自訂新分頁頁面。你可以在新分頁增加更多首頁磚、加入 Firefox 開始頁的捷徑列或是自訂背景圖片，你也能為首頁磚設定新的圖片和標題。</em:description>
-      </Description>
-    </em:localized>
-
-    <em:localized>
-      <Description>
-        <em:locale>lv</em:locale>
-        <em:name>NewTabTools</em:name>
-        <em:description>Personalizē jaunas cilnes lapu. Jūs varat pievienot vairāk elementus, palaidējjoslu no Firefox sākumlapas vai fona attēlu, kā arī mainīt vietņu attēlus un nosaukumus.</em:description>
-      </Description>
-    </em:localized>
-
-    <em:localized>
-      <Description>
-        <em:locale>nl</em:locale>
-        <em:name>New Tab Tools</em:name>
-        <em:description>Maakt de nieuwe tabblad-pagina aanpasbaar. U kunt meer tegels toevoegen, de starter van de Firefox-homepage of een achtergrond. En natuurlijk nieuwe tegels en tegelafbeeldingen.</em:description>
       </Description>
     </em:localized>
   </Description>
