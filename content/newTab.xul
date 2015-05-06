@@ -103,6 +103,15 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
             <xul:button id="options-thumbnail-set" label="&newtabtools.tile-thumbnail.set;" disabled="true" />
             <xul:button id="options-thumbnail-remove" label="&newtabtools.tile-thumbnail.remove;" disabled="true" />
           </xul:hbox>
+          <xul:hbox pack="center" align="baseline">
+            <xul:label control="options-bgcolor-input" value="&newtabtools.tile-thumbnail.bgcolor;" />
+            <input id="options-bgcolor-input" type="color" />
+            <xul:button id="options-bgcolor-displaybutton">
+              <div id="options-bgcolor-display">&#160;</div>
+            </xul:button>
+            <xul:button id="options-bgcolor-set" label="&newtabtools.tile-thumbnail.set;" />
+            <xul:button id="options-bgcolor-reset" label="&newtabtools.tile-thumbnail.remove;" />
+          </xul:hbox>
           <xul:label control="options-title-input" value="&newtabtools.tile-title.label;" />
           <xul:textbox id="options-title-input" flex="1" placeholder="&newtabtools.tile-title.placeholder;" />
           <xul:hbox pack="center">

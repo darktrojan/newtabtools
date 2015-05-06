@@ -98,6 +98,22 @@ let newTabTools = {
     case "options-thumbnail-remove":
       this.setThumbnail(this.selectedSite, null);
       break;
+    case "options-bgcolor-displaybutton":
+      this.setBgColourInput.click();
+      break;
+    case "options-bgcolor-set":
+      TileData.set(this.selectedSite.url, "backgroundColor", this.setBgColourInput.value);
+      this.siteThumbnail.style.backgroundColor = this.setBgColourInput.value;
+      this.resetBgColourButton.disabled = false;
+      break;
+    case "options-bgcolor-reset":
+      TileData.set(this.selectedSite.url, "backgroundColor", null);
+      this.siteThumbnail.style.backgroundColor =
+        this.setBgColourInput.value =
+        this.setBgColourDisplay.style.backgroundColor = null;
+      this.setBgColourButton.disabled =
+        this.resetBgColourButton.disabled = true;
+      break;
     case "options-title-set":
       this.setTitle(this.selectedSite, this.setTitleInput.value);
       break;
@@ -409,8 +425,13 @@ let newTabTools = {
         });
       }
     });
-    this.siteThumbnail.style.backgroundColor = TileData.get(site.url, "backgroundColor");
     this.siteURL.value = site.url;
+    let backgroundColor = TileData.get(site.url, "backgroundColor");
+    this.siteThumbnail.style.backgroundColor =
+      this.setBgColourInput.value =
+      this.setBgColourDisplay.style.backgroundColor = backgroundColor;
+    this.setBgColourButton.disabled =
+      this.resetBgColourButton.disabled = !backgroundColor;
     let title = TileData.get(site.url, "title");
     this.setTitleInput.value = title || site.title || site.url;
     this.resetTitleButton.disabled = title === null;
@@ -462,6 +483,10 @@ let newTabTools = {
     "setThumbnailInput": "options-thumbnail-input",
     "setThumbnailButton": "options-thumbnail-set",
     "removeThumbnailButton": "options-thumbnail-remove",
+    "setBgColourInput": "options-bgcolor-input",
+    "setBgColourDisplay": "options-bgcolor-display",
+    "setBgColourButton": "options-bgcolor-set",
+    "resetBgColourButton": "options-bgcolor-reset",
     "setTitleInput": "options-title-input",
     "resetTitleButton": "options-title-reset",
     "setTitleButton": "options-title-set",
@@ -493,6 +518,10 @@ let newTabTools = {
   newTabTools.launcher.addEventListener("click", newTabTools.launcherOnClick, false);
   newTabTools.setThumbnailInput.addEventListener("keyup", function() {
     newTabTools.setThumbnailButton.disabled = !/^(file|ftp|http|https):\/\//.exec(this.value);
+  });
+  newTabTools.setBgColourInput.addEventListener("change", function() {
+    newTabTools.setBgColourDisplay.style.backgroundColor = this.value;
+    newTabTools.setBgColourButton.disabled = false;
   });
   newTabTools.setBackgroundInput.addEventListener("keyup", function() {
     newTabTools.setBackgroundButton.disabled = !/^(file|ftp|http|https):\/\//.exec(this.value);

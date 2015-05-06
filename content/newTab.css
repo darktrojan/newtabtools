@@ -668,6 +668,13 @@ input[type=button] {
 #options-url {
   text-align: center;
 }
+#options-bgcolor-input {
+  visibility: collapse;
+}
+#options-bgcolor-display {
+  width: 24px;
+  outline: 1px currentcolor solid;
+}
 setting {
   display: -moz-grid-line;
   -moz-box-align: baseline;
