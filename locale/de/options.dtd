@@ -14,7 +14,7 @@
 <!ENTITY newtabtools.options.launcher.bottom "Unten">
 <!ENTITY newtabtools.options.launcher.left "Links">
 <!ENTITY newtabtools.options.launcher.right "Rechts">
-<!ENTITY newtabtools.options.thumb-titlesize "Tile title size">
+<!ENTITY newtabtools.options.thumb-titlesize "Titel des Miniaturbildes">
 <!ENTITY newtabtools.options.recent "Geschlossene Tabs">
 <!ENTITY newtabtools.options.thumb-buttons "Miniaturbild-Knöpfe">
 <!ENTITY newtabtools.options.favicons "Seitenlogos">
