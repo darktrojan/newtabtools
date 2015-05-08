@@ -1,4 +1,4 @@
-<!ENTITY newtabtools.page.show "新しいタブページを表示">
+<!ENTITY newtabtools.page.show "Show the new tab page">
 
 <!ENTITY newtabtools.pin-url.header "Add tile:">
 <!ENTITY newtabtools.pin-url.placeholder "Type or select a URL">
@@ -7,27 +7,27 @@
 <!ENTITY newtabtools.tile-header "Tiles:">
 
 <!ENTITY newtabtools.tile-thumbnail.label "Image:">
-<!ENTITY newtabtools.tile-thumbnail.placeholder "画像のURLを貼り付けまたは選択したファイルを参照">
-<!ENTITY newtabtools.tile-thumbnail.browse "参照…">
+<!ENTITY newtabtools.tile-thumbnail.placeholder "Paste an image URL or browse to choose a file">
+<!ENTITY newtabtools.tile-thumbnail.browse "Browse…">
 <!ENTITY newtabtools.tile-thumbnail.set "Set">
 <!ENTITY newtabtools.tile-thumbnail.remove "Remove">
-<!ENTITY newtabtools.tile-thumbnail.bgcolor "Background Color:">
+<!ENTITY newtabtools.tile-thumbnail.bgcolor "Background Colour:">
 
 <!ENTITY newtabtools.tile-title.label "Title:">
-<!ENTITY newtabtools.tile-title.placeholder "新しいタイルのタイトルを入力">
+<!ENTITY newtabtools.tile-title.placeholder "Type a new tile title">
 <!ENTITY newtabtools.tile-title.set "Set">
 <!ENTITY newtabtools.tile-title.reset "Reset">
 
-<!ENTITY newtabtools.bg-header "新しいタブページの背景画像:">
-<!ENTITY newtabtools.bg.placeholder "画像のURLを貼り付けまたは選択したファイルを参照">
-<!ENTITY newtabtools.bg.browse "参照…">
+<!ENTITY newtabtools.bg-header "Page Background Image:">
+<!ENTITY newtabtools.bg.placeholder "Paste an image URL or browse to choose a file">
+<!ENTITY newtabtools.bg.browse "Browse…">
 <!ENTITY newtabtools.bg.set "Set">
 <!ENTITY newtabtools.bg.remove "Remove">
 
 <!ENTITY newtabtools.options-header "Options:">
 
 <!ENTITY newtabtools.donate.label "New Tab Tools is funded by user donations.">
-<!ENTITY newtabtools.donate "寄付する…">
+<!ENTITY newtabtools.donate "Donate…">
 <!ENTITY newtabtools.github "New Tab Tools on GitHub">
 
-<!ENTITY newtabtools.recently-closed-tabs "最近閉じたタブ:">
+<!ENTITY newtabtools.recently-closed-tabs "Recently closed tabs:">

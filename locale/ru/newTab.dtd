@@ -11,6 +11,7 @@
 <!ENTITY newtabtools.tile-thumbnail.browse "Выбрать…">
 <!ENTITY newtabtools.tile-thumbnail.set "Применить">
 <!ENTITY newtabtools.tile-thumbnail.remove "Удалить">
+<!ENTITY newtabtools.tile-thumbnail.bgcolor "Background Color:">
 
 <!ENTITY newtabtools.tile-title.label "Название плитки:">
 <!ENTITY newtabtools.tile-title.placeholder "Введите новое название плитки">

@@ -11,6 +11,7 @@
 <!ENTITY newtabtools.tile-thumbnail.browse "Procurar…">
 <!ENTITY newtabtools.tile-thumbnail.set "Definir">
 <!ENTITY newtabtools.tile-thumbnail.remove "Remover">
+<!ENTITY newtabtools.tile-thumbnail.bgcolor "Background Color:">
 
 <!ENTITY newtabtools.tile-title.label "Título:">
 <!ENTITY newtabtools.tile-title.placeholder "Digite o novo nome do bloco">
