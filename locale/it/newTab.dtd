@@ -11,8 +11,8 @@
 <!ENTITY newtabtools.tile-thumbnail.browse "Sfoglia…">
 <!ENTITY newtabtools.tile-thumbnail.set "Imposta">
 <!ENTITY newtabtools.tile-thumbnail.remove "Rimuovi">
-<!ENTITY newtabtools.tile-thumbnail.refresh "Refresh Thumbnail">
-<!ENTITY newtabtools.tile-thumbnail.bgcolor "Background Color:">
+<!ENTITY newtabtools.tile-thumbnail.refresh "Aggiorna icona">
+<!ENTITY newtabtools.tile-thumbnail.bgcolor "Colore di sfondo:">
 
 <!ENTITY newtabtools.tile-title.label "Icona:">
 <!ENTITY newtabtools.tile-title.placeholder "Scrivi il nuovo titolo dell'icona">
