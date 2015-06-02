@@ -76,7 +76,7 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
       <xul:toolbarbutton class="close-icon" oncommand="newTabTools.hideOptions();" />
     </div>
     <xul:hbox>
-      <xul:vbox width="300" id="options-tile">
+      <xul:vbox width="350" id="options-tile">
         <xul:groupbox>
           <xul:caption label="&newtabtools.pin-url.header;" />
           <xul:hbox align="baseline">
@@ -102,6 +102,7 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
             <xul:button id="options-thumbnail-browse" label="&newtabtools.tile-thumbnail.browse;" />
             <xul:button id="options-thumbnail-set" label="&newtabtools.tile-thumbnail.set;" disabled="true" />
             <xul:button id="options-thumbnail-remove" label="&newtabtools.tile-thumbnail.remove;" disabled="true" />
+            <xul:button id="options-thumbnail-refresh" label="&newtabtools.tile-thumbnail.refresh;" />
           </xul:hbox>
           <xul:hbox pack="center" align="baseline">
             <xul:label control="options-bgcolor-input" value="&newtabtools.tile-thumbnail.bgcolor;" />

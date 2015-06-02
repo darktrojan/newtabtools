@@ -11,6 +11,7 @@
 <!ENTITY newtabtools.tile-thumbnail.browse "瀏覽…">
 <!ENTITY newtabtools.tile-thumbnail.set "設為縮圖">
 <!ENTITY newtabtools.tile-thumbnail.remove "移除縮圖">
+<!ENTITY newtabtools.tile-thumbnail.refresh "Refresh Thumbnail">
 <!ENTITY newtabtools.tile-thumbnail.bgcolor "Background Color:">
 
 <!ENTITY newtabtools.tile-title.label "標題:">

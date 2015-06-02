@@ -11,6 +11,7 @@
 <!ENTITY newtabtools.tile-thumbnail.browse "Browse…">
 <!ENTITY newtabtools.tile-thumbnail.set "Set">
 <!ENTITY newtabtools.tile-thumbnail.remove "Remove">
+<!ENTITY newtabtools.tile-thumbnail.refresh "Refresh Thumbnail">
 <!ENTITY newtabtools.tile-thumbnail.bgcolor "Background Colour:">
 
 <!ENTITY newtabtools.tile-title.label "Title:">

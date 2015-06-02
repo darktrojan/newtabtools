@@ -11,6 +11,7 @@
 <!ENTITY newtabtools.tile-thumbnail.browse "Αναζήτηση…">
 <!ENTITY newtabtools.tile-thumbnail.set "Εφαρμογή">
 <!ENTITY newtabtools.tile-thumbnail.remove "Αφαίρεση">
+<!ENTITY newtabtools.tile-thumbnail.refresh "Refresh Thumbnail">
 <!ENTITY newtabtools.tile-thumbnail.bgcolor "Background Color:">
 
 <!ENTITY newtabtools.tile-title.label "Τίτλος:">

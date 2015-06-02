@@ -98,6 +98,12 @@ let newTabTools = {
     case "options-thumbnail-remove":
       this.setThumbnail(this.selectedSite, null);
       break;
+    case "options-thumbnail-refresh":
+      event.originalTarget.disabled = true;
+      SavedThumbs.forceReloadThumbnail(this.selectedSite.url).then(function() {
+        event.originalTarget.disabled = false;
+      });
+      break;
     case "options-bgcolor-displaybutton":
       this.setBgColourInput.click();
       break;
@@ -419,9 +425,11 @@ let newTabTools = {
       this.siteThumbnail.style.backgroundImage = 'url("' + thumbnail + '")';
       if (thumbnail.startsWith("file:")) {
         this.removeThumbnailButton.disabled = false;
+        this.captureThumbnailButton.disabled = true;
       } else {
         OS.File.exists(PageThumbsStorage.getFilePathForURL(site.url)).then((exists) => {
           this.removeThumbnailButton.disabled = !exists;
+          this.captureThumbnailButton.disabled = false;
         });
       }
     });
@@ -483,6 +491,7 @@ let newTabTools = {
     "setThumbnailInput": "options-thumbnail-input",
     "setThumbnailButton": "options-thumbnail-set",
     "removeThumbnailButton": "options-thumbnail-remove",
+    "captureThumbnailButton": "options-thumbnail-refresh",
     "setBgColourInput": "options-bgcolor-input",
     "setBgColourDisplay": "options-bgcolor-display",
     "setBgColourButton": "options-bgcolor-set",

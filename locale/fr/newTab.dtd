@@ -11,6 +11,7 @@
 <!ENTITY newtabtools.tile-thumbnail.browse "Parcourir…">
 <!ENTITY newtabtools.tile-thumbnail.set "Appliquer">
 <!ENTITY newtabtools.tile-thumbnail.remove "Supprimer">
+<!ENTITY newtabtools.tile-thumbnail.refresh "Refresh Thumbnail">
 <!ENTITY newtabtools.tile-thumbnail.bgcolor "Background Color:">
 
 <!ENTITY newtabtools.tile-title.label "Titre :">

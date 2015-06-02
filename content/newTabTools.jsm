@@ -4,6 +4,7 @@ const PREF = "extensions.newtabtools.tiledata";
 Components.utils.import("resource://gre/modules/Services.jsm");
 Components.utils.import("resource://gre/modules/XPCOMUtils.jsm");
 
+XPCOMUtils.defineLazyModuleGetter(this, "BackgroundPageThumbs", "resource://gre/modules/BackgroundPageThumbs.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "FileUtils", "resource://gre/modules/FileUtils.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "OS", "resource://gre/modules/osfile.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "PageThumbs", "resource://gre/modules/PageThumbs.jsm");
@@ -122,6 +123,19 @@ let SavedThumbs = {
           delete this._readDirPromises;
         });
       }
+    });
+  },
+  forceReloadThumbnail: function(url) {
+    return new Promise((resolve, reject) => {
+      let path = PageThumbsStorage.getFilePathForURL(url);
+      OS.File.remove(path).then(function() {
+        BackgroundPageThumbs.capture(url, {
+          onDone: function() {
+            notifyTileChanged(url, "thumbnail");
+            resolve();
+          }
+        });
+      }, reject);
     });
   }
 };
