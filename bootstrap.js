@@ -88,6 +88,12 @@ function install(aParams, aReason) {
       }
     );
   }.bind(this), Ci.nsIThread.DISPATCH_NORMAL);
+
+  if (userPrefs.getPrefType("version") == Ci.nsIPrefBranch.PREF_INT) {
+    let version = userPrefs.getIntPref("version");
+    userPrefs.clearUserPref("version");
+    userPrefs.setCharPref("version", version);
+  }
 }
 function uninstall(aParams, aReason) {
   if (aReason == ADDON_UNINSTALL) {
@@ -109,11 +115,6 @@ function startup(aParams, aReason) {
   defaultPrefs.setBoolPref("thumbs.hidefavicons", false);
   defaultPrefs.setCharPref("thumbs.titlesize", "small");
   defaultPrefs.setCharPref("tiledata", "{}");
-
-  if (userPrefs.getIntPref("donationreminder") == 0 && userPrefs.prefHasUserValue("version")) {
-    userPrefs.setIntPref("donationreminder", 1);
-  }
-  userPrefs.setIntPref("version", parseInt(aParams.version));
 
   if (aReason == ADDON_UPGRADE) {
     for (let url of annoService.getPagesWithAnnotation("newtabtools/title")) {
@@ -193,9 +194,22 @@ function startup(aParams, aReason) {
     }
   });
 
-  if (aReason != ADDON_INSTALL && userPrefs.getIntPref("donationreminder") < parseInt(aParams.version)) {
-    idleService.addIdleObserver(idleObserver, IDLE_TIMEOUT);
+  if (aReason != ADDON_INSTALL) {
+    // Truncate version numbers to floats
+    let oldVersion = parseFloat(userPrefs.getCharPref("version"), 10);
+    let currentVersion = parseFloat(aParams.version, 10);
+    let shouldRemind = true;
+
+    if (userPrefs.getPrefType("donationreminder") == Ci.nsIPrefBranch.PREF_INT) {
+      let lastReminder = userPrefs.getIntPref("donationreminder") * 1000;
+      shouldRemind = Date.now() - lastReminder > 604800000;
+    }
+
+    if (shouldRemind && Services.vc.compare(oldVersion, currentVersion) == -1) {
+      idleService.addIdleObserver(idleObserver, IDLE_TIMEOUT);
+    }
   }
+  userPrefs.setCharPref("version", aParams.version);
 }
 function shutdown(aParams, aReason) {
   if (aReason == APP_SHUTDOWN) {
@@ -367,7 +381,7 @@ let idleObserver = {
   observe: function(aSubject, aTopic, aData) {
     idleService.removeIdleObserver(this, IDLE_TIMEOUT);
 
-    let version = userPrefs.getIntPref("version");
+    let version = parseFloat(userPrefs.getCharPref("version"), 10);
     let recentWindow = Services.wm.getMostRecentWindow(BROWSER_WINDOW);
     let browser = recentWindow.gBrowser;
     let notificationBox = browser.getNotificationBox();
@@ -383,6 +397,6 @@ let idleObserver = {
       }
     }]);
 
-    userPrefs.setIntPref("donationreminder", version);
+    userPrefs.setIntPref("donationreminder", Date.now() / 1000);
   }
 };
