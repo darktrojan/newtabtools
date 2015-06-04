@@ -3,6 +3,9 @@ This Source Code Form is subject to the terms of the Mozilla Public
 License, v. 2.0. If a copy of the MPL was not distributed with this file,
 You can obtain one at http://mozilla.org/MPL/2.0/.
 */
+/* globals APP_SHUTDOWN, ADDON_INSTALL, ADDON_UNINSTALL, ADDON_UPGRADE,
+    Services, NewTabUtils, AddonManager, XPCOMUtils,
+    thumbDir, strings, NewTabToolsExporter, OS, PageThumbs, Task, TileData, idleService, annoService */
 
 const { interfaces: Ci, utils: Cu } = Components;
 
@@ -25,11 +28,9 @@ XPCOMUtils.defineLazyGetter(this, "strings", function() {
   return Services.strings.createBundle("chrome://newtabtools/locale/newTabTools.properties");
 });
 
-XPCOMUtils.defineLazyModuleGetter(this, "FileUtils", "resource://gre/modules/FileUtils.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "NewTabToolsExporter", "chrome://newtabtools/content/export.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "OS", "resource://gre/modules/osfile.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "PageThumbs", "resource://gre/modules/PageThumbs.jsm");
-XPCOMUtils.defineLazyModuleGetter(this, "PageThumbsStorage", "resource://gre/modules/PageThumbs.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "Task", "resource://gre/modules/Task.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "TileData", "chrome://newtabtools/content/newTabTools.jsm");
 
@@ -38,6 +39,8 @@ XPCOMUtils.defineLazyServiceGetter(this, "annoService", "@mozilla.org/browser/an
 
 let browserPrefs = Services.prefs.getBranch(BROWSER_PREFS);
 let userPrefs = Services.prefs.getBranch(EXTENSION_PREFS);
+
+let prefObserver, notificationObserver, windowObserver, optionsObserver, expirationFilter, idleObserver;
 
 function install(aParams, aReason) {
   if (aReason == ADDON_UPGRADE) {
@@ -56,7 +59,7 @@ function install(aParams, aReason) {
   }
 
   Services.tm.currentThread.dispatch(function () {
-    Task.spawn(function() {
+    Task.spawn(function*() {
       if (yield OS.File.exists(thumbDir)) {
         let stat = yield OS.File.stat(thumbDir);
         if (!stat.isDir) {
@@ -66,28 +69,8 @@ function install(aParams, aReason) {
       } else {
         yield OS.File.makeDir(thumbDir);
       }
-
-      if (aReason == ADDON_UPGRADE && Services.vc.compare(aParams.oldVersion, 34) < 0) {
-        let iterator = new OS.File.DirectoryIterator(PageThumbsStorage.path);
-        while (true) {
-          let entry = yield iterator.next();
-          let file = new FileUtils.File(entry.path);
-          if (!file.isWritable()) {
-            yield OS.File.move(entry.path, OS.Path.join(thumbDir, entry.name));
-          }
-        }
-      }
-    }).then(
-      null,
-      // Clean up and return
-      function onFailure(reason) {
-        iterator.close();
-        if (reason != StopIteration) {
-          throw reason;
-        }
-      }
-    );
-  }.bind(this), Ci.nsIThread.DISPATCH_NORMAL);
+    });
+  }, Ci.nsIThread.DISPATCH_NORMAL);
 
   if (userPrefs.getPrefType("version") == Ci.nsIPrefBranch.PREF_INT) {
     let version = userPrefs.getIntPref("version");
@@ -163,7 +146,7 @@ function startup(aParams, aReason) {
       pinnedLinks = pinnedLinks.concat(links);
 
     return pinnedLinks;
-  }
+  };
 
   userPrefs.addObserver("", prefObserver, false);
   Services.obs.addObserver(notificationObserver, "newtabtools-change", false);
@@ -240,7 +223,7 @@ function shutdown(aParams, aReason) {
   }
 }
 
-let prefObserver = {
+prefObserver = {
   observe: function(aSubject, aTopic, aData) {
     switch (aData) {
     case "grid.margin":
@@ -271,7 +254,7 @@ let prefObserver = {
   }
 };
 
-let notificationObserver = {
+notificationObserver = {
   observe: function(aSubject, aTopic, aData) {
     switch (aData) {
     case "background":
@@ -283,7 +266,6 @@ let notificationObserver = {
     case "thumbnail":
     case "title":
       enumerateTabs(function(aWindow) {
-        let tileURL = aSubject.QueryInterface(Ci.nsISupportsString);
         aWindow.newTabTools.onTileChanged(aSubject.data, aData);
       });
       break;
@@ -291,8 +273,8 @@ let notificationObserver = {
   }
 };
 
-let windowObserver = {
-  observe: function(aSubject, aTopic, aData) {
+windowObserver = {
+  observe: function(aSubject) {
     aSubject.addEventListener("load", function() {
       windowObserver.paint(aSubject);
     }, false);
@@ -326,7 +308,7 @@ function enumerateTabs(aCallback) {
   }
 }
 
-let optionsObserver = {
+optionsObserver = {
   observe: function(aDocument, aTopic, aData) {
     switch(aTopic) {
     case "addon-options-displayed":
@@ -344,7 +326,7 @@ let optionsObserver = {
   },
 };
 
-let expirationFilter = {
+expirationFilter = {
   init: function() {
     PageThumbs.addExpirationFilter(this);
   },
@@ -377,8 +359,8 @@ let expirationFilter = {
   }
 };
 
-let idleObserver = {
-  observe: function(aSubject, aTopic, aData) {
+idleObserver = {
+  observe: function() {
     idleService.removeIdleObserver(this, IDLE_TIMEOUT);
 
     let version = parseFloat(userPrefs.getCharPref("version"), 10);
