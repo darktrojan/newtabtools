@@ -371,7 +371,7 @@ idleObserver = {
     let label = strings.GetStringFromName("donate.label");
     let accessKey = strings.GetStringFromName("donate.accesskey");
 
-    notificationBox.appendNotification(message, "newtabtools-donate", null, notificationBox.PRIORITY_INFO_MEDIUM, [{
+    notificationBox.appendNotification(message, "newtabtools-donate", "chrome://newtabtools/content/icon16.png", notificationBox.PRIORITY_INFO_MEDIUM, [{
       label: label,
       accessKey: accessKey,
       callback: function() {
