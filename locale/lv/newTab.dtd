@@ -11,8 +11,8 @@
 <!ENTITY newtabtools.tile-thumbnail.browse "Pārlūkot…">
 <!ENTITY newtabtools.tile-thumbnail.set "Iestatīt">
 <!ENTITY newtabtools.tile-thumbnail.remove "Noņemt">
-<!ENTITY newtabtools.tile-thumbnail.refresh "Refresh Thumbnail">
-<!ENTITY newtabtools.tile-thumbnail.bgcolor "Background Color:">
+<!ENTITY newtabtools.tile-thumbnail.refresh "Atsvaidzināt sīktēlus">
+<!ENTITY newtabtools.tile-thumbnail.bgcolor "Fona krāsa:">
 
 <!ENTITY newtabtools.tile-title.label "Nosaukums:">
 <!ENTITY newtabtools.tile-title.placeholder "Ierakstiet jauno nosaukumu">
