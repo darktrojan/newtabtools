@@ -11,8 +11,8 @@
 <!ENTITY newtabtools.tile-thumbnail.browse "Αναζήτηση…">
 <!ENTITY newtabtools.tile-thumbnail.set "Εφαρμογή">
 <!ENTITY newtabtools.tile-thumbnail.remove "Αφαίρεση">
-<!ENTITY newtabtools.tile-thumbnail.refresh "Refresh Thumbnail">
-<!ENTITY newtabtools.tile-thumbnail.bgcolor "Background Color:">
+<!ENTITY newtabtools.tile-thumbnail.refresh "Ανανέωση Μικρογραφίας">
+<!ENTITY newtabtools.tile-thumbnail.bgcolor "Χρώμα Φόντου:">
 
 <!ENTITY newtabtools.tile-title.label "Τίτλος:">
 <!ENTITY newtabtools.tile-title.placeholder "Πληκτρολογήστε νέο τίτλο πλακιδίου">
