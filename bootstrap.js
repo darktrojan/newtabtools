@@ -266,6 +266,7 @@ notificationObserver = {
     case "thumbnail":
     case "title":
       enumerateTabs(function(aWindow) {
+        aSubject.QueryInterface(Ci.nsISupportsString);
         aWindow.newTabTools.onTileChanged(aSubject.data, aData);
       });
       break;
