@@ -553,7 +553,7 @@ let newTabTools = {
     window.removeEventListener("load", window_load, false);
 
     SessionStore.promiseInitialized.then(function() {
-      if (SessionStore.canRestoreLastSession && !PrivateBrowsingUtils.isWindowPrivate(window)) {
+      if (SessionStore.canRestoreLastSession && !PrivateBrowsingUtils.isContentWindowPrivate(window)) {
         newTabTools.launcher.setAttribute("session", "true");
         Services.obs.addObserver({
           observe: function() {
