@@ -682,9 +682,6 @@ setting {
 setting[type="bool"] {
   -moz-binding: url("chrome://mozapps/content/extensions/setting.xml#setting-bool");
 }
-setting[type="bool"]:not([learnmore]) .preferences-learnmore {
-  visibility: collapse;
-}
 setting[type="integer"] {
   -moz-binding: url("chrome://mozapps/content/extensions/setting.xml#setting-integer");
 }
@@ -696,8 +693,15 @@ setting[type="radio"] {
   -moz-binding: url("setting.xml#setting-multi");
 }
 .preferences-alignment {
-  min-height: 28px;
+  min-height: 30px;
   -moz-box-align: center;
+}
+.preferences-learnmore,
+.preferences-description {
+  display: none;
+}
+menulist {
+  font-size: 100%;
 }
 #options-donate-wrap {
   border: 1px #b2aeaa solid !important;
