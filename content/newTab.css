@@ -594,19 +594,21 @@ input[type=button] {
   line-height: 18px;
   color: white;
   text-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
-  border-width: 1px 17px 3px 8px;
+  border-width: 0 17px 0 8px;
   border-style: solid;
   border-color: transparent;
+  padding: 1px 0 3px;
   /* TODO replace with SVG image once that is fixed. */
-  border-image: url("pointer.png") 1 17 3 8 fill;
+  border-image: url("pointer.png") 0 17% 0 8% fill;
   animation: pointerslide 2s paused;
 }
 #options-toggle-pointer:-moz-locale-dir(rtl) {
   left: 30px;
   right: auto;
-  border-width: 1px 8px 3px 17px;
+  border-width: 0 8px 0 17px;
+  padding: 1px 0 3px;
   /* TODO replace with SVG image once that is fixed. */
-  border-image: url("pointer-rtl.png") 1 8 3 17 fill;
+  border-image: url("pointer-rtl.png") 0 8% 0 17% fill;
   animation: pointerslide-rtl 2s paused;
 }
 @keyframes pointerslide {
