@@ -593,6 +593,7 @@ input[type=button] {
   right: 30px;
   line-height: 18px;
   color: white;
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
   border-width: 1px 17px 3px 8px;
   border-style: solid;
   border-color: transparent;
@@ -600,9 +601,26 @@ input[type=button] {
   border-image: url("pointer.png") 1 17 3 8 fill;
   animation: pointerslide 2s paused;
 }
+#options-toggle-pointer:-moz-locale-dir(rtl) {
+  left: 30px;
+  right: auto;
+  border-width: 1px 8px 3px 17px;
+  /* TODO replace with SVG image once that is fixed. */
+  border-image: url("pointer-rtl.png") 1 8 3 17 fill;
+  animation: pointerslide-rtl 2s paused;
+}
 @keyframes pointerslide {
   0% {
     transform: translatex(-100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translatex(0px);
+  }
+}
+@keyframes pointerslide-rtl {
+  0% {
+    transform: translatex(100px);
     opacity: 0;
   }
   100% {

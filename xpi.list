@@ -15,6 +15,7 @@ content/newTab.js
 content/newTab.xul
 content/newTabTools.jsm
 content/pointer.png
+content/pointer-rtl.png
 content/setting.xml
 content/utilities.png
 icon.png

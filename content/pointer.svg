@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="41" height="22" viewBox="0 0 41 22">
 	<g>
-		<path d="M30.5 1L41 11.5 30.5 22H1V1z" fill="#ccc"/>
+		<path d="M30.5 1L41 11.5 30.5 22H1V1z" fill="#000" fill-opacity="0.25" />
 		<path d="M29.5 0L40 10.5 29.5 21H0V0z" fill="#2ca02c"/>
 	</g>
 </svg>
