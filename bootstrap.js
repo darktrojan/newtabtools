@@ -91,6 +91,7 @@ function startup(aParams, aReason) {
   defaultPrefs.setCharPref("grid.margin", "small small small small");
   defaultPrefs.setCharPref("grid.spacing", "small");
   defaultPrefs.setIntPref("launcher", 3);
+  defaultPrefs.setBoolPref("optionspointershown", false);
   defaultPrefs.setBoolPref("recent.show", true);
   defaultPrefs.setCharPref("theme", "light");
   defaultPrefs.setBoolPref("thumbs.contain", false);
@@ -177,7 +178,9 @@ function startup(aParams, aReason) {
     }
   });
 
-  if (aReason != ADDON_INSTALL) {
+  if (userPrefs.prefHasUserValue("version")) {
+    userPrefs.setBoolPref("optionspointershown", true);
+
     // Truncate version numbers to floats
     let oldVersion = parseFloat(userPrefs.getCharPref("version"), 10);
     let currentVersion = parseFloat(aParams.version, 10);

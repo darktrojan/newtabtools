@@ -587,7 +587,30 @@ input[type=button] {
   left: 10px;
   right: auto;
 }
+#options-toggle-pointer {
+  position: absolute;
+  top: 9px;
+  right: 30px;
+  line-height: 18px;
+  color: white;
+  border-width: 1px 17px 3px 8px;
+  border-style: solid;
+  border-color: transparent;
+  /* TODO replace with SVG image once that is fixed. */
+  border-image: url("pointer.png") 1 17 3 8 fill;
+  animation: pointerslide 2s paused;
+}
+@keyframes pointerslide {
+  0% {
+    transform: translatex(-100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translatex(0px);
+  }
+}
 #newtab-scrollbox[page-disabled] #options-toggle,
+#newtab-scrollbox[page-disabled] #options-toggle-pointer,
 #newtab-scrollbox[page-disabled] #launcher,
 #newtab-scrollbox[page-disabled] #newtab-recent-outer,
 #newtab-scrollbox:not([page-disabled]) #newtab-toggle {
@@ -595,7 +618,8 @@ input[type=button] {
 }
 :root[options-hidden] #options,
 :root[options-hidden] #options-bg,
-:root:not([options-hidden]) #options-toggle {
+:root:not([options-hidden]) #options-toggle,
+:root:not([options-hidden]) #options-toggle-pointer {
   display: none;
 }
 :root:not([options-hidden]) #newtab-scrollbox {

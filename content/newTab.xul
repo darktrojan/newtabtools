@@ -55,6 +55,7 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
     </div>
 
     <input id="options-toggle" type="button"/>
+    <div id="options-toggle-pointer" hidden="true">&newtabtools.options.pointer;</div>
     <input id="newtab-toggle" type="button" title="&newtabtools.page.show;" />
 
     <div id="launcher">

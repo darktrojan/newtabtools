@@ -399,6 +399,10 @@ let newTabTools = {
   },
   onVisible: function() {
     this.startRecent();
+    if (!this.prefs.getBoolPref("optionspointershown")) {
+      this.optionsTogglePointer.hidden = false;
+      this.optionsTogglePointer.style.animationPlayState = "running";
+    }
     this.onVisible = function() {};
   },
   set selectedSiteIndex(index) {
@@ -446,6 +450,8 @@ let newTabTools = {
   },
   toggleOptions: function() {
     if (document.documentElement.hasAttribute("options-hidden")) {
+      this.optionsTogglePointer.hidden = true;
+      this.prefs.setBoolPref("optionspointershown", true);
       document.documentElement.removeAttribute("options-hidden");
       this.selectedSiteIndex = 0;
     } else {
@@ -484,6 +490,7 @@ let newTabTools = {
     "page": "newtab-scrollbox",
     "launcher": "launcher",
     "optionsToggleButton": "options-toggle",
+    "optionsTogglePointer": "options-toggle-pointer",
     "pinURLInput": "options-pinURL-input",
     "siteThumbnail": "options-thumbnail",
     "siteURL": "options-url",
@@ -544,7 +551,7 @@ let newTabTools = {
   newTabTools.refreshBackgroundImage();
   newTabTools.updateUI();
 
-  newTabTools.preloaded = getTopWindow().location != "chrome://browser/content/browser.xul";
+  newTabTools.preloaded = document.visibilityState == "hidden";
   if (!newTabTools.preloaded) {
     newTabTools.onVisible();
   }

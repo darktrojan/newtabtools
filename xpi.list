@@ -13,6 +13,7 @@ content/newTab.css
 content/newTab.js
 content/newTab.xul
 content/newTabTools.jsm
+content/pointer.png
 content/setting.xml
 content/utilities.png
 icon.png
