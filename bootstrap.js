@@ -179,8 +179,6 @@ function startup(aParams, aReason) {
   });
 
   if (userPrefs.prefHasUserValue("version")) {
-    userPrefs.setBoolPref("optionspointershown", true);
-
     // Truncate version numbers to floats
     let oldVersion = parseFloat(userPrefs.getCharPref("version"), 10);
     let currentVersion = parseFloat(aParams.version, 10);
@@ -191,8 +189,11 @@ function startup(aParams, aReason) {
       shouldRemind = Date.now() - lastReminder > 604800000;
     }
 
-    if (shouldRemind && Services.vc.compare(oldVersion, currentVersion) == -1) {
-      idleService.addIdleObserver(idleObserver, IDLE_TIMEOUT);
+    if (Services.vc.compare(oldVersion, currentVersion) == -1) {
+      userPrefs.setBoolPref("optionspointershown", true);
+      if (shouldRemind) {
+        idleService.addIdleObserver(idleObserver, IDLE_TIMEOUT);
+      }
     }
   }
   userPrefs.setCharPref("version", aParams.version);
