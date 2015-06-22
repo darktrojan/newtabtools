@@ -8,6 +8,7 @@ content/export.jsm
 content/exportDialog.js
 content/exportDialog.xul
 content/fx-newTab.js
+content/icon16.png
 content/launcher/*
 content/newTab.css
 content/newTab.js
