@@ -3,14 +3,14 @@ This Source Code Form is subject to the terms of the Mozilla Public
 License, v. 2.0. If a copy of the MPL was not distributed with this file,
 You can obtain one at http://mozilla.org/MPL/2.0/.
 */
-/* globals APP_SHUTDOWN, ADDON_INSTALL, ADDON_UNINSTALL, ADDON_UPGRADE,
+/* globals APP_STARTUP, APP_SHUTDOWN, ADDON_UNINSTALL, ADDON_UPGRADE,
     Services, NewTabUtils, AddonManager, XPCOMUtils,
     thumbDir, strings, NewTabToolsExporter, OS, PageThumbs, Task, TileData, idleService, annoService */
+/* exported install, uninstall, startup, shutdown */
 
 const { interfaces: Ci, utils: Cu } = Components;
 
 const ADDON_ID = "newtabtools@darktrojan.net";
-const BROWSER_PREFS = "browser.newtabpage.";
 const EXTENSION_PREFS = "extensions.newtabtools.";
 
 const BROWSER_WINDOW = "navigator:browser";
@@ -37,7 +37,7 @@ XPCOMUtils.defineLazyModuleGetter(this, "TileData", "chrome://newtabtools/conten
 XPCOMUtils.defineLazyServiceGetter(this, "idleService", "@mozilla.org/widget/idleservice;1", "nsIIdleService");
 XPCOMUtils.defineLazyServiceGetter(this, "annoService", "@mozilla.org/browser/annotation-service;1", "nsIAnnotationService");
 
-let browserPrefs = Services.prefs.getBranch(BROWSER_PREFS);
+let browserPrefs = Services.prefs.getBranch("browser.newtabpage.");
 let userPrefs = Services.prefs.getBranch(EXTENSION_PREFS);
 
 let prefObserver, notificationObserver, windowObserver, optionsObserver, expirationFilter, idleObserver;
@@ -197,6 +197,17 @@ function startup(aParams, aReason) {
     }
   }
   userPrefs.setCharPref("version", aParams.version);
+
+  if (aReason == APP_STARTUP) {
+    Services.obs.addObserver({
+      observe: function() {
+        Services.obs.removeObserver(this, "browser-delayed-startup-finished");
+        uiStartup(aParams, aReason);
+      }
+    }, "browser-delayed-startup-finished", false);
+  } else {
+    uiStartup(aParams, aReason);
+  }
 }
 function shutdown(aParams, aReason) {
   if (aReason == APP_SHUTDOWN) {
@@ -224,6 +235,31 @@ function shutdown(aParams, aReason) {
   try {
     idleService.removeIdleObserver(idleObserver, IDLE_TIMEOUT);
   } catch (e) { // might be already removed
+  }
+}
+
+function uiStartup(aParams, aReason) {
+  if (Services.prefs.getCharPref("browser.newtab.url") != "about:newtab") {
+    let recentWindow = Services.wm.getMostRecentWindow(BROWSER_WINDOW);
+
+    recentWindow.setTimeout(function() {
+      let browser = recentWindow.gBrowser;
+      let notificationBox = browser.getNotificationBox();
+      let message = strings.GetStringFromName("prefschange");
+      let label = strings.GetStringFromName("change.label");
+      let accessKey = strings.GetStringFromName("change.accesskey");
+
+      notificationBox.appendNotification(
+        message, "newtabtools-prefschange", "chrome://newtabtools/content/icon16.png",
+        notificationBox.PRIORITY_INFO_MEDIUM, [{
+          label: label,
+          accessKey: accessKey,
+          callback: function() {
+            Services.prefs.clearUserPref("browser.newtab.url");
+          }
+        }]
+      );
+    }, aReason == APP_STARTUP ? 1000 : 0);
   }
 }
 
