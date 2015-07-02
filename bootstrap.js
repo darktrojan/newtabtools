@@ -15,6 +15,7 @@ const EXTENSION_PREFS = "extensions.newtabtools.";
 
 const BROWSER_WINDOW = "navigator:browser";
 const IDLE_TIMEOUT = 10;
+const XULNS = "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul";
 
 Cu.import("resource://gre/modules/Services.jsm");
 Cu.import("resource://gre/modules/NewTabUtils.jsm");
@@ -322,12 +323,37 @@ windowObserver = {
   },
   paint: function(aWindow) {
     if (aWindow.location == "chrome://browser/content/browser.xul") {
-      aWindow.document.addEventListener("TabOpen", this.onTabOpen, false);
+      let doc = aWindow.document;
+      doc.addEventListener("TabOpen", this.onTabOpen, false);
+
+      let menu = doc.getElementById("contentAreaContextMenu");
+      menu.addEventListener("popupshowing", this.onPopupShowing);
+
+      let menuseparator = doc.createElementNS(XULNS, "menuseparator");
+      menuseparator.id = "newtabtools-separator";
+      menuseparator.className = "newtabtools-item";
+      menu.insertBefore(menuseparator, menu.firstChild);
+
+      for (let action of ["block", "unpin", "pin", "edit"]) {
+        let menuitem = doc.createElementNS(XULNS, "menuitem");
+        menuitem.id = "newtabtools-" + action + "tile";
+        menuitem.className = "newtabtools-item";
+        menuitem.setAttribute("label", strings.GetStringFromName("contextmenu." + action));
+        menuitem.addEventListener("command", this.onEditItemClicked);
+        menu.insertBefore(menuitem, menu.firstChild);
+      }
     }
   },
   unpaint: function(aWindow) {
     if (aWindow.location == "chrome://browser/content/browser.xul") {
-      aWindow.document.removeEventListener("TabOpen", this.onTabOpen, false);
+      let doc = aWindow.document;
+      doc.removeEventListener("TabOpen", this.onTabOpen, false);
+
+      let menu = doc.getElementById("contentAreaContextMenu");
+      menu.removeEventListener("popupshowing", this.onPopupShowing);
+      for (let item of menu.querySelectorAll(".newtabtools-item")) {
+        item.remove();
+      }
     }
   },
   onTabOpen: function(aEvent) {
@@ -335,6 +361,64 @@ windowObserver = {
     if (browser.currentURI.spec == "about:newtab") {
       browser.contentWindow.newTabTools.onVisible();
     }
+  },
+  onEditItemClicked: function(aEvent) {
+    let doc = aEvent.view.document;
+    let target = windowObserver.findCellTarget(doc);
+
+    switch (aEvent.target.id) {
+    case "newtabtools-edittile":
+      let win = target.ownerDocument.defaultView;
+      let index = 0;
+      while (target.previousElementSibling) {
+        target = target.previousElementSibling;
+        index++;
+      }
+      target = target.parentNode;
+      while (target.previousElementSibling) {
+        target = target.previousElementSibling;
+        index += target.childElementCount;
+      }
+
+      win.newTabTools.toggleOptions();
+      win.newTabTools.selectedSiteIndex = index;
+      break;
+
+    case "newtabtools-pintile":
+      target._newtabCell.site.pin();
+      break;
+    case "newtabtools-unpintile":
+      target._newtabCell.site.unpin();
+      break;
+    case "newtabtools-blocktile":
+      target._newtabCell.site.block();
+      break;
+    }
+  },
+  onPopupShowing: function(aEvent) {
+    let doc = aEvent.view.document;
+    let target = windowObserver.findCellTarget(doc);
+
+    let menu = doc.getElementById("contentAreaContextMenu");
+    for (let item of menu.querySelectorAll(".newtabtools-item")) {
+      item.hidden = !target;
+    }
+
+    if (target) {
+      let pinned = target._newtabCell.site.isPinned();
+      if (pinned) {
+        doc.getElementById("newtabtools-pintile").hidden = true;
+      } else {
+        doc.getElementById("newtabtools-unpintile").hidden = true;
+      }
+    }
+  },
+  findCellTarget: function(aDocument) {
+    let target = aDocument.popupNode;
+    while (target && target.classList && !target.classList.contains("newtab-cell")) {
+      target = target.parentNode;
+    }
+    return (target && target.classList && target.classList.contains("newtab-cell")) ? target : null;
   }
 };
 
