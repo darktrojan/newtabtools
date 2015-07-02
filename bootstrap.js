@@ -414,7 +414,12 @@ windowObserver = {
     }
   },
   findCellTarget: function(aDocument) {
+    // This probably isn't going to work once about:newtab is put in a content process.
     let target = aDocument.popupNode;
+    if (!target || target.ownerDocument.location.href != "about:newtab") {
+      return null;
+    }
+
     while (target && target.classList && !target.classList.contains("newtab-cell")) {
       target = target.parentNode;
     }
