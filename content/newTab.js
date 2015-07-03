@@ -78,11 +78,11 @@ let newTabTools = {
       break;
     case "options-previous-tile":
     case "options-next-tile":
-      let columns = gGridPrefs.gridColumns;
-      let row = Math.floor(this._selectedSiteIndex / columns);
-      let column = (this._selectedSiteIndex + (id == "options-previous-tile" ? -1 : 1) + columns) % columns;
+      let { gridColumns } = gGridPrefs;
+      let row = Math.floor(this._selectedSiteIndex / gridColumns);
+      let column = (this._selectedSiteIndex + (id == "options-previous-tile" ? -1 : 1) + gridColumns) % gridColumns;
 
-      this.selectedSiteIndex = row * columns + column;
+      this.selectedSiteIndex = row * gridColumns + column;
       break;
     case "options-next-row-tile":
       this.selectedSiteIndex = (this._selectedSiteIndex + gGridPrefs.gridColumns) % gGrid.cells.length;
@@ -447,6 +447,15 @@ let newTabTools = {
         });
       }
     });
+
+    let { gridRows, gridColumns } = gGridPrefs;
+    let row = Math.floor(index / gridColumns);
+    let column = index % gridColumns;
+    this.tilePreviousRow.style.opacity = row == 0 ? 0.25 : null;
+    this.tilePrevious.style.opacity = column == 0 ? 0.25 : null;
+    this.tileNext.style.opacity = (column + 1 == gridColumns) ? 0.25 : null;
+    this.tileNextRow.style.opacity = (row + 1 == gridRows) ? 0.25 : null;
+
     this.siteURL.value = site.url;
     let backgroundColor = TileData.get(site.url, "backgroundColor");
     this.siteThumbnail.style.backgroundColor =
@@ -502,6 +511,10 @@ let newTabTools = {
     "optionsToggleButton": "options-toggle",
     "optionsTogglePointer": "options-toggle-pointer",
     "pinURLInput": "options-pinURL-input",
+    "tilePreviousRow": "options-previous-row-tile",
+    "tilePrevious": "options-previous-tile",
+    "tileNext": "options-next-tile",
+    "tileNextRow": "options-next-row-tile",
     "siteThumbnail": "options-thumbnail",
     "siteURL": "options-url",
     "browseThumbnailButton": "options-thumbnail-browse",
