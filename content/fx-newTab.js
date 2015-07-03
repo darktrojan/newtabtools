@@ -1115,6 +1115,9 @@ let gDrag = {
       return false;
     }
 
+    // File URLs fail the link checker, but we want to allow them.
+    if (/^file:/.test(link.url)) return true;
+
     // Check that we're not accepting URLs which would inherit the caller's
     // principal (such as javascript: or data:).
     return gLinkChecker.checkLoadURI(link.url);
