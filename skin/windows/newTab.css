@@ -14,3 +14,7 @@
 #newtab-undo-close-button {
   -moz-appearance: none;
 }
+
+textbox {
+	padding: 4px;
+}
