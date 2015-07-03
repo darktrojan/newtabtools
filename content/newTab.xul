@@ -89,10 +89,16 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
         </xul:groupbox>
         <xul:groupbox>
           <xul:caption label="&newtabtools.tile-header;" />
+          <xul:hbox pack="center">
+            <xul:toolbarbutton id="options-previous-row-tile" />
+          </xul:hbox>
           <xul:hbox id="options-thumbnail-wrap" pack="center" align="center">
             <xul:toolbarbutton id="options-previous-tile" />
             <div id="options-thumbnail" class="newtab-thumbnail" flex="1"></div>
             <xul:toolbarbutton id="options-next-tile" />
+          </xul:hbox>
+          <xul:hbox pack="center">
+            <xul:toolbarbutton id="options-next-row-tile" />
           </xul:hbox>
           <xul:label id="options-url" flex="1" value="" crop="center" />
           <xul:label control="options-thumbnail-input" value="&newtabtools.tile-thumbnail.label;" />

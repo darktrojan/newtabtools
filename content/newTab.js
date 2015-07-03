@@ -71,11 +71,19 @@ let newTabTools = {
         event.originalTarget.disabled = false;
       }).then(null, Cu.reportError);
       break;
-    case "options-previous-tile":
-      this.selectedSiteIndex = (this._selectedSiteIndex - 1 + gGrid.cells.length) % gGrid.cells.length;
+    case "options-previous-row-tile":
+      this.selectedSiteIndex = (this._selectedSiteIndex - gGridPrefs.gridColumns + gGrid.cells.length) % gGrid.cells.length;
       break;
+    case "options-previous-tile":
     case "options-next-tile":
-      this.selectedSiteIndex = (this._selectedSiteIndex + 1) % gGrid.cells.length;
+      let columns = gGridPrefs.gridColumns;
+      let row = Math.floor(this._selectedSiteIndex / columns);
+      let column = (this._selectedSiteIndex + (id == "options-previous-tile" ? -1 : 1) + columns) % columns;
+
+      this.selectedSiteIndex = row * columns + column;
+      break;
+    case "options-next-row-tile":
+      this.selectedSiteIndex = (this._selectedSiteIndex + gGridPrefs.gridColumns) % gGrid.cells.length;
       break;
     case "options-thumbnail-browse":
     case "options-bg-browse":

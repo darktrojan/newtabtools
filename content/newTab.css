@@ -691,11 +691,24 @@ input[type=button] {
 #options-tile {
   -moz-margin-end: 2em;
 }
+#options-previous-row-tile {
+  margin-top: -1.5em;
+  list-style-image: url("arrow.svg");
+  transform: rotate(90deg);
+}
 #options-previous-tile {
   list-style-image: url("arrow.svg");
 }
+#options-next-tile {
+  list-style-image: url("arrow.svg");
+  transform: scalex(-1);
+}
+#options-next-row-tile {
+  list-style-image: url("arrow.svg");
+  transform: rotate(-90deg);
+}
 #options-thumbnail-wrap {
-  margin: 0.5em 1em;
+  margin: 0 1em;
 }
 #options-thumbnail {
   width: 200px;
@@ -704,10 +717,6 @@ input[type=button] {
   opacity: 1;
   position: static;
   -moz-box-flex: 1;
-}
-#options-next-tile {
-  list-style-image: url("arrow.svg");
-  transform: scalex(-1);
 }
 #options-url {
   text-align: center;
