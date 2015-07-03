@@ -3,13 +3,15 @@ This Source Code Form is subject to the terms of the Mozilla Public
 License, v. 2.0. If a copy of the MPL was not distributed with this file,
 You can obtain one at http://mozilla.org/MPL/2.0/.
 */
+/* globals Services, XPCOMUtils, FileUtils, NetUtil, SessionStore, OS, PageThumbs, PageThumbsStorage,
+    PageThumbUtils, PlacesUtils, PrivateBrowsingUtils, SavedThumbs, TileData, HTML_NAMESPACE,
+    gPinnedLinks, gBlockedLinks, gTransformation, gGridPrefs, gGrid, gDrag, gUpdater, gUndoDialog */
 
 let { classes: Cc, interfaces: Ci, utils: Cu } = Components;
 
 Cu.import("resource://gre/modules/Services.jsm");
 Cu.import("resource://gre/modules/XPCOMUtils.jsm");
 
-XPCOMUtils.defineLazyModuleGetter(this, "AddonManager", "resource://gre/modules/AddonManager.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "FileUtils", "resource://gre/modules/FileUtils.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "NetUtil", "resource://gre/modules/NetUtil.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "SessionStore", "resource:///modules/sessionstore/SessionStore.jsm");
@@ -141,7 +143,7 @@ let newTabTools = {
           if (!Components.isSuccessCode(status)) {
             return;
           }
-          NetUtil.asyncCopy(inputStream, fos, function (aResult) {
+          NetUtil.asyncCopy(inputStream, fos, function() {
             FileUtils.closeSafeFileOutputStream(fos);
             Services.obs.notifyObservers(null, "newtabtools-change", "background");
           }.bind(this));
@@ -231,12 +233,12 @@ let newTabTools = {
 
       canvas.mozFetchAsStream(function(aInputStream) {
         let outputStream = FileUtils.openSafeFileOutputStream(file);
-        NetUtil.asyncCopy(aInputStream, outputStream, function(aSuccessful) {
+        NetUtil.asyncCopy(aInputStream, outputStream, function() {
           FileUtils.closeSafeFileOutputStream(outputStream);
           SavedThumbs.addSavedThumb(site.url, leafName);
         });
       }, "image/png");
-    }
+    };
     image.src = src;
   },
   setTitle: function(site, title) {
@@ -378,7 +380,7 @@ let newTabTools = {
       a.onclick = function() {
         newTabTools.browserWindow.undoCloseTab(index);
         return false;
-      }
+      };
       let img = document.createElementNS(HTML_NAMESPACE, "img");
       img.className = "favicon";
       img.src = iconURL;
@@ -471,7 +473,7 @@ let newTabTools = {
   }
 };
 
-{
+(function() {
   function getTopWindow() {
     return window.QueryInterface(Ci.nsIInterfaceRequestor)
                  .getInterface(Ci.nsIWebNavigation)
@@ -524,9 +526,7 @@ let newTabTools = {
   };
   for (let key in uiElements) {
     let value = uiElements[key];
-    XPCOMUtils.defineLazyGetter(newTabTools, key, function() {
-      return document.getElementById(value);
-    });
+    XPCOMUtils.defineLazyGetter(newTabTools, key, () => document.getElementById(value));
   }
 
   if (Services.appinfo.OS == "WINNT") {
@@ -605,12 +605,12 @@ let newTabTools = {
       let border = 5;
 
       // Enforce minimum constraints to keep the drag image inside the window.
-      let left = Math.max(scrollX + aEvent.clientX - this._offsetX, border - offsetLeft);
-      let top = Math.max(scrollY + aEvent.clientY - this._offsetY, border - offsetTop);
+      let left = Math.max(aEvent.clientX - this._offsetX, border - offsetLeft);
+      let top = Math.max(aEvent.clientY - this._offsetY, border - offsetTop);
 
       // Enforce maximum constraints to keep the drag image inside the window.
-      left = Math.min(left, scrollX + clientWidth - this.cellWidth - border - offsetLeft);
-      top = Math.min(top, scrollY + clientHeight - this.cellHeight - border - offsetTop);
+      left = Math.min(left, clientWidth - this.cellWidth - border - offsetLeft);
+      top = Math.min(top, clientHeight - this.cellHeight - border - offsetTop);
 
       // Update the drag image's position.
       gTransformation.setSitePosition(aSite, {left: left, top: top});
@@ -620,6 +620,6 @@ let newTabTools = {
     gUndoDialog.hide = function() {
       gUndoDialog.oldHide();
       newTabTools.trimRecent();
-    }
+    };
   }, false);
-}
+})();
