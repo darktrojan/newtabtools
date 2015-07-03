@@ -240,7 +240,8 @@ function shutdown(aParams, aReason) {
 }
 
 function uiStartup(aParams, aReason) {
-  if (Services.prefs.getCharPref("browser.newtab.url") != "about:newtab") {
+  if (Services.prefs.prefHasUserValue("browser.newtab.url") &&
+      Services.prefs.getCharPref("browser.newtab.url") != "about:newtab") {
     let recentWindow = Services.wm.getMostRecentWindow(BROWSER_WINDOW);
 
     recentWindow.setTimeout(function() {
