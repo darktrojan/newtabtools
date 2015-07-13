@@ -7,6 +7,11 @@
 
 <!ENTITY newtabtools.tile-header "Πλακίδιο:">
 
+<!ENTITY newtabtools.tile-selection.previousrow.tooltip "Previous row">
+<!ENTITY newtabtools.tile-selection.previous.tooltip "Previous tile">
+<!ENTITY newtabtools.tile-selection.next.tooltip "Next tile">
+<!ENTITY newtabtools.tile-selection.nextrow.tooltip "Next row">
+
 <!ENTITY newtabtools.tile-thumbnail.label "Εικόνα:">
 <!ENTITY newtabtools.tile-thumbnail.placeholder "URL εικόνας ή αναζητήστε τοπικά το αρχείο εικόνας">
 <!ENTITY newtabtools.tile-thumbnail.browse "Αναζήτηση…">

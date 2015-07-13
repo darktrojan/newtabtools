@@ -90,15 +90,15 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
         <xul:groupbox>
           <xul:caption label="&newtabtools.tile-header;" />
           <xul:hbox pack="center">
-            <xul:toolbarbutton id="options-previous-row-tile" />
+            <xul:toolbarbutton id="options-previous-row-tile" tooltiptext="&newtabtools.tile-selection.previousrow.tooltip;" />
           </xul:hbox>
           <xul:hbox id="options-thumbnail-wrap" pack="center" align="center">
-            <xul:toolbarbutton id="options-previous-tile" />
+            <xul:toolbarbutton id="options-previous-tile" tooltiptext="&newtabtools.tile-selection.previous.tooltip;" />
             <div id="options-thumbnail" class="newtab-thumbnail" flex="1"></div>
-            <xul:toolbarbutton id="options-next-tile" />
+            <xul:toolbarbutton id="options-next-tile" tooltiptext="&newtabtools.tile-selection.next.tooltip;" />
           </xul:hbox>
           <xul:hbox pack="center">
-            <xul:toolbarbutton id="options-next-row-tile" />
+            <xul:toolbarbutton id="options-next-row-tile" tooltiptext="&newtabtools.tile-selection.nextrow.tooltip;" />
           </xul:hbox>
           <xul:label id="options-url" flex="1" value="" crop="center" />
           <xul:label control="options-thumbnail-input" value="&newtabtools.tile-thumbnail.label;" />

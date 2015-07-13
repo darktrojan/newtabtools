@@ -7,6 +7,11 @@
 
 <!ENTITY newtabtools.tile-header "首頁磚:">
 
+<!ENTITY newtabtools.tile-selection.previousrow.tooltip "Previous row">
+<!ENTITY newtabtools.tile-selection.previous.tooltip "Previous tile">
+<!ENTITY newtabtools.tile-selection.next.tooltip "Next tile">
+<!ENTITY newtabtools.tile-selection.nextrow.tooltip "Next row">
+
 <!ENTITY newtabtools.tile-thumbnail.label "圖片:">
 <!ENTITY newtabtools.tile-thumbnail.placeholder "貼上圖片網址或選擇檔案">
 <!ENTITY newtabtools.tile-thumbnail.browse "瀏覽…">

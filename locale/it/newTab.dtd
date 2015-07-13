@@ -7,6 +7,11 @@
 
 <!ENTITY newtabtools.tile-header "Icone:">
 
+<!ENTITY newtabtools.tile-selection.previousrow.tooltip "Previous row">
+<!ENTITY newtabtools.tile-selection.previous.tooltip "Previous tile">
+<!ENTITY newtabtools.tile-selection.next.tooltip "Next tile">
+<!ENTITY newtabtools.tile-selection.nextrow.tooltip "Next row">
+
 <!ENTITY newtabtools.tile-thumbnail.label "Immagine:">
 <!ENTITY newtabtools.tile-thumbnail.placeholder "Incolla un indirizzo web o sfoglia tra i file immagine">
 <!ENTITY newtabtools.tile-thumbnail.browse "Sfoglia…">

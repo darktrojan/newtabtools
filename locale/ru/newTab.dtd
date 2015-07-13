@@ -7,6 +7,11 @@
 
 <!ENTITY newtabtools.tile-header "Плитки Экспресс-панели:">
 
+<!ENTITY newtabtools.tile-selection.previousrow.tooltip "Previous row">
+<!ENTITY newtabtools.tile-selection.previous.tooltip "Previous tile">
+<!ENTITY newtabtools.tile-selection.next.tooltip "Next tile">
+<!ENTITY newtabtools.tile-selection.nextrow.tooltip "Next row">
+
 <!ENTITY newtabtools.tile-thumbnail.label "Изображение плитки:                                                                          ">
 <!ENTITY newtabtools.tile-thumbnail.placeholder "Вставьте ссылку на изображение или выберите файл">
 <!ENTITY newtabtools.tile-thumbnail.browse "Выбрать…">
