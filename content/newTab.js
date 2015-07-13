@@ -12,6 +12,7 @@ let { classes: Cc, interfaces: Ci, utils: Cu } = Components;
 Cu.import("resource://gre/modules/Services.jsm");
 Cu.import("resource://gre/modules/XPCOMUtils.jsm");
 
+XPCOMUtils.defineLazyModuleGetter(this, "BackgroundImage", "chrome://newtabtools/content/newTabTools.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "FileUtils", "resource://gre/modules/FileUtils.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "NetUtil", "resource://gre/modules/NetUtil.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "SessionStore", "resource:///modules/sessionstore/SessionStore.jsm");
@@ -136,25 +137,25 @@ let newTabTools = {
     case "options-title-reset":
       this.setTitle(this.selectedSite, null);
       break;
-    case "options-bg-set":
-      if (this.setBackgroundInput.value) {
-        let fos = FileUtils.openSafeFileOutputStream(this.backgroundImageFile);
-        NetUtil.asyncFetch(this.setBackgroundInput.value, function(inputStream, status) {
-          if (!Components.isSuccessCode(status)) {
-            return;
-          }
-          NetUtil.asyncCopy(inputStream, fos, function() {
-            FileUtils.closeSafeFileOutputStream(fos);
-            Services.obs.notifyObservers(null, "newtabtools-change", "background");
-          }.bind(this));
-        }.bind(this));
-      }
-      break;
-    case "options-bg-remove":
-      if (this.backgroundImageFile.exists())
-        this.backgroundImageFile.remove(true);
-      Services.obs.notifyObservers(null, "newtabtools-change", "background");
-      break;
+    // case "options-bg-set":
+    //   if (this.setBackgroundInput.value) {
+    //     let fos = FileUtils.openSafeFileOutputStream(this.backgroundImageFile);
+    //     NetUtil.asyncFetch(this.setBackgroundInput.value, function(inputStream, status) {
+    //       if (!Components.isSuccessCode(status)) {
+    //         return;
+    //       }
+    //       NetUtil.asyncCopy(inputStream, fos, function() {
+    //         FileUtils.closeSafeFileOutputStream(fos);
+    //         Services.obs.notifyObservers(null, "newtabtools-change", "background");
+    //       }.bind(this));
+    //     }.bind(this));
+    //   }
+    //   break;
+    // case "options-bg-remove":
+    //   if (this.backgroundImageFile.exists())
+    //     this.backgroundImageFile.remove(true);
+    //   Services.obs.notifyObservers(null, "newtabtools-change", "background");
+    //   break;
     case "options-donate":
       let url = "https://addons.mozilla.org/addon/new-tab-tools/about";
       newTabTools.browserWindow.openLinkIn(url, "current", {});
@@ -249,24 +250,29 @@ let newTabTools = {
       this.resetTitleButton.blur();
     }
   },
-  get backgroundImageFile() {
-    return FileUtils.getFile("ProfD", ["newtab-background"], true);
-  },
-  get backgroundImageURL() {
-    return Services.io.newFileURI(this.backgroundImageFile);
-  },
+  // get backgroundImageFile() {
+  //   return FileUtils.getFile("ProfD", ["newtab-background"], true);
+  // },
+  // get backgroundImageURL() {
+  //   return Services.io.newFileURI(this.backgroundImageFile);
+  // },
   refreshBackgroundImage: function() {
-    if (this.backgroundImageFile.exists()) {
-      this.page.style.backgroundImage =
-        'url("' + this.backgroundImageURL.spec + '?' + this.backgroundImageFile.lastModifiedTime + '")';
-      document.documentElement.classList.add("background");
-      this.removeBackgroundButton.disabled = false;
+    let url;
+    if (false) {
+      url = BackgroundImage.url;
     } else {
-      this.page.style.backgroundImage = null;
-      document.documentElement.classList.remove("background");
-      this.removeBackgroundButton.disabled = true;
-      this.removeBackgroundButton.blur();
+      url = BackgroundImage._pick();
     }
+    this.page.style.backgroundImage = 'url("' + url + '")';
+    // if (this.backgroundImageFile.exists()) {
+    //   this.page.style.backgroundImage =
+    //     'url("' + this.backgroundImageURL.spec + '?' + this.backgroundImageFile.lastModifiedTime + '")';
+    //   this.removeBackgroundButton.disabled = false;
+    // } else {
+    //   this.page.style.backgroundImage = null;
+    //   this.removeBackgroundButton.disabled = true;
+    //   this.removeBackgroundButton.blur();
+    // }
   },
   updateUI: function() {
     let launcherPosition = this.prefs.getIntPref("launcher");

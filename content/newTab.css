@@ -17,14 +17,12 @@ input[type=button] {
   -moz-box-flex: 1;
   -moz-user-focus: normal;
   -moz-box-orient: vertical;
+  background-size: cover;
+  background-position: 50% 50%;
 }
 :root[launcher="left"] #newtab-scrollbox,
 :root[launcher="right"] #newtab-scrollbox {
   -moz-box-orient: horizontal;
-}
-:root.background #newtab-scrollbox {
-  background-size: cover;
-  background-position: 50% 50%;
 }
 #newtab-scrollbox[page-disabled] {
   background-image: none !important;

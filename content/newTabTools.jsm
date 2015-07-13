@@ -1,4 +1,4 @@
-const EXPORTED_SYMBOLS = ["TileData", "SavedThumbs"];
+const EXPORTED_SYMBOLS = ["BackgroundImage", "TileData", "SavedThumbs"];
 const PREF = "extensions.newtabtools.tiledata";
 
 Components.utils.import("resource://gre/modules/Services.jsm");
@@ -139,3 +139,41 @@ let SavedThumbs = {
     });
   }
 };
+
+let BackgroundImage = {
+  _list: [],
+  _init: function() {
+    this._entriesForDir(OS.Path.join(OS.Constants.Path.homeDir, "Pictures", "Wallpapers")).then(() => {
+      this._list.sort();
+      if (false) {
+        this._change();
+      }
+    });
+  },
+  _entriesForDir: function(path) {
+    let di = new OS.File.DirectoryIterator(path);
+    let dirs = [];
+    return di.forEach(e => {
+      if (!e.isSymLink) {
+        if (e.isDir)
+          dirs.push(e.path);
+        else
+          BackgroundImage._list.push(e.path);
+      }
+    }).then(() => {
+      di.close();
+      let dirPromises = [this._entriesForDir(d) for (d of dirs)];
+      return Promise.all(dirPromises);
+    });
+  },
+  _pick: function() {
+    let index = Math.floor(Math.random() * this._list.length);
+    return Services.io.newFileURI(new FileUtils.File(this._list[index])).spec;
+  },
+  _change: function() {
+    this.url = this._pick();
+    Services.obs.notifyObservers(null, "newtabtools-change", "background");
+  }
+};
+
+BackgroundImage._init();
