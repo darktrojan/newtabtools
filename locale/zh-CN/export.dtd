@@ -15,3 +15,4 @@
 <!ENTITY newtabtools.export.prefs.launcher "启动栏位置">
 <!ENTITY newtabtools.export.prefs.recent.show "“最近关闭的标签页”可见性">
 <!ENTITY newtabtools.export.page.background "页面背景">
+<!ENTITY newtabtools.export.prefs.theme "主题">

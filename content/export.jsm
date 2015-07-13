@@ -89,7 +89,11 @@ function exportSave(aReturnValues) {
 					keys.push("extensions.newtabtools.columns", "extensions.newtabtools.rows");
 					break;
 				case "gridmargin":
-					keys.push("extensions.newtabtools.grid.margin", "extensions.newtabtools.grid.spacing");
+					keys.push(
+						"extensions.newtabtools.grid.margin",
+						"extensions.newtabtools.grid.spacing",
+						"extensions.newtabtools.thumbs.titlesize"
+					);
 					break;
 				case "thumbs.position":
 					keys.push("extensions.newtabtools.thumbs.contain");
@@ -274,6 +278,7 @@ function importSave(aReturnValues) {
 				} else if (name == "gridmargin") {
 					copyPref("extensions.newtabtools.grid.margin");
 					copyPref("extensions.newtabtools.grid.spacing");
+					copyPref("extensions.newtabtools.thumbs.titlesize");
 				} else if (name == "thumbs.position") {
 					copyPref("extensions.newtabtools.thumbs.contain");
 				} else if (name == "tiledata") {

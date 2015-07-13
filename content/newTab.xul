@@ -176,6 +176,17 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
                   </xul:menupopup>
                 </xul:menulist>
               </xul:setting>
+              <xul:setting pref="extensions.newtabtools.thumbs.titlesize" type="menulist"
+                title="&newtabtools.options.thumb-titlesize;">
+                <xul:menulist sizetopopup="always">
+                  <xul:menupopup>
+                    <xul:menuitem label="&newtabtools.options.launcher.hidden;" value="hidden" />
+                    <xul:menuitem label="&newtabtools.options.size.small;" value="small" />
+                    <xul:menuitem label="&newtabtools.options.size.medium;" value="medium" />
+                    <xul:menuitem label="&newtabtools.options.size.large;" value="large" />
+                  </xul:menupopup>
+                </xul:menulist>
+              </xul:setting>
               <xul:setting pref="extensions.newtabtools.launcher" type="menulist"
                 title="&newtabtools.options.launcher;">
                 <xul:menulist sizetopopup="always">
@@ -185,17 +196,6 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
                     <xul:menuitem label="&newtabtools.options.launcher.bottom;" value="3" />
                     <xul:menuitem label="&newtabtools.options.launcher.left;" value="4" />
                     <xul:menuitem label="&newtabtools.options.launcher.right;" value="2" />
-                  </xul:menupopup>
-                </xul:menulist>
-              </xul:setting>
-              <xul:setting pref="extensions.newtabtools.thumbs.titlesize" type="menulist"
-                title="&newtabtools.options.thumb-titlesize;">
-                <xul:menulist sizetopopup="always">
-                  <xul:menupopup>
-                    <xul:menuitem label="&newtabtools.options.launcher.hidden;" value="hidden" />
-                    <xul:menuitem label="&newtabtools.options.size.small;" value="small" />
-                    <xul:menuitem label="&newtabtools.options.size.medium;" value="medium" />
-                    <xul:menuitem label="&newtabtools.options.size.large;" value="large" />
                   </xul:menupopup>
                 </xul:menulist>
               </xul:setting>

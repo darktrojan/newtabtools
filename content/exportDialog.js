@@ -20,6 +20,9 @@ if (returnValues.importing) {
 			checkbox.disabled = !(prefName in returnValues.prefs);
 			break;
 		}
+		case "prefs.theme":
+			checkbox.disabled = (!"extensions.newtabtools.page.theme" in returnValues.prefs);
+			break;
 		case "prefs.gridsize":
 			checkbox.disabled = !("extensions.newtabtools.columns" in returnValues.prefs) || !("extensions.newtabtools.rows" in returnValues.prefs);
 			break;
