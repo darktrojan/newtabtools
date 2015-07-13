@@ -32,6 +32,16 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
       </menupopup>
     </menulist>
   </setting>
+  <setting pref="extensions.newtabtools.thumbs.titlesize" type="menulist" title="&newtabtools.options.thumb-titlesize;">
+    <menulist sizetopopup="always">
+      <menupopup>
+        <menuitem label="&newtabtools.options.launcher.hidden;" value="hidden" />
+        <menuitem label="&newtabtools.options.size.small;" value="small" />
+        <menuitem label="&newtabtools.options.size.medium;" value="medium" />
+        <menuitem label="&newtabtools.options.size.large;" value="large" />
+      </menupopup>
+    </menulist>
+  </setting>
   <setting pref="extensions.newtabtools.launcher" type="menulist" title="&newtabtools.options.launcher;">
     <menulist sizetopopup="always">
       <menupopup>
