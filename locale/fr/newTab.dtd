@@ -1,4 +1,4 @@
-<!ENTITY newtabtools.options.pointer "Click here to begin customizing your new tab page">
+<!ENTITY newtabtools.options.pointer "Cliquez ici pour commencer à personnaliser votre page « Nouvel onglet »">
 <!ENTITY newtabtools.page.show "Afficher la page « Nouvel onglet »">
 
 <!ENTITY newtabtools.pin-url.header "Ajouter un site :">
@@ -12,8 +12,8 @@
 <!ENTITY newtabtools.tile-thumbnail.browse "Parcourir…">
 <!ENTITY newtabtools.tile-thumbnail.set "Appliquer">
 <!ENTITY newtabtools.tile-thumbnail.remove "Supprimer">
-<!ENTITY newtabtools.tile-thumbnail.refresh "Refresh Thumbnail">
-<!ENTITY newtabtools.tile-thumbnail.bgcolor "Background Color:">
+<!ENTITY newtabtools.tile-thumbnail.refresh "Rafraîchir">
+<!ENTITY newtabtools.tile-thumbnail.bgcolor "Couleur de fond :">
 
 <!ENTITY newtabtools.tile-title.label "Titre :">
 <!ENTITY newtabtools.tile-title.placeholder "Tapez un nouveau titre">
