@@ -16,7 +16,7 @@
 <!ENTITY newtabtools.options.launcher.right "Direita">
 <!ENTITY newtabtools.options.thumb-titlesize "Tamanho do título do bloco">
 <!ENTITY newtabtools.options.recent "Abas Recentemente Fechadas">
-<!ENTITY newtabtools.options.thumb-buttons "Fixar Bloco e Remover Botões do Bloco">
+<!ENTITY newtabtools.options.thumb-buttons "Botões 'Fixar Bloco' e 'Remover Bloco'">
 <!ENTITY newtabtools.options.favicons "Ícones de Sites">
 <!ENTITY newtabtools.options.thumb-contain "Miniatura Inteira nos Blocos">
 <!ENTITY newtabtools.export "Exportar configurações…">
