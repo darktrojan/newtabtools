@@ -7,10 +7,10 @@
 
 <!ENTITY newtabtools.tile-header "Blocos:">
 
-<!ENTITY newtabtools.tile-selection.previousrow.tooltip "Previous row">
-<!ENTITY newtabtools.tile-selection.previous.tooltip "Previous tile">
-<!ENTITY newtabtools.tile-selection.next.tooltip "Next tile">
-<!ENTITY newtabtools.tile-selection.nextrow.tooltip "Next row">
+<!ENTITY newtabtools.tile-selection.previousrow.tooltip "Linha anterior">
+<!ENTITY newtabtools.tile-selection.previous.tooltip "Bloco anterior">
+<!ENTITY newtabtools.tile-selection.next.tooltip "Próximo bloco">
+<!ENTITY newtabtools.tile-selection.nextrow.tooltip "Próxima linha">
 
 <!ENTITY newtabtools.tile-thumbnail.label "Imagem:">
 <!ENTITY newtabtools.tile-thumbnail.placeholder "Cole a URL da imagem ou escolha um arquivo">
