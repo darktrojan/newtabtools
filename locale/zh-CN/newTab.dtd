@@ -1,4 +1,4 @@
-<!ENTITY newtabtools.options.pointer "Click here to begin customizing your new tab page">
+<!ENTITY newtabtools.options.pointer "点击这里开始定制您的“新标签页”页面">
 <!ENTITY newtabtools.page.show "显示新标签页">
 
 <!ENTITY newtabtools.pin-url.header "添加磁贴:">
@@ -7,10 +7,10 @@
 
 <!ENTITY newtabtools.tile-header "磁贴:">
 
-<!ENTITY newtabtools.tile-selection.previousrow.tooltip "Previous row">
-<!ENTITY newtabtools.tile-selection.previous.tooltip "Previous tile">
-<!ENTITY newtabtools.tile-selection.next.tooltip "Next tile">
-<!ENTITY newtabtools.tile-selection.nextrow.tooltip "Next row">
+<!ENTITY newtabtools.tile-selection.previousrow.tooltip "上一行">
+<!ENTITY newtabtools.tile-selection.previous.tooltip "上一个磁贴">
+<!ENTITY newtabtools.tile-selection.next.tooltip "下一个磁贴">
+<!ENTITY newtabtools.tile-selection.nextrow.tooltip "下一行">
 
 <!ENTITY newtabtools.tile-thumbnail.label "图片:">
 <!ENTITY newtabtools.tile-thumbnail.placeholder "贴入图片网址或选择一个文件">
