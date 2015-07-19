@@ -330,10 +330,13 @@ windowObserver = {
       let menu = doc.getElementById("contentAreaContextMenu");
       menu.addEventListener("popupshowing", this.onPopupShowing);
 
+      let before = doc.getElementById("context-sep-open").nextElementSibling;
+
       let menuseparator = doc.createElementNS(XULNS, "menuseparator");
       menuseparator.id = "newtabtools-separator";
       menuseparator.className = "newtabtools-item";
-      menu.insertBefore(menuseparator, menu.firstChild);
+      menu.insertBefore(menuseparator, before);
+      before = menuseparator;
 
       for (let action of ["block", "unpin", "pin", "edit"]) {
         let menuitem = doc.createElementNS(XULNS, "menuitem");
@@ -341,7 +344,8 @@ windowObserver = {
         menuitem.className = "newtabtools-item";
         menuitem.setAttribute("label", strings.GetStringFromName("contextmenu." + action));
         menuitem.addEventListener("command", this.onEditItemClicked);
-        menu.insertBefore(menuitem, menu.firstChild);
+        menu.insertBefore(menuitem, before);
+        before = menuitem;
       }
     }
   },
