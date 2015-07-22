@@ -41,7 +41,7 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
           <xul:button id="newtab-undo-restore-button" tabindex="-1"
                       label="&newtab.undo.restoreButton;"
                       class="newtab-undo-button" />
-          <xul:toolbarbutton id="newtab-undo-close-button" tabindex="-1"
+          <xul:toolbarbutton id="newtab-undo-close-button" class="close-icon" tabindex="-1"
                              title="&newtab.undo.closeTooltip;" />
         </div>
         <div id="newtab-margin-right-top" class="newtab-side-margin"/>
