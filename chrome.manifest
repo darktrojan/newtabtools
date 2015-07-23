@@ -16,4 +16,5 @@ skin newtabtools classic/1.0 skin/linux/ os!=WINNT os!=Darwin
 skin newtabtools classic/1.0 skin/osx/ os=Darwin
 skin newtabtools classic/1.0 skin/windows/ os=WINNT
 
+override chrome://browser/content/newtab/newTab.xhtml chrome://newtabtools/content/newTab.xul
 override chrome://browser/content/newtab/newTab.xul chrome://newtabtools/content/newTab.xul
