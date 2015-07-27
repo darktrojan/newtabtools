@@ -1,14 +1,14 @@
-<!ENTITY newtabtools.export.title "New Tab Tools">
+<!ENTITY newtabtools.export.title "New Tab Tools ">
 <!ENTITY newtabtools.export.header "Scegli cosa esportare:">
 <!ENTITY newtabtools.import.header "Scegli cosa importare:">
-<!ENTITY newtabtools.export.tiles.caption "Icone">
-<!ENTITY newtabtools.export.prefs.pinned "Icone bloccate">
-<!ENTITY newtabtools.export.prefs.blocked "Icone rimosse">
+<!ENTITY newtabtools.export.tiles.caption "Riquadri">
+<!ENTITY newtabtools.export.prefs.pinned "Riquadri bloccati">
+<!ENTITY newtabtools.export.prefs.blocked "Riquadri rimossi">
 <!ENTITY newtabtools.export.prefs.gridsize "Numero di righe e di colonne">
 <!ENTITY newtabtools.export.prefs.gridmargin "Dimensione cornice e ampiezza della griglia">
 <!ENTITY newtabtools.export.tiles.thumbs "Anteprime personalizzate">
 <!ENTITY newtabtools.export.prefs.thumbs.position "Posizione delle anteprime">
-<!ENTITY newtabtools.export.annos.title "Titoli personalizzati delle icone">
+<!ENTITY newtabtools.export.annos.title "Titoli personalizzati dei riquadri">
 <!ENTITY newtabtools.export.prefs.thumbs.hidebuttons "Nascondi/mostra i tasti anteprime">
 <!ENTITY newtabtools.export.prefs.thumbs.hidefavicons "Nascondi/mostra le icone dei siti">
 <!ENTITY newtabtools.export.page.caption "Pagina">
