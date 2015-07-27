@@ -16,8 +16,8 @@
 <!ENTITY newtabtools.options.launcher.right "A destra">
 <!ENTITY newtabtools.options.thumb-titlesize "Dimensione titolo">
 <!ENTITY newtabtools.options.recent "Mostra le schede chiuse di recente">
-<!ENTITY newtabtools.options.thumb-buttons "Mostra i pulsanti blocca e rimuovi icona">
+<!ENTITY newtabtools.options.thumb-buttons "Mostra i pulsanti blocca e rimuovi riquadro">
 <!ENTITY newtabtools.options.favicons "Mostra le icone dei siti">
-<!ENTITY newtabtools.options.thumb-contain "Mostra l'anteprima completa nelle icone">
+<!ENTITY newtabtools.options.thumb-contain "Mostra l'anteprima completa nei riquadri">
 <!ENTITY newtabtools.export "Esporta opzioni…">
 <!ENTITY newtabtools.import "Importa opzioni…">

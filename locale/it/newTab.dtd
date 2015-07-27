@@ -1,5 +1,5 @@
-<!ENTITY newtabtools.options.pointer "Click here to begin customizing your new tab page">
-<!ENTITY newtabtools.page.show "Mostra la pagina nuova scheda">
+<!ENTITY newtabtools.options.pointer "Clicca qui per iniziare a personalizzare la pagina Nuova Scheda">
+<!ENTITY newtabtools.page.show "Mostra la pagina Nuova Scheda">
 
 <!ENTITY newtabtools.pin-url.header "Aggiungi icona:">
 <!ENTITY newtabtools.pin-url.placeholder "Scrivi o seleziona un indirizzo web">
@@ -7,10 +7,10 @@
 
 <!ENTITY newtabtools.tile-header "Icone:">
 
-<!ENTITY newtabtools.tile-selection.previousrow.tooltip "Previous row">
-<!ENTITY newtabtools.tile-selection.previous.tooltip "Previous tile">
-<!ENTITY newtabtools.tile-selection.next.tooltip "Next tile">
-<!ENTITY newtabtools.tile-selection.nextrow.tooltip "Next row">
+<!ENTITY newtabtools.tile-selection.previousrow.tooltip "Riga precedente">
+<!ENTITY newtabtools.tile-selection.previous.tooltip "Riquadro precedente">
+<!ENTITY newtabtools.tile-selection.next.tooltip "Riquadro sucessivo">
+<!ENTITY newtabtools.tile-selection.nextrow.tooltip "Riga sucessiva">
 
 <!ENTITY newtabtools.tile-thumbnail.label "Immagine:">
 <!ENTITY newtabtools.tile-thumbnail.placeholder "Incolla un indirizzo web o sfoglia tra i file immagine">
