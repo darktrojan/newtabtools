@@ -7,18 +7,18 @@
 
 <!ENTITY newtabtools.tile-header "Плитки Экспресс-панели:">
 
-<!ENTITY newtabtools.tile-selection.previousrow.tooltip "Previous row">
-<!ENTITY newtabtools.tile-selection.previous.tooltip "Previous tile">
-<!ENTITY newtabtools.tile-selection.next.tooltip "Next tile">
-<!ENTITY newtabtools.tile-selection.nextrow.tooltip "Next row">
+<!ENTITY newtabtools.tile-selection.previousrow.tooltip "Предыдущая строка">
+<!ENTITY newtabtools.tile-selection.previous.tooltip "Предыдущая плитка">
+<!ENTITY newtabtools.tile-selection.next.tooltip "Следующая плитка">
+<!ENTITY newtabtools.tile-selection.nextrow.tooltip "Следующая строка">
 
 <!ENTITY newtabtools.tile-thumbnail.label "Изображение плитки:                                                                          ">
 <!ENTITY newtabtools.tile-thumbnail.placeholder "Вставьте ссылку на изображение или выберите файл">
 <!ENTITY newtabtools.tile-thumbnail.browse "Выбрать…">
 <!ENTITY newtabtools.tile-thumbnail.set "Применить">
 <!ENTITY newtabtools.tile-thumbnail.remove "Удалить">
-<!ENTITY newtabtools.tile-thumbnail.refresh "Refresh Thumbnail">
-<!ENTITY newtabtools.tile-thumbnail.bgcolor "Background Color:">
+<!ENTITY newtabtools.tile-thumbnail.refresh "Обновить">
+<!ENTITY newtabtools.tile-thumbnail.bgcolor "Цвет фона:">
 
 <!ENTITY newtabtools.tile-title.label "Название плитки:">
 <!ENTITY newtabtools.tile-title.placeholder "Введите новое название плитки">
