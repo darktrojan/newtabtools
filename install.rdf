@@ -5,7 +5,7 @@
     <em:id>newtabtools@darktrojan.net</em:id>
     <em:name>New Tab Tools</em:name>
     <em:description>Customizes the new tab page. You can add more tiles, the launcher from Firefox start, or a background image. And you can set new tile images and titles.</em:description>
-    <em:version>50</em:version>
+    <em:version>50.1</em:version>
     <em:bootstrap>true</em:bootstrap>
     <em:type>2</em:type>
 
@@ -13,7 +13,7 @@
       <Description>
         <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
         <em:minVersion>39.0</em:minVersion>
-        <em:maxVersion>42.0a1</em:maxVersion>
+        <em:maxVersion>43.0a1</em:maxVersion>
       </Description>
     </em:targetApplication>
 
@@ -38,6 +38,14 @@
         <em:locale>fr</em:locale>
         <em:name>New Tab Tools</em:name>
         <em:description>Personnalise la page Nouvel onglet. Permet d'ajouter un nombre plus important de sites, des raccourcis vers les menus de Firefox et une image d'arrière-plan. Permet également de personnaliser les titres et miniatures donnés aux sites.</em:description>
+      </Description>
+    </em:localized>
+
+    <em:localized>
+      <Description>
+        <em:locale>it</em:locale>
+        <em:name>New Tab Tools</em:name>
+        <em:description>Personalizza la pagina nuova scheda. Puoi aggiungere più riquadri, la barra di avvio di Firefox, o un'immagine di sfondo. Ed è possibile impostare nuove immagini nei riquadri e nuovi titoli.</em:description>
       </Description>
     </em:localized>
 
@@ -94,14 +102,6 @@
         <em:locale>zh-TW</em:locale>
         <em:name>New Tab Tools</em:name>
         <em:description>自訂新分頁頁面。你可以在新分頁增加更多首頁磚、加入 Firefox 開始頁的捷徑列或是自訂背景圖片，你也能為首頁磚設定新的圖片和標題。</em:description>
-      </Description>
-    </em:localized>
-
-    <em:localized>
-      <Description>
-        <em:locale>it</em:locale>
-        <em:name>New Tab Tools</em:name>
-        <em:description>Personalizza la pagina nuova scheda. Puoi aggiungere più riquadri, la barra di avvio di Firefox, o un'immagine di sfondo. Ed è possibile impostare nuove immagini nei riquadri e nuovi titoli.</em:description>
       </Description>
     </em:localized>
   </Description>
