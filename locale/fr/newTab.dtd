@@ -7,10 +7,10 @@
 
 <!ENTITY newtabtools.tile-header "Sites :">
 
-<!ENTITY newtabtools.tile-selection.previousrow.tooltip "Previous row">
-<!ENTITY newtabtools.tile-selection.previous.tooltip "Previous tile">
-<!ENTITY newtabtools.tile-selection.next.tooltip "Next tile">
-<!ENTITY newtabtools.tile-selection.nextrow.tooltip "Next row">
+<!ENTITY newtabtools.tile-selection.previousrow.tooltip "Rangée supérieure">
+<!ENTITY newtabtools.tile-selection.previous.tooltip "Site précédent">
+<!ENTITY newtabtools.tile-selection.next.tooltip "Site suivant">
+<!ENTITY newtabtools.tile-selection.nextrow.tooltip "Rangée inférieure">
 
 <!ENTITY newtabtools.tile-thumbnail.label "Image :">
 <!ENTITY newtabtools.tile-thumbnail.placeholder "Collez l'URL d'une image ou sélectionnez un fichier">
