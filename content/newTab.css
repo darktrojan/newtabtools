@@ -279,6 +279,7 @@ input[type=button] {
   opacity: 0.8;
   background-position: center;
   background-repeat: no-repeat;
+  background-size: 36px 36px;
   content: "";
   margin-bottom: 2px;
 }
@@ -580,8 +581,15 @@ input[type=button] {
   height: 18px;
   padding: 0;
   border: none;
-  background: transparent url("utilities.png");
-  z-index: 2
+  background: transparent url("options-light.svg") center no-repeat;
+  z-index: 2;
+  opacity: 0.8;
+}
+#options-toggle:hover {
+  opacity: 1;
+}
+:root[theme="dark"] #options-toggle {
+  background-image: url("options-dark.svg");
 }
 #options-toggle:-moz-locale-dir(rtl) {
   left: 10px;
