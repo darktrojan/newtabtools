@@ -14,10 +14,11 @@ content/newTab.css
 content/newTab.js
 content/newTab.xul
 content/newTabTools.jsm
+content/options-dark.svg
+content/options-light.svg
 content/pointer.png
 content/pointer-rtl.png
 content/setting.xml
-content/utilities.png
 icon.png
 icon64.png
 install.rdf
