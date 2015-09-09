@@ -7,6 +7,8 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
     PageThumbUtils, PlacesUtils, PrivateBrowsingUtils, SavedThumbs, TileData, HTML_NAMESPACE,
     gPinnedLinks, gBlockedLinks, gTransformation, gGridPrefs, gGrid, gDrag, gUpdater, gUndoDialog */
 
+const XHTMLNS = "http://www.w3.org/1999/xhtml";
+
 let { classes: Cc, interfaces: Ci, utils: Cu } = Components;
 
 Cu.import("resource://gre/modules/Services.jsm");
@@ -257,45 +259,40 @@ let newTabTools = {
   //   return Services.io.newFileURI(this.backgroundImageFile);
   // },
   refreshBackgroundImage: function() {
-    let url;
-    if (false) {
-      url = BackgroundImage.url;
-    } else {
-      url = BackgroundImage._pick();
-    }
-
-    if (url == null) {
-      return;
-    }
-
-    this.page.style.backgroundImage = 'url("' + url + '")';
-
-
-    let c = document.createElementNS("http://www.w3.org/1999/xhtml", "canvas");
-    c.width = c.height = 100;
-    let x = c.getContext("2d");
-    let i = document.createElementNS("http://www.w3.org/1999/xhtml", "img");
-    i.onload = function() {
-      try {
-        x.drawImage(i, 0, 0, i.width, i.height, 0, 0, 100, 100);
-        let d = x.getImageData(0, 0, 100, 100).data;
-        let b = 0;
-        for (let j = 0; j < 40000; j++) {
-          let v = d[j++] + d[j++] + d[j++];
-          if (v >= 384) {
-            b++;
-          }
-        }
-        if (b >= 5000) {
-          document.documentElement.setAttribute("theme", "light");
-        } else {
-          document.documentElement.setAttribute("theme", "dark");
-        }
-      } catch (ex) {
-        Components.utils.reportError(ex);
+    BackgroundImage._pick().then((url) => {
+      if (url == null) {
+        return;
       }
-    };
-    i.src = url;
+
+      this.page.style.backgroundImage = 'url("' + url + '")';
+
+      let c = document.createElementNS(XHTMLNS, "canvas");
+      c.width = c.height = 100;
+      let x = c.getContext("2d");
+      let i = document.createElementNS(XHTMLNS, "img");
+      i.onload = function() {
+        try {
+          x.drawImage(i, 0, 0, i.width, i.height, 0, 0, 100, 100);
+          let d = x.getImageData(0, 0, 100, 100).data;
+          let b = 0;
+          for (let j = 0; j < 40000; j++) {
+            let v = d[j++] + d[j++] + d[j++];
+            if (v >= 384) {
+              b++;
+            }
+          }
+          if (b >= 5000) {
+            document.documentElement.setAttribute("theme", "light");
+          } else {
+            document.documentElement.setAttribute("theme", "dark");
+          }
+        } catch (ex) {
+          Components.utils.reportError(ex);
+        }
+      };
+      i.src = url;
+    });
+
 
     // if (this.backgroundImageFile.exists()) {
     //   this.page.style.backgroundImage =

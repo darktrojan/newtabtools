@@ -142,8 +142,16 @@ let SavedThumbs = {
 
 let BackgroundImage = {
   _list: [],
+  _inited: false,
   _init: function() {
-    this._entriesForDir(OS.Path.join(OS.Constants.Path.homeDir, "Pictures", "Wallpapers")).then(() => {
+    if (this._inited) {
+      return new Promise(function(resolve) {
+        resolve();
+      });
+    }
+
+    return this._entriesForDir(OS.Path.join(OS.Constants.Path.homeDir, "Pictures", "Wallpapers")).then(() => {
+      this._inited = true;
       this._list.sort();
       if (false) {
         this._change();
@@ -167,17 +175,21 @@ let BackgroundImage = {
     });
   },
   _pick: function() {
-    if (this._list.length == 0) {
-      return null;
+    if (this._inited && this._list.length == 0) {
+      return new Promise(function(resolve) {
+        resolve(null);
+      });
     }
 
-    let index = Math.floor(Math.random() * this._list.length);
-    return Services.io.newFileURI(new FileUtils.File(this._list[index])).spec;
+    return this._init().then(() => {
+      let index = Math.floor(Math.random() * this._list.length);
+      return Services.io.newFileURI(new FileUtils.File(this._list[index])).spec;
+    });
   },
   _change: function() {
-    this.url = this._pick();
-    Services.obs.notifyObservers(null, "newtabtools-change", "background");
+    this.url = this._pick().then(() => {
+      Services.obs.notifyObservers(null, "newtabtools-change", "background");
+    });
   }
 };
-
 BackgroundImage._init();
