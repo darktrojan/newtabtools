@@ -347,6 +347,18 @@ windowObserver = {
         menu.insertBefore(menuitem, before);
         before = menuitem;
       }
+
+      for (let action of ["options"]) {
+        let menuitem = doc.createElementNS(XULNS, "menuitem");
+        menuitem.id = "newtabtools-" + action;
+        menuitem.className = "newtabtools-page";
+        menuitem.setAttribute("label", strings.GetStringFromName(
+          "contextmenu." + action + (Services.appinfo.OS == "WINNT" ? "Windows" : "Unix")
+        ));
+        menuitem.addEventListener("command", this.onEditItemClicked);
+        menu.insertBefore(menuitem, before);
+        before = menuitem;
+      }
     }
   },
   unpaint: function(aWindow) {
@@ -398,6 +410,9 @@ windowObserver = {
     case "newtabtools-blocktile":
       target._newtabCell.site.block();
       break;
+    case "newtabtools-options":
+      doc.popupNode.ownerDocument.defaultView.newTabTools.toggleOptions();
+      break;
     }
   },
   onPopupShowing: function(aEvent) {
@@ -407,6 +422,12 @@ windowObserver = {
     let menu = doc.getElementById("contentAreaContextMenu");
     for (let item of menu.querySelectorAll(".newtabtools-item")) {
       item.hidden = !target;
+    }
+    for (let item of menu.querySelectorAll(".newtabtools-page")) {
+      item.hidden = (!!target || !doc.popupNode.ownerDocument.documentElement.hasAttribute("options-hidden"));
+      if (!item.hidden) {
+        menu.querySelector("#newtabtools-separator").hidden = false;
+      }
     }
 
     if (target) {
