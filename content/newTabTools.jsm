@@ -167,6 +167,10 @@ let BackgroundImage = {
     });
   },
   _pick: function() {
+    if (this._list.length == 0) {
+      return null;
+    }
+
     let index = Math.floor(Math.random() * this._list.length);
     return Services.io.newFileURI(new FileUtils.File(this._list[index])).spec;
   },
