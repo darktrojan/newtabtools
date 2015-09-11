@@ -275,15 +275,23 @@ let newTabTools = {
           x.drawImage(i, 0, 0, i.width, i.height, 0, 0, 100, 100);
           let d = x.getImageData(0, 0, 100, 100).data;
           let b = 0;
-          for (let j = 0; j < 40000; j++) {
+          let j = 0;
+          for (; j < 19996; j++) {
             let v = d[j++] + d[j++] + d[j++];
             if (v >= 384) {
               b++;
             }
           }
-          if (b >= 5000) {
-            document.documentElement.setAttribute("theme", "light");
-          } else {
+          for (; j < 40000; j++) {
+            let v = d[j++] + d[j++] + d[j++];
+            if (v >= 384) {
+              if (++b > 5000) {
+                document.documentElement.setAttribute("theme", "light");
+                break;
+              }
+            }
+          }
+          if (b < 5000) {
             document.documentElement.setAttribute("theme", "dark");
           }
         } catch (ex) {
