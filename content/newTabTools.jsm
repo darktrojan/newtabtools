@@ -1,5 +1,7 @@
+/* globals BackgroundPageThumbs, FileUtils, OS, PageThumbs, PageThumbsStorage */
+/* exported EXPORTED_SYMBOLS, BackgroundImage, TileData, SavedThumbs */
 const EXPORTED_SYMBOLS = ["BackgroundImage", "TileData", "SavedThumbs"];
-const PREF = "extensions.newtabtools.tiledata";
+const XHTMLNS = "http://www.w3.org/1999/xhtml";
 
 Components.utils.import("resource://gre/modules/Services.jsm");
 Components.utils.import("resource://gre/modules/XPCOMUtils.jsm");
@@ -9,7 +11,6 @@ XPCOMUtils.defineLazyModuleGetter(this, "FileUtils", "resource://gre/modules/Fil
 XPCOMUtils.defineLazyModuleGetter(this, "OS", "resource://gre/modules/osfile.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "PageThumbs", "resource://gre/modules/PageThumbs.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "PageThumbsStorage", "resource://gre/modules/PageThumbs.jsm");
-XPCOMUtils.defineLazyModuleGetter(this, "Promise", "resource://gre/modules/Promise.jsm");
 
 function notifyTileChanged(url, key) {
   let urlString = Components.classes["@mozilla.org/supports-string;1"]
@@ -19,6 +20,7 @@ function notifyTileChanged(url, key) {
 }
 
 let TileData = {
+  PREF: "extensions.newtabtools.tiledata",
   _data: new Map(),
   get: function(url, key) {
     if (this._data.has(url)) {
@@ -46,7 +48,7 @@ let TileData = {
   },
   _getPref: function() {
     try {
-      let value = Services.prefs.getCharPref(PREF);
+      let value = Services.prefs.getCharPref(TileData.PREF);
       let json = JSON.parse(value);
       for (let [url, urlData] in Iterator(json)) {
         this._data.set(url, new Map(Iterator(urlData)));
@@ -63,7 +65,7 @@ let TileData = {
         obj[url][key] = value;
       }
     }
-    Services.prefs.setCharPref(PREF, JSON.stringify(obj));
+    Services.prefs.setCharPref(TileData.PREF, JSON.stringify(obj));
   }
 };
 TileData._getPref();
@@ -105,7 +107,7 @@ let SavedThumbs = {
   },
   _readDirPromises: [],
   _readDir: function() {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       if (this.ready) {
         resolve();
         return;
@@ -141,19 +143,38 @@ let SavedThumbs = {
 };
 
 let BackgroundImage = {
+  PREF_DIRECTORY: "extensions.newtabtools.background.directory",
+  PREF_MODE: "extensions.newtabtools.background.mode",
   _list: [],
   _inited: false,
+  _themeCache: new Map(),
+  // 0: old behaviour
+  // 1: pick one, use for all (could _change regularly)
+  // 2: new image each page
+  mode: 0,
   _init: function() {
+    if (Services.prefs.getPrefType(BackgroundImage.PREF_DIRECTORY) == Services.prefs.PREF_STRING) {
+      this._directory = Services.prefs.getCharPref(BackgroundImage.PREF_DIRECTORY);
+    } else {
+      return;
+    }
+    if (Services.prefs.getPrefType(BackgroundImage.PREF_MODE) == Services.prefs.PREF_INT) {
+      this.mode = Services.prefs.getIntPref(BackgroundImage.PREF_MODE);
+    }
+    if (this.mode != 1 && this.mode != 2) {
+      return;
+    }
+
     if (this._inited) {
       return new Promise(function(resolve) {
         resolve();
       });
     }
 
-    return this._entriesForDir(OS.Path.join(OS.Constants.Path.homeDir, "Pictures", "Wallpapers")).then(() => {
+    return this._entriesForDir(this._directory).then(() => {
       this._inited = true;
       this._list.sort();
-      if (false) {
+      if (this.mode == 1) {
         this._change();
       }
     });
@@ -177,18 +198,63 @@ let BackgroundImage = {
   _pick: function() {
     if (this._inited && this._list.length == 0) {
       return new Promise(function(resolve) {
-        resolve(null);
+        resolve(null, null);
       });
     }
 
     return this._init().then(() => {
       let index = Math.floor(Math.random() * this._list.length);
-      return Services.io.newFileURI(new FileUtils.File(this._list[index])).spec;
+      let url = Services.io.newFileURI(new FileUtils.File(this._list[index])).spec;
+      if (this._themeCache.has(url)) {
+        return [url, this._themeCache.get(url)];
+      }
+      return this._selectTheme(url).then((theme) => {
+        this._themeCache.set(url, theme);
+        return [url, theme];
+      });
     });
   },
   _change: function() {
-    this.url = this._pick().then(() => {
+    this._pick().then(([url, theme]) => {
+      this.url = url;
+      this.theme = theme;
       Services.obs.notifyObservers(null, "newtabtools-change", "background");
+    });
+  },
+  _selectTheme: function(url) {
+    return new Promise(function(resolve) {
+      let doc = Services.wm.getMostRecentWindow("navigator:browser").document;
+      let c = doc.createElementNS(XHTMLNS, "canvas");
+      c.width = c.height = 100;
+      let x = c.getContext("2d");
+      let i = doc.createElementNS(XHTMLNS, "img");
+      i.onload = function() {
+        try {
+          x.drawImage(i, 0, 0, i.width, i.height, 0, 0, 100, 100);
+          let d = x.getImageData(0, 0, 100, 100).data;
+          let b = 0;
+          let j = 0;
+          for (; j < 19996; j++) {
+            let v = d[j++] + d[j++] + d[j++];
+            if (v >= 384) {
+              b++;
+            }
+          }
+          for (; j < 40000; j++) {
+            let v = d[j++] + d[j++] + d[j++];
+            if (v >= 384) {
+              if (++b > 5000) {
+                resolve("light");
+                return;
+              }
+            }
+          }
+          resolve("dark");
+        } catch (ex) {
+          Components.utils.reportError(ex);
+        }
+      };
+      i.src = url;
     });
   }
 };

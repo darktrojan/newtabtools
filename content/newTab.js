@@ -7,8 +7,6 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
     PageThumbUtils, PlacesUtils, PrivateBrowsingUtils, SavedThumbs, TileData, HTML_NAMESPACE,
     gPinnedLinks, gBlockedLinks, gTransformation, gGridPrefs, gGrid, gDrag, gUpdater, gUndoDialog */
 
-const XHTMLNS = "http://www.w3.org/1999/xhtml";
-
 let { classes: Cc, interfaces: Ci, utils: Cu } = Components;
 
 Cu.import("resource://gre/modules/Services.jsm");
@@ -252,65 +250,39 @@ let newTabTools = {
       this.resetTitleButton.blur();
     }
   },
-  // get backgroundImageFile() {
-  //   return FileUtils.getFile("ProfD", ["newtab-background"], true);
-  // },
-  // get backgroundImageURL() {
-  //   return Services.io.newFileURI(this.backgroundImageFile);
-  // },
+  get backgroundImageFile() {
+    return FileUtils.getFile("ProfD", ["newtab-background"], true);
+  },
+  get backgroundImageURL() {
+    return Services.io.newFileURI(this.backgroundImageFile);
+  },
   refreshBackgroundImage: function() {
-    BackgroundImage._pick().then((url) => {
-      if (url == null) {
-        return;
-      }
-
-      this.page.style.backgroundImage = 'url("' + url + '")';
-
-      let c = document.createElementNS(XHTMLNS, "canvas");
-      c.width = c.height = 100;
-      let x = c.getContext("2d");
-      let i = document.createElementNS(XHTMLNS, "img");
-      i.onload = function() {
-        try {
-          x.drawImage(i, 0, 0, i.width, i.height, 0, 0, 100, 100);
-          let d = x.getImageData(0, 0, 100, 100).data;
-          let b = 0;
-          let j = 0;
-          for (; j < 19996; j++) {
-            let v = d[j++] + d[j++] + d[j++];
-            if (v >= 384) {
-              b++;
-            }
-          }
-          for (; j < 40000; j++) {
-            let v = d[j++] + d[j++] + d[j++];
-            if (v >= 384) {
-              if (++b > 5000) {
-                document.documentElement.setAttribute("theme", "light");
-                break;
-              }
-            }
-          }
-          if (b < 5000) {
-            document.documentElement.setAttribute("theme", "dark");
-          }
-        } catch (ex) {
-          Components.utils.reportError(ex);
+    switch (BackgroundImage.mode) {
+    case 1:
+      this.page.style.backgroundImage = 'url("' + BackgroundImage.url + '")';
+      document.documentElement.setAttribute("theme", BackgroundImage.theme);
+      break;
+    case 2:
+      BackgroundImage._pick().then(([url, theme]) => {
+        if (url == null) {
+          return;
         }
-      };
-      i.src = url;
-    });
-
-
-    // if (this.backgroundImageFile.exists()) {
-    //   this.page.style.backgroundImage =
-    //     'url("' + this.backgroundImageURL.spec + '?' + this.backgroundImageFile.lastModifiedTime + '")';
-    //   this.removeBackgroundButton.disabled = false;
-    // } else {
-    //   this.page.style.backgroundImage = null;
-    //   this.removeBackgroundButton.disabled = true;
-    //   this.removeBackgroundButton.blur();
-    // }
+        this.page.style.backgroundImage = 'url("' + url + '")';
+        document.documentElement.setAttribute("theme", theme);
+      });
+      break;
+    default:
+      if (this.backgroundImageFile.exists()) {
+        this.page.style.backgroundImage =
+          'url("' + this.backgroundImageURL.spec + '?' + this.backgroundImageFile.lastModifiedTime + '")';
+        this.removeBackgroundButton.disabled = false;
+      } else {
+        this.page.style.backgroundImage = null;
+        this.removeBackgroundButton.disabled = true;
+        this.removeBackgroundButton.blur();
+      }
+      break;
+    }
   },
   updateUI: function() {
     let launcherPosition = this.prefs.getIntPref("launcher");
@@ -320,9 +292,6 @@ let newTabTools = {
     } else {
       document.documentElement.removeAttribute("launcher");
     }
-
-    let theme = this.prefs.getCharPref("theme");
-    document.documentElement.setAttribute("theme", theme);
 
     let containThumbs = this.prefs.getBoolPref("thumbs.contain");
     document.documentElement.classList[containThumbs ? "add" : "remove"]("containThumbs");
