@@ -424,7 +424,12 @@ windowObserver = {
       item.hidden = !target;
     }
     for (let item of menu.querySelectorAll(".newtabtools-page")) {
-      item.hidden = (!!target || !doc.popupNode.ownerDocument.documentElement.hasAttribute("options-hidden"));
+      item.hidden = (
+        !!target ||
+        !doc.popupNode ||
+        doc.popupNode.ownerDocument.location.href != "about:newtab" ||
+        !doc.popupNode.ownerDocument.documentElement.hasAttribute("options-hidden")
+      );
       if (!item.hidden) {
         menu.querySelector("#newtabtools-separator").hidden = false;
       }
