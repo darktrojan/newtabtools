@@ -1983,6 +1983,8 @@ let gUndoDialog = {
     this._undoButton.removeAttribute("tabindex");
     this._undoCloseButton.removeAttribute("tabindex");
     this._undoRestoreButton.removeAttribute("tabindex");
+
+    newTabTools.trimRecent();
   },
 
   /**
@@ -1998,6 +2000,8 @@ let gUndoDialog = {
     this._undoButton.setAttribute("tabindex", "-1");
     this._undoCloseButton.setAttribute("tabindex", "-1");
     this._undoRestoreButton.setAttribute("tabindex", "-1");
+
+    newTabTools.trimRecent();
   },
 
   /**

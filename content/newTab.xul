@@ -29,20 +29,16 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
     <div id="newtab-vertical-margin">
       <div id="newtab-margin-top" align="end">
         <div id="newtab-margin-left-top" class="newtab-side-margin"/>
-        <xul:scrollbox id="newtab-recent-outer" flex="1" align="center">
+        <div id="newtab-recent-outer">
           <div id="newtab-recent" hidden="true"><span>&newtabtools.recently-closed-tabs;</span></div>
-        </xul:scrollbox>
+        </div>
         <div id="newtab-undo-container" undo-disabled="true">
-          <xul:label id="newtab-undo-label"
-                     value="&newtab.undo.removedLabel;" />
-          <xul:button id="newtab-undo-button" tabindex="-1"
-                      label="&newtab.undo.undoButton;"
-                      class="newtab-undo-button" />
-          <xul:button id="newtab-undo-restore-button" tabindex="-1"
-                      label="&newtab.undo.restoreButton;"
-                      class="newtab-undo-button" />
-          <xul:toolbarbutton id="newtab-undo-close-button" class="close-icon" tabindex="-1"
-                             title="&newtab.undo.closeTooltip;" />
+          <label id="newtab-undo-label">&newtab.undo.removedLabel;</label>
+          <button id="newtab-undo-button" tabindex="-1"
+                  class="newtab-undo-button">&newtab.undo.undoButton;</button>
+          <button id="newtab-undo-restore-button" tabindex="-1"
+                  class="newtab-undo-button">&newtab.undo.restoreButton;</button>
+          <button id="newtab-undo-close-button" tabindex="-1" title="&newtab.undo.closeTooltip;" />
         </div>
         <div id="newtab-margin-right-top" class="newtab-side-margin"/>
       </div>

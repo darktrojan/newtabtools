@@ -327,8 +327,13 @@ let newTabTools = {
     }, false);
     handler();
 
-    window.addEventListener("resize", this.trimRecent.bind(this));
-    this.recentListOuter.addEventListener("overflow", this.trimRecent.bind(this));
+    let previousWidth = window.innerWidth;
+    window.addEventListener("resize", () => {
+      if (window.innerWidth != previousWidth) {
+        previousWidth = window.innerWidth;
+        this.trimRecent();
+      }
+    });
   },
   refreshRecent: function(aEvent) {
     // Redefine this because this function is called before it is defined
@@ -393,17 +398,22 @@ let newTabTools = {
     this.recentList.hidden = !added;
   },
   trimRecent: function() {
+    this.recentList.style.width = "0";
+
     let width = this.recentListOuter.clientWidth;
     let elements = document.querySelectorAll(".recent");
-    let hiding = false;
 
     for (let recent of elements) {
-      recent.style.display = null;
-    }
-    for (let recent of elements) {
-      if (hiding || recent.offsetLeft + recent.offsetWidth > width) {
-        recent.style.display = "none";
-        hiding = true;
+      // see .recent
+      let right = recent.offsetLeft + recent.offsetWidth - this.recentList.offsetLeft + 4;
+      if (right == 4) {
+        requestAnimationFrame(this.trimRecent.bind(this));
+        return;
+      }
+      if (right <= width) {
+        this.recentList.style.width = right + "px";
+      } else {
+        break;
       }
     }
   },
@@ -572,8 +582,8 @@ let newTabTools = {
   newTabTools.refreshBackgroundImage();
   newTabTools.updateUI();
 
-  newTabTools.preloaded = document.visibilityState == "hidden";
-  if (!newTabTools.preloaded) {
+  let preloaded = document.visibilityState == "hidden";
+  if (!preloaded) {
     newTabTools.onVisible();
   }
 
@@ -627,12 +637,6 @@ let newTabTools = {
 
       // Update the drag image's position.
       gTransformation.setSitePosition(aSite, {left: left, top: top});
-    };
-
-    gUndoDialog.oldHide = gUndoDialog.hide;
-    gUndoDialog.hide = function() {
-      gUndoDialog.oldHide();
-      newTabTools.trimRecent();
     };
   }, false);
 })();

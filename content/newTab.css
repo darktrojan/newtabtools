@@ -37,7 +37,12 @@ input[type=button] {
 /* RECENT TABS */
 #newtab-recent-outer {
   white-space: nowrap;
-  height: 30px;
+  line-height: 28px;
+  -moz-box-flex: 1;
+  margin-bottom: 2px;
+}
+#newtab-recent {
+  overflow: hidden;
 }
 #newtab-recent > span {
   display: inline-block;
@@ -55,6 +60,7 @@ input[type=button] {
   display: inline-block;
   line-height: 20px;
   border-radius: 4px;
+  /* see newTabTools.trimRecent */
   -moz-margin-end: 4px;
   cursor: pointer;
   transition: background-color 200ms, color 200ms;
@@ -83,12 +89,13 @@ input[type=button] {
   display: -moz-box;
   -moz-box-align: center;
   -moz-box-pack: center;
+  -moz-margin-start: 1em;
+  margin-bottom: 2px;
   padding: 4px 3px;
   border: 1px solid;
   border-color: rgba(8, 22, 37, 0.12) rgba(8, 22, 37, 0.14) rgba(8, 22, 37, 0.16);
   background-color: rgba(255, 255, 255, 0.4);
   color: #525e69;
-  margin-left: 1em;
   transition: opacity 200ms, display 0s 200ms;
 }
 #newtab-undo-container[undo-disabled] {
@@ -97,18 +104,18 @@ input[type=button] {
   display: none;
 }
 #newtab-undo-label {
-  margin-top: 0;
-  margin-bottom: 0;
+  margin: 0 4px;
 }
 .newtab-undo-button {
   -moz-appearance: none;
   cursor: pointer;
   padding: 0;
-  margin: 0 4px;
+  margin: 0 2px;
   border: 0;
   background: transparent;
   text-decoration: none;
   min-width: 0;
+  font-size: 100%;
 }
 .newtab-undo-button:hover {
   text-decoration: underline;
@@ -117,11 +124,22 @@ input[type=button] {
   outline: 1px dotted;
 }
 #newtab-undo-close-button {
+  -moz-appearance: none;
+  height: 16px;
+  width: 16px;
   padding: 0;
   border: none;
+  background-color: transparent;
+  background-image: -moz-image-rect(url("chrome://global/skin/icons/close.svg"), 0, 16, 16, 0);
+  background-position: center center;
+  background-repeat: no-repeat;
+  vertical-align: middle;
 }
-#newtab-undo-close-button > .toolbarbutton-text {
-  display: none;
+#newtab-undo-close-button:hover {
+  background-image: -moz-image-rect(url("chrome://global/skin/icons/close.svg"), 0, 32, 16, 16);
+}
+#newtab-undo-close-button:hover:active {
+  background-image: -moz-image-rect(url("chrome://global/skin/icons/close.svg"), 0, 48, 16, 32);
 }
 #newtab-undo-close-button:-moz-focusring {
   outline: 1px dotted;
