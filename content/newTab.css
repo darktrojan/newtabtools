@@ -787,6 +787,9 @@ setting {
   display: -moz-grid-line;
   -moz-box-align: baseline;
 }
+setting[hidden] {
+  visibility: collapse;
+}
 setting[type="bool"] {
   -moz-binding: url("chrome://mozapps/content/extensions/setting.xml#setting-bool");
 }

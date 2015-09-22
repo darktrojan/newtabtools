@@ -3,7 +3,8 @@ This Source Code Form is subject to the terms of the Mozilla Public
 License, v. 2.0. If a copy of the MPL was not distributed with this file,
 You can obtain one at http://mozilla.org/MPL/2.0/.
 */
-/* globals Services, XPCOMUtils, FileUtils, NetUtil, SessionStore, OS, PageThumbs, PageThumbsStorage,
+/* globals Components, Services, XPCOMUtils, BackgroundImage, FileUtils, NetUtil, SessionStore,
+    OS, PageThumbs, PageThumbsStorage,
     PageThumbUtils, PlacesUtils, PrivateBrowsingUtils, SavedThumbs, TileData, HTML_NAMESPACE,
     gPinnedLinks, gBlockedLinks, gTransformation, gGridPrefs, gGrid, gDrag, gUpdater, gUndoDialog */
 
@@ -137,25 +138,25 @@ let newTabTools = {
     case "options-title-reset":
       this.setTitle(this.selectedSite, null);
       break;
-    // case "options-bg-set":
-    //   if (this.setBackgroundInput.value) {
-    //     let fos = FileUtils.openSafeFileOutputStream(this.backgroundImageFile);
-    //     NetUtil.asyncFetch(this.setBackgroundInput.value, function(inputStream, status) {
-    //       if (!Components.isSuccessCode(status)) {
-    //         return;
-    //       }
-    //       NetUtil.asyncCopy(inputStream, fos, function() {
-    //         FileUtils.closeSafeFileOutputStream(fos);
-    //         Services.obs.notifyObservers(null, "newtabtools-change", "background");
-    //       }.bind(this));
-    //     }.bind(this));
-    //   }
-    //   break;
-    // case "options-bg-remove":
-    //   if (this.backgroundImageFile.exists())
-    //     this.backgroundImageFile.remove(true);
-    //   Services.obs.notifyObservers(null, "newtabtools-change", "background");
-    //   break;
+    case "options-bg-set":
+      if (this.setBackgroundInput.value) {
+        let fos = FileUtils.openSafeFileOutputStream(this.backgroundImageFile);
+        NetUtil.asyncFetch(this.setBackgroundInput.value, function(inputStream, status) {
+          if (!Components.isSuccessCode(status)) {
+            return;
+          }
+          NetUtil.asyncCopy(inputStream, fos, function() {
+            FileUtils.closeSafeFileOutputStream(fos);
+            Services.obs.notifyObservers(null, "newtabtools-change", "background");
+          }.bind(this));
+        }.bind(this));
+      }
+      break;
+    case "options-bg-remove":
+      if (this.backgroundImageFile.exists())
+        this.backgroundImageFile.remove(true);
+      Services.obs.notifyObservers(null, "newtabtools-change", "background");
+      break;
     case "options-donate":
       let url = "https://addons.mozilla.org/addon/new-tab-tools/about";
       newTabTools.browserWindow.openLinkIn(url, "current", {});
@@ -281,6 +282,7 @@ let newTabTools = {
         this.removeBackgroundButton.disabled = true;
         this.removeBackgroundButton.blur();
       }
+
       break;
     }
   },
@@ -291,6 +293,11 @@ let newTabTools = {
       document.documentElement.setAttribute("launcher", positionNames[launcherPosition - 1]);
     } else {
       document.documentElement.removeAttribute("launcher");
+    }
+
+    if (BackgroundImage.mode != 1 && BackgroundImage.mode != 2) {
+      let theme = this.prefs.getCharPref("theme");
+      document.documentElement.setAttribute("theme", theme);
     }
 
     let containThumbs = this.prefs.getBoolPref("thumbs.contain");
@@ -496,6 +503,8 @@ let newTabTools = {
     if (document.documentElement.hasAttribute("options-hidden")) {
       this.optionsTogglePointer.hidden = true;
       this.prefs.setBoolPref("optionspointershown", true);
+      this.backgroundOptions.hidden = this.themePref.hidden =
+        BackgroundImage.mode == 1 || BackgroundImage.mode == 2;
       document.documentElement.removeAttribute("options-hidden");
       this.selectedSiteIndex = 0;
     } else {
@@ -554,9 +563,11 @@ let newTabTools = {
     "setTitleInput": "options-title-input",
     "resetTitleButton": "options-title-reset",
     "setTitleButton": "options-title-set",
+    "backgroundOptions": "options-bg-group",
     "setBackgroundInput": "options-bg-input",
     "setBackgroundButton": "options-bg-set",
     "removeBackgroundButton": "options-bg-remove",
+    "themePref": "options-theme-pref",
     "recentList": "newtab-recent",
     "recentListOuter": "newtab-recent-outer",
     "optionsBackground": "options-bg",

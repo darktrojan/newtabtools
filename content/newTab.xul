@@ -124,7 +124,7 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
             <xul:button id="options-title-reset" label="&newtabtools.tile-title.reset;" disabled="true" />
           </xul:hbox>
         </xul:groupbox>
-        <xul:groupbox>
+        <xul:groupbox id="options-bg-group">
           <xul:caption label="&newtabtools.bg-header;" />
           <xul:textbox id="options-bg-input" flex="1" placeholder="&newtabtools.bg.placeholder;" />
           <xul:hbox pack="center">
@@ -143,7 +143,7 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
               <xul:column flex="2" />
             </xul:columns>
             <xul:rows>
-              <xul:setting pref="extensions.newtabtools.theme" type="radio" title="&newtabtools.options.theme;">
+              <xul:setting id="options-theme-pref" pref="extensions.newtabtools.theme" type="radio" title="&newtabtools.options.theme;">
                 <xul:radiogroup orient="horizontal">
                   <xul:radio label="&newtabtools.options.theme.light;" value="light" />
                   <xul:radio label="&newtabtools.options.theme.dark;" value="dark" />
