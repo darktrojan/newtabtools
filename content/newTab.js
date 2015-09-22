@@ -306,6 +306,8 @@ let newTabTools = {
 
     let gridSpacing = this.prefs.getCharPref("grid.spacing");
     document.documentElement.setAttribute("spacing", gridSpacing);
+
+    this.trimRecent();
   },
   setGridMargin: function(aPiece, aSize) {
     let pieceElement = document.getElementById("newtab-margin-" + aPiece);
