@@ -40,7 +40,9 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
                   class="newtab-undo-button">&newtab.undo.restoreButton;</button>
           <button id="newtab-undo-close-button" tabindex="-1" title="&newtab.undo.closeTooltip;" />
         </div>
-        <div id="newtab-margin-right-top" class="newtab-side-margin"/>
+        <div id="newtab-margin-right-top" class="newtab-side-margin">
+          <input id="options-toggle" type="button"/>
+        </div>
       </div>
       <div id="newtab-horizontal-margin">
         <div id="newtab-margin-left-bottom" class="newtab-side-margin"/>
@@ -50,7 +52,6 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
       <div id="newtab-margin-bottom"/>
     </div>
 
-    <input id="options-toggle" type="button"/>
     <div id="options-toggle-pointer" hidden="true">&newtabtools.options.pointer;</div>
     <input id="newtab-toggle" type="button" title="&newtabtools.page.show;" />
 

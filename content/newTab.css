@@ -36,15 +36,16 @@ input[type=button] {
 }
 /* RECENT TABS */
 #newtab-recent-outer,
-#newtab-undo-container {
+#newtab-undo-container,
+#options-toggle {
   margin-top: -1px;
   margin-bottom: 3px;
 }
-:root[spacing="medium"] #newtab-margin-top:-moz-any(.medium, .large) :-moz-any(#newtab-recent-outer, #newtab-undo-container) {
+:root[spacing="medium"] #newtab-margin-top:-moz-any(.medium, .large) :-moz-any(#newtab-recent-outer, #newtab-undo-container, #options-toggle) {
   margin-top: 0;
   margin-bottom: 8px;
 }
-:root[spacing="large"] #newtab-margin-top:-moz-any(.medium, .large) :-moz-any(#newtab-recent-outer, #newtab-undo-container) {
+:root[spacing="large"] #newtab-margin-top:-moz-any(.medium, .large) :-moz-any(#newtab-recent-outer, #newtab-undo-container, #options-toggle) {
   margin-top: 0;
   margin-bottom: 18px;
 }
@@ -605,15 +606,26 @@ input[type=button] {
   opacity: 0.01;
 }
 /* OPTIONS */
+#newtab-margin-right-top {
+  -moz-box-pack: start;
+}
+:root[spacing="medium"] #newtab-margin-right-top:-moz-any(.medium, .large) #options-toggle {
+  -moz-margin-start: 8px;
+  -moz-margin-end: 0;
+}
+:root[spacing="large"] #newtab-margin-right-top:-moz-any(.medium, .large) #options-toggle {
+  -moz-margin-start: 18px;
+  -moz-margin-end: 0;
+}
 #options-toggle {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 18px;
-  height: 18px;
+  -moz-margin-end: -1px;
+  -moz-margin-start: 3px;
+  width: 28px;
+  height: 28px;
   padding: 0;
   border: none;
   background: transparent url("options-light.svg") center no-repeat;
+  background-size: 18px;
   z-index: 2;
   opacity: 0.8;
 }
@@ -629,8 +641,8 @@ input[type=button] {
 }
 #options-toggle-pointer {
   position: absolute;
-  top: 9px;
-  right: 30px;
+  top: 3px;
+  right: 26px;
   line-height: 18px;
   color: white;
   text-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
