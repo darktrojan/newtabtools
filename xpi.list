@@ -9,7 +9,9 @@ content/exportDialog.js
 content/exportDialog.xul
 content/fx-newTab.js
 content/icon16.png
-content/launcher/*
+content/launcher
+content/launcher/dark/*
+content/launcher/light/*
 content/newTab.css
 content/newTab.js
 content/newTab.xul
