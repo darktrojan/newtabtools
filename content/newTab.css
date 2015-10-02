@@ -617,6 +617,11 @@ input[type=button] {
   -moz-margin-start: 18px;
   -moz-margin-end: 0;
 }
+#newtab-margin-right-top:not(.medium):not(.large) #options-toggle {
+  -moz-margin-end: 0;
+  -moz-padding-start: 1px;
+  width: 27px;
+}
 #options-toggle {
   -moz-margin-end: -1px;
   -moz-margin-start: 3px;
