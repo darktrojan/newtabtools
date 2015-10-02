@@ -5,3 +5,13 @@
 .newtab-undo-button {
   color: rgb(20,79,174);
 }
+
+#options-previous-row-tile {
+  margin-top: 0;
+}
+
+#options-bgcolor-display {
+  font-size: 0;
+  padding: 6px;
+  margin: 3px 3px 2px;
+}

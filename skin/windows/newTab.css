@@ -16,5 +16,9 @@
 }
 
 textbox {
-	padding: 4px;
+  padding: 4px;
+}
+
+checkbox, radio:first-child {
+  -moz-padding-start: 0;
 }
