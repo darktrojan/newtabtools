@@ -618,7 +618,7 @@ input[type=button] {
   -moz-margin-end: 0;
 }
 #options-toggle {
-  -moz-margin-end: -1px;
+  -moz-margin-end: 0px;
   -moz-margin-start: 3px;
   width: 28px;
   height: 28px;
