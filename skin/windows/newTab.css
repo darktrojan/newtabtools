@@ -15,6 +15,10 @@
   -moz-appearance: none;
 }
 
+caption {
+  background-color: transparent;
+}
+
 textbox {
   padding: 4px;
 }
