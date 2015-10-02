@@ -623,7 +623,7 @@ input[type=button] {
   width: 27px;
 }
 #options-toggle {
-  -moz-margin-end: -1px;
+  -moz-margin-end: 0px;
   -moz-margin-start: 3px;
   width: 28px;
   height: 28px;
