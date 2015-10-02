@@ -183,16 +183,15 @@ function startup(aParams, aReason) {
     // Truncate version numbers to floats
     let oldVersion = parseFloat(userPrefs.getCharPref("version"), 10);
     let currentVersion = parseFloat(aParams.version, 10);
-    let shouldRemind = true;
-
-    if (userPrefs.getPrefType("donationreminder") == Ci.nsIPrefBranch.PREF_INT) {
-      let lastReminder = userPrefs.getIntPref("donationreminder") * 1000;
-      shouldRemind = Date.now() - lastReminder > 604800000;
-    }
+    let lastReminder = userPrefs.getIntPref("donationreminder") * 1000;
+    let shouldRemind = Date.now() - lastReminder > 604800000;
 
     if (Services.vc.compare(oldVersion, currentVersion) == -1) {
       userPrefs.setBoolPref("optionspointershown", true);
-      if (shouldRemind) {
+      if (lastReminder === 0) {
+        // Skip reminder the first time
+        userPrefs.setIntPref("donationreminder", Date.now() / 1000);
+      } else if (shouldRemind) {
         idleService.addIdleObserver(idleObserver, IDLE_TIMEOUT);
       }
     }
