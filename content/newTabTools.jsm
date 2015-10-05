@@ -144,6 +144,7 @@ let SavedThumbs = {
 
 let BackgroundImage = {
   PREF_DIRECTORY: "extensions.newtabtools.background.directory",
+  PREF_INTERVAL: "extensions.newtabtools.background.changeinterval",
   PREF_MODE: "extensions.newtabtools.background.mode",
   _list: [],
   _inited: false,
@@ -152,6 +153,10 @@ let BackgroundImage = {
   // 1: pick one, use for all (could _change regularly)
   // 2: new image each page
   mode: 0,
+  // For mode 1:
+  // 0: use first pick, never change
+  // other: number of minutes between change
+  changeInterval: 0,
   _init: function() {
     if (Services.prefs.getPrefType(BackgroundImage.PREF_DIRECTORY) == Services.prefs.PREF_STRING) {
       this._directory = Services.prefs.getCharPref(BackgroundImage.PREF_DIRECTORY);
@@ -160,6 +165,9 @@ let BackgroundImage = {
     }
     if (Services.prefs.getPrefType(BackgroundImage.PREF_MODE) == Services.prefs.PREF_INT) {
       this.mode = Services.prefs.getIntPref(BackgroundImage.PREF_MODE);
+    }
+    if (Services.prefs.getPrefType(BackgroundImage.PREF_INTERVAL) == Services.prefs.PREF_INT) {
+      this.changeInterval = Services.prefs.getIntPref(BackgroundImage.PREF_INTERVAL);
     }
     if (this.mode != 1 && this.mode != 2) {
       return;
@@ -219,6 +227,12 @@ let BackgroundImage = {
       this.url = url;
       this.theme = theme;
       Services.obs.notifyObservers(null, "newtabtools-change", "background");
+
+      if (this.changeInterval > 0) {
+        // Tied to this to avoid GC
+        this.timer = Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer);
+        this.timer.initWithCallback(this._change.bind(this), this.changeInterval * 60000, Components.interfaces.nsITimer.TYPE_ONE_SHOT);
+      }
     });
   },
   _selectTheme: function(url) {
