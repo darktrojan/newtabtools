@@ -4,7 +4,7 @@ License, v. 2.0. If a copy of the MPL was not distributed with this file,
 You can obtain one at http://mozilla.org/MPL/2.0/.
 */
 /* globals APP_STARTUP, APP_SHUTDOWN, ADDON_UNINSTALL, ADDON_UPGRADE,
-    Services, NewTabUtils, AddonManager, XPCOMUtils,
+    Components, Services, NewTabUtils, AddonManager, XPCOMUtils,
     thumbDir, strings, NewTabToolsExporter, OS, PageThumbs, Task, TileData, idleService, annoService */
 /* exported install, uninstall, startup, shutdown */
 
@@ -520,7 +520,10 @@ expirationFilter = {
 };
 
 idleObserver = {
-  observe: function() {
+  observe: function(service, state) {
+    if (state != "idle") {
+      return;
+    }
     idleService.removeIdleObserver(this, IDLE_TIMEOUT);
 
     let version = parseFloat(userPrefs.getCharPref("version"), 10);
