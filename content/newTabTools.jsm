@@ -1,16 +1,21 @@
-/* globals BackgroundPageThumbs, FileUtils, OS, PageThumbs, PageThumbsStorage */
 /* exported EXPORTED_SYMBOLS, BackgroundImage, TileData, SavedThumbs */
 const EXPORTED_SYMBOLS = ["BackgroundImage", "TileData", "SavedThumbs"];
 const XHTMLNS = "http://www.w3.org/1999/xhtml";
 
+/* globals Components, Services, XPCOMUtils, Iterator */
 Components.utils.import("resource://gre/modules/Services.jsm");
 Components.utils.import("resource://gre/modules/XPCOMUtils.jsm");
 
+/* globals BackgroundPageThumbs, FileUtils, NewTabUtils, OS, PageThumbs, PageThumbsStorage */
 XPCOMUtils.defineLazyModuleGetter(this, "BackgroundPageThumbs", "resource://gre/modules/BackgroundPageThumbs.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "FileUtils", "resource://gre/modules/FileUtils.jsm");
+XPCOMUtils.defineLazyModuleGetter(this, "NewTabUtils", "resource://gre/modules/NewTabUtils.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "OS", "resource://gre/modules/osfile.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "PageThumbs", "resource://gre/modules/PageThumbs.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "PageThumbsStorage", "resource://gre/modules/PageThumbs.jsm");
+
+/* globals idleService */
+XPCOMUtils.defineLazyServiceGetter(this, "idleService", "@mozilla.org/widget/idleservice;1", "nsIIdleService");
 
 function notifyTileChanged(url, key) {
   let urlString = Components.classes["@mozilla.org/supports-string;1"]
@@ -146,6 +151,8 @@ let BackgroundImage = {
   PREF_DIRECTORY: "extensions.newtabtools.background.directory",
   PREF_INTERVAL: "extensions.newtabtools.background.changeinterval",
   PREF_MODE: "extensions.newtabtools.background.mode",
+  IDLE_TIME: 3,
+  _asleep: false,
   _list: [],
   _inited: false,
   _themeCache: new Map(),
@@ -228,12 +235,46 @@ let BackgroundImage = {
       this.theme = theme;
       Services.obs.notifyObservers(null, "newtabtools-change", "background");
 
-      if (this.changeInterval > 0) {
-        // Tied to this to avoid GC
-        this.timer = Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer);
-        this.timer.initWithCallback(this._change.bind(this), this.changeInterval * 60000, Components.interfaces.nsITimer.TYPE_ONE_SHOT);
-      }
+      this._startTimer();
     });
+  },
+  _startTimer: function(forceAwake = false) {
+    if (this.changeInterval > 0) {
+      if (!forceAwake && !NewTabUtils.allPages._pages.some(function(p) {
+        return Components.utils.getGlobalForObject(p).document.visibilityState == "visible";
+      })) {
+        // If no new tab pages can be seen, stop changing the image.
+        this._asleep = true;
+        return;
+      }
+
+      if (this._timer) {
+        // Only one time at once, please!
+        this._timer.cancel();
+      }
+      this._timer = Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer);
+      this._timer.initWithCallback(this._delayedChange.bind(this), this.changeInterval * 60000, Components.interfaces.nsITimer.TYPE_ONE_SHOT);
+    }
+  },
+  wakeUp: function() {
+    // This is called by newTabTools.onVisible
+    if (this._asleep) {
+      this._asleep = false;
+      this._startTimer(true);
+    }
+  },
+  observe: function(subject, topic) {
+    if (topic == "idle") {
+      idleService.removeIdleObserver(this, this.IDLE_TIME);
+      this._change();
+    }
+  },
+  _delayedChange: function() {
+      if (idleService.idleTime > this.IDLE_TIME * 1000) {
+        this._change();
+      } else {
+        idleService.addIdleObserver(this, this.IDLE_TIME);
+      }
   },
   _selectTheme: function(url) {
     return new Promise(function(resolve) {

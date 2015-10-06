@@ -445,6 +445,7 @@ let newTabTools = {
       this.optionsTogglePointer.hidden = false;
       this.optionsTogglePointer.style.animationPlayState = "running";
     }
+    BackgroundImage.wakeUp();
     this.onVisible = function() {};
   },
   set selectedSiteIndex(index) {
