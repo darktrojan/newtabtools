@@ -367,7 +367,7 @@ windowObserver = {
 
       let menu = doc.getElementById("contentAreaContextMenu");
       menu.removeEventListener("popupshowing", this.onPopupShowing);
-      for (let item of menu.querySelectorAll(".newtabtools-item")) {
+      for (let item of menu.querySelectorAll(".newtabtools-item, .newtabtools-page")) {
         item.remove();
       }
     }
