@@ -23,6 +23,10 @@ textbox {
   padding: 4px;
 }
 
+.menulist-icon {
+  margin: 0 1px;
+}
+
 checkbox, radio:first-child {
   -moz-padding-start: 0;
 }
