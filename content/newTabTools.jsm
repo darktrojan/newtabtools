@@ -201,7 +201,7 @@ let BackgroundImage = {
       if (!e.isSymLink) {
         if (e.isDir)
           dirs.push(e.path);
-        else
+        else if (/\.(jpe?g|png)/i.test(e.name))
           BackgroundImage._list.push(e.path);
       }
     }).then(() => {
