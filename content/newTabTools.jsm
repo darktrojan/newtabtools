@@ -1,5 +1,5 @@
-/* exported EXPORTED_SYMBOLS, BackgroundImage, TileData, SavedThumbs */
-const EXPORTED_SYMBOLS = ["BackgroundImage", "TileData", "SavedThumbs"];
+/* exported BackgroundImage, TileData, SavedThumbs */
+this.EXPORTED_SYMBOLS = ["BackgroundImage", "TileData", "SavedThumbs"];
 const XHTMLNS = "http://www.w3.org/1999/xhtml";
 
 /* globals Components, Services, XPCOMUtils, Iterator */

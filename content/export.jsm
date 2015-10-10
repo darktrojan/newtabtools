@@ -1,4 +1,4 @@
-const EXPORTED_SYMBOLS = ["NewTabToolsExporter"];
+this.EXPORTED_SYMBOLS = ["NewTabToolsExporter"];
 
 const PR_RDWR = 0x04;
 const PR_CREATE_FILE = 0x08;

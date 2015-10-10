@@ -25,7 +25,7 @@ XPCOMUtils.defineLazyModuleGetter(this, "TileData", "chrome://newtabtools/conten
 
 XPCOMUtils.defineLazyServiceGetter(this, "faviconService", "@mozilla.org/browser/favicon-service;1", "mozIAsyncFavicons");
 
-let newTabTools = {
+this.newTabTools = {
   launcherOnClick: function(event) {
     switch (event.originalTarget.id) {
     case "downloads":
