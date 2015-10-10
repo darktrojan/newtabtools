@@ -499,7 +499,7 @@ let gGrid = {
   /**
    * All sites contained in the grid's cells. Sites may be empty.
    */
-  get sites() [cell.site for (cell of this.cells)],
+  get sites() [for (cell of this.cells) cell.site],
 
   // Tells whether the grid has already been initialized.
   get ready() !!this._node,
@@ -580,7 +580,7 @@ let gGrid = {
 
     // (Re-)initialize all cells.
     let cellElements = this.node.querySelectorAll(".newtab-cell");
-    this._cells = [new Cell(this, cell) for (cell of cellElements)];
+    this._cells = [for (cell of cellElements) new Cell(this, cell)];
   },
 
   /**

@@ -206,7 +206,7 @@ let BackgroundImage = {
       }
     }).then(() => {
       di.close();
-      let dirPromises = [this._entriesForDir(d) for (d of dirs)];
+      let dirPromises = [for (d of dirs) this._entriesForDir(d)];
       return Promise.all(dirPromises);
     });
   },
