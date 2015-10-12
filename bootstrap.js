@@ -59,7 +59,7 @@ function install(aParams, aReason) {
     }
   }
 
-  Services.tm.currentThread.dispatch(function () {
+  Services.tm.currentThread.dispatch(function() {
     Task.spawn(function*() {
       if (yield OS.File.exists(thumbDir)) {
         let stat = yield OS.File.stat(thumbDir);
@@ -114,7 +114,7 @@ function startup(aParams, aReason) {
     let links = this._getMergedProviderLinks();
 
     // Filter blocked and pinned links.
-    links = links.filter(function (link) {
+    links = links.filter(function(link) {
       return link.type == "history" &&
           !NewTabUtils.blockedLinks.isBlocked(link) &&
           !NewTabUtils.pinnedLinks.isPinned(link);
@@ -462,7 +462,7 @@ function enumerateTabs(aCallback) {
     try {
       let global = Cu.getGlobalForObject(page);
       aCallback(global);
-    } catch(e) {
+    } catch (e) {
       Cu.reportError(e);
     }
   }
@@ -470,7 +470,7 @@ function enumerateTabs(aCallback) {
 
 optionsObserver = {
   observe: function(aDocument, aTopic, aData) {
-    switch(aTopic) {
+    switch (aTopic) {
     case "addon-options-displayed":
       if (aData != ADDON_ID) {
         return;
@@ -505,7 +505,7 @@ expirationFilter = {
       return;
     }
 
-    NewTabUtils.links.populateCache(function () {
+    NewTabUtils.links.populateCache(function() {
       let urls = [];
 
       // Add all URLs to the list that we want to keep thumbnails for.

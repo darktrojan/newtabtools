@@ -58,7 +58,7 @@ let TileData = {
       for (let [url, urlData] in Iterator(json)) {
         this._data.set(url, new Map(Iterator(urlData)));
       }
-    } catch(e) {
+    } catch (e) {
       Components.utils.reportError(e);
     }
   },
@@ -271,11 +271,11 @@ let BackgroundImage = {
     }
   },
   _delayedChange: function() {
-      if (idleService.idleTime > this.IDLE_TIME * 1000) {
-        this._change();
-      } else {
-        idleService.addIdleObserver(this, this.IDLE_TIME);
-      }
+    if (idleService.idleTime > this.IDLE_TIME * 1000) {
+      this._change();
+    } else {
+      idleService.addIdleObserver(this, this.IDLE_TIME);
+    }
   },
   _selectTheme: function(url) {
     return new Promise(function(resolve) {
