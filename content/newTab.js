@@ -25,6 +25,7 @@ XPCOMUtils.defineLazyModuleGetter(this, "TileData", "chrome://newtabtools/conten
 
 XPCOMUtils.defineLazyServiceGetter(this, "faviconService", "@mozilla.org/browser/favicon-service;1", "mozIAsyncFavicons");
 
+/* globals newTabTools */
 this.newTabTools = {
   launcherOnClick: function(event) {
     switch (event.originalTarget.id) {
@@ -259,11 +260,11 @@ this.newTabTools = {
   },
   refreshBackgroundImage: function() {
     switch (BackgroundImage.mode) {
-    case 1:
+    case BackgroundImage.MODE_FOLDER_SHARED:
       this.page.style.backgroundImage = 'url("' + BackgroundImage.url + '")';
       document.documentElement.setAttribute("theme", BackgroundImage.theme);
       break;
-    case 2:
+    case BackgroundImage.MODE_FOLDER_UNSHARED:
       BackgroundImage._pick().then(([url, theme]) => {
         if (url == null) {
           return;
@@ -295,7 +296,7 @@ this.newTabTools = {
       document.documentElement.removeAttribute("launcher");
     }
 
-    if (BackgroundImage.mode != 1 && BackgroundImage.mode != 2) {
+    if (BackgroundImage.modeIsSingle) {
       let theme = this.prefs.getCharPref("theme");
       document.documentElement.setAttribute("theme", theme);
     }
@@ -504,8 +505,7 @@ this.newTabTools = {
     if (document.documentElement.hasAttribute("options-hidden")) {
       this.optionsTogglePointer.hidden = true;
       this.prefs.setBoolPref("optionspointershown", true);
-      this.backgroundOptions.hidden = this.themePref.hidden =
-        BackgroundImage.mode == 1 || BackgroundImage.mode == 2;
+      this.backgroundOptions.hidden = this.themePref.hidden = !BackgroundImage.modeIsSingle;
       document.documentElement.removeAttribute("options-hidden");
       this.selectedSiteIndex = 0;
     } else {

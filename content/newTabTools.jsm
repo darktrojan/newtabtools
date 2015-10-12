@@ -148,6 +148,9 @@ let SavedThumbs = {
 };
 
 let BackgroundImage = {
+  MODE_SINGLE: 0, // old behaviour
+  MODE_FOLDER_SHARED: 1, // pick one, use for all (could _change regularly)
+  MODE_FOLDER_UNSHARED: 2, // new image each page
   PREF_DIRECTORY: "extensions.newtabtools.background.directory",
   PREF_INTERVAL: "extensions.newtabtools.background.changeinterval",
   PREF_MODE: "extensions.newtabtools.background.mode",
@@ -156,15 +159,13 @@ let BackgroundImage = {
   _list: [],
   _inited: false,
   _themeCache: new Map(),
-  // 0: old behaviour
-  // 1: pick one, use for all (could _change regularly)
-  // 2: new image each page
-  mode: 0,
-  // For mode 1:
-  // 0: use first pick, never change
-  // other: number of minutes between change
-  changeInterval: 0,
+  get modeIsSingle() {
+    return this.mode != BackgroundImage.MODE_FOLDER_SHARED && this.mode != BackgroundImage.MODE_FOLDER_UNSHARED;
+  },
   _init: function() {
+    this.mode = BackgroundImage.MODE_SINGLE;
+    this.changeInterval = 0;
+
     if (Services.prefs.getPrefType(BackgroundImage.PREF_DIRECTORY) == Services.prefs.PREF_STRING) {
       this._directory = Services.prefs.getCharPref(BackgroundImage.PREF_DIRECTORY);
     } else {
@@ -176,7 +177,7 @@ let BackgroundImage = {
     if (Services.prefs.getPrefType(BackgroundImage.PREF_INTERVAL) == Services.prefs.PREF_INT) {
       this.changeInterval = Services.prefs.getIntPref(BackgroundImage.PREF_INTERVAL);
     }
-    if (this.mode != 1 && this.mode != 2) {
+    if (this.modeIsSingle) {
       return;
     }
 
@@ -189,7 +190,7 @@ let BackgroundImage = {
     return this._entriesForDir(this._directory).then(() => {
       this._inited = true;
       this._list.sort();
-      if (this.mode == 1) {
+      if (this.mode == BackgroundImage.MODE_FOLDER_SHARED) {
         this._change();
       }
     });
@@ -258,7 +259,7 @@ let BackgroundImage = {
   },
   wakeUp: function() {
     // This is called by newTabTools.onVisible
-    if (this._asleep) {
+    if (this.mode == BackgroundImage.MODE_FOLDER_SHARED && this._asleep) {
       this._asleep = false;
       this._startTimer(true);
     }
