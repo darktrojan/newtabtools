@@ -3,11 +3,7 @@ This Source Code Form is subject to the terms of the Mozilla Public
 License, v. 2.0. If a copy of the MPL was not distributed with this file,
 You can obtain one at http://mozilla.org/MPL/2.0/.
 */
-/* globals APP_STARTUP, APP_SHUTDOWN, ADDON_UNINSTALL, ADDON_UPGRADE,
-    Components, Services, NewTabUtils, AddonManager, XPCOMUtils,
-    thumbDir, strings, NewTabToolsExporter, OS, PageThumbs, Task, TileData, idleService, annoService */
-/* exported install, uninstall, startup, shutdown */
-
+/* globals APP_STARTUP, APP_SHUTDOWN, ADDON_UNINSTALL, ADDON_UPGRADE, Components */
 const { interfaces: Ci, utils: Cu } = Components;
 
 const ADDON_ID = "newtabtools@darktrojan.net";
@@ -17,11 +13,13 @@ const BROWSER_WINDOW = "navigator:browser";
 const IDLE_TIMEOUT = 10;
 const XULNS = "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul";
 
+/* globals Services, NewTabUtils, AddonManager, XPCOMUtils */
 Cu.import("resource://gre/modules/Services.jsm");
 Cu.import("resource://gre/modules/NewTabUtils.jsm");
 Cu.import("resource://gre/modules/AddonManager.jsm");
 Cu.import("resource://gre/modules/XPCOMUtils.jsm");
 
+/* globals thumbDir, strings */
 XPCOMUtils.defineLazyGetter(this, "thumbDir", function() {
   return OS.Path.join(OS.Constants.Path.profileDir, "newtab-savedthumbs");
 });
@@ -29,12 +27,15 @@ XPCOMUtils.defineLazyGetter(this, "strings", function() {
   return Services.strings.createBundle("chrome://newtabtools/locale/newTabTools.properties");
 });
 
+/* globals NewTabToolsExporter, NewTabURL, OS, PageThumbs, Task, TileData */
 XPCOMUtils.defineLazyModuleGetter(this, "NewTabToolsExporter", "chrome://newtabtools/content/export.jsm");
+XPCOMUtils.defineLazyModuleGetter(this, "NewTabURL", "resource:///modules/NewTabURL.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "OS", "resource://gre/modules/osfile.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "PageThumbs", "resource://gre/modules/PageThumbs.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "Task", "resource://gre/modules/Task.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "TileData", "chrome://newtabtools/content/newTabTools.jsm");
 
+/* globals idleService, annoService */
 XPCOMUtils.defineLazyServiceGetter(this, "idleService", "@mozilla.org/widget/idleservice;1", "nsIIdleService");
 XPCOMUtils.defineLazyServiceGetter(this, "annoService", "@mozilla.org/browser/annotation-service;1", "nsIAnnotationService");
 
@@ -43,11 +44,12 @@ let userPrefs = Services.prefs.getBranch(EXTENSION_PREFS);
 
 let prefObserver, notificationObserver, windowObserver, optionsObserver, expirationFilter, idleObserver;
 
+/* exported install, uninstall, startup, shutdown */
 function install(aParams, aReason) {
   if (aReason == ADDON_UPGRADE) {
     let showRecent = true;
     if (userPrefs.prefHasUserValue("recent.count")) {
-      showRecent = userPrefs.getIntPref("recent.count") != 0;
+      showRecent = userPrefs.getIntPref("recent.count") !== 0;
       userPrefs.deleteBranch("recent.count");
       userPrefs.setBoolPref("recent.show", showRecent);
     }
@@ -239,24 +241,22 @@ function shutdown(aParams, aReason) {
 }
 
 function uiStartup(aParams, aReason) {
-  if (Services.prefs.prefHasUserValue("browser.newtab.url") &&
-      Services.prefs.getCharPref("browser.newtab.url") != "about:newtab") {
+  if (NewTabURL.overridden) {
     let recentWindow = Services.wm.getMostRecentWindow(BROWSER_WINDOW);
 
     recentWindow.setTimeout(function() {
-      let browser = recentWindow.gBrowser;
-      let notificationBox = browser.getNotificationBox();
+      let notificationBox = recentWindow.document.getElementById("global-notificationbox");
       let message = strings.GetStringFromName("prefschange");
       let label = strings.GetStringFromName("change.label");
       let accessKey = strings.GetStringFromName("change.accesskey");
 
       notificationBox.appendNotification(
-        message, "newtabtools-prefschange", "chrome://newtabtools/content/icon16.png",
+        message, "newtabtools-urlchange", "chrome://newtabtools/content/icon16.png",
         notificationBox.PRIORITY_INFO_MEDIUM, [{
           label: label,
           accessKey: accessKey,
           callback: function() {
-            Services.prefs.clearUserPref("browser.newtab.url");
+            NewTabURL.reset();
           }
         }]
       );
@@ -529,7 +529,7 @@ idleObserver = {
     let version = parseFloat(userPrefs.getCharPref("version"), 10);
     let recentWindow = Services.wm.getMostRecentWindow(BROWSER_WINDOW);
     let browser = recentWindow.gBrowser;
-    let notificationBox = browser.getNotificationBox();
+    let notificationBox = recentWindow.document.getElementById("global-notificationbox");
     let message = strings.formatStringFromName("newversion", [version], 1);
     let label = strings.GetStringFromName("donate.label");
     let accessKey = strings.GetStringFromName("donate.accesskey");
