@@ -223,7 +223,7 @@ this.newTabTools = {
 
     let image = new Image();
     image.onload = function() {
-      let [thumbnailWidth, thumbnailHeight] = "_getThumbnailSize" in PageThumbs ? PageThumbs._getThumbnailSize() : PageThumbUtils.getThumbnailSize();
+      let [thumbnailWidth, thumbnailHeight] = PageThumbUtils.getThumbnailSize();
       let scale = Math.max(thumbnailWidth / image.width, thumbnailHeight / image.height);
 
       let canvas = document.createElementNS(HTML_NAMESPACE, "canvas");
@@ -234,12 +234,19 @@ this.newTabTools = {
       let ctx = canvas.getContext("2d");
       ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
 
-      canvas.mozFetchAsStream(function(aInputStream) {
-        let outputStream = FileUtils.openSafeFileOutputStream(file);
-        NetUtil.asyncCopy(aInputStream, outputStream, function() {
-          FileUtils.closeSafeFileOutputStream(outputStream);
-          SavedThumbs.addSavedThumb(site.url, leafName);
-        });
+      canvas.toBlob(function(blob) {
+        let reader = new FileReader();
+        reader.onloadend = function() {
+          let inputStream = Cc["@mozilla.org/io/arraybuffer-input-stream;1"]
+            .createInstance(Ci.nsIArrayBufferInputStream);
+          inputStream.setData(reader.result, 0, reader.result.byteLength);
+          let outputStream = FileUtils.openSafeFileOutputStream(file);
+          NetUtil.asyncCopy(inputStream, outputStream, function() {
+            FileUtils.closeSafeFileOutputStream(outputStream);
+            SavedThumbs.addSavedThumb(site.url, leafName);
+          });
+        };
+        reader.readAsArrayBuffer(blob);
       }, "image/png");
     };
     image.src = src;
