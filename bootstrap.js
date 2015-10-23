@@ -27,7 +27,8 @@ XPCOMUtils.defineLazyGetter(this, "strings", function() {
   return Services.strings.createBundle("chrome://newtabtools/locale/newTabTools.properties");
 });
 
-/* globals NewTabToolsExporter, NewTabURL, OS, PageThumbs, Task, TileData */
+/* globals BackgroundImage, NewTabToolsExporter, NewTabURL, OS, PageThumbs, Task, TileData */
+XPCOMUtils.defineLazyModuleGetter(this, "BackgroundImage", "chrome://newtabtools/content/newTabTools.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "NewTabToolsExporter", "chrome://newtabtools/content/export.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "NewTabURL", "resource:///modules/NewTabURL.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "OS", "resource://gre/modules/osfile.jsm");
@@ -474,6 +475,11 @@ optionsObserver = {
     case "addon-options-displayed":
       if (aData != ADDON_ID) {
         return;
+      }
+
+      if (!BackgroundImage.modeIsSingle) {
+        aDocument.querySelector("setting[pref=\"extensions.newtabtools.theme\"]").style.visibility = "collapse";
+        aDocument.querySelector("setting[pref=\"extensions.newtabtools.rows\"]").setAttribute("first-row", "true");
       }
 
       aDocument.getElementById("newtabtools.export").addEventListener("command", () => {
