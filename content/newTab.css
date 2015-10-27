@@ -695,7 +695,7 @@ input[type=button] {
 :root[options-hidden] #options-bg,
 :root:not([options-hidden]) #options-toggle,
 :root:not([options-hidden]) #options-toggle-pointer {
-  display: none;
+  visibility: hidden;
 }
 :root:not([options-hidden]) #newtab-scrollbox {
   filter: blur(1px);
