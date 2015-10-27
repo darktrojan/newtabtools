@@ -141,11 +141,11 @@ this.newTabTools = {
       break;
     case "options-bg-set":
       if (this.setBackgroundInput.value) {
-        let fos = FileUtils.openSafeFileOutputStream(this.backgroundImageFile);
         NetUtil.asyncFetch(this.setBackgroundInput.value, function(inputStream, status) {
           if (!Components.isSuccessCode(status)) {
             return;
           }
+          let fos = FileUtils.openSafeFileOutputStream(this.backgroundImageFile);
           NetUtil.asyncCopy(inputStream, fos, function() {
             FileUtils.closeSafeFileOutputStream(fos);
             Services.obs.notifyObservers(null, "newtabtools-change", "background");
