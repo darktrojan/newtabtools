@@ -1,39 +1,39 @@
 <!ENTITY newtabtools.options.pointer "Click here to begin customizing your new tab page">
 <!ENTITY newtabtools.page.show "新しいタブページを表示">
 
-<!ENTITY newtabtools.pin-url.header "Add tile:">
+<!ENTITY newtabtools.pin-url.header "タイル追加:">
 <!ENTITY newtabtools.pin-url.placeholder "Type or select a URL">
-<!ENTITY newtabtools.pin-url.button "Add">
+<!ENTITY newtabtools.pin-url.button "追加">
 
-<!ENTITY newtabtools.tile-header "Tiles:">
+<!ENTITY newtabtools.tile-header "タイル:">
 
-<!ENTITY newtabtools.tile-selection.previousrow.tooltip "Previous row">
-<!ENTITY newtabtools.tile-selection.previous.tooltip "Previous tile">
-<!ENTITY newtabtools.tile-selection.next.tooltip "Next tile">
-<!ENTITY newtabtools.tile-selection.nextrow.tooltip "Next row">
+<!ENTITY newtabtools.tile-selection.previousrow.tooltip "上の行">
+<!ENTITY newtabtools.tile-selection.previous.tooltip "前のタイル">
+<!ENTITY newtabtools.tile-selection.next.tooltip "次のタイル">
+<!ENTITY newtabtools.tile-selection.nextrow.tooltip "下の行">
 
-<!ENTITY newtabtools.tile-thumbnail.label "Image:">
+<!ENTITY newtabtools.tile-thumbnail.label "画像:">
 <!ENTITY newtabtools.tile-thumbnail.placeholder "画像のURLを貼り付けまたは選択したファイルを参照">
 <!ENTITY newtabtools.tile-thumbnail.browse "参照…">
-<!ENTITY newtabtools.tile-thumbnail.set "Set">
-<!ENTITY newtabtools.tile-thumbnail.remove "Remove">
-<!ENTITY newtabtools.tile-thumbnail.refresh "Refresh Thumbnail">
-<!ENTITY newtabtools.tile-thumbnail.bgcolor "Background Color:">
+<!ENTITY newtabtools.tile-thumbnail.set "設定">
+<!ENTITY newtabtools.tile-thumbnail.remove "削除">
+<!ENTITY newtabtools.tile-thumbnail.refresh "サムネイル更新">
+<!ENTITY newtabtools.tile-thumbnail.bgcolor "背景色:">
 
-<!ENTITY newtabtools.tile-title.label "Title:">
+<!ENTITY newtabtools.tile-title.label "タイトル:">
 <!ENTITY newtabtools.tile-title.placeholder "新しいタイルのタイトルを入力">
-<!ENTITY newtabtools.tile-title.set "Set">
-<!ENTITY newtabtools.tile-title.reset "Reset">
+<!ENTITY newtabtools.tile-title.set "設定">
+<!ENTITY newtabtools.tile-title.reset "リセット">
 
 <!ENTITY newtabtools.bg-header "新しいタブページの背景画像:">
 <!ENTITY newtabtools.bg.placeholder "画像のURLを貼り付けまたは選択したファイルを参照">
 <!ENTITY newtabtools.bg.browse "参照…">
-<!ENTITY newtabtools.bg.set "Set">
-<!ENTITY newtabtools.bg.remove "Remove">
+<!ENTITY newtabtools.bg.set "設定">
+<!ENTITY newtabtools.bg.remove "削除">
 
-<!ENTITY newtabtools.options-header "Options:">
+<!ENTITY newtabtools.options-header "オプション:">
 
-<!ENTITY newtabtools.donate.label "New Tab Tools is funded by user donations.">
+<!ENTITY newtabtools.donate.label "New Tab Tools はユーザーからの寄付により成り立っています。">
 <!ENTITY newtabtools.donate "寄付する…">
 <!ENTITY newtabtools.github "New Tab Tools on GitHub">
 
