@@ -4,7 +4,7 @@ License, v. 2.0. If a copy of the MPL was not distributed with this file,
 You can obtain one at http://mozilla.org/MPL/2.0/.
 */
 /* jshint -W041, -W110 */
-/* globals gPinnedLinks, gBlockedLinks, gTransformation, gGrid, gDrag, gUpdater */
+/* globals gPinnedLinks, gBlockedLinks, gGrid, gUpdater */
 
 /* globals Components, PageThumbsStorage, Services, XPCOMUtils */
 let { classes: Cc, interfaces: Ci, utils: Cu } = Components;
@@ -627,56 +627,15 @@ this.newTabTools = {
     newTabTools.onVisible();
   }
 
-  window.addEventListener("load", function window_load() {
-    window.removeEventListener("load", window_load, false);
-
-    SessionStore.promiseInitialized.then(function() {
-      if (SessionStore.canRestoreLastSession && !inPrivateBrowsingMode()) {
-        newTabTools.launcher.setAttribute("session", "true");
-        Services.obs.addObserver({
-          observe: function() {
-            newTabTools.launcher.removeAttribute("session");
-          },
-          QueryInterface: XPCOMUtils.generateQI([Ci.nsIObserver, Ci.nsISupportsWeakReference])
-        }, "sessionstore-last-session-cleared", true);
-      }
-    });
-
-    gTransformation.oldGetNodePosition = gTransformation.getNodePosition;
-    gTransformation.getNodePosition = function(aNode) {
-      let {offsetLeft, offsetTop} = document.getElementById("newtab-vertical-margin");
-      let position = this.oldGetNodePosition(aNode);
-      position.left -= offsetLeft;
-      position.top -= offsetTop;
-      return position;
-    };
-
-    gDrag.oldStart = gDrag.start;
-    gDrag.start = function(aSite, aEvent) {
-      gDrag.oldStart(aSite, aEvent);
-      let {offsetLeft, offsetTop} = document.getElementById("newtab-vertical-margin");
-      this._offsetX += offsetLeft;
-      this._offsetY += offsetTop;
-    };
-
-    gDrag.drag = function(aSite, aEvent) {
-      // Get the viewport size.
-      let {clientWidth, clientHeight} = document.documentElement;
-      let {offsetLeft, offsetTop} = document.getElementById("newtab-vertical-margin");
-
-      // We'll want a padding of 5px.
-      let border = 5;
-
-      // Enforce minimum constraints to keep the drag image inside the window.
-      let left = Math.max(aEvent.clientX - this._offsetX, border - offsetLeft);
-      let top = Math.max(aEvent.clientY - this._offsetY, border - offsetTop);
-
-      // Enforce maximum constraints to keep the drag image inside the window.
-      left = Math.min(left, clientWidth - this.cellWidth - border - offsetLeft);
-      top = Math.min(top, clientHeight - this.cellHeight - border - offsetTop);
-
-      // Update the drag image's position.
-      gTransformation.setSitePosition(aSite, {left: left, top: top});
-    };
-  }, false);
+  SessionStore.promiseInitialized.then(function() {
+    if (SessionStore.canRestoreLastSession && !inPrivateBrowsingMode()) {
+      newTabTools.launcher.setAttribute("session", "true");
+      Services.obs.addObserver({
+        observe: function() {
+          newTabTools.launcher.removeAttribute("session");
+        },
+        QueryInterface: XPCOMUtils.generateQI([Ci.nsIObserver, Ci.nsISupportsWeakReference])
+      }, "sessionstore-last-session-cleared", true);
+    }
+  });
 })();

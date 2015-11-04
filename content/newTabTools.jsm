@@ -48,8 +48,7 @@ let GridPrefs = {
   },
   QueryInterface: XPCOMUtils.generateQI([
     Components.interfaces.nsIObserver,
-    Components.interfaces.nsISupportsWeakReference,
-    Components.interfaces.nsISupports
+    Components.interfaces.nsISupportsWeakReference
   ]),
 };
 GridPrefs.init();

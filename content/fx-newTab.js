@@ -59,7 +59,8 @@ let gTransformation = {
    */
   getNodePosition: function Transformation_getNodePosition(aNode) {
     let {left, top, width, height} = aNode.getBoundingClientRect();
-    return new Rect(left + scrollX, top + scrollY, width, height);
+    let {offsetLeft, offsetTop} = newTabTools.page.firstElementChild;
+    return new Rect(left + scrollX - offsetLeft, top + scrollY - offsetTop, width, height);
   },
 
   /**
@@ -1027,8 +1028,9 @@ let gDrag = {
     // Store the cursor offset.
     let node = aSite.node;
     let rect = node.getBoundingClientRect();
-    this._offsetX = aEvent.clientX - rect.left;
-    this._offsetY = aEvent.clientY - rect.top;
+    let {offsetLeft, offsetTop} = newTabTools.page.firstElementChild;
+    this._offsetX = aEvent.clientX - rect.left + offsetLeft;
+    this._offsetY = aEvent.clientY - rect.top + offsetTop;
 
     // Store the cell dimensions.
     let cellNode = aSite.cell.node;
@@ -1046,17 +1048,18 @@ let gDrag = {
   drag: function Drag_drag(aSite, aEvent) {
     // Get the viewport size.
     let {clientWidth, clientHeight} = document.documentElement;
+    let {offsetLeft, offsetTop} = newTabTools.page.firstElementChild;
 
     // We'll want a padding of 5px.
     let border = 5;
 
     // Enforce minimum constraints to keep the drag image inside the window.
-    let left = Math.max(scrollX + aEvent.clientX - this._offsetX, border);
-    let top = Math.max(scrollY + aEvent.clientY - this._offsetY, border);
+    let left = Math.max(aEvent.clientX - this._offsetX, border - offsetLeft);
+    let top = Math.max(aEvent.clientY - this._offsetY, border - offsetTop);
 
     // Enforce maximum constraints to keep the drag image inside the window.
-    left = Math.min(left, scrollX + clientWidth - this.cellWidth - border);
-    top = Math.min(top, scrollY + clientHeight - this.cellHeight - border);
+    left = Math.min(left, clientWidth - this.cellWidth - border - offsetLeft);
+    top = Math.min(top, clientHeight - this.cellHeight - border - offsetTop);
 
     // Update the drag image's position.
     gTransformation.setSitePosition(aSite, {left: left, top: top});
