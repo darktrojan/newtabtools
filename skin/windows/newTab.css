@@ -3,30 +3,30 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
 .newtab-undo-button {
-  color: -moz-nativehyperlinktext;
-  color: rgb(0,102,204);
+	color: -moz-nativehyperlinktext;
+	color: rgb(0,102,204);
 }
 
 .newtab-undo-button > .button-box {
-  padding: 0;
+	padding: 0;
 }
 
 #newtab-undo-close-button {
-  -moz-appearance: none;
+	-moz-appearance: none;
 }
 
 caption {
-  background-color: transparent;
+	background-color: transparent;
 }
 
 textbox {
-  padding: 4px;
+	padding: 4px;
 }
 
 .menulist-icon {
-  margin: 0 1px;
+	margin: 0 1px;
 }
 
 checkbox, radio:first-child {
-  -moz-padding-start: 0;
+	-moz-padding-start: 0;
 }

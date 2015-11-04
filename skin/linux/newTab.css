@@ -3,11 +3,11 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
 .newtab-undo-button {
-  color: rgb(221,72,20);
+	color: rgb(221,72,20);
 }
 
 #newtab-undo-close-button {
-  -moz-appearance: none;
-  height: 16px;
-  width: 16px;
+	-moz-appearance: none;
+	height: 16px;
+	width: 16px;
 }
