@@ -1,30 +1,29 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this file,
  * You can obtain one at http://mozilla.org/MPL/2.0/. */
+/* jshint -W041, -W110 */
+/* globals Services, XPCOMUtils, TileData, SavedThumbs, -length */
+/* globals Ci, Cu, HTML_NAMESPACE, inPrivateBrowsingMode, gGridPrefs, newTabTools */
 
-"use strict";
-
+/* globals BackgroundPageThumbs, NewTabUtils */
 Cu.import("resource://gre/modules/BackgroundPageThumbs.jsm");
 Cu.import("resource://gre/modules/NewTabUtils.jsm");
 Cu.import("resource://gre/modules/commonjs/sdk/core/promise.js");
 
-XPCOMUtils.defineLazyModuleGetter(this, "Rect",
-  "resource://gre/modules/Geometry.jsm");
-
+/* globals Rect, faviconService, gStringBundle */
+XPCOMUtils.defineLazyModuleGetter(this, "Rect", "resource://gre/modules/Geometry.jsm");
 XPCOMUtils.defineLazyServiceGetter(this, "faviconService", "@mozilla.org/browser/favicon-service;1", "mozIAsyncFavicons");
+XPCOMUtils.defineLazyGetter(this, "gStringBundle", function() {
+  return Services.strings.createBundle("chrome://browser/locale/newTab.properties");
+});
 
-let {
+var {
   links: gLinks,
   allPages: gAllPages,
   linkChecker: gLinkChecker,
   pinnedLinks: gPinnedLinks,
   blockedLinks: gBlockedLinks
 } = NewTabUtils;
-
-XPCOMUtils.defineLazyGetter(this, "gStringBundle", function() {
-  return Services.strings.
-    createBundle("chrome://browser/locale/newTab.properties");
-});
 
 function newTabString(name) { return gStringBundle.GetStringFromName('newtab.' + name); }
 
@@ -33,7 +32,7 @@ function newTabString(name) { return gStringBundle.GetStringFromName('newtab.' +
  * in the DOM and by showing or hiding the node. It additionally provides
  * convenience methods to work with a site's DOM node.
  */
-let gTransformation = {
+var gTransformation = {
   /**
    * Returns the width of the left and top border of a cell. We need to take it
    * into account when measuring and comparing site and cell positions.
@@ -60,7 +59,7 @@ let gTransformation = {
   getNodePosition: function Transformation_getNodePosition(aNode) {
     let {left, top, width, height} = aNode.getBoundingClientRect();
     let {offsetLeft, offsetTop} = newTabTools.page.firstElementChild;
-    return new Rect(left + scrollX - offsetLeft, top + scrollY - offsetTop, width, height);
+    return new Rect(left - offsetLeft, top - offsetTop, width, height);
   },
 
   /**
@@ -295,7 +294,7 @@ let gTransformation = {
  * This singleton represents the whole 'New Tab Page' and takes care of
  * initializing all its components.
  */
-let gPage = {
+var gPage = {
   /**
    * Initializes the page.
    */
@@ -456,7 +455,7 @@ let gPage = {
 /**
  * This singleton represents the grid that contains all sites.
  */
-let gGrid = {
+var gGrid = {
   /**
    * The DOM node of the grid.
    */
@@ -982,7 +981,7 @@ Site.prototype = {
 /**
  * This singleton implements site dragging functionality.
  */
-let gDrag = {
+var gDrag = {
   /**
    * The site offset to the drag start point.
    */
@@ -1067,7 +1066,7 @@ let gDrag = {
    * @param aSite The site that's being dragged.
    * @param aEvent The 'dragend' event.
    */
-  end: function Drag_end(aSite, aEvent) {
+  end: function Drag_end(aSite) {
     let nodes = gGrid.node.querySelectorAll("[dragged]");
     for (let i = 0; i < nodes.length; i++)
       nodes[i].removeAttribute("dragged");
@@ -1133,7 +1132,7 @@ let gDrag = {
   }
 };
 
-let gDragDataHelper = {
+var gDragDataHelper = {
   get mimeType() {
     return "text/x-moz-url";
   },
@@ -1157,7 +1156,7 @@ const DELAY_REARRANGE_MS = 100;
 /**
  * This singleton implements site dropping functionality.
  */
-let gDrop = {
+var gDrop = {
   /**
    * The last drop target.
    */
@@ -1300,7 +1299,7 @@ let gDrop = {
  * the default DnD target detection relies on the cursor's position. We want
  * to pick a drop target based on the dragged site's position.
  */
-let gDropTargetShim = {
+var gDropTargetShim = {
   /**
    * Cache for the position of all cells, cleaned after drag finished.
    */
@@ -1494,7 +1493,7 @@ let gDropTargetShim = {
     if (this._cellPositions)
       return this._cellPositions;
 
-    return this._cellPositions = gGrid.cells.map(function(cell) {
+    return this._cellPositions = gGrid.cells.map(function(cell) { // jshint ignore:line
       return {cell: cell, rect: gTransformation.getNodePosition(cell.node)};
     });
   },
@@ -1522,7 +1521,7 @@ let gDropTargetShim = {
  * indicate the transformation that results from dropping a cell at a certain
  * position.
  */
-let gDropPreview = {
+var gDropPreview = {
   /**
    * Rearranges the sites currently contained in the grid when a site would be
    * dropped onto the given cell.
@@ -1603,7 +1602,7 @@ let gDropPreview = {
     // pinned cells surrounding the drop target are moved as well.
     let range = this._getPinnedRange(aCell);
 
-    return aSites.filter(function(aSite, aIndex) {
+    return aSites.filter(function(aSite) {
       // The site must be valid, pinned and not the dragged site.
       if (!aSite || aSite == draggedSite || !aSite.isPinned())
         return false;
@@ -1730,7 +1729,7 @@ let gDropPreview = {
  * This singleton provides functionality to update the current grid to a new
  * set of pinned and blocked sites. It adds, moves and removes sites.
  */
-let gUpdater = {
+var gUpdater = {
   /**
    * Updates the current grid according to its pinned and blocked sites.
    * This removes old, moves existing and creates new sites to fill gaps.
@@ -1898,7 +1897,7 @@ let gUpdater = {
 
       // Flush all style changes for the dynamically inserted site to make
       // the fade-in transition work.
-      window.getComputedStyle(site.node).opacity;
+      window.getComputedStyle(site.node).opacity; // jshint ignore:line
       gTransformation.showSite(site, function() { deferred.resolve(); });
     });
 
@@ -1911,7 +1910,7 @@ let gUpdater = {
  * Dialog allowing to undo the removal of single site or to completely restore
  * the grid's original state.
  */
-let gUndoDialog = {
+var gUndoDialog = {
   /**
    * The undo dialog's timeout in miliseconds.
    */

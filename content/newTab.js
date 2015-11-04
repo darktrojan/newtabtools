@@ -7,7 +7,7 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 /* globals gPinnedLinks, gBlockedLinks, gGrid, gUpdater */
 
 /* globals Components, PageThumbsStorage, Services, XPCOMUtils */
-let { classes: Cc, interfaces: Ci, utils: Cu } = Components;
+var { classes: Cc, interfaces: Ci, utils: Cu } = Components;
 
 Cu.import("resource://gre/modules/PageThumbs.jsm");
 Cu.import("resource://gre/modules/Services.jsm");
@@ -24,16 +24,15 @@ XPCOMUtils.defineLazyModuleGetter(this, "PageThumbUtils", "resource://gre/module
 XPCOMUtils.defineLazyModuleGetter(this, "PlacesUtils", "resource://gre/modules/PlacesUtils.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "PrivateBrowsingUtils", "resource://gre/modules/PrivateBrowsingUtils.jsm");
 
-const HTML_NAMESPACE = "http://www.w3.org/1999/xhtml";
+var HTML_NAMESPACE = "http://www.w3.org/1999/xhtml";
 
 function inPrivateBrowsingMode() {
   return PrivateBrowsingUtils.isContentWindowPrivate(window);
 }
 
-let gGridPrefs = GridPrefs;
+var gGridPrefs = GridPrefs;
 
-/* globals newTabTools */
-this.newTabTools = {
+var newTabTools = {
   launcherOnClick: function(event) {
     switch (event.originalTarget.id) {
     case "downloads":
@@ -421,7 +420,7 @@ this.newTabTools = {
       a.onclick = function() {
         newTabTools.browserWindow.undoCloseTab(index);
         return false;
-      };
+      }; // jshint ignore:line
       let img = document.createElementNS(HTML_NAMESPACE, "img");
       img.className = "favicon";
       img.src = iconURL;
@@ -462,7 +461,7 @@ this.newTabTools = {
     BackgroundImage.wakeUp();
     this.onVisible = function() {};
   },
-  set selectedSiteIndex(index) {
+  set selectedSiteIndex(index) { // jshint ignore:line
     this._selectedSiteIndex = index;
     let site = this.selectedSite;
     let disabled = site == null;
