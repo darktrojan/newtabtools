@@ -4,19 +4,14 @@
 
 "use strict";
 
-Cu.import("resource://gre/modules/XPCOMUtils.jsm");
-Cu.import("resource://gre/modules/Services.jsm");
-Cu.import("resource://gre/modules/PageThumbs.jsm");
 Cu.import("resource://gre/modules/BackgroundPageThumbs.jsm");
 Cu.import("resource://gre/modules/NewTabUtils.jsm");
 Cu.import("resource://gre/modules/commonjs/sdk/core/promise.js");
 
-Cu.import("chrome://newtabtools/content/newTabTools.jsm");
-
 XPCOMUtils.defineLazyModuleGetter(this, "Rect",
   "resource://gre/modules/Geometry.jsm");
-XPCOMUtils.defineLazyModuleGetter(this, "PrivateBrowsingUtils",
-  "resource://gre/modules/PrivateBrowsingUtils.jsm");
+
+XPCOMUtils.defineLazyServiceGetter(this, "faviconService", "@mozilla.org/browser/favicon-service;1", "mozIAsyncFavicons");
 
 let {
   links: gLinks,
@@ -26,27 +21,12 @@ let {
   blockedLinks: gBlockedLinks
 } = NewTabUtils;
 
-let gGridPrefs = {
-  get gridRows() {
-    return Math.max(1, Services.prefs.getIntPref("extensions.newtabtools.rows"));
-  },
-  get gridColumns() {
-    return Math.max(1, Services.prefs.getIntPref("extensions.newtabtools.columns"));
-  }
-};
-
 XPCOMUtils.defineLazyGetter(this, "gStringBundle", function() {
   return Services.strings.
     createBundle("chrome://browser/locale/newTab.properties");
 });
 
 function newTabString(name) gStringBundle.GetStringFromName('newtab.' + name);
-
-function inPrivateBrowsingMode() {
-  return PrivateBrowsingUtils.isWindowPrivate(window);
-}
-
-const HTML_NAMESPACE = "http://www.w3.org/1999/xhtml";
 
 /**
  * This singleton allows to transform the grid by repositioning a site's node

@@ -3,27 +3,34 @@ This Source Code Form is subject to the terms of the Mozilla Public
 License, v. 2.0. If a copy of the MPL was not distributed with this file,
 You can obtain one at http://mozilla.org/MPL/2.0/.
 */
-/* globals Components, Services, XPCOMUtils, BackgroundImage, FileUtils, NetUtil, SessionStore,
-    OS, PageThumbs, PageThumbsStorage,
-    PageThumbUtils, PlacesUtils, PrivateBrowsingUtils, SavedThumbs, TileData, HTML_NAMESPACE,
-    gPinnedLinks, gBlockedLinks, gTransformation, gGridPrefs, gGrid, gDrag, gUpdater, gUndoDialog */
+/* jshint -W041, -W110 */
+/* globals gPinnedLinks, gBlockedLinks, gTransformation, gGrid, gDrag, gUpdater */
 
+/* globals Components, PageThumbsStorage, Services, XPCOMUtils */
 let { classes: Cc, interfaces: Ci, utils: Cu } = Components;
 
+Cu.import("resource://gre/modules/PageThumbs.jsm");
 Cu.import("resource://gre/modules/Services.jsm");
 Cu.import("resource://gre/modules/XPCOMUtils.jsm");
+/* globals GridPrefs, BackgroundImage, TileData, SavedThumbs */
+Cu.import("chrome://newtabtools/content/newTabTools.jsm");
 
-XPCOMUtils.defineLazyModuleGetter(this, "BackgroundImage", "chrome://newtabtools/content/newTabTools.jsm");
+/* globals FileUtils, NetUtil, SessionStore, OS, PageThumbUtils, PlacesUtils, PrivateBrowsingUtils */
 XPCOMUtils.defineLazyModuleGetter(this, "FileUtils", "resource://gre/modules/FileUtils.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "NetUtil", "resource://gre/modules/NetUtil.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "SessionStore", "resource:///modules/sessionstore/SessionStore.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "OS", "resource://gre/modules/osfile.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "PageThumbUtils", "resource://gre/modules/PageThumbUtils.jsm");
 XPCOMUtils.defineLazyModuleGetter(this, "PlacesUtils", "resource://gre/modules/PlacesUtils.jsm");
-XPCOMUtils.defineLazyModuleGetter(this, "SavedThumbs", "chrome://newtabtools/content/newTabTools.jsm");
-XPCOMUtils.defineLazyModuleGetter(this, "TileData", "chrome://newtabtools/content/newTabTools.jsm");
+XPCOMUtils.defineLazyModuleGetter(this, "PrivateBrowsingUtils", "resource://gre/modules/PrivateBrowsingUtils.jsm");
 
-XPCOMUtils.defineLazyServiceGetter(this, "faviconService", "@mozilla.org/browser/favicon-service;1", "mozIAsyncFavicons");
+const HTML_NAMESPACE = "http://www.w3.org/1999/xhtml";
+
+function inPrivateBrowsingMode() {
+  return PrivateBrowsingUtils.isContentWindowPrivate(window);
+}
+
+let gGridPrefs = GridPrefs;
 
 /* globals newTabTools */
 this.newTabTools = {
@@ -368,9 +375,6 @@ this.newTabTools = {
     });
   },
   refreshRecent: function(aEvent) {
-    // Redefine this because this function is called before it is defined
-    let HTML_NAMESPACE = "http://www.w3.org/1999/xhtml";
-
     if (aEvent && aEvent.originalTarget.linkedBrowser.contentWindow == window) {
       return;
     }
@@ -627,7 +631,7 @@ this.newTabTools = {
     window.removeEventListener("load", window_load, false);
 
     SessionStore.promiseInitialized.then(function() {
-      if (SessionStore.canRestoreLastSession && !PrivateBrowsingUtils.isContentWindowPrivate(window)) {
+      if (SessionStore.canRestoreLastSession && !inPrivateBrowsingMode()) {
         newTabTools.launcher.setAttribute("session", "true");
         Services.obs.addObserver({
           observe: function() {

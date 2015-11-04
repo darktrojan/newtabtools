@@ -1,5 +1,5 @@
-/* exported BackgroundImage, TileData, SavedThumbs */
-this.EXPORTED_SYMBOLS = ["BackgroundImage", "TileData", "SavedThumbs"];
+/* exported GridPrefs, BackgroundImage, TileData, SavedThumbs */
+this.EXPORTED_SYMBOLS = ["GridPrefs", "BackgroundImage", "TileData", "SavedThumbs"];
 const XHTMLNS = "http://www.w3.org/1999/xhtml";
 
 /* globals Components, Services, XPCOMUtils, Iterator */
@@ -16,6 +16,43 @@ XPCOMUtils.defineLazyModuleGetter(this, "PageThumbsStorage", "resource://gre/mod
 
 /* globals idleService */
 XPCOMUtils.defineLazyServiceGetter(this, "idleService", "@mozilla.org/widget/idleservice;1", "nsIIdleService");
+
+let GridPrefs = {
+  PREF_ROWS: "extensions.newtabtools.rows",
+  PREF_COLUMNS: "extensions.newtabtools.columns",
+
+  _gridRows: null,
+  get gridRows() {
+    if (!this._gridRows) {
+      this._gridRows = Math.max(1, Services.prefs.getIntPref(GridPrefs.PREF_ROWS));
+    }
+    return this._gridRows;
+  },
+  _gridColumns: null,
+  get gridColumns() {
+    if (!this._gridColumns) {
+      this._gridColumns = Math.max(1, Services.prefs.getIntPref(GridPrefs.PREF_COLUMNS));
+    }
+    return this._gridColumns;
+  },
+  init: function GridPrefs_init() {
+    Services.prefs.addObserver(GridPrefs.PREF_ROWS, this, true);
+    Services.prefs.addObserver(GridPrefs.PREF_COLUMNS, this, true);
+  },
+  observe: function GridPrefs_observe(aSubject, aTopic, aData) {
+    if (aData == GridPrefs.PREF_ROWS) {
+      this._gridRows = null;
+    } else {
+      this._gridColumns = null;
+    }
+  },
+  QueryInterface: XPCOMUtils.generateQI([
+    Components.interfaces.nsIObserver,
+    Components.interfaces.nsISupportsWeakReference,
+    Components.interfaces.nsISupports
+  ]),
+};
+GridPrefs.init();
 
 function notifyTileChanged(url, key) {
   let urlString = Components.classes["@mozilla.org/supports-string;1"]
