@@ -1,10 +1,8 @@
 <!ENTITY abouthome.bookmarksButton.label "书签">
 <!ENTITY abouthome.historyButton.label "历史">
-<!-- LOCALIZATION NOTE (abouthome.preferencesButtonWin.label): The label for the
-     preferences/options item on about:home on Windows -->
+<!-- The label for the preferences/options item on about:home on Windows -->
 <!ENTITY abouthome.preferencesButtonWin.label "选项">
-<!-- LOCALIZATION NOTE (abouthome.preferencesButtonUnix.label): The label for the
-     preferences/options item on about:home on Linux and OS X -->
+<!-- The label for the preferences/options item on about:home on Linux and OS X -->
 <!ENTITY abouthome.preferencesButtonUnix.label "首选项">
 <!ENTITY abouthome.addonsButton.label "附加组件">
 <!ENTITY abouthome.appsButton.label "应用市场">

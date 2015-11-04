@@ -1,10 +1,8 @@
 <!ENTITY abouthome.bookmarksButton.label "ブックマーク">
 <!ENTITY abouthome.historyButton.label "履歴">
-<!-- LOCALIZATION NOTE (abouthome.preferencesButtonWin.label): The label for the
-     preferences/options item on about:home on Windows -->
+<!-- The label for the preferences/options item on about:home on Windows -->
 <!ENTITY abouthome.preferencesButtonWin.label "オプション">
-<!-- LOCALIZATION NOTE (abouthome.preferencesButtonUnix.label): The label for the
-     preferences/options item on about:home on Linux and OS X -->
+<!-- The label for the preferences/options item on about:home on Linux and OS X -->
 <!ENTITY abouthome.preferencesButtonUnix.label "設定">
 <!ENTITY abouthome.addonsButton.label "アドオン">
 <!ENTITY abouthome.appsButton.label "Marketplace">

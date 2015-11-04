@@ -1,10 +1,8 @@
 <!ENTITY abouthome.bookmarksButton.label "Marque-pages">
 <!ENTITY abouthome.historyButton.label "Historique">
-<!-- LOCALIZATION NOTE (abouthome.preferencesButtonWin.label): The label for the
-     preferences/options item on about:home on Windows -->
+<!-- The label for the preferences/options item on about:home on Windows -->
 <!ENTITY abouthome.preferencesButtonWin.label "Options">
-<!-- LOCALIZATION NOTE (abouthome.preferencesButtonUnix.label): The label for the
-     preferences/options item on about:home on Linux and OS X -->
+<!-- The label for the preferences/options item on about:home on Linux and OS X -->
 <!ENTITY abouthome.preferencesButtonUnix.label "Préférences">
 <!ENTITY abouthome.addonsButton.label "Modules">
 <!ENTITY abouthome.appsButton.label "Marketplace">
