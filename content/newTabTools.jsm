@@ -194,7 +194,8 @@ let BackgroundImage = {
   IDLE_TIME: 3,
   _asleep: false,
   _list: [],
-  _inited: false,
+  _state: "unready",
+  _initCallbacks: [],
   _themeCache: new Map(),
   get modeIsSingle() {
     return this.mode != BackgroundImage.MODE_FOLDER_SHARED && this.mode != BackgroundImage.MODE_FOLDER_UNSHARED;
@@ -220,19 +221,30 @@ let BackgroundImage = {
       return;
     }
 
-    if (this._inited) {
-      return new Promise(function(resolve) {
+    let promise = new Promise(resolve => {
+      if (this._state == "ready") {
         resolve();
+      } else {
+        this._initCallbacks.push(resolve);
+      }
+    });
+
+    if (this._state == "unready") {
+      this._state = "loading";
+
+      this._entriesForDir(this._directory).then(() => {
+        this._state = "ready";
+        this._list.sort();
+        if (this.mode == BackgroundImage.MODE_FOLDER_SHARED) {
+          return this._change();
+        }
+      }).then(() => {
+        this._initCallbacks.forEach(cb => cb.call());
+        delete this._initCallbacks;
       });
     }
 
-    return this._entriesForDir(this._directory).then(() => {
-      this._inited = true;
-      this._list.sort();
-      if (this.mode == BackgroundImage.MODE_FOLDER_SHARED) {
-        this._change();
-      }
-    });
+    return promise;
   },
   _entriesForDir: function(path) {
     let di = new OS.File.DirectoryIterator(path);
@@ -251,7 +263,7 @@ let BackgroundImage = {
     });
   },
   _pick: function() {
-    if (this._inited && this._list.length == 0) {
+    if (this._state == "ready" && this._list.length == 0) {
       return new Promise(function(resolve) {
         resolve(null, null);
       });
