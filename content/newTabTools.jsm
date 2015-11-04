@@ -162,7 +162,7 @@ let BackgroundImage = {
   get modeIsSingle() {
     return this.mode != BackgroundImage.MODE_FOLDER_SHARED && this.mode != BackgroundImage.MODE_FOLDER_UNSHARED;
   },
-  _init: function() {
+  _readPrefs: function() {
     this.mode = BackgroundImage.MODE_SINGLE;
     this.changeInterval = 0;
 
@@ -177,6 +177,8 @@ let BackgroundImage = {
     if (Services.prefs.getPrefType(BackgroundImage.PREF_INTERVAL) == Services.prefs.PREF_INT) {
       this.changeInterval = Services.prefs.getIntPref(BackgroundImage.PREF_INTERVAL);
     }
+  },
+  _init: function() {
     if (this.modeIsSingle) {
       return;
     }
@@ -314,4 +316,4 @@ let BackgroundImage = {
     });
   }
 };
-BackgroundImage._init();
+BackgroundImage._readPrefs();

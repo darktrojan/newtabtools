@@ -268,8 +268,10 @@ this.newTabTools = {
   refreshBackgroundImage: function() {
     switch (BackgroundImage.mode) {
     case BackgroundImage.MODE_FOLDER_SHARED:
-      this.page.style.backgroundImage = 'url("' + BackgroundImage.url + '")';
-      document.documentElement.setAttribute("theme", BackgroundImage.theme);
+      BackgroundImage._init().then(() => {
+        this.page.style.backgroundImage = 'url("' + BackgroundImage.url + '")';
+        document.documentElement.setAttribute("theme", BackgroundImage.theme);
+      });
       break;
     case BackgroundImage.MODE_FOLDER_UNSHARED:
       BackgroundImage._pick().then(([url, theme]) => {
