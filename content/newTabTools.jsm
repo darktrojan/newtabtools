@@ -3,8 +3,10 @@ this.EXPORTED_SYMBOLS = ["GridPrefs", "BackgroundImage", "TileData", "SavedThumb
 const XHTMLNS = "http://www.w3.org/1999/xhtml";
 
 /* globals Components, Services, XPCOMUtils, Iterator */
-Components.utils.import("resource://gre/modules/Services.jsm");
-Components.utils.import("resource://gre/modules/XPCOMUtils.jsm");
+let { classes: Cc, interfaces: Ci, utils: Cu } = Components;
+
+Cu.import("resource://gre/modules/Services.jsm");
+Cu.import("resource://gre/modules/XPCOMUtils.jsm");
 
 /* globals BackgroundPageThumbs, FileUtils, NewTabUtils, OS, PageThumbs, PageThumbsStorage */
 XPCOMUtils.defineLazyModuleGetter(this, "BackgroundPageThumbs", "resource://gre/modules/BackgroundPageThumbs.jsm");
@@ -46,16 +48,12 @@ let GridPrefs = {
       this._gridColumns = null;
     }
   },
-  QueryInterface: XPCOMUtils.generateQI([
-    Components.interfaces.nsIObserver,
-    Components.interfaces.nsISupportsWeakReference
-  ]),
+  QueryInterface: XPCOMUtils.generateQI([Ci.nsIObserver, Ci.nsISupportsWeakReference]),
 };
 GridPrefs.init();
 
 function notifyTileChanged(url, key) {
-  let urlString = Components.classes["@mozilla.org/supports-string;1"]
-    .createInstance(Components.interfaces.nsISupportsString);
+  let urlString = Cc["@mozilla.org/supports-string;1"].createInstance(Ci.nsISupportsString);
   urlString.data = url;
   Services.obs.notifyObservers(urlString, "newtabtools-change", key);
 }
@@ -95,7 +93,7 @@ let TileData = {
         this._data.set(url, new Map(Iterator(urlData)));
       }
     } catch (e) {
-      Components.utils.reportError(e);
+      Cu.reportError(e);
     }
   },
   _setPref: function() {
@@ -292,7 +290,7 @@ let BackgroundImage = {
   _startTimer: function(forceAwake = false) {
     if (this.changeInterval > 0) {
       if (!forceAwake && !NewTabUtils.allPages._pages.some(function(p) {
-        return Components.utils.getGlobalForObject(p).document.visibilityState == "visible";
+        return Cu.getGlobalForObject(p).document.visibilityState == "visible";
       })) {
         // If no new tab pages can be seen, stop changing the image.
         this._asleep = true;
@@ -303,8 +301,8 @@ let BackgroundImage = {
         // Only one time at once, please!
         this._timer.cancel();
       }
-      this._timer = Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer);
-      this._timer.initWithCallback(this._delayedChange.bind(this), this.changeInterval * 60000, Components.interfaces.nsITimer.TYPE_ONE_SHOT);
+      this._timer = Cc["@mozilla.org/timer;1"].createInstance(Ci.nsITimer);
+      this._timer.initWithCallback(this._delayedChange.bind(this), this.changeInterval * 60000, Ci.nsITimer.TYPE_ONE_SHOT);
     }
   },
   wakeUp: function() {
@@ -357,7 +355,7 @@ let BackgroundImage = {
           }
           resolve("dark");
         } catch (ex) {
-          Components.utils.reportError(ex);
+          Cu.reportError(ex);
         }
       };
       i.src = url;

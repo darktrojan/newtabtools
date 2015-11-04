@@ -1,3 +1,6 @@
+/* globals Components */
+let { utils: Cu } = Components;
+
 let returnValues = window.arguments[0];
 let done = window.arguments[1];
 
@@ -21,7 +24,7 @@ if (returnValues.importing) {
 			break;
 		}
 		case "prefs.theme":
-			checkbox.disabled = (!"extensions.newtabtools.page.theme" in returnValues.prefs);
+			checkbox.disabled = !("extensions.newtabtools.page.theme" in returnValues.prefs);
 			break;
 		case "prefs.gridsize":
 			checkbox.disabled = !("extensions.newtabtools.columns" in returnValues.prefs) || !("extensions.newtabtools.rows" in returnValues.prefs);
@@ -49,7 +52,7 @@ if (returnValues.importing) {
 			checkbox.disabled = !returnValues.hasBackgroundImage;
 			break;
 		default:
-			Components.utils.reportError(checkbox.id);
+			Cu.reportError(checkbox.id);
 			checkbox.disabled = true;
 			break;
 		}
@@ -66,6 +69,7 @@ window.addEventListener("load", function onLoad() {
 	document.documentElement.getButton("accept").focus();
 });
 
+/* exported onDialogAccept, onDialogCancel */
 function onDialogAccept() {
 	let options = {};
 	for (let checkbox of document.querySelectorAll("checkbox")) {
