@@ -8,7 +8,6 @@
 /* globals BackgroundPageThumbs, NewTabUtils */
 Cu.import("resource://gre/modules/BackgroundPageThumbs.jsm");
 Cu.import("resource://gre/modules/NewTabUtils.jsm");
-Cu.import("resource://gre/modules/commonjs/sdk/core/promise.js");
 
 /* globals Rect, faviconService, gStringBundle */
 XPCOMUtils.defineLazyModuleGetter(this, "Rect", "resource://gre/modules/Geometry.jsm");
@@ -203,23 +202,23 @@ var gTransformation = {
       if (!aSite || aSite == gDrag.draggedSite)
         return;
 
-      let deferred = Promise.defer();
-      batch.push(deferred.promise);
-      let cb = function() { deferred.resolve(); };
-
-      if (!cells[aIndex])
-        // The site disappeared from the grid, hide it.
-        this.hideSite(aSite, cb);
-      else if (this._getNodeOpacity(aSite.node) != 1)
-        // The site disappeared before but is now back, show it.
-        this.showSite(aSite, cb);
-      else
-        // The site's position has changed, move it around.
-        this._moveSite(aSite, aIndex, {unfreeze: unfreeze, callback: cb});
+      batch.push(new Promise(resolve => {
+        if (!cells[aIndex]) {
+          // The site disappeared from the grid, hide it.
+          this.hideSite(aSite, resolve);
+        } else if (this._getNodeOpacity(aSite.node) != 1) {
+          // The site disappeared before but is now back, show it.
+          this.showSite(aSite, resolve);
+        } else {
+          // The site's position has changed, move it around.
+          this._moveSite(aSite, aIndex, {unfreeze: unfreeze, callback: resolve});
+        }
+      }));
     }, this);
 
-    let wait = Promise.promised(function() { return callback && callback(); });
-    wait.apply(null, batch);
+    if (callback) {
+      Promise.all(batch).then(callback);
+    }
   },
 
   /**
@@ -1855,21 +1854,19 @@ var gUpdater = {
       if (!aSite || aSites.indexOf(aSite) != -1)
         return;
 
-      let deferred = Promise.defer();
-      batch.push(deferred.promise);
+      batch.push(new Promise(resolve => {
+        // Fade out the to-be-removed site.
+        gTransformation.hideSite(aSite, function() {
+          let node = aSite.node;
 
-      // Fade out the to-be-removed site.
-      gTransformation.hideSite(aSite, function() {
-        let node = aSite.node;
-
-        // Remove the site from the DOM.
-        node.parentNode.removeChild(node);
-        deferred.resolve();
-      });
+          // Remove the site from the DOM.
+          node.parentNode.removeChild(node);
+          resolve();
+        });
+      }));
     });
 
-    let wait = Promise.promised(aCallback);
-    wait.apply(null, batch);
+    Promise.all(batch).then(aCallback);
   },
 
   /**
@@ -1879,30 +1876,25 @@ var gUpdater = {
    */
   _fillEmptyCells: function Updater_fillEmptyCells(aLinks, aCallback) {
     let {cells, sites} = gGrid;
-    let batch = [];
 
     // Find empty cells and fill them.
-    sites.forEach(function(aSite, aIndex) {
+    Promise.all(sites.map((aSite, aIndex) => {
       if (aSite || !aLinks[aIndex])
-        return;
+        return null;
 
-      let deferred = Promise.defer();
-      batch.push(deferred.promise);
+      return new Promise(resolve => {
+        // Create the new site and fade it in.
+        let site = gGrid.createSite(aLinks[aIndex], cells[aIndex]);
 
-      // Create the new site and fade it in.
-      let site = gGrid.createSite(aLinks[aIndex], cells[aIndex]);
+        // Set the site's initial opacity to zero.
+        site.node.style.opacity = 0;
 
-      // Set the site's initial opacity to zero.
-      site.node.style.opacity = 0;
-
-      // Flush all style changes for the dynamically inserted site to make
-      // the fade-in transition work.
-      window.getComputedStyle(site.node).opacity; // jshint ignore:line
-      gTransformation.showSite(site, function() { deferred.resolve(); });
-    });
-
-    let wait = Promise.promised(aCallback);
-    wait.apply(null, batch);
+        // Flush all style changes for the dynamically inserted site to make
+        // the fade-in transition work.
+        window.getComputedStyle(site.node).opacity; // jshint ignore:line
+        gTransformation.showSite(site, resolve);
+      });
+    })).then(aCallback).catch(console.exception);
   }
 };
 
