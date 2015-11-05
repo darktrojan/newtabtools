@@ -229,6 +229,7 @@ let BackgroundImage = {
 		if (this._state == 'unready') {
 			this._state = 'loading';
 
+			this._list = [];
 			this._entriesForDir(this._directory).then(() => {
 				this._state = 'ready';
 				this._list.sort();
@@ -237,7 +238,7 @@ let BackgroundImage = {
 				}
 			}).then(() => {
 				this._initCallbacks.forEach(cb => cb.call());
-				delete this._initCallbacks;
+				this._initCallbacks = [];
 			});
 		}
 
@@ -249,9 +250,9 @@ let BackgroundImage = {
 		return di.forEach(e => {
 			if (!e.isSymLink) {
 				if (e.isDir)
-				dirs.push(e.path);
+					dirs.push(e.path);
 				else if (/\.(jpe?g|png)/i.test(e.name))
-				BackgroundImage._list.push(e.path);
+					this._list.push(e.path);
 			}
 		}).then(() => {
 			di.close();
@@ -288,6 +289,8 @@ let BackgroundImage = {
 		});
 	},
 	_startTimer: function(forceAwake = false) {
+		this._stopTimer();
+
 		if (this.changeInterval > 0) {
 			if (!forceAwake && !NewTabUtils.allPages._pages.some(function(p) {
 				return Cu.getGlobalForObject(p).document.visibilityState == 'visible';
@@ -296,13 +299,15 @@ let BackgroundImage = {
 				this._asleep = true;
 				return;
 			}
-
-			if (this._timer) {
-				// Only one time at once, please!
-				this._timer.cancel();
-			}
 			this._timer = Cc['@mozilla.org/timer;1'].createInstance(Ci.nsITimer);
 			this._timer.initWithCallback(this._delayedChange.bind(this), this.changeInterval * 60000, Ci.nsITimer.TYPE_ONE_SHOT);
+		}
+	},
+	_stopTimer: function() {
+		if (this._timer) {
+			// Only one time at once, please!
+			this._timer.cancel();
+			delete this._timer;
 		}
 	},
 	wakeUp: function() {
@@ -312,10 +317,26 @@ let BackgroundImage = {
 			this._startTimer(true);
 		}
 	},
-	observe: function(subject, topic) {
-		if (topic == 'idle') {
+	observe: function(subject, topic, data) {
+		switch (topic) {
+		case 'idle':
 			idleService.removeIdleObserver(this, this.IDLE_TIME);
 			this._change();
+			break;
+		case 'nsPref:changed':
+			this._readPrefs();
+			this._stopTimer();
+
+			if (data == BackgroundImage.PREF_DIRECTORY) {
+				this._state = 'unready';
+				this._init();
+			}
+
+			if (this.mode == BackgroundImage.MODE_FOLDER_SHARED) {
+				this._startTimer();
+			}
+			Services.obs.notifyObservers(null, 'newtabtools-change', 'background');
+			break;
 		}
 	},
 	_delayedChange: function() {
@@ -360,6 +381,8 @@ let BackgroundImage = {
 			};
 			i.src = url;
 		});
-	}
+	},
+	QueryInterface: XPCOMUtils.generateQI([Ci.nsIObserver, Ci.nsISupportsWeakReference])
 };
 BackgroundImage._readPrefs();
+Services.prefs.addObserver('extensions.newtabtools.background.', BackgroundImage, true);

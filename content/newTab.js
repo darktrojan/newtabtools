@@ -459,6 +459,12 @@ var newTabTools = {
 		}
 		BackgroundImage.wakeUp();
 		this.onVisible = function() {};
+
+		document.addEventListener('visibilitychange', function() {
+			if (document.visibilityState == 'visible') {
+				BackgroundImage.wakeUp();
+			}
+		});
 	},
 	set selectedSiteIndex(index) { // jshint ignore:line
 		this._selectedSiteIndex = index;
