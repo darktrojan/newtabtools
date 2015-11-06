@@ -271,34 +271,58 @@ var newTabTools = {
 		return Services.io.newFileURI(this.backgroundImageFile);
 	},
 	refreshBackgroundImage: function() {
+		let oldBackground = document.querySelector('.newtab-background');
+		let newBackground = document.createElementNS(HTML_NAMESPACE, 'div');
+		newBackground.className = 'newtab-background';
+		let newTheme = document.documentElement.getAttribute('theme');
 		switch (BackgroundImage.mode) {
 		case BackgroundImage.MODE_FOLDER_SHARED:
 			BackgroundImage._init().then(() => {
-				this.page.style.backgroundImage = 'url("' + BackgroundImage.url + '")';
-				document.documentElement.setAttribute('theme', BackgroundImage.theme);
+				newBackground.style.backgroundImage = 'url("' + BackgroundImage.url + '")';
+				if (oldBackground && newBackground.style.backgroundImage == oldBackground.style.backgroundImage) {
+					return;
+				}
+				newTheme = BackgroundImage.theme;
+				finish();
 			});
 			break;
 		case BackgroundImage.MODE_FOLDER_UNSHARED:
 			BackgroundImage._pick().then(([url, theme]) => {
 				if (url == null) {
-					return;
+					newBackground = null;
+				} else {
+					newBackground.style.backgroundImage = 'url("' + url + '")';
+					newTheme = theme;
 				}
-				this.page.style.backgroundImage = 'url("' + url + '")';
-				document.documentElement.setAttribute('theme', theme);
+				finish();
 			});
 			break;
 		default:
 			if (this.backgroundImageFile.exists()) {
-				this.page.style.backgroundImage =
-				'url("' + this.backgroundImageURL.spec + '?' + this.backgroundImageFile.lastModifiedTime + '")';
+				newBackground.style.backgroundImage =
+					'url("' + this.backgroundImageURL.spec + '?' + this.backgroundImageFile.lastModifiedTime + '")';
 				this.removeBackgroundButton.disabled = false;
 			} else {
-				this.page.style.backgroundImage = null;
+				newBackground = null;
 				this.removeBackgroundButton.disabled = true;
 				this.removeBackgroundButton.blur();
 			}
-
+			finish();
 			break;
+		}
+
+		function finish() {
+			if (oldBackground) {
+				setTimeout(function() {
+					oldBackground.remove();
+					document.documentElement.setAttribute('theme', newTheme);
+				}, 500);
+			} else {
+				document.documentElement.setAttribute('theme', newTheme);
+			}
+			if (newBackground) {
+				document.documentElement.insertBefore(newBackground, document.documentElement.firstChild);
+			}
 		}
 	},
 	updateUI: function() {
@@ -558,7 +582,6 @@ var newTabTools = {
 	});
 
 	let uiElements = {
-		'page': 'newtab-scrollbox',
 		'launcher': 'launcher',
 		'optionsToggleButton': 'options-toggle',
 		'optionsTogglePointer': 'options-toggle-pointer',
