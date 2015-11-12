@@ -119,8 +119,8 @@ function startup(aParams, aReason) {
 		// Filter blocked and pinned links.
 		links = links.filter(function(link) {
 			return link.type == 'history' &&
-			!NewTabUtils.blockedLinks.isBlocked(link) &&
-			!NewTabUtils.pinnedLinks.isPinned(link);
+				!NewTabUtils.blockedLinks.isBlocked(link) &&
+				!NewTabUtils.pinnedLinks.isPinned(link);
 		});
 
 		if (userPrefs.prefHasUserValue('filter')) {
@@ -129,7 +129,7 @@ function startup(aParams, aReason) {
 			links = links.filter(function(aItem) {
 				let match = /^https?:\/\/([^\/]+)\//.exec(aItem.url);
 				if (!match)
-				return true;
+					return true;
 				if (match[1] in counts) {
 					if (counts[match[1]]) {
 						counts[match[1]]--;
@@ -143,12 +143,12 @@ function startup(aParams, aReason) {
 
 		// Try to fill the gaps between pinned links.
 		for (let i = 0; i < pinnedLinks.length && links.length; i++)
-		if (!pinnedLinks[i])
-		pinnedLinks[i] = links.shift();
+			if (!pinnedLinks[i])
+				pinnedLinks[i] = links.shift();
 
 		// Append the remaining links if any.
 		if (links.length)
-		pinnedLinks = pinnedLinks.concat(links);
+			pinnedLinks = pinnedLinks.concat(links);
 
 		return pinnedLinks;
 	};
@@ -353,7 +353,7 @@ windowObserver = {
 				menuitem.id = 'newtabtools-' + action;
 				menuitem.className = 'newtabtools-page';
 				menuitem.setAttribute('label', strings.GetStringFromName(
-				'contextmenu.' + action + (Services.appinfo.OS == 'WINNT' ? 'Windows' : 'Unix')
+					'contextmenu.' + action + (Services.appinfo.OS == 'WINNT' ? 'Windows' : 'Unix')
 				));
 				menuitem.addEventListener('command', this.onEditItemClicked);
 				menu.insertBefore(menuitem, before);
@@ -425,10 +425,10 @@ windowObserver = {
 		}
 		for (let item of menu.querySelectorAll('.newtabtools-page')) {
 			item.hidden = (
-			!!target ||
-			!doc.popupNode ||
-			doc.popupNode.ownerDocument.location.href != 'about:newtab' ||
-			!doc.popupNode.ownerDocument.documentElement.hasAttribute('options-hidden')
+				!!target ||
+				!doc.popupNode ||
+				doc.popupNode.ownerDocument.location.href != 'about:newtab' ||
+				!doc.popupNode.ownerDocument.documentElement.hasAttribute('options-hidden')
 			);
 			if (!item.hidden) {
 				menu.querySelector('#newtabtools-separator').hidden = false;
