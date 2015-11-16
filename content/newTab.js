@@ -582,6 +582,7 @@ var newTabTools = {
 	});
 
 	let uiElements = {
+		'page': 'newtab-scrollbox', // used in fx-newTab.js
 		'launcher': 'launcher',
 		'optionsToggleButton': 'options-toggle',
 		'optionsTogglePointer': 'options-toggle-pointer',
