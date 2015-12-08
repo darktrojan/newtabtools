@@ -6,6 +6,21 @@
 	-moz-appearance: none;
 	font-size: 12px;
 	background-color: transparent;
+
+	--opacity: 0.8;
+	--quarter-opacity: 0.2;
+	--text-hover: rgb(31, 54, 76);
+	--text: rgba(31, 54, 76, var(--opacity));
+	--shadow-hover: rgb(255, 255, 255);
+	--shadow: rgba(255, 255, 255, var(--opacity));
+	--background-fill: rgba(255, 255, 255, var(--quarter-opacity));
+}
+:root[theme="dark"] {
+	--text-hover: rgb(255, 255, 255);
+	--text: rgba(255, 255, 255, var(--opacity));
+	--shadow-hover: rgb(31, 54, 76);
+	--shadow: rgba(31, 54, 76, var(--opacity));
+	--background-fill: rgba(31, 54, 76, var(--quarter-opacity));
 }
 :root:not([page-disabled]) {
 	background-color: #f2f2f2;
@@ -68,12 +83,8 @@ input[type=button] {
 	display: inline-block;
 	vertical-align: middle;
 	-moz-margin-end: 4px;
-	color: rgba(31, 54, 76, 0.8);
-	text-shadow: 0 0 3px white;
-}
-:root[theme="dark"] #newtab-recent > span {
-	color: rgba(255, 255, 255, 0.8);
-	text-shadow: 0 0 3px black;
+	color: var(--text);
+	text-shadow: 0 0 3px var(--shadow), 0 0 1px var(--shadow);
 }
 .recent {
 	padding: 2px 4px;
@@ -90,14 +101,9 @@ input[type=button] {
 	overflow-x: hidden;
 	white-space: nowrap;
 	vertical-align: middle;
-	background-color: rgba(255, 255, 255, 0.1);
-	color: rgba(31, 54, 76, 0.8);
-	text-shadow: 0 0 3px white;
-}
-:root[theme="dark"] .recent {
-	background-color: rgba(0, 0, 0, 0.1);
-	color: rgba(255, 255, 255, 0.8);
-	text-shadow: 0 0 3px black;
+	background-color: var(--background-fill);
+	color: var(--text);
+	text-shadow: 0 0 3px var(--shadow), 0 0 1px var(--shadow);
 }
 .recent:hover {
 	background-color: highlight;
@@ -285,8 +291,8 @@ input[type=button] {
 	white-space: normal;
 	background: none;
 	border: none;
-	color: rgba(31, 54, 76, 0.8);
-	text-shadow: 0 0 3px white;
+	color: var(--text);
+	text-shadow: 0 0 3px var(--shadow), 0 0 1px var(--shadow);
 	font-family: inherit;
 	font-size: 12px;
 	cursor: pointer;
@@ -300,21 +306,15 @@ input[type=button] {
 :root[launcher="bottom"] .launchButton {
 	min-width: 88px;
 }
-:root[theme="dark"] .launchButton {
-	color: rgba(255, 255, 255, 0.8);
-	text-shadow: 0 0 3px black;
-}
 .launchButton:hover {
-	color: rgba(31, 54, 76, 1);
-}
-:root[theme="dark"] .launchButton:hover {
-	color: rgba(255, 255, 255, 1);
+	color: var(--text-hover);
+	text-shadow: 0 0 3px var(--shadow-hover), 0 0 1px var(--shadow-hover);
 }
 .launchButton::before {
 	display: block;
 	height: 36px;
 	line-height: 0;
-	opacity: 0.8;
+	opacity: var(--opacity);
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: 36px 36px;
@@ -450,7 +450,7 @@ input[type=button] {
 	vertical-align: middle;
 	width: 16px;
 	height: 16px;
-	opacity: 0.8;
+	opacity: var(--opacity);
 }
 .recent:hover > .favicon,
 .newtab-site:hover .newtab-title > .favicon {
@@ -468,18 +468,15 @@ input[type=button] {
 	bottom: 0;
 }
 .newtab-thumbnail {
-	opacity: 0.8;
+	opacity: var(--opacity);
 	transition: opacity 100ms ease-out;
 	background-origin: padding-box;
 	background-clip: padding-box;
 	background-repeat: no-repeat;
 	background-size: cover;
-	background-color: rgba(255, 255, 255, 0.2);
+	background-color: var(--background-fill);
 	margin-bottom: 24px;
 	box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
-}
-:root[theme="dark"] .newtab-thumbnail {
-	background-color: rgba(0, 0, 0, 0.2);
 }
 :root.containThumbs .newtab-thumbnail {
 	background-size: contain;
@@ -511,19 +508,13 @@ input[type=button] {
 	text-overflow: ellipsis;
 	padding: 0 8px;
 	line-height: 24px;
-	color: rgba(31, 54, 76, 0.8);
+	color: var(--text);
 	text-align: center;
-	text-shadow: 0 0 3px white;
+	text-shadow: 0 0 3px var(--shadow), 0 0 1px var(--shadow);
 }
 .newtab-site:hover .newtab-title {
-	color: rgba(31, 54, 76, 1);
-}
-:root[theme="dark"] .newtab-title {
-	color: rgba(255, 255, 255, 0.8);
-	text-shadow: 0 0 3px black;
-}
-:root[theme="dark"] .newtab-site:hover .newtab-title {
-	color: rgba(255, 255, 255, 1);
+	color: var(--text-hover);
+	text-shadow: 0 0 3px var(--shadow-hover), 0 0 1px var(--shadow-hover);
 }
 :root[titlesize="hidden"] .newtab-title {
 	visibility: collapse;
@@ -637,7 +628,7 @@ input[type=button] {
 	background: transparent url("options-light.svg") center no-repeat;
 	background-size: 18px;
 	z-index: 2;
-	opacity: 0.8;
+	opacity: var(--opacity);
 }
 #options-toggle:hover {
 	opacity: 1;
