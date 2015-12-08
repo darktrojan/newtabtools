@@ -89,6 +89,7 @@ function uninstall(aParams, aReason) {
 }
 function startup(aParams, aReason) {
 	let defaultPrefs = Services.prefs.getDefaultBranch(EXTENSION_PREFS);
+	defaultPrefs.setIntPref('foreground.opacity', 80);
 	defaultPrefs.setIntPref('rows', 3);
 	defaultPrefs.setIntPref('columns', 3);
 	defaultPrefs.setIntPref('donationreminder', 0);
@@ -271,6 +272,7 @@ prefObserver = {
 		case 'grid.margin':
 		case 'grid.spacing':
 		case 'launcher':
+		case 'foreground.opacity':
 		case 'theme':
 		case 'thumbs.contain':
 		case 'thumbs.hidebuttons':

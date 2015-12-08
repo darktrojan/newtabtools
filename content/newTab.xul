@@ -149,6 +149,8 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 									<xul:radio label="&newtabtools.options.theme.dark;" value="dark" />
 								</xul:radiogroup>
 							</xul:setting>
+							<xul:setting pref="extensions.newtabtools.foreground.opacity" type="range"
+								title="&newtabtools.options.foreground.opacity;" max="100" min="0" step="10" size="2" />
 							<xul:setting pref="extensions.newtabtools.rows" type="integer"
 								title="&newtabtools.options.rows;" max="10" min="1" size="2" />
 							<xul:setting pref="extensions.newtabtools.columns" type="integer"

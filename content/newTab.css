@@ -8,19 +8,18 @@
 	background-color: transparent;
 
 	--opacity: 0.8;
-	--quarter-opacity: 0.2;
 	--text-hover: rgb(31, 54, 76);
 	--text: rgba(31, 54, 76, var(--opacity));
 	--shadow-hover: rgb(255, 255, 255);
 	--shadow: rgba(255, 255, 255, var(--opacity));
-	--background-fill: rgba(255, 255, 255, var(--quarter-opacity));
+	--background-fill: rgba(255, 255, 255, 0.2);
 }
 :root[theme="dark"] {
 	--text-hover: rgb(255, 255, 255);
 	--text: rgba(255, 255, 255, var(--opacity));
 	--shadow-hover: rgb(31, 54, 76);
 	--shadow: rgba(31, 54, 76, var(--opacity));
-	--background-fill: rgba(31, 54, 76, var(--quarter-opacity));
+	--background-fill: rgba(31, 54, 76, 0.2);
 }
 :root:not([page-disabled]) {
 	background-color: #f2f2f2;
@@ -94,21 +93,18 @@ input[type=button] {
 	/* see newTabTools.trimRecent */
 	-moz-margin-end: 4px;
 	cursor: pointer;
-	transition: background-color 200ms, color 200ms;
 	text-decoration: none;
 	text-overflow: ellipsis;
 	max-width: 200px;
 	overflow-x: hidden;
 	white-space: nowrap;
 	vertical-align: middle;
-	background-color: var(--background-fill);
 	color: var(--text);
 	text-shadow: 0 0 3px var(--shadow), 0 0 1px var(--shadow);
 }
 .recent:hover {
-	background-color: highlight;
-	color: highlighttext;
-	text-shadow: none;
+	color: var(--text-hover);
+	text-shadow: 0 0 3px var(--shadow-hover), 0 0 1px var(--shadow-hover);
 }
 /* UNDO */
 #newtab-undo-container {
@@ -801,6 +797,9 @@ setting[type="menulist"],
 setting[type="radio"] {
 	-moz-binding: url("setting.xml#setting-multi");
 }
+setting[type="range"] {
+	-moz-binding: url("setting.xml#setting-range");
+}
 .preferences-alignment {
 	min-height: 30px;
 	-moz-box-align: center;
@@ -811,6 +810,10 @@ setting[type="radio"] {
 }
 menulist {
 	font-size: 100%;
+}
+input[type="range"] {
+	-moz-box-flex: 1;
+	max-width: 100%;
 }
 #options-donate-wrap {
 	border: 1px #b2aeaa solid !important;

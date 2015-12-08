@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
-<bindings xmlns="http://www.mozilla.org/xbl">
+<bindings xmlns="http://www.mozilla.org/xbl" xmlns:xhtml="http://www.w3.org/1999/xhtml"
+		xmlns:xbl="http://www.mozilla.org/xbl"
+		xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 	<binding id="setting-multi" extends="chrome://mozapps/content/extensions/setting.xml#setting-multi">
 		<implementation>
 			<field name="control"><![CDATA[
@@ -9,5 +11,20 @@
 				)[0];
 			]]></field>
 		</implementation>
+	</binding>
+	<binding id="setting-range" extends="chrome://mozapps/content/extensions/setting.xml#setting-integer">
+		<content>
+			<xul:vbox>
+				<xul:hbox class="preferences-alignment">
+					<xul:label class="preferences-title" flex="1" xbl:inherits="xbl:text=title"/>
+				</xul:hbox>
+				<xul:description class="preferences-description" flex="1" xbl:inherits="xbl:text=desc"/>
+			</xul:vbox>
+			<xul:hbox class="preferences-alignment">
+				<xhtml:input type="range" anonid="input" xbl:inherits="disabled,min,max,step"
+					oninput="document.getBindingParent(this).inputChanged();"
+					onchange="document.getBindingParent(this).inputChanged();"/>
+			</xul:hbox>
+		</content>
 	</binding>
 </bindings>

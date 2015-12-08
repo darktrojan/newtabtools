@@ -366,6 +366,9 @@ var newTabTools = {
 		let gridSpacing = this.prefs.getCharPref('grid.spacing');
 		document.documentElement.setAttribute('spacing', gridSpacing);
 
+		let opacity = Math.max(0, Math.min(1, this.prefs.getIntPref('foreground.opacity') / 100));
+		document.documentElement.style.setProperty('--opacity', opacity);
+
 		this.trimRecent();
 	},
 	setGridMargin: function(aPiece, aSize) {
