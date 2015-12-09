@@ -812,8 +812,7 @@ menulist {
 	font-size: 100%;
 }
 input[type="range"] {
-	-moz-box-flex: 1;
-	max-width: 100%;
+	width: 200px;
 }
 #options-donate-wrap {
 	border: 1px #b2aeaa solid !important;

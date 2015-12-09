@@ -21,9 +21,11 @@
 				<xul:description class="preferences-description" flex="1" xbl:inherits="xbl:text=desc"/>
 			</xul:vbox>
 			<xul:hbox class="preferences-alignment">
-				<xhtml:input type="range" anonid="input" xbl:inherits="disabled,min,max,step"
-					oninput="document.getBindingParent(this).inputChanged();"
-					onchange="document.getBindingParent(this).inputChanged();"/>
+				<xhtml:div>
+					<xhtml:input type="range" anonid="input" xbl:inherits="disabled,min,max,step"
+						oninput="document.getBindingParent(this).inputChanged();"
+						onchange="document.getBindingParent(this).inputChanged();"/>
+				</xhtml:div>
 			</xul:hbox>
 		</content>
 	</binding>
