@@ -142,55 +142,55 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 				<fieldset>
 					<legend>&newtabtools.options-header;</legend>
 					<table>
-						<tr id="options-theme-pref" pref="extensions.newtabtools.theme">
+						<tr id="options-theme-pref">
 							<th>&newtabtools.options.theme;</th>
 							<td>
-								<label><input type="radio" value="light" />&newtabtools.options.theme.light;</label>
-								<label><input type="radio" value="dark" />&newtabtools.options.theme.dark;</label>
+								<label><input type="radio" name="theme" value="light" />&newtabtools.options.theme.light;</label>
+								<label><input type="radio" name="theme" value="dark" />&newtabtools.options.theme.dark;</label>
 							</td>
 						</tr>
-						<tr pref="extensions.newtabtools.foreground.opacity">
+						<tr>
 							<th>&newtabtools.options.foreground.opacity;</th>
 							<td>
-								<input type="range" max="100" min="0" step="10" />
+								<input type="range" name="foreground.opacity" max="100" min="0" step="10" />
 							</td>
 						</tr>
-						<tr pref="extensions.newtabtools.rows">
+						<tr>
 							<th>&newtabtools.options.rows;</th>
 							<td>
-								<input type="number" max="10" min="1" size="2" />
+								<input type="number" name="rows" max="10" min="1" size="2" />
 							</td>
 						</tr>
-						<tr pref="extensions.newtabtools.columns">
+						<tr>
 							<th>&newtabtools.options.columns;</th>
 							<td>
-								<input type="number" max="10" min="1" size="2" />
+								<input type="number" name="columns" max="10" min="1" size="2" />
 							</td>
 						</tr>
-						<tr pref="extensions.newtabtools.grid.margin">
+						<tr>
 							<th>&newtabtools.options.grid.margin;</th>
 							<td>
-								<select>
+								<select name="grid.margin">
 									<option value="small small small small">&newtabtools.options.size.small;</option>
 									<option value="medium medium medium medium">&newtabtools.options.size.medium;</option>
 									<option value="large large large large">&newtabtools.options.size.large;</option>
 								</select>
 							</td>
 						</tr>
-						<tr pref="extensions.newtabtools.grid.spacing">
+						<tr>
 							<th>&newtabtools.options.grid.spacing;</th>
 							<td>
-								<select>
+								<select name="grid.spacing">
 									<option value="small">&newtabtools.options.size.small;</option>
 									<option value="medium">&newtabtools.options.size.medium;</option>
 									<option value="large">&newtabtools.options.size.large;</option>
 								</select>
 							</td>
 						</tr>
-						<tr pref="extensions.newtabtools.thumbs.titlesize">
+						<tr>
 							<th>&newtabtools.options.thumb-titlesize;</th>
 							<td>
-								<select>
+								<select name="thumbs.titlesize">
 									<option value="hidden">&newtabtools.options.launcher.hidden;</option>
 									<option value="small">&newtabtools.options.size.small;</option>
 									<option value="medium">&newtabtools.options.size.medium;</option>
@@ -198,10 +198,10 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 								</select>
 							</td>
 						</tr>
-						<tr pref="extensions.newtabtools.launcher">
+						<tr>
 							<th>&newtabtools.options.launcher;</th>
 							<td>
-								<select>
+								<select name="launcher">
 									<option value="0">&newtabtools.options.launcher.hidden;</option>
 									<option value="1">&newtabtools.options.launcher.top;</option>
 									<option value="3">&newtabtools.options.launcher.bottom;</option>
@@ -210,35 +210,35 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 								</select>
 							</td>
 						</tr>
-						<tr pref="extensions.newtabtools.recent.show">
+						<tr>
 							<th></th>
 							<td>
 								<label>
-									<input type="checkbox" />&newtabtools.options.recent;
+									<input type="checkbox" name="recent.show" />&newtabtools.options.recent;
 								</label>
 							</td>
 						</tr>
-						<tr pref="extensions.newtabtools.thumbs.hidebuttons" inverted="true">
+						<tr>
 							<th></th>
 							<td>
 								<label>
-									<input type="checkbox" />&newtabtools.options.thumb-buttons;
+									<input type="checkbox" name="thumbs.hidebuttons" />&newtabtools.options.thumb-buttons;
 								</label>
 							</td>
 						</tr>
-						<tr pref="extensions.newtabtools.thumbs.hidefavicons" inverted="true">
+						<tr>
 							<th></th>
 							<td>
 								<label>
-									<input type="checkbox" />&newtabtools.options.favicons;
+									<input type="checkbox" name="thumbs.hidefavicons" />&newtabtools.options.favicons;
 								</label>
 							</td>
 						</tr>
-						<tr pref="extensions.newtabtools.thumbs.contain">
+						<tr>
 							<th></th>
 							<td>
 								<label>
-									<input type="checkbox" />&newtabtools.options.thumb-contain;
+									<input type="checkbox" name="thumbs.contain" />&newtabtools.options.thumb-contain;
 								</label>
 							</td>
 						</tr>

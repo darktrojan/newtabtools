@@ -327,6 +327,7 @@ var newTabTools = {
 	},
 	updateUI: function() {
 		let launcherPosition = this.prefs.getIntPref('launcher');
+		document.querySelector('[name="launcher"]').value = launcherPosition;
 		if (launcherPosition) {
 			let positionNames = ['top', 'right', 'bottom', 'left'];
 			document.documentElement.setAttribute('launcher', positionNames[launcherPosition - 1]);
@@ -336,19 +337,24 @@ var newTabTools = {
 
 		if (BackgroundImage.modeIsSingle) {
 			let theme = this.prefs.getCharPref('theme');
+			this.themePref.querySelector('[value="' + theme + '"]').checked = true;
 			document.documentElement.setAttribute('theme', theme);
 		}
 
 		let containThumbs = this.prefs.getBoolPref('thumbs.contain');
+		document.querySelector('[name="thumbs.contain"]').checked = containThumbs;
 		document.documentElement.classList[containThumbs ? 'add' : 'remove']('containThumbs');
 
 		let hideButtons = this.prefs.getBoolPref('thumbs.hidebuttons');
+		document.querySelector('[name="thumbs.hidebuttons"]').checked = !hideButtons;
 		document.documentElement.classList[hideButtons ? 'add' : 'remove']('hideButtons');
 
 		let hideFavicons = this.prefs.getBoolPref('thumbs.hidefavicons');
+		document.querySelector('[name="thumbs.hidefavicons"]').checked = !hideFavicons;
 		document.documentElement.classList[hideFavicons ? 'add' : 'remove']('hideFavicons');
 
 		let titleSize = this.prefs.getCharPref('thumbs.titlesize');
+		document.querySelector('[name="thumbs.titlesize"]').value = titleSize;
 		document.documentElement.setAttribute('titlesize', titleSize);
 
 		let gridMargin = ['small', 'small', 'small', 'small'];
@@ -356,6 +362,7 @@ var newTabTools = {
 		if (prefGridMargin.length == 4) {
 			gridMargin = prefGridMargin;
 		}
+		document.querySelector('[name="grid.margin"]').value = gridMargin.join(' ');
 		this.setGridMargin('top', gridMargin[0]);
 		this.setGridMargin('right-top', gridMargin[1]);
 		this.setGridMargin('right-bottom', gridMargin[1]);
@@ -364,12 +371,20 @@ var newTabTools = {
 		this.setGridMargin('left-top', gridMargin[3]);
 
 		let gridSpacing = this.prefs.getCharPref('grid.spacing');
+		document.querySelector('[name="grid.spacing"]').value = gridSpacing;
 		document.documentElement.setAttribute('spacing', gridSpacing);
 
-		let opacity = Math.max(0, Math.min(1, this.prefs.getIntPref('foreground.opacity') / 100));
-		document.documentElement.style.setProperty('--opacity', opacity);
+		let opacity = Math.max(0, Math.min(100, this.prefs.getIntPref('foreground.opacity')));
+		document.querySelector('[name="foreground.opacity"]').value = opacity;
+		document.documentElement.style.setProperty('--opacity', opacity / 100);
 
+		let showRecent = this.prefs.getBoolPref('recent.show');
+		document.querySelector('[name="recent.show"]').checked = showRecent;
 		this.trimRecent();
+	},
+	updateGridPrefs: function() {
+		document.querySelector('[name="rows"]').value = gGridPrefs.gridRows;
+		document.querySelector('[name="columns"]').value = gGridPrefs.gridColumns;
 	},
 	setGridMargin: function(aPiece, aSize) {
 		let pieceElement = document.getElementById('newtab-margin-' + aPiece);
@@ -652,6 +667,7 @@ var newTabTools = {
 
 	newTabTools.refreshBackgroundImage();
 	newTabTools.updateUI();
+	newTabTools.updateGridPrefs();
 
 	let preloaded = document.visibilityState == 'hidden';
 	if (!preloaded) {

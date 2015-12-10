@@ -292,6 +292,7 @@ prefObserver = {
 		case 'filter':
 			enumerateTabs(function(aWindow) {
 				aWindow.gGrid.refresh();
+				aWindow.newTabTools.updateGridPrefs();
 			});
 			break;
 		}
