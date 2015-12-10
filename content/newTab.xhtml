@@ -1,12 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <!--
 This Source Code Form is subject to the terms of the Mozilla Public
 License, v. 2.0. If a copy of the MPL was not distributed with this file,
 You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
-<?xml-stylesheet href="chrome://newtabtools/content/newTab.css" type="text/css"?>
-<?xml-stylesheet href="chrome://newtabtools/skin/newTab.css" type="text/css"?>
-
 <!DOCTYPE window [
 	<!ENTITY % newTabDTD SYSTEM "chrome://browser/locale/newTab.dtd">
 	%newTabDTD;
@@ -22,15 +18,17 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 <html id="newtab-window" xmlns="http://www.w3.org/1999/xhtml" disablefastfind="true" options-hidden="true">
 <head>
 	<title>&newtab.pageTitle;</title>
+	<link rel="stylesheet" href="chrome://newtabtools/content/newTab.css" type="text/css" />
+	<link rel="stylesheet" href="chrome://newtabtools/skin/newTab.css" type="text/css" />
 </head>
 
 <body>
 	<div id="newtab-scrollbox">
 		<div id="newtab-vertical-margin">
-			<div id="newtab-margin-top" align="end">
-				<div id="newtab-margin-left-top" class="newtab-side-margin"/>
+			<div id="newtab-margin-top">
+				<div id="newtab-margin-left-top" class="newtab-side-margin"></div>
 				<div id="newtab-recent-outer">
-					<div id="newtab-recent" hidden="true"><span>&newtabtools.recently-closed-tabs;</span></div>
+					<div id="newtab-recent" hidden=""><span>&newtabtools.recently-closed-tabs;</span></div>
 				</div>
 				<div id="newtab-undo-container" undo-disabled="true">
 					<label id="newtab-undo-label">&newtab.undo.removedLabel;</label>
@@ -38,21 +36,21 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 									class="newtab-undo-button">&newtab.undo.undoButton;</button>
 					<button id="newtab-undo-restore-button" tabindex="-1"
 									class="newtab-undo-button">&newtab.undo.restoreButton;</button>
-					<button id="newtab-undo-close-button" tabindex="-1" title="&newtab.undo.closeTooltip;" />
+					<button id="newtab-undo-close-button" tabindex="-1" title="&newtab.undo.closeTooltip;"></button>
 				</div>
 				<div id="newtab-margin-right-top" class="newtab-side-margin">
 					<input id="options-toggle" type="button"/>
 				</div>
 			</div>
 			<div id="newtab-horizontal-margin">
-				<div id="newtab-margin-left-bottom" class="newtab-side-margin"/>
-				<div id="newtab-grid"/>
-				<div id="newtab-margin-right-bottom" class="newtab-side-margin"/>
+				<div id="newtab-margin-left-bottom" class="newtab-side-margin"></div>
+				<div id="newtab-grid"></div>
+				<div id="newtab-margin-right-bottom" class="newtab-side-margin"></div>
 			</div>
-			<div id="newtab-margin-bottom"/>
+			<div id="newtab-margin-bottom"></div>
 		</div>
 
-		<div id="options-toggle-pointer" hidden="true">&newtabtools.options.pointer;</div>
+		<div id="options-toggle-pointer" hidden="">&newtabtools.options.pointer;</div>
 		<input id="newtab-toggle" type="button" title="&newtabtools.page.show;" />
 
 		<div id="launcher">
@@ -71,14 +69,14 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 
 	<div id="options">
 		<div id="options-close">
-			<button class="close-icon" onclick="newTabTools.hideOptions();" />
+			<button class="close-icon" onclick="newTabTools.hideOptions();"></button>
 		</div>
 		<div style="display: flex">
 			<div style="width: 350px" id="options-tile">
 				<fieldset>
 					<legend>&newtabtools.pin-url.header;</legend>
-					<div align="baseline">
-						<input id="options-pinURL-input" flex="1" type="autocomplete"
+					<div class="options-row">
+						<input id="options-pinURL-input" type="autocomplete"
 							completeselectedindex="true" autocompletesearch="history"
 							enablehistory="true" showcommentcolumn="true" placeholder="&newtabtools.pin-url.placeholder;" />
 						<button id="options-pinURL">&newtabtools.pin-url.button;</button>
@@ -86,30 +84,30 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 				</fieldset>
 				<fieldset>
 					<legend>&newtabtools.tile-header;</legend>
-					<div pack="center">
-						<button id="options-previous-row-tile" class="arrow" tooltiptext="&newtabtools.tile-selection.previousrow.tooltip;" />
+					<div class="options-row">
+						<button id="options-previous-row-tile" class="arrow" title="&newtabtools.tile-selection.previousrow.tooltip;"></button>
 					</div>
-					<div id="options-thumbnail-wrap" pack="center" align="center">
-						<button id="options-previous-tile" class="arrow" tooltiptext="&newtabtools.tile-selection.previous.tooltip;" />
-						<div id="options-thumbnail" class="newtab-thumbnail" flex="1"></div>
-						<button id="options-next-tile" class="arrow" tooltiptext="&newtabtools.tile-selection.next.tooltip;" />
+					<div id="options-thumbnail-wrap" class="options-row">
+						<button id="options-previous-tile" class="arrow" title="&newtabtools.tile-selection.previous.tooltip;"></button>
+						<div id="options-thumbnail" class="newtab-thumbnail"></div>
+						<button id="options-next-tile" class="arrow" title="&newtabtools.tile-selection.next.tooltip;"></button>
 					</div>
-					<div pack="center">
-						<button id="options-next-row-tile" class="arrow" tooltiptext="&newtabtools.tile-selection.nextrow.tooltip;" />
+					<div class="options-row">
+						<button id="options-next-row-tile" class="arrow" title="&newtabtools.tile-selection.nextrow.tooltip;"></button>
 					</div>
-					<label id="options-url" flex="1" value="" crop="center" />
-					<label control="options-thumbnail-input">&newtabtools.tile-thumbnail.label;</label>
-					<div align="baseline">
-						<input id="options-thumbnail-input" flex="1" placeholder="&newtabtools.tile-thumbnail.placeholder;" />
+					<label id="options-url"></label>
+					<label for="options-thumbnail-input">&newtabtools.tile-thumbnail.label;</label>
+					<div class="options-row">
+						<input id="options-thumbnail-input" placeholder="&newtabtools.tile-thumbnail.placeholder;" />
 					</div>
-					<div pack="center" align="baseline">
+					<div class="options-row">
 						<button id="options-thumbnail-browse">&newtabtools.tile-thumbnail.browse;</button>
-						<button id="options-thumbnail-set" disabled="true">&newtabtools.tile-thumbnail.set;</button>
-						<button id="options-thumbnail-remove" disabled="true">&newtabtools.tile-thumbnail.remove;</button>
+						<button id="options-thumbnail-set" disabled="">&newtabtools.tile-thumbnail.set;</button>
+						<button id="options-thumbnail-remove" disabled="">&newtabtools.tile-thumbnail.remove;</button>
 						<button id="options-thumbnail-refresh">&newtabtools.tile-thumbnail.refresh;</button>
 					</div>
-					<div pack="center" align="baseline">
-						<label control="options-bgcolor-input">&newtabtools.tile-thumbnail.bgcolor;</label>
+					<div class="options-row">
+						<label for="options-bgcolor-input">&newtabtools.tile-thumbnail.bgcolor; </label>
 						<input id="options-bgcolor-input" type="color" />
 						<button id="options-bgcolor-displaybutton">
 							<div id="options-bgcolor-display">&#160;</div>
@@ -117,24 +115,24 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 						<button id="options-bgcolor-set">&newtabtools.tile-thumbnail.set;</button>
 						<button id="options-bgcolor-reset">&newtabtools.tile-thumbnail.remove;</button>
 					</div>
-					<label control="options-title-input">&newtabtools.tile-title.label;</label>
-					<div align="baseline">
-						<input id="options-title-input" flex="1" placeholder="&newtabtools.tile-title.placeholder;" />
+					<label for="options-title-input">&newtabtools.tile-title.label;</label>
+					<div class="options-row">
+						<input id="options-title-input" placeholder="&newtabtools.tile-title.placeholder;" />
 					</div>
-					<div pack="center">
+					<div class="options-row">
 						<button id="options-title-set">&newtabtools.tile-title.set;</button>
-						<button id="options-title-reset" disabled="true">&newtabtools.tile-title.reset;</button>
+						<button id="options-title-reset" disabled="">&newtabtools.tile-title.reset;</button>
 					</div>
 				</fieldset>
 				<fieldset id="options-bg-group">
 					<legend>&newtabtools.bg-header;</legend>
-					<div align="baseline">
-						<input id="options-bg-input" flex="1" placeholder="&newtabtools.bg.placeholder;" />
+					<div class="options-row">
+						<input id="options-bg-input" placeholder="&newtabtools.bg.placeholder;" />
 					</div>
-					<div pack="center">
+					<div class="options-row">
 						<button id="options-bg-browse">&newtabtools.bg.browse;</button>
-						<button id="options-bg-set" disabled="true">&newtabtools.bg.set;</button>
-						<button id="options-bg-remove" disabled="true">&newtabtools.bg.remove;</button>
+						<button id="options-bg-set" disabled="">&newtabtools.bg.set;</button>
+						<button id="options-bg-remove" disabled="">&newtabtools.bg.remove;</button>
 					</div>
 				</fieldset>
 			</div>
@@ -244,7 +242,7 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 						</tr>
 					</table>
 				</fieldset>
-				<div flex="1" />
+				<div style="flex: 1"></div>
 				<fieldset id="options-donate-wrap">
 					<div>
 						<label>&newtabtools.donate.label;</label>
@@ -258,7 +256,7 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 		</div>
 	</div>
 
-	<script type="text/javascript;version=1.8" src="chrome://newtabtools/content/newTab.js" />
-	<script type="text/javascript;version=1.8" src="chrome://newtabtools/content/fx-newTab.js" />
+	<script type="text/javascript;version=1.8" src="chrome://newtabtools/content/newTab.js"></script>
+	<script type="text/javascript;version=1.8" src="chrome://newtabtools/content/fx-newTab.js"></script>
 </body>
 </html>

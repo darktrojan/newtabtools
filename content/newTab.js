@@ -347,7 +347,7 @@ var newTabTools = {
 				document.documentElement.setAttribute('theme', newTheme);
 			}
 			if (newBackground) {
-				document.documentElement.insertBefore(newBackground, document.documentElement.firstChild);
+				document.body.insertBefore(newBackground, document.body.firstChild);
 			}
 		}
 	},
@@ -548,7 +548,7 @@ var newTabTools = {
 		if (disabled) {
 			this.siteThumbnail.style.backgroundImage = null;
 			this.removeThumbnailButton.disabled = true;
-			this.siteURL.value = '';
+			this.siteURL.textContent = '';
 			this.setTitleInput.value = '';
 			this.resetTitleButton.disabled = true;
 			return;
@@ -575,7 +575,7 @@ var newTabTools = {
 		this.tileNext.style.opacity = (column + 1 == gridColumns) ? 0.25 : null;
 		this.tileNextRow.style.opacity = (row + 1 == gridRows) ? 0.25 : null;
 
-		this.siteURL.value = site.url;
+		this.siteURL.textContent = site.url;
 		let backgroundColor = TileData.get(site.url, 'backgroundColor');
 		this.siteThumbnail.style.backgroundColor =
 		this.setBgColourInput.value =

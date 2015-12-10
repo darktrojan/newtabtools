@@ -2,26 +2,6 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-[align="center"] {
-	align-items: center !important;
-	display: flex;
-}
-[align="baseline"] {
-	align-items: baseline !important;
-	display: flex;
-}
-[align="end"] {
-	align-items: flex-end !important;
-	display: flex;
-}
-[pack="center"] {
-	justify-content: center !important;
-	display: flex;
-}
-[flex="1"] {
-	flex: 1;
-}
-
 :root {
 	-moz-appearance: none;
 	font: message-box;
@@ -52,7 +32,7 @@ body {
 	display: flex;
 	margin: 0;
 }
-input[type=button] {
+input[type="button"] {
 	cursor: pointer;
 }
 /* SCROLLBOX */
@@ -109,7 +89,7 @@ input[type=button] {
 #newtab-recent > span {
 	display: inline-block;
 	vertical-align: middle;
-	-moz-margin-end: 4px;
+	margin-inline-end: 4px;
 	color: var(--text);
 	text-shadow: 0 0 3px var(--shadow), 0 0 1px var(--shadow);
 }
@@ -119,7 +99,7 @@ input[type=button] {
 	line-height: 20px;
 	border-radius: 4px;
 	/* see newTabTools.trimRecent */
-	-moz-margin-end: 4px;
+	margin-inline-end: 4px;
 	cursor: pointer;
 	text-decoration: none;
 	text-overflow: ellipsis;
@@ -139,7 +119,7 @@ input[type=button] {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	-moz-margin-start: 1em;
+	margin-inline-start: 1em;
 	padding: 4px 3px;
 	line-height: 18px;
 	border: 1px solid;
@@ -240,6 +220,9 @@ input[type=button] {
 	align-items: center;
 	justify-content: center;
 	flex: none;
+}
+#newtab-margin-top {
+	align-items: flex-end;
 }
 #newtab-margin-top,
 #newtab-margin-bottom,
@@ -428,7 +411,6 @@ input[type=button] {
 .newtab-row {
 	display: flex;
 	flex-direction: row;
-	-moz-box-direction: normal;
 	flex: 1;
 	margin-bottom: 5px;
 }
@@ -445,16 +427,16 @@ input[type=button] {
 .newtab-cell {
 	display: flex;
 	flex: 1;
-	-moz-margin-end: 5px;
+	margin-inline-end: 5px;
 }
 :root[spacing="medium"] .newtab-cell:not(:last-child) {
-	-moz-margin-end: 10px;
+	margin-inline-end: 10px;
 }
 :root[spacing="large"] .newtab-cell:not(:last-child) {
-	-moz-margin-end: 20px;
+	margin-inline-end: 20px;
 }
 .newtab-cell:last-child {
-	-moz-margin-end: 0;
+	margin-inline-end: 0;
 }
 /* SITES */
 .newtab-site {
@@ -475,7 +457,7 @@ input[type=button] {
 /* FAVICON + LINK + THUMBNAIL */
 .favicon {
 	margin-top: -2px;
-	-moz-margin-end: 3px;
+	margin-inline-end: 3px;
 	vertical-align: middle;
 	width: 16px;
 	height: 16px;
@@ -635,21 +617,21 @@ input[type=button] {
 	justify-content: flex-start;
 }
 :root[spacing="medium"] #newtab-margin-right-top:-moz-any(.medium, .large) #options-toggle {
-	-moz-margin-start: 8px;
-	-moz-margin-end: 0;
+	margin-inline-start: 8px;
+	margin-inline-end: 0;
 }
 :root[spacing="large"] #newtab-margin-right-top:-moz-any(.medium, .large) #options-toggle {
-	-moz-margin-start: 18px;
-	-moz-margin-end: 0;
+	margin-inline-start: 18px;
+	margin-inline-end: 0;
 }
 #newtab-margin-right-top:not(.medium):not(.large) #options-toggle {
-	-moz-margin-end: 0;
-	-moz-padding-start: 1px;
+	margin-inline-end: 0;
+	padding-inline-start: 1px;
 	width: 27px;
 }
 #options-toggle {
-	-moz-margin-end: -1px;
-	-moz-margin-start: 3px;
+	margin-inline-end: -1px;
+	margin-inline-start: 3px;
 	width: 28px;
 	height: 28px;
 	padding: 0;
@@ -741,7 +723,7 @@ input[type=button] {
 	position: fixed;
 	top: 2em;
 	left: 50%;
-	margin-left: -moz-calc(-375px - 2em);
+	margin-left: calc(-375px - 2em);
 	padding: 1em;
 	box-sizing: border-box;
 	box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5);
@@ -755,8 +737,8 @@ input[type=button] {
 }
 #options button:not(.arrow) {
 	min-width: 0;
-	-moz-margin-start: 0;
-	-moz-margin-end: 0;
+	margin-inline-start: 0;
+	margin-inline-end: 0;
 	padding: 0;
 }
 #options input,
@@ -776,11 +758,24 @@ input[type=button] {
 	line-height: 0;
 	z-index: 1;
 }
+.options-row {
+	align-items: baseline;
+	justify-content: center;
+	display: flex;
+}
+#options-pinURL-input,
+#options-thumbnail-input,
+#options-title-input,
+#options-bg-input {
+	flex: 1;
+}
 #options-tile {
-	-moz-margin-end: 2em;
+	margin-inline-end: 2em;
 }
 #options-thumbnail-wrap {
 	margin: 0 1em;
+	display: flex;
+	align-items: center;
 }
 button.arrow {
 	background-image: url("arrow.svg");
@@ -810,7 +805,12 @@ button.arrow {
 	flex: 1;
 }
 #options-url {
+	display: block;
 	text-align: center;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	width: 100%;
 }
 #options-bgcolor-input {
 	visibility: collapse;
@@ -857,4 +857,7 @@ input[type="range"] {
 }
 #options-donate-wrap > :last-child {
 	margin: 0 0.5em 0.5em;
+}
+#options-donate-wrap a {
+	color: -moz-nativehyperlinktext;
 }
