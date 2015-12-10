@@ -169,6 +169,32 @@ var newTabTools = {
 			break;
 		}
 	},
+	optionsOnChange: function(event) {
+		if (event.originalTarget.disabled) {
+			return;
+		}
+		switch (event.originalTarget.type) {
+		case 'radio':
+		case 'select-one':
+			if (event.originalTarget.name == 'launcher') {
+				this.prefs.setIntPref(event.originalTarget.name, parseInt(event.originalTarget.value, 10));
+			} else {
+				this.prefs.setCharPref(event.originalTarget.name, event.originalTarget.value);
+			}
+			break;
+		case 'range':
+		case 'number':
+			this.prefs.setIntPref(event.originalTarget.name, parseInt(event.originalTarget.value, 10));
+			break;
+		case 'checkbox':
+			let checked = event.originalTarget.checked;
+			if (event.originalTarget.hasAttribute('inverted')) {
+				checked = !checked;
+			}
+			this.prefs.setBoolPref(event.originalTarget.name, checked);
+			break;
+		}
+	},
 	pinURL: function(link, title) {
 		let index = gGrid.sites.length - 1;
 		for (var i = 0; i < gGrid.sites.length; i++) {
@@ -648,6 +674,7 @@ var newTabTools = {
 
 	newTabTools.optionsToggleButton.addEventListener('click', newTabTools.toggleOptions.bind(newTabTools), false);
 	newTabTools.optionsPane.addEventListener('click', newTabTools.optionsOnClick.bind(newTabTools), false);
+	newTabTools.optionsPane.addEventListener('change', newTabTools.optionsOnChange.bind(newTabTools), false);
 	newTabTools.launcher.addEventListener('click', newTabTools.launcherOnClick, false);
 	newTabTools.setThumbnailInput.addEventListener('keyup', function() {
 		newTabTools.setThumbnailButton.disabled = !/^(file|ftp|http|https):\/\//.exec(this.value);

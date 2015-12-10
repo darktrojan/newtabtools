@@ -291,6 +291,7 @@ input[type=button] {
 	align-items: center;
 	justify-content: center;
 	text-align: center;
+	order: 3;
 }
 :root[launcher="top"] #launcher,
 :root[launcher="bottom"] #launcher {
