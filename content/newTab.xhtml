@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This Source Code Form is subject to the terms of the Mozilla Public
+License, v. 2.0. If a copy of the MPL was not distributed with this file,
+You can obtain one at http://mozilla.org/MPL/2.0/.
+-->
+<?xml-stylesheet href="chrome://newtabtools/content/newTab.css" type="text/css"?>
+<?xml-stylesheet href="chrome://newtabtools/skin/newTab.css" type="text/css"?>
+
+<!DOCTYPE window [
+	<!ENTITY % newTabDTD SYSTEM "chrome://browser/locale/newTab.dtd">
+	%newTabDTD;
+	<!ENTITY % aboutHomeDTD SYSTEM "chrome://newtabtools/locale/aboutHome.dtd">
+	%aboutHomeDTD;
+	<!ENTITY % browserDTD SYSTEM "chrome://browser/locale/browser.dtd">
+	%browserDTD;
+	<!ENTITY % newTabToolsDTD SYSTEM "chrome://newtabtools/locale/newTab.dtd">
+	%newTabToolsDTD;
+	<!ENTITY % optionsDTD SYSTEM "chrome://newtabtools/locale/options.dtd">
+	%optionsDTD;
+]>
+<html id="newtab-window" xmlns="http://www.w3.org/1999/xhtml" disablefastfind="true" options-hidden="true">
+<head>
+	<title>&newtab.pageTitle;</title>
+</head>
+
+<body>
+	<div id="newtab-scrollbox">
+		<div id="newtab-vertical-margin">
+			<div id="newtab-margin-top" align="end">
+				<div id="newtab-margin-left-top" class="newtab-side-margin"/>
+				<div id="newtab-recent-outer">
+					<div id="newtab-recent" hidden="true"><span>&newtabtools.recently-closed-tabs;</span></div>
+				</div>
+				<div id="newtab-undo-container" undo-disabled="true">
+					<label id="newtab-undo-label">&newtab.undo.removedLabel;</label>
+					<button id="newtab-undo-button" tabindex="-1"
+									class="newtab-undo-button">&newtab.undo.undoButton;</button>
+					<button id="newtab-undo-restore-button" tabindex="-1"
+									class="newtab-undo-button">&newtab.undo.restoreButton;</button>
+					<button id="newtab-undo-close-button" tabindex="-1" title="&newtab.undo.closeTooltip;" />
+				</div>
+				<div id="newtab-margin-right-top" class="newtab-side-margin">
+					<input id="options-toggle" type="button"/>
+				</div>
+			</div>
+			<div id="newtab-horizontal-margin">
+				<div id="newtab-margin-left-bottom" class="newtab-side-margin"/>
+				<div id="newtab-grid"/>
+				<div id="newtab-margin-right-bottom" class="newtab-side-margin"/>
+			</div>
+			<div id="newtab-margin-bottom"/>
+		</div>
+
+		<div id="options-toggle-pointer" hidden="true">&newtabtools.options.pointer;</div>
+		<input id="newtab-toggle" type="button" title="&newtabtools.page.show;" />
+
+		<div id="launcher">
+			<button class="launchButton" id="downloads">&abouthome.downloadsButton.label;</button>
+			<button class="launchButton" id="bookmarks">&abouthome.bookmarksButton.label;</button>
+			<button class="launchButton" id="history">&abouthome.historyButton.label;</button>
+			<button class="launchButton" id="addons">&abouthome.addonsButton.label;</button>
+			<button class="launchButton" id="sync">&abouthome.syncButton.label;</button>
+			<button class="launchButton" id="settingsWin">&abouthome.preferencesButtonWin.label;</button>
+			<button class="launchButton" id="settingsUnix">&abouthome.preferencesButtonUnix.label;</button>
+			<button class="launchButton" id="restorePreviousSession">&historyRestoreLastSession.label;</button>
+		</div>
+	</div>
+
+	<div id="options-bg" onclick="newTabTools.hideOptions();"></div>
+
+	<div id="options">
+		<div id="options-close">
+			<button class="close-icon" onclick="newTabTools.hideOptions();" />
+		</div>
+		<div style="display: flex">
+			<div style="width: 350px" id="options-tile">
+				<fieldset>
+					<legend>&newtabtools.pin-url.header;</legend>
+					<div align="baseline">
+						<input id="options-pinURL-input" flex="1" type="autocomplete"
+							completeselectedindex="true" autocompletesearch="history"
+							enablehistory="true" showcommentcolumn="true" placeholder="&newtabtools.pin-url.placeholder;" />
+						<button id="options-pinURL">&newtabtools.pin-url.button;</button>
+					</div>
+				</fieldset>
+				<fieldset>
+					<legend>&newtabtools.tile-header;</legend>
+					<div pack="center">
+						<button id="options-previous-row-tile" class="arrow" tooltiptext="&newtabtools.tile-selection.previousrow.tooltip;" />
+					</div>
+					<div id="options-thumbnail-wrap" pack="center" align="center">
+						<button id="options-previous-tile" class="arrow" tooltiptext="&newtabtools.tile-selection.previous.tooltip;" />
+						<div id="options-thumbnail" class="newtab-thumbnail" flex="1"></div>
+						<button id="options-next-tile" class="arrow" tooltiptext="&newtabtools.tile-selection.next.tooltip;" />
+					</div>
+					<div pack="center">
+						<button id="options-next-row-tile" class="arrow" tooltiptext="&newtabtools.tile-selection.nextrow.tooltip;" />
+					</div>
+					<label id="options-url" flex="1" value="" crop="center" />
+					<label control="options-thumbnail-input">&newtabtools.tile-thumbnail.label;</label>
+					<div align="baseline">
+						<input id="options-thumbnail-input" flex="1" placeholder="&newtabtools.tile-thumbnail.placeholder;" />
+					</div>
+					<div pack="center" align="baseline">
+						<button id="options-thumbnail-browse">&newtabtools.tile-thumbnail.browse;</button>
+						<button id="options-thumbnail-set" disabled="true">&newtabtools.tile-thumbnail.set;</button>
+						<button id="options-thumbnail-remove" disabled="true">&newtabtools.tile-thumbnail.remove;</button>
+						<button id="options-thumbnail-refresh">&newtabtools.tile-thumbnail.refresh;</button>
+					</div>
+					<div pack="center" align="baseline">
+						<label control="options-bgcolor-input">&newtabtools.tile-thumbnail.bgcolor;</label>
+						<input id="options-bgcolor-input" type="color" />
+						<button id="options-bgcolor-displaybutton">
+							<div id="options-bgcolor-display">&#160;</div>
+						</button>
+						<button id="options-bgcolor-set">&newtabtools.tile-thumbnail.set;</button>
+						<button id="options-bgcolor-reset">&newtabtools.tile-thumbnail.remove;</button>
+					</div>
+					<label control="options-title-input">&newtabtools.tile-title.label;</label>
+					<div align="baseline">
+						<input id="options-title-input" flex="1" placeholder="&newtabtools.tile-title.placeholder;" />
+					</div>
+					<div pack="center">
+						<button id="options-title-set">&newtabtools.tile-title.set;</button>
+						<button id="options-title-reset" disabled="true">&newtabtools.tile-title.reset;</button>
+					</div>
+				</fieldset>
+				<fieldset id="options-bg-group">
+					<legend>&newtabtools.bg-header;</legend>
+					<div align="baseline">
+						<input id="options-bg-input" flex="1" placeholder="&newtabtools.bg.placeholder;" />
+					</div>
+					<div pack="center">
+						<button id="options-bg-browse">&newtabtools.bg.browse;</button>
+						<button id="options-bg-set" disabled="true">&newtabtools.bg.set;</button>
+						<button id="options-bg-remove" disabled="true">&newtabtools.bg.remove;</button>
+					</div>
+				</fieldset>
+			</div>
+			<div style="width: 400px; display: flex; flex-direction: column;">
+				<fieldset>
+					<legend>&newtabtools.options-header;</legend>
+					<table>
+						<tr id="options-theme-pref" pref="extensions.newtabtools.theme">
+							<th>&newtabtools.options.theme;</th>
+							<td>
+								<label><input type="radio" value="light" />&newtabtools.options.theme.light;</label>
+								<label><input type="radio" value="dark" />&newtabtools.options.theme.dark;</label>
+							</td>
+						</tr>
+						<tr pref="extensions.newtabtools.foreground.opacity">
+							<th>&newtabtools.options.foreground.opacity;</th>
+							<td>
+								<input type="range" max="100" min="0" step="10" />
+							</td>
+						</tr>
+						<tr pref="extensions.newtabtools.rows">
+							<th>&newtabtools.options.rows;</th>
+							<td>
+								<input type="number" max="10" min="1" size="2" />
+							</td>
+						</tr>
+						<tr pref="extensions.newtabtools.columns">
+							<th>&newtabtools.options.columns;</th>
+							<td>
+								<input type="number" max="10" min="1" size="2" />
+							</td>
+						</tr>
+						<tr pref="extensions.newtabtools.grid.margin">
+							<th>&newtabtools.options.grid.margin;</th>
+							<td>
+								<select>
+									<option value="small small small small">&newtabtools.options.size.small;</option>
+									<option value="medium medium medium medium">&newtabtools.options.size.medium;</option>
+									<option value="large large large large">&newtabtools.options.size.large;</option>
+								</select>
+							</td>
+						</tr>
+						<tr pref="extensions.newtabtools.grid.spacing">
+							<th>&newtabtools.options.grid.spacing;</th>
+							<td>
+								<select>
+									<option value="small">&newtabtools.options.size.small;</option>
+									<option value="medium">&newtabtools.options.size.medium;</option>
+									<option value="large">&newtabtools.options.size.large;</option>
+								</select>
+							</td>
+						</tr>
+						<tr pref="extensions.newtabtools.thumbs.titlesize">
+							<th>&newtabtools.options.thumb-titlesize;</th>
+							<td>
+								<select>
+									<option value="hidden">&newtabtools.options.launcher.hidden;</option>
+									<option value="small">&newtabtools.options.size.small;</option>
+									<option value="medium">&newtabtools.options.size.medium;</option>
+									<option value="large">&newtabtools.options.size.large;</option>
+								</select>
+							</td>
+						</tr>
+						<tr pref="extensions.newtabtools.launcher">
+							<th>&newtabtools.options.launcher;</th>
+							<td>
+								<select>
+									<option value="0">&newtabtools.options.launcher.hidden;</option>
+									<option value="1">&newtabtools.options.launcher.top;</option>
+									<option value="3">&newtabtools.options.launcher.bottom;</option>
+									<option value="4">&newtabtools.options.launcher.left;</option>
+									<option value="2">&newtabtools.options.launcher.right;</option>
+								</select>
+							</td>
+						</tr>
+						<tr pref="extensions.newtabtools.recent.show">
+							<th></th>
+							<td>
+								<label>
+									<input type="checkbox" />&newtabtools.options.recent;
+								</label>
+							</td>
+						</tr>
+						<tr pref="extensions.newtabtools.thumbs.hidebuttons" inverted="true">
+							<th></th>
+							<td>
+								<label>
+									<input type="checkbox" />&newtabtools.options.thumb-buttons;
+								</label>
+							</td>
+						</tr>
+						<tr pref="extensions.newtabtools.thumbs.hidefavicons" inverted="true">
+							<th></th>
+							<td>
+								<label>
+									<input type="checkbox" />&newtabtools.options.favicons;
+								</label>
+							</td>
+						</tr>
+						<tr pref="extensions.newtabtools.thumbs.contain">
+							<th></th>
+							<td>
+								<label>
+									<input type="checkbox" />&newtabtools.options.thumb-contain;
+								</label>
+							</td>
+						</tr>
+					</table>
+				</fieldset>
+				<div flex="1" />
+				<fieldset id="options-donate-wrap">
+					<div>
+						<label>&newtabtools.donate.label;</label>
+						<button id="options-donate">&newtabtools.donate;</button>
+					</div>
+					<div>
+						<a href="https://github.com/darktrojan/newtabtools">&newtabtools.github;</a>
+					</div>
+				</fieldset>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript;version=1.8" src="chrome://newtabtools/content/newTab.js" />
+	<script type="text/javascript;version=1.8" src="chrome://newtabtools/content/fx-newTab.js" />
+</body>
+</html>

@@ -2,10 +2,33 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
+[align="center"] {
+	align-items: center !important;
+	display: flex;
+}
+[align="baseline"] {
+	align-items: baseline !important;
+	display: flex;
+}
+[align="end"] {
+	align-items: flex-end !important;
+	display: flex;
+}
+[pack="center"] {
+	justify-content: center !important;
+	display: flex;
+}
+[flex="1"] {
+	flex: 1;
+}
+
 :root {
 	-moz-appearance: none;
+	font: message-box;
 	font-size: 12px;
+	color: #444;
 	background-color: transparent;
+	height: 100%;
 
 	--opacity: 0.8;
 	--text-hover: rgb(31, 54, 76);
@@ -24,20 +47,25 @@
 :root:not([page-disabled]) {
 	background-color: #f2f2f2;
 }
+body {
+	height: 100%;
+	display: flex;
+	margin: 0;
+}
 input[type=button] {
 	cursor: pointer;
 }
 /* SCROLLBOX */
 #newtab-scrollbox {
-	display: -moz-box;
+	display: flex;
 	position: relative;
-	-moz-box-flex: 1;
+	flex: 1;
 	-moz-user-focus: normal;
-	-moz-box-orient: vertical;
+	flex-direction: column;
 }
 :root[launcher="left"] #newtab-scrollbox,
 :root[launcher="right"] #newtab-scrollbox {
-	-moz-box-orient: horizontal;
+	flex-direction: row;
 }
 #newtab-scrollbox[page-disabled] {
 	background-image: none !important;
@@ -72,7 +100,7 @@ input[type=button] {
 #newtab-recent-outer {
 	white-space: nowrap;
 	line-height: 28px;
-	-moz-box-flex: 1;
+	flex: 1;
 }
 #newtab-recent {
 	overflow: hidden;
@@ -108,9 +136,9 @@ input[type=button] {
 }
 /* UNDO */
 #newtab-undo-container {
-	display: -moz-box;
-	-moz-box-align: center;
-	-moz-box-pack: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	-moz-margin-start: 1em;
 	padding: 4px 3px;
 	line-height: 18px;
@@ -192,22 +220,23 @@ input[type=button] {
 }
 /* MARGINS */
 #newtab-vertical-margin {
-	display: -moz-box;
+	display: flex;
 	position: relative;
-	-moz-box-flex: 1;
-	-moz-box-orient: vertical;
+	flex: 1;
+	flex-direction: column;
+	order: 2;
 }
 #newtab-horizontal-margin {
-	display: -moz-box;
-	-moz-box-flex: 5;
+	display: flex;
+	flex: 5;
 }
 #newtab-margin-top,
 #newtab-margin-bottom,
 .newtab-side-margin {
-	display: -moz-box;
-	-moz-box-align: center;
-	-moz-box-pack: center;
-	-moz-box-flex: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex: none;
 }
 #newtab-margin-top,
 #newtab-margin-bottom,
@@ -258,29 +287,29 @@ input[type=button] {
 	display: none;
 }
 :root[launcher] #launcher {
-	display: -moz-box;
-	-moz-box-align: center;
-	-moz-box-pack: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	text-align: center;
 }
 :root[launcher="top"] #launcher,
 :root[launcher="bottom"] #launcher {
-	-moz-box-orient: horizontal;
+	flex-direction: row;
 	width: 100%;
 }
 :root[launcher="right"] #launcher,
 :root[launcher="left"] #launcher {
-	-moz-box-orient: vertical;
+	flex-direction: column;
 	width: 90px;
 }
 :root[launcher="top"] #launcher,
 :root[launcher="left"] #launcher {
-	-moz-box-ordinal-group: 0;
+	order: 1;
 }
 /* LAUNCH BUTTONS */
 .launchButton {
-	display: -moz-box;
-	-moz-box-orient: vertical;
+	display: flex;
+	flex-direction: column;
 	margin: 1px 1px;
 	padding: 10px 6px;
 	vertical-align: top;
@@ -376,9 +405,9 @@ input[type=button] {
 }
 /* GRID */
 #newtab-grid {
-	display: -moz-box;
-	-moz-box-flex: 5;
-	-moz-box-orient: vertical;
+	display: flex;
+	flex: 5;
+	flex-direction: column;
 	min-width: 600px;
 	min-height: 400px;
 	transition: 100ms ease-out;
@@ -393,10 +422,10 @@ input[type=button] {
 }
 /* ROWS */
 .newtab-row {
-	display: -moz-box;
-	-moz-box-orient: horizontal;
+	display: flex;
+	flex-direction: row;
 	-moz-box-direction: normal;
-	-moz-box-flex: 1;
+	flex: 1;
 	margin-bottom: 5px;
 }
 :root[spacing="medium"] .newtab-row:not(:last-child) {
@@ -410,8 +439,8 @@ input[type=button] {
 }
 /* CELLS */
 .newtab-cell {
-	display: -moz-box;
-	-moz-box-flex: 1;
+	display: flex;
+	flex: 1;
 	-moz-margin-end: 5px;
 }
 :root[spacing="medium"] .newtab-cell:not(:last-child) {
@@ -426,7 +455,7 @@ input[type=button] {
 /* SITES */
 .newtab-site {
 	position: relative;
-	-moz-box-flex: 1;
+	flex: 1;
 	transition: 100ms ease-out;
 	text-decoration: none;
 	transition-property: top, left, opacity;
@@ -599,7 +628,7 @@ input[type=button] {
 }
 /* OPTIONS */
 #newtab-margin-right-top {
-	-moz-box-pack: start;
+	justify-content: flex-start;
 }
 :root[spacing="medium"] #newtab-margin-right-top:-moz-any(.medium, .large) #options-toggle {
 	-moz-margin-start: 8px;
@@ -713,22 +742,28 @@ input[type=button] {
 	box-sizing: border-box;
 	box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5);
 }
-#options toolbarbutton {
-	-moz-appearance: none;
+#options fieldset {
 	border: none;
 }
-#options groupbox {
-	-moz-appearance: none;
-	border: none;
-}
-#options caption {
+#options legend {
 	margin: 0;
 	font-weight: bold;
 }
-#options button {
+#options button:not(.arrow) {
 	min-width: 0;
 	-moz-margin-start: 0;
 	-moz-margin-end: 0;
+	padding: 0;
+}
+#options input,
+#options button:not(.arrow),
+#options select {
+	font-size: 12px;
+	color: #444;
+	margin: 0;
+}
+#options button:disabled {
+	color: #888;
 }
 #options-close {
 	position: absolute;
@@ -740,24 +775,27 @@ input[type=button] {
 #options-tile {
 	-moz-margin-end: 2em;
 }
+#options-thumbnail-wrap {
+	margin: 0 1em;
+}
+button.arrow {
+	background-image: url("arrow.svg");
+	width: 24px;
+	height: 24px;
+	margin: 3px;
+	padding: 0;
+	-moz-appearance: none;
+	border: none;
+}
 #options-previous-row-tile {
 	margin-top: -1.5em;
-	list-style-image: url("arrow.svg");
 	transform: rotate(90deg);
 }
-#options-previous-tile {
-	list-style-image: url("arrow.svg");
-}
 #options-next-tile {
-	list-style-image: url("arrow.svg");
 	transform: scalex(-1);
 }
 #options-next-row-tile {
-	list-style-image: url("arrow.svg");
 	transform: rotate(-90deg);
-}
-#options-thumbnail-wrap {
-	margin: 0 1em;
 }
 #options-thumbnail {
 	width: 200px;
@@ -765,7 +803,7 @@ input[type=button] {
 	margin: 0 auto;
 	opacity: 1;
 	position: static;
-	-moz-box-flex: 1;
+	flex: 1;
 }
 #options-url {
 	text-align: center;
@@ -777,39 +815,30 @@ input[type=button] {
 	width: 24px;
 	outline: 1px currentcolor solid;
 }
-setting {
-	display: -moz-grid-line;
-	-moz-box-align: baseline;
+table {
+	width: 100%;
+	border-collapse: collapse;
 }
-setting[hidden] {
-	visibility: collapse;
+tr {
+	height: 31px;
 }
-setting[type="bool"] {
-	-moz-binding: url("chrome://mozapps/content/extensions/setting.xml#setting-bool");
+th, td {
+	text-align: left;
+	font-weight: normal;
+	margin: 0;
+	padding: 2px 5px;
+	line-height: 27px;
+	vertical-align: middle;
 }
-setting[type="integer"] {
-	-moz-binding: url("chrome://mozapps/content/extensions/setting.xml#setting-integer");
+#options td > label > input {
+	margin-inline-end: 4px;
 }
-setting[type="control"] {
-	-moz-binding: url("chrome://mozapps/content/extensions/setting.xml#setting-control");
-}
-setting[type="menulist"],
-setting[type="radio"] {
-	-moz-binding: url("setting.xml#setting-multi");
-}
-setting[type="range"] {
-	-moz-binding: url("setting.xml#setting-range");
+td > label > * {
+	vertical-align: middle;
 }
 .preferences-alignment {
 	min-height: 30px;
-	-moz-box-align: center;
-}
-.preferences-learnmore,
-.preferences-description {
-	display: none;
-}
-menulist {
-	font-size: 100%;
+	align-items: center;
 }
 input[type="range"] {
 	width: 200px;
@@ -817,6 +846,7 @@ input[type="range"] {
 #options-donate-wrap {
 	border: 1px #b2aeaa solid !important;
 	background-color: #f9f9f9;
+	text-align: center;
 }
 #options-donate-wrap > :first-child {
 	margin: 0.5em 0.5em 0;
