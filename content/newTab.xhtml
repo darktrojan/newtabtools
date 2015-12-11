@@ -76,9 +76,8 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 				<fieldset>
 					<legend>&newtabtools.pin-url.header;</legend>
 					<div class="options-row">
-						<input id="options-pinURL-input" type="autocomplete"
-							completeselectedindex="true" autocompletesearch="history"
-							enablehistory="true" showcommentcolumn="true" placeholder="&newtabtools.pin-url.placeholder;" />
+						<input id="options-pinURL-input" type="url" list="autocomplete" autocomplete="off" placeholder="&newtabtools.pin-url.placeholder;" oninput="newTabTools.autocomplete(this);" />
+						<datalist id="autocomplete"></datalist>
 						<button id="options-pinURL">&newtabtools.pin-url.button;</button>
 					</div>
 				</fieldset>
@@ -98,7 +97,7 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 					<label id="options-url"></label>
 					<label for="options-thumbnail-input">&newtabtools.tile-thumbnail.label;</label>
 					<div class="options-row">
-						<input id="options-thumbnail-input" placeholder="&newtabtools.tile-thumbnail.placeholder;" />
+						<input id="options-thumbnail-input" autocomplete="off" placeholder="&newtabtools.tile-thumbnail.placeholder;" />
 					</div>
 					<div class="options-row">
 						<button id="options-thumbnail-browse">&newtabtools.tile-thumbnail.browse;</button>
@@ -127,7 +126,7 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 				<fieldset id="options-bg-group">
 					<legend>&newtabtools.bg-header;</legend>
 					<div class="options-row">
-						<input id="options-bg-input" placeholder="&newtabtools.bg.placeholder;" />
+						<input id="options-bg-input" autocomplete="off" placeholder="&newtabtools.bg.placeholder;" />
 					</div>
 					<div class="options-row">
 						<button id="options-bg-browse">&newtabtools.bg.browse;</button>

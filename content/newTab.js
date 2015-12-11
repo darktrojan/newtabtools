@@ -23,6 +23,11 @@ XPCOMUtils.defineLazyModuleGetter(this, 'PageThumbUtils', 'resource://gre/module
 XPCOMUtils.defineLazyModuleGetter(this, 'PlacesUtils', 'resource://gre/modules/PlacesUtils.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'PrivateBrowsingUtils', 'resource://gre/modules/PrivateBrowsingUtils.jsm');
 
+/* globals autocompleteService */
+XPCOMUtils.defineLazyServiceGetter(
+	this, 'autocompleteService', '@mozilla.org/autocomplete/search;1?name=history', 'nsIAutoCompleteSearch'
+);
+
 var HTML_NAMESPACE = 'http://www.w3.org/1999/xhtml';
 
 function inPrivateBrowsingMode() {
@@ -32,6 +37,31 @@ function inPrivateBrowsingMode() {
 var gGridPrefs = GridPrefs;
 
 var newTabTools = {
+	_previousAutocompleteString: '',
+	_previousAutocompleteResult: null,
+	autocomplete: function(input) {
+		if (!!this._previousAutocompleteString && input.value.indexOf(this._previousAutocompleteString) > -1) {
+			return;
+		}
+		if (input.value.length < 3) {
+			while (this.pinURLAutocomplete.lastChild) {
+				this.pinURLAutocomplete.lastChild.remove();
+			}
+			return;
+		}
+		autocompleteService.stopSearch();
+		autocompleteService.startSearch(input.value, '', this._previousAutocompleteResult, {
+			onSearchResult: (function(s, r) {
+				for (let i = 0; i < r.matchCount; i++) {
+					let option = document.createElement('option');
+					option.textContent = r.getValueAt(i);
+					this.pinURLAutocomplete.appendChild(option);
+				}
+				this._previousAutocompleteResult = r;
+				this._previousAutocompleteString = input.value;
+			}).bind(this)
+		});
+	},
 	launcherOnClick: function(event) {
 		switch (event.originalTarget.id) {
 		case 'downloads':
@@ -631,6 +661,7 @@ var newTabTools = {
 		'optionsToggleButton': 'options-toggle',
 		'optionsTogglePointer': 'options-toggle-pointer',
 		'pinURLInput': 'options-pinURL-input',
+		'pinURLAutocomplete': 'autocomplete',
 		'tilePreviousRow': 'options-previous-row-tile',
 		'tilePrevious': 'options-previous-tile',
 		'tileNext': 'options-next-tile',
