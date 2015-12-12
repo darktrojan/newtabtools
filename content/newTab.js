@@ -43,7 +43,7 @@ var newTabTools = {
 		if (!!this._previousAutocompleteString && input.value.indexOf(this._previousAutocompleteString) > -1) {
 			return;
 		}
-		if (input.value.length < 3) {
+		if (input.value.length < 2) {
 			while (this.pinURLAutocomplete.lastChild) {
 				this.pinURLAutocomplete.lastChild.remove();
 			}
@@ -623,6 +623,7 @@ var newTabTools = {
 			this.backgroundOptions.hidden = this.themePref.hidden = !BackgroundImage.modeIsSingle;
 			document.documentElement.removeAttribute('options-hidden');
 			this.selectedSiteIndex = 0;
+			this.pinURLInput.focus();
 		} else {
 			this.hideOptions();
 		}
@@ -703,9 +704,20 @@ var newTabTools = {
 		newTabTools.optionsToggleButton.title = document.getElementById('settingsUnix').textContent;
 	}
 
+	function keyUpHandler(event) {
+		if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].indexOf(event.key) > -1) {
+			newTabTools.optionsOnChange(event);
+		} else if (event.key == 'Escape') {
+			newTabTools.hideOptions();
+		}
+	}
+
 	newTabTools.optionsToggleButton.addEventListener('click', newTabTools.toggleOptions.bind(newTabTools), false);
 	newTabTools.optionsPane.addEventListener('click', newTabTools.optionsOnClick.bind(newTabTools), false);
 	newTabTools.optionsPane.addEventListener('change', newTabTools.optionsOnChange.bind(newTabTools), false);
+	for (let c of newTabTools.optionsPane.querySelectorAll('select, input[type="range"]')) {
+		c.addEventListener('keyup', keyUpHandler);
+	}
 	newTabTools.launcher.addEventListener('click', newTabTools.launcherOnClick, false);
 	newTabTools.setThumbnailInput.addEventListener('keyup', function() {
 		newTabTools.setThumbnailButton.disabled = !/^(file|ftp|http|https):\/\//.exec(this.value);
