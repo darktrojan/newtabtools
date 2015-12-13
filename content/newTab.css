@@ -146,6 +146,7 @@ input[type="button"] {
 	text-decoration: none;
 	min-width: 0;
 	font-size: 100%;
+	color: -moz-nativehyperlinktext;
 }
 .newtab-undo-button:hover {
 	text-decoration: underline;
@@ -814,7 +815,8 @@ button.arrow {
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
-	width: 100%;
+	width: 300px;
+	margin: 0 auto 10px;
 }
 #options-bgcolor-input {
 	visibility: collapse;

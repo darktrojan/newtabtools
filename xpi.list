@@ -2,6 +2,7 @@ bootstrap.js
 chrome.manifest
 content
 content/arrow.svg
+content/close.svg
 content/controls.png
 content/controls@2x.png
 content/export.jsm
@@ -14,16 +15,14 @@ content/launcher/dark/*
 content/launcher/light/*
 content/newTab.css
 content/newTab.js
-content/newTab.xul
+content/newTab.xhtml
 content/newTabTools.jsm
 content/options-dark.svg
 content/options-light.svg
 content/pointer.png
 content/pointer-rtl.png
-content/setting.xml
 icon.png
 icon64.png
 install.rdf
 locale/*
-skin/*
 options.xul
