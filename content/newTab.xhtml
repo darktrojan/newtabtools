@@ -70,8 +70,8 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 		<div id="options-close">
 			<button class="close-icon" onclick="newTabTools.hideOptions();"></button>
 		</div>
-		<div style="display: flex">
-			<div style="width: 350px" id="options-tile">
+		<div id="options-inner">
+			<div id="options-tile">
 				<fieldset>
 					<legend>&newtabtools.pin-url.header;</legend>
 					<div class="options-row">
@@ -134,7 +134,7 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 					</div>
 				</fieldset>
 			</div>
-			<div style="width: 400px; display: flex; flex-direction: column;">
+			<div id="options-page">
 				<fieldset>
 					<legend>&newtabtools.options-header;</legend>
 					<table>
@@ -240,7 +240,7 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 						</tr>
 					</table>
 				</fieldset>
-				<div style="flex: 1"></div>
+				<div class="spacer"></div>
 				<fieldset id="options-donate-wrap">
 					<div>
 						<label>&newtabtools.donate.label;</label>
