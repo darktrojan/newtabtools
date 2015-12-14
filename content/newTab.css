@@ -707,7 +707,8 @@ input[type="button"] {
 :root:not([options-hidden]) #options-toggle-pointer {
 	visibility: hidden;
 }
-:root:not([options-hidden]) #newtab-scrollbox {
+:root:not([options-hidden]) #newtab-scrollbox,
+:root:not([options-hidden]) .newtab-background {
 	filter: blur(1px);
 }
 #options-bg {
