@@ -1,6 +1,7 @@
 <!ENTITY newtabtools.options.theme "Theme">
 <!ENTITY newtabtools.options.theme.light "Light Theme">
 <!ENTITY newtabtools.options.theme.dark "Dark Theme">
+<!ENTITY newtabtools.options.foreground.opacity "Foreground Opacity">
 <!ENTITY newtabtools.options.rows "行">
 <!ENTITY newtabtools.options.columns "列">
 <!ENTITY newtabtools.options.grid.margin "マージン">

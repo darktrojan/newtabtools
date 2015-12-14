@@ -1,6 +1,7 @@
 <!ENTITY newtabtools.options.theme "Tēma">
 <!ENTITY newtabtools.options.theme.light "Gaiša">
 <!ENTITY newtabtools.options.theme.dark "Tumša">
+<!ENTITY newtabtools.options.foreground.opacity "Foreground Opacity">
 <!ENTITY newtabtools.options.rows "Rindas">
 <!ENTITY newtabtools.options.columns "Kolonnas">
 <!ENTITY newtabtools.options.grid.margin "Režģa malas">

@@ -1,6 +1,7 @@
 <!ENTITY newtabtools.options.theme "Thema">
 <!ENTITY newtabtools.options.theme.light "Licht thema">
 <!ENTITY newtabtools.options.theme.dark "Donker thema">
+<!ENTITY newtabtools.options.foreground.opacity "Foreground Opacity">
 <!ENTITY newtabtools.options.rows "Rijen">
 <!ENTITY newtabtools.options.columns "Kolommen">
 <!ENTITY newtabtools.options.grid.margin "Rasterafmeting">

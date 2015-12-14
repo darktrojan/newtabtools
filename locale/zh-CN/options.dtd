@@ -1,6 +1,7 @@
 <!ENTITY newtabtools.options.theme "主题">
 <!ENTITY newtabtools.options.theme.light "亮色主题">
 <!ENTITY newtabtools.options.theme.dark "暗色主题">
+<!ENTITY newtabtools.options.foreground.opacity "Foreground Opacity">
 <!ENTITY newtabtools.options.rows "纵向列">
 <!ENTITY newtabtools.options.columns "横向行">
 <!ENTITY newtabtools.options.grid.margin "磁贴周围留白">

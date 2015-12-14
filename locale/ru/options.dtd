@@ -1,6 +1,7 @@
 <!ENTITY newtabtools.options.theme "Выбор темы оформления">
 <!ENTITY newtabtools.options.theme.light "Светлая Тема">
 <!ENTITY newtabtools.options.theme.dark "Темная Тема">
+<!ENTITY newtabtools.options.foreground.opacity "Foreground Opacity">
 <!ENTITY newtabtools.options.rows "Количество Строк">
 <!ENTITY newtabtools.options.columns "Количество Столбцов">
 <!ENTITY newtabtools.options.grid.margin "Отступ от края">
