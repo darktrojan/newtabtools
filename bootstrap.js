@@ -36,9 +36,10 @@ XPCOMUtils.defineLazyModuleGetter(this, 'PageThumbs', 'resource://gre/modules/Pa
 XPCOMUtils.defineLazyModuleGetter(this, 'Task', 'resource://gre/modules/Task.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'TileData', 'chrome://newtabtools/content/newTabTools.jsm');
 
-/* globals idleService, annoService */
+/* globals idleService, annoService, aboutNewTabService */
 XPCOMUtils.defineLazyServiceGetter(this, 'idleService', '@mozilla.org/widget/idleservice;1', 'nsIIdleService');
 XPCOMUtils.defineLazyServiceGetter(this, 'annoService', '@mozilla.org/browser/annotation-service;1', 'nsIAnnotationService');
+XPCOMUtils.defineLazyServiceGetter(this, 'aboutNewTabService', '@mozilla.org/browser/aboutnewtab-service;1', 'nsIAboutNewTabService');
 
 let browserPrefs = Services.prefs.getBranch('browser.newtabpage.');
 let userPrefs = Services.prefs.getBranch(EXTENSION_PREFS);
@@ -241,7 +242,17 @@ function shutdown(aParams, aReason) {
 }
 
 function uiStartup(aParams, aReason) {
-	if (NewTabURL.overridden) {
+	let overridden = false;
+	let reset;
+	if (Services.vc.compare(Services.appinfo.platformVersion, 44) >= 0) {
+		overridden = aboutNewTabService.overridden;
+		reset = aboutNewTabService.resetNewTabURL;
+	} else {
+		overridden = NewTabURL.overridden;
+		reset = NewTabURL.reset;
+	}
+
+	if (overridden) {
 		let recentWindow = Services.wm.getMostRecentWindow(BROWSER_WINDOW);
 
 		recentWindow.setTimeout(function() {
@@ -256,7 +267,7 @@ function uiStartup(aParams, aReason) {
 					label: label,
 					accessKey: accessKey,
 					callback: function() {
-						NewTabURL.reset();
+						reset();
 					}
 				}]
 			);
