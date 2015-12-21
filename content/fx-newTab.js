@@ -912,6 +912,9 @@ Site.prototype = {
 			let thumbnail = this._querySelector('.newtab-thumbnail');
 			thumbnail.style.backgroundImage = 'url(' + thumbnailURL + ')';
 			thumbnail.style.backgroundColor = TileData.get(this.url, 'backgroundColor');
+			if (thumbnailURL.startsWith('file://')) {
+				thumbnail.classList.add('custom-thumbnail');
+			}
 		});
 	},
 

@@ -163,10 +163,10 @@ var newTabTools = {
 		case 'options-bgcolor-reset':
 			TileData.set(this.selectedSite.url, 'backgroundColor', null);
 			this.siteThumbnail.style.backgroundColor =
-			this.setBgColourInput.value =
-			this.setBgColourDisplay.style.backgroundColor = null;
+				this.setBgColourInput.value =
+				this.setBgColourDisplay.style.backgroundColor = null;
 			this.setBgColourButton.disabled =
-			this.resetBgColourButton.disabled = true;
+				this.resetBgColourButton.disabled = true;
 			break;
 		case 'options-title-set':
 			this.setTitle(this.selectedSite, this.setTitleInput.value);
@@ -589,11 +589,13 @@ var newTabTools = {
 			if (thumbnail.startsWith('file:')) {
 				this.removeThumbnailButton.disabled = false;
 				this.captureThumbnailButton.disabled = true;
+				this.siteThumbnail.classList.add('custom-thumbnail');
 			} else {
 				OS.File.exists(PageThumbsStorage.getFilePathForURL(site.url)).then((exists) => {
 					this.removeThumbnailButton.disabled = !exists;
 					this.captureThumbnailButton.disabled = false;
 				});
+				this.siteThumbnail.classList.remove('custom-thumbnail');
 			}
 		});
 
@@ -608,10 +610,10 @@ var newTabTools = {
 		this.siteURL.textContent = site.url;
 		let backgroundColor = TileData.get(site.url, 'backgroundColor');
 		this.siteThumbnail.style.backgroundColor =
-		this.setBgColourInput.value =
-		this.setBgColourDisplay.style.backgroundColor = backgroundColor;
+			this.setBgColourInput.value =
+			this.setBgColourDisplay.style.backgroundColor = backgroundColor;
 		this.setBgColourButton.disabled =
-		this.resetBgColourButton.disabled = !backgroundColor;
+			this.resetBgColourButton.disabled = !backgroundColor;
 		let title = TileData.get(site.url, 'title');
 		this.setTitleInput.value = title || site.title || site.url;
 		this.resetTitleButton.disabled = title === null;

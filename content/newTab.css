@@ -486,10 +486,12 @@ input[type="button"] {
 	background-clip: padding-box;
 	background-repeat: no-repeat;
 	background-size: cover;
+	background-position: center top;
 	background-color: var(--background-fill);
 	margin-bottom: 24px;
 	box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
 }
+.newtab-thumbnail.custom-thumbnail,
 :root.containThumbs .newtab-thumbnail {
 	background-size: contain;
 	background-position: 50% 50%;
