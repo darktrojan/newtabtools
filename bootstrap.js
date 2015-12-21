@@ -43,8 +43,6 @@ XPCOMUtils.defineLazyServiceGetter(this, 'annoService', '@mozilla.org/browser/an
 let browserPrefs = Services.prefs.getBranch('browser.newtabpage.');
 let userPrefs = Services.prefs.getBranch(EXTENSION_PREFS);
 
-let prefObserver, notificationObserver, windowObserver, optionsObserver, expirationFilter, idleObserver;
-
 /* exported install, uninstall, startup, shutdown */
 function install(aParams, aReason) {
 	if (aReason == ADDON_UPGRADE) {
@@ -266,7 +264,7 @@ function uiStartup(aParams, aReason) {
 	}
 }
 
-prefObserver = {
+var prefObserver = {
 	observe: function(aSubject, aTopic, aData) {
 		switch (aData) {
 		case 'grid.margin':
@@ -299,7 +297,7 @@ prefObserver = {
 	}
 };
 
-notificationObserver = {
+var notificationObserver = {
 	observe: function(aSubject, aTopic, aData) {
 		switch (aData) {
 		case 'background':
@@ -319,7 +317,7 @@ notificationObserver = {
 	}
 };
 
-windowObserver = {
+var windowObserver = {
 	observe: function(aSubject) {
 		aSubject.addEventListener('load', function() {
 			windowObserver.paint(aSubject);
@@ -472,7 +470,7 @@ function enumerateTabs(aCallback) {
 	}
 }
 
-optionsObserver = {
+var optionsObserver = {
 	observe: function(aDocument, aTopic, aData) {
 		switch (aTopic) {
 		case 'addon-options-displayed':
@@ -495,7 +493,7 @@ optionsObserver = {
 	},
 };
 
-expirationFilter = {
+var expirationFilter = {
 	init: function() {
 		PageThumbs.addExpirationFilter(this);
 	},
@@ -528,7 +526,7 @@ expirationFilter = {
 	}
 };
 
-idleObserver = {
+var idleObserver = {
 	observe: function(service, state) {
 		if (state != 'idle') {
 			return;
