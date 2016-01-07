@@ -188,6 +188,7 @@ input[type="button"] {
 	padding: 0;
 	border: none;
 	background: -216px 0 transparent url("controls.png");
+	z-index: 1;
 }
 #newtab-toggle:-moz-locale-dir(rtl) {
 	left: 12px;
