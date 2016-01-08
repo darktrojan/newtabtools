@@ -4,7 +4,7 @@
 /* globals Services, XPCOMUtils, TileData, SavedThumbs, -length */
 /* globals Ci, Cu, HTML_NAMESPACE, inPrivateBrowsingMode, gGridPrefs, newTabTools */
 
-/* globals BackgroundPageThumbs, NewTabUtils */
+/* globals BackgroundPageThumbs, NewTabUtils, ThumbnailPrefs */
 Cu.import('resource://gre/modules/BackgroundPageThumbs.jsm');
 Cu.import('resource://gre/modules/NewTabUtils.jsm');
 
@@ -606,6 +606,7 @@ var gGrid = {
 		}
 
 		this._renderSites();
+		this.setThumbnailPrefs();
 	},
 
 	_shouldRenderGrid: function Grid_shouldRenderGrid() {
@@ -614,6 +615,11 @@ var gGrid = {
 
 		return (rowsLength != gGridPrefs.gridRows ||
 		cellsLength != (gGridPrefs.gridRows * gGridPrefs.gridColumns));
+	},
+
+	setThumbnailPrefs: function Grid_setThumbnailPrefs() {
+		let firstCell = this._cells[0]._node.querySelector('.newtab-thumbnail');
+		ThumbnailPrefs.setOnce(firstCell.clientWidth * 2, firstCell.clientHeight * 2);
 	}
 };
 

@@ -11,7 +11,7 @@ var { classes: Cc, interfaces: Ci, utils: Cu } = Components;
 Cu.import('resource://gre/modules/PageThumbs.jsm');
 Cu.import('resource://gre/modules/Services.jsm');
 Cu.import('resource://gre/modules/XPCOMUtils.jsm');
-/* globals GridPrefs, BackgroundImage, TileData, SavedThumbs */
+/* globals GridPrefs, BackgroundImage, TileData, SavedThumbs, ThumbnailPrefs */
 Cu.import('chrome://newtabtools/content/newTabTools.jsm');
 
 /* globals FileUtils, NetUtil, SessionStore, OS, PageThumbUtils, PlacesUtils, PrivateBrowsingUtils */
@@ -206,14 +206,19 @@ var newTabTools = {
 		switch (event.originalTarget.type) {
 		case 'radio':
 		case 'select-one':
+			ThumbnailPrefs.hasBeenSet = false;
 			if (event.originalTarget.name == 'launcher') {
 				this.prefs.setIntPref(event.originalTarget.name, parseInt(event.originalTarget.value, 10));
 			} else {
 				this.prefs.setCharPref(event.originalTarget.name, event.originalTarget.value);
 			}
+			gGrid.setThumbnailPrefs();
 			break;
-		case 'range':
 		case 'number':
+			ThumbnailPrefs.hasBeenSet = false;
+			// Prefs set by grid redrawing itself.
+			/* falls through */
+		case 'range':
 			this.prefs.setIntPref(event.originalTarget.name, parseInt(event.originalTarget.value, 10));
 			break;
 		case 'checkbox':
