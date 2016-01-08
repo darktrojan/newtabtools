@@ -8,13 +8,12 @@ let { classes: Cc, interfaces: Ci, utils: Cu } = Components;
 Cu.import('resource://gre/modules/Services.jsm');
 Cu.import('resource://gre/modules/XPCOMUtils.jsm');
 
-/* globals BackgroundPageThumbs, FileUtils, NewTabUtils, OS, PageThumbs, PageThumbUtils, PageThumbsStorage */
+/* globals BackgroundPageThumbs, FileUtils, NewTabUtils, OS, PageThumbs, PageThumbsStorage */
 XPCOMUtils.defineLazyModuleGetter(this, 'BackgroundPageThumbs', 'resource://gre/modules/BackgroundPageThumbs.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'FileUtils', 'resource://gre/modules/FileUtils.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'NewTabUtils', 'resource://gre/modules/NewTabUtils.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'OS', 'resource://gre/modules/osfile.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'PageThumbs', 'resource://gre/modules/PageThumbs.jsm');
-XPCOMUtils.defineLazyModuleGetter(this, 'PageThumbUtils', 'resource://gre/modules/PageThumbUtils.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'PageThumbsStorage', 'resource://gre/modules/PageThumbs.jsm');
 
 /* globals idleService */
