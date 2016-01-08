@@ -168,6 +168,7 @@ function startup(aParams, aReason) {
 
 	Services.obs.addObserver(optionsObserver, 'addon-options-displayed', false);
 	expirationFilter.init();
+	messageListener.init();
 
 	AddonManager.addAddonListener({
 		// If we call reload in shutdown, the page override is
@@ -234,6 +235,7 @@ function shutdown(aParams, aReason) {
 	Cu.unload('chrome://newtabtools/content/newTabTools.jsm');
 
 	expirationFilter.cleanup();
+	messageListener.destroy();
 
 	try {
 		idleService.removeIdleObserver(idleObserver, IDLE_TIMEOUT);
@@ -561,5 +563,17 @@ var idleObserver = {
 		}]);
 
 		userPrefs.setIntPref('donationreminder', Date.now() / 1000);
+	}
+};
+
+var messageListener = {
+	// Work around bug 1051238.
+	_processScriptURL: 'chrome://newtabtools/content/process.js?' + Math.random(),
+	init: function() {
+		Services.ppmm.loadProcessScript(this._processScriptURL, true);
+	},
+	destroy: function() {
+		Services.ppmm.removeDelayedProcessScript(this._processScriptURL, true);
+		Services.ppmm.broadcastAsyncMessage('NewTabTools:disable');
 	}
 };

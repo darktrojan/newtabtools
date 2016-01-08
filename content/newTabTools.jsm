@@ -401,7 +401,6 @@ let ThumbnailPrefs = {
 
 		Services.prefs.setIntPref(this.PREF_WIDTH, width);
 		Services.prefs.setIntPref(this.PREF_HEIGHT, height);
-		delete PageThumbUtils._thumbnailWidth;
-		delete PageThumbUtils._thumbnailHeight;
+		Services.ppmm.broadcastAsyncMessage('NewTabTools:uncacheThumbnailPrefs');
 	}
 };
