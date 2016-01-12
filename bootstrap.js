@@ -84,6 +84,8 @@ function install(aParams, aReason) {
 function uninstall(aParams, aReason) {
 	if (aReason == ADDON_UNINSTALL) {
 		Services.prefs.deleteBranch(EXTENSION_PREFS);
+		Services.prefs.clearUserPref('toolkit.pageThumbs.minWidth');
+		Services.prefs.clearUserPref('toolkit.pageThumbs.minHeight');
 	}
 }
 function startup(aParams, aReason) {
@@ -98,6 +100,7 @@ function startup(aParams, aReason) {
 	defaultPrefs.setBoolPref('optionspointershown', false);
 	defaultPrefs.setBoolPref('recent.show', true);
 	defaultPrefs.setCharPref('theme', 'light');
+	defaultPrefs.setIntPref('thumbs.prefs.delay', 1);
 	defaultPrefs.setBoolPref('thumbs.contain', false);
 	defaultPrefs.setBoolPref('thumbs.hidebuttons', false);
 	defaultPrefs.setBoolPref('thumbs.hidefavicons', false);
@@ -461,7 +464,8 @@ var windowObserver = {
 	findCellTarget: function(aDocument) {
 		// This probably isn't going to work once about:newtab is put in a content process.
 		let target = aDocument.popupNode;
-		if (!target || target.ownerDocument.location.href != 'about:newtab') {
+		if (!target || !target.ownerDocument.location ||
+				target.ownerDocument.location.href != 'about:newtab') {
 			return null;
 		}
 

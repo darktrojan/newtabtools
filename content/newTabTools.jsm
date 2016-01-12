@@ -390,10 +390,11 @@ Services.prefs.addObserver('extensions.newtabtools.background.', BackgroundImage
 let ThumbnailPrefs = {
 	PREF_WIDTH: 'toolkit.pageThumbs.minWidth',
 	PREF_HEIGHT: 'toolkit.pageThumbs.minHeight',
+	PREF_DELAY: 'extensions.newtabtools.thumbs.prefs.delay',
 
 	hasBeenSet: false,
 	setOnce: function(width, height) {
-		if (this.hasBeenSet) {
+		if (this.hasBeenSet || this.delay < 0) {
 			return;
 		}
 		this.hasBeenSet = true;
@@ -401,5 +402,13 @@ let ThumbnailPrefs = {
 		Services.prefs.setIntPref(this.PREF_WIDTH, width);
 		Services.prefs.setIntPref(this.PREF_HEIGHT, height);
 		Services.ppmm.broadcastAsyncMessage('NewTabTools:uncacheThumbnailPrefs');
-	}
+	},
+	observe: function() {
+		this.delay = Services.prefs.getIntPref(ThumbnailPrefs.PREF_DELAY);
+	},
+	QueryInterface: XPCOMUtils.generateQI([Ci.nsIObserver, Ci.nsISupportsWeakReference]),
 };
+XPCOMUtils.defineLazyGetter(ThumbnailPrefs, 'delay', function() {
+	Services.prefs.addObserver(ThumbnailPrefs.PREF_DELAY, ThumbnailPrefs, true);
+	return Services.prefs.getIntPref(ThumbnailPrefs.PREF_DELAY);
+});

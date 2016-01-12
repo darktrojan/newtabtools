@@ -618,8 +618,15 @@ var gGrid = {
 	},
 
 	setThumbnailPrefs: function Grid_setThumbnailPrefs() {
+		let delay = ThumbnailPrefs.delay;
+		if (delay < 0) {
+			return;
+		}
+
 		let firstCell = this._cells[0]._node.querySelector('.newtab-thumbnail');
-		ThumbnailPrefs.setOnce(firstCell.clientWidth * 2, firstCell.clientHeight * 2);
+		setTimeout(function() {
+			ThumbnailPrefs.setOnce(firstCell.clientWidth * 2, firstCell.clientHeight * 2);
+		}, delay * 1000);
 	}
 };
 
