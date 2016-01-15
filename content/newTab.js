@@ -442,6 +442,9 @@ var newTabTools = {
 		let showRecent = this.prefs.getBoolPref('recent.show');
 		document.querySelector('[name="recent.show"]').checked = showRecent;
 		this.trimRecent();
+
+		let dataCollection = this.prefs.getBoolPref('datacollection.optin');
+		document.querySelector('[name="datacollection.optin"]').checked = dataCollection;
 	},
 	updateGridPrefs: function() {
 		document.querySelector('[name="rows"]').value = gGridPrefs.gridRows;
@@ -709,6 +712,12 @@ var newTabTools = {
 	} else {
 		document.getElementById('settingsWin').style.display = 'none';
 		newTabTools.optionsToggleButton.title = document.getElementById('settingsUnix').textContent;
+	}
+
+	let chromeRegistry = Components.classes['@mozilla.org/chrome/chrome-registry;1']
+		.getService(Components.interfaces.nsIXULChromeRegistry);
+	if (['en-US', 'en-GB'].indexOf(chromeRegistry.getSelectedLocale('newtabtools')) >= 0) {
+		document.getElementById('options-datacollection').hidden = false;
 	}
 
 	function keyUpHandler(event) {

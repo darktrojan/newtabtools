@@ -33,6 +33,10 @@
 
 <!ENTITY newtabtools.options-header "Επιλογές:">
 
+<!-- Data collection is only enabled for en-US and en-GB users, but this might change in future. -->
+<!ENTITY newtabtools.datacollection.optin "Help improve New Tab Tools by submitting anonymous usage data">
+<!ENTITY newtabtools.datacollection.privacypolicy "Privacy Policy">
+
 <!ENTITY newtabtools.donate.label "To New Tab Tools χρηματοδοτείται απο δωρεές χρηστών.">
 <!ENTITY newtabtools.donate "Δωρήστε…">
 <!ENTITY newtabtools.github "Το New Tab Tools στο GitHub">

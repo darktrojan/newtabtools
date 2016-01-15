@@ -33,6 +33,10 @@
 
 <!ENTITY newtabtools.options-header "オプション:">
 
+<!-- Data collection is only enabled for en-US and en-GB users, but this might change in future. -->
+<!ENTITY newtabtools.datacollection.optin "Help improve New Tab Tools by submitting anonymous usage data">
+<!ENTITY newtabtools.datacollection.privacypolicy "Privacy Policy">
+
 <!ENTITY newtabtools.donate.label "New Tab Tools はユーザーからの寄付により成り立っています。">
 <!ENTITY newtabtools.donate "寄付する…">
 <!ENTITY newtabtools.github "New Tab Tools on GitHub">

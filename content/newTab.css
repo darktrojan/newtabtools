@@ -861,10 +861,9 @@ th, td {
 	line-height: 27px;
 	vertical-align: middle;
 }
-#options td > label > input {
+#options input[type="checkbox"],
+#options input[type="radio"] {
 	margin-inline-end: 4px;
-}
-td > label > * {
 	vertical-align: middle;
 }
 .preferences-alignment {
@@ -877,6 +876,14 @@ input[type="range"] {
 input[type="number"] {
 	width: 4em;
 }
+a {
+	color: -moz-nativehyperlinktext;
+	white-space: nowrap;
+}
+#options-datacollection {
+	text-align: center;
+	margin-bottom: 1em;
+}
 #options-donate-wrap {
 	border: 1px #b2aeaa solid !important;
 	background-color: #f9f9f9;
@@ -887,7 +894,4 @@ input[type="number"] {
 }
 #options-donate-wrap > :last-child {
 	margin: 0 0.5em 0.5em;
-}
-#options-donate-wrap a {
-	color: -moz-nativehyperlinktext;
 }

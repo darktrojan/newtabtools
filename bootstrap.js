@@ -27,9 +27,10 @@ XPCOMUtils.defineLazyGetter(this, 'strings', function() {
 	return Services.strings.createBundle('chrome://newtabtools/locale/newTabTools.properties');
 });
 
-/* globals BackgroundImage, NewTabToolsExporter, NewTabURL, OS, PageThumbs, Task, TileData */
+/* globals BackgroundImage, NewTabToolsDataCollector, NewTabToolsExporter, NewTabURL, OS, PageThumbs, Task, TileData */
 XPCOMUtils.defineLazyModuleGetter(this, 'BackgroundImage', 'chrome://newtabtools/content/newTabTools.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'NewTabToolsExporter', 'chrome://newtabtools/content/export.jsm');
+XPCOMUtils.defineLazyModuleGetter(this, 'NewTabToolsDataCollector', 'chrome://newtabtools/content/dataCollection.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'NewTabURL', 'resource:///modules/NewTabURL.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'OS', 'resource://gre/modules/osfile.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'PageThumbs', 'resource://gre/modules/PageThumbs.jsm');
@@ -94,6 +95,7 @@ function startup(aParams, aReason) {
 	defaultPrefs.setIntPref('rows', 3);
 	defaultPrefs.setIntPref('columns', 3);
 	defaultPrefs.setIntPref('donationreminder', 0);
+	defaultPrefs.setBoolPref('datacollection.optin', false);
 	defaultPrefs.setCharPref('grid.margin', 'small small small small');
 	defaultPrefs.setCharPref('grid.spacing', 'small');
 	defaultPrefs.setIntPref('launcher', 3);
@@ -236,6 +238,7 @@ function shutdown(aParams, aReason) {
 	Services.obs.removeObserver(optionsObserver, 'addon-options-displayed');
 	Cu.unload('chrome://newtabtools/content/export.jsm');
 	Cu.unload('chrome://newtabtools/content/newTabTools.jsm');
+	Cu.unload('chrome://newtabtools/content/dataCollection.jsm');
 
 	expirationFilter.cleanup();
 	messageListener.destroy();
@@ -278,11 +281,18 @@ function uiStartup(aParams, aReason) {
 			);
 		}, aReason == APP_STARTUP ? 1000 : 0);
 	}
+
+	if (NewTabToolsDataCollector.active && NewTabToolsDataCollector.shouldReport) {
+		NewTabToolsDataCollector.initReport();
+	} else {
+		Cu.unload('chrome://newtabtools/content/dataCollection.jsm');
+	}
 }
 
 var prefObserver = {
 	observe: function(aSubject, aTopic, aData) {
 		switch (aData) {
+		case 'datacollection.optin':
 		case 'grid.margin':
 		case 'grid.spacing':
 		case 'launcher':
