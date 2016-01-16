@@ -560,21 +560,34 @@ var idleObserver = {
 		}
 		idleService.removeIdleObserver(this, IDLE_TIMEOUT);
 
-		let version = parseFloat(userPrefs.getCharPref('version'), 10);
+		let version = userPrefs.getCharPref('version');
 		let recentWindow = Services.wm.getMostRecentWindow(BROWSER_WINDOW);
 		let browser = recentWindow.gBrowser;
 		let notificationBox = recentWindow.document.getElementById('global-notificationbox');
-		let message = strings.formatStringFromName('newversion', [version], 1);
-		let label = strings.GetStringFromName('donate.label');
-		let accessKey = strings.GetStringFromName('donate.accesskey');
+		let message = strings.formatStringFromName('newversion', [parseFloat(version, 10)], 1);
+		let changeLogLabel = strings.GetStringFromName('changelog.label');
+		let changeLogAccessKey = strings.GetStringFromName('changelog.accesskey');
+		let donateLabel = strings.GetStringFromName('donate.label');
+		let donateAccessKey = strings.GetStringFromName('donate.accesskey');
 
-		notificationBox.appendNotification(message, 'newtabtools-donate', 'chrome://newtabtools/content/icon16.png', notificationBox.PRIORITY_INFO_MEDIUM, [{
-			label: label,
-			accessKey: accessKey,
-			callback: function() {
-				browser.selectedTab = browser.addTab('https://addons.mozilla.org/addon/new-tab-tools/contribute/installed/');
-			}
-		}]);
+		notificationBox.appendNotification(
+			message, 'newtabtools-donate', 'chrome://newtabtools/content/icon16.png',
+			notificationBox.PRIORITY_INFO_MEDIUM, [{
+				label: changeLogLabel,
+				accessKey: changeLogAccessKey,
+				callback: function() {
+					browser.selectedTab =
+						browser.addTab('https://addons.mozilla.org/addon/new-tab-tools/versions/' + version);
+				}
+			}, {
+				label: donateLabel,
+				accessKey: donateAccessKey,
+				callback: function() {
+					browser.selectedTab =
+						browser.addTab('https://addons.mozilla.org/addon/new-tab-tools/contribute/installed/');
+				}
+			}]
+		);
 
 		userPrefs.setIntPref('donationreminder', Date.now() / 1000);
 	}
