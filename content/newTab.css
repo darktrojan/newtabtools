@@ -882,7 +882,7 @@ a {
 }
 #options-datacollection {
 	text-align: center;
-	margin-bottom: 1em;
+	margin: 1em 0;
 }
 #options-donate-wrap {
 	border: 1px #b2aeaa solid !important;

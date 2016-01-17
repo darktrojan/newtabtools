@@ -5,6 +5,7 @@ content/arrow.svg
 content/close.svg
 content/controls.png
 content/controls@2x.png
+content/dataCollection.jsm
 content/export.jsm
 content/exportDialog.js
 content/exportDialog.xul
