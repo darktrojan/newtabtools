@@ -5,18 +5,18 @@ var EXPORTED_SYMBOLS = ['NewTabToolsDataCollector'];
 Components.utils.import('resource://gre/modules/Services.jsm');
 Components.utils.import('resource://gre/modules/XPCOMUtils.jsm');
 
-/* globals BackgroundImage, Preferences, SavedThumbs, TileData */
+/* globals BackgroundImage, Preferences, OS, Task */
 XPCOMUtils.defineLazyModuleGetter(this, 'BackgroundImage', 'chrome://newtabtools/content/newTabTools.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'Preferences', 'resource://gre/modules/Preferences.jsm');
-XPCOMUtils.defineLazyModuleGetter(this, 'SavedThumbs', 'chrome://newtabtools/content/newTabTools.jsm');
-XPCOMUtils.defineLazyModuleGetter(this, 'TileData', 'chrome://newtabtools/content/newTabTools.jsm');
+XPCOMUtils.defineLazyModuleGetter(this, 'OS', 'resource://gre/modules/osfile.jsm');
+XPCOMUtils.defineLazyModuleGetter(this, 'Task', 'resource://gre/modules/Task.jsm');
 
 /* globals idleService */
 XPCOMUtils.defineLazyServiceGetter(this, 'idleService', '@mozilla.org/widget/idleservice;1', 'nsIIdleService');
 
-var collectionURL = 'https://www.darktrojan.net/data-collection/experiment1.php';
-var activeFrom = Date.UTC(2016, 0, 1);
-var activeUntil = Date.UTC(2016, 1, 1);
+var collectionURL = 'https://www.darktrojan.net/data-collection/experiment2.php';
+var activeFrom = Date.UTC(2016, 1, 1);
+var activeUntil = Date.UTC(2016, 2, 1);
 var prefs = Services.prefs.getBranch('extensions.newtabtools.datacollection.');
 
 var NewTabToolsDataCollector = {
@@ -32,21 +32,14 @@ var NewTabToolsDataCollector = {
 	}
 };
 
-function gatherData() {
+var gatherData = Task.async(function*() {
 	let data = new Services.appShell.hiddenDOMWindow.FormData();
 	let prefs = [
 		'columns',
 		'foreground.opacity',
-		'grid.margin',
-		'grid.spacing',
-		'launcher',
-		'recent.show',
 		'rows',
 		'theme',
-		'thumbs.contain',
-		'thumbs.hidebuttons',
-		'thumbs.hidefavicons',
-		'thumbs.titlesize'
+		'thumbs.prefs.delay'
 	];
 	for (let p of prefs) {
 		data.set(
@@ -54,31 +47,29 @@ function gatherData() {
 			Preferences.get('extensions.newtabtools.' + p)
 		);
 	}
+	data.set('thumbsHeight', Preferences.get('toolkit.pageThumbs.minHeight'));
+	data.set('thumbsWidth', Preferences.get('toolkit.pageThumbs.minWidth'));
 
-	let tileDataData = [...TileData._data].reduce((previous, current) => {
-		if (current[1].has('backgroundColor')) {
-			previous.backgroundColor++;
-		}
-		if (current[1].has('title')) {
-			previous.title++;
-		}
-		return previous;
-	}, { backgroundColor: 0, title: 0 });
-	data.set('tileBackgroundColor', tileDataData.backgroundColor);
-	data.set('tileTitle', tileDataData.title);
 	data.set('backgroundMode', BackgroundImage.mode);
-	data.set('customThumbnails', SavedThumbs._list.size);
+	data.set(
+		'backgroundFileExists',
+		yield OS.File.exists(OS.Path.join(OS.Constants.Path.profileDir, 'newtab-background'))
+	);
+
+	data.set('firefoxVersion', parseInt(Services.appinfo.version, 10));
 	return data;
-}
+});
 
 function report() {
 	if (!NewTabToolsDataCollector.active || !NewTabToolsDataCollector.shouldReport) {
 		return;
 	}
 
-	Services.appShell.hiddenDOMWindow.fetch(collectionURL, {
-		method: 'POST',
-		body: gatherData()
+	gatherData().then(function(data) {
+		Services.appShell.hiddenDOMWindow.fetch(collectionURL, {
+			method: 'POST',
+			body: data
+		});
 	});
 	prefs.setIntPref('lastreport', Math.floor(Date.now() / 1000));
 }
