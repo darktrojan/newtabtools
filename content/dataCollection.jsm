@@ -56,7 +56,11 @@ var gatherData = Task.async(function*() {
 		yield OS.File.exists(OS.Path.join(OS.Constants.Path.profileDir, 'newtab-background'))
 	);
 
+	let chromeRegistry = Components.classes['@mozilla.org/chrome/chrome-registry;1']
+		.getService(Components.interfaces.nsIXULChromeRegistry);
+	data.set('firefoxLocale', chromeRegistry.getSelectedLocale('browser'));
 	data.set('firefoxVersion', parseInt(Services.appinfo.version, 10));
+
 	return data;
 });
 
