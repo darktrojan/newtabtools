@@ -1,4 +1,5 @@
 content newtabtools content/
+locale newtabtools bg locale/bg/
 locale newtabtools en-US locale/en-US/
 locale newtabtools de locale/de/
 locale newtabtools el locale/el/
