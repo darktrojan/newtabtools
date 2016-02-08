@@ -1,0 +1,44 @@
+<!ENTITY newtabtools.options.pointer "Натисни тук, за да персонализираш новия раздел">
+<!ENTITY newtabtools.page.show "Показвай страницата за нов раздел">
+
+<!ENTITY newtabtools.pin-url.header "Добавяне на плочка:">
+<!ENTITY newtabtools.pin-url.placeholder "Напиши или избери URL">
+<!ENTITY newtabtools.pin-url.button "Добави">
+
+<!ENTITY newtabtools.tile-header "Плочки:">
+
+<!ENTITY newtabtools.tile-selection.previousrow.tooltip "Предишен ред">
+<!ENTITY newtabtools.tile-selection.previous.tooltip "Предишна плочка">
+<!ENTITY newtabtools.tile-selection.next.tooltip "Следваща плочка">
+<!ENTITY newtabtools.tile-selection.nextrow.tooltip "Следващ ред">
+
+<!ENTITY newtabtools.tile-thumbnail.label "Изображение:">
+<!ENTITY newtabtools.tile-thumbnail.placeholder "Поставете URL на изображението или изберете файл">
+<!ENTITY newtabtools.tile-thumbnail.browse "Преглед&#x2026;">
+<!ENTITY newtabtools.tile-thumbnail.set "Задай">
+<!ENTITY newtabtools.tile-thumbnail.remove "Премахни">
+<!ENTITY newtabtools.tile-thumbnail.refresh "Обнови миниатюра">
+<!ENTITY newtabtools.tile-thumbnail.bgcolor "Фонов цвят:">
+
+<!ENTITY newtabtools.tile-title.label "Заглавие:">
+<!ENTITY newtabtools.tile-title.placeholder "Напиши ново заглавие">
+<!ENTITY newtabtools.tile-title.set "Задай">
+<!ENTITY newtabtools.tile-title.reset "Възстанови">
+
+<!ENTITY newtabtools.bg-header "Фоново изображение:">
+<!ENTITY newtabtools.bg.placeholder "Поставете URL на изображението или изберете файл">
+<!ENTITY newtabtools.bg.browse "Преглед&#x2026;">
+<!ENTITY newtabtools.bg.set "Задай">
+<!ENTITY newtabtools.bg.remove "Премахни">
+
+<!ENTITY newtabtools.options-header "Опции:">
+
+<!-- Data collection is only enabled for en-US and en-GB users, but this might change in future. -->
+<!ENTITY newtabtools.datacollection.optin "Помигни ни да подобрим New Tab Tools като ни изпращаш анонимни данни">
+<!ENTITY newtabtools.datacollection.privacypolicy "Декларация за поверителност">
+
+<!ENTITY newtabtools.donate.label "New Tab Tools се издържа от дарения.">
+<!ENTITY newtabtools.donate "Дарение&#x2026;">
+<!ENTITY newtabtools.github "New Tab Tools в GitHub">
+
+<!ENTITY newtabtools.recently-closed-tabs "Последно затворени раздели:">

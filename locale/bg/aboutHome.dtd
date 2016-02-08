@@ -1,0 +1,10 @@
+<!ENTITY abouthome.bookmarksButton.label "Отметки">
+<!ENTITY abouthome.historyButton.label "История">
+<!-- The label for the preferences/options item on about:home on Windows -->
+<!ENTITY abouthome.preferencesButtonWin.label "Настройки">
+<!-- The label for the preferences/options item on about:home on Linux and OS X -->
+<!ENTITY abouthome.preferencesButtonUnix.label "Настройки">
+<!ENTITY abouthome.addonsButton.label "Добавки">
+<!ENTITY abouthome.appsButton.label "Магазин">
+<!ENTITY abouthome.downloadsButton.label "Свалени">
+<!ENTITY abouthome.syncButton.label "Синхронизация">
