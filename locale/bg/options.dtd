@@ -1,0 +1,24 @@
+<!ENTITY newtabtools.options.theme "Тема">
+<!ENTITY newtabtools.options.theme.light "Светла">
+<!ENTITY newtabtools.options.theme.dark "Тъмна">
+<!ENTITY newtabtools.options.foreground.opacity "Прозрачност">
+<!ENTITY newtabtools.options.rows "Редове">
+<!ENTITY newtabtools.options.columns "Колони">
+<!ENTITY newtabtools.options.grid.margin "Разстоение от края">
+<!ENTITY newtabtools.options.grid.spacing "Разстояние между">
+<!ENTITY newtabtools.options.size.small "Малко">
+<!ENTITY newtabtools.options.size.medium "Средно">
+<!ENTITY newtabtools.options.size.large "Голямо">
+<!ENTITY newtabtools.options.launcher "Стартер">
+<!ENTITY newtabtools.options.launcher.hidden "Не показвай">
+<!ENTITY newtabtools.options.launcher.top "Горе">
+<!ENTITY newtabtools.options.launcher.bottom "Долу">
+<!ENTITY newtabtools.options.launcher.left "Ляво">
+<!ENTITY newtabtools.options.launcher.right "Дясно">
+<!ENTITY newtabtools.options.thumb-titlesize "Размер на заглавието">
+<!ENTITY newtabtools.options.recent "Последно затворени раздели">
+<!ENTITY newtabtools.options.thumb-buttons "&quot;Закачи&quot; и &quot;Премахни&quot; Бутони">
+<!ENTITY newtabtools.options.favicons "Иконки на сайтове">
+<!ENTITY newtabtools.options.thumb-contain "Цялата миниатюра в плочката">
+<!ENTITY newtabtools.export "Настроки за експортиране&#x2026;">
+<!ENTITY newtabtools.import "Настройки за импортиране&#x2026;">
