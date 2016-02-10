@@ -42,23 +42,14 @@ XPCOMUtils.defineLazyServiceGetter(this, 'idleService', '@mozilla.org/widget/idl
 XPCOMUtils.defineLazyServiceGetter(this, 'annoService', '@mozilla.org/browser/annotation-service;1', 'nsIAnnotationService');
 XPCOMUtils.defineLazyServiceGetter(this, 'aboutNewTabService', '@mozilla.org/browser/aboutnewtab-service;1', 'nsIAboutNewTabService');
 
-let browserPrefs = Services.prefs.getBranch('browser.newtabpage.');
 let userPrefs = Services.prefs.getBranch(EXTENSION_PREFS);
 
 /* exported install, uninstall, startup, shutdown */
-function install(aParams, aReason) {
-	if (aReason == ADDON_UPGRADE) {
-		let showRecent = true;
-		if (userPrefs.prefHasUserValue('recent.count')) {
-			showRecent = userPrefs.getIntPref('recent.count') !== 0;
-			userPrefs.deleteBranch('recent.count');
-			userPrefs.setBoolPref('recent.show', showRecent);
-		}
-		if (browserPrefs.prefHasUserValue('rows') && !userPrefs.prefHasUserValue('rows')) {
-			userPrefs.setIntPref('rows', browserPrefs.getIntPref('rows'));
-		}
-		if (browserPrefs.prefHasUserValue('columns') && !userPrefs.prefHasUserValue('columns')) {
-			userPrefs.setIntPref('columns', browserPrefs.getIntPref('columns'));
+function install() {
+	// Clean up badly-set prefs from earlier versions
+	for (let p of ['toolkit.pageThumbs.minWidth', 'toolkit.pageThumbs.minHeight']) {
+		if (Services.prefs.getIntPref(p) === 0) {
+			Services.prefs.clearUserPref(p);
 		}
 	}
 

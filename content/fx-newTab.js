@@ -625,7 +625,10 @@ var gGrid = {
 
 		let firstCell = this._cells[0]._node.querySelector('.newtab-thumbnail');
 		setTimeout(function() {
-			ThumbnailPrefs.setOnce(firstCell.clientWidth * 2, firstCell.clientHeight * 2);
+			let { clientWidth: w, clientHeight: h } = firstCell;
+			if (w > 0 && h > 0) {
+				ThumbnailPrefs.setOnce(w * 2, h * 2);
+			}
 		}, delay * 1000);
 	}
 };
