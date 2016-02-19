@@ -1,4 +1,4 @@
-<!ENTITY newtabtools.options.pointer "Click here to begin customizing your new tab page">
+<!ENTITY newtabtools.options.pointer "Κάντε κλίκ εδώ για να παραμετροποιήσετε την σελίδα της νέας καρτέλας">
 <!ENTITY newtabtools.page.show "Εμφάνιση της σελίδας της νέας καρτέλας">
 
 <!ENTITY newtabtools.pin-url.header "Προσθήκη τίτλου:">
@@ -33,9 +33,9 @@
 
 <!ENTITY newtabtools.options-header "Επιλογές:">
 
-<!-- Data collection is only enabled for en-US and en-GB users, but this might change in future. -->
-<!ENTITY newtabtools.datacollection.optin "Help improve New Tab Tools by submitting anonymous usage data">
-<!ENTITY newtabtools.datacollection.privacypolicy "Privacy Policy">
+<!-- Η συλλογή δεδομένων είναι ενεργοποιημένη μόνο για χρήστες en-US και en-GB, αλλά αυτό μπορεί να αλλάξει στο μέλλον. -->
+<!ENTITY newtabtools.datacollection.optin "Βοηθήστε στη βελτίωση του New Tab Tools προωθώντας ανώνυμα στοιχεία χρήσης">
+<!ENTITY newtabtools.datacollection.privacypolicy "Άδεια χρήσης">
 
 <!ENTITY newtabtools.donate.label "To New Tab Tools χρηματοδοτείται απο δωρεές χρηστών.">
 <!ENTITY newtabtools.donate "Δωρήστε…">
