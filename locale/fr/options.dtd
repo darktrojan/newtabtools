@@ -1,7 +1,7 @@
 <!ENTITY newtabtools.options.theme "Thème">
 <!ENTITY newtabtools.options.theme.light "Thème clair">
 <!ENTITY newtabtools.options.theme.dark "Thème sombre">
-<!ENTITY newtabtools.options.foreground.opacity "Foreground Opacity">
+<!ENTITY newtabtools.options.foreground.opacity "Opacité">
 <!ENTITY newtabtools.options.rows "Lignes">
 <!ENTITY newtabtools.options.columns "Colonnes">
 <!ENTITY newtabtools.options.grid.margin "Marge autour de la grille">
