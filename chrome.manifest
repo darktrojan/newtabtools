@@ -4,6 +4,7 @@ locale newtabtools en-US locale/en-US/
 locale newtabtools de locale/de/
 locale newtabtools el locale/el/
 locale newtabtools en-GB locale/en-GB/
+locale newtabtools es locale/es/
 locale newtabtools fr locale/fr/
 locale newtabtools it locale/it/
 locale newtabtools ja locale/ja/

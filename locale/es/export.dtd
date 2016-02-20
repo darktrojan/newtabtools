@@ -1,0 +1,18 @@
+<!ENTITY newtabtools.export.title "New Tab Tools">
+<!ENTITY newtabtools.export.header "Seleccione qué importar:">
+<!ENTITY newtabtools.import.header "Seleccione qué importar:">
+<!ENTITY newtabtools.export.tiles.caption "Cuadros">
+<!ENTITY newtabtools.export.prefs.pinned "Cuadros fijados">
+<!ENTITY newtabtools.export.prefs.blocked "Cuadros eliminados">
+<!ENTITY newtabtools.export.prefs.gridsize "Número de Filas y Columnas">
+<!ENTITY newtabtools.export.prefs.gridmargin "Margen y Espaciado de cuadrícula">
+<!ENTITY newtabtools.export.tiles.thumbs "Miniaturas Personalizadas">
+<!ENTITY newtabtools.export.prefs.thumbs.position "Posición de miniatura">
+<!ENTITY newtabtools.export.annos.title "Títulos de Cuadro personalizados">
+<!ENTITY newtabtools.export.prefs.thumbs.hidebuttons "Visibilidad del botón de miniatura">
+<!ENTITY newtabtools.export.prefs.thumbs.hidefavicons "Visibilidad de icono de página">
+<!ENTITY newtabtools.export.page.caption "Página">
+<!ENTITY newtabtools.export.prefs.launcher "Posición del Launcher">
+<!ENTITY newtabtools.export.prefs.recent.show "Visibilidad de &quot;Cerrado recientemente&quot;">
+<!ENTITY newtabtools.export.page.background "Fondo de página">
+<!ENTITY newtabtools.export.prefs.theme "Tema">

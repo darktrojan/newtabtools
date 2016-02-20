@@ -1,0 +1,44 @@
+<!ENTITY newtabtools.options.pointer "Haz clic aquí para empezar a personalizar tu página de Nueva Pestaña">
+<!ENTITY newtabtools.page.show "Mostrar página de Nueva Pestaña">
+
+<!ENTITY newtabtools.pin-url.header "Añadir títutlo:">
+<!ENTITY newtabtools.pin-url.placeholder "Escribe o selecciona un URL">
+<!ENTITY newtabtools.pin-url.button "Añadir">
+
+<!ENTITY newtabtools.tile-header "Cuadros:">
+
+<!ENTITY newtabtools.tile-selection.previousrow.tooltip "Fila anterior">
+<!ENTITY newtabtools.tile-selection.previous.tooltip "Cuadro anterior">
+<!ENTITY newtabtools.tile-selection.next.tooltip "Siguiente cuadro">
+<!ENTITY newtabtools.tile-selection.nextrow.tooltip "Siguiente fila">
+
+<!ENTITY newtabtools.tile-thumbnail.label "Imagen:">
+<!ENTITY newtabtools.tile-thumbnail.placeholder "Pega el URL de la imagen o selecciona un archivo">
+<!ENTITY newtabtools.tile-thumbnail.browse "Seleccionar…">
+<!ENTITY newtabtools.tile-thumbnail.set "Fijar">
+<!ENTITY newtabtools.tile-thumbnail.remove "Eliminar">
+<!ENTITY newtabtools.tile-thumbnail.refresh "Refrescar miniatura">
+<!ENTITY newtabtools.tile-thumbnail.bgcolor "Color de fondo:">
+
+<!ENTITY newtabtools.tile-title.label "Títutlo:">
+<!ENTITY newtabtools.tile-title.placeholder "Escribe un nuevo título">
+<!ENTITY newtabtools.tile-title.set "Fijar">
+<!ENTITY newtabtools.tile-title.reset "Resetear">
+
+<!ENTITY newtabtools.bg-header "Imagen de fondo de la página">
+<!ENTITY newtabtools.bg.placeholder "Pega el URL de la imagen o selecciona un archivo">
+<!ENTITY newtabtools.bg.browse "Seleccionar">
+<!ENTITY newtabtools.bg.set "Fijar">
+<!ENTITY newtabtools.bg.remove "Eliminar">
+
+<!ENTITY newtabtools.options-header "Opciones:">
+
+<!-- Data collection is only enabled for en-US and en-GB users, but this might change in future. -->
+<!ENTITY newtabtools.datacollection.optin "Ayuda a mejorar New Tab Tools anónimamente enviando información de uso">
+<!ENTITY newtabtools.datacollection.privacypolicy "Política de Privacidad">
+
+<!ENTITY newtabtools.donate.label "New Tab Tools se financia a través de donaciones de usuarios.">
+<!ENTITY newtabtools.donate "Donar…">
+<!ENTITY newtabtools.github "New Tab Tools en GitHub">
+
+<!ENTITY newtabtools.recently-closed-tabs "Cerrado recientemente:">
