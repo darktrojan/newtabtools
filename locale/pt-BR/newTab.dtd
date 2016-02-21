@@ -34,8 +34,8 @@
 <!ENTITY newtabtools.options-header "Opções:">
 
 <!-- Data collection is only enabled for en-US and en-GB users, but this might change in future. -->
-<!ENTITY newtabtools.datacollection.optin "Help improve New Tab Tools by submitting anonymous usage data">
-<!ENTITY newtabtools.datacollection.privacypolicy "Privacy Policy">
+<!ENTITY newtabtools.datacollection.optin "Ajude a melhorar o New Tab Tools enviando dados de uso anônimas">
+<!ENTITY newtabtools.datacollection.privacypolicy "Política de Privacidade">
 
 <!ENTITY newtabtools.donate.label "O New Tab Tools é mantido com doações de usuários.">
 <!ENTITY newtabtools.donate "Doar…">
