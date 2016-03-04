@@ -290,7 +290,7 @@ var newTabTools = {
 		let image = new Image();
 		image.onload = function() {
 			let [thumbnailWidth, thumbnailHeight] = PageThumbUtils.getThumbnailSize();
-			let scale = Math.max(thumbnailWidth / image.width, thumbnailHeight / image.height);
+			let scale = Math.min(Math.max(thumbnailWidth / image.width, thumbnailHeight / image.height), 1);
 
 			let canvas = document.createElementNS(HTML_NAMESPACE, 'canvas');
 			canvas.mozOpaque = false;
