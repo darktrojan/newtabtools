@@ -339,6 +339,7 @@ var prefObserver = {
 		case 'historytiles.show':
 			NewTabUtils.links._getLinksCache = null;
 			enumerateTabs(function(win) {
+				win.newTabTools.updateUI();
 				win.gUpdater.updateGrid();
 			});
 		}

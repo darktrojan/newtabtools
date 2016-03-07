@@ -439,6 +439,9 @@ var newTabTools = {
 		document.querySelector('[name="foreground.opacity"]').value = opacity;
 		document.documentElement.style.setProperty('--opacity', opacity / 100);
 
+		let showHistory = this.prefs.getBoolPref('historytiles.show');
+		document.querySelector('[name="historytiles.show"]').checked = showHistory;
+
 		let showRecent = this.prefs.getBoolPref('recent.show');
 		document.querySelector('[name="recent.show"]').checked = showRecent;
 		this.trimRecent();
