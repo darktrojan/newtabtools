@@ -27,10 +27,11 @@ XPCOMUtils.defineLazyGetter(this, 'strings', function() {
 	return Services.strings.createBundle('chrome://newtabtools/locale/newTabTools.properties');
 });
 
-/* globals BackgroundImage, NewTabToolsDataCollector, NewTabToolsExporter, NewTabURL, OS, PageThumbs, Task, TileData */
+/* globals BackgroundImage, NewTabToolsDataCollector, NewTabToolsExporter, NewTabToolsLinks, NewTabURL, OS, PageThumbs, Task, TileData */
 XPCOMUtils.defineLazyModuleGetter(this, 'BackgroundImage', 'chrome://newtabtools/content/newTabTools.jsm');
-XPCOMUtils.defineLazyModuleGetter(this, 'NewTabToolsExporter', 'chrome://newtabtools/content/export.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'NewTabToolsDataCollector', 'chrome://newtabtools/content/dataCollection.jsm');
+XPCOMUtils.defineLazyModuleGetter(this, 'NewTabToolsExporter', 'chrome://newtabtools/content/export.jsm');
+XPCOMUtils.defineLazyModuleGetter(this, 'NewTabToolsLinks', 'chrome://newtabtools/content/newTabTools.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'NewTabURL', 'resource:///modules/NewTabURL.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'OS', 'resource://gre/modules/osfile.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'PageThumbs', 'resource://gre/modules/PageThumbs.jsm');
@@ -108,58 +109,6 @@ function startup(aParams, aReason) {
 		}
 	}
 
-	NewTabUtils.links._oldGetLinks = NewTabUtils.links.getLinks;
-	NewTabUtils.links.getLinks = function Links_getLinks() {
-		if (this._getLinksCache) {
-			return this._getLinksCache;
-		}
-
-		let finalLinks = Array.slice(NewTabUtils.pinnedLinks.links);
-		if (!userPrefs.getBoolPref('historytiles.show')) {
-			this._getLinksCache = finalLinks;
-			return finalLinks;
-		}
-
-		let historyLinks = this._getMergedProviderLinks();
-
-		// Filter blocked and pinned links.
-		historyLinks = historyLinks.filter(function(link) {
-			return link.type == 'history' &&
-				!NewTabUtils.blockedLinks.isBlocked(link) &&
-				!NewTabUtils.pinnedLinks.isPinned(link);
-		});
-
-		if (userPrefs.prefHasUserValue('filter')) {
-			let countPref = userPrefs.getCharPref('filter');
-			let counts = JSON.parse(countPref);
-			historyLinks = historyLinks.filter(function(item) {
-				let match = /^https?:\/\/([^\/]+)\//.exec(item.url);
-				if (!match)
-					return true;
-				if (match[1] in counts) {
-					if (counts[match[1]]) {
-						counts[match[1]]--;
-						return true;
-					}
-					return false;
-				}
-				return true;
-			});
-		}
-
-		// Try to fill the gaps between pinned links.
-		for (let i = 0; i < finalLinks.length && historyLinks.length; i++)
-			if (!finalLinks[i])
-				finalLinks[i] = historyLinks.shift();
-
-		// Append the remaining links if any.
-		if (historyLinks.length)
-			finalLinks = finalLinks.concat(historyLinks);
-
-		this._getLinksCache = finalLinks;
-		return finalLinks;
-	};
-
 	prefObserver.init();
 	Services.obs.addObserver(notificationObserver, 'newtabtools-change', false);
 
@@ -224,10 +173,6 @@ function shutdown(aParams, aReason) {
 	if (aReason == APP_SHUTDOWN) {
 		return;
 	}
-
-	NewTabUtils.links.getLinks = NewTabUtils.links._oldGetLinks;
-	delete NewTabUtils.links._oldGetLinks;
-	delete NewTabTools.links._getLinksCache;
 
 	let windowEnum = Services.wm.getEnumerator(BROWSER_WINDOW);
 	while (windowEnum.hasMoreElements()) {
@@ -307,7 +252,7 @@ var prefObserver = {
 		switch (data) {
 		case 'browser.newtabpage.blocked':
 		case 'browser.newtabpage.pinned':
-			NewTabUtils.links._getLinksCache = null;
+			NewTabToolsLinks._getLinksCache = null;
 			break;
 		case 'datacollection.optin':
 		case 'grid.margin':
@@ -337,7 +282,7 @@ var prefObserver = {
 			break;
 		case 'filter':
 		case 'historytiles.show':
-			NewTabUtils.links._getLinksCache = null;
+			NewTabToolsLinks._getLinksCache = null;
 			enumerateTabs(function(win) {
 				win.newTabTools.updateUI();
 				win.gUpdater.updateGrid();

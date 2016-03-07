@@ -1,5 +1,5 @@
-/* exported GridPrefs, BackgroundImage, TileData, SavedThumbs, ThumbnailPrefs */
-this.EXPORTED_SYMBOLS = ['GridPrefs', 'BackgroundImage', 'TileData', 'SavedThumbs', 'ThumbnailPrefs'];
+/* exported NewTabToolsLinks, GridPrefs, BackgroundImage, TileData, SavedThumbs, ThumbnailPrefs */
+this.EXPORTED_SYMBOLS = ['NewTabToolsLinks', 'GridPrefs', 'BackgroundImage', 'TileData', 'SavedThumbs', 'ThumbnailPrefs'];
 const XHTMLNS = 'http://www.w3.org/1999/xhtml';
 
 /* globals Components, Services, XPCOMUtils, Iterator */
@@ -18,6 +18,61 @@ XPCOMUtils.defineLazyModuleGetter(this, 'PageThumbsStorage', 'resource://gre/mod
 
 /* globals idleService */
 XPCOMUtils.defineLazyServiceGetter(this, 'idleService', '@mozilla.org/widget/idleservice;1', 'nsIIdleService');
+
+var NewTabToolsLinks = {
+	PREF_HISTORY: 'extensions.newtabtools.historytiles.show',
+	PREF_FILTER: 'extensions.newtabtools.filter',
+	getLinks: function() {
+		if (this._getLinksCache) {
+			return this._getLinksCache;
+		}
+
+		let finalLinks = Array.slice(NewTabUtils.pinnedLinks.links);
+		if (!Services.prefs.getBoolPref(this.PREF_HISTORY)) {
+			this._getLinksCache = finalLinks;
+			return finalLinks;
+		}
+
+		let historyLinks = NewTabUtils.links._getMergedProviderLinks();
+
+		// Filter blocked and pinned links.
+		historyLinks = historyLinks.filter(function(link) {
+			return link.type == 'history' &&
+				!NewTabUtils.blockedLinks.isBlocked(link) &&
+				!NewTabUtils.pinnedLinks.isPinned(link);
+		});
+
+		if (Services.prefs.prefHasUserValue(this.PREF_FILTER)) {
+			let countPref = Services.prefs.getCharPref(this.PREF_FILTER);
+			let counts = JSON.parse(countPref);
+			historyLinks = historyLinks.filter(function(item) {
+				let match = /^https?:\/\/([^\/]+)\//.exec(item.url);
+				if (!match)
+					return true;
+				if (match[1] in counts) {
+					if (counts[match[1]]) {
+						counts[match[1]]--;
+						return true;
+					}
+					return false;
+				}
+				return true;
+			});
+		}
+
+		// Try to fill the gaps between pinned links.
+		for (let i = 0; i < finalLinks.length && historyLinks.length; i++)
+			if (!finalLinks[i])
+				finalLinks[i] = historyLinks.shift();
+
+		// Append the remaining links if any.
+		if (historyLinks.length)
+			finalLinks = finalLinks.concat(historyLinks);
+
+		this._getLinksCache = finalLinks;
+		return finalLinks;
+	}
+};
 
 let GridPrefs = {
 	PREF_ROWS: 'extensions.newtabtools.rows',

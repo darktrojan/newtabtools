@@ -4,7 +4,7 @@
 /* globals Services, XPCOMUtils, TileData, SavedThumbs, -length */
 /* globals Ci, Cu, HTML_NAMESPACE, inPrivateBrowsingMode, gGridPrefs, newTabTools */
 
-/* globals BackgroundPageThumbs, NewTabUtils, ThumbnailPrefs */
+/* globals BackgroundPageThumbs, NewTabUtils, NewTabToolsLinks, ThumbnailPrefs */
 Cu.import('resource://gre/modules/BackgroundPageThumbs.jsm');
 Cu.import('resource://gre/modules/NewTabUtils.jsm');
 
@@ -588,12 +588,12 @@ var gGrid = {
 	_renderSites: function Grid_renderSites() {
 		let cells = this.cells;
 		// Put sites into the cells.
-		let links = gLinks.getLinks();
+		let links = NewTabToolsLinks.getLinks();
 		let length = Math.min(links.length, cells.length);
 
 		for (let i = 0; i < length; i++) {
 			if (links[i])
-			this.createSite(links[i], cells[i]);
+				this.createSite(links[i], cells[i]);
 		}
 	},
 
@@ -1753,7 +1753,7 @@ var gUpdater = {
 	   * @param aCallback The callback to call when finished.
 	   */
 	updateGrid: function Updater_updateGrid(aCallback) {
-		let links = gLinks.getLinks().slice(0, gGrid.cells.length);
+		let links = NewTabToolsLinks.getLinks().slice(0, gGrid.cells.length);
 
 		// Find all sites that remain in the grid.
 		let sites = this._findRemainingSites(links);
