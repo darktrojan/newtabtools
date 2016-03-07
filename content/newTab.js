@@ -577,18 +577,24 @@ var newTabTools = {
 		let site = this.selectedSite;
 		let disabled = site == null;
 
-		this.browseThumbnailButton.disabled = disabled;
 		this.setThumbnailInput.value = '';
-		this.setThumbnailInput.disabled = disabled;
-		this.setTitleInput.disabled = disabled;
-		this.setTitleButton.disabled = disabled;
+		this.browseThumbnailButton.disabled =
+			this.setThumbnailInput.disabled =
+			this.setTitleInput.disabled =
+			this.setTitleButton.disabled =
+			this.setBgColourDisplay.parentNode.disabled = disabled;
 
 		if (disabled) {
-			this.siteThumbnail.style.backgroundImage = null;
-			this.removeThumbnailButton.disabled = true;
-			this.siteURL.textContent = '';
+			this.siteThumbnail.style.backgroundImage =
+				this.siteThumbnail.style.backgroundColor =
+				this.setBgColourDisplay.style.backgroundColor = null;
+			this.siteURL.textContent = this.strings.GetStringFromName('tileurl.empty');
 			this.setTitleInput.value = '';
-			this.resetTitleButton.disabled = true;
+			this.removeThumbnailButton.disabled =
+				this.captureThumbnailButton.disabled =
+				this.setBgColourButton.disabled =
+				this.resetBgColourButton.disabled =
+				this.resetTitleButton.disabled = true;
 			return;
 		}
 

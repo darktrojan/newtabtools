@@ -473,7 +473,10 @@ var windowObserver = {
 		while (target && target.classList && !target.classList.contains('newtab-cell')) {
 			target = target.parentNode;
 		}
-		return (target && target.classList && target.classList.contains('newtab-cell')) ? target : null;
+		return (
+			target && target.classList &&
+			target.classList.contains('newtab-cell') && !!target._newtabCell.site
+		) ? target : null;
 	}
 };
 
