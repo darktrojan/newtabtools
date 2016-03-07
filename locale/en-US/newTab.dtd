@@ -17,15 +17,15 @@
 <!ENTITY newtabtools.tile-thumbnail.browse "Browse&#x2026;">
 <!ENTITY newtabtools.tile-thumbnail.set "Set">
 <!ENTITY newtabtools.tile-thumbnail.remove "Remove">
-<!ENTITY newtabtools.tile-thumbnail.refresh "Refresh Thumbnail">
-<!ENTITY newtabtools.tile-thumbnail.bgcolor "Background Color:">
+<!ENTITY newtabtools.tile-thumbnail.refresh "Refresh thumbnail">
+<!ENTITY newtabtools.tile-thumbnail.bgcolor "Background color:">
 
 <!ENTITY newtabtools.tile-title.label "Title:">
 <!ENTITY newtabtools.tile-title.placeholder "Type a new tile title">
 <!ENTITY newtabtools.tile-title.set "Set">
 <!ENTITY newtabtools.tile-title.reset "Reset">
 
-<!ENTITY newtabtools.bg-header "Page Background Image:">
+<!ENTITY newtabtools.bg-header "Page background image:">
 <!ENTITY newtabtools.bg.placeholder "Paste an image URL or browse to choose a file">
 <!ENTITY newtabtools.bg.browse "Browse&#x2026;">
 <!ENTITY newtabtools.bg.set "Set">

@@ -1,11 +1,11 @@
 <!ENTITY newtabtools.options.theme "Theme">
-<!ENTITY newtabtools.options.theme.light "Light Theme">
-<!ENTITY newtabtools.options.theme.dark "Dark Theme">
-<!ENTITY newtabtools.options.foreground.opacity "Foreground Opacity">
+<!ENTITY newtabtools.options.theme.light "Light theme">
+<!ENTITY newtabtools.options.theme.dark "Dark theme">
+<!ENTITY newtabtools.options.foreground.opacity "Foreground opacity">
 <!ENTITY newtabtools.options.rows "Rows">
 <!ENTITY newtabtools.options.columns "Columns">
-<!ENTITY newtabtools.options.grid.margin "Grid Margin">
-<!ENTITY newtabtools.options.grid.spacing "Grid Spacing">
+<!ENTITY newtabtools.options.grid.margin "Grid margin">
+<!ENTITY newtabtools.options.grid.spacing "Grid spacing">
 <!ENTITY newtabtools.options.size.small "Small">
 <!ENTITY newtabtools.options.size.medium "Medium">
 <!ENTITY newtabtools.options.size.large "Large">
@@ -16,10 +16,10 @@
 <!ENTITY newtabtools.options.launcher.left "Left">
 <!ENTITY newtabtools.options.launcher.right "Right">
 <!ENTITY newtabtools.options.thumb-titlesize "Tile title size">
-<!ENTITY newtabtools.options.historytiles "Browsing history tiles">
-<!ENTITY newtabtools.options.recent "Recently Closed Tabs">
-<!ENTITY newtabtools.options.thumb-buttons "&quot;Pin Tile&quot; and &quot;Remove Tile&quot; Buttons">
-<!ENTITY newtabtools.options.favicons "Site Icons">
-<!ENTITY newtabtools.options.thumb-contain "Whole Thumbnail in Tiles">
+<!ENTITY newtabtools.options.historytiles "Tiles from your browsing history">
+<!ENTITY newtabtools.options.recent "Recently closed tabs">
+<!ENTITY newtabtools.options.thumb-buttons "&quot;Pin Tile&quot; and &quot;Remove Tile&quot; buttons">
+<!ENTITY newtabtools.options.favicons "Site icons">
+<!ENTITY newtabtools.options.thumb-contain "Whole thumbnail in tiles">
 <!ENTITY newtabtools.export "Export Settings&#x2026;">
 <!ENTITY newtabtools.import "Import Settings&#x2026;">
