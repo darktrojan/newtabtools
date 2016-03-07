@@ -110,15 +110,20 @@ function startup(aParams, aReason) {
 
 	NewTabUtils.links._oldGetLinks = NewTabUtils.links.getLinks;
 	NewTabUtils.links.getLinks = function Links_getLinks() {
-		let pinnedLinks = Array.slice(NewTabUtils.pinnedLinks.links);
-		if (!userPrefs.getBoolPref('historytiles.show')) {
-			return pinnedLinks;
+		if (this._getLinksCache) {
+			return this._getLinksCache;
 		}
 
-		let links = this._getMergedProviderLinks();
+		let finalLinks = Array.slice(NewTabUtils.pinnedLinks.links);
+		if (!userPrefs.getBoolPref('historytiles.show')) {
+			this._getLinksCache = finalLinks;
+			return finalLinks;
+		}
+
+		let historyLinks = this._getMergedProviderLinks();
 
 		// Filter blocked and pinned links.
-		links = links.filter(function(link) {
+		historyLinks = historyLinks.filter(function(link) {
 			return link.type == 'history' &&
 				!NewTabUtils.blockedLinks.isBlocked(link) &&
 				!NewTabUtils.pinnedLinks.isPinned(link);
@@ -127,8 +132,8 @@ function startup(aParams, aReason) {
 		if (userPrefs.prefHasUserValue('filter')) {
 			let countPref = userPrefs.getCharPref('filter');
 			let counts = JSON.parse(countPref);
-			links = links.filter(function(aItem) {
-				let match = /^https?:\/\/([^\/]+)\//.exec(aItem.url);
+			historyLinks = historyLinks.filter(function(item) {
+				let match = /^https?:\/\/([^\/]+)\//.exec(item.url);
 				if (!match)
 					return true;
 				if (match[1] in counts) {
@@ -143,18 +148,19 @@ function startup(aParams, aReason) {
 		}
 
 		// Try to fill the gaps between pinned links.
-		for (let i = 0; i < pinnedLinks.length && links.length; i++)
-			if (!pinnedLinks[i])
-				pinnedLinks[i] = links.shift();
+		for (let i = 0; i < finalLinks.length && historyLinks.length; i++)
+			if (!finalLinks[i])
+				finalLinks[i] = historyLinks.shift();
 
 		// Append the remaining links if any.
-		if (links.length)
-			pinnedLinks = pinnedLinks.concat(links);
+		if (historyLinks.length)
+			finalLinks = finalLinks.concat(historyLinks);
 
-		return pinnedLinks;
+		this._getLinksCache = finalLinks;
+		return finalLinks;
 	};
 
-	userPrefs.addObserver('', prefObserver, false);
+	prefObserver.init();
 	Services.obs.addObserver(notificationObserver, 'newtabtools-change', false);
 
 	enumerateTabs(function(aWindow) {
@@ -221,6 +227,7 @@ function shutdown(aParams, aReason) {
 
 	NewTabUtils.links.getLinks = NewTabUtils.links._oldGetLinks;
 	delete NewTabUtils.links._oldGetLinks;
+	delete NewTabTools.links._getLinksCache;
 
 	let windowEnum = Services.wm.getEnumerator(BROWSER_WINDOW);
 	while (windowEnum.hasMoreElements()) {
@@ -228,7 +235,7 @@ function shutdown(aParams, aReason) {
 	}
 	Services.ww.unregisterNotification(windowObserver);
 
-	userPrefs.removeObserver('', prefObserver);
+	prefObserver.destroy();
 	Services.obs.removeObserver(notificationObserver, 'newtabtools-change');
 
 	Services.obs.removeObserver(optionsObserver, 'addon-options-displayed');
@@ -286,8 +293,22 @@ function uiStartup(aParams, aReason) {
 }
 
 var prefObserver = {
-	observe: function(aSubject, aTopic, aData) {
-		switch (aData) {
+	init: function() {
+		userPrefs.addObserver('', this, false);
+		Services.prefs.addObserver('browser.newtabpage.blocked', this, false);
+		Services.prefs.addObserver('browser.newtabpage.pinned', this, false);
+	},
+	destroy: function() {
+		userPrefs.removeObserver('', prefObserver);
+		Services.prefs.removeObserver('browser.newtabpage.blocked', prefObserver);
+		Services.prefs.removeObserver('browser.newtabpage.pinned', prefObserver);
+	},
+	observe: function(subject, topic, data) {
+		switch (data) {
+		case 'browser.newtabpage.blocked':
+		case 'browser.newtabpage.pinned':
+			NewTabUtils.links._getLinksCache = null;
+			break;
 		case 'datacollection.optin':
 		case 'grid.margin':
 		case 'grid.spacing':
@@ -309,13 +330,14 @@ var prefObserver = {
 			break;
 		case 'columns':
 		case 'rows':
-		case 'filter':
 			enumerateTabs(function(aWindow) {
 				aWindow.gGrid.refresh();
 				aWindow.newTabTools.updateGridPrefs();
 			});
 			break;
+		case 'filter':
 		case 'historytiles.show':
+			NewTabUtils.links._getLinksCache = null;
 			enumerateTabs(function(win) {
 				win.gUpdater.updateGrid();
 			});
