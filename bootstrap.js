@@ -281,12 +281,18 @@ var prefObserver = {
 			});
 			break;
 		case 'filter':
+			NewTabToolsLinks._getLinksCache = null;
+			enumerateTabs(function(win) {
+				win.gUpdater.updateGrid();
+			});
+			break;
 		case 'historytiles.show':
 			NewTabToolsLinks._getLinksCache = null;
 			enumerateTabs(function(win) {
 				win.newTabTools.updateUI();
-				win.gUpdater.updateGrid();
+				win.gUpdater.fastUpdateGrid();
 			});
+			break;
 		}
 	}
 };

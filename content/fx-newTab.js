@@ -1783,6 +1783,19 @@ var gUpdater = {
 		});
 	},
 
+	fastUpdateGrid: function Updater_fastUpdateGrid() {
+		let links = NewTabToolsLinks.getLinks().slice(0, gGrid.cells.length);
+
+		// Find all sites that remain in the grid.
+		let sites = this._findRemainingSites(links);
+
+		// Remove sites that are no longer in the grid.
+		this._removeLegacySites(sites, () => {
+			// Try to fill empty cells and finish.
+			this._fillEmptyCells(links);
+		});
+	},
+
 	/**
 	   * Takes an array of links and tries to correlate them to sites contained in
 	   * the current grid. If no corresponding site can be found (i.e. the link is
