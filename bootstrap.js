@@ -89,6 +89,7 @@ function startup(aParams, aReason) {
 	defaultPrefs.setBoolPref('datacollection.optin', false);
 	defaultPrefs.setCharPref('grid.margin', 'small small small small');
 	defaultPrefs.setCharPref('grid.spacing', 'small');
+	defaultPrefs.setBoolPref('historytiles.show', true);
 	defaultPrefs.setIntPref('launcher', 3);
 	defaultPrefs.setBoolPref('optionspointershown', false);
 	defaultPrefs.setBoolPref('recent.show', true);
@@ -110,6 +111,10 @@ function startup(aParams, aReason) {
 	NewTabUtils.links._oldGetLinks = NewTabUtils.links.getLinks;
 	NewTabUtils.links.getLinks = function Links_getLinks() {
 		let pinnedLinks = Array.slice(NewTabUtils.pinnedLinks.links);
+		if (!userPrefs.getBoolPref('historytiles.show')) {
+			return pinnedLinks;
+		}
+
 		let links = this._getMergedProviderLinks();
 
 		// Filter blocked and pinned links.
@@ -310,6 +315,10 @@ var prefObserver = {
 				aWindow.newTabTools.updateGridPrefs();
 			});
 			break;
+		case 'historytiles.show':
+			enumerateTabs(function(win) {
+				win.gUpdater.updateGrid();
+			});
 		}
 	}
 };
