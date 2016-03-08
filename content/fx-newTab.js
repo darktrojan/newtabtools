@@ -2,41 +2,41 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this file,
  * You can obtain one at http://mozilla.org/MPL/2.0/. */
 /* globals Services, XPCOMUtils, TileData, SavedThumbs, -length */
-/* globals Ci, Cu, HTML_NAMESPACE, inPrivateBrowsingMode, gGridPrefs, newTabTools */
+/* globals Ci, Cu, HTML_NAMESPACE, inPrivateBrowsingMode, GridPrefs, newTabTools */
 
 /* globals BackgroundPageThumbs, NewTabUtils, NewTabToolsLinks, ThumbnailPrefs */
 Cu.import('resource://gre/modules/BackgroundPageThumbs.jsm');
 Cu.import('resource://gre/modules/NewTabUtils.jsm');
 
-/* globals Rect, faviconService, gStringBundle */
+/* globals Rect, faviconService, StringBundle */
 XPCOMUtils.defineLazyModuleGetter(this, 'Rect', 'resource://gre/modules/Geometry.jsm');
 XPCOMUtils.defineLazyServiceGetter(this, 'faviconService', '@mozilla.org/browser/favicon-service;1', 'mozIAsyncFavicons');
-XPCOMUtils.defineLazyGetter(this, 'gStringBundle', function() {
+XPCOMUtils.defineLazyGetter(this, 'StringBundle', function() {
 	return Services.strings.createBundle('chrome://browser/locale/newTab.properties');
 });
 
 var {
-	links: gLinks,
-	allPages: gAllPages,
-	linkChecker: gLinkChecker,
-	pinnedLinks: gPinnedLinks,
-	blockedLinks: gBlockedLinks
+	links: Links,
+	allPages: AllPages,
+	linkChecker: LinkChecker,
+	pinnedLinks: PinnedLinks,
+	blockedLinks: BlockedLinks
 } = NewTabUtils;
 
-function newTabString(name) { return gStringBundle.GetStringFromName('newtab.' + name); }
+function newTabString(name) { return StringBundle.GetStringFromName('newtab.' + name); }
 
 /**
  * This singleton allows to transform the grid by repositioning a site's node
  * in the DOM and by showing or hiding the node. It additionally provides
  * convenience methods to work with a site's DOM node.
  */
-var gTransformation = {
+var Transformation = {
 	/**
 	   * Returns the width of the left and top border of a cell. We need to take it
 	   * into account when measuring and comparing site and cell positions.
 	   */
 	get _cellBorderWidths() {
-		let cstyle = window.getComputedStyle(gGrid.cells[0].node, null);
+		let cstyle = window.getComputedStyle(Grid.cells[0].node, null);
 		let widths = {
 			left: parseInt(cstyle.getPropertyValue('border-left-width')),
 			top: parseInt(cstyle.getPropertyValue('border-top-width'))
@@ -51,65 +51,65 @@ var gTransformation = {
 
 	/**
 	   * Gets a DOM node's position.
-	   * @param aNode The DOM node.
+	   * @param node The DOM node.
 	   * @return A Rect instance with the position.
 	   */
-	getNodePosition: function Transformation_getNodePosition(aNode) {
-		let {left, top, width, height} = aNode.getBoundingClientRect();
+	getNodePosition: function Transformation_getNodePosition(node) {
+		let {left, top, width, height} = node.getBoundingClientRect();
 		let {offsetLeft, offsetTop} = newTabTools.page.firstElementChild;
 		return new Rect(left - offsetLeft, top - offsetTop, width, height);
 	},
 
 	/**
 	   * Fades a given node from zero to full opacity.
-	   * @param aNode The node to fade.
-	   * @param aCallback The callback to call when finished.
+	   * @param node The node to fade.
+	   * @param callback The callback to call when finished.
 	   */
-	fadeNodeIn: function Transformation_fadeNodeIn(aNode, aCallback) {
-		this._setNodeOpacity(aNode, 1, function() {
+	fadeNodeIn: function Transformation_fadeNodeIn(node, callback) {
+		this._setNodeOpacity(node, 1, function() {
 			// Clear the style property.
-			aNode.style.opacity = '';
+			node.style.opacity = '';
 
-			if (aCallback)
-			aCallback();
+			if (callback)
+				callback();
 		});
 	},
 
 	/**
 	   * Fades a given node from full to zero opacity.
-	   * @param aNode The node to fade.
-	   * @param aCallback The callback to call when finished.
+	   * @param node The node to fade.
+	   * @param callback The callback to call when finished.
 	   */
-	fadeNodeOut: function Transformation_fadeNodeOut(aNode, aCallback) {
-		this._setNodeOpacity(aNode, 0, aCallback);
+	fadeNodeOut: function Transformation_fadeNodeOut(node, callback) {
+		this._setNodeOpacity(node, 0, callback);
 	},
 
 	/**
 	   * Fades a given site from zero to full opacity.
-	   * @param aSite The site to fade.
-	   * @param aCallback The callback to call when finished.
+	   * @param site The site to fade.
+	   * @param callback The callback to call when finished.
 	   */
-	showSite: function Transformation_showSite(aSite, aCallback) {
-		this.fadeNodeIn(aSite.node, aCallback);
+	showSite: function Transformation_showSite(site, callback) {
+		this.fadeNodeIn(site.node, callback);
 	},
 
 	/**
 	   * Fades a given site from full to zero opacity.
-	   * @param aSite The site to fade.
-	   * @param aCallback The callback to call when finished.
+	   * @param site The site to fade.
+	   * @param callback The callback to call when finished.
 	   */
-	hideSite: function Transformation_hideSite(aSite, aCallback) {
-		this.fadeNodeOut(aSite.node, aCallback);
+	hideSite: function Transformation_hideSite(site, callback) {
+		this.fadeNodeOut(site.node, callback);
 	},
 
 	/**
 	   * Allows to set a site's position.
-	   * @param aSite The site to re-position.
-	   * @param aPosition The desired position for the given site.
+	   * @param site The site to re-position.
+	   * @param position The desired position for the given site.
 	   */
-	setSitePosition: function Transformation_setSitePosition(aSite, aPosition) {
-		let style = aSite.node.style;
-		let {top, left} = aPosition;
+	setSitePosition: function Transformation_setSitePosition(site, position) {
+		let style = site.node.style;
+		let {top, left} = position;
 
 		style.top = top + 'px';
 		style.left = left + 'px';
@@ -117,55 +117,55 @@ var gTransformation = {
 
 	/**
 	   * Freezes a site in its current position by positioning it absolute.
-	   * @param aSite The site to freeze.
+	   * @param site The site to freeze.
 	   */
-	freezeSitePosition: function Transformation_freezeSitePosition(aSite) {
-		if (this._isFrozen(aSite))
-		return;
+	freezeSitePosition: function Transformation_freezeSitePosition(site) {
+		if (this._isFrozen(site))
+			return;
 
-		let style = aSite.node.style;
-		let comp = getComputedStyle(aSite.node, null);
+		let style = site.node.style;
+		let comp = getComputedStyle(site.node, null);
 		style.width = comp.getPropertyValue('width');
 		style.height = comp.getPropertyValue('height');
 
-		aSite.node.setAttribute('frozen', 'true');
-		this.setSitePosition(aSite, this.getNodePosition(aSite.node));
+		site.node.setAttribute('frozen', 'true');
+		this.setSitePosition(site, this.getNodePosition(site.node));
 	},
 
 	/**
 	   * Unfreezes a site by removing its absolute positioning.
-	   * @param aSite The site to unfreeze.
+	   * @param site The site to unfreeze.
 	   */
-	unfreezeSitePosition: function Transformation_unfreezeSitePosition(aSite) {
-		if (!this._isFrozen(aSite))
-		return;
+	unfreezeSitePosition: function Transformation_unfreezeSitePosition(site) {
+		if (!this._isFrozen(site))
+			return;
 
-		let style = aSite.node.style;
+		let style = site.node.style;
 		style.left = style.top = style.width = style.height = '';
-		aSite.node.removeAttribute('frozen');
+		site.node.removeAttribute('frozen');
 	},
 
 	/**
 	   * Slides the given site to the target node's position.
-	   * @param aSite The site to move.
-	   * @param aTarget The slide target.
-	   * @param aOptions Set of options (see below).
+	   * @param site The site to move.
+	   * @param target The slide target.
+	   * @param options Set of options (see below).
 	   *        unfreeze - unfreeze the site after sliding
 	   *        callback - the callback to call when finished
 	   */
-	slideSiteTo: function Transformation_slideSiteTo(aSite, aTarget, aOptions) {
-		let currentPosition = this.getNodePosition(aSite.node);
-		let targetPosition = this.getNodePosition(aTarget.node);
-		let callback = aOptions && aOptions.callback;
+	slideSiteTo: function Transformation_slideSiteTo(site, target, options) {
+		let currentPosition = this.getNodePosition(site.node);
+		let targetPosition = this.getNodePosition(target.node);
+		let callback = options && options.callback;
 
 		let self = this;
 
 		function finish() {
-			if (aOptions && aOptions.unfreeze)
-			self.unfreezeSitePosition(aSite);
+			if (options && options.unfreeze)
+				self.unfreezeSitePosition(site);
 
 			if (callback)
-			callback();
+				callback();
 		}
 
 		// We need to take the width of a cell's border into account.
@@ -177,40 +177,40 @@ var gTransformation = {
 		currentPosition.top == targetPosition.top) {
 			finish();
 		} else {
-			this.setSitePosition(aSite, targetPosition);
-			this._whenTransitionEnded(aSite.node, ['left', 'top'], finish);
+			this.setSitePosition(site, targetPosition);
+			this._whenTransitionEnded(site.node, ['left', 'top'], finish);
 		}
 	},
 
 	/**
 	   * Rearranges a given array of sites and moves them to their new positions or
 	   * fades in/out new/removed sites.
-	   * @param aSites An array of sites to rearrange.
-	   * @param aOptions Set of options (see below).
+	   * @param sites An array of sites to rearrange.
+	   * @param options Set of options (see below).
 	   *        unfreeze - unfreeze the site after rearranging
 	   *        callback - the callback to call when finished
 	   */
-	rearrangeSites: function Transformation_rearrangeSites(aSites, aOptions) {
+	rearrangeSites: function Transformation_rearrangeSites(sites, options) {
 		let batch = [];
-		let cells = gGrid.cells;
-		let callback = aOptions && aOptions.callback;
-		let unfreeze = aOptions && aOptions.unfreeze;
+		let cells = Grid.cells;
+		let callback = options && options.callback;
+		let unfreeze = options && options.unfreeze;
 
-		aSites.forEach(function(aSite, aIndex) {
+		sites.forEach(function(site, index) {
 			// Do not re-arrange empty cells or the dragged site.
-			if (!aSite || aSite == gDrag.draggedSite)
-			return;
+			if (!site || site == Drag.draggedSite)
+				return;
 
 			batch.push(new Promise(resolve => {
-				if (!cells[aIndex]) {
+				if (!cells[index]) {
 					// The site disappeared from the grid, hide it.
-					this.hideSite(aSite, resolve);
-				} else if (this._getNodeOpacity(aSite.node) != 1) {
+					this.hideSite(site, resolve);
+				} else if (this._getNodeOpacity(site.node) != 1) {
 					// The site disappeared before but is now back, show it.
-					this.showSite(aSite, resolve);
+					this.showSite(site, resolve);
 				} else {
 					// The site's position has changed, move it around.
-					this._moveSite(aSite, aIndex, {unfreeze: unfreeze, callback: resolve});
+					this._moveSite(site, index, {unfreeze: unfreeze, callback: resolve});
 				}
 			}));
 		}, this);
@@ -223,68 +223,68 @@ var gTransformation = {
 	/**
 	   * Listens for the 'transitionend' event on a given node and calls the given
 	   * callback.
-	   * @param aNode The node that is transitioned.
-	   * @param aProperties The properties we'll wait to be transitioned.
-	   * @param aCallback The callback to call when finished.
+	   * @param node The node that is transitioned.
+	   * @param properties The properties we'll wait to be transitioned.
+	   * @param callback The callback to call when finished.
 	   */
-	_whenTransitionEnded: function Transformation_whenTransitionEnded(aNode, aProperties, aCallback) {
-		let props = new Set(aProperties);
-		aNode.addEventListener('transitionend', function onEnd(e) {
+	_whenTransitionEnded: function Transformation_whenTransitionEnded(node, properties, callback) {
+		let props = new Set(properties);
+		node.addEventListener('transitionend', function onEnd(e) {
 			if (props.has(e.propertyName)) {
-				aNode.removeEventListener('transitionend', onEnd);
-				aCallback();
+				node.removeEventListener('transitionend', onEnd);
+				callback();
 			}
 		});
 	},
 
 	/**
 	   * Gets a given node's opacity value.
-	   * @param aNode The node to get the opacity value from.
+	   * @param node The node to get the opacity value from.
 	   * @return The node's opacity value.
 	   */
-	_getNodeOpacity: function Transformation_getNodeOpacity(aNode) {
-		let cstyle = window.getComputedStyle(aNode, null);
+	_getNodeOpacity: function Transformation_getNodeOpacity(node) {
+		let cstyle = window.getComputedStyle(node, null);
 		return cstyle.getPropertyValue('opacity');
 	},
 
 	/**
 	   * Sets a given node's opacity.
-	   * @param aNode The node to set the opacity value for.
-	   * @param aOpacity The opacity value to set.
-	   * @param aCallback The callback to call when finished.
+	   * @param node The node to set the opacity value for.
+	   * @param opacity The opacity value to set.
+	   * @param callback The callback to call when finished.
 	   */
-	_setNodeOpacity: function Transformation_setNodeOpacity(aNode, aOpacity, aCallback) {
+	_setNodeOpacity: function Transformation_setNodeOpacity(node, opacity, callback) {
 
-		if (this._getNodeOpacity(aNode) == aOpacity) {
-			if (aCallback)
-			aCallback();
+		if (this._getNodeOpacity(node) == opacity) {
+			if (callback)
+				callback();
 		} else {
-			if (aCallback) {
-				this._whenTransitionEnded(aNode, ['opacity'], aCallback);
+			if (callback) {
+				this._whenTransitionEnded(node, ['opacity'], callback);
 			}
 
-			aNode.style.opacity = aOpacity;
+			node.style.opacity = opacity;
 		}
 	},
 
 	/**
 	   * Moves a site to the cell with the given index.
-	   * @param aSite The site to move.
-	   * @param aIndex The target cell's index.
-	   * @param aOptions Options that are directly passed to slideSiteTo().
+	   * @param site The site to move.
+	   * @param index The target cell's index.
+	   * @param options Options that are directly passed to slideSiteTo().
 	   */
-	_moveSite: function Transformation_moveSite(aSite, aIndex, aOptions) {
-		this.freezeSitePosition(aSite);
-		this.slideSiteTo(aSite, gGrid.cells[aIndex], aOptions);
+	_moveSite: function Transformation_moveSite(site, index, options) {
+		this.freezeSitePosition(site);
+		this.slideSiteTo(site, Grid.cells[index], options);
 	},
 
 	/**
 	   * Checks whether a site is currently frozen.
-	   * @param aSite The site to check.
+	   * @param site The site to check.
 	   * @return Whether the given site is frozen.
 	   */
-	_isFrozen: function Transformation_isFrozen(aSite) {
-		return aSite.node.hasAttribute('frozen');
+	_isFrozen: function Transformation_isFrozen(site) {
+		return site.node.hasAttribute('frozen');
 	}
 };
 
@@ -292,13 +292,13 @@ var gTransformation = {
  * This singleton represents the whole 'New Tab Page' and takes care of
  * initializing all its components.
  */
-var gPage = {
+var Page = {
 	/**
 	   * Initializes the page.
 	   */
 	init: function Page_init() {
 		// Add ourselves to the list of pages to receive notifications.
-		gAllPages.register(this);
+		AllPages.register(this);
 
 		// Listen for 'unload' to unregister this page.
 		addEventListener('unload', this, false);
@@ -308,9 +308,9 @@ var gPage = {
 		button.addEventListener('click', this, false);
 
 		// Check if the new tab feature is enabled.
-		let enabled = gAllPages.enabled;
+		let enabled = AllPages.enabled;
 		if (enabled)
-		this._init();
+			this._init();
 
 		this._updateAttributes(enabled);
 	},
@@ -327,20 +327,20 @@ var gPage = {
 	/**
 	   * Listens for notifications specific to this page.
 	   */
-	observe: function Page_observe(aSubject, aTopic, aData) {
-		if (aTopic == 'nsPref:changed') {
-			let enabled = gAllPages.enabled;
+	observe: function Page_observe(subject, topic, data) {
+		if (topic == 'nsPref:changed') {
+			let enabled = AllPages.enabled;
 			this._updateAttributes(enabled);
 
 			// Initialize the whole page if we haven't done that, yet.
 			if (enabled) {
 				this._init();
 			} else {
-				gUndoDialog.hide();
+				UndoDialog.hide();
 			}
-		} else if (aTopic == 'page-thumbnail:create' && gGrid.ready) {
-			for (let site of gGrid.sites) {
-				if (site && site.url === aData) {
+		} else if (topic == 'page-thumbnail:create' && Grid.ready) {
+			for (let site of Grid.sites) {
+				if (site && site.url === data) {
 					site.refreshThumbnail();
 				}
 			}
@@ -360,8 +360,8 @@ var gPage = {
 		}
 
 		// The grid might not be ready yet as we initialize it asynchronously.
-		if (gGrid.ready) {
-			gGrid.refresh();
+		if (Grid.ready) {
+			Grid.refresh();
 		}
 	},
 
@@ -371,13 +371,13 @@ var gPage = {
 	   */
 	_init: function Page_init() {
 		if (this._initialized)
-		return;
+			return;
 
 		this._initialized = true;
 
 		this._mutationObserver = new MutationObserver(() => {
 			if (this.allowBackgroundCaptures) {
-				for (let site of gGrid.sites) {
+				for (let site of Grid.sites) {
 					if (site) {
 						site.captureIfMissing();
 					}
@@ -389,63 +389,63 @@ var gPage = {
 			attributeFilter: ['allow-background-captures'],
 		});
 
-		gLinks.populateCache(function() {
+		Links.populateCache(function() {
 			// Initialize and render the grid.
-			gGrid.init();
+			Grid.init();
 
 			// Initialize the drop target shim.
-			gDropTargetShim.init();
+			DropTargetShim.init();
 
 		}.bind(this));
 	},
 
 	/**
 	   * Updates the 'page-disabled' attributes of the respective DOM nodes.
-	   * @param aValue Whether the New Tab Page is enabled or not.
+	   * @param value Whether the New Tab Page is enabled or not.
 	   */
-	_updateAttributes: function Page_updateAttributes(aValue) {
+	_updateAttributes: function Page_updateAttributes(value) {
 		// Set the nodes' states.
 		let nodeSelector = '#newtab-scrollbox, #newtab-toggle, #newtab-grid';
 		for (let node of document.querySelectorAll(nodeSelector)) {
-			if (aValue)
-			node.removeAttribute('page-disabled');
+			if (value)
+				node.removeAttribute('page-disabled');
 			else
-			node.setAttribute('page-disabled', 'true');
+				node.setAttribute('page-disabled', 'true');
 		}
 
 		// Enables/disables the control and link elements.
 		let inputSelector = '.newtab-control, .newtab-link';
 		for (let input of document.querySelectorAll(inputSelector)) {
-			if (aValue)
-			input.removeAttribute('tabindex');
+			if (value)
+				input.removeAttribute('tabindex');
 			else
-			input.setAttribute('tabindex', '-1');
+				input.setAttribute('tabindex', '-1');
 		}
 	},
 
 	/**
 	   * Handles all page events.
 	   */
-	handleEvent: function Page_handleEvent(aEvent) {
-		switch (aEvent.type) {
-			case 'unload':
-				if (this._mutationObserver)
+	handleEvent: function Page_handleEvent(event) {
+		switch (event.type) {
+		case 'unload':
+			if (this._mutationObserver)
 				this._mutationObserver.disconnect();
-				gAllPages.unregister(this);
-				break;
-			case 'click':
-				gAllPages.enabled = !gAllPages.enabled;
-				break;
-			case 'dragover':
-				if (gDrag.isValid(aEvent) && gDrag.draggedSite)
-				aEvent.preventDefault();
-				break;
-			case 'drop':
-				if (gDrag.isValid(aEvent) && gDrag.draggedSite) {
-					aEvent.preventDefault();
-					aEvent.stopPropagation();
-				}
-				break;
+			AllPages.unregister(this);
+			break;
+		case 'click':
+			AllPages.enabled = !AllPages.enabled;
+			break;
+		case 'dragover':
+			if (Drag.isValid(event) && Drag.draggedSite)
+				event.preventDefault();
+			break;
+		case 'drop':
+			if (Drag.isValid(event) && Drag.draggedSite) {
+				event.preventDefault();
+				event.stopPropagation();
+			}
+			break;
 		}
 	}
 };
@@ -453,7 +453,7 @@ var gPage = {
 /**
  * This singleton represents the grid that contains all sites.
  */
-var gGrid = {
+var Grid = {
 	/**
 	   * The DOM node of the grid.
 	   */
@@ -474,14 +474,14 @@ var gGrid = {
 	/**
 	   * All sites contained in the grid's cells. Sites may be empty.
 	   */
-	get sites() { return [for (cell of this.cells) cell.site]; },
+	get sites() { return this.cells.map(cell => cell.site); },
 
 	// Tells whether the grid has already been initialized.
 	get ready() { return !!this._node; },
 
 	/**
 	   * Initializes the grid.
-	   * @param aSelector The query selector of the grid.
+	   * @param selector The query selector of the grid.
 	   */
 	init: function Grid_init() {
 		this._node = document.getElementById('newtab-grid');
@@ -491,14 +491,14 @@ var gGrid = {
 
 	/**
 	   * Creates a new site in the grid.
-	   * @param aLink The new site's link.
-	   * @param aCell The cell that will contain the new site.
+	   * @param link The new site's link.
+	   * @param cell The cell that will contain the new site.
 	   * @return The newly created site.
 	   */
-	createSite: function Grid_createSite(aLink, aCell) {
-		let node = aCell.node;
+	createSite: function Grid_createSite(link, cell) {
+		let node = cell.node;
 		node.appendChild(this._siteFragment.cloneNode(true));
-		return new Site(node.firstElementChild, aLink);
+		return new Site(node.firstElementChild, link);
 	},
 
 	/**
@@ -511,7 +511,7 @@ var gGrid = {
 			let child = node.firstElementChild;
 
 			if (child)
-			node.removeChild(child);
+				node.removeChild(child);
 		}, this);
 
 		// Render the grid again.
@@ -545,17 +545,17 @@ var gGrid = {
 		this._node.innerHTML = '';
 
 		// Creates the structure of one row
-		for (let i = 0; i < gGridPrefs.gridColumns; i++) {
+		for (let i = 0; i < GridPrefs.gridColumns; i++) {
 			row.appendChild(cell.cloneNode(true));
 		}
 		// Creates the grid
-		for (let j = 0; j < gGridPrefs.gridRows; j++) {
+		for (let j = 0; j < GridPrefs.gridRows; j++) {
 			this._node.appendChild(row.cloneNode(true));
 		}
 
 		// (Re-)initialize all cells.
 		let cellElements = this.node.querySelectorAll('.newtab-cell');
-		this._cells = [for (cell of cellElements) new Cell(this, cell)];
+		this._cells = Array.map(cellElements, cell => new Cell(this, cell));
 	},
 
 	/**
@@ -613,8 +613,8 @@ var gGrid = {
 		let rowsLength = this._node.querySelectorAll('.newtab-row').length;
 		let cellsLength = this._node.querySelectorAll('.newtab-cell').length;
 
-		return (rowsLength != gGridPrefs.gridRows ||
-		cellsLength != (gGridPrefs.gridRows * gGridPrefs.gridColumns));
+		return (rowsLength != GridPrefs.gridRows ||
+		cellsLength != (GridPrefs.gridRows * GridPrefs.gridColumns));
 	},
 
 	setThumbnailPrefs: function Grid_setThumbnailPrefs() {
@@ -638,14 +638,14 @@ var gGrid = {
  * It's mostly read-only, i.e. all manipulation of both position and content
  * aren't handled here.
  */
-function Cell(aGrid, aNode) {
-	this._grid = aGrid;
-	this._node = aNode;
+function Cell(grid, node) {
+	this._grid = grid;
+	this._node = node;
 	this._node._newtabCell = this;
 
 	// Register drag-and-drop event handlers.
-	['dragenter', 'dragover', 'dragexit', 'drop'].forEach(function(aType) {
-		this._node.addEventListener(aType, this, false);
+	['dragenter', 'dragover', 'dragexit', 'drop'].forEach(function(type) {
+		this._node.addEventListener(type, this, false);
 	}, this);
 }
 
@@ -726,30 +726,30 @@ Cell.prototype = {
 	/**
 	   * Handles all cell events.
 	   */
-	handleEvent: function Cell_handleEvent(aEvent) {
+	handleEvent: function Cell_handleEvent(event) {
 		// We're not responding to external drag/drop events
 		// when our parent window is in private browsing mode.
-		if (inPrivateBrowsingMode() && !gDrag.draggedSite)
-		return;
+		if (inPrivateBrowsingMode() && !Drag.draggedSite)
+			return;
 
-		if (aEvent.type != 'dragexit' && !gDrag.isValid(aEvent))
-		return;
+		if (event.type != 'dragexit' && !Drag.isValid(event))
+			return;
 
-		switch (aEvent.type) {
-			case 'dragenter':
-				aEvent.preventDefault();
-				gDrop.enter(this, aEvent);
-				break;
-			case 'dragover':
-				aEvent.preventDefault();
-				break;
-			case 'dragexit':
-				gDrop.exit(this, aEvent);
-				break;
-			case 'drop':
-				aEvent.preventDefault();
-				gDrop.drop(this, aEvent);
-				break;
+		switch (event.type) {
+		case 'dragenter':
+			event.preventDefault();
+			Drop.enter(this, event);
+			break;
+		case 'dragover':
+			event.preventDefault();
+			break;
+		case 'dragexit':
+			Drop.exit(this, event);
+			break;
+		case 'drop':
+			event.preventDefault();
+			Drop.drop(this, event);
+			break;
 		}
 	}
 };
@@ -758,11 +758,11 @@ Cell.prototype = {
  * This class represents a site that is contained in a cell and can be pinned,
  * moved around or deleted.
  */
-function Site(aNode, aLink) {
-	this._node = aNode;
+function Site(node, link) {
+	this._node = node;
 	this._node._newtabSite = this;
 
-	this._link = aLink;
+	this._link = link;
 
 	this._render();
 	this._addEventHandlers();
@@ -799,14 +799,14 @@ Site.prototype = {
 
 	/**
 	   * Pins the site on its current or a given index.
-	   * @param aIndex The pinned index (optional).
+	   * @param index The pinned index (optional).
 	   */
-	pin: function Site_pin(aIndex) {
-		if (typeof aIndex == 'undefined')
-		aIndex = this.cell.index;
+	pin: function Site_pin(index) {
+		if (typeof index == 'undefined')
+			index = this.cell.index;
 
 		this._updateAttributes(true);
-		gPinnedLinks.pin(this._link, aIndex);
+		PinnedLinks.pin(this._link, index);
 	},
 
 	/**
@@ -815,8 +815,8 @@ Site.prototype = {
 	unpin: function Site_unpin() {
 		if (this.isPinned()) {
 			this._updateAttributes(false);
-			gPinnedLinks.unpin(this._link);
-			gUpdater.updateGrid();
+			PinnedLinks.unpin(this._link);
+			Updater.updateGrid();
 		}
 	},
 
@@ -825,7 +825,7 @@ Site.prototype = {
 	   * @return Whether this site is pinned.
 	   */
 	isPinned: function Site_isPinned() {
-		return gPinnedLinks.isPinned(this._link);
+		return PinnedLinks.isPinned(this._link);
 	},
 
 	/**
@@ -833,31 +833,31 @@ Site.prototype = {
 	   * when done.
 	   */
 	block: function Site_block() {
-		if (!gBlockedLinks.isBlocked(this._link)) {
-			gUndoDialog.show(this);
-			gBlockedLinks.block(this._link);
-			gUpdater.updateGrid();
+		if (!BlockedLinks.isBlocked(this._link)) {
+			UndoDialog.show(this);
+			BlockedLinks.block(this._link);
+			Updater.updateGrid();
 		}
 	},
 
 	/**
 	   * Gets the DOM node specified by the given query selector.
-	   * @param aSelector The query selector.
+	   * @param selector The query selector.
 	   * @return The DOM node we found.
 	   */
-	_querySelector: function Site_querySelector(aSelector) {
-		return this.node.querySelector(aSelector);
+	_querySelector: function Site_querySelector(selector) {
+		return this.node.querySelector(selector);
 	},
 
 	/**
 	   * Updates attributes for all nodes which status depends on this site being
 	   * pinned or unpinned.
-	   * @param aPinned Whether this site is now pinned or unpinned.
+	   * @param pinned Whether this site is now pinned or unpinned.
 	   */
-	_updateAttributes: function(aPinned) {
+	_updateAttributes: function(pinned) {
 		let control = this._querySelector('.newtab-control-pin');
 
-		if (aPinned) {
+		if (pinned) {
 			control.setAttribute('pinned', true);
 			control.setAttribute('title', newTabString('unpin'));
 		} else {
@@ -871,7 +871,7 @@ Site.prototype = {
 	   */
 	_render: function Site_render() {
 		if (this.isPinned())
-		this._updateAttributes(true);
+			this._updateAttributes(true);
 		// Capture the page if the thumbnail is missing, which will cause page.js
 		// to be notified and call our refreshThumbnail() method.
 		this.captureIfMissing();
@@ -894,9 +894,9 @@ Site.prototype = {
 		link.setAttribute('title', tooltip);
 		link.setAttribute('href', url);
 
-		faviconService.getFaviconURLForPage(uri, function(aURI) {
-			if (!aURI)
-			return;
+		faviconService.getFaviconURLForPage(uri, function(uri) {
+			if (!uri)
+				return;
 
 			let icon;
 			if (titleElement.firstChild && titleElement.firstChild.nodeType == Node.ELEMENT_NODE) {
@@ -905,7 +905,7 @@ Site.prototype = {
 			} else {
 				icon = document.createElementNS(HTML_NAMESPACE, 'img');
 			}
-			icon.src = 'moz-anno:favicon:' + aURI.spec;
+			icon.src = 'moz-anno:favicon:' + uri.spec;
 			icon.className = 'favicon';
 			titleElement.insertBefore(icon, titleElement.firstChild);
 		});
@@ -916,8 +916,8 @@ Site.prototype = {
 	   * existing thumbnail and the page allows background captures.
 	   */
 	captureIfMissing: function Site_captureIfMissing() {
-		if (gPage.allowBackgroundCaptures)
-		BackgroundPageThumbs.captureIfMissing(this.url);
+		if (Page.allowBackgroundCaptures)
+			BackgroundPageThumbs.captureIfMissing(this.url);
 	},
 
 	/**
@@ -957,40 +957,40 @@ Site.prototype = {
 	/**
 	   * Handles site click events.
 	   */
-	_onClick: function Site_onClick(aEvent) {
-		let target = aEvent.target;
+	_onClick: function Site_onClick(event) {
+		let target = event.target;
 		if (target.classList.contains('newtab-link') ||
 		target.parentElement.classList.contains('newtab-link')) {
 			return;
 		}
 
-		aEvent.preventDefault();
-		if (aEvent.target.classList.contains('newtab-control-block'))
-		this.block();
+		event.preventDefault();
+		if (event.target.classList.contains('newtab-control-block'))
+			this.block();
 		else if (this.isPinned())
-		this.unpin();
+			this.unpin();
 		else
-		this.pin();
+			this.pin();
 	},
 
 	/**
 	   * Handles all site events.
 	   */
-	handleEvent: function Site_handleEvent(aEvent) {
-		switch (aEvent.type) {
-			case 'click':
-				this._onClick(aEvent);
-				break;
-			case 'mouseover':
-				this._node.removeEventListener('mouseover', this, false);
-				this._speculativeConnect();
-				break;
-			case 'dragstart':
-				gDrag.start(this, aEvent);
-				break;
-			case 'dragend':
-				gDrag.end(this, aEvent);
-				break;
+	handleEvent: function Site_handleEvent(event) {
+		switch (event.type) {
+		case 'click':
+			this._onClick(event);
+			break;
+		case 'mouseover':
+			this._node.removeEventListener('mouseover', this, false);
+			this._speculativeConnect();
+			break;
+		case 'dragstart':
+			Drag.start(this, event);
+			break;
+		case 'dragend':
+			Drag.end(this, event);
+			break;
 		}
 	}
 };
@@ -998,7 +998,7 @@ Site.prototype = {
 /**
  * This singleton implements site dragging functionality.
  */
-var gDrag = {
+var Drag = {
 	/**
 	   * The site offset to the drag start point.
 	   */
@@ -1021,44 +1021,44 @@ var gDrag = {
 
 	/**
 	   * Start a new drag operation.
-	   * @param aSite The site that's being dragged.
-	   * @param aEvent The 'dragstart' event.
+	   * @param site The site that's being dragged.
+	   * @param event The 'dragstart' event.
 	   */
-	start: function Drag_start(aSite, aEvent) {
-		this._draggedSite = aSite;
+	start: function Drag_start(site, event) {
+		this._draggedSite = site;
 
 		// Mark nodes as being dragged.
 		let selector = '.newtab-site, .newtab-control, .newtab-thumbnail';
-		let parentCell = aSite.node.parentNode;
+		let parentCell = site.node.parentNode;
 		let nodes = parentCell.querySelectorAll(selector);
 		for (let i = 0; i < nodes.length; i++)
-		nodes[i].setAttribute('dragged', 'true');
+			nodes[i].setAttribute('dragged', 'true');
 
 		parentCell.setAttribute('dragged', 'true');
 
-		this._setDragData(aSite, aEvent);
+		this._setDragData(site, event);
 
 		// Store the cursor offset.
-		let node = aSite.node;
+		let node = site.node;
 		let rect = node.getBoundingClientRect();
 		let {offsetLeft, offsetTop} = newTabTools.page.firstElementChild;
-		this._offsetX = aEvent.clientX - rect.left + offsetLeft;
-		this._offsetY = aEvent.clientY - rect.top + offsetTop;
+		this._offsetX = event.clientX - rect.left + offsetLeft;
+		this._offsetY = event.clientY - rect.top + offsetTop;
 
 		// Store the cell dimensions.
-		let cellNode = aSite.cell.node;
+		let cellNode = site.cell.node;
 		this._cellWidth = cellNode.offsetWidth;
 		this._cellHeight = cellNode.offsetHeight;
 
-		gTransformation.freezeSitePosition(aSite);
+		Transformation.freezeSitePosition(site);
 	},
 
 	/**
 	   * Handles the 'drag' event.
-	   * @param aSite The site that's being dragged.
-	   * @param aEvent The 'drag' event.
+	   * @param site The site that's being dragged.
+	   * @param event The 'drag' event.
 	   */
-	drag: function Drag_drag(aSite, aEvent) {
+	drag: function Drag_drag(site, event) {
 		// Get the viewport size.
 		let {clientWidth, clientHeight} = document.documentElement;
 		let {offsetLeft, offsetTop} = newTabTools.page.firstElementChild;
@@ -1067,40 +1067,40 @@ var gDrag = {
 		let border = 5;
 
 		// Enforce minimum constraints to keep the drag image inside the window.
-		let left = Math.max(aEvent.clientX - this._offsetX, border - offsetLeft);
-		let top = Math.max(aEvent.clientY - this._offsetY, border - offsetTop);
+		let left = Math.max(event.clientX - this._offsetX, border - offsetLeft);
+		let top = Math.max(event.clientY - this._offsetY, border - offsetTop);
 
 		// Enforce maximum constraints to keep the drag image inside the window.
 		left = Math.min(left, clientWidth - this.cellWidth - border - offsetLeft);
 		top = Math.min(top, clientHeight - this.cellHeight - border - offsetTop);
 
 		// Update the drag image's position.
-		gTransformation.setSitePosition(aSite, {left: left, top: top});
+		Transformation.setSitePosition(site, {left: left, top: top});
 	},
 
 	/**
 	   * Ends the current drag operation.
-	   * @param aSite The site that's being dragged.
-	   * @param aEvent The 'dragend' event.
+	   * @param site The site that's being dragged.
+	   * @param event The 'dragend' event.
 	   */
-	end: function Drag_end(aSite) {
-		let nodes = gGrid.node.querySelectorAll('[dragged]');
+	end: function Drag_end(site) {
+		let nodes = Grid.node.querySelectorAll('[dragged]');
 		for (let i = 0; i < nodes.length; i++)
-		nodes[i].removeAttribute('dragged');
+			nodes[i].removeAttribute('dragged');
 
 		// Slide the dragged site back into its cell (may be the old or the new cell).
-		gTransformation.slideSiteTo(aSite, aSite.cell, {unfreeze: true});
+		Transformation.slideSiteTo(site, site.cell, {unfreeze: true});
 
 		this._draggedSite = null;
 	},
 
 	/**
 	   * Checks whether we're responsible for a given drag event.
-	   * @param aEvent The drag event to check.
+	   * @param event The drag event to check.
 	   * @return Whether we should handle this drag and drop operation.
 	   */
-	isValid: function Drag_isValid(aEvent) {
-		let link = gDragDataHelper.getLinkFromDragEvent(aEvent);
+	isValid: function Drag_isValid(event) {
+		let link = DragDataHelper.getLinkFromDragEvent(event);
 
 		// Check that the drag data is non-empty.
 		// Can happen when dragging places folders.
@@ -1113,18 +1113,18 @@ var gDrag = {
 
 		// Check that we're not accepting URLs which would inherit the caller's
 		// principal (such as javascript: or data:).
-		return gLinkChecker.checkLoadURI(link.url);
+		return LinkChecker.checkLoadURI(link.url);
 	},
 
 	/**
 	   * Initializes the drag data for the current drag operation.
-	   * @param aSite The site that's being dragged.
-	   * @param aEvent The 'dragstart' event.
+	   * @param site The site that's being dragged.
+	   * @param event The 'dragstart' event.
 	   */
-	_setDragData: function Drag_setDragData(aSite, aEvent) {
-		let {url, title} = aSite;
+	_setDragData: function Drag_setDragData(site, event) {
+		let {url, title} = site;
 
-		let dt = aEvent.dataTransfer;
+		let dt = event.dataTransfer;
 		dt.mozCursor = 'default';
 		dt.effectAllowed = 'move';
 		dt.setData('text/plain', url);
@@ -1149,13 +1149,13 @@ var gDrag = {
 	}
 };
 
-var gDragDataHelper = {
+var DragDataHelper = {
 	get mimeType() {
 		return 'text/x-moz-url';
 	},
 
-	getLinkFromDragEvent: function DragDataHelper_getLinkFromDragEvent(aEvent) {
-		let dt = aEvent.dataTransfer;
+	getLinkFromDragEvent: function DragDataHelper_getLinkFromDragEvent(event) {
+		let dt = event.dataTransfer;
 		if (!dt || !dt.types.contains(this.mimeType)) {
 			return null;
 		}
@@ -1173,7 +1173,7 @@ const DELAY_REARRANGE_MS = 100;
 /**
  * This singleton implements site dropping functionality.
  */
-var gDrop = {
+var Drop = {
 	/**
 	   * The last drop target.
 	   */
@@ -1181,19 +1181,19 @@ var gDrop = {
 
 	/**
 	   * Handles the 'dragenter' event.
-	   * @param aCell The drop target cell.
+	   * @param cell The drop target cell.
 	   */
-	enter: function Drop_enter(aCell) {
-		this._delayedRearrange(aCell);
+	enter: function Drop_enter(cell) {
+		this._delayedRearrange(cell);
 	},
 
 	/**
 	   * Handles the 'dragexit' event.
-	   * @param aCell The drop target cell.
-	   * @param aEvent The 'dragexit' event.
+	   * @param cell The drop target cell.
+	   * @param event The 'dragexit' event.
 	   */
-	exit: function Drop_exit(aCell, aEvent) {
-		if (aEvent.dataTransfer && !aEvent.dataTransfer.mozUserCancelled) {
+	exit: function Drop_exit(cell, event) {
+		if (event.dataTransfer && !event.dataTransfer.mozUserCancelled) {
 			this._delayedRearrange();
 		} else {
 			// The drag operation has been cancelled.
@@ -1204,86 +1204,86 @@ var gDrop = {
 
 	/**
 	   * Handles the 'drop' event.
-	   * @param aCell The drop target cell.
-	   * @param aEvent The 'dragexit' event.
+	   * @param cell The drop target cell.
+	   * @param event The 'dragexit' event.
 	   */
-	drop: function Drop_drop(aCell, aEvent) {
+	drop: function Drop_drop(cell, event) {
 		// The cell that is the drop target could contain a pinned site. We need
 		// to find out where that site has gone and re-pin it there.
-		if (aCell.containsPinnedSite())
-		this._repinSitesAfterDrop(aCell);
+		if (cell.containsPinnedSite())
+			this._repinSitesAfterDrop(cell);
 
 		// Pin the dragged or insert the new site.
-		this._pinDraggedSite(aCell, aEvent);
+		this._pinDraggedSite(cell, event);
 
 		this._cancelDelayedArrange();
 
 		// Update the grid and move all sites to their new places.
-		gUpdater.updateGrid();
+		Updater.updateGrid();
 	},
 
 	/**
 	   * Re-pins all pinned sites in their (new) positions.
-	   * @param aCell The drop target cell.
+	   * @param cell The drop target cell.
 	   */
-	_repinSitesAfterDrop: function Drop_repinSitesAfterDrop(aCell) {
-		let sites = gDropPreview.rearrange(aCell);
+	_repinSitesAfterDrop: function Drop_repinSitesAfterDrop(cell) {
+		let sites = DropPreview.rearrange(cell);
 
 		// Filter out pinned sites.
-		let pinnedSites = sites.filter(function(aSite) {
-			return aSite && aSite.isPinned();
+		let pinnedSites = sites.filter(function(site) {
+			return site && site.isPinned();
 		});
 
 		// Re-pin all shifted pinned cells.
-		pinnedSites.forEach(function(aSite) { aSite.pin(sites.indexOf(aSite)); }, this);
+		pinnedSites.forEach(function(site) { site.pin(sites.indexOf(site)); }, this);
 	},
 
 	/**
 	   * Pins the dragged site in its new place.
-	   * @param aCell The drop target cell.
-	   * @param aEvent The 'dragexit' event.
+	   * @param cell The drop target cell.
+	   * @param event The 'dragexit' event.
 	   */
-	_pinDraggedSite: function Drop_pinDraggedSite(aCell, aEvent) {
-		let index = aCell.index;
-		let draggedSite = gDrag.draggedSite;
+	_pinDraggedSite: function Drop_pinDraggedSite(cell, event) {
+		let index = cell.index;
+		let draggedSite = Drag.draggedSite;
 
 		if (draggedSite) {
 			// Pin the dragged site at its new place.
-			if (aCell != draggedSite.cell)
-			draggedSite.pin(index);
+			if (cell != draggedSite.cell)
+				draggedSite.pin(index);
 		} else {
-			let link = gDragDataHelper.getLinkFromDragEvent(aEvent);
+			let link = DragDataHelper.getLinkFromDragEvent(event);
 			if (link) {
 				// A new link was dragged onto the grid. Create it by pinning its URL.
-				gPinnedLinks.pin(link, index);
+				PinnedLinks.pin(link, index);
 
 				// Make sure the newly added link is not blocked.
-				gBlockedLinks.unblock(link);
+				BlockedLinks.unblock(link);
 			}
 		}
 	},
 
 	/**
 	   * Time a rearrange with a little delay.
-	   * @param aCell The drop target cell.
+	   * @param cell The drop target cell.
 	   */
-	_delayedRearrange: function Drop_delayedRearrange(aCell) {
+	_delayedRearrange: function Drop_delayedRearrange(cell) {
 		// The last drop target didn't change so there's no need to re-arrange.
-		if (this._lastDropTarget == aCell)
-		return;
+		if (this._lastDropTarget == cell)
+			return;
 
 		let self = this;
 
 		function callback() {
 			self._rearrangeTimeout = null;
-			self._rearrange(aCell);
+			self._rearrange(cell);
 		}
 
 		this._cancelDelayedArrange();
 		this._rearrangeTimeout = setTimeout(callback, DELAY_REARRANGE_MS);
 
 		// Store the last drop target.
-		this._lastDropTarget = aCell;
+		this._lastDropTarget = cell;
 	},
 
 	/**
@@ -1298,16 +1298,16 @@ var gDrop = {
 
 	/**
 	   * Rearrange all sites in the grid depending on the current drop target.
-	   * @param aCell The drop target cell.
+	   * @param cell The drop target cell.
 	   */
-	_rearrange: function Drop_rearrange(aCell) {
-		let sites = gGrid.sites;
+	_rearrange: function Drop_rearrange(cell) {
+		let sites = Grid.sites;
 
 		// We need to rearrange the grid only if there's a current drop target.
-		if (aCell)
-		sites = gDropPreview.rearrange(aCell);
+		if (cell)
+			sites = DropPreview.rearrange(cell);
 
-		gTransformation.rearrangeSites(sites, {unfreeze: !aCell});
+		Transformation.rearrangeSites(sites, {unfreeze: !cell});
 	}
 };
 
@@ -1316,7 +1316,7 @@ var gDrop = {
  * the default DnD target detection relies on the cursor's position. We want
  * to pick a drop target based on the dragged site's position.
  */
-var gDropTargetShim = {
+var DropTargetShim = {
 	/**
 	   * Cache for the position of all cells, cleaned after drag finished.
 	   */
@@ -1331,14 +1331,14 @@ var gDropTargetShim = {
 	   * Initializes the drop target shim.
 	   */
 	init: function() {
-		gGrid.node.addEventListener('dragstart', this, true);
+		Grid.node.addEventListener('dragstart', this, true);
 	},
 
 	/**
 	   * Add all event listeners needed during a drag operation.
 	   */
 	_addEventListeners: function() {
-		gGrid.node.addEventListener('dragend', this);
+		Grid.node.addEventListener('dragend', this);
 
 		let docElement = document.documentElement;
 		docElement.addEventListener('dragover', this);
@@ -1350,7 +1350,7 @@ var gDropTargetShim = {
 	   * Remove all event listeners that were needed during a drag operation.
 	   */
 	_removeEventListeners: function() {
-		gGrid.node.removeEventListener('dragend', this);
+		Grid.node.removeEventListener('dragend', this);
 
 		let docElement = document.documentElement;
 		docElement.removeEventListener('dragover', this);
@@ -1361,83 +1361,83 @@ var gDropTargetShim = {
 	/**
 	   * Handles all shim events.
 	   */
-	handleEvent: function(aEvent) {
-		switch (aEvent.type) {
-			case 'dragstart':
-				this._dragstart(aEvent);
-				break;
-			case 'dragenter':
-				aEvent.preventDefault();
-				break;
-			case 'dragover':
-				this._dragover(aEvent);
-				break;
-			case 'drop':
-				this._drop(aEvent);
-				break;
-			case 'dragend':
-				this._dragend(aEvent);
-				break;
+	handleEvent: function(event) {
+		switch (event.type) {
+		case 'dragstart':
+			this._dragstart(event);
+			break;
+		case 'dragenter':
+			event.preventDefault();
+			break;
+		case 'dragover':
+			this._dragover(event);
+			break;
+		case 'drop':
+			this._drop(event);
+			break;
+		case 'dragend':
+			this._dragend(event);
+			break;
 		}
 	},
 
 	/**
 	   * Handles the 'dragstart' event.
-	   * @param aEvent The 'dragstart' event.
+	   * @param event The 'dragstart' event.
 	   */
-	_dragstart: function(aEvent) {
-		if (aEvent.target.classList.contains('newtab-link')) {
-			gGrid.lock();
+	_dragstart: function(event) {
+		if (event.target.classList.contains('newtab-link')) {
+			Grid.lock();
 			this._addEventListeners();
 		}
 	},
 
 	/**
 	   * Handles the 'dragover' event.
-	   * @param aEvent The 'dragover' event.
+	   * @param event The 'dragover' event.
 	   */
-	_dragover: function(aEvent) {
+	_dragover: function(event) {
 		// XXX bug 505521 - Use the dragover event to retrieve the
 		//                  current mouse coordinates while dragging.
-		let sourceNode = aEvent.dataTransfer.mozSourceNode.parentNode;
-		gDrag.drag(sourceNode._newtabSite, aEvent);
+		let sourceNode = event.dataTransfer.mozSourceNode.parentNode;
+		Drag.drag(sourceNode._newtabSite, event);
 
 		// Find the current drop target, if there's one.
-		this._updateDropTarget(aEvent);
+		this._updateDropTarget(event);
 
 		// If we have a valid drop target,
 		// let the drag-and-drop service know.
 		if (this._lastDropTarget) {
-			aEvent.preventDefault();
+			event.preventDefault();
 		}
 	},
 
 	/**
 	   * Handles the 'drop' event.
-	   * @param aEvent The 'drop' event.
+	   * @param event The 'drop' event.
 	   */
-	_drop: function(aEvent) {
+	_drop: function(event) {
 		// We're accepting all drops.
-		aEvent.preventDefault();
+		event.preventDefault();
 
 		// Make sure to determine the current drop target
 		// in case the dragover event hasn't been fired.
-		this._updateDropTarget(aEvent);
+		this._updateDropTarget(event);
 
 		// A site was successfully dropped.
-		this._dispatchEvent(aEvent, 'drop', this._lastDropTarget);
+		this._dispatchEvent(event, 'drop', this._lastDropTarget);
 	},
 
 	/**
 	   * Handles the 'dragend' event.
-	   * @param aEvent The 'dragend' event.
+	   * @param event The 'dragend' event.
 	   */
-	_dragend: function(aEvent) {
+	_dragend: function(event) {
 		if (this._lastDropTarget) {
-			if (aEvent.dataTransfer.mozUserCancelled) {
+			if (event.dataTransfer.mozUserCancelled) {
 				// The drag operation was cancelled.
-				this._dispatchEvent(aEvent, 'dragexit', this._lastDropTarget);
-				this._dispatchEvent(aEvent, 'dragleave', this._lastDropTarget);
+				this._dispatchEvent(event, 'dragexit', this._lastDropTarget);
+				this._dispatchEvent(event, 'dragleave', this._lastDropTarget);
 			}
 
 			// Clean up.
@@ -1445,31 +1445,31 @@ var gDropTargetShim = {
 			this._cellPositions = null;
 		}
 
-		gGrid.unlock();
+		Grid.unlock();
 		this._removeEventListeners();
 	},
 
 	/**
 	   * Tries to find the current drop target and will fire
 	   * appropriate dragenter, dragexit, and dragleave events.
-	   * @param aEvent The current drag event.
+	   * @param event The current drag event.
 	   */
-	_updateDropTarget: function(aEvent) {
+	_updateDropTarget: function(event) {
 		// Let's see if we find a drop target.
-		let target = this._findDropTarget(aEvent);
+		let target = this._findDropTarget(event);
 
 		if (target != this._lastDropTarget) {
 			if (this._lastDropTarget)
 			// We left the last drop target.
-			this._dispatchEvent(aEvent, 'dragexit', this._lastDropTarget);
+				this._dispatchEvent(event, 'dragexit', this._lastDropTarget);
 
 			if (target)
 			// We're now hovering a (new) drop target.
-			this._dispatchEvent(aEvent, 'dragenter', target);
+				this._dispatchEvent(event, 'dragenter', target);
 
 			if (this._lastDropTarget)
 			// We left the last drop target.
-			this._dispatchEvent(aEvent, 'dragleave', this._lastDropTarget);
+				this._dispatchEvent(event, 'dragleave', this._lastDropTarget);
 
 			this._lastDropTarget = target;
 		}
@@ -1483,11 +1483,11 @@ var gDropTargetShim = {
 	_findDropTarget: function() {
 		// These are the minimum intersection values - we want to use the cell if
 		// the site is >= 50% hovering its position.
-		let minWidth = gDrag.cellWidth / 2;
-		let minHeight = gDrag.cellHeight / 2;
+		let minWidth = Drag.cellWidth / 2;
+		let minHeight = Drag.cellHeight / 2;
 
 		let cellPositions = this._getCellPositions();
-		let rect = gTransformation.getNodePosition(gDrag.draggedSite.node);
+		let rect = Transformation.getNodePosition(Drag.draggedSite.node);
 
 		// Compare each cell's position to the dragged site's position.
 		for (let i = 0; i < cellPositions.length; i++) {
@@ -1495,7 +1495,7 @@ var gDropTargetShim = {
 
 			// If the intersection is big enough we found a drop target.
 			if (inter.width >= minWidth && inter.height >= minHeight)
-			return cellPositions[i].cell;
+				return cellPositions[i].cell;
 		}
 
 		// No drop target found.
@@ -1508,26 +1508,26 @@ var gDropTargetShim = {
 	   */
 	_getCellPositions: function DropTargetShim_getCellPositions() {
 		if (this._cellPositions)
-		return this._cellPositions;
+			return this._cellPositions;
 
-		return this._cellPositions = gGrid.cells.map(function(cell) { // jshint ignore:line
-			return {cell: cell, rect: gTransformation.getNodePosition(cell.node)};
+		return this._cellPositions = Grid.cells.map(function(cell) { // jshint ignore:line
+			return {cell: cell, rect: Transformation.getNodePosition(cell.node)};
 		});
 	},
 
 	/**
 	   * Dispatches a custom DragEvent on the given target node.
-	   * @param aEvent The source event.
-	   * @param aType The event type.
-	   * @param aTarget The target node that receives the event.
+	   * @param event The source event.
+	   * @param type The event type.
+	   * @param target The target node that receives the event.
 	   */
-	_dispatchEvent: function(aEvent, aType, aTarget) {
-		let node = aTarget.node;
+	_dispatchEvent: function({dataTransfer}, type, target) {
+		let node = target.node;
 		let event = document.createEvent('DragEvents');
 
 		// The event should not bubble to prevent recursion.
-		event.initDragEvent(aType, false, true, window, 0, 0, 0, 0, 0, false, false,
-		false, false, 0, node, aEvent.dataTransfer);
+		event.initDragEvent(type, false, true, window, 0, 0, 0, 0, 0, false, false,
+		false, false, 0, node, dataTransfer);
 
 		node.dispatchEvent(event);
 	}
@@ -1538,34 +1538,34 @@ var gDropTargetShim = {
  * indicate the transformation that results from dropping a cell at a certain
  * position.
  */
-var gDropPreview = {
+var DropPreview = {
 	/**
 	   * Rearranges the sites currently contained in the grid when a site would be
 	   * dropped onto the given cell.
-	   * @param aCell The drop target cell.
+	   * @param cell The drop target cell.
 	   * @return The re-arranged array of sites.
 	   */
-	rearrange: function DropPreview_rearrange(aCell) {
-		let sites = gGrid.sites;
+	rearrange: function DropPreview_rearrange(cell) {
+		let sites = Grid.sites;
 
 		// Insert the dragged site into the current grid.
-		this._insertDraggedSite(sites, aCell);
+		this._insertDraggedSite(sites, cell);
 
 		// After the new site has been inserted we need to correct the positions
 		// of all pinned tabs that have been moved around.
-		this._repositionPinnedSites(sites, aCell);
+		this._repositionPinnedSites(sites, cell);
 
 		return sites;
 	},
 
 	/**
 	   * Inserts the currently dragged site into the given array of sites.
-	   * @param aSites The array of sites to insert into.
-	   * @param aCell The drop target cell.
+	   * @param sites The array of sites to insert into.
+	   * @param cell The drop target cell.
 	   */
-	_insertDraggedSite: function DropPreview_insertDraggedSite(aSites, aCell) {
-		let dropIndex = aCell.index;
-		let draggedSite = gDrag.draggedSite;
+	_insertDraggedSite: function DropPreview_insertDraggedSite(sites, cell) {
+		let dropIndex = cell.index;
+		let draggedSite = Drag.draggedSite;
 
 		// We're currently dragging a site.
 		if (draggedSite) {
@@ -1574,57 +1574,57 @@ var gDropPreview = {
 
 			// Move the dragged site into its new position.
 			if (dragIndex != dropIndex) {
-				aSites.splice(dragIndex, 1);
-				aSites.splice(dropIndex, 0, draggedSite);
+				sites.splice(dragIndex, 1);
+				sites.splice(dropIndex, 0, draggedSite);
 			}
 			// We're handling an external drag item.
 		} else {
-			aSites.splice(dropIndex, 0, null);
+			sites.splice(dropIndex, 0, null);
 		}
 	},
 
 	/**
 	   * Correct the position of all pinned sites that might have been moved to
 	   * different positions after the dragged site has been inserted.
-	   * @param aSites The array of sites containing the dragged site.
-	   * @param aCell The drop target cell.
+	   * @param sites The array of sites containing the dragged site.
+	   * @param cell The drop target cell.
 	   */
-	_repositionPinnedSites: function DropPreview_repositionPinnedSites(aSites, aCell) {
+	_repositionPinnedSites: function DropPreview_repositionPinnedSites(sites, cell) {
 		// Collect all pinned sites.
-		let pinnedSites = this._filterPinnedSites(aSites, aCell);
+		let pinnedSites = this._filterPinnedSites(sites, cell);
 
 		// Correct pinned site positions.
-		pinnedSites.forEach(function(aSite) {
-			aSites[aSites.indexOf(aSite)] = aSites[aSite.cell.index];
-			aSites[aSite.cell.index] = aSite;
+		pinnedSites.forEach(function(site) {
+			sites[sites.indexOf(site)] = sites[site.cell.index];
+			sites[site.cell.index] = site;
 		}, this);
 
 		// There might be a pinned cell that got pushed out of the grid, try to
 		// sneak it in by removing a lower-priority cell.
-		if (this._hasOverflowedPinnedSite(aSites, aCell))
-		this._repositionOverflowedPinnedSite(aSites, aCell);
+		if (this._hasOverflowedPinnedSite(sites, cell))
+			this._repositionOverflowedPinnedSite(sites, cell);
 	},
 
 	/**
 	   * Filter pinned sites out of the grid that are still on their old positions
 	   * and have not moved.
-	   * @param aSites The array of sites to filter.
-	   * @param aCell The drop target cell.
+	   * @param sites The array of sites to filter.
+	   * @param cell The drop target cell.
 	   * @return The filtered array of sites.
 	   */
-	_filterPinnedSites: function DropPreview_filterPinnedSites(aSites, aCell) {
-		let draggedSite = gDrag.draggedSite;
+	_filterPinnedSites: function DropPreview_filterPinnedSites(sites, cell) {
+		let draggedSite = Drag.draggedSite;
 
 		// When dropping on a cell that contains a pinned site make sure that all
 		// pinned cells surrounding the drop target are moved as well.
-		let range = this._getPinnedRange(aCell);
+		let range = this._getPinnedRange(cell);
 
-		return aSites.filter(function(aSite) {
+		return sites.filter(function(site) {
 			// The site must be valid, pinned and not the dragged site.
-			if (!aSite || aSite == draggedSite || !aSite.isPinned())
-			return false;
+			if (!site || site == draggedSite || !site.isPinned())
+				return false;
 
-			let index = aSite.cell.index;
+			let index = site.cell.index;
 
 			// If it's not in the 'pinned range' it's a valid pinned site.
 			return (index > range.end || index < range.start);
@@ -1633,26 +1633,26 @@ var gDropPreview = {
 
 	/**
 	   * Determines the range of pinned sites surrounding the drop target cell.
-	   * @param aCell The drop target cell.
+	   * @param cell The drop target cell.
 	   * @return The range of pinned cells.
 	   */
-	_getPinnedRange: function DropPreview_getPinnedRange(aCell) {
-		let dropIndex = aCell.index;
+	_getPinnedRange: function DropPreview_getPinnedRange(cell) {
+		let dropIndex = cell.index;
 		let range = {start: dropIndex, end: dropIndex};
 
 		// We need a pinned range only when dropping on a pinned site.
-		if (aCell.containsPinnedSite()) {
-			let links = gPinnedLinks.links;
+		if (cell.containsPinnedSite()) {
+			let links = PinnedLinks.links;
 
 			// Find all previous siblings of the drop target that are pinned as well.
 			while (range.start && links[range.start - 1])
-			range.start--;
+				range.start--;
 
 			let maxEnd = links.length - 1;
 
 			// Find all next siblings of the drop target that are pinned as well.
 			while (range.end < maxEnd && links[range.end + 1])
-			range.end++;
+				range.end++;
 		}
 
 		return range;
@@ -1661,23 +1661,23 @@ var gDropPreview = {
 	/**
 	   * Checks if the given array of sites contains a pinned site that has
 	   * been pushed out of the grid.
-	   * @param aSites The array of sites to check.
-	   * @param aCell The drop target cell.
+	   * @param sites The array of sites to check.
+	   * @param cell The drop target cell.
 	   * @return Whether there is an overflowed pinned cell.
 	   */
-	_hasOverflowedPinnedSite: function DropPreview_hasOverflowedPinnedSite(aSites, aCell) {
+	_hasOverflowedPinnedSite: function DropPreview_hasOverflowedPinnedSite(sites, cell) {
 		// If the drop target isn't pinned there's no way a pinned site has been
 		// pushed out of the grid so we can just exit here.
-		if (!aCell.containsPinnedSite())
-		return false;
+		if (!cell.containsPinnedSite())
+			return false;
 
-		let cells = gGrid.cells;
+		let cells = Grid.cells;
 
 		// No cells have been pushed out of the grid, nothing to do here.
-		if (aSites.length <= cells.length)
-		return false;
+		if (sites.length <= cells.length)
+			return false;
 
-		let overflowedSite = aSites[cells.length];
+		let overflowedSite = sites[cells.length];
 
 		// Nothing to do if the site that got pushed out of the grid is not pinned.
 		return (overflowedSite && overflowedSite.isPinned());
@@ -1687,41 +1687,41 @@ var gDropPreview = {
 	   * We have a overflowed pinned site that we need to re-position so that it's
 	   * visible again. We try to find a lower-priority cell (empty or containing
 	   * an unpinned site) that we can move it to.
-	   * @param aSites The array of sites.
-	   * @param aCell The drop target cell.
+	   * @param sites The array of sites.
+	   * @param cell The drop target cell.
 	   */
-	_repositionOverflowedPinnedSite: function DropPreview_repositionOverflowedPinnedSite(aSites, aCell) {
+	_repositionOverflowedPinnedSite: function DropPreview_repositionOverflowedPinnedSite(sites, cell) {
 		// Try to find a lower-priority cell (empty or containing an unpinned site).
-		let index = this._indexOfLowerPrioritySite(aSites, aCell);
+		let index = this._indexOfLowerPrioritySite(sites, cell);
 
 		if (index > -1) {
-			let cells = gGrid.cells;
-			let dropIndex = aCell.index;
+			let cells = Grid.cells;
+			let dropIndex = cell.index;
 
 			// Move all pinned cells to their new positions to let the overflowed
 			// site fit into the grid.
-			for (let i = index + 1, lastPosition = index; i < aSites.length; i++) {
+			for (let i = index + 1, lastPosition = index; i < sites.length; i++) {
 				if (i != dropIndex) {
-					aSites[lastPosition] = aSites[i];
+					sites[lastPosition] = sites[i];
 					lastPosition = i;
 				}
 			}
 
 			// Finally, remove the overflowed site from its previous position.
-			aSites.splice(cells.length, 1);
+			sites.splice(cells.length, 1);
 		}
 	},
 
 	/**
 	   * Finds the index of the last cell that is empty or contains an unpinned
 	   * site. These are considered to be of a lower priority.
-	   * @param aSites The array of sites.
-	   * @param aCell The drop target cell.
+	   * @param sites The array of sites.
+	   * @param cell The drop target cell.
 	   * @return The cell's index.
 	   */
-	_indexOfLowerPrioritySite: function DropPreview_indexOfLowerPrioritySite(aSites, aCell) {
-		let cells = gGrid.cells;
-		let dropIndex = aCell.index;
+	_indexOfLowerPrioritySite: function DropPreview_indexOfLowerPrioritySite(sites, cell) {
+		let cells = Grid.cells;
+		let dropIndex = cell.index;
 
 		// Search (beginning with the last site in the grid) for a site that is
 		// empty or unpinned (an thus lower-priority) and can be pushed out of the
@@ -1729,13 +1729,13 @@ var gDropPreview = {
 		for (let i = cells.length - 1; i >= 0; i--) {
 			// The cell that is our drop target is not a good choice.
 			if (i == dropIndex)
-			continue;
+				continue;
 
-			let site = aSites[i];
+			let site = sites[i];
 
 			// We can use the cell only if it's empty or the site is un-pinned.
 			if (!site || !site.isPinned())
-			return i;
+				return i;
 		}
 
 		return -1;
@@ -1746,14 +1746,14 @@ var gDropPreview = {
  * This singleton provides functionality to update the current grid to a new
  * set of pinned and blocked sites. It adds, moves and removes sites.
  */
-var gUpdater = {
+var Updater = {
 	/**
 	   * Updates the current grid according to its pinned and blocked sites.
 	   * This removes old, moves existing and creates new sites to fill gaps.
-	   * @param aCallback The callback to call when finished.
+	   * @param callback The callback to call when finished.
 	   */
-	updateGrid: function Updater_updateGrid(aCallback) {
-		let links = NewTabToolsLinks.getLinks().slice(0, gGrid.cells.length);
+	updateGrid: function Updater_updateGrid(callback) {
+		let links = NewTabToolsLinks.getLinks().slice(0, Grid.cells.length);
 
 		// Find all sites that remain in the grid.
 		let sites = this._findRemainingSites(links);
@@ -1775,16 +1775,16 @@ var gUpdater = {
 			// positions.
 			self._rearrangeSites(sites, function() {
 				// Try to fill empty cells and finish.
-				self._fillEmptyCells(links, aCallback);
+				self._fillEmptyCells(links, callback);
 
 				// Update other pages that might be open to keep them synced.
-				gAllPages.update(gPage);
+				AllPages.update(Page);
 			});
 		});
 	},
 
 	fastUpdateGrid: function Updater_fastUpdateGrid() {
-		let links = NewTabToolsLinks.getLinks().slice(0, gGrid.cells.length);
+		let links = NewTabToolsLinks.getLinks().slice(0, Grid.cells.length);
 
 		// Find all sites that remain in the grid.
 		let sites = this._findRemainingSites(links);
@@ -1800,95 +1800,95 @@ var gUpdater = {
 	   * Takes an array of links and tries to correlate them to sites contained in
 	   * the current grid. If no corresponding site can be found (i.e. the link is
 	   * new and a site will be created) then just set it to null.
-	   * @param aLinks The array of links to find sites for.
+	   * @param links The array of links to find sites for.
 	   * @return Array of sites mapped to the given links (can contain null values).
 	   */
-	_findRemainingSites: function Updater_findRemainingSites(aLinks) {
+	_findRemainingSites: function Updater_findRemainingSites(links) {
 		let map = {};
 
 		// Create a map to easily retrieve the site for a given URL.
-		gGrid.sites.forEach(function(aSite) {
-			if (aSite)
-			map[aSite.url] = aSite;
+		Grid.sites.forEach(function(site) {
+			if (site)
+				map[site.url] = site;
 		});
 
 		// Map each link to its corresponding site, if any.
-		return aLinks.map(function(aLink) {
-			return aLink && (aLink.url in map) && map[aLink.url];
+		return links.map(function(link) {
+			return link && (link.url in map) && map[link.url];
 		});
 	},
 
 	/**
 	   * Freezes the given sites' positions.
-	   * @param aSites The array of sites to freeze.
+	   * @param sites The array of sites to freeze.
 	   */
-	_freezeSitePositions: function Updater_freezeSitePositions(aSites) {
-		aSites.forEach(function(aSite) {
-			if (aSite)
-			gTransformation.freezeSitePosition(aSite);
+	_freezeSitePositions: function Updater_freezeSitePositions(sites) {
+		sites.forEach(function(site) {
+			if (site)
+				Transformation.freezeSitePosition(site);
 		});
 	},
 
 	/**
 	   * Moves the given sites' DOM nodes to their new positions.
-	   * @param aSites The array of sites to move.
+	   * @param sites The array of sites to move.
 	   */
-	_moveSiteNodes: function Updater_moveSiteNodes(aSites) {
-		let cells = gGrid.cells;
+	_moveSiteNodes: function Updater_moveSiteNodes(sites) {
+		let cells = Grid.cells;
 
 		// Truncate the given array of sites to not have more sites than cells.
 		// This can happen when the user drags a bookmark (or any other new kind
 		// of link) onto the grid.
-		let sites = aSites.slice(0, cells.length);
+		sites = sites.slice(0, cells.length);
 
-		sites.forEach(function(aSite, aIndex) {
-			let cell = cells[aIndex];
+		sites.forEach(function(site, index) {
+			let cell = cells[index];
 			let cellSite = cell.site;
 
 			// The site's position didn't change.
-			if (!aSite || cellSite != aSite) {
+			if (!site || cellSite != site) {
 				let cellNode = cell.node;
 
 				// Empty the cell if necessary.
 				if (cellSite)
-				cellNode.removeChild(cellSite.node);
+					cellNode.removeChild(cellSite.node);
 
 				// Put the new site in place, if any.
-				if (aSite)
-				cellNode.appendChild(aSite.node);
+				if (site)
+					cellNode.appendChild(site.node);
 			}
 		}, this);
 	},
 
 	/**
 	   * Rearranges the given sites and slides them to their new positions.
-	   * @param aSites The array of sites to re-arrange.
-	   * @param aCallback The callback to call when finished.
+	   * @param sites The array of sites to re-arrange.
+	   * @param callback The callback to call when finished.
 	   */
-	_rearrangeSites: function Updater_rearrangeSites(aSites, aCallback) {
-		let options = {callback: aCallback, unfreeze: true};
-		gTransformation.rearrangeSites(aSites, options);
+	_rearrangeSites: function Updater_rearrangeSites(sites, callback) {
+		let options = {callback: callback, unfreeze: true};
+		Transformation.rearrangeSites(sites, options);
 	},
 
 	/**
 	   * Removes all sites from the grid that are not in the given links array or
 	   * exceed the grid.
-	   * @param aSites The array of sites remaining in the grid.
-	   * @param aCallback The callback to call when finished.
+	   * @param sites The array of sites remaining in the grid.
+	   * @param callback The callback to call when finished.
 	   */
-	_removeLegacySites: function Updater_removeLegacySites(aSites, aCallback) {
+	_removeLegacySites: function Updater_removeLegacySites(sites, callback) {
 		let batch = [];
 
 		// Delete sites that were removed from the grid.
-		gGrid.sites.forEach(function(aSite) {
+		Grid.sites.forEach(function(site) {
 			// The site must be valid and not in the current grid.
-			if (!aSite || aSites.indexOf(aSite) != -1)
-			return;
+			if (!site || sites.indexOf(site) != -1)
+				return;
 
 			batch.push(new Promise(resolve => {
 				// Fade out the to-be-removed site.
-				gTransformation.hideSite(aSite, function() {
-					let node = aSite.node;
+				Transformation.hideSite(site, function() {
+					let node = site.node;
 
 					// Remove the site from the DOM.
 					node.parentNode.removeChild(node);
@@ -1897,25 +1897,25 @@ var gUpdater = {
 			}));
 		});
 
-		Promise.all(batch).then(aCallback);
+		Promise.all(batch).then(callback);
 	},
 
 	/**
 	   * Tries to fill empty cells with new links if available.
-	   * @param aLinks The array of links.
-	   * @param aCallback The callback to call when finished.
+	   * @param links The array of links.
+	   * @param callback The callback to call when finished.
 	   */
-	_fillEmptyCells: function Updater_fillEmptyCells(aLinks, aCallback) {
-		let {cells, sites} = gGrid;
+	_fillEmptyCells: function Updater_fillEmptyCells(links, callback) {
+		let {cells, sites} = Grid;
 
 		// Find empty cells and fill them.
-		Promise.all(sites.map((aSite, aIndex) => {
-			if (aSite || !aLinks[aIndex])
-			return null;
+		Promise.all(sites.map((site, index) => {
+			if (site || !links[index])
+				return null;
 
 			return new Promise(resolve => {
 				// Create the new site and fade it in.
-				let site = gGrid.createSite(aLinks[aIndex], cells[aIndex]);
+				let site = Grid.createSite(links[index], cells[index]);
 
 				// Set the site's initial opacity to zero.
 				site.node.style.opacity = 0;
@@ -1923,9 +1923,9 @@ var gUpdater = {
 				// Flush all style changes for the dynamically inserted site to make
 				// the fade-in transition work.
 				window.getComputedStyle(site.node).opacity; // jshint ignore:line
-				gTransformation.showSite(site, resolve);
+				Transformation.showSite(site, resolve);
 			});
-		})).then(aCallback).catch(console.exception);
+		})).then(callback).catch(console.exception);
 	}
 };
 
@@ -1933,7 +1933,7 @@ var gUpdater = {
  * Dialog allowing to undo the removal of single site or to completely restore
  * the grid's original state.
  */
-var gUndoDialog = {
+var UndoDialog = {
 	/**
 	   * The undo dialog's timeout in miliseconds.
 	   */
@@ -1957,16 +1957,16 @@ var gUndoDialog = {
 
 	/**
 	   * Shows the undo dialog.
-	   * @param aSite The site that just got removed.
+	   * @param site The site that just got removed.
 	   */
-	show: function UndoDialog_show(aSite) {
+	show: function UndoDialog_show(site) {
 		if (this._undoData)
-		clearTimeout(this._undoData.timeout);
+			clearTimeout(this._undoData.timeout);
 
 		this._undoData = {
-			index: aSite.cell.index,
-			wasPinned: aSite.isPinned(),
-			blockedLink: aSite.link,
+			index: site.cell.index,
+			wasPinned: site.isPinned(),
+			blockedLink: site.link,
 			timeout: setTimeout(this.hide.bind(this), this.HIDE_TIMEOUT_MS)
 		};
 
@@ -1983,7 +1983,7 @@ var gUndoDialog = {
 	   */
 	hide: function UndoDialog_hide() {
 		if (!this._undoData)
-		return;
+			return;
 
 		clearTimeout(this._undoData.timeout);
 		this._undoData = null;
@@ -1997,19 +1997,19 @@ var gUndoDialog = {
 
 	/**
 	   * The undo dialog event handler.
-	   * @param aEvent The event to handle.
+	   * @param event The event to handle.
 	   */
-	handleEvent: function UndoDialog_handleEvent(aEvent) {
-		switch (aEvent.target.id) {
-			case 'newtab-undo-button':
-				this._undo();
-				break;
-			case 'newtab-undo-restore-button':
-				this._undoAll();
-				break;
-			case 'newtab-undo-close-button':
-				this.hide();
-				break;
+	handleEvent: function UndoDialog_handleEvent(event) {
+		switch (event.target.id) {
+		case 'newtab-undo-button':
+			this._undo();
+			break;
+		case 'newtab-undo-restore-button':
+			this._undoAll();
+			break;
+		case 'newtab-undo-close-button':
+			this.hide();
+			break;
 		}
 	},
 
@@ -2018,16 +2018,16 @@ var gUndoDialog = {
 	   */
 	_undo: function UndoDialog_undo() {
 		if (!this._undoData)
-		return;
+			return;
 
 		let {index, wasPinned, blockedLink} = this._undoData;
-		gBlockedLinks.unblock(blockedLink);
+		BlockedLinks.unblock(blockedLink);
 
 		if (wasPinned) {
-			gPinnedLinks.pin(blockedLink, index);
+			PinnedLinks.pin(blockedLink, index);
 		}
 
-		gUpdater.updateGrid();
+		Updater.updateGrid();
 		this.hide();
 	},
 
@@ -2036,13 +2036,13 @@ var gUndoDialog = {
 	   */
 	_undoAll: function UndoDialog_undoAll() {
 		NewTabUtils.undoAll(function() {
-			gUpdater.updateGrid();
+			Updater.updateGrid();
 			this.hide();
 		}.bind(this));
 	}
 };
 
-gUndoDialog.init();
+UndoDialog.init();
 
 // Everything is loaded. Initialize the New Tab Page.
-gPage.init();
+Page.init();

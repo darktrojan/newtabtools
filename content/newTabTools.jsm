@@ -96,8 +96,8 @@ let GridPrefs = {
 		Services.prefs.addObserver(GridPrefs.PREF_ROWS, this, true);
 		Services.prefs.addObserver(GridPrefs.PREF_COLUMNS, this, true);
 	},
-	observe: function GridPrefs_observe(aSubject, aTopic, aData) {
-		if (aData == GridPrefs.PREF_ROWS) {
+	observe: function GridPrefs_observe(subject, topic, data) {
+		if (data == GridPrefs.PREF_ROWS) {
 			this._gridRows = null;
 		} else {
 			this._gridColumns = null;
@@ -311,7 +311,7 @@ let BackgroundImage = {
 			}
 		}).then(() => {
 			di.close();
-			let dirPromises = [for (d of dirs) this._entriesForDir(d)];
+			let dirPromises = dirs.map(d => this._entriesForDir(d));
 			return Promise.all(dirPromises);
 		});
 	},

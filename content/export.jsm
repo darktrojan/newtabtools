@@ -59,31 +59,31 @@ function exportShowOptionDialog() {
 	});
 }
 
-function exportShowFilePicker(aReturnValues) {
+function exportShowFilePicker(returnValues) {
 	return new Promise(function(resolve, reject) {
 		let picker = Cc['@mozilla.org/filepicker;1'].createInstance(Ci.nsIFilePicker);
 		picker.init(getWindow(), strings.GetStringFromName('picker.title.export'), Ci.nsIFilePicker.modeSave);
 		picker.appendFilter(strings.GetStringFromName('picker.filter'), '*.zip');
 		picker.defaultExtension = 'zip';
 		picker.defaultString = 'newtabtools.zip';
-		picker.open(function(aResult) {
-			if (aResult == Ci.nsIFilePicker.returnCancel) {
+		picker.open(function(result) {
+			if (result == Ci.nsIFilePicker.returnCancel) {
 				reject('New Tab Tools export cancelled.');
 			} else {
-				aReturnValues.file = picker.file;
-				resolve(aReturnValues);
+				returnValues.file = picker.file;
+				resolve(returnValues);
 			}
 		});
 	});
 }
 
-function exportSave(aReturnValues) {
+function exportSave(returnValues) {
 	return new Promise(function(resolve) {
 		let zipWriter = Cc['@mozilla.org/zipwriter;1'].createInstance(Ci.nsIZipWriter);
-		zipWriter.open(aReturnValues.file, PR_RDWR | PR_CREATE_FILE | PR_TRUNCATE);
+		zipWriter.open(returnValues.file, PR_RDWR | PR_CREATE_FILE | PR_TRUNCATE);
 
 		let keys = [];
-		for (let [name, enabled] of Iterator(aReturnValues.options.prefs)) {
+		for (let [name, enabled] of Iterator(returnValues.options.prefs)) {
 			if (enabled) {
 				switch (name) {
 				case 'gridsize':
@@ -134,13 +134,13 @@ function exportSave(aReturnValues) {
 		stream.setData(data, data.length);
 		zipWriter.addEntryStream('prefs.json', Date.now() * 1000, Ci.nsIZipWriter.COMPRESSION_DEFAULT, stream, false);
 
-		if (aReturnValues.options.page.background) {
+		if (returnValues.options.page.background) {
 			let backgroundFile = FileUtils.getFile('ProfD', ['newtab-background']);
 			if (backgroundFile.exists()) {
 				zipWriter.addEntryFile('newtab-background', Ci.nsIZipWriter.COMPRESSION_DEFAULT, backgroundFile, false);
 			}
 		}
-		if (aReturnValues.options.tiles.thumbs) {
+		if (returnValues.options.tiles.thumbs) {
 			zipWriter.addEntryDirectory('thumbnails/', Date.now() * 1000, false);
 
 			let thumbDir = SavedThumbs.thumbnailDirectory;
@@ -172,8 +172,8 @@ function importShowFilePicker() {
 		picker.init(getWindow(), strings.GetStringFromName('picker.title.import'), Ci.nsIFilePicker.modeOpen);
 		picker.appendFilter(strings.GetStringFromName('picker.filter'), '*.zip');
 		picker.defaultExtension = 'zip';
-		picker.open(function(aResult) {
-			if (aResult == Ci.nsIFilePicker.returnCancel) {
+		picker.open(function(result) {
+			if (result == Ci.nsIFilePicker.returnCancel) {
 				reject('New Tab Tools import cancelled.');
 			} else {
 				resolve(picker.file);
@@ -182,17 +182,17 @@ function importShowFilePicker() {
 	});
 }
 
-function importLoad(aFile) {
+function importLoad(file) {
 	return new Promise(function(resolve, reject) {
 		let returnValues = {
 			importing: true,
 			cancelled: true,
-			file: aFile
+			file: file
 		};
 
 		let zipReader = Cc['@mozilla.org/libjar/zip-reader;1'].createInstance(Ci.nsIZipReader);
 		try {
-			zipReader.open(aFile);
+			zipReader.open(file);
 
 			returnValues.annos = readZippedJSON(zipReader, 'annos.json');
 			returnValues.prefs = readZippedJSON(zipReader, 'prefs.json');
@@ -226,9 +226,9 @@ function importLoad(aFile) {
 	});
 }
 
-function readZippedJSON(aZipReader, aFilePath) {
-	if (aZipReader.hasEntry(aFilePath)) {
-		let stream = aZipReader.getInputStream(aFilePath);
+function readZippedJSON(zipReader, filePath) {
+	if (zipReader.hasEntry(filePath)) {
+		let stream = zipReader.getInputStream(filePath);
 		let scriptableStream = Cc['@mozilla.org/scriptableinputstream;1'].createInstance(Ci.nsIScriptableInputStream);
 		scriptableStream.init(stream);
 
@@ -238,19 +238,19 @@ function readZippedJSON(aZipReader, aFilePath) {
 	return {};
 }
 
-function importSave(aReturnValues) {
-	function copyPref(aName) {
-		let value = aReturnValues.prefs[aName];
+function importSave(returnValues) {
+	function copyPref(name) {
+		let value = returnValues.prefs[name];
 		try {
 			switch (typeof value) {
 			case 'string':
-				Services.prefs.setCharPref(aName, value);
+				Services.prefs.setCharPref(name, value);
 				break;
 			case 'number':
-				Services.prefs.setIntPref(aName, value);
+				Services.prefs.setIntPref(name, value);
 				break;
 			case 'boolean':
-				Services.prefs.setBoolPref(aName, value);
+				Services.prefs.setBoolPref(name, value);
 				break;
 			}
 		} catch (e) {
@@ -260,9 +260,9 @@ function importSave(aReturnValues) {
 
 	let zipReader = Cc['@mozilla.org/libjar/zip-reader;1'].createInstance(Ci.nsIZipReader);
 	try {
-		zipReader.open(aReturnValues.file);
+		zipReader.open(returnValues.file);
 
-		for (let [name, enabled] of Iterator(aReturnValues.options.prefs)) {
+		for (let [name, enabled] of Iterator(returnValues.options.prefs)) {
 			if (!enabled) {
 				continue;
 			}
@@ -276,36 +276,36 @@ function importSave(aReturnValues) {
 			} else if (name == 'thumbs.position') {
 				copyPref('extensions.newtabtools.thumbs.contain');
 			} else if (name == 'tiledata') {
-				if (aReturnValues.annos['newtabtools/title']) {
-					let data = aReturnValues.annos['newtabtools/title'];
+				if (returnValues.annos['newtabtools/title']) {
+					let data = returnValues.annos['newtabtools/title'];
 					for (let [url, value] of Iterator(data)) {
 						TileData.set(url, 'title', value);
 					}
-				} else if (aReturnValues.prefs['extensions.newtabtools.tiledata']) {
-					let data = JSON.parse(aReturnValues.prefs['extensions.newtabtools.tiledata']);
+				} else if (returnValues.prefs['extensions.newtabtools.tiledata']) {
+					let data = JSON.parse(returnValues.prefs['extensions.newtabtools.tiledata']);
 					for (let [url, urlData] of Iterator(data)) {
 						for (let [key, value] of Iterator(urlData)) {
 							TileData.set(url, key, value);
 						}
 					}
 				}
-			} else if (('browser.newtabpage.' + name) in aReturnValues.prefs) {
+			} else if (('browser.newtabpage.' + name) in returnValues.prefs) {
 				copyPref('browser.newtabpage.' + name);
-			} else if (('extensions.newtabtools.' + name) in aReturnValues.prefs) {
+			} else if (('extensions.newtabtools.' + name) in returnValues.prefs) {
 				copyPref('extensions.newtabtools.' + name);
 			}
 		}
 
-		if (aReturnValues.options.tiles.thumbs) {
+		if (returnValues.options.tiles.thumbs) {
 			let thumbsDirectory = new FileUtils.File(SavedThumbs.thumbnailDirectory);
-			for (let file of aReturnValues.thumbnails) {
+			for (let file of returnValues.thumbnails) {
 				let thumbFile = thumbsDirectory.clone();
 				thumbFile.append(file.substring(11)); // length of "thumbnails/"
 				zipReader.extract(file, thumbFile);
 			}
 		}
 		// can't be enabled and not exist, but check anyway
-		if (aReturnValues.options.page.background && aReturnValues.hasBackgroundImage) {
+		if (returnValues.options.page.background && returnValues.hasBackgroundImage) {
 			zipReader.extract('newtab-background', FileUtils.getFile('ProfD', ['newtab-background']));
 		}
 	} finally {

@@ -74,14 +74,14 @@ function install() {
 		userPrefs.setCharPref('version', version);
 	}
 }
-function uninstall(aParams, aReason) {
-	if (aReason == ADDON_UNINSTALL) {
+function uninstall(params, reason) {
+	if (reason == ADDON_UNINSTALL) {
 		Services.prefs.deleteBranch(EXTENSION_PREFS);
 		Services.prefs.clearUserPref('toolkit.pageThumbs.minWidth');
 		Services.prefs.clearUserPref('toolkit.pageThumbs.minHeight');
 	}
 }
-function startup(aParams, aReason) {
+function startup(params, reason) {
 	let defaultPrefs = Services.prefs.getDefaultBranch(EXTENSION_PREFS);
 	defaultPrefs.setIntPref('foreground.opacity', 80);
 	defaultPrefs.setIntPref('rows', 3);
@@ -102,7 +102,7 @@ function startup(aParams, aReason) {
 	defaultPrefs.setCharPref('thumbs.titlesize', 'small');
 	defaultPrefs.setCharPref('tiledata', '{}');
 
-	if (aReason == ADDON_UPGRADE) {
+	if (reason == ADDON_UPGRADE) {
 		for (let url of annoService.getPagesWithAnnotation('newtabtools/title')) {
 			TileData.set(url.spec, 'title', annoService.getPageAnnotation(url, 'newtabtools/title'));
 			annoService.removePageAnnotation(url, 'newtabtools/title');
@@ -112,8 +112,8 @@ function startup(aParams, aReason) {
 	prefObserver.init();
 	Services.obs.addObserver(notificationObserver, 'newtabtools-change', false);
 
-	enumerateTabs(function(aWindow) {
-		aWindow.location.reload();
+	enumerateTabs(function(win) {
+		win.location.reload();
 	});
 
 	let windowEnum = Services.wm.getEnumerator(BROWSER_WINDOW);
@@ -129,11 +129,11 @@ function startup(aParams, aReason) {
 	AddonManager.addAddonListener({
 		// If we call reload in shutdown, the page override is
 		// still in place, and we don't want that.
-		onDisabled: function(aAddon) {
+		onDisabled: function(addon) {
 			AddonManager.removeAddonListener(this);
-			if (aAddon.id == ADDON_ID) {
-				enumerateTabs(function(aWindow) {
-					aWindow.location.reload();
+			if (addon.id == ADDON_ID) {
+				enumerateTabs(function(win) {
+					win.location.reload();
 				});
 			}
 		}
@@ -142,7 +142,7 @@ function startup(aParams, aReason) {
 	if (userPrefs.prefHasUserValue('version')) {
 		// Truncate version numbers to floats
 		let oldVersion = parseFloat(userPrefs.getCharPref('version'), 10);
-		let currentVersion = parseFloat(aParams.version, 10);
+		let currentVersion = parseFloat(params.version, 10);
 		let lastReminder = userPrefs.getIntPref('donationreminder') * 1000;
 		let shouldRemind = Date.now() - lastReminder > 604800000;
 
@@ -156,21 +156,21 @@ function startup(aParams, aReason) {
 			}
 		}
 	}
-	userPrefs.setCharPref('version', aParams.version);
+	userPrefs.setCharPref('version', params.version);
 
-	if (aReason == APP_STARTUP) {
+	if (reason == APP_STARTUP) {
 		Services.obs.addObserver({
 			observe: function() {
 				Services.obs.removeObserver(this, 'browser-delayed-startup-finished');
-				uiStartup(aParams, aReason);
+				uiStartup(params, reason);
 			}
 		}, 'browser-delayed-startup-finished', false);
 	} else {
-		uiStartup(aParams, aReason);
+		uiStartup(params, reason);
 	}
 }
-function shutdown(aParams, aReason) {
-	if (aReason == APP_SHUTDOWN) {
+function shutdown(params, reason) {
+	if (reason == APP_SHUTDOWN) {
 		return;
 	}
 
@@ -197,7 +197,7 @@ function shutdown(aParams, aReason) {
 	}
 }
 
-function uiStartup(aParams, aReason) {
+function uiStartup(params, reason) {
 	let overridden = false;
 	let reset;
 	if (Services.vc.compare(Services.appinfo.platformVersion, 44) >= 0) {
@@ -227,7 +227,7 @@ function uiStartup(aParams, aReason) {
 					}
 				}]
 			);
-		}, aReason == APP_STARTUP ? 1000 : 0);
+		}, reason == APP_STARTUP ? 1000 : 0);
 	}
 
 	if (NewTabToolsDataCollector.active && NewTabToolsDataCollector.shouldReport) {
@@ -264,33 +264,33 @@ var prefObserver = {
 		case 'thumbs.hidebuttons':
 		case 'thumbs.hidefavicons':
 		case 'thumbs.titlesize':
-			enumerateTabs(function(aWindow) {
-				aWindow.newTabTools.updateUI();
+			enumerateTabs(function(win) {
+				win.newTabTools.updateUI();
 			});
 			break;
 		case 'recent.show':
-			enumerateTabs(function(aWindow) {
-				aWindow.newTabTools.refreshRecent();
+			enumerateTabs(function(win) {
+				win.newTabTools.refreshRecent();
 			});
 			break;
 		case 'columns':
 		case 'rows':
-			enumerateTabs(function(aWindow) {
-				aWindow.gGrid.refresh();
-				aWindow.newTabTools.updateGridPrefs();
+			enumerateTabs(function(win) {
+				win.Grid.refresh();
+				win.newTabTools.updateGridPrefs();
 			});
 			break;
 		case 'filter':
 			NewTabToolsLinks._getLinksCache = null;
 			enumerateTabs(function(win) {
-				win.gUpdater.updateGrid();
+				win.Updater.updateGrid();
 			});
 			break;
 		case 'historytiles.show':
 			NewTabToolsLinks._getLinksCache = null;
 			enumerateTabs(function(win) {
 				win.newTabTools.updateUI();
-				win.gUpdater.fastUpdateGrid();
+				win.Updater.fastUpdateGrid();
 			});
 			break;
 		}
@@ -298,19 +298,19 @@ var prefObserver = {
 };
 
 var notificationObserver = {
-	observe: function(aSubject, aTopic, aData) {
-		switch (aData) {
+	observe: function(subject, topic, data) {
+		switch (data) {
 		case 'background':
-			enumerateTabs(function(aWindow) {
-				aWindow.newTabTools.refreshBackgroundImage();
+			enumerateTabs(function(win) {
+				win.newTabTools.refreshBackgroundImage();
 			});
 			break;
 		case 'backgroundColor':
 		case 'thumbnail':
 		case 'title':
-			enumerateTabs(function(aWindow) {
-				aSubject.QueryInterface(Ci.nsISupportsString);
-				aWindow.newTabTools.onTileChanged(aSubject.data, aData);
+			enumerateTabs(function(win) {
+				subject.QueryInterface(Ci.nsISupportsString);
+				win.newTabTools.onTileChanged(subject.data, data);
 			});
 			break;
 		}
@@ -318,14 +318,14 @@ var notificationObserver = {
 };
 
 var windowObserver = {
-	observe: function(aSubject) {
-		aSubject.addEventListener('load', function() {
-			windowObserver.paint(aSubject);
+	observe: function(subject) {
+		subject.addEventListener('load', function() {
+			windowObserver.paint(subject);
 		}, false);
 	},
-	paint: function(aWindow) {
-		if (aWindow.location == 'chrome://browser/content/browser.xul') {
-			let doc = aWindow.document;
+	paint: function(win) {
+		if (win.location == 'chrome://browser/content/browser.xul') {
+			let doc = win.document;
 			doc.addEventListener('TabOpen', this.onTabOpen, false);
 
 			let menu = doc.getElementById('contentAreaContextMenu');
@@ -362,9 +362,9 @@ var windowObserver = {
 			}
 		}
 	},
-	unpaint: function(aWindow) {
-		if (aWindow.location == 'chrome://browser/content/browser.xul') {
-			let doc = aWindow.document;
+	unpaint: function(win) {
+		if (win.location == 'chrome://browser/content/browser.xul') {
+			let doc = win.document;
 			doc.removeEventListener('TabOpen', this.onTabOpen, false);
 
 			let menu = doc.getElementById('contentAreaContextMenu');
@@ -374,17 +374,17 @@ var windowObserver = {
 			}
 		}
 	},
-	onTabOpen: function(aEvent) {
-		let browser = aEvent.target.linkedBrowser;
+	onTabOpen: function(event) {
+		let browser = event.target.linkedBrowser;
 		if (browser.currentURI.spec == 'about:newtab') {
 			browser.contentWindow.newTabTools.onVisible();
 		}
 	},
-	onEditItemClicked: function(aEvent) {
-		let doc = aEvent.view.document;
+	onEditItemClicked: function(event) {
+		let doc = event.view.document;
 		let target = windowObserver.findCellTarget(doc);
 
-		switch (aEvent.target.id) {
+		switch (event.target.id) {
 		case 'newtabtools-edittile':
 			let win = target.ownerDocument.defaultView;
 			let index = 0;
@@ -416,8 +416,8 @@ var windowObserver = {
 			break;
 		}
 	},
-	onPopupShowing: function(aEvent) {
-		let doc = aEvent.view.document;
+	onPopupShowing: function(event) {
+		let doc = event.view.document;
 		let target = windowObserver.findCellTarget(doc);
 
 		let menu = doc.getElementById('contentAreaContextMenu');
@@ -445,9 +445,9 @@ var windowObserver = {
 			}
 		}
 	},
-	findCellTarget: function(aDocument) {
+	findCellTarget: function(doc) {
 		// This probably isn't going to work once about:newtab is put in a content process.
-		let target = aDocument.popupNode;
+		let target = doc.popupNode;
 		if (!target || !target.ownerDocument.location ||
 				target.ownerDocument.location.href != 'about:newtab') {
 			return null;
@@ -463,11 +463,11 @@ var windowObserver = {
 	}
 };
 
-function enumerateTabs(aCallback) {
+function enumerateTabs(callback) {
 	for (let page of NewTabUtils.allPages._pages) {
 		try {
 			let global = Cu.getGlobalForObject(page);
-			aCallback(global);
+			callback(global);
 		} catch (e) {
 			Cu.reportError(e);
 		}
@@ -475,22 +475,22 @@ function enumerateTabs(aCallback) {
 }
 
 var optionsObserver = {
-	observe: function(aDocument, aTopic, aData) {
-		switch (aTopic) {
+	observe: function(doc, topic, data) {
+		switch (topic) {
 		case 'addon-options-displayed':
-			if (aData != ADDON_ID) {
+			if (data != ADDON_ID) {
 				return;
 			}
 
 			if (!BackgroundImage.modeIsSingle) {
-				aDocument.querySelector('setting[pref="extensions.newtabtools.theme"]').style.visibility = 'collapse';
-				aDocument.querySelector('setting[pref="extensions.newtabtools.rows"]').setAttribute('first-row', 'true');
+				doc.querySelector('setting[pref="extensions.newtabtools.theme"]').style.visibility = 'collapse';
+				doc.querySelector('setting[pref="extensions.newtabtools.rows"]').setAttribute('first-row', 'true');
 			}
 
-			aDocument.getElementById('newtabtools.export').addEventListener('command', () => {
+			doc.getElementById('newtabtools.export').addEventListener('command', () => {
 				NewTabToolsExporter.doExport();
 			});
-			aDocument.getElementById('newtabtools.import').addEventListener('command', () => {
+			doc.getElementById('newtabtools.import').addEventListener('command', () => {
 				NewTabToolsExporter.doImport();
 			});
 		}
@@ -506,13 +506,13 @@ var expirationFilter = {
 		PageThumbs.removeExpirationFilter(this);
 	},
 
-	filterForThumbnailExpiration: function(aCallback) {
+	filterForThumbnailExpiration: function(callback) {
 		let columns = userPrefs.getIntPref('columns');
 		let rows = userPrefs.getIntPref('rows');
 		let count = columns * rows + 10;
 
 		if (count <= 25) {
-			aCallback([]);
+			callback([]);
 			return;
 		}
 
@@ -522,10 +522,10 @@ var expirationFilter = {
 			// Add all URLs to the list that we want to keep thumbnails for.
 			for (let link of NewTabUtils.links.getLinks().slice(25, count)) {
 				if (link && link.url)
-				urls.push(link.url);
+					urls.push(link.url);
 			}
 
-			aCallback(urls);
+			callback(urls);
 		});
 	}
 };

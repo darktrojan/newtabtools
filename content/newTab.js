@@ -3,7 +3,7 @@ This Source Code Form is subject to the terms of the Mozilla Public
 License, v. 2.0. If a copy of the MPL was not distributed with this file,
 You can obtain one at http://mozilla.org/MPL/2.0/.
 */
-/* globals gPinnedLinks, gBlockedLinks, gGrid, gUpdater */
+/* globals PinnedLinks, BlockedLinks, Grid, Updater */
 
 /* globals Components, PageThumbsStorage, Services, XPCOMUtils */
 var { classes: Cc, interfaces: Ci, utils: Cu } = Components;
@@ -33,8 +33,6 @@ var HTML_NAMESPACE = 'http://www.w3.org/1999/xhtml';
 function inPrivateBrowsingMode() {
 	return PrivateBrowsingUtils.isContentWindowPrivate(window);
 }
-
-var gGridPrefs = GridPrefs;
 
 var newTabTools = {
 	_previousAutocompleteString: '',
@@ -89,7 +87,7 @@ var newTabTools = {
 		}
 	},
 	get selectedSite() {
-		return gGrid.sites[this._selectedSiteIndex];
+		return Grid.sites[this._selectedSiteIndex];
 	},
 	optionsOnClick: function(event) {
 		if (event.originalTarget.disabled) {
@@ -112,18 +110,18 @@ var newTabTools = {
 			}).then(null, Cu.reportError);
 			break;
 		case 'options-previous-row-tile':
-			this.selectedSiteIndex = (this._selectedSiteIndex - gGridPrefs.gridColumns + gGrid.cells.length) % gGrid.cells.length;
+			this.selectedSiteIndex = (this._selectedSiteIndex - GridPrefs.gridColumns + Grid.cells.length) % Grid.cells.length;
 			break;
 		case 'options-previous-tile':
 		case 'options-next-tile':
-			let { gridColumns } = gGridPrefs;
+			let { gridColumns } = GridPrefs;
 			let row = Math.floor(this._selectedSiteIndex / gridColumns);
 			let column = (this._selectedSiteIndex + (id == 'options-previous-tile' ? -1 : 1) + gridColumns) % gridColumns;
 
 			this.selectedSiteIndex = row * gridColumns + column;
 			break;
 		case 'options-next-row-tile':
-			this.selectedSiteIndex = (this._selectedSiteIndex + gGridPrefs.gridColumns) % gGrid.cells.length;
+			this.selectedSiteIndex = (this._selectedSiteIndex + GridPrefs.gridColumns) % Grid.cells.length;
 			break;
 		case 'options-thumbnail-browse':
 		case 'options-bg-browse':
@@ -190,7 +188,7 @@ var newTabTools = {
 			break;
 		case 'options-bg-remove':
 			if (this.backgroundImageFile.exists())
-			this.backgroundImageFile.remove(true);
+				this.backgroundImageFile.remove(true);
 			Services.obs.notifyObservers(null, 'newtabtools-change', 'background');
 			break;
 		case 'options-donate':
@@ -212,7 +210,7 @@ var newTabTools = {
 			} else {
 				this.prefs.setCharPref(event.originalTarget.name, event.originalTarget.value);
 			}
-			gGrid.setThumbnailPrefs();
+			Grid.setThumbnailPrefs();
 			break;
 		case 'number':
 			ThumbnailPrefs.hasBeenSet = false;
@@ -231,21 +229,21 @@ var newTabTools = {
 		}
 	},
 	pinURL: function(link, title) {
-		let index = gGrid.sites.length - 1;
-		for (var i = 0; i < gGrid.sites.length; i++) {
-			let s = gGrid.sites[i];
+		let index = Grid.sites.length - 1;
+		for (var i = 0; i < Grid.sites.length; i++) {
+			let s = Grid.sites[i];
 			if (s && !s.isPinned()) {
 				index = i;
 				break;
 			}
 		}
 
-		gBlockedLinks.unblock(link);
-		gPinnedLinks.pin({url: link, title: title}, index);
-		gUpdater.updateGrid();
+		BlockedLinks.unblock(link);
+		PinnedLinks.pin({url: link, title: title}, index);
+		Updater.updateGrid();
 	},
 	onTileChanged: function(url, whatChanged) {
-		for (let site of gGrid.sites) {
+		for (let site of Grid.sites) {
 			if (site.url == url) {
 				switch (whatChanged) {
 				case 'backgroundColor':
@@ -450,15 +448,15 @@ var newTabTools = {
 		document.querySelector('[name="datacollection.optin"]').checked = dataCollection;
 	},
 	updateGridPrefs: function() {
-		document.querySelector('[name="rows"]').value = gGridPrefs.gridRows;
-		document.querySelector('[name="columns"]').value = gGridPrefs.gridColumns;
+		document.querySelector('[name="rows"]').value = GridPrefs.gridRows;
+		document.querySelector('[name="columns"]').value = GridPrefs.gridColumns;
 	},
-	setGridMargin: function(aPiece, aSize) {
-		let pieceElement = document.getElementById('newtab-margin-' + aPiece);
+	setGridMargin: function(piece, size) {
+		let pieceElement = document.getElementById('newtab-margin-' + piece);
 		pieceElement.classList.remove('medium');
 		pieceElement.classList.remove('large');
-		if (aSize == 'medium' || aSize == 'large') {
-			pieceElement.classList.add(aSize);
+		if (size == 'medium' || size == 'large') {
+			pieceElement.classList.add(size);
 		}
 	},
 	startRecent: function() {
@@ -481,8 +479,8 @@ var newTabTools = {
 			}
 		});
 	},
-	refreshRecent: function(aEvent) {
-		if (aEvent && aEvent.originalTarget.linkedBrowser.contentWindow == window) {
+	refreshRecent: function(event) {
+		if (event && event.originalTarget.linkedBrowser.contentWindow == window) {
 			return;
 		}
 
@@ -616,7 +614,7 @@ var newTabTools = {
 			}
 		});
 
-		let { gridRows, gridColumns } = gGridPrefs;
+		let { gridRows, gridColumns } = GridPrefs;
 		let row = Math.floor(index / gridColumns);
 		let column = index % gridColumns;
 		this.tilePreviousRow.style.opacity = row == 0 ? 0.25 : null;
