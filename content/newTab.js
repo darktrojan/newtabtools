@@ -244,7 +244,7 @@ var newTabTools = {
 	},
 	onTileChanged: function(url, whatChanged) {
 		for (let site of Grid.sites) {
-			if (site.url == url) {
+			if (!!site && site.url == url) {
 				switch (whatChanged) {
 				case 'backgroundColor':
 					site._querySelector('.newtab-thumbnail').style.backgroundColor = TileData.get(url, 'backgroundColor');
