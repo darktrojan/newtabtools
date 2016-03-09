@@ -37,7 +37,7 @@
 			<Description>
 				<em:locale>es</em:locale>
 				<em:name>New Tab Tools</em:name>
-				<em:description>Personaliza la página de Nueva Pestaña. Puedes añadir más cuadros (páginas), lanzar New Tab Tools al inicio de Firefox o incluir una imagen de fondo. También puedes modificar la imagen y el título de los cuadros.</em:description>
+				<em:description>Personaliza la página de Nueva Pestaña. Puedes añadir más contenedores (páginas), lanzar New Tab Tools al inicio de Firefox o incluir una imagen de fondo. También puedes modificar la imagen y el título de los contenedores.</em:description>
 			</Description>
 		</em:localized>
 

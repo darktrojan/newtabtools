@@ -1,15 +1,15 @@
 <!ENTITY newtabtools.options.pointer "Haz clic aquí para empezar a personalizar tu página de Nueva Pestaña">
 <!ENTITY newtabtools.page.show "Mostrar página de Nueva Pestaña">
 
-<!ENTITY newtabtools.pin-url.header "Añadir títutlo:">
+<!ENTITY newtabtools.pin-url.header "Añadir título:">
 <!ENTITY newtabtools.pin-url.placeholder "Escribe o selecciona un URL">
 <!ENTITY newtabtools.pin-url.button "Añadir">
 
-<!ENTITY newtabtools.tile-header "Cuadros:">
+<!ENTITY newtabtools.tile-header "Contenedores:">
 
 <!ENTITY newtabtools.tile-selection.previousrow.tooltip "Fila anterior">
-<!ENTITY newtabtools.tile-selection.previous.tooltip "Cuadro anterior">
-<!ENTITY newtabtools.tile-selection.next.tooltip "Siguiente cuadro">
+<!ENTITY newtabtools.tile-selection.previous.tooltip "Contenedor anterior">
+<!ENTITY newtabtools.tile-selection.next.tooltip "Siguiente contenedor">
 <!ENTITY newtabtools.tile-selection.nextrow.tooltip "Siguiente fila">
 
 <!ENTITY newtabtools.tile-thumbnail.label "Imagen:">
@@ -20,14 +20,14 @@
 <!ENTITY newtabtools.tile-thumbnail.refresh "Refrescar miniatura">
 <!ENTITY newtabtools.tile-thumbnail.bgcolor "Color de fondo:">
 
-<!ENTITY newtabtools.tile-title.label "Títutlo:">
+<!ENTITY newtabtools.tile-title.label "Título:">
 <!ENTITY newtabtools.tile-title.placeholder "Escribe un nuevo título">
 <!ENTITY newtabtools.tile-title.set "Fijar">
 <!ENTITY newtabtools.tile-title.reset "Resetear">
 
 <!ENTITY newtabtools.bg-header "Imagen de fondo de la página">
 <!ENTITY newtabtools.bg.placeholder "Pega el URL de la imagen o selecciona un archivo">
-<!ENTITY newtabtools.bg.browse "Seleccionar">
+<!ENTITY newtabtools.bg.browse "Seleccionar…">
 <!ENTITY newtabtools.bg.set "Fijar">
 <!ENTITY newtabtools.bg.remove "Eliminar">
 
