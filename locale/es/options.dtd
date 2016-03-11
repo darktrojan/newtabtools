@@ -1,7 +1,7 @@
 <!ENTITY newtabtools.options.theme "Tema">
 <!ENTITY newtabtools.options.theme.light "Tema Claro">
 <!ENTITY newtabtools.options.theme.dark "Tema Oscuro">
-<!ENTITY newtabtools.options.foreground.opacity "Opacidad del primer plano">
+<!ENTITY newtabtools.options.foreground.opacity "Opacidad de contenedores">
 <!ENTITY newtabtools.options.rows "Filas">
 <!ENTITY newtabtools.options.columns "Columnas">
 <!ENTITY newtabtools.options.grid.margin "Margen de cuadrícula">
@@ -15,10 +15,11 @@
 <!ENTITY newtabtools.options.launcher.bottom "Abajo">
 <!ENTITY newtabtools.options.launcher.left "Izquierda">
 <!ENTITY newtabtools.options.launcher.right "Derecha">
-<!ENTITY newtabtools.options.thumb-titlesize "Tamaño del títutlo de cuadro">
+<!ENTITY newtabtools.options.thumb-titlesize "Título de contenedor">
+<!ENTITY newtabtools.options.historytiles "Contenedores desde tu historial">
 <!ENTITY newtabtools.options.recent "Pestañas cerradas recientemente">
-<!ENTITY newtabtools.options.thumb-buttons "Botones &quot;Fijar Cuadro&quot; y &quot;Soltar Cuadro&quot;">
+<!ENTITY newtabtools.options.thumb-buttons "Botones &quot;Fijar&quot; y &quot;Soltar&quot;">
 <!ENTITY newtabtools.options.favicons "Iconos de Sitios">
-<!ENTITY newtabtools.options.thumb-contain "Miniatura completa en los Cuadros">
+<!ENTITY newtabtools.options.thumb-contain "Miniatura completa en los Contenedores">
 <!ENTITY newtabtools.export "Exportar configuración…">
 <!ENTITY newtabtools.import "Importar configuración…">
