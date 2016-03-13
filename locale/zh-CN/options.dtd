@@ -16,6 +16,7 @@
 <!ENTITY newtabtools.options.launcher.left "左侧">
 <!ENTITY newtabtools.options.launcher.right "右侧">
 <!ENTITY newtabtools.options.thumb-titlesize "磁贴标题大小">
+<!ENTITY newtabtools.options.historytiles "Tiles from your browsing history">
 <!ENTITY newtabtools.options.recent "最近关闭的标签页">
 <!ENTITY newtabtools.options.thumb-buttons "显示“固定磁贴”和“移除磁贴”按钮">
 <!ENTITY newtabtools.options.favicons "网站图标">

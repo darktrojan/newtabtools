@@ -16,6 +16,7 @@
 <!ENTITY newtabtools.options.launcher.left "左側">
 <!ENTITY newtabtools.options.launcher.right "右側">
 <!ENTITY newtabtools.options.thumb-titlesize "Tile title size">
+<!ENTITY newtabtools.options.historytiles "Tiles from your browsing history">
 <!ENTITY newtabtools.options.recent "最近關閉的分頁">
 <!ENTITY newtabtools.options.thumb-buttons "釘選首頁磚並移除首頁磚按鈕">
 <!ENTITY newtabtools.options.favicons "網站圖示">

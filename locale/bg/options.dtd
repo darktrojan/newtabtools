@@ -16,9 +16,10 @@
 <!ENTITY newtabtools.options.launcher.left "Ляво">
 <!ENTITY newtabtools.options.launcher.right "Дясно">
 <!ENTITY newtabtools.options.thumb-titlesize "Размер на заглавието">
+<!ENTITY newtabtools.options.historytiles "Tiles from your browsing history">
 <!ENTITY newtabtools.options.recent "Последно затворени раздели">
 <!ENTITY newtabtools.options.thumb-buttons "&quot;Закачи&quot; и &quot;Премахни&quot; Бутони">
 <!ENTITY newtabtools.options.favicons "Иконки на сайтове">
 <!ENTITY newtabtools.options.thumb-contain "Цялата миниатюра в плочката">
-<!ENTITY newtabtools.export "Настроки за експортиране&#x2026;">
-<!ENTITY newtabtools.import "Настройки за импортиране&#x2026;">
+<!ENTITY newtabtools.export "Настроки за експортиране…">
+<!ENTITY newtabtools.import "Настройки за импортиране…">

@@ -33,7 +33,7 @@
 
 <!ENTITY newtabtools.options-header "Επιλογές:">
 
-<!-- Η συλλογή δεδομένων είναι ενεργοποιημένη μόνο για χρήστες en-US και en-GB, αλλά αυτό μπορεί να αλλάξει στο μέλλον. -->
+<!-- Data collection is only enabled for en-US and en-GB users, but this might change in future. -->
 <!ENTITY newtabtools.datacollection.optin "Βοηθήστε στη βελτίωση του New Tab Tools προωθώντας ανώνυμα στοιχεία χρήσης">
 <!ENTITY newtabtools.datacollection.privacypolicy "Άδεια χρήσης">
 
