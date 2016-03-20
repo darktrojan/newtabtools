@@ -174,7 +174,11 @@ var newTabTools = {
 			break;
 		case 'options-bg-set':
 			if (this.setBackgroundInput.value) {
-				NetUtil.asyncFetch(this.setBackgroundInput.value, function(inputStream, status) {
+				NetUtil.asyncFetch({
+					uri: this.setBackgroundInput.value,
+					loadingNode: document,
+					contentPolicyType: Ci.nsIContentPolicyBase.TYPE_IMAGE
+				}, function(inputStream, status) {
 					if (!Components.isSuccessCode(status)) {
 						return;
 					}
