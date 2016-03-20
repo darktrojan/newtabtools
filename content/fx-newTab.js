@@ -32,24 +32,6 @@ function newTabString(name) { return StringBundle.GetStringFromName('newtab.' + 
  */
 var Transformation = {
 	/**
-	   * Returns the width of the left and top border of a cell. We need to take it
-	   * into account when measuring and comparing site and cell positions.
-	   */
-	get _cellBorderWidths() {
-		let cstyle = window.getComputedStyle(Grid.cells[0].node, null);
-		let widths = {
-			left: parseInt(cstyle.getPropertyValue('border-left-width')),
-			top: parseInt(cstyle.getPropertyValue('border-top-width'))
-		};
-
-		// Cache this value, overwrite the getter.
-		Object.defineProperty(this, '_cellBorderWidths',
-		{value: widths, enumerable: true});
-
-		return widths;
-	},
-
-	/**
 	   * Gets a DOM node's position.
 	   * @param node The DOM node.
 	   * @return A Rect instance with the position.
@@ -168,10 +150,6 @@ var Transformation = {
 		}
 
 		let currentIndex = 'index' in site ? site.index : site.cell.index;
-
-		// We need to take the width of a cell's border into account.
-		targetPosition.left += this._cellBorderWidths.left;
-		targetPosition.top += this._cellBorderWidths.top;
 
 		// Nothing to do here if the positions already match.
 		if (currentIndex == target.index) {
