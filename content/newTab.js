@@ -451,7 +451,9 @@ var newTabTools = {
 		let dataCollection = this.prefs.getBoolPref('datacollection.optin');
 		document.querySelector('[name="datacollection.optin"]').checked = dataCollection;
 
-		requestAnimationFrame(Grid.cacheCellPositions);
+		if ('Grid' in window) {
+			requestAnimationFrame(Grid.cacheCellPositions);
+		}
 	},
 	updateGridPrefs: function() {
 		document.querySelector('[name="rows"]').value = GridPrefs.gridRows;
