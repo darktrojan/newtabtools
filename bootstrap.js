@@ -525,7 +525,7 @@ var expirationFilter = {
 		let urls = [];
 
 		// Add all URLs to the list that we want to keep thumbnails for.
-		for (let link of NewTabToolsLinks.getLinks.slice(0, count)) {
+		for (let link of NewTabToolsLinks.getLinks().slice(0, count)) {
 			if (link && link.url)
 				urls.push(link.url);
 		}
