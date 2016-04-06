@@ -27,8 +27,10 @@ XPCOMUtils.defineLazyGetter(this, 'strings', function() {
 	return Services.strings.createBundle('chrome://newtabtools/locale/newTabTools.properties');
 });
 
-/* globals BackgroundImage, NewTabToolsDataCollector, NewTabToolsExporter, NewTabToolsLinks, NewTabURL, OS, PageThumbs, Task, TileData */
+/* globals BackgroundImage, GridPrefs, NewTabToolsDataCollector, NewTabToolsExporter, NewTabToolsLinks,
+	NewTabURL, OS, PageThumbs, Task, TileData */
 XPCOMUtils.defineLazyModuleGetter(this, 'BackgroundImage', 'chrome://newtabtools/content/newTabTools.jsm');
+XPCOMUtils.defineLazyModuleGetter(this, 'GridPrefs', 'chrome://newtabtools/content/newTabTools.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'NewTabToolsDataCollector', 'chrome://newtabtools/content/dataCollection.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'NewTabToolsExporter', 'chrome://newtabtools/content/export.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'NewTabToolsLinks', 'chrome://newtabtools/content/newTabTools.jsm');
@@ -360,6 +362,15 @@ var windowObserver = {
 				menu.insertBefore(menuitem, before);
 				before = menuitem;
 			}
+
+			win.gBrowserThumbnails.__oldTopSiteURLs = win.gBrowserThumbnails.__lookupGetter__('_topSiteURLs');
+			win.gBrowserThumbnails.__defineGetter__('_topSiteURLs', function() {
+				return NewTabToolsLinks.getLinks().reduce((urls, link) => {
+					if (link)
+						urls.push(link.url);
+					return urls;
+				}, []);
+			});
 		}
 	},
 	unpaint: function(win) {
@@ -372,6 +383,9 @@ var windowObserver = {
 			for (let item of menu.querySelectorAll('.newtabtools-item, .newtabtools-page')) {
 				item.remove();
 			}
+
+			win.gBrowserThumbnails.__defineGetter__('_topSiteURLs', win.gBrowserThumbnails.__oldTopSiteURLs);
+			delete win.gBrowserThumbnails.__oldTopSiteURLs;
 		}
 	},
 	onTabOpen: function(event) {
@@ -507,26 +521,16 @@ var expirationFilter = {
 	},
 
 	filterForThumbnailExpiration: function(callback) {
-		let columns = userPrefs.getIntPref('columns');
-		let rows = userPrefs.getIntPref('rows');
-		let count = columns * rows + 10;
+		let count = GridPrefs.gridColumns * GridPrefs.gridRows + 10;
+		let urls = [];
 
-		if (count <= 25) {
-			callback([]);
-			return;
+		// Add all URLs to the list that we want to keep thumbnails for.
+		for (let link of NewTabToolsLinks.getLinks.slice(0, count)) {
+			if (link && link.url)
+				urls.push(link.url);
 		}
 
-		NewTabUtils.links.populateCache(function() {
-			let urls = [];
-
-			// Add all URLs to the list that we want to keep thumbnails for.
-			for (let link of NewTabUtils.links.getLinks().slice(25, count)) {
-				if (link && link.url)
-					urls.push(link.url);
-			}
-
-			callback(urls);
-		});
+		callback(urls);
 	}
 };
 
