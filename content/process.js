@@ -1,4 +1,6 @@
-/* globals Components, addMessageListener, removeMessageListener */
+/* globals Components, addMessageListener, removeMessageListener, PageThumbUtils */
+Components.utils.import('resource://gre/modules/PageThumbUtils.jsm');
+
 let listener = {
 	_messages: [
 		'NewTabTools:uncacheThumbnailPrefs',
@@ -8,17 +10,27 @@ let listener = {
 		for (let m of this._messages) {
 			addMessageListener(m, this);
 		}
+
+		PageThumbUtils._oldGetContentSize = PageThumbUtils.getContentSize;
+		PageThumbUtils.getContentSize = function(window) {
+			let [width, height] = PageThumbUtils._oldGetContentSize(window);
+			return [
+				Math.min(16384, width),
+				Math.min(16384, height + window.scrollMaxY)
+			];
+		};
 	},
 	destroy: function() {
 		for (let m of this._messages) {
 			removeMessageListener(m, this);
 		}
+
+		PageThumbUtils.getContentSize = PageThumbUtils._oldGetContentSize;
+		delete PageThumbUtils._oldGetContentSize;
 	},
 	receiveMessage: function(message) {
 		switch (message.name) {
 		case 'NewTabTools:uncacheThumbnailPrefs':
-			/* globals PageThumbUtils */
-			Components.utils.import('resource://gre/modules/PageThumbUtils.jsm');
 			delete PageThumbUtils._thumbnailWidth;
 			delete PageThumbUtils._thumbnailHeight;
 			break;
