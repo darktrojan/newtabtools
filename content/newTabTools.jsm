@@ -1,9 +1,9 @@
 /* exported NewTabToolsLinks, GridPrefs, BackgroundImage, TileData, SavedThumbs, ThumbnailPrefs */
-this.EXPORTED_SYMBOLS = ['NewTabToolsLinks', 'GridPrefs', 'BackgroundImage', 'TileData', 'SavedThumbs', 'ThumbnailPrefs'];
-const XHTMLNS = 'http://www.w3.org/1999/xhtml';
+var EXPORTED_SYMBOLS = ['NewTabToolsLinks', 'GridPrefs', 'BackgroundImage', 'TileData', 'SavedThumbs', 'ThumbnailPrefs'];
+var XHTMLNS = 'http://www.w3.org/1999/xhtml';
 
 /* globals Components, Services, XPCOMUtils, Iterator */
-let { classes: Cc, interfaces: Ci, utils: Cu } = Components;
+var { classes: Cc, interfaces: Ci, utils: Cu } = Components;
 
 Cu.import('resource://gre/modules/Services.jsm');
 Cu.import('resource://gre/modules/XPCOMUtils.jsm');
@@ -74,7 +74,7 @@ var NewTabToolsLinks = {
 	}
 };
 
-let GridPrefs = {
+var GridPrefs = {
 	PREF_ROWS: 'extensions.newtabtools.rows',
 	PREF_COLUMNS: 'extensions.newtabtools.columns',
 
@@ -113,7 +113,7 @@ function notifyTileChanged(url, key) {
 	Services.obs.notifyObservers(urlString, 'newtabtools-change', key);
 }
 
-let TileData = {
+var TileData = {
 	PREF: 'extensions.newtabtools.tiledata',
 	_data: new Map(),
 	get: function(url, key) {
@@ -164,7 +164,7 @@ let TileData = {
 };
 TileData._getPref();
 
-let SavedThumbs = {
+var SavedThumbs = {
 	_ready: false,
 	_list: new Set(),
 	getThumbnailURL: function(url) {
@@ -236,7 +236,7 @@ let SavedThumbs = {
 	}
 };
 
-let BackgroundImage = {
+var BackgroundImage = {
 	MODE_SINGLE: 0, // old behaviour
 	MODE_FOLDER_SHARED: 1, // pick one, use for all (could _change regularly)
 	MODE_FOLDER_UNSHARED: 2, // new image each page
@@ -442,7 +442,7 @@ let BackgroundImage = {
 BackgroundImage._readPrefs();
 Services.prefs.addObserver('extensions.newtabtools.background.', BackgroundImage, true);
 
-let ThumbnailPrefs = {
+var ThumbnailPrefs = {
 	PREF_WIDTH: 'toolkit.pageThumbs.minWidth',
 	PREF_HEIGHT: 'toolkit.pageThumbs.minHeight',
 	PREF_DELAY: 'extensions.newtabtools.thumbs.prefs.delay',
