@@ -236,7 +236,7 @@ var newTabTools = {
 		let index = Grid.sites.length - 1;
 		for (var i = 0; i < Grid.sites.length; i++) {
 			let s = Grid.sites[i];
-			if (s && !s.isPinned()) {
+			if (!s || !s.isPinned()) {
 				index = i;
 				break;
 			}
