@@ -20,6 +20,6 @@
 <!ENTITY newtabtools.options.recent "Pestañas cerradas recientemente">
 <!ENTITY newtabtools.options.thumb-buttons "Botones &quot;Fijar&quot; y &quot;Soltar&quot;">
 <!ENTITY newtabtools.options.favicons "Iconos de Sitios">
-<!ENTITY newtabtools.options.thumb-contain "Miniatura completa en los Contenedores">
+<!ENTITY newtabtools.options.thumb-contain "No recortar miniatura">
 <!ENTITY newtabtools.export "Exportar configuración…">
 <!ENTITY newtabtools.import "Importar configuración…">
