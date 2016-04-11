@@ -8,6 +8,7 @@
 		<em:version>64</em:version>
 		<em:bootstrap>true</em:bootstrap>
 		<em:type>2</em:type>
+		<em:multiprocessCompatible>true</em:multiprocessCompatible>
 
 		<em:targetApplication>
 			<Description>
