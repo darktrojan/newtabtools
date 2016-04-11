@@ -363,13 +363,15 @@ var windowObserver = {
 				before = menuitem;
 			}
 
-			win.gBrowserThumbnails.__oldTopSiteURLs = win.gBrowserThumbnails.__lookupGetter__('_topSiteURLs');
-			win.gBrowserThumbnails.__defineGetter__('_topSiteURLs', function() {
-				return NewTabToolsLinks.getLinks().reduce((urls, link) => {
-					if (link)
-						urls.push(link.url);
-					return urls;
-				}, []);
+			NewTabUtils.links.populateCache(function() {
+				win.gBrowserThumbnails.__oldTopSiteURLs = win.gBrowserThumbnails.__lookupGetter__('_topSiteURLs');
+				win.gBrowserThumbnails.__defineGetter__('_topSiteURLs', function() {
+					return NewTabToolsLinks.getLinks().reduce((urls, link) => {
+						if (link)
+							urls.push(link.url);
+						return urls;
+					}, []);
+				});
 			});
 		}
 	},
@@ -521,16 +523,18 @@ var expirationFilter = {
 	},
 
 	filterForThumbnailExpiration: function(callback) {
-		let count = GridPrefs.gridColumns * GridPrefs.gridRows + 10;
-		let urls = [];
+		NewTabUtils.links.populateCache(function() {
+			let count = GridPrefs.gridColumns * GridPrefs.gridRows + 10;
+			let urls = [];
 
-		// Add all URLs to the list that we want to keep thumbnails for.
-		for (let link of NewTabToolsLinks.getLinks().slice(0, count)) {
-			if (link && link.url)
-				urls.push(link.url);
-		}
+			// Add all URLs to the list that we want to keep thumbnails for.
+			for (let link of NewTabToolsLinks.getLinks().slice(0, count)) {
+				if (link && link.url)
+					urls.push(link.url);
+			}
 
-		callback(urls);
+			callback(urls);
+		});
 	}
 };
 
