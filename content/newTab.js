@@ -11,7 +11,7 @@ var { classes: Cc, interfaces: Ci, utils: Cu } = Components;
 Cu.import('resource://gre/modules/PageThumbs.jsm');
 Cu.import('resource://gre/modules/Services.jsm');
 Cu.import('resource://gre/modules/XPCOMUtils.jsm');
-/* globals GridPrefs, BackgroundImage, TileData, SavedThumbs, ThumbnailPrefs */
+/* globals GridPrefs, TileData, SavedThumbs, ThumbnailPrefs */
 Cu.import('chrome://newtabtools/content/newTabTools.jsm');
 
 /* globals FileUtils, NetUtil, SessionStore, OS, PageThumbUtils, PlacesUtils, PrivateBrowsingUtils */
@@ -334,58 +334,14 @@ var newTabTools = {
 		return Services.io.newFileURI(this.backgroundImageFile);
 	},
 	refreshBackgroundImage: function() {
-		let oldBackground = document.querySelector('.newtab-background');
-		let newBackground = document.createElementNS(HTML_NAMESPACE, 'div');
-		newBackground.className = 'newtab-background';
-		let newTheme = document.documentElement.getAttribute('theme');
-		switch (BackgroundImage.mode) {
-		case BackgroundImage.MODE_FOLDER_SHARED:
-			BackgroundImage._init().then(() => {
-				newBackground.style.backgroundImage = 'url("' + BackgroundImage.url + '")';
-				if (oldBackground && newBackground.style.backgroundImage == oldBackground.style.backgroundImage) {
-					return;
-				}
-				newTheme = BackgroundImage.theme;
-				finish();
-			});
-			break;
-		case BackgroundImage.MODE_FOLDER_UNSHARED:
-			BackgroundImage._pick().then(([url, theme]) => {
-				if (url == null) {
-					newBackground = null;
-				} else {
-					newBackground.style.backgroundImage = 'url("' + url + '")';
-					newTheme = theme;
-				}
-				finish();
-			});
-			break;
-		default:
-			if (this.backgroundImageFile.exists()) {
-				newBackground.style.backgroundImage =
-					'url("' + this.backgroundImageURL.spec + '?' + this.backgroundImageFile.lastModifiedTime + '")';
-				this.removeBackgroundButton.disabled = false;
-			} else {
-				newBackground = null;
-				this.removeBackgroundButton.disabled = true;
-				this.removeBackgroundButton.blur();
-			}
-			finish();
-			break;
-		}
-
-		function finish() {
-			if (oldBackground) {
-				setTimeout(function() {
-					oldBackground.remove();
-					document.documentElement.setAttribute('theme', newTheme);
-				}, 500);
-			} else {
-				document.documentElement.setAttribute('theme', newTheme);
-			}
-			if (newBackground) {
-				document.body.insertBefore(newBackground, document.body.firstChild);
-			}
+		if (this.backgroundImageFile.exists()) {
+			document.body.style.backgroundImage =
+				'url("' + this.backgroundImageURL.spec + '?' + this.backgroundImageFile.lastModifiedTime + '")';
+			this.removeBackgroundButton.disabled = false;
+		} else {
+			document.body.style.backgroundImage = null;
+			this.removeBackgroundButton.disabled = true;
+			this.removeBackgroundButton.blur();
 		}
 	},
 	updateUI: function() {
@@ -398,11 +354,9 @@ var newTabTools = {
 			document.documentElement.removeAttribute('launcher');
 		}
 
-		if (BackgroundImage.modeIsSingle) {
-			let theme = this.prefs.getCharPref('theme');
-			this.themePref.querySelector('[value="' + theme + '"]').checked = true;
-			document.documentElement.setAttribute('theme', theme);
-		}
+		let theme = this.prefs.getCharPref('theme');
+		this.themePref.querySelector('[value="' + theme + '"]').checked = true;
+		document.documentElement.setAttribute('theme', theme);
 
 		let containThumbs = this.prefs.getBoolPref('thumbs.contain');
 		document.querySelector('[name="thumbs.contain"]').checked = containThumbs;
@@ -572,14 +526,7 @@ var newTabTools = {
 			this.optionsTogglePointer.hidden = false;
 			this.optionsTogglePointer.style.animationPlayState = 'running';
 		}
-		BackgroundImage.wakeUp();
 		this.onVisible = function() {};
-
-		document.addEventListener('visibilitychange', function() {
-			if (document.visibilityState == 'visible') {
-				BackgroundImage.wakeUp();
-			}
-		});
 	},
 	set selectedSiteIndex(index) { // jshint ignore:line
 		this._selectedSiteIndex = index;
@@ -645,7 +592,6 @@ var newTabTools = {
 		if (document.documentElement.hasAttribute('options-hidden')) {
 			this.optionsTogglePointer.hidden = true;
 			this.prefs.setBoolPref('optionspointershown', true);
-			this.backgroundOptions.hidden = this.themePref.hidden = !BackgroundImage.modeIsSingle;
 			document.documentElement.removeAttribute('options-hidden');
 			this.selectedSiteIndex = 0;
 			this.pinURLInput.focus();

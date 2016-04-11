@@ -5,8 +5,7 @@ var EXPORTED_SYMBOLS = ['NewTabToolsDataCollector'];
 Components.utils.import('resource://gre/modules/Services.jsm');
 Components.utils.import('resource://gre/modules/XPCOMUtils.jsm');
 
-/* globals BackgroundImage, Preferences, OS, Task */
-XPCOMUtils.defineLazyModuleGetter(this, 'BackgroundImage', 'chrome://newtabtools/content/newTabTools.jsm');
+/* globals Preferences, OS, Task */
 XPCOMUtils.defineLazyModuleGetter(this, 'Preferences', 'resource://gre/modules/Preferences.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'OS', 'resource://gre/modules/osfile.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'Task', 'resource://gre/modules/Task.jsm');
@@ -50,7 +49,6 @@ var gatherData = Task.async(function*() {
 	data.set('thumbsHeight', Preferences.get('toolkit.pageThumbs.minHeight'));
 	data.set('thumbsWidth', Preferences.get('toolkit.pageThumbs.minWidth'));
 
-	data.set('backgroundMode', BackgroundImage.mode);
 	data.set(
 		'backgroundFileExists',
 		yield OS.File.exists(OS.Path.join(OS.Constants.Path.profileDir, 'newtab-background'))
