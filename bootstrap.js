@@ -332,8 +332,10 @@ var windowObserver = {
 			menu.insertBefore(menuseparator, before);
 			before = menuseparator;
 
+			let menuitem;
+
 			for (let action of ['block', 'unpin', 'pin', 'edit']) {
-				let menuitem = doc.createElementNS(XULNS, 'menuitem');
+				menuitem = doc.createElementNS(XULNS, 'menuitem');
 				menuitem.id = 'newtabtools-' + action + 'tile';
 				menuitem.className = 'newtabtools-item';
 				menuitem.setAttribute('label', strings.GetStringFromName('contextmenu.' + action));
@@ -343,7 +345,7 @@ var windowObserver = {
 			}
 
 			for (let action of ['options']) {
-				let menuitem = doc.createElementNS(XULNS, 'menuitem');
+				menuitem = doc.createElementNS(XULNS, 'menuitem');
 				menuitem.id = 'newtabtools-' + action;
 				menuitem.className = 'newtabtools-page';
 				menuitem.setAttribute('label', strings.GetStringFromName(
@@ -364,6 +366,16 @@ var windowObserver = {
 					}, []);
 				});
 			});
+
+			menuitem = doc.createElementNS(XULNS, 'menuitem');
+			menuitem.id = 'newtabtools-capture';
+			menuitem.setAttribute('label', strings.GetStringFromName('toolsmenu.captureThumbnail'));
+			menuitem.addEventListener('command', function() {
+				win.setTimeout(function() {
+					PageThumbs.captureAndStore(win.gBrowser.selectedBrowser);
+				}, 1000);
+			});
+			doc.getElementById('menu_ToolsPopup').appendChild(menuitem);
 		}
 	},
 	unpaint: function(win) {
@@ -376,6 +388,8 @@ var windowObserver = {
 			for (let item of menu.querySelectorAll('.newtabtools-item, .newtabtools-page')) {
 				item.remove();
 			}
+
+			doc.getElementById('newtabtools-capture').remove();
 
 			win.gBrowserThumbnails.__defineGetter__('_topSiteURLs', win.gBrowserThumbnails.__oldTopSiteURLs);
 			delete win.gBrowserThumbnails.__oldTopSiteURLs;
