@@ -541,7 +541,6 @@ var idleObserver = {
 
 		let version = userPrefs.getCharPref('version');
 		let recentWindow = Services.wm.getMostRecentWindow(BROWSER_WINDOW);
-		let browser = recentWindow.gBrowser;
 		let notificationBox = recentWindow.document.getElementById('global-notificationbox');
 		let message = strings.formatStringFromName('newversion', [parseFloat(version, 10)], 1);
 		let changeLogLabel = strings.GetStringFromName('changelog.label');
@@ -555,15 +554,17 @@ var idleObserver = {
 				label: changeLogLabel,
 				accessKey: changeLogAccessKey,
 				callback: function() {
-					browser.selectedTab =
-						browser.addTab('https://addons.mozilla.org/addon/new-tab-tools/versions/' + version);
+					recentWindow.switchToTabHavingURI(
+						'https://addons.mozilla.org/addon/new-tab-tools/versions/' + version, true
+					);
 				}
 			}, {
 				label: donateLabel,
 				accessKey: donateAccessKey,
 				callback: function() {
-					browser.selectedTab =
-						browser.addTab('https://addons.mozilla.org/addon/new-tab-tools/contribute/installed/');
+					recentWindow.switchToTabHavingURI(
+						'https://darktrojan.github.io/donate.html?newtabtools', true
+					);
 				}
 			}]
 		);
