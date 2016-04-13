@@ -196,8 +196,8 @@ var newTabTools = {
 			Services.obs.notifyObservers(null, 'newtabtools-change', 'background');
 			break;
 		case 'options-donate':
-			let url = 'https://addons.mozilla.org/addon/new-tab-tools/about';
-			newTabTools.browserWindow.openLinkIn(url, 'current', {});
+			let url = 'https://darktrojan.github.io/donate.html?newtabtools';
+			newTabTools.browserWindow.switchToTabHavingURI(url, true);
 			break;
 		}
 	},
