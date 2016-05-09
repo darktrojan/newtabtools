@@ -1,7 +1,7 @@
 <!ENTITY newtabtools.options.theme "主题">
 <!ENTITY newtabtools.options.theme.light "亮色主题">
 <!ENTITY newtabtools.options.theme.dark "暗色主题">
-<!ENTITY newtabtools.options.foreground.opacity "Foreground Opacity">
+<!ENTITY newtabtools.options.foreground.opacity "前景不透明度">
 <!ENTITY newtabtools.options.rows "纵向列">
 <!ENTITY newtabtools.options.columns "横向行">
 <!ENTITY newtabtools.options.grid.margin "磁贴周围留白">
@@ -16,7 +16,7 @@
 <!ENTITY newtabtools.options.launcher.left "左侧">
 <!ENTITY newtabtools.options.launcher.right "右侧">
 <!ENTITY newtabtools.options.thumb-titlesize "磁贴标题大小">
-<!ENTITY newtabtools.options.historytiles "Tiles from your browsing history">
+<!ENTITY newtabtools.options.historytiles "基于浏览记录的磁贴">
 <!ENTITY newtabtools.options.recent "最近关闭的标签页">
 <!ENTITY newtabtools.options.thumb-buttons "显示“固定磁贴”和“移除磁贴”按钮">
 <!ENTITY newtabtools.options.favicons "网站图标">
