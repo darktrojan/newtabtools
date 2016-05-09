@@ -16,4 +16,5 @@
 <!ENTITY newtabtools.export.prefs.recent.show "Видимост на последно затворените раздели">
 <!ENTITY newtabtools.export.page.background "Фон на страницата">
 <!ENTITY newtabtools.export.prefs.theme "Тема">
+<!ENTITY newtabtools.export.historytiles "Browsing History Tiles Visibility">
 <!ENTITY newtabtools.export.foreground.opacity "Прозрачност">

@@ -16,3 +16,5 @@
 <!ENTITY newtabtools.export.prefs.recent.show "Mostra/nascondi schede chiuse di recente">
 <!ENTITY newtabtools.export.page.background "Sfondo della pagina">
 <!ENTITY newtabtools.export.prefs.theme "Tema">
+<!ENTITY newtabtools.export.historytiles "Browsing History Tiles Visibility">
+<!ENTITY newtabtools.export.foreground.opacity "Foreground Opacity">

@@ -16,3 +16,5 @@
 <!ENTITY newtabtools.export.prefs.recent.show "最近關閉的分頁的顯示設定">
 <!ENTITY newtabtools.export.page.background "頁面背景">
 <!ENTITY newtabtools.export.prefs.theme "佈景">
+<!ENTITY newtabtools.export.historytiles "Browsing History Tiles Visibility">
+<!ENTITY newtabtools.export.foreground.opacity "Foreground Opacity">
