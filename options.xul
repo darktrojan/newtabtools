@@ -12,6 +12,7 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 			<radio label="&newtabtools.options.theme.dark;" value="dark" />
 		</radiogroup>
 	</setting>
+	<setting pref="extensions.newtabtools.foreground.opacity" type="integer" title="&newtabtools.options.foreground.opacity;" max="100" min="0" increment="10" size="2" />
 	<setting pref="extensions.newtabtools.rows" type="integer" title="&newtabtools.options.rows;" max="10" min="1" size="2"/>
 	<setting pref="extensions.newtabtools.columns" type="integer" title="&newtabtools.options.columns;" max="10" min="1" size="2"/>
 	<setting pref="extensions.newtabtools.grid.margin" type="menulist" title="&newtabtools.options.grid.margin;">
@@ -53,6 +54,7 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 			</menupopup>
 		</menulist>
 	</setting>
+	<setting pref="extensions.newtabtools.historytiles.show" type="bool" checkboxlabel="&newtabtools.options.historytiles;" />
 	<setting pref="extensions.newtabtools.recent.show" type="bool" checkboxlabel="&newtabtools.options.recent;" />
 	<setting pref="extensions.newtabtools.thumbs.hidebuttons" type="bool" inverted="true" checkboxlabel="&newtabtools.options.thumb-buttons;" />
 	<setting pref="extensions.newtabtools.thumbs.hidefavicons" type="bool" inverted="true" checkboxlabel="&newtabtools.options.favicons;" />

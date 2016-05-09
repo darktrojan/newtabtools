@@ -24,7 +24,7 @@ if (returnValues.importing) {
 			break;
 		}
 		case 'prefs.theme':
-			checkbox.disabled = !('extensions.newtabtools.page.theme' in returnValues.prefs);
+			checkbox.disabled = !('extensions.newtabtools.theme' in returnValues.prefs);
 			break;
 		case 'prefs.gridsize':
 			checkbox.disabled = !('extensions.newtabtools.columns' in returnValues.prefs) || !('extensions.newtabtools.rows' in returnValues.prefs);
@@ -39,6 +39,8 @@ if (returnValues.importing) {
 		case 'prefs.thumbs.hidefavicons':
 		case 'prefs.launcher':
 		case 'prefs.recent.show':
+		case 'prefs.foreground.opacity':
+		case 'prefs.historytiles.show':
 			let prefName = 'extensions.newtabtools.' + checkbox.id.substring(6); // length of "prefs."
 			checkbox.disabled = !(prefName in returnValues.prefs);
 			break;

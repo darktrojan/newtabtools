@@ -16,3 +16,4 @@
 <!ENTITY newtabtools.export.prefs.recent.show "Ορατότητα Πρόσφατα Κλεισμένων Καρτελών">
 <!ENTITY newtabtools.export.page.background "Φόντο Σελίδας">
 <!ENTITY newtabtools.export.prefs.theme "Θέμα">
+<!ENTITY newtabtools.export.foreground.opacity "Διαφάνεια προσκηνίου">
