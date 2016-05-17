@@ -15,4 +15,4 @@ git clone git://github.com/darktrojan/newtabtools.git newtabtools@darktrojan.net
 
 Localizing
 ----------
-Send me a pull request, or try my new experiment in add-on localization, *Zoo*: http://zoo.darktrojan.net/darktrojan/newtabtools/repo.php
+Send me a pull request, or try my new experiment in add-on localization, *Zoo*: https://zoo2translate.herokuapp.com/darktrojan/newtabtools

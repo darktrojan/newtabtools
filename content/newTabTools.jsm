@@ -1,9 +1,8 @@
-/* exported NewTabToolsLinks, GridPrefs, BackgroundImage, TileData, SavedThumbs, ThumbnailPrefs */
-this.EXPORTED_SYMBOLS = ['NewTabToolsLinks', 'GridPrefs', 'BackgroundImage', 'TileData', 'SavedThumbs', 'ThumbnailPrefs'];
-const XHTMLNS = 'http://www.w3.org/1999/xhtml';
+/* exported EXPORTED_SYMBOLS, NewTabToolsLinks, GridPrefs, TileData, SavedThumbs, ThumbnailPrefs */
+var EXPORTED_SYMBOLS = ['NewTabToolsLinks', 'GridPrefs', 'TileData', 'SavedThumbs', 'ThumbnailPrefs'];
 
 /* globals Components, Services, XPCOMUtils, Iterator */
-let { classes: Cc, interfaces: Ci, utils: Cu } = Components;
+var { classes: Cc, interfaces: Ci, utils: Cu } = Components;
 
 Cu.import('resource://gre/modules/Services.jsm');
 Cu.import('resource://gre/modules/XPCOMUtils.jsm');
@@ -15,9 +14,6 @@ XPCOMUtils.defineLazyModuleGetter(this, 'NewTabUtils', 'resource://gre/modules/N
 XPCOMUtils.defineLazyModuleGetter(this, 'OS', 'resource://gre/modules/osfile.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'PageThumbs', 'resource://gre/modules/PageThumbs.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'PageThumbsStorage', 'resource://gre/modules/PageThumbs.jsm');
-
-/* globals idleService */
-XPCOMUtils.defineLazyServiceGetter(this, 'idleService', '@mozilla.org/widget/idleservice;1', 'nsIIdleService');
 
 var NewTabToolsLinks = {
 	PREF_HISTORY: 'extensions.newtabtools.historytiles.show',
@@ -74,7 +70,7 @@ var NewTabToolsLinks = {
 	}
 };
 
-let GridPrefs = {
+var GridPrefs = {
 	PREF_ROWS: 'extensions.newtabtools.rows',
 	PREF_COLUMNS: 'extensions.newtabtools.columns',
 
@@ -113,7 +109,7 @@ function notifyTileChanged(url, key) {
 	Services.obs.notifyObservers(urlString, 'newtabtools-change', key);
 }
 
-let TileData = {
+var TileData = {
 	PREF: 'extensions.newtabtools.tiledata',
 	_data: new Map(),
 	get: function(url, key) {
@@ -164,7 +160,7 @@ let TileData = {
 };
 TileData._getPref();
 
-let SavedThumbs = {
+var SavedThumbs = {
 	_ready: false,
 	_list: new Set(),
 	getThumbnailURL: function(url) {
@@ -236,213 +232,7 @@ let SavedThumbs = {
 	}
 };
 
-let BackgroundImage = {
-	MODE_SINGLE: 0, // old behaviour
-	MODE_FOLDER_SHARED: 1, // pick one, use for all (could _change regularly)
-	MODE_FOLDER_UNSHARED: 2, // new image each page
-	PREF_DIRECTORY: 'extensions.newtabtools.background.directory',
-	PREF_INTERVAL: 'extensions.newtabtools.background.changeinterval',
-	PREF_MODE: 'extensions.newtabtools.background.mode',
-	IDLE_TIME: 3,
-	_asleep: false,
-	_list: [],
-	_state: 'unready',
-	_initCallbacks: [],
-	_themeCache: new Map(),
-	get modeIsSingle() {
-		return this.mode != BackgroundImage.MODE_FOLDER_SHARED && this.mode != BackgroundImage.MODE_FOLDER_UNSHARED;
-	},
-	_readPrefs: function() {
-		this.mode = BackgroundImage.MODE_SINGLE;
-		this.changeInterval = 0;
-
-		if (Services.prefs.getPrefType(BackgroundImage.PREF_DIRECTORY) == Services.prefs.PREF_STRING) {
-			this._directory = Services.prefs.getCharPref(BackgroundImage.PREF_DIRECTORY);
-		} else {
-			return;
-		}
-		if (Services.prefs.getPrefType(BackgroundImage.PREF_MODE) == Services.prefs.PREF_INT) {
-			this.mode = Services.prefs.getIntPref(BackgroundImage.PREF_MODE);
-		}
-		if (Services.prefs.getPrefType(BackgroundImage.PREF_INTERVAL) == Services.prefs.PREF_INT) {
-			this.changeInterval = Services.prefs.getIntPref(BackgroundImage.PREF_INTERVAL);
-		}
-	},
-	_init: function() {
-		if (this.modeIsSingle) {
-			return;
-		}
-
-		let promise = new Promise(resolve => {
-			if (this._state == 'ready') {
-				resolve();
-			} else {
-				this._initCallbacks.push(resolve);
-			}
-		});
-
-		if (this._state == 'unready') {
-			this._state = 'loading';
-
-			this._list = [];
-			this._entriesForDir(this._directory).then(() => {
-				this._state = 'ready';
-				this._list.sort();
-				if (this.mode == BackgroundImage.MODE_FOLDER_SHARED) {
-					return this._change();
-				}
-			}).then(() => {
-				this._initCallbacks.forEach(cb => cb.call());
-				this._initCallbacks = [];
-			});
-		}
-
-		return promise;
-	},
-	_entriesForDir: function(path) {
-		let di = new OS.File.DirectoryIterator(path);
-		let dirs = [];
-		return di.forEach(e => {
-			if (!e.isSymLink) {
-				if (e.isDir)
-					dirs.push(e.path);
-				else if (/\.(jpe?g|png)/i.test(e.name))
-					this._list.push(e.path);
-			}
-		}).then(() => {
-			di.close();
-			let dirPromises = dirs.map(d => this._entriesForDir(d));
-			return Promise.all(dirPromises);
-		});
-	},
-	_pick: function() {
-		if (this._state == 'ready' && this._list.length == 0) {
-			return new Promise(function(resolve) {
-				resolve(null, null);
-			});
-		}
-
-		return this._init().then(() => {
-			let index = Math.floor(Math.random() * this._list.length);
-			let url = Services.io.newFileURI(new FileUtils.File(this._list[index])).spec;
-			if (this._themeCache.has(url)) {
-				return [url, this._themeCache.get(url)];
-			}
-			return this._selectTheme(url).then((theme) => {
-				this._themeCache.set(url, theme);
-				return [url, theme];
-			});
-		});
-	},
-	_change: function() {
-		this._pick().then(([url, theme]) => {
-			this.url = url;
-			this.theme = theme;
-			Services.obs.notifyObservers(null, 'newtabtools-change', 'background');
-
-			this._startTimer();
-		});
-	},
-	_startTimer: function(forceAwake = false) {
-		this._stopTimer();
-
-		if (this.changeInterval > 0) {
-			if (!forceAwake && !NewTabUtils.allPages._pages.some(function(p) {
-				return Cu.getGlobalForObject(p).document.visibilityState == 'visible';
-			})) {
-				// If no new tab pages can be seen, stop changing the image.
-				this._asleep = true;
-				return;
-			}
-			this._timer = Cc['@mozilla.org/timer;1'].createInstance(Ci.nsITimer);
-			this._timer.initWithCallback(this._delayedChange.bind(this), this.changeInterval * 60000, Ci.nsITimer.TYPE_ONE_SHOT);
-		}
-	},
-	_stopTimer: function() {
-		if (this._timer) {
-			// Only one time at once, please!
-			this._timer.cancel();
-			delete this._timer;
-		}
-	},
-	wakeUp: function() {
-		// This is called by newTabTools.onVisible
-		if (this.mode == BackgroundImage.MODE_FOLDER_SHARED && this._asleep) {
-			this._asleep = false;
-			this._startTimer(true);
-		}
-	},
-	observe: function(subject, topic, data) {
-		switch (topic) {
-		case 'idle':
-			idleService.removeIdleObserver(this, this.IDLE_TIME);
-			this._change();
-			break;
-		case 'nsPref:changed':
-			this._readPrefs();
-			this._stopTimer();
-
-			if (data == BackgroundImage.PREF_DIRECTORY) {
-				this._state = 'unready';
-				this._init();
-			}
-
-			if (this.mode == BackgroundImage.MODE_FOLDER_SHARED) {
-				this._startTimer();
-			}
-			Services.obs.notifyObservers(null, 'newtabtools-change', 'background');
-			break;
-		}
-	},
-	_delayedChange: function() {
-		if (idleService.idleTime > this.IDLE_TIME * 1000) {
-			this._change();
-		} else {
-			idleService.addIdleObserver(this, this.IDLE_TIME);
-		}
-	},
-	_selectTheme: function(url) {
-		return new Promise(function(resolve) {
-			let doc = Services.wm.getMostRecentWindow('navigator:browser').document;
-			let c = doc.createElementNS(XHTMLNS, 'canvas');
-			c.width = c.height = 100;
-			let x = c.getContext('2d');
-			let i = doc.createElementNS(XHTMLNS, 'img');
-			i.onload = function() {
-				try {
-					x.drawImage(i, 0, 0, i.width, i.height, 0, 0, 100, 100);
-					let d = x.getImageData(0, 0, 100, 100).data;
-					let b = 0;
-					let j = 0;
-					for (; j < 19996; j++) {
-						let v = d[j++] + d[j++] + d[j++];
-						if (v >= 384) {
-							b++;
-						}
-					}
-					for (; j < 40000; j++) {
-						let v = d[j++] + d[j++] + d[j++];
-						if (v >= 384) {
-							if (++b > 5000) {
-								resolve('light');
-								return;
-							}
-						}
-					}
-					resolve('dark');
-				} catch (ex) {
-					Cu.reportError(ex);
-				}
-			};
-			i.src = url;
-		});
-	},
-	QueryInterface: XPCOMUtils.generateQI([Ci.nsIObserver, Ci.nsISupportsWeakReference])
-};
-BackgroundImage._readPrefs();
-Services.prefs.addObserver('extensions.newtabtools.background.', BackgroundImage, true);
-
-let ThumbnailPrefs = {
+var ThumbnailPrefs = {
 	PREF_WIDTH: 'toolkit.pageThumbs.minWidth',
 	PREF_HEIGHT: 'toolkit.pageThumbs.minHeight',
 	PREF_DELAY: 'extensions.newtabtools.thumbs.prefs.delay',

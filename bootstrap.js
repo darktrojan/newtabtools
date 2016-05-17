@@ -27,8 +27,9 @@ XPCOMUtils.defineLazyGetter(this, 'strings', function() {
 	return Services.strings.createBundle('chrome://newtabtools/locale/newTabTools.properties');
 });
 
-/* globals BackgroundImage, NewTabToolsDataCollector, NewTabToolsExporter, NewTabToolsLinks, NewTabURL, OS, PageThumbs, Task, TileData */
-XPCOMUtils.defineLazyModuleGetter(this, 'BackgroundImage', 'chrome://newtabtools/content/newTabTools.jsm');
+/* globals GridPrefs, NewTabToolsDataCollector, NewTabToolsExporter, NewTabToolsLinks,
+	NewTabURL, OS, PageThumbs, Task, TileData */
+XPCOMUtils.defineLazyModuleGetter(this, 'GridPrefs', 'chrome://newtabtools/content/newTabTools.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'NewTabToolsDataCollector', 'chrome://newtabtools/content/dataCollection.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'NewTabToolsExporter', 'chrome://newtabtools/content/export.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'NewTabToolsLinks', 'chrome://newtabtools/content/newTabTools.jsm');
@@ -360,6 +361,17 @@ var windowObserver = {
 				menu.insertBefore(menuitem, before);
 				before = menuitem;
 			}
+
+			NewTabUtils.links.populateCache(function() {
+				win.gBrowserThumbnails.__oldTopSiteURLs = win.gBrowserThumbnails.__lookupGetter__('_topSiteURLs');
+				win.gBrowserThumbnails.__defineGetter__('_topSiteURLs', function() {
+					return NewTabToolsLinks.getLinks().reduce((urls, link) => {
+						if (link)
+							urls.push(link.url);
+						return urls;
+					}, []);
+				});
+			});
 		}
 	},
 	unpaint: function(win) {
@@ -372,6 +384,9 @@ var windowObserver = {
 			for (let item of menu.querySelectorAll('.newtabtools-item, .newtabtools-page')) {
 				item.remove();
 			}
+
+			win.gBrowserThumbnails.__defineGetter__('_topSiteURLs', win.gBrowserThumbnails.__oldTopSiteURLs);
+			delete win.gBrowserThumbnails.__oldTopSiteURLs;
 		}
 	},
 	onTabOpen: function(event) {
@@ -482,11 +497,6 @@ var optionsObserver = {
 				return;
 			}
 
-			if (!BackgroundImage.modeIsSingle) {
-				doc.querySelector('setting[pref="extensions.newtabtools.theme"]').style.visibility = 'collapse';
-				doc.querySelector('setting[pref="extensions.newtabtools.rows"]').setAttribute('first-row', 'true');
-			}
-
 			doc.getElementById('newtabtools.export').addEventListener('command', () => {
 				NewTabToolsExporter.doExport();
 			});
@@ -507,20 +517,12 @@ var expirationFilter = {
 	},
 
 	filterForThumbnailExpiration: function(callback) {
-		let columns = userPrefs.getIntPref('columns');
-		let rows = userPrefs.getIntPref('rows');
-		let count = columns * rows + 10;
-
-		if (count <= 25) {
-			callback([]);
-			return;
-		}
-
 		NewTabUtils.links.populateCache(function() {
+			let count = GridPrefs.gridColumns * GridPrefs.gridRows + 10;
 			let urls = [];
 
 			// Add all URLs to the list that we want to keep thumbnails for.
-			for (let link of NewTabUtils.links.getLinks().slice(25, count)) {
+			for (let link of NewTabToolsLinks.getLinks().slice(0, count)) {
 				if (link && link.url)
 					urls.push(link.url);
 			}
@@ -539,7 +541,6 @@ var idleObserver = {
 
 		let version = userPrefs.getCharPref('version');
 		let recentWindow = Services.wm.getMostRecentWindow(BROWSER_WINDOW);
-		let browser = recentWindow.gBrowser;
 		let notificationBox = recentWindow.document.getElementById('global-notificationbox');
 		let message = strings.formatStringFromName('newversion', [parseFloat(version, 10)], 1);
 		let changeLogLabel = strings.GetStringFromName('changelog.label');
@@ -553,15 +554,17 @@ var idleObserver = {
 				label: changeLogLabel,
 				accessKey: changeLogAccessKey,
 				callback: function() {
-					browser.selectedTab =
-						browser.addTab('https://addons.mozilla.org/addon/new-tab-tools/versions/' + version);
+					recentWindow.switchToTabHavingURI(
+						'https://addons.mozilla.org/addon/new-tab-tools/versions/' + version, true
+					);
 				}
 			}, {
 				label: donateLabel,
 				accessKey: donateAccessKey,
 				callback: function() {
-					browser.selectedTab =
-						browser.addTab('https://addons.mozilla.org/addon/new-tab-tools/contribute/installed/');
+					recentWindow.switchToTabHavingURI(
+						'https://darktrojan.github.io/donate.html?newtabtools', true
+					);
 				}
 			}]
 		);

@@ -16,3 +16,5 @@
 <!ENTITY newtabtools.export.prefs.recent.show "Recently Closed Tabs Visibility">
 <!ENTITY newtabtools.export.page.background "Page Background">
 <!ENTITY newtabtools.export.prefs.theme "Theme">
+<!ENTITY newtabtools.export.historytiles "Browsing History Tiles Visibility">
+<!ENTITY newtabtools.export.foreground.opacity "Foreground Opacity">

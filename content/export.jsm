@@ -12,7 +12,12 @@ Cu.import('resource://gre/modules/FileUtils.jsm');
 Cu.import('resource://gre/modules/Services.jsm');
 Cu.import('resource://gre/modules/XPCOMUtils.jsm');
 
-/* globals strings, OS, SavedThumbs, TileData */
+/* globals picker, strings, OS, SavedThumbs, TileData */
+XPCOMUtils.defineLazyGetter(this, 'picker', function() {
+	let p = Cc['@mozilla.org/filepicker;1'].createInstance(Ci.nsIFilePicker);
+	p.displayDirectory = Services.dirsvc.get('Home', Ci.nsIFile);
+	return p;
+});
 XPCOMUtils.defineLazyGetter(this, 'strings', function() {
 	return Services.strings.createBundle('chrome://newtabtools/locale/export.properties');
 });
@@ -61,7 +66,6 @@ function exportShowOptionDialog() {
 
 function exportShowFilePicker(returnValues) {
 	return new Promise(function(resolve, reject) {
-		let picker = Cc['@mozilla.org/filepicker;1'].createInstance(Ci.nsIFilePicker);
 		picker.init(getWindow(), strings.GetStringFromName('picker.title.export'), Ci.nsIFilePicker.modeSave);
 		picker.appendFilter(strings.GetStringFromName('picker.filter'), '*.zip');
 		picker.defaultExtension = 'zip';
@@ -70,6 +74,7 @@ function exportShowFilePicker(returnValues) {
 			if (result == Ci.nsIFilePicker.returnCancel) {
 				reject('New Tab Tools export cancelled.');
 			} else {
+				picker.displayDirectory = picker.file.parent;
 				returnValues.file = picker.file;
 				resolve(returnValues);
 			}
@@ -109,6 +114,8 @@ function exportSave(returnValues) {
 				case 'thumbs.hidebuttons':
 				case 'thumbs.hidefavicons':
 				case 'tiledata':
+				case 'historytiles.show':
+				case 'foreground.opacity':
 					keys.push('extensions.newtabtools.' + name);
 					break;
 				}
@@ -168,7 +175,6 @@ function exportSave(returnValues) {
 
 function importShowFilePicker() {
 	return new Promise(function(resolve, reject) {
-		let picker = Cc['@mozilla.org/filepicker;1'].createInstance(Ci.nsIFilePicker);
 		picker.init(getWindow(), strings.GetStringFromName('picker.title.import'), Ci.nsIFilePicker.modeOpen);
 		picker.appendFilter(strings.GetStringFromName('picker.filter'), '*.zip');
 		picker.defaultExtension = 'zip';
@@ -176,6 +182,7 @@ function importShowFilePicker() {
 			if (result == Ci.nsIFilePicker.returnCancel) {
 				reject('New Tab Tools import cancelled.');
 			} else {
+				picker.displayDirectory = picker.file.parent;
 				resolve(picker.file);
 			}
 		});

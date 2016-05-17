@@ -18,10 +18,12 @@
 		<checkbox id="prefs.tiledata" label="&newtabtools.export.annos.title;" />
 		<checkbox id="prefs.thumbs.hidebuttons" label="&newtabtools.export.prefs.thumbs.hidebuttons;" />
 		<checkbox id="prefs.thumbs.hidefavicons" label="&newtabtools.export.prefs.thumbs.hidefavicons;" />
+		<checkbox id="prefs.historytiles.show" label="&newtabtools.export.historytiles;" />
 	</groupbox>
 	<groupbox>
 		<caption label="&newtabtools.export.page.caption;" />
 		<checkbox id="prefs.theme" label="&newtabtools.export.prefs.theme;" />
+		<checkbox id="prefs.foreground.opacity" label="&newtabtools.export.foreground.opacity;" />
 		<checkbox id="prefs.gridsize" label="&newtabtools.export.prefs.gridsize;" />
 		<checkbox id="prefs.gridmargin" label="&newtabtools.export.prefs.gridmargin;" />
 		<checkbox id="prefs.launcher" label="&newtabtools.export.prefs.launcher;" />

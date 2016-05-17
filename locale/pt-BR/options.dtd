@@ -1,7 +1,7 @@
 <!ENTITY newtabtools.options.theme "Tema">
-<!ENTITY newtabtools.options.theme.light "Tema Claro">
-<!ENTITY newtabtools.options.theme.dark "Tema Escuro">
-<!ENTITY newtabtools.options.foreground.opacity "Opacidade do Primeiro Plano">
+<!ENTITY newtabtools.options.theme.light "Tema claro">
+<!ENTITY newtabtools.options.theme.dark "Tema escuro">
+<!ENTITY newtabtools.options.foreground.opacity "Opacidade">
 <!ENTITY newtabtools.options.rows "Linhas">
 <!ENTITY newtabtools.options.columns "Colunas">
 <!ENTITY newtabtools.options.grid.margin "Margem da grade">
@@ -16,10 +16,10 @@
 <!ENTITY newtabtools.options.launcher.left "Esquerda">
 <!ENTITY newtabtools.options.launcher.right "Direita">
 <!ENTITY newtabtools.options.thumb-titlesize "Tamanho do título do bloco">
-<!ENTITY newtabtools.options.historytiles "Tiles from your browsing history">
-<!ENTITY newtabtools.options.recent "Abas Recentemente Fechadas">
+<!ENTITY newtabtools.options.historytiles "Blocos do histórico de navegação">
+<!ENTITY newtabtools.options.recent "Abas fechadas recentemente">
 <!ENTITY newtabtools.options.thumb-buttons "Botões 'Fixar Bloco' e 'Remover Bloco'">
-<!ENTITY newtabtools.options.favicons "Ícones de Sites">
-<!ENTITY newtabtools.options.thumb-contain "Miniatura Inteira nos Blocos">
+<!ENTITY newtabtools.options.favicons "Ícones de sites">
+<!ENTITY newtabtools.options.thumb-contain "Miniatura inteira nos blocos">
 <!ENTITY newtabtools.export "Exportar configurações…">
 <!ENTITY newtabtools.import "Importar configurações…">

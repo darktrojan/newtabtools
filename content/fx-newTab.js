@@ -32,24 +32,6 @@ function newTabString(name) { return StringBundle.GetStringFromName('newtab.' + 
  */
 var Transformation = {
 	/**
-	   * Returns the width of the left and top border of a cell. We need to take it
-	   * into account when measuring and comparing site and cell positions.
-	   */
-	get _cellBorderWidths() {
-		let cstyle = window.getComputedStyle(Grid.cells[0].node, null);
-		let widths = {
-			left: parseInt(cstyle.getPropertyValue('border-left-width')),
-			top: parseInt(cstyle.getPropertyValue('border-top-width'))
-		};
-
-		// Cache this value, overwrite the getter.
-		Object.defineProperty(this, '_cellBorderWidths',
-		{value: widths, enumerable: true});
-
-		return widths;
-	},
-
-	/**
 	   * Gets a DOM node's position.
 	   * @param node The DOM node.
 	   * @return A Rect instance with the position.
@@ -123,13 +105,14 @@ var Transformation = {
 		if (this._isFrozen(site))
 			return;
 
+		let first = Grid.cells[0].position;
 		let style = site.node.style;
-		let comp = getComputedStyle(site.node, null);
-		style.width = comp.getPropertyValue('width');
-		style.height = comp.getPropertyValue('height');
+		style.width = first.width + 'px';
+		style.height = first.height + 'px';
 
 		site.node.setAttribute('frozen', 'true');
-		this.setSitePosition(site, this.getNodePosition(site.node));
+		site.index = site.cell.index;
+		this.setSitePosition(site, Grid.cells[site.index].position);
 	},
 
 	/**
@@ -143,6 +126,7 @@ var Transformation = {
 		let style = site.node.style;
 		style.left = style.top = style.width = style.height = '';
 		site.node.removeAttribute('frozen');
+		delete site.index;
 	},
 
 	/**
@@ -154,11 +138,8 @@ var Transformation = {
 	   *        callback - the callback to call when finished
 	   */
 	slideSiteTo: function Transformation_slideSiteTo(site, target, options) {
-		let currentPosition = this.getNodePosition(site.node);
-		let targetPosition = this.getNodePosition(target.node);
-		let callback = options && options.callback;
-
 		let self = this;
+		let callback = options && options.callback;
 
 		function finish() {
 			if (options && options.unfreeze)
@@ -168,16 +149,14 @@ var Transformation = {
 				callback();
 		}
 
-		// We need to take the width of a cell's border into account.
-		targetPosition.left += this._cellBorderWidths.left;
-		targetPosition.top += this._cellBorderWidths.top;
+		let currentIndex = 'index' in site ? site.index : site.cell.index;
 
 		// Nothing to do here if the positions already match.
-		if (currentPosition.left == targetPosition.left &&
-		currentPosition.top == targetPosition.top) {
+		if (currentIndex == target.index) {
 			finish();
 		} else {
-			this.setSitePosition(site, targetPosition);
+			this.setSitePosition(site, target.position);
+			site.index = target.index;
 			this._whenTransitionEnded(site.node, ['left', 'top'], finish);
 		}
 	},
@@ -275,7 +254,10 @@ var Transformation = {
 	   */
 	_moveSite: function Transformation_moveSite(site, index, options) {
 		this.freezeSitePosition(site);
-		this.slideSiteTo(site, Grid.cells[index], options);
+		requestAnimationFrame(function() {
+			// Do this at the end of the event loop to ensure a CSS change happens.
+			Transformation.slideSiteTo(site, Grid.cells[index], options);
+		});
 	},
 
 	/**
@@ -313,6 +295,8 @@ var Page = {
 			this._init();
 
 		this._updateAttributes(enabled);
+
+		addEventListener('resize', Grid.cacheCellPositions);
 	},
 
 	/**
@@ -556,6 +540,14 @@ var Grid = {
 		// (Re-)initialize all cells.
 		let cellElements = this.node.querySelectorAll('.newtab-cell');
 		this._cells = Array.map(cellElements, cell => new Cell(this, cell));
+
+		requestAnimationFrame(this.cacheCellPositions);
+	},
+
+	cacheCellPositions: function Grid_cacheCellPositions() {
+		for (let c of Grid.cells) {
+			c.position = Transformation.getNodePosition(c.node);
+		}
 	},
 
 	/**
@@ -1050,7 +1042,10 @@ var Drag = {
 		this._cellWidth = cellNode.offsetWidth;
 		this._cellHeight = cellNode.offsetHeight;
 
-		Transformation.freezeSitePosition(site);
+		let style = site.node.style;
+		style.width = this._cellWidth + 'px';
+		style.height = this._cellHeight + 'px';
+		site.node.setAttribute('frozen', 'true');
 	},
 
 	/**
@@ -1076,6 +1071,8 @@ var Drag = {
 
 		// Update the drag image's position.
 		Transformation.setSitePosition(site, {left: left, top: top});
+		this._cellLeft = left;
+		this._cellTop = top;
 	},
 
 	/**
@@ -1088,9 +1085,12 @@ var Drag = {
 		for (let i = 0; i < nodes.length; i++)
 			nodes[i].removeAttribute('dragged');
 
-		// Slide the dragged site back into its cell (may be the old or the new cell).
-		Transformation.slideSiteTo(site, site.cell, {unfreeze: true});
+		// Slide the dragged site back into its cell if it didn't move.
+		// Transformation_rearrangeSites will fix it if it did move.
+		if (!Drop._lastDropTarget || Drop._lastDropTarget.index === site.cell.index)
+			Transformation.slideSiteTo(site, site.cell, {unfreeze: true});
 
+		Drop._lastDropTarget = null;
 		this._draggedSite = null;
 	},
 
@@ -1487,7 +1487,7 @@ var DropTargetShim = {
 		let minHeight = Drag.cellHeight / 2;
 
 		let cellPositions = this._getCellPositions();
-		let rect = Transformation.getNodePosition(Drag.draggedSite.node);
+		let rect = new Rect(Drag._cellLeft, Drag._cellTop, Drag.cellWidth, Drag.cellHeight);
 
 		// Compare each cell's position to the dragged site's position.
 		for (let i = 0; i < cellPositions.length; i++) {
@@ -1510,8 +1510,10 @@ var DropTargetShim = {
 		if (this._cellPositions)
 			return this._cellPositions;
 
-		return this._cellPositions = Grid.cells.map(function(cell) { // jshint ignore:line
-			return {cell: cell, rect: Transformation.getNodePosition(cell.node)};
+		return this._cellPositions = Grid.cells.filter(function(cell) { // jshint ignore:line
+			return !cell.node.hasAttribute('dragged');
+		}).map(function(cell) {
+			return {cell: cell, rect: cell.position};
 		});
 	},
 

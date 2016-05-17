@@ -16,3 +16,5 @@
 <!ENTITY newtabtools.export.prefs.recent.show "Visibilité des onglets récemment fermés">
 <!ENTITY newtabtools.export.page.background "Arrière-plan">
 <!ENTITY newtabtools.export.prefs.theme "Thème">
+<!ENTITY newtabtools.export.historytiles "Browsing History Tiles Visibility">
+<!ENTITY newtabtools.export.foreground.opacity "Opacité">

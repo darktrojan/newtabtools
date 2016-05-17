@@ -16,3 +16,5 @@
 <!ENTITY newtabtools.export.prefs.recent.show "Nesen aizvērto cilņu redzamību">
 <!ENTITY newtabtools.export.page.background "Fona attēlu">
 <!ENTITY newtabtools.export.prefs.theme "Tēma">
+<!ENTITY newtabtools.export.historytiles "Browsing History Tiles Visibility">
+<!ENTITY newtabtools.export.foreground.opacity "Foreground Opacity">
