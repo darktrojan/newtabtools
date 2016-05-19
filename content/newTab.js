@@ -47,17 +47,28 @@ function inPrivateBrowsingMode() {
 var newTabTools = {
 	_previousAutocompleteString: '',
 	_previousAutocompleteResult: null,
-	autocomplete: function(input) {
-		if (!!this._previousAutocompleteString && input.value.indexOf(this._previousAutocompleteString) > -1) {
-			return;
-		}
+	autocomplete: function() {
+		let input = this.pinURLInput;
 		if (input.value.length < 2) {
 			while (this.pinURLAutocomplete.lastChild) {
 				this.pinURLAutocomplete.lastChild.remove();
 			}
 			return;
 		}
-		let urls = [];
+
+		let count = 0;
+		let urls = Array.map(this.pinURLAutocomplete.children, function(u) {
+			let v = u.textContent;
+			if (v.includes(input.value)) {
+				count++;
+			}
+			return v;
+		});
+
+		if (count > 10) {
+			return;
+		}
+
 		autocompleteService.stopSearch();
 		autocompleteService.startSearch(input.value, '', this._previousAutocompleteResult, {
 			onSearchResult: (function(s, r) {
