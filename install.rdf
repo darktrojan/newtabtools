@@ -20,6 +20,14 @@
 
 		<em:localized>
 			<Description>
+				<em:locale>ca</em:locale>
+				<em:name>Eines de pestanyes noves</em:name>
+				<em:description>Personalitza la pàgina de pestanya nova. Podeu afegir-hi més mosaics, el llançador de l’inici del Firefox o una imatge de fons. També podeu canviar els títols i les imatges dels mosaics.</em:description>
+			</Description>
+		</em:localized>
+
+		<em:localized>
+			<Description>
 				<em:locale>de</em:locale>
 				<em:name>Neuer-Tab-Tools</em:name>
 				<em:description>Passt die Neuer-Tab-Seite an. Sie können neue Schaltflächen anlegen, die Schnellstartleiste versetzen, oder ein Hintergrundbild verwenden. Außerdem sind nun die Bilder der Schaltflächen und die Titel veränderbar.</em:description>

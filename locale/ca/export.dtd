@@ -1,0 +1,20 @@
+<!ENTITY newtabtools.export.title "Eines de pestanyes noves">
+<!ENTITY newtabtools.export.header "Trieu el que s’exportarà:">
+<!ENTITY newtabtools.import.header "Trieu el que s’importarà:">
+<!ENTITY newtabtools.export.tiles.caption "Mosaics">
+<!ENTITY newtabtools.export.prefs.pinned "Mosaics fixats">
+<!ENTITY newtabtools.export.prefs.blocked "Mosaics eliminats">
+<!ENTITY newtabtools.export.prefs.gridsize "Nombre de files i columnes">
+<!ENTITY newtabtools.export.prefs.gridmargin "Marge i espaiament de la graella">
+<!ENTITY newtabtools.export.tiles.thumbs "Miniatures personalitzades">
+<!ENTITY newtabtools.export.prefs.thumbs.position "Posició de les miniatures">
+<!ENTITY newtabtools.export.annos.title "Títols dels mosaics personalitzats">
+<!ENTITY newtabtools.export.prefs.thumbs.hidebuttons "Visibilitat dels botons de les miniatures">
+<!ENTITY newtabtools.export.prefs.thumbs.hidefavicons "Visibilitat de les icones dels llocs">
+<!ENTITY newtabtools.export.page.caption "Pàgina">
+<!ENTITY newtabtools.export.prefs.launcher "Posició del llançador">
+<!ENTITY newtabtools.export.prefs.recent.show "Visibilitat de les pestanyes tancades recentment">
+<!ENTITY newtabtools.export.page.background "Fons de la pàgina">
+<!ENTITY newtabtools.export.prefs.theme "Tema">
+<!ENTITY newtabtools.export.historytiles "Visibilitat dels mosaics d’historial de navegació">
+<!ENTITY newtabtools.export.foreground.opacity "Opacitat del primer pla">
