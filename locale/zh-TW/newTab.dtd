@@ -1,4 +1,4 @@
-<!ENTITY newtabtools.options.pointer "Click here to begin customizing your new tab page">
+<!ENTITY newtabtools.options.pointer "點此來開始自訂你的新分頁">
 <!ENTITY newtabtools.page.show "顯示新分頁頁面">
 
 <!ENTITY newtabtools.pin-url.header "新增首頁磚:">
@@ -7,18 +7,18 @@
 
 <!ENTITY newtabtools.tile-header "首頁磚:">
 
-<!ENTITY newtabtools.tile-selection.previousrow.tooltip "Previous row">
-<!ENTITY newtabtools.tile-selection.previous.tooltip "Previous tile">
-<!ENTITY newtabtools.tile-selection.next.tooltip "Next tile">
-<!ENTITY newtabtools.tile-selection.nextrow.tooltip "Next row">
+<!ENTITY newtabtools.tile-selection.previousrow.tooltip "前一列">
+<!ENTITY newtabtools.tile-selection.previous.tooltip "前一塊磚">
+<!ENTITY newtabtools.tile-selection.next.tooltip "下一列">
+<!ENTITY newtabtools.tile-selection.nextrow.tooltip "下一塊磚">
 
 <!ENTITY newtabtools.tile-thumbnail.label "圖片:">
 <!ENTITY newtabtools.tile-thumbnail.placeholder "貼上圖片網址或選擇檔案">
 <!ENTITY newtabtools.tile-thumbnail.browse "瀏覽…">
 <!ENTITY newtabtools.tile-thumbnail.set "設為縮圖">
 <!ENTITY newtabtools.tile-thumbnail.remove "移除縮圖">
-<!ENTITY newtabtools.tile-thumbnail.refresh "Refresh Thumbnail">
-<!ENTITY newtabtools.tile-thumbnail.bgcolor "Background Color:">
+<!ENTITY newtabtools.tile-thumbnail.refresh "更新縮圖">
+<!ENTITY newtabtools.tile-thumbnail.bgcolor "背景顏色:">
 
 <!ENTITY newtabtools.tile-title.label "標題:">
 <!ENTITY newtabtools.tile-title.placeholder "輸入新的首頁磚標題">
@@ -34,8 +34,8 @@
 <!ENTITY newtabtools.options-header "選項:">
 
 <!-- Data collection is only enabled for en-US and en-GB users, but this might change in future. -->
-<!ENTITY newtabtools.datacollection.optin "Help improve New Tab Tools by submitting anonymous usage data">
-<!ENTITY newtabtools.datacollection.privacypolicy "Privacy Policy">
+<!ENTITY newtabtools.datacollection.optin "傳送匿名使用資料來幫助改進 New Tab Tools">
+<!ENTITY newtabtools.datacollection.privacypolicy "隱私政策">
 
 <!ENTITY newtabtools.donate.label "New Tab Tools 是由使用者的捐款資助。">
 <!ENTITY newtabtools.donate "捐款…">
