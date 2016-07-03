@@ -875,10 +875,6 @@ a {
 	color: -moz-nativehyperlinktext;
 	white-space: nowrap;
 }
-#options-datacollection {
-	text-align: center;
-	margin: 1em 0;
-}
 #options-donate-wrap {
 	border: 1px #b2aeaa solid !important;
 	background-color: #f9f9f9;

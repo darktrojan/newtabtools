@@ -27,10 +27,9 @@ XPCOMUtils.defineLazyGetter(this, 'strings', function() {
 	return Services.strings.createBundle('chrome://newtabtools/locale/newTabTools.properties');
 });
 
-/* globals GridPrefs, NewTabToolsDataCollector, NewTabToolsExporter, NewTabToolsLinks,
+/* globals GridPrefs, NewTabToolsExporter, NewTabToolsLinks,
 	NewTabURL, OS, PageThumbs, Task, TileData */
 XPCOMUtils.defineLazyModuleGetter(this, 'GridPrefs', 'chrome://newtabtools/content/newTabTools.jsm');
-XPCOMUtils.defineLazyModuleGetter(this, 'NewTabToolsDataCollector', 'chrome://newtabtools/content/dataCollection.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'NewTabToolsExporter', 'chrome://newtabtools/content/export.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'NewTabToolsLinks', 'chrome://newtabtools/content/newTabTools.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'NewTabURL', 'resource:///modules/NewTabURL.jsm');
@@ -88,7 +87,6 @@ function startup(params, reason) {
 	defaultPrefs.setIntPref('rows', 3);
 	defaultPrefs.setIntPref('columns', 3);
 	defaultPrefs.setIntPref('donationreminder', 0);
-	defaultPrefs.setBoolPref('datacollection.optin', false);
 	defaultPrefs.setCharPref('grid.margin', 'small small small small');
 	defaultPrefs.setCharPref('grid.spacing', 'small');
 	defaultPrefs.setBoolPref('historytiles.show', true);
@@ -187,7 +185,6 @@ function shutdown(params, reason) {
 	Services.obs.removeObserver(optionsObserver, 'addon-options-displayed');
 	Cu.unload('chrome://newtabtools/content/export.jsm');
 	Cu.unload('chrome://newtabtools/content/newTabTools.jsm');
-	Cu.unload('chrome://newtabtools/content/dataCollection.jsm');
 
 	expirationFilter.cleanup();
 	messageListener.destroy();
@@ -230,12 +227,6 @@ function uiStartup(params, reason) {
 			);
 		}, reason == APP_STARTUP ? 1000 : 0);
 	}
-
-	if (NewTabToolsDataCollector.active && NewTabToolsDataCollector.shouldReport) {
-		NewTabToolsDataCollector.initReport();
-	} else {
-		Cu.unload('chrome://newtabtools/content/dataCollection.jsm');
-	}
 }
 
 var prefObserver = {
@@ -255,7 +246,6 @@ var prefObserver = {
 		case 'browser.newtabpage.pinned':
 			NewTabToolsLinks._getLinksCache = null;
 			break;
-		case 'datacollection.optin':
 		case 'grid.margin':
 		case 'grid.spacing':
 		case 'launcher':
