@@ -91,6 +91,7 @@ function startup(params, reason) {
 	defaultPrefs.setCharPref('grid.spacing', 'small');
 	defaultPrefs.setBoolPref('historytiles.show', true);
 	defaultPrefs.setIntPref('launcher', 3);
+	defaultPrefs.setBoolPref('locked', false);
 	defaultPrefs.setBoolPref('optionspointershown', false);
 	defaultPrefs.setBoolPref('recent.show', true);
 	defaultPrefs.setCharPref('theme', 'light');

@@ -429,7 +429,7 @@ var newTabTools = {
 		document.querySelector('[name="recent.show"]').checked = showRecent;
 		this.trimRecent();
 
-		if ('Grid' in window) {
+		if ('Grid' in window && 'cacheCellPositions' in Grid) {
 			requestAnimationFrame(Grid.cacheCellPositions);
 		}
 	},

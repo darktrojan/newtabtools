@@ -721,11 +721,15 @@ Cell.prototype = {
 	handleEvent: function Cell_handleEvent(event) {
 		// We're not responding to external drag/drop events
 		// when our parent window is in private browsing mode.
-		if (inPrivateBrowsingMode() && !Drag.draggedSite)
+		if (inPrivateBrowsingMode() && !Drag.draggedSite) {
 			return;
-
-		if (event.type != 'dragexit' && !Drag.isValid(event))
+		}
+		if (event.type != 'dragexit' && !Drag.isValid(event)) {
 			return;
+		}
+		if (GridPrefs.gridLocked) {
+			return;
+		}
 
 		switch (event.type) {
 		case 'dragenter':
@@ -978,7 +982,11 @@ Site.prototype = {
 			this._speculativeConnect();
 			break;
 		case 'dragstart':
-			Drag.start(this, event);
+			if (GridPrefs.gridLocked) {
+				event.preventDefault();
+			} else {
+				Drag.start(this, event);
+			}
 			break;
 		case 'dragend':
 			Drag.end(this, event);
@@ -1362,6 +1370,10 @@ var DropTargetShim = {
 	   * Handles all shim events.
 	   */
 	handleEvent: function(event) {
+		if (GridPrefs.gridLocked) {
+			return;
+		}
+
 		switch (event.type) {
 		case 'dragstart':
 			this._dragstart(event);

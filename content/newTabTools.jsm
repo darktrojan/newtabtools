@@ -73,6 +73,7 @@ var NewTabToolsLinks = {
 var GridPrefs = {
 	PREF_ROWS: 'extensions.newtabtools.rows',
 	PREF_COLUMNS: 'extensions.newtabtools.columns',
+	PREF_LOCKED: 'extensions.newtabtools.locked',
 
 	_gridRows: null,
 	get gridRows() {
@@ -88,15 +89,23 @@ var GridPrefs = {
 		}
 		return this._gridColumns;
 	},
+	_gridLocked: false,
+	get gridLocked() {
+		return this._gridLocked;
+	},
 	init: function GridPrefs_init() {
 		Services.prefs.addObserver(GridPrefs.PREF_ROWS, this, true);
 		Services.prefs.addObserver(GridPrefs.PREF_COLUMNS, this, true);
+		this._gridLocked = Services.prefs.getBoolPref(GridPrefs.PREF_LOCKED);
+		Services.prefs.addObserver(GridPrefs.PREF_LOCKED, this, true);
 	},
 	observe: function GridPrefs_observe(subject, topic, data) {
 		if (data == GridPrefs.PREF_ROWS) {
 			this._gridRows = null;
-		} else {
+		} else if (data == GridPrefs.PREF_COLUMNS) {
 			this._gridColumns = null;
+		} else {
+			this._gridLocked = Services.prefs.getBoolPref(GridPrefs.PREF_LOCKED);
 		}
 	},
 	QueryInterface: XPCOMUtils.generateQI([Ci.nsIObserver, Ci.nsISupportsWeakReference]),
