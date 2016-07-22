@@ -19,6 +19,7 @@
 <!ENTITY newtabtools.options.historytiles "Tiles from your browsing history">
 <!ENTITY newtabtools.options.recent "Recently closed tabs">
 <!ENTITY newtabtools.options.thumb-buttons "&quot;Pin Tile&quot; and &quot;Remove Tile&quot; buttons">
+<!ENTITY newtabtools.options.locked "Prevent tiles being dragged">
 <!ENTITY newtabtools.options.favicons "Site icons">
 <!ENTITY newtabtools.options.thumb-contain "Whole thumbnail in tiles">
 <!ENTITY newtabtools.export "Export Settings&#x2026;">

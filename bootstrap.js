@@ -250,6 +250,7 @@ var prefObserver = {
 		case 'grid.margin':
 		case 'grid.spacing':
 		case 'launcher':
+		case 'locked':
 		case 'foreground.opacity':
 		case 'theme':
 		case 'thumbs.contain':

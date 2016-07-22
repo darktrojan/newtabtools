@@ -393,6 +393,9 @@ var newTabTools = {
 		document.querySelector('[name="thumbs.hidebuttons"]').checked = !hideButtons;
 		document.documentElement.classList[hideButtons ? 'add' : 'remove']('hideButtons');
 
+		let locked = this.prefs.getBoolPref('locked');
+		document.querySelector('[name="locked"]').checked = locked;
+
 		let hideFavicons = this.prefs.getBoolPref('thumbs.hidefavicons');
 		document.querySelector('[name="thumbs.hidefavicons"]').checked = !hideFavicons;
 		document.documentElement.classList[hideFavicons ? 'add' : 'remove']('hideFavicons');
