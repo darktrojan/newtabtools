@@ -19,6 +19,7 @@
 <!ENTITY newtabtools.options.historytiles "Blocos do histórico de navegação">
 <!ENTITY newtabtools.options.recent "Abas fechadas recentemente">
 <!ENTITY newtabtools.options.thumb-buttons "Botões 'Fixar Bloco' e 'Remover Bloco'">
+<!ENTITY newtabtools.options.locked "Prevenir que blocos sejam arrastados">
 <!ENTITY newtabtools.options.favicons "Ícones de sites">
 <!ENTITY newtabtools.options.thumb-contain "Miniatura inteira nos blocos">
 <!ENTITY newtabtools.export "Exportar configurações…">
