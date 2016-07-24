@@ -19,6 +19,7 @@
 <!ENTITY newtabtools.options.historytiles "Tiles from your browsing history">
 <!ENTITY newtabtools.options.recent "Onlangs gesloten tabbladen">
 <!ENTITY newtabtools.options.thumb-buttons "&quot;Tegel vastzetten&quot;- en &quot;Tegel verwijderen&quot;-knoppen">
+<!ENTITY newtabtools.options.locked "Prevent tiles being dragged">
 <!ENTITY newtabtools.options.favicons "Websitepictogrammen (favicons)">
 <!ENTITY newtabtools.options.thumb-contain "Gehele minatuurafbeelding op tegels">
 <!ENTITY newtabtools.export "Voorkeuren exporteren…">

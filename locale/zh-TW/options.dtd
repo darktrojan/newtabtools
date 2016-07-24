@@ -19,6 +19,7 @@
 <!ENTITY newtabtools.options.historytiles "從歷史紀錄產生首頁磚">
 <!ENTITY newtabtools.options.recent "最近關閉的分頁">
 <!ENTITY newtabtools.options.thumb-buttons "釘選首頁磚並移除首頁磚按鈕">
+<!ENTITY newtabtools.options.locked "Prevent tiles being dragged">
 <!ENTITY newtabtools.options.favicons "網站圖示">
 <!ENTITY newtabtools.options.thumb-contain "在首頁磚顯示整個縮圖">
 <!ENTITY newtabtools.export "匯出設定…">

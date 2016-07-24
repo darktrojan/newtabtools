@@ -19,6 +19,7 @@
 <!ENTITY newtabtools.options.historytiles "Elementi no pārlūkošanas vēstures">
 <!ENTITY newtabtools.options.recent "Nesen aizvērtās cilnes">
 <!ENTITY newtabtools.options.thumb-buttons "Pogas &quot;Piespraust&quot; un &quot;Noņemt&quot; elementu">
+<!ENTITY newtabtools.options.locked "Prevent tiles being dragged">
 <!ENTITY newtabtools.options.favicons "Vietņu ikonas">
 <!ENTITY newtabtools.options.thumb-contain "Viss sīktēls elementā">
 <!ENTITY newtabtools.export "Eksportēt iestatījumus">

@@ -19,6 +19,7 @@
 <!ENTITY newtabtools.options.historytiles "Tiles from your browsing history">
 <!ENTITY newtabtools.options.recent "Закрытые вкладки">
 <!ENTITY newtabtools.options.thumb-buttons "Кнопки Закрепления и Удаления плиток">
+<!ENTITY newtabtools.options.locked "Prevent tiles being dragged">
 <!ENTITY newtabtools.options.favicons "Иконки сайтов">
 <!ENTITY newtabtools.options.thumb-contain "Изображения плиток во весь размер">
 <!ENTITY newtabtools.export "Экспортировать Настройки…">

@@ -19,6 +19,7 @@
 <!ENTITY newtabtools.options.historytiles "Tiles from your browsing history">
 <!ENTITY newtabtools.options.recent "Mostra le schede chiuse di recente">
 <!ENTITY newtabtools.options.thumb-buttons "Mostra i pulsanti blocca e rimuovi riquadro">
+<!ENTITY newtabtools.options.locked "Prevent tiles being dragged">
 <!ENTITY newtabtools.options.favicons "Mostra le icone dei siti">
 <!ENTITY newtabtools.options.thumb-contain "Mostra l'anteprima completa nei riquadri">
 <!ENTITY newtabtools.export "Esporta opzioni…">

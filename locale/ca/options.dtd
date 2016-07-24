@@ -19,6 +19,7 @@
 <!ENTITY newtabtools.options.historytiles "Mosaics de l’historial de navegació">
 <!ENTITY newtabtools.options.recent "Pestanyes tancades recentment">
 <!ENTITY newtabtools.options.thumb-buttons "Botons per fixar i eliminar els mosaics">
+<!ENTITY newtabtools.options.locked "Prevent tiles being dragged">
 <!ENTITY newtabtools.options.favicons "Icones dels llocs">
 <!ENTITY newtabtools.options.thumb-contain "Tota la mimiatura en els mosaics">
 <!ENTITY newtabtools.export "Paràmetres d’exportació…">

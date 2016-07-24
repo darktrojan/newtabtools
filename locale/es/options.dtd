@@ -19,6 +19,7 @@
 <!ENTITY newtabtools.options.historytiles "Contenedores desde tu historial">
 <!ENTITY newtabtools.options.recent "Pestañas cerradas recientemente">
 <!ENTITY newtabtools.options.thumb-buttons "Botones &quot;Fijar&quot; y &quot;Soltar&quot;">
+<!ENTITY newtabtools.options.locked "Prevent tiles being dragged">
 <!ENTITY newtabtools.options.favicons "Iconos de Sitios">
 <!ENTITY newtabtools.options.thumb-contain "No recortar miniatura">
 <!ENTITY newtabtools.export "Exportar configuración…">

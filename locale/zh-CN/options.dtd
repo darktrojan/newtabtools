@@ -19,6 +19,7 @@
 <!ENTITY newtabtools.options.historytiles "基于浏览记录的磁贴">
 <!ENTITY newtabtools.options.recent "最近关闭的标签页">
 <!ENTITY newtabtools.options.thumb-buttons "显示“固定磁贴”和“移除磁贴”按钮">
+<!ENTITY newtabtools.options.locked "Prevent tiles being dragged">
 <!ENTITY newtabtools.options.favicons "网站图标">
 <!ENTITY newtabtools.options.thumb-contain "磁贴中应显示完整缩略图">
 <!ENTITY newtabtools.export "导出设置…">

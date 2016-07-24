@@ -19,6 +19,7 @@
 <!ENTITY newtabtools.options.historytiles "Πλακίδια απο το ιστορικό περιήγησης">
 <!ENTITY newtabtools.options.recent "Πρόσφατα Κλεισμένες Καρτέλες">
 <!ENTITY newtabtools.options.thumb-buttons "Καρφίτσωμα Πλακιδίου και Αφαίρεση Κουμπιών Πλακιδίου">
+<!ENTITY newtabtools.options.locked "Prevent tiles being dragged">
 <!ENTITY newtabtools.options.favicons "Εικονίδια Ιστοσελίδων">
 <!ENTITY newtabtools.options.thumb-contain "Ολόκληρη Μικρογραφία στα Πλακίδια">
 <!ENTITY newtabtools.export "Εξαγωγή Ρυθμίσεων…">
