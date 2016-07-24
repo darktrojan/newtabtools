@@ -1,0 +1,44 @@
+<!ENTITY newtabtools.options.pointer "Kattintson ide az új lap oldal személyre szabásának megkezdéséhez">
+<!ENTITY newtabtools.page.show "Mutassa az új lap oldalt">
+
+<!ENTITY newtabtools.pin-url.header "Csempe hozzáadása:">
+<!ENTITY newtabtools.pin-url.placeholder "Adjon meg vagy válasszon egy webcímet">
+<!ENTITY newtabtools.pin-url.button "Hozzáadás">
+
+<!ENTITY newtabtools.tile-header "Csempék:">
+
+<!ENTITY newtabtools.tile-selection.previousrow.tooltip "Előző sor">
+<!ENTITY newtabtools.tile-selection.previous.tooltip "Előző csempe">
+<!ENTITY newtabtools.tile-selection.next.tooltip "Következő csempe">
+<!ENTITY newtabtools.tile-selection.nextrow.tooltip "Következő sor">
+
+<!ENTITY newtabtools.tile-thumbnail.label "Kép:">
+<!ENTITY newtabtools.tile-thumbnail.placeholder "Illessze be egy kép webcímét vagy válasszon ki egy fájlt">
+<!ENTITY newtabtools.tile-thumbnail.browse "Kiválasztás…">
+<!ENTITY newtabtools.tile-thumbnail.set "Beállítás">
+<!ENTITY newtabtools.tile-thumbnail.remove "Eltávolítás">
+<!ENTITY newtabtools.tile-thumbnail.refresh "Előnézeti kép frissítése">
+<!ENTITY newtabtools.tile-thumbnail.bgcolor "Háttérszín:">
+
+<!ENTITY newtabtools.tile-title.label "Felirat:">
+<!ENTITY newtabtools.tile-title.placeholder "Adjon meg egy új csempefeliratot">
+<!ENTITY newtabtools.tile-title.set "Beállítás">
+<!ENTITY newtabtools.tile-title.reset "Visszaállítás">
+
+<!ENTITY newtabtools.bg-header "Oldal háttérképe:">
+<!ENTITY newtabtools.bg.placeholder "Illessze be egy kép webcímét vagy válasszon ki egy fájlt">
+<!ENTITY newtabtools.bg.browse "Kiválasztás…">
+<!ENTITY newtabtools.bg.set "Beállítás">
+<!ENTITY newtabtools.bg.remove "Eltávolítás">
+
+<!ENTITY newtabtools.options-header "Beállítások:">
+
+<!-- Data collection is only enabled for en-US and en-GB users, but this might change in future. -->
+<!ENTITY newtabtools.datacollection.optin "A New Tab Tools fejlesztésének támogatása névtelen használati adatok küldésével">
+<!ENTITY newtabtools.datacollection.privacypolicy "Adatvédelmi irányelvek">
+
+<!ENTITY newtabtools.donate.label "A New Tab Tools-t a felhasználói adományok finanszírozzák.">
+<!ENTITY newtabtools.donate "Adományozás…">
+<!ENTITY newtabtools.github "New Tab Tools a GitHub-on">
+
+<!ENTITY newtabtools.recently-closed-tabs "Nemrég bezárt lapok:">

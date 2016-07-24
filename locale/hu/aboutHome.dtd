@@ -1,0 +1,10 @@
+<!ENTITY abouthome.bookmarksButton.label "Könyvjelzők">
+<!ENTITY abouthome.historyButton.label "Előzmények">
+<!-- The label for the preferences/options item on about:home on Windows -->
+<!ENTITY abouthome.preferencesButtonWin.label "Beállítások">
+<!-- The label for the preferences/options item on about:home on Linux and OS X -->
+<!ENTITY abouthome.preferencesButtonUnix.label "Beállítások">
+<!ENTITY abouthome.addonsButton.label "Kiegészítők">
+<!ENTITY abouthome.appsButton.label "Marketplace">
+<!ENTITY abouthome.downloadsButton.label "Letöltések">
+<!ENTITY abouthome.syncButton.label "Sync">

@@ -60,6 +60,14 @@
 
 		<em:localized>
 			<Description>
+				<em:locale>hu</em:locale>
+				<em:name>New Tab Tools</em:name>
+				<em:description>Személyre szabja az új lap oldalt. Hozzáadhat további csempéket, a Firefox start gyorsindítóját, vagy egy háttérképet. Megadhat új csempeképeket és feliratokat.</em:description>
+			</Description>
+		</em:localized>
+
+		<em:localized>
+			<Description>
 				<em:locale>it</em:locale>
 				<em:name>New Tab Tools</em:name>
 				<em:description>Personalizza la pagina nuova scheda. Puoi aggiungere più riquadri, la barra di avvio di Firefox, o un'immagine di sfondo. Ed è possibile impostare nuove immagini nei riquadri e nuovi titoli.</em:description>
