@@ -19,6 +19,7 @@
 <!ENTITY newtabtools.options.historytiles "Плочки от историята на сърфиране">
 <!ENTITY newtabtools.options.recent "Последно затворени раздели">
 <!ENTITY newtabtools.options.thumb-buttons "&quot;Закачи&quot; и &quot;Премахни&quot; Бутони">
+<!ENTITY newtabtools.options.locked "Забрани влачене на плочките">
 <!ENTITY newtabtools.options.favicons "Иконки на сайтове">
 <!ENTITY newtabtools.options.thumb-contain "Цялата миниатюра в плочката">
 <!ENTITY newtabtools.export "Настроки за експортиране…">
