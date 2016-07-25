@@ -16,5 +16,5 @@
 <!ENTITY newtabtools.export.prefs.recent.show "“最近关闭的标签页”可见性">
 <!ENTITY newtabtools.export.page.background "页面背景">
 <!ENTITY newtabtools.export.prefs.theme "主题">
-<!ENTITY newtabtools.export.historytiles "Browsing History Tiles Visibility">
+<!ENTITY newtabtools.export.historytiles "浏览历史磁贴可见性">
 <!ENTITY newtabtools.export.foreground.opacity "前景不透明度">
