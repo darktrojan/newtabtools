@@ -16,10 +16,10 @@
 <!ENTITY newtabtools.options.launcher.left "Слева">
 <!ENTITY newtabtools.options.launcher.right "Справа">
 <!ENTITY newtabtools.options.thumb-titlesize "Размер названия плитки">
-<!ENTITY newtabtools.options.historytiles "Tiles from your browsing history">
+<!ENTITY newtabtools.options.historytiles "Плитки из истории браузера">
 <!ENTITY newtabtools.options.recent "Закрытые вкладки">
 <!ENTITY newtabtools.options.thumb-buttons "Кнопки Закрепления и Удаления плиток">
-<!ENTITY newtabtools.options.locked "Prevent tiles being dragged">
+<!ENTITY newtabtools.options.locked "Предотвратить перетаскивание плиток">
 <!ENTITY newtabtools.options.favicons "Иконки сайтов">
 <!ENTITY newtabtools.options.thumb-contain "Изображения плиток во весь размер">
 <!ENTITY newtabtools.export "Экспортировать Настройки…">
