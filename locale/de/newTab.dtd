@@ -1,23 +1,23 @@
-<!ENTITY newtabtools.options.pointer "Click here to begin customizing your new tab page">
+<!ENTITY newtabtools.options.pointer "Klick hier um die Neuer-Tab-Seite anzupassen">
 <!ENTITY newtabtools.page.show "Seite für neuen Tab anzeigen">
 
-<!ENTITY newtabtools.pin-url.header "Schaltfläche hinzufügen:">
+<!ENTITY newtabtools.pin-url.header "Kachel hinzufügen:">
 <!ENTITY newtabtools.pin-url.placeholder "Adresse eingeben oder auswählen">
 <!ENTITY newtabtools.pin-url.button "Hinzufügen">
 
-<!ENTITY newtabtools.tile-header "Schaltflächen:">
+<!ENTITY newtabtools.tile-header "Kacheln:">
 
-<!ENTITY newtabtools.tile-selection.previousrow.tooltip "Previous row">
-<!ENTITY newtabtools.tile-selection.previous.tooltip "Previous tile">
-<!ENTITY newtabtools.tile-selection.next.tooltip "Next tile">
-<!ENTITY newtabtools.tile-selection.nextrow.tooltip "Next row">
+<!ENTITY newtabtools.tile-selection.previousrow.tooltip "Vorherige Reihe">
+<!ENTITY newtabtools.tile-selection.previous.tooltip "Vorheriger Titel">
+<!ENTITY newtabtools.tile-selection.next.tooltip "Nächster Titel">
+<!ENTITY newtabtools.tile-selection.nextrow.tooltip "Nächste Reihe">
 
 <!ENTITY newtabtools.tile-thumbnail.label "Bild:">
 <!ENTITY newtabtools.tile-thumbnail.placeholder "Bild-Link einfügen oder nach einer Datei suchen">
 <!ENTITY newtabtools.tile-thumbnail.browse "Suchen…">
 <!ENTITY newtabtools.tile-thumbnail.set "Übernehmen">
 <!ENTITY newtabtools.tile-thumbnail.remove "Entfernen">
-<!ENTITY newtabtools.tile-thumbnail.refresh "Refresh Thumbnail">
+<!ENTITY newtabtools.tile-thumbnail.refresh "Miniaturbilder aktualisieren">
 <!ENTITY newtabtools.tile-thumbnail.bgcolor "Hintergrundfarbe:">
 
 <!ENTITY newtabtools.tile-title.label "Titel:">
@@ -34,8 +34,8 @@
 <!ENTITY newtabtools.options-header "Einstellungen:">
 
 <!-- Data collection is only enabled for en-US and en-GB users, but this might change in future. -->
-<!ENTITY newtabtools.datacollection.optin "Help improve New Tab Tools by submitting anonymous usage data">
-<!ENTITY newtabtools.datacollection.privacypolicy "Privacy Policy">
+<!ENTITY newtabtools.datacollection.optin "Hilf mit durch die Übermittlung anonymer Nutzungsstatistiken Neuer-Tab-Tools zu verbessern">
+<!ENTITY newtabtools.datacollection.privacypolicy "Datenschutzerklärung">
 
 <!ENTITY newtabtools.donate.label "Neuer-Tab-Tools wird durch Spenden finanziert.">
 <!ENTITY newtabtools.donate "Spenden…">

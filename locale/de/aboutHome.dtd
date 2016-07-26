@@ -5,6 +5,6 @@
 <!-- The label for the preferences/options item on about:home on Linux and OS X -->
 <!ENTITY abouthome.preferencesButtonUnix.label "Einstellungen">
 <!ENTITY abouthome.addonsButton.label "Add-ons">
-<!ENTITY abouthome.appsButton.label "Marketplace">
+<!ENTITY abouthome.appsButton.label "Marktplatz">
 <!ENTITY abouthome.downloadsButton.label "Downloads">
-<!ENTITY abouthome.syncButton.label "Sync">
+<!ENTITY abouthome.syncButton.label "Synchronisieren">
