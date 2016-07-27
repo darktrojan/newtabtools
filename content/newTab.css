@@ -861,10 +861,6 @@ th, td {
 	margin-inline-end: 4px;
 	vertical-align: middle;
 }
-.preferences-alignment {
-	min-height: 30px;
-	align-items: center;
-}
 input[type="range"] {
 	width: 200px;
 }
