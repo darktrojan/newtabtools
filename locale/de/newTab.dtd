@@ -8,8 +8,8 @@
 <!ENTITY newtabtools.tile-header "Kacheln:">
 
 <!ENTITY newtabtools.tile-selection.previousrow.tooltip "Vorherige Reihe">
-<!ENTITY newtabtools.tile-selection.previous.tooltip "Vorheriger Titel">
-<!ENTITY newtabtools.tile-selection.next.tooltip "Nächster Titel">
+<!ENTITY newtabtools.tile-selection.previous.tooltip "Vorherige Kachel">
+<!ENTITY newtabtools.tile-selection.next.tooltip "Nächste Kachel">
 <!ENTITY newtabtools.tile-selection.nextrow.tooltip "Nächste Reihe">
 
 <!ENTITY newtabtools.tile-thumbnail.label "Bild:">
