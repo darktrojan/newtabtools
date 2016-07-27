@@ -1,14 +1,14 @@
 <!ENTITY newtabtools.export.title "Neuer-Tab-Tools">
 <!ENTITY newtabtools.export.header "Zum Exportieren auswählen:">
 <!ENTITY newtabtools.import.header "Zum Importieren auswählen:">
-<!ENTITY newtabtools.export.tiles.caption "Schaltflächen">
-<!ENTITY newtabtools.export.prefs.pinned "Angeheftete Schaltflächen">
-<!ENTITY newtabtools.export.prefs.blocked "Entfernte Schaltflächen">
-<!ENTITY newtabtools.export.prefs.gridsize "Anzahl der Reihen und Spaltern">
+<!ENTITY newtabtools.export.tiles.caption "Kacheln">
+<!ENTITY newtabtools.export.prefs.pinned "Angeheftete Kacheln">
+<!ENTITY newtabtools.export.prefs.blocked "Entfernte Kacheln">
+<!ENTITY newtabtools.export.prefs.gridsize "Anzahl der Reihen und Spalten">
 <!ENTITY newtabtools.export.prefs.gridmargin "Raster-Abstände und Rand">
 <!ENTITY newtabtools.export.tiles.thumbs "Angepasste Miniaturbilder">
 <!ENTITY newtabtools.export.prefs.thumbs.position "Position der Miniaturbilder">
-<!ENTITY newtabtools.export.annos.title "Angepasste Schaltflächentitel">
+<!ENTITY newtabtools.export.annos.title "Angepasste Kacheltitel">
 <!ENTITY newtabtools.export.prefs.thumbs.hidebuttons "Miniaturbild-Knöpfe">
 <!ENTITY newtabtools.export.prefs.thumbs.hidefavicons "Seitenlogos">
 <!ENTITY newtabtools.export.page.caption "Seite">
@@ -16,5 +16,5 @@
 <!ENTITY newtabtools.export.prefs.recent.show "Geschlossene Tabs">
 <!ENTITY newtabtools.export.page.background "Hintergrund">
 <!ENTITY newtabtools.export.prefs.theme "Design">
-<!ENTITY newtabtools.export.historytiles "Browsing History Tiles Visibility">
-<!ENTITY newtabtools.export.foreground.opacity "Foreground Opacity">
+<!ENTITY newtabtools.export.historytiles "Sichtbarkeit der Kacheln aus der Chronik">
+<!ENTITY newtabtools.export.foreground.opacity "Vordergrund Deckkraft">
