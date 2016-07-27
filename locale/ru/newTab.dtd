@@ -1,5 +1,5 @@
-<!ENTITY newtabtools.options.pointer "Click here to begin customizing your new tab page">
-<!ENTITY newtabtools.page.show "Show the new tab page">
+<!ENTITY newtabtools.options.pointer "Нажмите здесь, чтобы начать настройку вашей страницы новой вкладки">
+<!ENTITY newtabtools.page.show "Показать страницу новой вкладки">
 
 <!ENTITY newtabtools.pin-url.header "Добавить плитку:">
 <!ENTITY newtabtools.pin-url.placeholder "Введите или выберите ссылку из списка">
@@ -34,8 +34,8 @@
 <!ENTITY newtabtools.options-header "Опции:">
 
 <!-- Data collection is only enabled for en-US and en-GB users, but this might change in future. -->
-<!ENTITY newtabtools.datacollection.optin "Help improve New Tab Tools by submitting anonymous usage data">
-<!ENTITY newtabtools.datacollection.privacypolicy "Privacy Policy">
+<!ENTITY newtabtools.datacollection.optin "Помогите улучшить New Tab Tools путем представления анонимных данных об использовании">
+<!ENTITY newtabtools.datacollection.privacypolicy "Политика конфиденциальности">
 
 <!ENTITY newtabtools.donate.label "New Tab Tools финансируется за счет пожертвований пользователей.">
 <!ENTITY newtabtools.donate "Пожертвовать…">
