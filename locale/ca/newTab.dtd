@@ -33,7 +33,7 @@
 
 <!ENTITY newtabtools.options-header "Paràmetres:">
 
-<!-- Data collection is only enabled for en-US and en-GB users, but this might change in future. -->
+<!-- Data collection is not currently active, but this might change in future. -->
 <!ENTITY newtabtools.datacollection.optin "Envieu dades anònimes d’ús i ajudeu a millorar les Eines de pestanyes noves">
 <!ENTITY newtabtools.datacollection.privacypolicy "Política de privadesa">
 

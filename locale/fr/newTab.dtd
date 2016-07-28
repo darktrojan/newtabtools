@@ -33,7 +33,7 @@
 
 <!ENTITY newtabtools.options-header "Options :">
 
-<!-- Data collection is only enabled for en-US and en-GB users, but this might change in future. -->
+<!-- Data collection is not currently active, but this might change in future. -->
 <!ENTITY newtabtools.datacollection.optin "Aidez-nous à améliorer New Tab Tools en acceptant l'envoi de statistiques anonymes sur votre utilisation du module.">
 <!ENTITY newtabtools.datacollection.privacypolicy "Politique de confidentialité">
 
