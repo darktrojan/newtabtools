@@ -16,5 +16,5 @@
 <!ENTITY newtabtools.export.prefs.recent.show "Видимость закрытых вкладок">
 <!ENTITY newtabtools.export.page.background "Фоновое изображение">
 <!ENTITY newtabtools.export.prefs.theme "Выбор темы оформления">
-<!ENTITY newtabtools.export.historytiles "Browsing History Tiles Visibility">
+<!ENTITY newtabtools.export.historytiles "Отображать плитки из истории браузера">
 <!ENTITY newtabtools.export.foreground.opacity "Непрозрачность">
