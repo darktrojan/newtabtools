@@ -717,14 +717,14 @@ var newTabTools = {
 		c.addEventListener('keyup', keyUpHandler);
 	}
 	newTabTools.launcher.addEventListener('click', newTabTools.launcherOnClick, false);
-	newTabTools.setThumbnailInput.addEventListener('keyup', function() {
+	newTabTools.setThumbnailInput.addEventListener('input', function() {
 		newTabTools.setThumbnailButton.disabled = !/^(file|ftp|http|https):\/\//.exec(this.value);
 	});
 	newTabTools.setBgColourInput.addEventListener('change', function() {
 		newTabTools.setBgColourDisplay.style.backgroundColor = this.value;
 		newTabTools.setBgColourButton.disabled = false;
 	});
-	newTabTools.setBackgroundInput.addEventListener('keyup', function() {
+	newTabTools.setBackgroundInput.addEventListener('input', function() {
 		newTabTools.setBackgroundButton.disabled = !/^(file|ftp|http|https):\/\//.exec(this.value);
 	});
 	window.addEventListener('keypress', function(event) {
