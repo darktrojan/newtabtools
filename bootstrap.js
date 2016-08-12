@@ -570,6 +570,7 @@ var messageListener = {
 	_processScriptURL: 'chrome://newtabtools/content/process.js?' + Math.random(),
 	init: function() {
 		Services.ppmm.loadProcessScript(this._processScriptURL, true);
+		Services.ppmm.broadcastAsyncMessage('NewTabTools:enable');
 	},
 	destroy: function() {
 		Services.ppmm.removeDelayedProcessScript(this._processScriptURL, true);
