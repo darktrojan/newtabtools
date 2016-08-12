@@ -27,8 +27,9 @@ XPCOMUtils.defineLazyGetter(this, 'strings', function() {
 	return Services.strings.createBundle('chrome://newtabtools/locale/newTabTools.properties');
 });
 
-/* globals GridPrefs, NewTabToolsExporter, NewTabToolsLinks,
+/* globals CustomizableUI, GridPrefs, NewTabToolsExporter, NewTabToolsLinks,
 	NewTabURL, OS, PageThumbs, Task, TileData */
+XPCOMUtils.defineLazyModuleGetter(this, 'CustomizableUI', 'resource:///modules/CustomizableUI.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'GridPrefs', 'chrome://newtabtools/content/newTabTools.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'NewTabToolsExporter', 'chrome://newtabtools/content/export.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'NewTabToolsLinks', 'chrome://newtabtools/content/newTabTools.jsm');
@@ -158,6 +159,17 @@ function startup(params, reason) {
 	}
 	userPrefs.setCharPref('version', params.version);
 
+	CustomizableUI.createWidget({
+		id: 'newtabtools-capture-thumb-widget',
+		defaultArea: CustomizableUI.AREA_PANEL,
+		label: strings.GetStringFromName('toolsmenu.captureThumbnail'),
+		tooltiptext: strings.GetStringFromName('toolsmenu.captureThumbnail'),
+		onCommand: function(event) {
+			let win = event.view;
+			PageThumbs.captureAndStore(win.gBrowser.selectedBrowser);
+		}
+	});
+
 	if (reason == APP_STARTUP) {
 		Services.obs.addObserver({
 			observe: function() {
@@ -189,6 +201,8 @@ function shutdown(params, reason) {
 
 	expirationFilter.cleanup();
 	messageListener.destroy();
+
+	CustomizableUI.destroyWidget('newtabtools-capture-thumb-widget');
 
 	try {
 		idleService.removeIdleObserver(idleObserver, IDLE_TIMEOUT);
@@ -311,6 +325,7 @@ var notificationObserver = {
 };
 
 var windowObserver = {
+	ICON_CSS_PIDATA: 'href="chrome://newtabtools/content/browser.css" type="text/css"',
 	observe: function(subject) {
 		subject.addEventListener('load', function() {
 			windowObserver.paint(subject);
@@ -371,11 +386,12 @@ var windowObserver = {
 			menuitem.id = 'newtabtools-capture';
 			menuitem.setAttribute('label', strings.GetStringFromName('toolsmenu.captureThumbnail'));
 			menuitem.addEventListener('command', function() {
-				win.setTimeout(function() {
-					PageThumbs.captureAndStore(win.gBrowser.selectedBrowser);
-				}, 1000);
+				PageThumbs.captureAndStore(win.gBrowser.selectedBrowser);
 			});
 			doc.getElementById('menu_ToolsPopup').appendChild(menuitem);
+
+			let pi = doc.createProcessingInstruction('xml-stylesheet', this.ICON_CSS_PIDATA);
+			doc.insertBefore(pi, doc.getElementById('main-window'));
 		}
 	},
 	unpaint: function(win) {
@@ -390,6 +406,13 @@ var windowObserver = {
 			}
 
 			doc.getElementById('newtabtools-capture').remove();
+
+			for (let node of doc.childNodes) {
+				if (node.nodeType == doc.PROCESSING_INSTRUCTION_NODE && node.data == this.ICON_CSS_PIDATA) {
+					doc.removeChild(node);
+					break;
+				}
+			}
 
 			win.gBrowserThumbnails.__defineGetter__('_topSiteURLs', win.gBrowserThumbnails.__oldTopSiteURLs);
 			delete win.gBrowserThumbnails.__oldTopSiteURLs;

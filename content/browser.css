@@ -1,0 +1,7 @@
+#newtabtools-capture-thumb-widget {
+	list-style-image: url("chrome://newtabtools/content/capture16.svg");
+}
+#newtabtools-capture-thumb-widget[cui-areatype="menu-panel"],
+toolbarpaletteitem[place="palette"] > #newtabtools-capture-thumb-widget {
+	list-style-image: url("chrome://newtabtools/content/capture32.svg");
+}
