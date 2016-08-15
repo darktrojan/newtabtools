@@ -815,12 +815,9 @@ button.arrow {
 	transform: rotate(-90deg);
 }
 #options-thumbnail {
-	width: 200px;
-	height: 150px;
 	margin: 0 auto;
 	opacity: 1;
 	position: static;
-	flex: 1;
 }
 #options-url {
 	display: block;

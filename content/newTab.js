@@ -252,8 +252,8 @@ var newTabTools = {
 			Grid.setThumbnailPrefs();
 			break;
 		case 'number':
-			ThumbnailPrefs.hasBeenSet = false;
-			// Prefs set by grid redrawing itself.
+			ThumbnailPrefs.hasBeenSet = false; // Prefs set by grid redrawing itself.
+			requestAnimationFrame(this.resizeOptionsThumbnail.bind(this));
 			/* falls through */
 		case 'range':
 			this.prefs.setIntPref(event.originalTarget.name, parseInt(event.originalTarget.value, 10));
@@ -447,6 +447,10 @@ var newTabTools = {
 		if ('Grid' in window && 'cacheCellPositions' in Grid) {
 			requestAnimationFrame(Grid.cacheCellPositions);
 		}
+
+		if (!document.documentElement.hasAttribute('options-hidden')) {
+			this.resizeOptionsThumbnail();
+		}
 	},
 	updateGridPrefs: function() {
 		document.querySelector('[name="rows"]').value = GridPrefs.gridRows;
@@ -639,6 +643,7 @@ var newTabTools = {
 			this.prefs.setBoolPref('optionspointershown', true);
 			document.documentElement.removeAttribute('options-hidden');
 			this.selectedSiteIndex = 0;
+			this.resizeOptionsThumbnail();
 			this.pinURLInput.focus();
 		} else {
 			this.hideOptions();
@@ -646,6 +651,17 @@ var newTabTools = {
 	},
 	hideOptions: function() {
 		document.documentElement.setAttribute('options-hidden', 'true');
+	},
+	resizeOptionsThumbnail: function() {
+		let node = Grid._cells[0]._node.querySelector('.newtab-thumbnail');
+		let ratio = node.offsetWidth / node.offsetHeight;
+		if (ratio > 1.6666) {
+			this.siteThumbnail.style.width = '250px';
+			this.siteThumbnail.style.height = 250 / ratio + 'px';
+		} else {
+			this.siteThumbnail.style.width = 150 * ratio + 'px';
+			this.siteThumbnail.style.height = '150px';
+		}
 	}
 };
 
