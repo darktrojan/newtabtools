@@ -8,21 +8,26 @@ let listener = {
 		'NewTabTools:disable'
 	],
 	init: function() {
-		addMessageListener('NewTabTools:enable', this);
+		this.enable();
 	},
+	// NewTabTools:enable is broadcast to all processes at startup, to counteract any broadcasts
+	// of NewTabTools:disable from the shutdown of a previous version. This function might run
+	// twice in a row, so we need to make sure any effects aren't doubled.
 	enable: function() {
 		for (let m of this._messages) {
 			addMessageListener(m, this);
 		}
 
-		PageThumbUtils._oldGetContentSize = PageThumbUtils.getContentSize;
-		PageThumbUtils.getContentSize = function(window) {
-			let [width, height] = PageThumbUtils._oldGetContentSize(window);
-			return [
-				Math.min(16384, width),
-				Math.min(16384, height + window.scrollMaxY)
-			];
-		};
+		if (typeof PageThumbUtils._oldGetContentSize != 'function') {
+			PageThumbUtils._oldGetContentSize = PageThumbUtils.getContentSize;
+			PageThumbUtils.getContentSize = function(window) {
+				let [width, height] = PageThumbUtils._oldGetContentSize(window);
+				return [
+					Math.min(16384, width),
+					Math.min(16384, height + window.scrollMaxY)
+				];
+			};
+		}
 	},
 	disable: function() {
 		for (let m of this._messages) {
