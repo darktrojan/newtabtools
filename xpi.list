@@ -2,6 +2,9 @@ bootstrap.js
 chrome.manifest
 content
 content/arrow.svg
+content/browser.css
+content/capture16.svg
+content/capture32.svg
 content/close.svg
 content/controls.png
 content/controls@2x.png
