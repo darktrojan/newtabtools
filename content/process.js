@@ -24,7 +24,7 @@ let listener = {
 			];
 		};
 	},
-	destroy: function() {
+	disable: function() {
 		for (let m of this._messages) {
 			removeMessageListener(m, this);
 		}
@@ -44,7 +44,7 @@ let listener = {
 			delete PageThumbUtils._thumbnailHeight;
 			break;
 		case 'NewTabTools:disable':
-			this.destroy();
+			this.disable();
 			break;
 		}
 	}
