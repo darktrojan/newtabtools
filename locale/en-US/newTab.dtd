@@ -12,12 +12,15 @@
 <!ENTITY newtabtools.tile-selection.next.tooltip "Next tile">
 <!ENTITY newtabtools.tile-selection.nextrow.tooltip "Next row">
 
-<!ENTITY newtabtools.tile-thumbnail.label "Image:">
-<!ENTITY newtabtools.tile-thumbnail.placeholder "Paste an image URL or browse to choose a file">
-<!ENTITY newtabtools.tile-thumbnail.browse "Browse&#x2026;">
-<!ENTITY newtabtools.tile-thumbnail.set "Set">
+<!ENTITY newtabtools.tile-thumbnail.label2 "Page Thumbnail:">
+<!ENTITY newtabtools.tile-thumbnail.refresh2 "Refresh">
 <!ENTITY newtabtools.tile-thumbnail.remove "Remove">
-<!ENTITY newtabtools.tile-thumbnail.refresh "Refresh thumbnail">
+<!ENTITY newtabtools.tile-thumbnail.save "Save">
+
+<!ENTITY newtabtools.tile-savedthumb.label "Saved image:">
+<!ENTITY newtabtools.tile-savedthumb.placeholder "Paste an image URL or browse to choose a file">
+<!ENTITY newtabtools.tile-savedthumb.browse "Browse&#x2026;">
+<!ENTITY newtabtools.tile-savedthumb.set "Set">
 <!ENTITY newtabtools.tile-thumbnail.bgcolor "Background color:">
 
 <!ENTITY newtabtools.tile-title.label "Title:">

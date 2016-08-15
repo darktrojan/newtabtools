@@ -13,9 +13,9 @@
 <!ENTITY newtabtools.tile-selection.nextrow.tooltip "Következő sor">
 
 <!ENTITY newtabtools.tile-thumbnail.label "Kép:">
-<!ENTITY newtabtools.tile-thumbnail.placeholder "Illessze be egy kép webcímét vagy válasszon ki egy fájlt">
-<!ENTITY newtabtools.tile-thumbnail.browse "Kiválasztás…">
-<!ENTITY newtabtools.tile-thumbnail.set "Beállítás">
+<!ENTITY newtabtools.tile-savedthumb.placeholder "Illessze be egy kép webcímét vagy válasszon ki egy fájlt">
+<!ENTITY newtabtools.tile-savedthumb.browse "Kiválasztás…">
+<!ENTITY newtabtools.tile-savedthumb.set "Beállítás">
 <!ENTITY newtabtools.tile-thumbnail.remove "Eltávolítás">
 <!ENTITY newtabtools.tile-thumbnail.refresh "Előnézeti kép frissítése">
 <!ENTITY newtabtools.tile-thumbnail.bgcolor "Háttérszín:">

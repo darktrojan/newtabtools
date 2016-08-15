@@ -13,9 +13,9 @@
 <!ENTITY newtabtools.tile-selection.nextrow.tooltip "Rangée inférieure">
 
 <!ENTITY newtabtools.tile-thumbnail.label "Image :">
-<!ENTITY newtabtools.tile-thumbnail.placeholder "Collez l'URL d'une image ou sélectionnez un fichier">
-<!ENTITY newtabtools.tile-thumbnail.browse "Parcourir…">
-<!ENTITY newtabtools.tile-thumbnail.set "Appliquer">
+<!ENTITY newtabtools.tile-savedthumb.placeholder "Collez l'URL d'une image ou sélectionnez un fichier">
+<!ENTITY newtabtools.tile-savedthumb.browse "Parcourir…">
+<!ENTITY newtabtools.tile-savedthumb.set "Appliquer">
 <!ENTITY newtabtools.tile-thumbnail.remove "Supprimer">
 <!ENTITY newtabtools.tile-thumbnail.refresh "Rafraîchir">
 <!ENTITY newtabtools.tile-thumbnail.bgcolor "Couleur de fond :">

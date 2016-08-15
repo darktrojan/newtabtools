@@ -13,9 +13,9 @@
 <!ENTITY newtabtools.tile-selection.nextrow.tooltip "Επόμενη σειρά">
 
 <!ENTITY newtabtools.tile-thumbnail.label "Εικόνα:">
-<!ENTITY newtabtools.tile-thumbnail.placeholder "URL εικόνας ή αναζητήστε τοπικά το αρχείο εικόνας">
-<!ENTITY newtabtools.tile-thumbnail.browse "Αναζήτηση…">
-<!ENTITY newtabtools.tile-thumbnail.set "Εφαρμογή">
+<!ENTITY newtabtools.tile-savedthumb.placeholder "URL εικόνας ή αναζητήστε τοπικά το αρχείο εικόνας">
+<!ENTITY newtabtools.tile-savedthumb.browse "Αναζήτηση…">
+<!ENTITY newtabtools.tile-savedthumb.set "Εφαρμογή">
 <!ENTITY newtabtools.tile-thumbnail.remove "Αφαίρεση">
 <!ENTITY newtabtools.tile-thumbnail.refresh "Ανανέωση Μικρογραφίας">
 <!ENTITY newtabtools.tile-thumbnail.bgcolor "Χρώμα Φόντου:">

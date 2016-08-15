@@ -13,9 +13,9 @@
 <!ENTITY newtabtools.tile-selection.nextrow.tooltip "Riga sucessiva">
 
 <!ENTITY newtabtools.tile-thumbnail.label "Immagine:">
-<!ENTITY newtabtools.tile-thumbnail.placeholder "Incolla un indirizzo web o sfoglia tra i file immagine">
-<!ENTITY newtabtools.tile-thumbnail.browse "Sfoglia…">
-<!ENTITY newtabtools.tile-thumbnail.set "Imposta">
+<!ENTITY newtabtools.tile-savedthumb.placeholder "Incolla un indirizzo web o sfoglia tra i file immagine">
+<!ENTITY newtabtools.tile-savedthumb.browse "Sfoglia…">
+<!ENTITY newtabtools.tile-savedthumb.set "Imposta">
 <!ENTITY newtabtools.tile-thumbnail.remove "Rimuovi">
 <!ENTITY newtabtools.tile-thumbnail.refresh "Aggiorna icona">
 <!ENTITY newtabtools.tile-thumbnail.bgcolor "Colore di sfondo:">

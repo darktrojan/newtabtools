@@ -13,9 +13,9 @@
 <!ENTITY newtabtools.tile-selection.nextrow.tooltip "Следващ ред">
 
 <!ENTITY newtabtools.tile-thumbnail.label "Изображение:">
-<!ENTITY newtabtools.tile-thumbnail.placeholder "Поставете URL на изображението или изберете файл">
-<!ENTITY newtabtools.tile-thumbnail.browse "Преглед…">
-<!ENTITY newtabtools.tile-thumbnail.set "Задай">
+<!ENTITY newtabtools.tile-savedthumb.placeholder "Поставете URL на изображението или изберете файл">
+<!ENTITY newtabtools.tile-savedthumb.browse "Преглед…">
+<!ENTITY newtabtools.tile-savedthumb.set "Задай">
 <!ENTITY newtabtools.tile-thumbnail.remove "Премахни">
 <!ENTITY newtabtools.tile-thumbnail.refresh "Обнови миниатюра">
 <!ENTITY newtabtools.tile-thumbnail.bgcolor "Фонов цвят:">

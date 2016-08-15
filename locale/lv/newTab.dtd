@@ -13,9 +13,9 @@
 <!ENTITY newtabtools.tile-selection.nextrow.tooltip "Nākamā rinda">
 
 <!ENTITY newtabtools.tile-thumbnail.label "Attēls:">
-<!ENTITY newtabtools.tile-thumbnail.placeholder "Ielīmējiet attēla URL vai izvēlieties failu">
-<!ENTITY newtabtools.tile-thumbnail.browse "Pārlūkot…">
-<!ENTITY newtabtools.tile-thumbnail.set "Iestatīt">
+<!ENTITY newtabtools.tile-savedthumb.placeholder "Ielīmējiet attēla URL vai izvēlieties failu">
+<!ENTITY newtabtools.tile-savedthumb.browse "Pārlūkot…">
+<!ENTITY newtabtools.tile-savedthumb.set "Iestatīt">
 <!ENTITY newtabtools.tile-thumbnail.remove "Noņemt">
 <!ENTITY newtabtools.tile-thumbnail.refresh "Atsvaidzināt">
 <!ENTITY newtabtools.tile-thumbnail.bgcolor "Fona krāsa:">

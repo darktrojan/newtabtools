@@ -13,9 +13,9 @@
 <!ENTITY newtabtools.tile-selection.nextrow.tooltip "Próxima linha">
 
 <!ENTITY newtabtools.tile-thumbnail.label "Imagem:">
-<!ENTITY newtabtools.tile-thumbnail.placeholder "Cole a URL da imagem ou escolha um arquivo">
-<!ENTITY newtabtools.tile-thumbnail.browse "Procurar…">
-<!ENTITY newtabtools.tile-thumbnail.set "Definir">
+<!ENTITY newtabtools.tile-savedthumb.placeholder "Cole a URL da imagem ou escolha um arquivo">
+<!ENTITY newtabtools.tile-savedthumb.browse "Procurar…">
+<!ENTITY newtabtools.tile-savedthumb.set "Definir">
 <!ENTITY newtabtools.tile-thumbnail.remove "Remover">
 <!ENTITY newtabtools.tile-thumbnail.refresh "Atualizar Miniatura">
 <!ENTITY newtabtools.tile-thumbnail.bgcolor "Cor de Fundo:">

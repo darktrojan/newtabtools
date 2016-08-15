@@ -150,32 +150,40 @@ var newTabTools = {
 		case 'options-next-row-tile':
 			this.selectedSiteIndex = (this._selectedSiteIndex + GridPrefs.gridColumns) % Grid.cells.length;
 			break;
-		case 'options-thumbnail-browse':
+		case 'options-thumb-refresh':
+			event.originalTarget.disabled = true;
+			SavedThumbs.forceReloadThumbnail(this.selectedSite.url).then(function() {
+				event.originalTarget.disabled = false;
+			});
+			break;
+		case 'options-thumb-remove':
+			this.removeThumbnail(this.selectedSite, false);
+			break;
+		case 'options-thumb-save':
+			SavedThumbs.getThumbnailURL(this.selectedSite.url).then(thumbnailURL => {
+				this.setThumbnail(this.selectedSite, thumbnailURL);
+			});
+			break;
+		case 'options-savedthumb-browse':
 		case 'options-bg-browse':
 			let fp = Cc['@mozilla.org/filepicker;1'].createInstance(Ci.nsIFilePicker);
 			fp.init(window, document.title, Ci.nsIFilePicker.modeOpen);
 			fp.appendFilters(Ci.nsIFilePicker.filterImages);
 			if (fp.show() == Ci.nsIFilePicker.returnOK) {
-				if (id == 'options-thumbnail-browse') {
-					this.setThumbnailInput.value = fp.fileURL.spec;
-					newTabTools.setThumbnailButton.disabled = false;
+				if (id == 'options-savedthumb-browse') {
+					this.setSavedThumbInput.value = fp.fileURL.spec;
+					newTabTools.setSavedThumbButton.disabled = false;
 				} else {
 					this.setBackgroundInput.value = fp.fileURL.spec;
 					newTabTools.setBackgroundButton.disabled = false;
 				}
 			}
 			break;
-		case 'options-thumbnail-set':
-			this.setThumbnail(this.selectedSite, this.setThumbnailInput.value);
+		case 'options-savedthumb-set':
+			this.setThumbnail(this.selectedSite, this.setSavedThumbInput.value);
 			break;
-		case 'options-thumbnail-remove':
-			this.setThumbnail(this.selectedSite, null);
-			break;
-		case 'options-thumbnail-refresh':
-			event.originalTarget.disabled = true;
-			SavedThumbs.forceReloadThumbnail(this.selectedSite.url).then(function() {
-				event.originalTarget.disabled = false;
-			});
+		case 'options-savedthumb-remove':
+			this.removeThumbnail(this.selectedSite, true);
 			break;
 		case 'options-bgcolor-displaybutton':
 			this.setBgColourInput.click();
@@ -301,21 +309,6 @@ var newTabTools = {
 			file.remove(true);
 		}
 
-		if (!src) {
-			if (!existed) {
-				path = PageThumbsStorage.getFilePathForURL(site.url);
-				file = FileUtils.File(path);
-				if (file.exists()) {
-					file.permissions = 0644;
-					file.remove(true);
-				}
-			}
-
-			SavedThumbs.removeSavedThumb(site.url, leafName);
-			this.removeThumbnailButton.blur();
-			return;
-		}
-
 		let image = new Image();
 		image.onload = function() {
 			let [thumbnailWidth, thumbnailHeight] = PageThumbUtils.getThumbnailSize();
@@ -333,7 +326,7 @@ var newTabTools = {
 				let reader = new FileReader();
 				reader.onloadend = function() {
 					let inputStream = Cc['@mozilla.org/io/arraybuffer-input-stream;1']
-					.createInstance(Ci.nsIArrayBufferInputStream);
+						.createInstance(Ci.nsIArrayBufferInputStream);
 					inputStream.setData(reader.result, 0, reader.result.byteLength);
 					let outputStream = FileUtils.openSafeFileOutputStream(file);
 					NetUtil.asyncCopy(inputStream, outputStream, function() {
@@ -345,6 +338,25 @@ var newTabTools = {
 			}, 'image/png');
 		};
 		image.src = src;
+	},
+	removeThumbnail: function(site, saved) {
+		let leafName = SavedThumbs.getThumbnailLeafName(site.url);
+		if (saved) {
+			SavedThumbs.removeSavedThumb(site.url, leafName);
+			this.removeSavedThumbButton.blur();
+		} else {
+			let path = PageThumbsStorage.getFilePathForURL(site.url);
+			let file = FileUtils.File(path);
+			if (file.exists()) {
+				file.permissions = 0644;
+				file.remove(true);
+			}
+			site.refreshThumbnail();
+			this.siteThumbnail.style.backgroundImage = null;
+			this.removeThumbButton.blur();
+			this.removeThumbButton.disabled =
+				this.saveThumbButton.disabled = true;
+		}
 	},
 	setTitle: function(site, title) {
 		TileData.set(site.url, 'title', title);
@@ -560,9 +572,9 @@ var newTabTools = {
 		let site = this.selectedSite;
 		let disabled = site == null;
 
-		this.setThumbnailInput.value = '';
-		this.browseThumbnailButton.disabled =
-			this.setThumbnailInput.disabled =
+		this.setSavedThumbInput.value = '';
+		this.browseSavedThumbButton.disabled =
+			this.setSavedThumbInput.disabled =
 			this.setTitleInput.disabled =
 			this.setTitleButton.disabled =
 			this.setBgColourDisplay.parentNode.disabled = disabled;
@@ -573,8 +585,10 @@ var newTabTools = {
 				this.setBgColourDisplay.style.backgroundColor = null;
 			this.siteURL.textContent = this.strings.GetStringFromName('tileurl.empty');
 			this.setTitleInput.value = '';
-			this.removeThumbnailButton.disabled =
-				this.captureThumbnailButton.disabled =
+			this.captureThumbButton.disabled =
+				this.removeThumbButton.disabled =
+				this.saveThumbButton.disabled =
+				this.removeSavedThumbButton.disabled =
 				this.setBgColourButton.disabled =
 				this.resetBgColourButton.disabled =
 				this.resetTitleButton.disabled = true;
@@ -584,14 +598,18 @@ var newTabTools = {
 		SavedThumbs.getThumbnailURL(site.url).then((thumbnail) => {
 			this.siteThumbnail.style.backgroundImage = 'url("' + thumbnail + '")';
 			if (thumbnail.startsWith('file:')) {
-				this.removeThumbnailButton.disabled = false;
-				this.captureThumbnailButton.disabled = true;
+				this.captureThumbButton.disabled =
+					this.removeThumbButton.disabled =
+					this.saveThumbButton.disabled = true;
+				this.removeSavedThumbButton.disabled = false;
 				this.siteThumbnail.classList.add('custom-thumbnail');
 			} else {
 				OS.File.exists(PageThumbsStorage.getFilePathForURL(site.url)).then((exists) => {
-					this.removeThumbnailButton.disabled = !exists;
-					this.captureThumbnailButton.disabled = false;
+					this.captureThumbButton.disabled = false;
+					this.removeThumbButton.disabled =
+						this.saveThumbButton.disabled = !exists;
 				});
+				this.removeSavedThumbButton.disabled = true;
 				this.siteThumbnail.classList.remove('custom-thumbnail');
 			}
 		});
@@ -667,11 +685,13 @@ var newTabTools = {
 		'tileNextRow': 'options-next-row-tile',
 		'siteThumbnail': 'options-thumbnail',
 		'siteURL': 'options-url',
-		'browseThumbnailButton': 'options-thumbnail-browse',
-		'setThumbnailInput': 'options-thumbnail-input',
-		'setThumbnailButton': 'options-thumbnail-set',
-		'removeThumbnailButton': 'options-thumbnail-remove',
-		'captureThumbnailButton': 'options-thumbnail-refresh',
+		'captureThumbButton': 'options-thumb-refresh',
+		'removeThumbButton': 'options-thumb-remove',
+		'saveThumbButton': 'options-thumb-save',
+		'setSavedThumbInput': 'options-savedthumb-input',
+		'browseSavedThumbButton': 'options-savedthumb-browse',
+		'setSavedThumbButton': 'options-savedthumb-set',
+		'removeSavedThumbButton': 'options-savedthumb-remove',
 		'setBgColourInput': 'options-bgcolor-input',
 		'setBgColourDisplay': 'options-bgcolor-display',
 		'setBgColourButton': 'options-bgcolor-set',
@@ -717,8 +737,8 @@ var newTabTools = {
 		c.addEventListener('keyup', keyUpHandler);
 	}
 	newTabTools.launcher.addEventListener('click', newTabTools.launcherOnClick, false);
-	newTabTools.setThumbnailInput.addEventListener('input', function() {
-		newTabTools.setThumbnailButton.disabled = !/^(file|ftp|http|https):\/\//.exec(this.value);
+	newTabTools.setSavedThumbInput.addEventListener('input', function() {
+		newTabTools.setSavedThumbButton.disabled = !/^(file|ftp|http|https):\/\//.exec(this.value);
 	});
 	newTabTools.setBgColourInput.addEventListener('change', function() {
 		newTabTools.setBgColourDisplay.style.backgroundColor = this.value;

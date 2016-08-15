@@ -13,9 +13,9 @@
 <!ENTITY newtabtools.tile-selection.nextrow.tooltip "下一行">
 
 <!ENTITY newtabtools.tile-thumbnail.label "图片:">
-<!ENTITY newtabtools.tile-thumbnail.placeholder "贴入图片网址或选择一个文件">
-<!ENTITY newtabtools.tile-thumbnail.browse "浏览…">
-<!ENTITY newtabtools.tile-thumbnail.set "设为缩略图">
+<!ENTITY newtabtools.tile-savedthumb.placeholder "贴入图片网址或选择一个文件">
+<!ENTITY newtabtools.tile-savedthumb.browse "浏览…">
+<!ENTITY newtabtools.tile-savedthumb.set "设为缩略图">
 <!ENTITY newtabtools.tile-thumbnail.remove "移除缩略图">
 <!ENTITY newtabtools.tile-thumbnail.refresh "刷新缩略图">
 <!ENTITY newtabtools.tile-thumbnail.bgcolor "背景色:">

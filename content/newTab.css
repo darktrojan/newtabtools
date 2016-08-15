@@ -782,7 +782,7 @@ input[type="button"] {
 	flex: 1;
 }
 #options-pinURL-input,
-#options-thumbnail-input,
+#options-savedthumb-input,
 #options-title-input,
 #options-bg-input {
 	flex: 1;
@@ -833,9 +833,6 @@ button.arrow {
 }
 #options-bgcolor-input {
 	visibility: collapse;
-}
-#options-bgcolor-displaybutton {
-	margin-inline-start: 4px !important;
 }
 #options-bgcolor-display {
 	width: 24px;

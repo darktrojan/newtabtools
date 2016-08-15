@@ -13,9 +13,9 @@
 <!ENTITY newtabtools.tile-selection.nextrow.tooltip "Next row">
 
 <!ENTITY newtabtools.tile-thumbnail.label "Afbeelding:">
-<!ENTITY newtabtools.tile-thumbnail.placeholder "Plak een afbeeldings-URL of blader naar een lokaal bestand">
-<!ENTITY newtabtools.tile-thumbnail.browse "Bladeren…">
-<!ENTITY newtabtools.tile-thumbnail.set "Instellen">
+<!ENTITY newtabtools.tile-savedthumb.placeholder "Plak een afbeeldings-URL of blader naar een lokaal bestand">
+<!ENTITY newtabtools.tile-savedthumb.browse "Bladeren…">
+<!ENTITY newtabtools.tile-savedthumb.set "Instellen">
 <!ENTITY newtabtools.tile-thumbnail.remove "Verwijderen">
 <!ENTITY newtabtools.tile-thumbnail.refresh "Refresh Thumbnail">
 <!ENTITY newtabtools.tile-thumbnail.bgcolor "Background Color:">

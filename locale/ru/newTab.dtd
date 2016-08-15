@@ -12,10 +12,10 @@
 <!ENTITY newtabtools.tile-selection.next.tooltip "Следующая плитка">
 <!ENTITY newtabtools.tile-selection.nextrow.tooltip "Следующая строка">
 
-<!ENTITY newtabtools.tile-thumbnail.label "Изображение плитки:                                                                          ">
-<!ENTITY newtabtools.tile-thumbnail.placeholder "Вставьте ссылку на изображение или выберите файл">
-<!ENTITY newtabtools.tile-thumbnail.browse "Выбрать…">
-<!ENTITY newtabtools.tile-thumbnail.set "Применить">
+<!ENTITY newtabtools.tile-thumbnail.label "Изображение плитки:">
+<!ENTITY newtabtools.tile-savedthumb.placeholder "Вставьте ссылку на изображение или выберите файл">
+<!ENTITY newtabtools.tile-savedthumb.browse "Выбрать…">
+<!ENTITY newtabtools.tile-savedthumb.set "Применить">
 <!ENTITY newtabtools.tile-thumbnail.remove "Удалить">
 <!ENTITY newtabtools.tile-thumbnail.refresh "Обновить">
 <!ENTITY newtabtools.tile-thumbnail.bgcolor "Цвет фона:">

@@ -13,9 +13,9 @@
 <!ENTITY newtabtools.tile-selection.nextrow.tooltip "Fila següent">
 
 <!ENTITY newtabtools.tile-thumbnail.label "Imatge:">
-<!ENTITY newtabtools.tile-thumbnail.placeholder "Enganxeu un URL d’imatge o navegueu per trobar un fitxer">
-<!ENTITY newtabtools.tile-thumbnail.browse "Navega…">
-<!ENTITY newtabtools.tile-thumbnail.set "Estableix">
+<!ENTITY newtabtools.tile-savedthumb.placeholder "Enganxeu un URL d’imatge o navegueu per trobar un fitxer">
+<!ENTITY newtabtools.tile-savedthumb.browse "Navega…">
+<!ENTITY newtabtools.tile-savedthumb.set "Estableix">
 <!ENTITY newtabtools.tile-thumbnail.remove "Elimina">
 <!ENTITY newtabtools.tile-thumbnail.refresh "Actualitza la miniatura">
 <!ENTITY newtabtools.tile-thumbnail.bgcolor "Color del fons:">
