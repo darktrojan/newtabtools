@@ -259,7 +259,7 @@ var prefObserver = {
 		switch (data) {
 		case 'browser.newtabpage.blocked':
 		case 'browser.newtabpage.pinned':
-			NewTabToolsLinks._getLinksCache = null;
+			NewTabToolsLinks.clearCache();
 			break;
 		case 'grid.margin':
 		case 'grid.spacing':
@@ -288,13 +288,13 @@ var prefObserver = {
 			});
 			break;
 		case 'filter':
-			NewTabToolsLinks._getLinksCache = null;
+			NewTabToolsLinks.clearCache();
 			enumerateTabs(function(win) {
 				win.Updater.updateGrid();
 			});
 			break;
 		case 'historytiles.show':
-			NewTabToolsLinks._getLinksCache = null;
+			NewTabToolsLinks.clearCache();
 			enumerateTabs(function(win) {
 				win.newTabTools.updateUI();
 				win.Updater.fastUpdateGrid();

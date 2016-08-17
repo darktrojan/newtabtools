@@ -67,6 +67,9 @@ var NewTabToolsLinks = {
 
 		this._getLinksCache = finalLinks;
 		return finalLinks;
+	},
+	clearCache: function() {
+		this._getLinksCache = null;
 	}
 };
 
