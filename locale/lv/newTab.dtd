@@ -12,12 +12,15 @@
 <!ENTITY newtabtools.tile-selection.next.tooltip "Nākamā">
 <!ENTITY newtabtools.tile-selection.nextrow.tooltip "Nākamā rinda">
 
-<!ENTITY newtabtools.tile-thumbnail.label "Attēls:">
+<!ENTITY newtabtools.tile-thumbnail.label2 "Page Thumbnail:">
+<!ENTITY newtabtools.tile-thumbnail.refresh2 "Refresh">
+<!ENTITY newtabtools.tile-thumbnail.remove "Noņemt">
+<!ENTITY newtabtools.tile-thumbnail.save "Save">
+
+<!ENTITY newtabtools.tile-savedthumb.label "Saved image:">
 <!ENTITY newtabtools.tile-savedthumb.placeholder "Ielīmējiet attēla URL vai izvēlieties failu">
 <!ENTITY newtabtools.tile-savedthumb.browse "Pārlūkot…">
 <!ENTITY newtabtools.tile-savedthumb.set "Iestatīt">
-<!ENTITY newtabtools.tile-thumbnail.remove "Noņemt">
-<!ENTITY newtabtools.tile-thumbnail.refresh "Atsvaidzināt">
 <!ENTITY newtabtools.tile-thumbnail.bgcolor "Fona krāsa:">
 
 <!ENTITY newtabtools.tile-title.label "Nosaukums:">

@@ -12,12 +12,15 @@
 <!ENTITY newtabtools.tile-selection.next.tooltip "Következő csempe">
 <!ENTITY newtabtools.tile-selection.nextrow.tooltip "Következő sor">
 
-<!ENTITY newtabtools.tile-thumbnail.label "Kép:">
+<!ENTITY newtabtools.tile-thumbnail.label2 "Page Thumbnail:">
+<!ENTITY newtabtools.tile-thumbnail.refresh2 "Refresh">
+<!ENTITY newtabtools.tile-thumbnail.remove "Eltávolítás">
+<!ENTITY newtabtools.tile-thumbnail.save "Save">
+
+<!ENTITY newtabtools.tile-savedthumb.label "Saved image:">
 <!ENTITY newtabtools.tile-savedthumb.placeholder "Illessze be egy kép webcímét vagy válasszon ki egy fájlt">
 <!ENTITY newtabtools.tile-savedthumb.browse "Kiválasztás…">
 <!ENTITY newtabtools.tile-savedthumb.set "Beállítás">
-<!ENTITY newtabtools.tile-thumbnail.remove "Eltávolítás">
-<!ENTITY newtabtools.tile-thumbnail.refresh "Előnézeti kép frissítése">
 <!ENTITY newtabtools.tile-thumbnail.bgcolor "Háttérszín:">
 
 <!ENTITY newtabtools.tile-title.label "Felirat:">

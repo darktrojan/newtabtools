@@ -12,12 +12,15 @@
 <!ENTITY newtabtools.tile-selection.next.tooltip "Mosaic següent">
 <!ENTITY newtabtools.tile-selection.nextrow.tooltip "Fila següent">
 
-<!ENTITY newtabtools.tile-thumbnail.label "Imatge:">
+<!ENTITY newtabtools.tile-thumbnail.label2 "Page Thumbnail:">
+<!ENTITY newtabtools.tile-thumbnail.refresh2 "Refresh">
+<!ENTITY newtabtools.tile-thumbnail.remove "Elimina">
+<!ENTITY newtabtools.tile-thumbnail.save "Save">
+
+<!ENTITY newtabtools.tile-savedthumb.label "Saved image:">
 <!ENTITY newtabtools.tile-savedthumb.placeholder "Enganxeu un URL d’imatge o navegueu per trobar un fitxer">
 <!ENTITY newtabtools.tile-savedthumb.browse "Navega…">
 <!ENTITY newtabtools.tile-savedthumb.set "Estableix">
-<!ENTITY newtabtools.tile-thumbnail.remove "Elimina">
-<!ENTITY newtabtools.tile-thumbnail.refresh "Actualitza la miniatura">
 <!ENTITY newtabtools.tile-thumbnail.bgcolor "Color del fons:">
 
 <!ENTITY newtabtools.tile-title.label "Títol:">

@@ -12,12 +12,15 @@
 <!ENTITY newtabtools.tile-selection.next.tooltip "下一个磁贴">
 <!ENTITY newtabtools.tile-selection.nextrow.tooltip "下一行">
 
-<!ENTITY newtabtools.tile-thumbnail.label "图片:">
+<!ENTITY newtabtools.tile-thumbnail.label2 "Page Thumbnail:">
+<!ENTITY newtabtools.tile-thumbnail.refresh2 "Refresh">
+<!ENTITY newtabtools.tile-thumbnail.remove "移除缩略图">
+<!ENTITY newtabtools.tile-thumbnail.save "Save">
+
+<!ENTITY newtabtools.tile-savedthumb.label "Saved image:">
 <!ENTITY newtabtools.tile-savedthumb.placeholder "贴入图片网址或选择一个文件">
 <!ENTITY newtabtools.tile-savedthumb.browse "浏览…">
 <!ENTITY newtabtools.tile-savedthumb.set "设为缩略图">
-<!ENTITY newtabtools.tile-thumbnail.remove "移除缩略图">
-<!ENTITY newtabtools.tile-thumbnail.refresh "刷新缩略图">
 <!ENTITY newtabtools.tile-thumbnail.bgcolor "背景色:">
 
 <!ENTITY newtabtools.tile-title.label "标题:">

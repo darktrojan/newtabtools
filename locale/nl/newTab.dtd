@@ -12,12 +12,15 @@
 <!ENTITY newtabtools.tile-selection.next.tooltip "Next tile">
 <!ENTITY newtabtools.tile-selection.nextrow.tooltip "Next row">
 
-<!ENTITY newtabtools.tile-thumbnail.label "Afbeelding:">
+<!ENTITY newtabtools.tile-thumbnail.label2 "Page Thumbnail:">
+<!ENTITY newtabtools.tile-thumbnail.refresh2 "Refresh">
+<!ENTITY newtabtools.tile-thumbnail.remove "Verwijderen">
+<!ENTITY newtabtools.tile-thumbnail.save "Save">
+
+<!ENTITY newtabtools.tile-savedthumb.label "Saved image:">
 <!ENTITY newtabtools.tile-savedthumb.placeholder "Plak een afbeeldings-URL of blader naar een lokaal bestand">
 <!ENTITY newtabtools.tile-savedthumb.browse "Bladeren…">
 <!ENTITY newtabtools.tile-savedthumb.set "Instellen">
-<!ENTITY newtabtools.tile-thumbnail.remove "Verwijderen">
-<!ENTITY newtabtools.tile-thumbnail.refresh "Refresh Thumbnail">
 <!ENTITY newtabtools.tile-thumbnail.bgcolor "Background Color:">
 
 <!ENTITY newtabtools.tile-title.label "Titel:">

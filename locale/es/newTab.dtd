@@ -12,12 +12,15 @@
 <!ENTITY newtabtools.tile-selection.next.tooltip "Siguiente contenedor">
 <!ENTITY newtabtools.tile-selection.nextrow.tooltip "Siguiente fila">
 
-<!ENTITY newtabtools.tile-thumbnail.label "Imagen:">
+<!ENTITY newtabtools.tile-thumbnail.label2 "Page Thumbnail:">
+<!ENTITY newtabtools.tile-thumbnail.refresh2 "Refresh">
+<!ENTITY newtabtools.tile-thumbnail.remove "Eliminar">
+<!ENTITY newtabtools.tile-thumbnail.save "Save">
+
+<!ENTITY newtabtools.tile-savedthumb.label "Saved image:">
 <!ENTITY newtabtools.tile-savedthumb.placeholder "Pega el URL de la imagen o selecciona un archivo">
 <!ENTITY newtabtools.tile-savedthumb.browse "Seleccionar…">
 <!ENTITY newtabtools.tile-savedthumb.set "Fijar">
-<!ENTITY newtabtools.tile-thumbnail.remove "Eliminar">
-<!ENTITY newtabtools.tile-thumbnail.refresh "Refrescar miniatura">
 <!ENTITY newtabtools.tile-thumbnail.bgcolor "Color de fondo:">
 
 <!ENTITY newtabtools.tile-title.label "Título:">

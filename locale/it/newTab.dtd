@@ -12,12 +12,15 @@
 <!ENTITY newtabtools.tile-selection.next.tooltip "Riquadro sucessivo">
 <!ENTITY newtabtools.tile-selection.nextrow.tooltip "Riga sucessiva">
 
-<!ENTITY newtabtools.tile-thumbnail.label "Immagine:">
+<!ENTITY newtabtools.tile-thumbnail.label2 "Page Thumbnail:">
+<!ENTITY newtabtools.tile-thumbnail.refresh2 "Refresh">
+<!ENTITY newtabtools.tile-thumbnail.remove "Rimuovi">
+<!ENTITY newtabtools.tile-thumbnail.save "Save">
+
+<!ENTITY newtabtools.tile-savedthumb.label "Saved image:">
 <!ENTITY newtabtools.tile-savedthumb.placeholder "Incolla un indirizzo web o sfoglia tra i file immagine">
 <!ENTITY newtabtools.tile-savedthumb.browse "Sfoglia…">
 <!ENTITY newtabtools.tile-savedthumb.set "Imposta">
-<!ENTITY newtabtools.tile-thumbnail.remove "Rimuovi">
-<!ENTITY newtabtools.tile-thumbnail.refresh "Aggiorna icona">
 <!ENTITY newtabtools.tile-thumbnail.bgcolor "Colore di sfondo:">
 
 <!ENTITY newtabtools.tile-title.label "Icona:">

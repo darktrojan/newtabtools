@@ -12,12 +12,15 @@
 <!ENTITY newtabtools.tile-selection.next.tooltip "次のタイル">
 <!ENTITY newtabtools.tile-selection.nextrow.tooltip "下の行">
 
-<!ENTITY newtabtools.tile-thumbnail.label "画像:">
+<!ENTITY newtabtools.tile-thumbnail.label2 "Page Thumbnail:">
+<!ENTITY newtabtools.tile-thumbnail.refresh2 "Refresh">
+<!ENTITY newtabtools.tile-thumbnail.remove "削除">
+<!ENTITY newtabtools.tile-thumbnail.save "Save">
+
+<!ENTITY newtabtools.tile-savedthumb.label "Saved image:">
 <!ENTITY newtabtools.tile-savedthumb.placeholder "画像のURLを貼り付けまたは選択したファイルを参照">
 <!ENTITY newtabtools.tile-savedthumb.browse "参照…">
 <!ENTITY newtabtools.tile-savedthumb.set "設定">
-<!ENTITY newtabtools.tile-thumbnail.remove "削除">
-<!ENTITY newtabtools.tile-thumbnail.refresh "サムネイル更新">
 <!ENTITY newtabtools.tile-thumbnail.bgcolor "背景色:">
 
 <!ENTITY newtabtools.tile-title.label "タイトル:">

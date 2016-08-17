@@ -12,12 +12,15 @@
 <!ENTITY newtabtools.tile-selection.next.tooltip "下一列">
 <!ENTITY newtabtools.tile-selection.nextrow.tooltip "下一塊磚">
 
-<!ENTITY newtabtools.tile-thumbnail.label "圖片:">
+<!ENTITY newtabtools.tile-thumbnail.label2 "Page Thumbnail:">
+<!ENTITY newtabtools.tile-thumbnail.refresh2 "Refresh">
+<!ENTITY newtabtools.tile-thumbnail.remove "移除縮圖">
+<!ENTITY newtabtools.tile-thumbnail.save "Save">
+
+<!ENTITY newtabtools.tile-savedthumb.label "Saved image:">
 <!ENTITY newtabtools.tile-savedthumb.placeholder "貼上圖片網址或選擇檔案">
 <!ENTITY newtabtools.tile-savedthumb.browse "瀏覽…">
 <!ENTITY newtabtools.tile-savedthumb.set "設為縮圖">
-<!ENTITY newtabtools.tile-thumbnail.remove "移除縮圖">
-<!ENTITY newtabtools.tile-thumbnail.refresh "更新縮圖">
 <!ENTITY newtabtools.tile-thumbnail.bgcolor "背景顏色:">
 
 <!ENTITY newtabtools.tile-title.label "標題:">
