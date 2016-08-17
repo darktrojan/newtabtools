@@ -5,7 +5,7 @@
 		<em:id>newtabtools@darktrojan.net</em:id>
 		<em:name>New Tab Tools</em:name>
 		<em:description>Customizes the new tab page. You can add more tiles, the launcher from Firefox start, or a background image. And you can set new tile images and titles.</em:description>
-		<em:version>71</em:version>
+		<em:version>72</em:version>
 		<em:bootstrap>true</em:bootstrap>
 		<em:type>2</em:type>
 		<em:multiprocessCompatible>true</em:multiprocessCompatible>
