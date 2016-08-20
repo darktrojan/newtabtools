@@ -19,7 +19,7 @@
 <!ENTITY newtabtools.options.historytiles "Cases vides remplies automatiquement">
 <!ENTITY newtabtools.options.recent "Onglets récemment fermés">
 <!ENTITY newtabtools.options.thumb-buttons "Boutons Relâcher et Supprimer">
-<!ENTITY newtabtools.options.locked "Prevent tiles being dragged">
+<!ENTITY newtabtools.options.locked "Cases non déplaçables">
 <!ENTITY newtabtools.options.favicons "Favicons">
 <!ENTITY newtabtools.options.thumb-contain "Miniatures non rognées">
 <!ENTITY newtabtools.export "Exporter les paramètres…">
