@@ -5,16 +5,16 @@
 <!ENTITY newtabtools.export.prefs.pinned "Sites épinglés">
 <!ENTITY newtabtools.export.prefs.blocked "Sites supprimés">
 <!ENTITY newtabtools.export.prefs.gridsize "Nombre de lignes et de colonnes">
-<!ENTITY newtabtools.export.prefs.gridmargin "Marges">
+<!ENTITY newtabtools.export.prefs.gridmargin "Marges choisies">
 <!ENTITY newtabtools.export.tiles.thumbs "Miniatures personnelles">
-<!ENTITY newtabtools.export.prefs.thumbs.position "Options d'affichage des miniatures">
+<!ENTITY newtabtools.export.prefs.thumbs.position "État des miniatures">
 <!ENTITY newtabtools.export.annos.title "Titres personnels">
-<!ENTITY newtabtools.export.prefs.thumbs.hidebuttons "Visibilité des boutons Relâcher et Supprimer">
-<!ENTITY newtabtools.export.prefs.thumbs.hidefavicons "Visibilité des favicons">
+<!ENTITY newtabtools.export.prefs.thumbs.hidebuttons "État des boutons Relâcher et Supprimer">
+<!ENTITY newtabtools.export.prefs.thumbs.hidefavicons "État des favicons">
 <!ENTITY newtabtools.export.page.caption "Page Nouvel onglet">
 <!ENTITY newtabtools.export.prefs.launcher "Position de la barre de raccourcis">
-<!ENTITY newtabtools.export.prefs.recent.show "Visibilité des onglets récemment fermés">
+<!ENTITY newtabtools.export.prefs.recent.show "État des onglets récemment fermés">
 <!ENTITY newtabtools.export.page.background "Arrière-plan">
-<!ENTITY newtabtools.export.prefs.theme "Thème">
-<!ENTITY newtabtools.export.historytiles "Browsing History Tiles Visibility">
-<!ENTITY newtabtools.export.foreground.opacity "Opacité">
+<!ENTITY newtabtools.export.prefs.theme "Thème choisi">
+<!ENTITY newtabtools.export.historytiles "État des cases vides">
+<!ENTITY newtabtools.export.foreground.opacity "Opacité choisie">
