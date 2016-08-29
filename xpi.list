@@ -11,6 +11,8 @@ content/controls@2x.png
 content/export.jsm
 content/exportDialog.js
 content/exportDialog.xul
+content/filterDialog.js
+content/filterDialog.xul
 content/fx-newTab.js
 content/icon16.png
 content/launcher

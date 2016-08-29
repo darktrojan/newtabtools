@@ -7,9 +7,6 @@ let listener = {
 		'NewTabTools:uncacheThumbnailPrefs',
 		'NewTabTools:disable'
 	],
-	init: function() {
-		this.enable();
-	},
 	// NewTabTools:enable is broadcast to all processes at startup, to counteract any broadcasts
 	// of NewTabTools:disable from the shutdown of a previous version. This function might run
 	// twice in a row, so we need to make sure any effects aren't doubled.
@@ -54,4 +51,4 @@ let listener = {
 		}
 	}
 };
-listener.init();
+listener.enable();

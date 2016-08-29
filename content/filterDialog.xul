@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<!DOCTYPE dialog SYSTEM "chrome://newtabtools/locale/filter.dtd">
+
+<dialog title="&title;"
+		ondialogaccept="return onDialogAccept();"
+		xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	<description style="font-style: italic; margin-bottom: 1em; max-width: 450px;">&description;</description>
+	<grid flex="1">
+		<columns>
+			<column flex="2" />
+			<column flex="1" />
+			<column />
+		</columns>
+		<rows removebuttonlabel="&removebuttonlabel;">
+			<row>
+				<label class="header" value="&domainheader;" />
+				<label class="header">&countheader;</label>
+			</row>
+			<row id="addRow" style="border-top: 2px -moz-field groove; padding-top: 4px; margin: 4px 0;">
+				<textbox type="autocomplete" completeselectedindex="true" autocompletesearch="newtabtools-hosts" enablehistory="true" style="padding: 0" />
+				<textbox type="number" size="1" value="0" />
+				<button label="&addbuttonlabel;" disabled="true" oncommand="onAddClicked();" />
+			</row>
+		</rows>
+	</grid>
+	<script type="application/javascript" src="filterDialog.js" />
+</dialog>

@@ -230,6 +230,9 @@ var newTabTools = {
 				this.backgroundImageFile.remove(true);
 			Services.obs.notifyObservers(null, 'newtabtools-change', 'background');
 			break;
+		case 'historytiles-filter':
+			openDialog('chrome://newtabtools/content/filterDialog.xul', null, 'centerscreen,width=450');
+			break;
 		case 'options-donate':
 			let url = 'https://darktrojan.github.io/donate.html?newtabtools';
 			newTabTools.browserWindow.switchToTabHavingURI(url, true);
@@ -316,7 +319,11 @@ var newTabTools = {
 
 			let canvas = document.createElementNS(HTML_NAMESPACE, 'canvas');
 			canvas.mozOpaque = false;
-			canvas.mozImageSmoothingEnabled = true;
+			if ('imageSmoothingEnabled' in canvas) {
+				canvas.imageSmoothingEnabled = true;
+			} else {
+				canvas.mozImageSmoothingEnabled = true;
+			}
 			canvas.width = image.width * scale;
 			canvas.height = image.height * scale;
 			let ctx = canvas.getContext('2d');
@@ -439,6 +446,7 @@ var newTabTools = {
 
 		let showHistory = this.prefs.getBoolPref('historytiles.show');
 		document.querySelector('[name="historytiles.show"]').checked = showHistory;
+		document.getElementById('historytiles-filter').disabled = !showHistory;
 
 		let showRecent = this.prefs.getBoolPref('recent.show');
 		document.querySelector('[name="recent.show"]').checked = showRecent;

@@ -4,7 +4,7 @@ License, v. 2.0. If a copy of the MPL was not distributed with this file,
 You can obtain one at http://mozilla.org/MPL/2.0/.
 */
 /* globals APP_STARTUP, APP_SHUTDOWN, ADDON_UNINSTALL, ADDON_UPGRADE, Components */
-const { interfaces: Ci, utils: Cu } = Components;
+const { interfaces: Ci, manager: Cm, utils: Cu } = Components;
 
 const ADDON_ID = 'newtabtools@darktrojan.net';
 const EXTENSION_PREFS = 'extensions.newtabtools.';
@@ -19,7 +19,10 @@ Cu.import('resource://gre/modules/NewTabUtils.jsm');
 Cu.import('resource://gre/modules/AddonManager.jsm');
 Cu.import('resource://gre/modules/XPCOMUtils.jsm');
 
-/* globals thumbDir, strings */
+/* globals componentRegistrar, thumbDir, strings */
+XPCOMUtils.defineLazyGetter(this, 'componentRegistrar', function() {
+	return Cm.QueryInterface(Ci.nsIComponentRegistrar);
+});
 XPCOMUtils.defineLazyGetter(this, 'thumbDir', function() {
 	return OS.Path.join(OS.Constants.Path.profileDir, 'newtab-savedthumbs');
 });
@@ -44,6 +47,7 @@ XPCOMUtils.defineLazyServiceGetter(this, 'idleService', '@mozilla.org/widget/idl
 XPCOMUtils.defineLazyServiceGetter(this, 'annoService', '@mozilla.org/browser/annotation-service;1', 'nsIAnnotationService');
 XPCOMUtils.defineLazyServiceGetter(this, 'aboutNewTabService', '@mozilla.org/browser/aboutnewtab-service;1', 'nsIAboutNewTabService');
 
+let autocomplete = {};
 let userPrefs = Services.prefs.getBranch(EXTENSION_PREFS);
 
 /* exported install, uninstall, startup, shutdown */
@@ -208,6 +212,11 @@ function shutdown(params, reason) {
 		idleService.removeIdleObserver(idleObserver, IDLE_TIMEOUT);
 	} catch (e) { // might be already removed
 	}
+
+	componentRegistrar.unregisterFactory(
+		autocomplete.HostsAutoCompleteSearch.prototype.classID,
+		autocomplete.NSGetFactory(autocomplete.HostsAutoCompleteSearch.prototype.classID)
+	);
 }
 
 function uiStartup(params, reason) {
@@ -242,6 +251,14 @@ function uiStartup(params, reason) {
 			);
 		}, reason == APP_STARTUP ? 1000 : 0);
 	}
+
+	Services.scriptloader.loadSubScript(params.resourceURI.spec + 'components/autocomplete.js', autocomplete);
+	componentRegistrar.registerFactory(
+		autocomplete.HostsAutoCompleteSearch.prototype.classID,
+		'',
+		autocomplete.HostsAutoCompleteSearch.prototype.contractID,
+		autocomplete.NSGetFactory(autocomplete.HostsAutoCompleteSearch.prototype.classID)
+	);
 }
 
 var prefObserver = {
