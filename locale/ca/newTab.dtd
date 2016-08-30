@@ -36,6 +36,8 @@
 
 <!ENTITY newtabtools.options-header "Paràmetres:">
 
+<!ENTITY newtabtools.filter.button "Filter…">
+
 <!-- Data collection is not currently active, but this might change in future. -->
 <!ENTITY newtabtools.datacollection.optin "Envieu dades anònimes d’ús i ajudeu a millorar les Eines de pestanyes noves">
 <!ENTITY newtabtools.datacollection.privacypolicy "Política de privadesa">

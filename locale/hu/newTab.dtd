@@ -36,6 +36,8 @@
 
 <!ENTITY newtabtools.options-header "Beállítások:">
 
+<!ENTITY newtabtools.filter.button "Filter…">
+
 <!-- Data collection is not currently active, but this might change in future. -->
 <!ENTITY newtabtools.datacollection.optin "A New Tab Tools fejlesztésének támogatása névtelen használati adatok küldésével">
 <!ENTITY newtabtools.datacollection.privacypolicy "Adatvédelmi irányelvek">

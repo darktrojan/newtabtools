@@ -36,6 +36,8 @@
 
 <!ENTITY newtabtools.options-header "Options :">
 
+<!ENTITY newtabtools.filter.button "Filter…">
+
 <!-- Data collection is not currently active, but this might change in future. -->
 <!ENTITY newtabtools.datacollection.optin "Aidez-nous à améliorer New Tab Tools en acceptant l'envoi de statistiques anonymes sur votre utilisation du module.">
 <!ENTITY newtabtools.datacollection.privacypolicy "Politique de confidentialité">

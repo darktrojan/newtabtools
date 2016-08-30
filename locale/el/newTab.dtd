@@ -36,6 +36,8 @@
 
 <!ENTITY newtabtools.options-header "Επιλογές:">
 
+<!ENTITY newtabtools.filter.button "Filter…">
+
 <!-- Data collection is not currently active, but this might change in future. -->
 <!ENTITY newtabtools.datacollection.optin "Βοηθήστε στη βελτίωση του New Tab Tools προωθώντας ανώνυμα στοιχεία χρήσης">
 <!ENTITY newtabtools.datacollection.privacypolicy "Άδεια χρήσης">

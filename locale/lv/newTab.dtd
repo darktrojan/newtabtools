@@ -36,6 +36,8 @@
 
 <!ENTITY newtabtools.options-header "Opcijas:">
 
+<!ENTITY newtabtools.filter.button "Filter…">
+
 <!-- Data collection is not currently active, but this might change in future. -->
 <!ENTITY newtabtools.datacollection.optin "Palīdzēt uzlabot NewTabTools iesniedzot anonīmus lietojuma datus">
 <!ENTITY newtabtools.datacollection.privacypolicy "Privātuma politika">
