@@ -66,7 +66,7 @@ function HostsAutoCompleteSearch() {
 		finally {
 			stmt.finalize();
 		}
-		return hosts;
+		return Array.from(hosts);
 	});
 }
 HostsAutoCompleteSearch.prototype = {

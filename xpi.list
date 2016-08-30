@@ -1,5 +1,6 @@
 bootstrap.js
 chrome.manifest
+components/*
 content
 content/arrow.svg
 content/browser.css
