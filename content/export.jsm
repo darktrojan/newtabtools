@@ -12,7 +12,7 @@ Cu.import('resource://gre/modules/FileUtils.jsm');
 Cu.import('resource://gre/modules/Services.jsm');
 Cu.import('resource://gre/modules/XPCOMUtils.jsm');
 
-/* globals picker, strings, OS, Preferences, SavedThumbs, TileData */
+/* globals picker, strings, NewTabUtils, OS, Preferences, SavedThumbs, TileData */
 XPCOMUtils.defineLazyGetter(this, 'picker', function() {
 	let p = Cc['@mozilla.org/filepicker;1'].createInstance(Ci.nsIFilePicker);
 	p.displayDirectory = Services.dirsvc.get('Home', Ci.nsIFile);
@@ -21,6 +21,7 @@ XPCOMUtils.defineLazyGetter(this, 'picker', function() {
 XPCOMUtils.defineLazyGetter(this, 'strings', function() {
 	return Services.strings.createBundle('chrome://newtabtools/locale/export.properties');
 });
+XPCOMUtils.defineLazyModuleGetter(this, 'NewTabUtils', 'resource://gre/modules/NewTabUtils.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'OS', 'resource://gre/modules/osfile.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'Preferences', 'resource://gre/modules/Preferences.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'SavedThumbs', 'chrome://newtabtools/content/newTabTools.jsm');
@@ -318,6 +319,12 @@ function importSave(returnValues) {
 		// can't be enabled and not exist, but check anyway
 		if (returnValues.options.page.background && returnValues.hasBackgroundImage) {
 			zipReader.extract('newtab-background', FileUtils.getFile('ProfD', ['newtab-background']));
+		}
+
+		if (returnValues.options.prefs.pinned || returnValues.options.prefs.blocked) {
+			NewTabUtils.blockedLinks.resetCache();
+			NewTabUtils.pinnedLinks.resetCache();
+			NewTabUtils.allPages.update();
 		}
 	} finally {
 		zipReader.close();
