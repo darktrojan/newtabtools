@@ -12,7 +12,7 @@ Cu.import('resource://gre/modules/FileUtils.jsm');
 Cu.import('resource://gre/modules/Services.jsm');
 Cu.import('resource://gre/modules/XPCOMUtils.jsm');
 
-/* globals picker, strings, OS, SavedThumbs, TileData */
+/* globals picker, strings, OS, Preferences, SavedThumbs, TileData */
 XPCOMUtils.defineLazyGetter(this, 'picker', function() {
 	let p = Cc['@mozilla.org/filepicker;1'].createInstance(Ci.nsIFilePicker);
 	p.displayDirectory = Services.dirsvc.get('Home', Ci.nsIFile);
@@ -22,6 +22,7 @@ XPCOMUtils.defineLazyGetter(this, 'strings', function() {
 	return Services.strings.createBundle('chrome://newtabtools/locale/export.properties');
 });
 XPCOMUtils.defineLazyModuleGetter(this, 'OS', 'resource://gre/modules/osfile.jsm');
+XPCOMUtils.defineLazyModuleGetter(this, 'Preferences', 'resource://gre/modules/Preferences.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'SavedThumbs', 'chrome://newtabtools/content/newTabTools.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'TileData', 'chrome://newtabtools/content/newTabTools.jsm');
 
@@ -125,7 +126,7 @@ function exportSave(returnValues) {
 		for (let k of keys) {
 			switch (Services.prefs.getPrefType(k)) {
 			case Ci.nsIPrefBranch.PREF_STRING:
-				prefs[k] = Services.prefs.getCharPref(k);
+				prefs[k] = Preferences.get(k);
 				break;
 			case Ci.nsIPrefBranch.PREF_INT:
 				prefs[k] = Services.prefs.getIntPref(k);
@@ -136,9 +137,10 @@ function exportSave(returnValues) {
 			}
 		}
 
-		let stream = Cc['@mozilla.org/io/string-input-stream;1'].createInstance(Ci.nsIStringInputStream);
-		let data = JSON.stringify(prefs);
-		stream.setData(data, data.length);
+		let converter = Cc['@mozilla.org/intl/scriptableunicodeconverter'].createInstance(Ci.nsIScriptableUnicodeConverter);
+		converter.charset = 'UTF-8';
+		let stream = converter.convertToInputStream(JSON.stringify(prefs));
+
 		zipWriter.addEntryStream('prefs.json', Date.now() * 1000, Ci.nsIZipWriter.COMPRESSION_DEFAULT, stream, false);
 
 		if (returnValues.options.page.background) {
@@ -236,11 +238,13 @@ function importLoad(file) {
 function readZippedJSON(zipReader, filePath) {
 	if (zipReader.hasEntry(filePath)) {
 		let stream = zipReader.getInputStream(filePath);
-		let scriptableStream = Cc['@mozilla.org/scriptableinputstream;1'].createInstance(Ci.nsIScriptableInputStream);
-		scriptableStream.init(stream);
 
-		let data = scriptableStream.read(scriptableStream.available());
-		return JSON.parse(data);
+		let utf8Stream = Cc['@mozilla.org/intl/converter-input-stream;1'].createInstance(Ci.nsIConverterInputStream);
+		utf8Stream.init(stream, 'UTF-8', 8192, Ci.nsIConverterInputStream.DEFAULT_REPLACEMENT_CHARACTER);
+		let data = {};
+		utf8Stream.readString(8192, data);
+
+		return JSON.parse(data.value);
 	}
 	return {};
 }
@@ -251,7 +255,7 @@ function importSave(returnValues) {
 		try {
 			switch (typeof value) {
 			case 'string':
-				Services.prefs.setCharPref(name, value);
+				Preferences.set(name, value);
 				break;
 			case 'number':
 				Services.prefs.setIntPref(name, value);

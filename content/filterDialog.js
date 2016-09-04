@@ -1,5 +1,5 @@
-/* globals Components, Services, sizeToContent */
-Components.utils.import('resource://gre/modules/Services.jsm');
+/* globals Components, Preferences, sizeToContent */
+Components.utils.import('resource://gre/modules/Preferences.jsm');
 
 const PREF = 'extensions.newtabtools.filter';
 const XULNS = 'http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul';
@@ -12,7 +12,7 @@ let addButton = addRow.children[2];
 (function() {
 	let filters = {};
 	try {
-		filters = JSON.parse(Services.prefs.getCharPref(PREF));
+		filters = JSON.parse(Preferences.get(PREF));
 	} catch (ex) {}
 	for (let key of Object.keys(filters).sort()) {
 		insertRow(key, filters[key]);
@@ -71,5 +71,5 @@ function onDialogAccept() {
 		data[row.children[0].value] = parseInt(row.children[1].value, 10);
 	}
 
-	Services.prefs.setCharPref(PREF, JSON.stringify(data));
+	Preferences.set(PREF, JSON.stringify(data));
 }

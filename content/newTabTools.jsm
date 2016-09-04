@@ -7,13 +7,14 @@ var { classes: Cc, interfaces: Ci, utils: Cu } = Components;
 Cu.import('resource://gre/modules/Services.jsm');
 Cu.import('resource://gre/modules/XPCOMUtils.jsm');
 
-/* globals BackgroundPageThumbs, FileUtils, NewTabUtils, OS, PageThumbs, PageThumbsStorage */
+/* globals BackgroundPageThumbs, FileUtils, NewTabUtils, OS, PageThumbs, PageThumbsStorage, Preferences */
 XPCOMUtils.defineLazyModuleGetter(this, 'BackgroundPageThumbs', 'resource://gre/modules/BackgroundPageThumbs.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'FileUtils', 'resource://gre/modules/FileUtils.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'NewTabUtils', 'resource://gre/modules/NewTabUtils.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'OS', 'resource://gre/modules/osfile.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'PageThumbs', 'resource://gre/modules/PageThumbs.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'PageThumbsStorage', 'resource://gre/modules/PageThumbs.jsm');
+XPCOMUtils.defineLazyModuleGetter(this, 'Preferences', 'resource://gre/modules/Preferences.jsm');
 
 var NewTabToolsLinks = {
 	PREF_HISTORY: 'extensions.newtabtools.historytiles.show',
@@ -38,8 +39,8 @@ var NewTabToolsLinks = {
 				!NewTabUtils.pinnedLinks.isPinned(link);
 		});
 
-		if (Services.prefs.prefHasUserValue(this.PREF_FILTER)) {
-			let countPref = Services.prefs.getCharPref(this.PREF_FILTER);
+		try {
+			let countPref = Preferences.get(this.PREF_FILTER, '{}');
 			let counts = JSON.parse(countPref);
 			historyLinks = historyLinks.filter(function(item) {
 				let match = /^https?:\/\/([^\/]+)\//.exec(item.url);
@@ -54,6 +55,8 @@ var NewTabToolsLinks = {
 				}
 				return true;
 			});
+		} catch (e) {
+			Cu.reportError(e);
 		}
 
 		// Try to fill the gaps between pinned links.
@@ -150,7 +153,7 @@ var TileData = {
 	},
 	_getPref: function() {
 		try {
-			let value = Services.prefs.getCharPref(TileData.PREF);
+			let value = Preferences.get(TileData.PREF, '{}');
 			let json = JSON.parse(value);
 			for (let [url, urlData] in Iterator(json)) {
 				this._data.set(url, new Map(Iterator(urlData)));
@@ -167,7 +170,7 @@ var TileData = {
 				obj[url][key] = value;
 			}
 		}
-		Services.prefs.setCharPref(TileData.PREF, JSON.stringify(obj));
+		Preferences.set(TileData.PREF, JSON.stringify(obj));
 	}
 };
 TileData._getPref();
