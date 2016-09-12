@@ -44,15 +44,22 @@ var NewTabToolsLinks = {
 			let counts = JSON.parse(countPref);
 			historyLinks = historyLinks.filter(function(item) {
 				let match = /^https?:\/\/([^\/]+)\//.exec(item.url);
-				if (!match)
+				if (!match) {
 					return true;
-				if (match[1] in counts) {
-					if (counts[match[1]]) {
-						counts[match[1]]--;
-						return true;
-					}
-					return false;
 				}
+				let host = match[1];
+				let dot = 0;
+				do {
+					host = host.substring(dot);
+					if (host in counts || (host[0] != '.' && '.' + host in counts)) {
+						if (counts[host]) {
+							counts[host]--;
+							return true;
+						}
+						return false;
+					}
+					dot = host.indexOf('.', 1);
+				} while (dot > 0);
 				return true;
 			});
 		} catch (e) {
@@ -60,13 +67,16 @@ var NewTabToolsLinks = {
 		}
 
 		// Try to fill the gaps between pinned links.
-		for (let i = 0; i < finalLinks.length && historyLinks.length; i++)
-			if (!finalLinks[i])
+		for (let i = 0; i < finalLinks.length && historyLinks.length; i++) {
+			if (!finalLinks[i]) {
 				finalLinks[i] = historyLinks.shift();
+			}
+		}
 
 		// Append the remaining links if any.
-		if (historyLinks.length)
+		if (historyLinks.length) {
 			finalLinks = finalLinks.concat(historyLinks);
+		}
 
 		this._getLinksCache = finalLinks;
 		return finalLinks;
