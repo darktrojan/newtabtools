@@ -1,6 +1,6 @@
-<!ENTITY title "Filter Browsing History Tiles">
-<!ENTITY description "This tool limits the number of tiles from your browsing history that appear for each domain. It does not affect pinned tiles.">
-<!ENTITY domainheader "Domain">
-<!ENTITY countheader "Max Tile Count">
-<!ENTITY addbuttonlabel "Add">
-<!ENTITY removebuttonlabel "Remove">
+<!ENTITY title "过滤浏览记录磁贴">
+<!ENTITY description "此工具可限制基于您的浏览记录出现的特定域名磁贴数量。它不影响已固定磁贴。">
+<!ENTITY domainheader "域名">
+<!ENTITY countheader "磁贴最多(个)">
+<!ENTITY addbuttonlabel "添加">
+<!ENTITY removebuttonlabel "移除">
