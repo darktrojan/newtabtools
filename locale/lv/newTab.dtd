@@ -12,12 +12,12 @@
 <!ENTITY newtabtools.tile-selection.next.tooltip "Nākamā">
 <!ENTITY newtabtools.tile-selection.nextrow.tooltip "Nākamā rinda">
 
-<!ENTITY newtabtools.tile-thumbnail.label2 "Page Thumbnail:">
-<!ENTITY newtabtools.tile-thumbnail.refresh2 "Refresh">
+<!ENTITY newtabtools.tile-thumbnail.label2 "Lapas sīktēls:">
+<!ENTITY newtabtools.tile-thumbnail.refresh2 "Atsvaidzināt">
 <!ENTITY newtabtools.tile-thumbnail.remove "Noņemt">
-<!ENTITY newtabtools.tile-thumbnail.save "Save">
+<!ENTITY newtabtools.tile-thumbnail.save "Saglabāt">
 
-<!ENTITY newtabtools.tile-savedthumb.label "Saved image:">
+<!ENTITY newtabtools.tile-savedthumb.label "Saglabātais attēls:">
 <!ENTITY newtabtools.tile-savedthumb.placeholder "Ielīmējiet attēla URL vai izvēlieties failu">
 <!ENTITY newtabtools.tile-savedthumb.browse "Pārlūkot…">
 <!ENTITY newtabtools.tile-savedthumb.set "Iestatīt">
@@ -36,7 +36,7 @@
 
 <!ENTITY newtabtools.options-header "Opcijas:">
 
-<!ENTITY newtabtools.filter.button "Filter…">
+<!ENTITY newtabtools.filter.button "Filtrēt…">
 
 <!-- Data collection is not currently active, but this might change in future. -->
 <!ENTITY newtabtools.datacollection.optin "Palīdzēt uzlabot NewTabTools iesniedzot anonīmus lietojuma datus">
