@@ -171,6 +171,11 @@ function startup(params, reason) {
 		onCommand: function(event) {
 			let win = event.view;
 			PageThumbs.captureAndStore(win.gBrowser.selectedBrowser);
+			win.gBrowser.selectedBrowser.animate({ opacity: [0, 1] }, 500);
+			let audioURL = Services.vc.compare(Services.appinfo.version, '50') < 0 ?
+				'resource://devtools/client/responsive.html/audio/camera-click.mp3' :
+				'resource://devtools/client/themes/audio/shutter.wav';
+			new win.Audio(audioURL).play();
 		}
 	});
 
