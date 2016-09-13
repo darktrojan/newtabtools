@@ -169,13 +169,7 @@ function startup(params, reason) {
 		label: strings.GetStringFromName('toolsmenu.captureThumbnail'),
 		tooltiptext: strings.GetStringFromName('toolsmenu.captureThumbnail'),
 		onCommand: function(event) {
-			let win = event.view;
-			PageThumbs.captureAndStore(win.gBrowser.selectedBrowser);
-			win.gBrowser.selectedBrowser.animate({ opacity: [0, 1] }, 500);
-			let audioURL = Services.vc.compare(Services.appinfo.version, '50') < 0 ?
-				'resource://devtools/client/responsive.html/audio/camera-click.mp3' :
-				'resource://devtools/client/themes/audio/shutter.wav';
-			new win.Audio(audioURL).play();
+			windowObserver.captureThumbnail(event.view);
 		}
 	});
 
@@ -408,7 +402,7 @@ var windowObserver = {
 			menuitem.id = 'newtabtools-capture';
 			menuitem.setAttribute('label', strings.GetStringFromName('toolsmenu.captureThumbnail'));
 			menuitem.addEventListener('command', function() {
-				PageThumbs.captureAndStore(win.gBrowser.selectedBrowser);
+				windowObserver.captureThumbnail(win);
 			});
 			doc.getElementById('menu_ToolsPopup').appendChild(menuitem);
 
@@ -526,6 +520,14 @@ var windowObserver = {
 			target && target.classList &&
 			target.classList.contains('newtab-cell') && !!target._newtabCell.site
 		) ? target : null;
+	},
+	captureThumbnail: function(win) {
+		PageThumbs.captureAndStore(win.gBrowser.selectedBrowser);
+		win.gBrowser.selectedBrowser.animate({ opacity: [0, 1] }, 500);
+		let audioURL = Services.vc.compare(Services.appinfo.version, '50') < 0 ?
+			'resource://devtools/client/responsive.html/audio/camera-click.mp3' :
+			'resource://devtools/client/themes/audio/shutter.wav';
+		new win.Audio(audioURL).play();
 	}
 };
 
