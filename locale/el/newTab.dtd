@@ -12,12 +12,12 @@
 <!ENTITY newtabtools.tile-selection.next.tooltip "Επόμενο πλακίδιο">
 <!ENTITY newtabtools.tile-selection.nextrow.tooltip "Επόμενη σειρά">
 
-<!ENTITY newtabtools.tile-thumbnail.label2 "Page Thumbnail:">
-<!ENTITY newtabtools.tile-thumbnail.refresh2 "Refresh">
+<!ENTITY newtabtools.tile-thumbnail.label2 "Μιρκογραφία ιστοσελίδας:">
+<!ENTITY newtabtools.tile-thumbnail.refresh2 "Ανανέωση">
 <!ENTITY newtabtools.tile-thumbnail.remove "Αφαίρεση">
-<!ENTITY newtabtools.tile-thumbnail.save "Save">
+<!ENTITY newtabtools.tile-thumbnail.save "Αποθήκευση">
 
-<!ENTITY newtabtools.tile-savedthumb.label "Saved image:">
+<!ENTITY newtabtools.tile-savedthumb.label "Αποθηκευμένη εικόνα:">
 <!ENTITY newtabtools.tile-savedthumb.placeholder "URL εικόνας ή αναζητήστε τοπικά το αρχείο εικόνας">
 <!ENTITY newtabtools.tile-savedthumb.browse "Αναζήτηση…">
 <!ENTITY newtabtools.tile-savedthumb.set "Εφαρμογή">
