@@ -12,12 +12,12 @@
 <!ENTITY newtabtools.tile-selection.next.tooltip "Следующая плитка">
 <!ENTITY newtabtools.tile-selection.nextrow.tooltip "Следующая строка">
 
-<!ENTITY newtabtools.tile-thumbnail.label2 "Page Thumbnail:">
-<!ENTITY newtabtools.tile-thumbnail.refresh2 "Refresh">
+<!ENTITY newtabtools.tile-thumbnail.label2 "Превью страницы:">
+<!ENTITY newtabtools.tile-thumbnail.refresh2 "Обновить">
 <!ENTITY newtabtools.tile-thumbnail.remove "Удалить">
-<!ENTITY newtabtools.tile-thumbnail.save "Save">
+<!ENTITY newtabtools.tile-thumbnail.save "Сохранить">
 
-<!ENTITY newtabtools.tile-savedthumb.label "Saved image:">
+<!ENTITY newtabtools.tile-savedthumb.label "Сохраненное изображение:">
 <!ENTITY newtabtools.tile-savedthumb.placeholder "Вставьте ссылку на изображение или выберите файл">
 <!ENTITY newtabtools.tile-savedthumb.browse "Выбрать…">
 <!ENTITY newtabtools.tile-savedthumb.set "Применить">
@@ -36,7 +36,7 @@
 
 <!ENTITY newtabtools.options-header "Опции:">
 
-<!ENTITY newtabtools.filter.button "Filter…">
+<!ENTITY newtabtools.filter.button "Фильтр…">
 
 <!-- Data collection is not currently active, but this might change in future. -->
 <!ENTITY newtabtools.datacollection.optin "Помогите улучшить New Tab Tools путем представления анонимных данных об использовании">
