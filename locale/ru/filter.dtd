@@ -1,6 +1,6 @@
-<!ENTITY title "Filter Browsing History Tiles">
-<!ENTITY description "This tool limits the number of tiles from your browsing history that appear for each domain. It does not affect pinned tiles.">
-<!ENTITY domainheader "Domain">
-<!ENTITY countheader "Max Tile Count">
-<!ENTITY addbuttonlabel "Add">
-<!ENTITY removebuttonlabel "Remove">
+<!ENTITY title "Фильтр плиток из истории браузера">
+<!ENTITY description "Этот инструмент ограничивает количество плиток из истории просмотра для каждого домена. Не влияет на закрепленные плитки.">
+<!ENTITY domainheader "Домен">
+<!ENTITY countheader "Максимум плиток">
+<!ENTITY addbuttonlabel "Добавить">
+<!ENTITY removebuttonlabel "Удалить">
