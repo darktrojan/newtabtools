@@ -1,6 +1,6 @@
-<!ENTITY title "Filter Browsing History Tiles">
-<!ENTITY description "This tool limits the number of tiles from your browsing history that appear for each domain. It does not affect pinned tiles.">
-<!ENTITY domainheader "Domain">
-<!ENTITY countheader "Max Tile Count">
-<!ENTITY addbuttonlabel "Add">
-<!ENTITY removebuttonlabel "Remove">
+<!ENTITY title "Φιλτράρισμα Πλακιδίων Ιστορικού Περιήγησης">
+<!ENTITY description "Αυτό το εργαλείο θέτει όριο στον αριθμό πλακιδίων απο το ιστορικό περιήγησης που εμφανίζονται για κάθε ιστότοπο. Δέν επηρεάζει τα καρφιτσωμένα πλακίδια.">
+<!ENTITY domainheader "Ιστότοπος">
+<!ENTITY countheader "Μέγιστος Αριθμός Πλακιδίων">
+<!ENTITY addbuttonlabel "Προσθήκη">
+<!ENTITY removebuttonlabel "Αφαίρεση">
