@@ -81,6 +81,12 @@ input[type="button"] {
 	overflow: hidden;
 	height: 28px;
 }
+:root[titlesize="medium"] #newtab-recent {
+	font-size: 15px;
+}
+:root[titlesize="large"] #newtab-recent {
+	font-size: 18px;
+}
 #newtab-recent > span {
 	display: inline-block;
 	vertical-align: middle;
@@ -841,6 +847,9 @@ table {
 }
 tr {
 	height: 31px;
+}
+th {
+	white-space: nowrap;
 }
 th, td {
 	text-align: left;
