@@ -12,12 +12,12 @@
 <!ENTITY newtabtools.tile-selection.next.tooltip "Следваща плочка">
 <!ENTITY newtabtools.tile-selection.nextrow.tooltip "Следващ ред">
 
-<!ENTITY newtabtools.tile-thumbnail.label2 "Page Thumbnail:">
-<!ENTITY newtabtools.tile-thumbnail.refresh2 "Refresh">
+<!ENTITY newtabtools.tile-thumbnail.label2 "Плочка на страница:">
+<!ENTITY newtabtools.tile-thumbnail.refresh2 "Обнови">
 <!ENTITY newtabtools.tile-thumbnail.remove "Премахни">
-<!ENTITY newtabtools.tile-thumbnail.save "Save">
+<!ENTITY newtabtools.tile-thumbnail.save "Запази">
 
-<!ENTITY newtabtools.tile-savedthumb.label "Saved image:">
+<!ENTITY newtabtools.tile-savedthumb.label "Запазено изображение:">
 <!ENTITY newtabtools.tile-savedthumb.placeholder "Поставете URL на изображението или изберете файл">
 <!ENTITY newtabtools.tile-savedthumb.browse "Преглед…">
 <!ENTITY newtabtools.tile-savedthumb.set "Задай">
@@ -36,7 +36,7 @@
 
 <!ENTITY newtabtools.options-header "Опции:">
 
-<!ENTITY newtabtools.filter.button "Filter…">
+<!ENTITY newtabtools.filter.button "Филтър…">
 
 <!-- Data collection is not currently active, but this might change in future. -->
 <!ENTITY newtabtools.datacollection.optin "Помигни ни да подобрим New Tab Tools като ни изпращаш анонимни данни">
