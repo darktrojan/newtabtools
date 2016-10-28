@@ -1,6 +1,6 @@
-<!ENTITY title "Filter Browsing History Tiles">
-<!ENTITY description "This tool limits the number of tiles from your browsing history that appear for each domain. It does not affect pinned tiles.">
+<!ENTITY title "Kacheln aus der Chronik filtern">
+<!ENTITY description "Dieses Tool beschränkt die Anzahl der Kacheln aus der Browser-Chronik, die für jede Domain angezeigt werden. Es hat keine Auswirkungen auf angeheftete Kacheln.">
 <!ENTITY domainheader "Domain">
-<!ENTITY countheader "Max Tile Count">
-<!ENTITY addbuttonlabel "Add">
-<!ENTITY removebuttonlabel "Remove">
+<!ENTITY countheader "Max. Kachelanzahl">
+<!ENTITY addbuttonlabel "Hinzufügen">
+<!ENTITY removebuttonlabel "Entfernen">
