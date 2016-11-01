@@ -1,6 +1,6 @@
-<!ENTITY title "Filter Browsing History Tiles">
-<!ENTITY description "This tool limits the number of tiles from your browsing history that appear for each domain. It does not affect pinned tiles.">
-<!ENTITY domainheader "Domain">
-<!ENTITY countheader "Max Tile Count">
-<!ENTITY addbuttonlabel "Add">
-<!ENTITY removebuttonlabel "Remove">
+<!ENTITY title "A böngészési előzményekből származó csempék szűrése">
+<!ENTITY description "Ez az eszköz korlátozza a böngészési előzményekből származó csempék webcímenkéni számát. A rögzített csempékre nincs hatással.">
+<!ENTITY domainheader "Webcím">
+<!ENTITY countheader "Maximális csempeszám">
+<!ENTITY addbuttonlabel "Hozzáadás">
+<!ENTITY removebuttonlabel "Eltávolítás">

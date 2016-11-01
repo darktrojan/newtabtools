@@ -12,12 +12,12 @@
 <!ENTITY newtabtools.tile-selection.next.tooltip "Következő csempe">
 <!ENTITY newtabtools.tile-selection.nextrow.tooltip "Következő sor">
 
-<!ENTITY newtabtools.tile-thumbnail.label2 "Page Thumbnail:">
-<!ENTITY newtabtools.tile-thumbnail.refresh2 "Refresh">
+<!ENTITY newtabtools.tile-thumbnail.label2 "Oldal előnézeti képe:">
+<!ENTITY newtabtools.tile-thumbnail.refresh2 "Frissítés">
 <!ENTITY newtabtools.tile-thumbnail.remove "Eltávolítás">
-<!ENTITY newtabtools.tile-thumbnail.save "Save">
+<!ENTITY newtabtools.tile-thumbnail.save "Mentés">
 
-<!ENTITY newtabtools.tile-savedthumb.label "Saved image:">
+<!ENTITY newtabtools.tile-savedthumb.label "Mentett kép:">
 <!ENTITY newtabtools.tile-savedthumb.placeholder "Illessze be egy kép webcímét vagy válasszon ki egy fájlt">
 <!ENTITY newtabtools.tile-savedthumb.browse "Kiválasztás…">
 <!ENTITY newtabtools.tile-savedthumb.set "Beállítás">
@@ -36,7 +36,7 @@
 
 <!ENTITY newtabtools.options-header "Beállítások:">
 
-<!ENTITY newtabtools.filter.button "Filter…">
+<!ENTITY newtabtools.filter.button "Szűrés…">
 
 <!-- Data collection is not currently active, but this might change in future. -->
 <!ENTITY newtabtools.datacollection.optin "A New Tab Tools fejlesztésének támogatása névtelen használati adatok küldésével">
