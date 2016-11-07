@@ -1,7 +1,7 @@
 <!ENTITY newtabtools.options.theme "Design">
 <!ENTITY newtabtools.options.theme.light "Helles Design">
 <!ENTITY newtabtools.options.theme.dark "Dunkles Design">
-<!ENTITY newtabtools.options.foreground.opacity "Vordergrund Deckkraft">
+<!ENTITY newtabtools.options.foreground.opacity "Vordergrunddeckkraft">
 <!ENTITY newtabtools.options.rows "Reihen">
 <!ENTITY newtabtools.options.columns "Spalten">
 <!ENTITY newtabtools.options.grid.margin "Raster - Äußerer Rand">
@@ -15,12 +15,12 @@
 <!ENTITY newtabtools.options.launcher.bottom "Unten">
 <!ENTITY newtabtools.options.launcher.left "Links">
 <!ENTITY newtabtools.options.launcher.right "Rechts">
-<!ENTITY newtabtools.options.thumb-titlesize "Titel des Miniaturbildes">
+<!ENTITY newtabtools.options.thumb-titlesize "Titel des Vorschaubildes">
 <!ENTITY newtabtools.options.historytiles "Kacheln aus der Chronik">
 <!ENTITY newtabtools.options.recent "Geschlossene Tabs">
-<!ENTITY newtabtools.options.thumb-buttons "Miniaturbild-Knöpfe">
+<!ENTITY newtabtools.options.thumb-buttons "Vorschaubild-Knöpfe">
 <!ENTITY newtabtools.options.locked "Verhindere das Ziehen von Kacheln">
 <!ENTITY newtabtools.options.favicons "Seitenlogos">
-<!ENTITY newtabtools.options.thumb-contain "Ganzes Miniaturbild zeigen">
+<!ENTITY newtabtools.options.thumb-contain "Ganzes Vorschaubild zeigen">
 <!ENTITY newtabtools.export "Einstellungen exportieren…">
 <!ENTITY newtabtools.import "Einstellungen importieren…">
