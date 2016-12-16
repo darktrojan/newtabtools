@@ -242,10 +242,13 @@ function readZippedJSON(zipReader, filePath) {
 
 		let utf8Stream = Cc['@mozilla.org/intl/converter-input-stream;1'].createInstance(Ci.nsIConverterInputStream);
 		utf8Stream.init(stream, 'UTF-8', 8192, Ci.nsIConverterInputStream.DEFAULT_REPLACEMENT_CHARACTER);
+		let json = '';
 		let data = {};
-		utf8Stream.readString(8192, data);
+		while (utf8Stream.readString(8192, data) !== 0) {
+			json += data.value;
+		}
 
-		return JSON.parse(data.value);
+		return JSON.parse(json);
 	}
 	return {};
 }
