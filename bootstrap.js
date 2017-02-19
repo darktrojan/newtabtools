@@ -31,21 +31,19 @@ XPCOMUtils.defineLazyGetter(this, 'strings', function() {
 });
 
 /* globals CustomizableUI, GridPrefs, NewTabToolsExporter, NewTabToolsLinks,
-	NewTabURL, OS, PageThumbs, Task, TileData */
+	OS, PageThumbs, Task, TileData */
 XPCOMUtils.defineLazyModuleGetter(this, 'CustomizableUI', 'resource:///modules/CustomizableUI.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'GridPrefs', 'chrome://newtabtools/content/newTabTools.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'NewTabToolsExporter', 'chrome://newtabtools/content/export.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'NewTabToolsLinks', 'chrome://newtabtools/content/newTabTools.jsm');
-XPCOMUtils.defineLazyModuleGetter(this, 'NewTabURL', 'resource:///modules/NewTabURL.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'OS', 'resource://gre/modules/osfile.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'PageThumbs', 'resource://gre/modules/PageThumbs.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'Task', 'resource://gre/modules/Task.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'TileData', 'chrome://newtabtools/content/newTabTools.jsm');
 
-/* globals idleService, annoService, aboutNewTabService */
+/* globals idleService, annoService */
 XPCOMUtils.defineLazyServiceGetter(this, 'idleService', '@mozilla.org/widget/idleservice;1', 'nsIIdleService');
 XPCOMUtils.defineLazyServiceGetter(this, 'annoService', '@mozilla.org/browser/annotation-service;1', 'nsIAnnotationService');
-XPCOMUtils.defineLazyServiceGetter(this, 'aboutNewTabService', '@mozilla.org/browser/aboutnewtab-service;1', 'nsIAboutNewTabService');
 
 let autocomplete = {};
 let userPrefs = Services.prefs.getBranch(EXTENSION_PREFS);
@@ -218,39 +216,7 @@ function shutdown(params, reason) {
 	);
 }
 
-function uiStartup(params, reason) {
-	let overridden = false;
-	let reset;
-	if (Services.vc.compare(Services.appinfo.platformVersion, 44) >= 0) {
-		overridden = aboutNewTabService.overridden;
-		reset = aboutNewTabService.resetNewTabURL;
-	} else {
-		overridden = NewTabURL.overridden;
-		reset = NewTabURL.reset;
-	}
-
-	if (overridden) {
-		let recentWindow = Services.wm.getMostRecentWindow(BROWSER_WINDOW);
-
-		recentWindow.setTimeout(function() {
-			let notificationBox = recentWindow.document.getElementById('global-notificationbox');
-			let message = strings.GetStringFromName('prefschange');
-			let label = strings.GetStringFromName('change.label');
-			let accessKey = strings.GetStringFromName('change.accesskey');
-
-			notificationBox.appendNotification(
-				message, 'newtabtools-urlchange', 'chrome://newtabtools/content/icon16.png',
-				notificationBox.PRIORITY_INFO_MEDIUM, [{
-					label: label,
-					accessKey: accessKey,
-					callback: function() {
-						reset();
-					}
-				}]
-			);
-		}, reason == APP_STARTUP ? 1000 : 0);
-	}
-
+function uiStartup(params) {
 	Services.scriptloader.loadSubScript(params.resourceURI.spec + 'components/autocomplete.js', autocomplete);
 	componentRegistrar.registerFactory(
 		autocomplete.HostsAutoCompleteSearch.prototype.classID,
