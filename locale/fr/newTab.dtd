@@ -1,15 +1,15 @@
 <!ENTITY newtabtools.options.pointer "Cliquez ici pour commencer à personnaliser votre page « Nouvel onglet »">
 <!ENTITY newtabtools.page.show "Afficher la page « Nouvel onglet »">
 
-<!ENTITY newtabtools.pin-url.header "Ajouter un site :">
+<!ENTITY newtabtools.pin-url.header "Ajouter une page :">
 <!ENTITY newtabtools.pin-url.placeholder "Tapez ou sélectionnez une URL">
 <!ENTITY newtabtools.pin-url.button "Ajouter">
 
-<!ENTITY newtabtools.tile-header "Sites :">
+<!ENTITY newtabtools.tile-header "Pages :">
 
 <!ENTITY newtabtools.tile-selection.previousrow.tooltip "Rangée supérieure">
-<!ENTITY newtabtools.tile-selection.previous.tooltip "Site précédent">
-<!ENTITY newtabtools.tile-selection.next.tooltip "Site suivant">
+<!ENTITY newtabtools.tile-selection.previous.tooltip "Page précédente">
+<!ENTITY newtabtools.tile-selection.next.tooltip "Page suivante">
 <!ENTITY newtabtools.tile-selection.nextrow.tooltip "Rangée inférieure">
 
 <!ENTITY newtabtools.tile-thumbnail.label2 "Miniature :">
@@ -36,7 +36,7 @@
 
 <!ENTITY newtabtools.options-header "Options :">
 
-<!ENTITY newtabtools.filter.button "Filter…">
+<!ENTITY newtabtools.filter.button "Filtrer…">
 
 <!-- Data collection is not currently active, but this might change in future. -->
 <!ENTITY newtabtools.datacollection.optin "Aidez-nous à améliorer New Tab Tools en acceptant l'envoi de statistiques anonymes sur votre utilisation du module.">
