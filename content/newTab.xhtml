@@ -15,10 +15,10 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 	<!ENTITY % optionsDTD SYSTEM "chrome://newtabtools/locale/options.dtd">
 	%optionsDTD;
 ]>
-<html id="newtab-window" xmlns="http://www.w3.org/1999/xhtml" disablefastfind="true" options-hidden="true">
+<html id="newtab-window" xmlns="http://www.w3.org/1999/xhtml" disablefastfind="true" options-hidden="true" class="containThumbs">
 <head>
 	<title>&newtab.pageTitle;</title>
-	<link rel="stylesheet" href="chrome://newtabtools/content/newTab.css" type="text/css" />
+	<link rel="stylesheet" href="newTab.css" type="text/css" />
 </head>
 
 <body>
@@ -64,18 +64,18 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 		</div>
 	</div>
 
-	<div id="options-bg" onclick="newTabTools.hideOptions();"></div>
+	<div id="options-bg"></div>
 
 	<div id="options">
 		<div id="options-close">
-			<button class="close-icon" onclick="newTabTools.hideOptions();"></button>
+			<button id="options-close-button" class="close-icon"></button>
 		</div>
 		<div id="options-inner">
 			<div id="options-tile">
 				<fieldset>
 					<legend>&newtabtools.pin-url.header;</legend>
 					<div class="options-row">
-						<input id="options-pinURL-input" type="url" list="autocomplete" autocomplete="off" placeholder="&newtabtools.pin-url.placeholder;" oninput="newTabTools.autocomplete();" />
+						<input id="options-pinURL-input" type="url" list="autocomplete" autocomplete="off" placeholder="&newtabtools.pin-url.placeholder;" />
 						<datalist id="autocomplete"></datalist>
 						<button id="options-pinURL">&newtabtools.pin-url.button;</button>
 					</div>
@@ -94,23 +94,21 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 						<button id="options-next-row-tile" class="arrow" title="&newtabtools.tile-selection.nextrow.tooltip;"></button>
 					</div>
 					<label id="options-url"></label>
-					<label>&newtabtools.tile-thumbnail.label2;</label>
+					<!-- <label>&newtabtools.tile-thumbnail.label2;</label>
 					<div class="options-row">
 						<button id="options-thumb-refresh">&newtabtools.tile-thumbnail.refresh2;</button>
 						<button id="options-thumb-remove">&newtabtools.tile-thumbnail.remove;</button>
 						<button id="options-thumb-save">&newtabtools.tile-thumbnail.save;</button>
-					</div>
-					<label for="options-savedthumb-input">&newtabtools.tile-savedthumb.label;</label>
+					</div> -->
+					<label class="options-row-label" for="options-savedthumb-input">&newtabtools.tile-savedthumb.label;</label>
 					<div class="options-row">
-						<input id="options-savedthumb-input" autocomplete="off" placeholder="&newtabtools.tile-savedthumb.placeholder;" />
-					</div>
-					<div class="options-row">
-						<button id="options-savedthumb-browse">&newtabtools.tile-savedthumb.browse;</button>
+						<!-- <input id="options-savedthumb-input" autocomplete="off" placeholder="&newtabtools.tile-savedthumb.placeholder;" /> -->
+						<input id="options-savedthumb-input" type="file" accept="image/*" />
 						<button id="options-savedthumb-set" disabled="">&newtabtools.tile-savedthumb.set;</button>
 						<button id="options-savedthumb-remove" disabled="">&newtabtools.tile-thumbnail.remove;</button>
 					</div>
-					<label for="options-bgcolor-input">&newtabtools.tile-thumbnail.bgcolor; </label>
 					<div class="options-row">
+						<label style="flex: 1" for="options-bgcolor-input">&newtabtools.tile-thumbnail.bgcolor;</label>
 						<input id="options-bgcolor-input" type="color" />
 						<button id="options-bgcolor-displaybutton">
 							<div id="options-bgcolor-display">&#160;</div>
@@ -118,22 +116,16 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 						<button id="options-bgcolor-set">&newtabtools.tile-savedthumb.set;</button>
 						<button id="options-bgcolor-reset">&newtabtools.tile-thumbnail.remove;</button>
 					</div>
-					<label for="options-title-input">&newtabtools.tile-title.label;</label>
+					<label class="options-row-label" for="options-title-input">&newtabtools.tile-title.label;</label>
 					<div class="options-row">
 						<input id="options-title-input" placeholder="&newtabtools.tile-title.placeholder;" />
-					</div>
-					<div class="options-row">
 						<button id="options-title-set">&newtabtools.tile-title.set;</button>
-						<button id="options-title-reset" disabled="">&newtabtools.tile-title.reset;</button>
 					</div>
 				</fieldset>
 				<fieldset id="options-bg-group">
 					<legend>&newtabtools.bg-header;</legend>
 					<div class="options-row">
-						<input id="options-bg-input" autocomplete="off" placeholder="&newtabtools.bg.placeholder;" />
-					</div>
-					<div class="options-row">
-						<button id="options-bg-browse">&newtabtools.bg.browse;</button>
+						<input id="options-bg-input" type="file" accept="image/*" />
 						<button id="options-bg-set" disabled="">&newtabtools.bg.set;</button>
 						<button id="options-bg-remove" disabled="">&newtabtools.bg.remove;</button>
 					</div>
@@ -199,7 +191,7 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 								</select>
 							</td>
 						</tr>
-						<tr>
+						<!-- <tr>
 							<th>&newtabtools.options.launcher;</th>
 							<td>
 								<select name="launcher">
@@ -210,8 +202,8 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 									<option value="2">&newtabtools.options.launcher.right;</option>
 								</select>
 							</td>
-						</tr>
-						<tr>
+						</tr> -->
+						<!-- <tr>
 							<th></th>
 							<td>
 								<label>
@@ -219,23 +211,23 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 								</label>
 								<button id="historytiles-filter">&newtabtools.filter.button;</button>
 							</td>
-						</tr>
-						<tr>
+						</tr> -->
+						<!-- <tr>
 							<th></th>
 							<td>
 								<label>
 									<input type="checkbox" name="recent.show" />&newtabtools.options.recent;
 								</label>
 							</td>
-						</tr>
-						<tr>
+						</tr> -->
+						<!-- <tr>
 							<th></th>
 							<td>
 								<label>
 									<input type="checkbox" name="thumbs.hidebuttons" inverted="true" />&newtabtools.options.thumb-buttons;
 								</label>
 							</td>
-						</tr>
+						</tr> -->
 						<tr>
 							<th></th>
 							<td>
@@ -244,22 +236,22 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 								</label>
 							</td>
 						</tr>
-						<tr>
+						<!-- <tr>
 							<th></th>
 							<td>
 								<label>
 									<input type="checkbox" name="thumbs.hidefavicons" inverted="true" />&newtabtools.options.favicons;
 								</label>
 							</td>
-						</tr>
-						<tr>
+						</tr> -->
+						<!-- <tr>
 							<th></th>
 							<td>
 								<label>
 									<input type="checkbox" name="thumbs.contain" />&newtabtools.options.thumb-contain;
 								</label>
 							</td>
-						</tr>
+						</tr> -->
 					</table>
 				</fieldset>
 				<div class="spacer"></div>
@@ -276,7 +268,9 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 		</div>
 	</div>
 
-	<script type="text/javascript;version=1.8" src="chrome://newtabtools/content/newTab.js"></script>
-	<script type="text/javascript;version=1.8" src="chrome://newtabtools/content/fx-newTab.js"></script>
+	<script type="text/javascript" src="tiles.js"></script>
+	<script type="text/javascript" src="prefs.js"></script>
+	<script type="text/javascript" src="newTab.js"></script>
+	<script type="text/javascript" src="fx-newTab.js"></script>
 </body>
 </html>

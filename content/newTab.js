@@ -3,46 +3,9 @@ This Source Code Form is subject to the terms of the Mozilla Public
 License, v. 2.0. If a copy of the MPL was not distributed with this file,
 You can obtain one at http://mozilla.org/MPL/2.0/.
 */
-/* globals PinnedLinks, BlockedLinks, Grid, Updater */
-
-/* globals Components, PageThumbsStorage, Services, XPCOMUtils */
-var { classes: Cc, interfaces: Ci, utils: Cu } = Components;
-
-Cu.import('resource://gre/modules/PageThumbs.jsm');
-Cu.import('resource://gre/modules/Services.jsm');
-Cu.import('resource://gre/modules/XPCOMUtils.jsm');
-/* globals GridPrefs, TileData, SavedThumbs, ThumbnailPrefs */
-Cu.import('chrome://newtabtools/content/newTabTools.jsm');
-
-/* globals FileUtils, NetUtil, SessionStore, OS, PageThumbUtils, PlacesUtils, PrivateBrowsingUtils */
-XPCOMUtils.defineLazyModuleGetter(this, 'FileUtils', 'resource://gre/modules/FileUtils.jsm');
-XPCOMUtils.defineLazyModuleGetter(this, 'NetUtil', 'resource://gre/modules/NetUtil.jsm');
-XPCOMUtils.defineLazyModuleGetter(this, 'SessionStore', 'resource:///modules/sessionstore/SessionStore.jsm');
-XPCOMUtils.defineLazyModuleGetter(this, 'OS', 'resource://gre/modules/osfile.jsm');
-XPCOMUtils.defineLazyModuleGetter(this, 'PageThumbUtils', 'resource://gre/modules/PageThumbUtils.jsm');
-XPCOMUtils.defineLazyModuleGetter(this, 'PlacesUtils', 'resource://gre/modules/PlacesUtils.jsm');
-XPCOMUtils.defineLazyModuleGetter(this, 'PrivateBrowsingUtils', 'resource://gre/modules/PrivateBrowsingUtils.jsm');
-
-/* globals autocompleteService */
-if ('@mozilla.org/autocomplete/search;1?name=history' in Cc) {
-	XPCOMUtils.defineLazyServiceGetter(
-		this, 'autocompleteService',
-		'@mozilla.org/autocomplete/search;1?name=history',
-		'nsIAutoCompleteSearch'
-	);
-} else {
-	XPCOMUtils.defineLazyServiceGetter(
-		this, 'autocompleteService',
-		'@mozilla.org/autocomplete/search;1?name=unifiedcomplete',
-		'nsIAutoCompleteSearch'
-	);
-}
+/* globals GridPrefs, Grid, addTile, putTile, setBackground */
 
 var HTML_NAMESPACE = 'http://www.w3.org/1999/xhtml';
-
-function inPrivateBrowsingMode() {
-	return PrivateBrowsingUtils.isContentWindowPrivate(window);
-}
 
 var newTabTools = {
 	_previousAutocompleteString: '',
@@ -88,53 +51,56 @@ var newTabTools = {
 		});
 	},
 	launcherOnClick: function(event) {
-		switch (event.originalTarget.id) {
-		case 'downloads':
-			newTabTools.browserWindow.BrowserDownloadsUI();
-			break;
-		case 'bookmarks':
-			newTabTools.browserWindow.PlacesCommandHook.showPlacesOrganizer('AllBookmarks');
-			break;
-		case 'history':
-			newTabTools.browserWindow.PlacesCommandHook.showPlacesOrganizer('History');
-			break;
-		case 'addons':
-			newTabTools.browserWindow.BrowserOpenAddonsMgr();
-			break;
-		case 'sync':
-			newTabTools.browserWindow.openPreferences('paneSync');
-			break;
-		case 'settingsWin':
-		case 'settingsUnix':
-			newTabTools.browserWindow.openPreferences();
-			break;
-		case 'restorePreviousSession':
-			SessionStore.restoreLastSession();
-			break;
-		}
+		// switch (event.originalTarget.id) {
+		// case 'downloads':
+		// 	newTabTools.browserWindow.BrowserDownloadsUI();
+		// 	break;
+		// case 'bookmarks':
+		// 	newTabTools.browserWindow.PlacesCommandHook.showPlacesOrganizer('AllBookmarks');
+		// 	break;
+		// case 'history':
+		// 	newTabTools.browserWindow.PlacesCommandHook.showPlacesOrganizer('History');
+		// 	break;
+		// case 'addons':
+		// 	newTabTools.browserWindow.BrowserOpenAddonsMgr();
+		// 	break;
+		// case 'sync':
+		// 	newTabTools.browserWindow.openPreferences('paneSync');
+		// 	break;
+		// case 'settingsWin':
+		// case 'settingsUnix':
+		// 	newTabTools.browserWindow.openPreferences();
+		// 	break;
+		// case 'restorePreviousSession':
+		// 	SessionStore.restoreLastSession();
+		// 	break;
+		// }
 	},
 	get selectedSite() {
 		return Grid.sites[this._selectedSiteIndex];
 	},
 	optionsOnClick: function(event) {
-		if (event.originalTarget.disabled) {
+		if (event.target.disabled) {
 			return;
 		}
-		let id = event.originalTarget.id;
+		let id = event.target.id;
 		switch (id) {
+		case 'options-close-button':
+			newTabTools.hideOptions();
+			break;
 		case 'options-pinURL':
 			let link = this.pinURLInput.value;
-			let linkURI = Services.io.newURI(link, null, null);
-			event.originalTarget.disabled = true;
-			PlacesUtils.promisePlaceInfo(linkURI).then(function(info) {
-				newTabTools.pinURL(linkURI.spec, info.title);
-				newTabTools.pinURLInput.value = '';
-				event.originalTarget.disabled = false;
-			}, function() {
-				newTabTools.pinURL(linkURI.spec, '');
-				newTabTools.pinURLInput.value = '';
-				event.originalTarget.disabled = false;
-			}).then(null, Cu.reportError);
+			addTile(link, '').then(tile => {
+				for (let i = 0; i < Grid.sites.length; i++) {
+					if (Grid.sites[i] === null) {
+						Grid.createSite(tile, Grid.cells[i]);
+						tile.position = i;
+						putTile(tile);
+						this.selectedSiteIndex = i;
+						break;
+					}
+				}
+			});
 			break;
 		case 'options-previous-row-tile':
 			this.selectedSiteIndex = (this._selectedSiteIndex - GridPrefs.gridColumns + Grid.cells.length) % Grid.cells.length;
@@ -150,51 +116,28 @@ var newTabTools = {
 		case 'options-next-row-tile':
 			this.selectedSiteIndex = (this._selectedSiteIndex + GridPrefs.gridColumns) % Grid.cells.length;
 			break;
-		case 'options-thumb-refresh':
-			event.originalTarget.disabled = true;
-			SavedThumbs.forceReloadThumbnail(this.selectedSite.url).then(function() {
-				event.originalTarget.disabled = false;
-			});
-			break;
-		case 'options-thumb-remove':
-			this.removeThumbnail(this.selectedSite, false);
-			break;
-		case 'options-thumb-save':
-			SavedThumbs.getThumbnailURL(this.selectedSite.url).then(thumbnailURL => {
-				this.setThumbnail(this.selectedSite, thumbnailURL);
-			});
-			break;
-		case 'options-savedthumb-browse':
-		case 'options-bg-browse':
-			let fp = Cc['@mozilla.org/filepicker;1'].createInstance(Ci.nsIFilePicker);
-			fp.init(window, document.title, Ci.nsIFilePicker.modeOpen);
-			fp.appendFilters(Ci.nsIFilePicker.filterImages);
-			if (fp.show() == Ci.nsIFilePicker.returnOK) {
-				if (id == 'options-savedthumb-browse') {
-					this.setSavedThumbInput.value = fp.fileURL.spec;
-					newTabTools.setSavedThumbButton.disabled = false;
-				} else {
-					this.setBackgroundInput.value = fp.fileURL.spec;
-					newTabTools.setBackgroundButton.disabled = false;
-				}
-			}
-			break;
 		case 'options-savedthumb-set':
-			this.setThumbnail(this.selectedSite, this.setSavedThumbInput.value);
+			this.setThumbnail(this.selectedSite, URL.createObjectURL(this.setSavedThumbInput.files[0]));
+			this.removeSavedThumbButton.disabled = false;
 			break;
 		case 'options-savedthumb-remove':
-			this.removeThumbnail(this.selectedSite, true);
+			this.removeThumbnail(this.selectedSite);
+			this.removeSavedThumbButton.disabled = true;
 			break;
 		case 'options-bgcolor-displaybutton':
 			this.setBgColourInput.click();
 			break;
 		case 'options-bgcolor-set':
-			TileData.set(this.selectedSite.url, 'backgroundColor', this.setBgColourInput.value);
+			this.selectedSite.link.backgroundColor = this.setBgColourInput.value;
+			this.selectedSite.refreshThumbnail();
+			putTile(this.selectedSite.link);
 			this.siteThumbnail.style.backgroundColor = this.setBgColourInput.value;
 			this.resetBgColourButton.disabled = false;
 			break;
 		case 'options-bgcolor-reset':
-			TileData.set(this.selectedSite.url, 'backgroundColor', null);
+			delete this.selectedSite.link.backgroundColor;
+			this.selectedSite.refreshThumbnail();
+			putTile(this.selectedSite.link);
 			this.siteThumbnail.style.backgroundColor =
 				this.setBgColourInput.value =
 				this.setBgColourDisplay.style.backgroundColor = null;
@@ -202,119 +145,97 @@ var newTabTools = {
 				this.resetBgColourButton.disabled = true;
 			break;
 		case 'options-title-set':
-			this.setTitle(this.selectedSite, this.setTitleInput.value);
-			break;
-		case 'options-title-reset':
-			this.setTitle(this.selectedSite, null);
+			this.selectedSite.link.title = this.setTitleInput.value;
+			this.selectedSite._addTitleAndFavicon();
+			putTile(this.selectedSite.link);
 			break;
 		case 'options-bg-set':
-			if (this.setBackgroundInput.value) {
-				NetUtil.asyncFetch({
-					uri: this.setBackgroundInput.value,
-					loadingNode: document,
-					contentPolicyType: Ci.nsIContentPolicyBase.TYPE_IMAGE
-				}, function(inputStream, status) {
-					if (!Components.isSuccessCode(status)) {
-						return;
-					}
-					let fos = FileUtils.openSafeFileOutputStream(this.backgroundImageFile);
-					NetUtil.asyncCopy(inputStream, fos, function() {
-						FileUtils.closeSafeFileOutputStream(fos);
-						Services.obs.notifyObservers(null, 'newtabtools-change', 'background');
-					}.bind(this));
-				}.bind(this));
+			if (this.setBackgroundInput.files.length) {
+				let file = this.setBackgroundInput.files[0];
+				setBackground(file).then(() => {
+					this.refreshBackgroundImage();
+				});
 			}
 			break;
 		case 'options-bg-remove':
-			if (this.backgroundImageFile.exists())
-				this.backgroundImageFile.remove(true);
-			Services.obs.notifyObservers(null, 'newtabtools-change', 'background');
-			break;
-		case 'historytiles-filter':
-			openDialog('chrome://newtabtools/content/filterDialog.xul', null, 'centerscreen,width=450');
+			setBackground().then(() => {
+				this.refreshBackgroundImage();
+			});
 			break;
 		case 'options-donate':
-			let url = 'https://darktrojan.github.io/donate.html?newtabtools';
-			newTabTools.browserWindow.switchToTabHavingURI(url, true);
+			window.open('https://darktrojan.github.io/donate.html?newtabtools');
 			break;
 		}
 	},
 	optionsOnChange: function(event) {
-		if (event.originalTarget.disabled) {
+		if (event.target.disabled) {
 			return;
 		}
-		switch (event.originalTarget.type) {
-		case 'radio':
-		case 'select-one':
-			ThumbnailPrefs.hasBeenSet = false;
-			if (event.originalTarget.name == 'launcher') {
-				this.prefs.setIntPref(event.originalTarget.name, parseInt(event.originalTarget.value, 10));
-			} else {
-				this.prefs.setCharPref(event.originalTarget.name, event.originalTarget.value);
-			}
-			Grid.setThumbnailPrefs();
+
+		let {name, value, checked} = event.originalTarget;
+		switch (name) {
+		case 'theme':
+			GridPrefs.theme = value;
 			break;
-		case 'number':
-			ThumbnailPrefs.hasBeenSet = false; // Prefs set by grid redrawing itself.
-			requestAnimationFrame(this.resizeOptionsThumbnail.bind(this));
-			/* falls through */
-		case 'range':
-			this.prefs.setIntPref(event.originalTarget.name, parseInt(event.originalTarget.value, 10));
+		case 'foreground.opacity':
+			GridPrefs.opacity = parseInt(value, 10);
 			break;
-		case 'checkbox':
-			let checked = event.originalTarget.checked;
-			if (event.originalTarget.hasAttribute('inverted')) {
-				checked = !checked;
-			}
-			this.prefs.setBoolPref(event.originalTarget.name, checked);
+		case 'rows':
+			GridPrefs.gridRows = parseInt(value, 10);
+			break;
+		case 'columns':
+			GridPrefs.gridColumns = parseInt(value, 10);
+			break;
+		case 'grid.margin':
+			GridPrefs.gridMargin = value.split(' ');
+			break;
+		case 'grid.spacing':
+			GridPrefs.gridSpacing = value;
+			break;
+		case 'thumbs.titlesize':
+			GridPrefs.titleSize = value;
+			break;
+		case 'locked':
+			GridPrefs.gridLocked = checked;
 			break;
 		}
 	},
 	pinURL: function(link, title) {
-		let index = Grid.sites.length - 1;
-		for (var i = 0; i < Grid.sites.length; i++) {
-			let s = Grid.sites[i];
-			if (!s || !s.isPinned()) {
-				index = i;
-				break;
-			}
-		}
+		// let index = Grid.sites.length - 1;
+		// for (var i = 0; i < Grid.sites.length; i++) {
+		// 	let s = Grid.sites[i];
+		// 	if (!s || !s.isPinned()) {
+		// 		index = i;
+		// 		break;
+		// 	}
+		// }
 
-		BlockedLinks.unblock(link);
-		PinnedLinks.pin({url: link, title: title}, index);
-		Updater.updateGrid();
+		// BlockedLinks.unblock(link);
+		// PinnedLinks.pin({url: link, title: title}, index);
+		// Updater.updateGrid();
 	},
 	onTileChanged: function(url, whatChanged) {
-		for (let site of Grid.sites) {
-			if (!!site && site.url == url) {
-				switch (whatChanged) {
-				case 'backgroundColor':
-					site._querySelector('.newtab-thumbnail').style.backgroundColor = TileData.get(url, 'backgroundColor');
-					break;
-				case 'thumbnail':
-					site.refreshThumbnail();
-					this.selectedSiteIndex = this._selectedSiteIndex;
-					break;
-				case 'title':
-					site._addTitleAndFavicon();
-					break;
-				}
-			}
-		}
+		// for (let site of Grid.sites) {
+		// 	if (!!site && site.url == url) {
+		// 		switch (whatChanged) {
+		// 		case 'backgroundColor':
+		// 			site._querySelector('.newtab-thumbnail').style.backgroundColor = TileData.get(url, 'backgroundColor');
+		// 			break;
+		// 		case 'thumbnail':
+		// 			site.refreshThumbnail();
+		// 			this.selectedSiteIndex = this._selectedSiteIndex;
+		// 			break;
+		// 		case 'title':
+		// 			site._addTitleAndFavicon();
+		// 			break;
+		// 		}
+		// 	}
+		// }
 	},
 	setThumbnail: function(site, src) {
-		let leafName = SavedThumbs.getThumbnailLeafName(site.url);
-		let path = SavedThumbs.getThumbnailPath(site.url, leafName);
-		let file = FileUtils.File(path);
-		let existed = SavedThumbs.hasSavedThumb(site.url, leafName);
-		if (existed) {
-			file.permissions = 0644;
-			file.remove(true);
-		}
-
 		let image = new Image();
 		image.onload = function() {
-			let [thumbnailWidth, thumbnailHeight] = PageThumbUtils.getThumbnailSize();
+			let [thumbnailWidth, thumbnailHeight] = [200, 200];
 			let scale = Math.min(Math.max(thumbnailWidth / image.width, thumbnailHeight / image.height), 1);
 
 			let canvas = document.createElementNS(HTML_NAMESPACE, 'canvas');
@@ -330,127 +251,110 @@ var newTabTools = {
 			ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
 
 			canvas.toBlob(function(blob) {
-				let reader = new FileReader();
-				reader.onloadend = function() {
-					let inputStream = Cc['@mozilla.org/io/arraybuffer-input-stream;1']
-						.createInstance(Ci.nsIArrayBufferInputStream);
-					inputStream.setData(reader.result, 0, reader.result.byteLength);
-					let outputStream = FileUtils.openSafeFileOutputStream(file);
-					NetUtil.asyncCopy(inputStream, outputStream, function() {
-						FileUtils.closeSafeFileOutputStream(outputStream);
-						SavedThumbs.addSavedThumb(site.url, leafName);
-					});
-				};
-				reader.readAsArrayBuffer(blob);
+				site.link.image = blob;
+				site.refreshThumbnail();
+
+				let thumbnailURL = URL.createObjectURL(site.link.image);
+				newTabTools.siteThumbnail.style.backgroundImage = 'url("' + thumbnailURL + '")';
+
+				putTile(site.link);
 			}, 'image/png');
+		};
+		image.onerror = function(error) {
+			console.error(error);
 		};
 		image.src = src;
 	},
-	removeThumbnail: function(site, saved) {
-		let leafName = SavedThumbs.getThumbnailLeafName(site.url);
-		if (saved) {
-			SavedThumbs.removeSavedThumb(site.url, leafName);
-			this.removeSavedThumbButton.blur();
-		} else {
-			let path = PageThumbsStorage.getFilePathForURL(site.url);
-			let file = FileUtils.File(path);
-			if (file.exists()) {
-				file.permissions = 0644;
-				file.remove(true);
-			}
-			site.refreshThumbnail();
-			this.siteThumbnail.style.backgroundImage = null;
-			this.removeThumbButton.blur();
-			this.removeThumbButton.disabled =
-				this.saveThumbButton.disabled = true;
-		}
-	},
-	setTitle: function(site, title) {
-		TileData.set(site.url, 'title', title);
-		this.resetTitleButton.disabled = !title;
-		if (!title) {
-			this.setTitleInput.value = site.title;
-			this.resetTitleButton.blur();
-		}
-	},
-	get backgroundImageFile() {
-		return FileUtils.getFile('ProfD', ['newtab-background'], true);
-	},
-	get backgroundImageURL() {
-		return Services.io.newFileURI(this.backgroundImageFile);
+	removeThumbnail: function(site) {
+		delete site.link.image;
+		site.refreshThumbnail();
+
+		this.siteThumbnail.style.backgroundImage = null;
+
+		putTile(site.link);
 	},
 	refreshBackgroundImage: function() {
-		if (this.backgroundImageFile.exists()) {
-			document.body.style.backgroundImage =
-				'url("' + this.backgroundImageURL.spec + '?' + this.backgroundImageFile.lastModifiedTime + '")';
+		getBackground().then(background => {
+			if (!background) {
+				document.body.style.backgroundImage = null;
+				this.removeBackgroundButton.disabled = true;
+				this.removeBackgroundButton.blur();
+				return;
+			}
+
+			document.body.style.backgroundImage = 'url("' + URL.createObjectURL(background) + '")';
 			this.removeBackgroundButton.disabled = false;
-		} else {
-			document.body.style.backgroundImage = null;
-			this.removeBackgroundButton.disabled = true;
-			this.removeBackgroundButton.blur();
-		}
+		});
 	},
-	updateUI: function() {
-		let launcherPosition = this.prefs.getIntPref('launcher');
-		document.querySelector('[name="launcher"]').value = launcherPosition;
-		if (launcherPosition) {
-			let positionNames = ['top', 'right', 'bottom', 'left'];
-			document.documentElement.setAttribute('launcher', positionNames[launcherPosition - 1]);
-		} else {
-			document.documentElement.removeAttribute('launcher');
+	updateUI: function(keys) {
+		// let launcherPosition = this.prefs.getIntPref('launcher');
+		// document.querySelector('[name="launcher"]').value = launcherPosition;
+		// if (launcherPosition) {
+		// 	let positionNames = ['top', 'right', 'bottom', 'left'];
+		// 	document.documentElement.setAttribute('launcher', positionNames[launcherPosition - 1]);
+		// } else {
+		// 	document.documentElement.removeAttribute('launcher');
+		// }
+
+		if (!keys || keys.includes('theme')) {
+			let theme = GridPrefs.theme;
+			this.themePref.querySelector('[value="' + theme + '"]').checked = true;
+			document.documentElement.setAttribute('theme', theme);
 		}
 
-		let theme = this.prefs.getCharPref('theme');
-		this.themePref.querySelector('[value="' + theme + '"]').checked = true;
-		document.documentElement.setAttribute('theme', theme);
+		// let containThumbs = this.prefs.getBoolPref('thumbs.contain');
+		// document.querySelector('[name="thumbs.contain"]').checked = containThumbs;
+		// document.documentElement.classList[containThumbs ? 'add' : 'remove']('containThumbs');
 
-		let containThumbs = this.prefs.getBoolPref('thumbs.contain');
-		document.querySelector('[name="thumbs.contain"]').checked = containThumbs;
-		document.documentElement.classList[containThumbs ? 'add' : 'remove']('containThumbs');
+		// let hideButtons = this.prefs.getBoolPref('thumbs.hidebuttons');
+		// document.querySelector('[name="thumbs.hidebuttons"]').checked = !hideButtons;
+		// document.documentElement.classList[hideButtons ? 'add' : 'remove']('hideButtons');
 
-		let hideButtons = this.prefs.getBoolPref('thumbs.hidebuttons');
-		document.querySelector('[name="thumbs.hidebuttons"]').checked = !hideButtons;
-		document.documentElement.classList[hideButtons ? 'add' : 'remove']('hideButtons');
-
-		let locked = this.prefs.getBoolPref('locked');
-		document.querySelector('[name="locked"]').checked = locked;
-
-		let hideFavicons = this.prefs.getBoolPref('thumbs.hidefavicons');
-		document.querySelector('[name="thumbs.hidefavicons"]').checked = !hideFavicons;
-		document.documentElement.classList[hideFavicons ? 'add' : 'remove']('hideFavicons');
-
-		let titleSize = this.prefs.getCharPref('thumbs.titlesize');
-		document.querySelector('[name="thumbs.titlesize"]').value = titleSize;
-		document.documentElement.setAttribute('titlesize', titleSize);
-
-		let gridMargin = ['small', 'small', 'small', 'small'];
-		let prefGridMargin = this.prefs.getCharPref('grid.margin').split(' ', 4);
-		if (prefGridMargin.length == 4) {
-			gridMargin = prefGridMargin;
+		if (!keys || keys.includes('locked')) {
+			let locked = GridPrefs.locked;
+			document.querySelector('[name="locked"]').checked = locked;
 		}
-		document.querySelector('[name="grid.margin"]').value = gridMargin.join(' ');
-		this.setGridMargin('top', gridMargin[0]);
-		this.setGridMargin('right-top', gridMargin[1]);
-		this.setGridMargin('right-bottom', gridMargin[1]);
-		this.setGridMargin('bottom', gridMargin[2]);
-		this.setGridMargin('left-bottom', gridMargin[3]);
-		this.setGridMargin('left-top', gridMargin[3]);
 
-		let gridSpacing = this.prefs.getCharPref('grid.spacing');
-		document.querySelector('[name="grid.spacing"]').value = gridSpacing;
-		document.documentElement.setAttribute('spacing', gridSpacing);
+		// let hideFavicons = this.prefs.getBoolPref('thumbs.hidefavicons');
+		// document.querySelector('[name="thumbs.hidefavicons"]').checked = !hideFavicons;
+		// document.documentElement.classList[hideFavicons ? 'add' : 'remove']('hideFavicons');
 
-		let opacity = Math.max(0, Math.min(100, this.prefs.getIntPref('foreground.opacity')));
-		document.querySelector('[name="foreground.opacity"]').value = opacity;
-		document.documentElement.style.setProperty('--opacity', opacity / 100);
+		if (!keys || keys.includes('titleSize')) {
+			let titleSize = GridPrefs.titleSize;
+			document.querySelector('[name="thumbs.titlesize"]').value = titleSize;
+			document.documentElement.setAttribute('titlesize', titleSize);
+		}
 
-		let showHistory = this.prefs.getBoolPref('historytiles.show');
-		document.querySelector('[name="historytiles.show"]').checked = showHistory;
-		document.getElementById('historytiles-filter').disabled = !showHistory;
+		if (!keys || keys.includes('gridMargin')) {
+			let gridMargin = GridPrefs.gridMargin;
+			document.querySelector('[name="grid.margin"]').value = gridMargin.join(' ');
+			this.setGridMargin('top', gridMargin[0]);
+			this.setGridMargin('right-top', gridMargin[1]);
+			this.setGridMargin('right-bottom', gridMargin[1]);
+			this.setGridMargin('bottom', gridMargin[2]);
+			this.setGridMargin('left-bottom', gridMargin[3]);
+			this.setGridMargin('left-top', gridMargin[3]);
+		}
 
-		let showRecent = this.prefs.getBoolPref('recent.show');
-		document.querySelector('[name="recent.show"]').checked = showRecent;
-		this.trimRecent();
+		if (!keys || keys.includes('gridSpacing')) {
+			let gridSpacing = GridPrefs.gridSpacing;
+			document.querySelector('[name="grid.spacing"]').value = gridSpacing;
+			document.documentElement.setAttribute('spacing', gridSpacing);
+		}
+
+		if (!keys || keys.includes('opacity')) {
+			let opacity = Math.max(0, Math.min(100, GridPrefs.opacity));
+			document.querySelector('[name="foreground.opacity"]').value = opacity;
+			document.documentElement.style.setProperty('--opacity', opacity / 100);
+		}
+
+		// let showHistory = this.prefs.getBoolPref('historytiles.show');
+		// document.querySelector('[name="historytiles.show"]').checked = showHistory;
+		// document.getElementById('historytiles-filter').disabled = !showHistory;
+
+		// let showRecent = this.prefs.getBoolPref('recent.show');
+		// document.querySelector('[name="recent.show"]').checked = showRecent;
+		// this.trimRecent();
 
 		if ('Grid' in window && 'cacheCellPositions' in Grid) {
 			requestAnimationFrame(Grid.cacheCellPositions);
@@ -473,119 +377,118 @@ var newTabTools = {
 		}
 	},
 	startRecent: function() {
-		let tabContainer = this.browserWindow.gBrowser.tabContainer;
-		let handler = this.refreshRecent.bind(this);
-		tabContainer.addEventListener('TabOpen', handler, false);
-		tabContainer.addEventListener('TabClose', handler, false);
+		// let tabContainer = this.browserWindow.gBrowser.tabContainer;
+		// let handler = this.refreshRecent.bind(this);
+		// tabContainer.addEventListener('TabOpen', handler, false);
+		// tabContainer.addEventListener('TabClose', handler, false);
 
-		window.addEventListener('unload', function() {
-			tabContainer.removeEventListener('TabOpen', handler, false);
-			tabContainer.removeEventListener('TabClose', handler, false);
-		}, false);
-		handler();
+		// window.addEventListener('unload', function() {
+		// 	tabContainer.removeEventListener('TabOpen', handler, false);
+		// 	tabContainer.removeEventListener('TabClose', handler, false);
+		// }, false);
+		// handler();
 
-		let previousWidth = window.innerWidth;
-		window.addEventListener('resize', () => {
-			if (window.innerWidth != previousWidth) {
-				previousWidth = window.innerWidth;
-				this.trimRecent();
-			}
-		});
+		// let previousWidth = window.innerWidth;
+		// window.addEventListener('resize', () => {
+		// 	if (window.innerWidth != previousWidth) {
+		// 		previousWidth = window.innerWidth;
+		// 		this.trimRecent();
+		// 	}
+		// });
 	},
 	refreshRecent: function(event) {
-		if (event && event.originalTarget.linkedBrowser.contentWindow == window) {
-			return;
-		}
+		// if (event && event.originalTarget.linkedBrowser.contentWindow == window) {
+		// 	return;
+		// }
 
-		if (!this.prefs.getBoolPref('recent.show')) {
-			this.recentList.hidden = true;
-			return;
-		}
+		// if (!this.prefs.getBoolPref('recent.show')) {
+		// 	this.recentList.hidden = true;
+		// 	return;
+		// }
 
-		for (let element of this.recentList.querySelectorAll('a')) {
-			this.recentList.removeChild(element);
-		}
+		// for (let element of this.recentList.querySelectorAll('a')) {
+		// 	this.recentList.removeChild(element);
+		// }
 
-		let added = 0;
-		let undoItems = JSON.parse(SessionStore.getClosedTabData(this.browserWindow));
-		for (let i = 0; i < undoItems.length; i++) {
-			let item = undoItems[i];
-			let index = i;
-			let iconURL;
-			let url;
+		// let added = 0;
+		// let undoItems = JSON.parse(SessionStore.getClosedTabData(this.browserWindow));
+		// for (let i = 0; i < undoItems.length; i++) {
+		// 	let item = undoItems[i];
+		// 	let index = i;
+		// 	let iconURL;
+		// 	let url;
 
-			if (item.image) {
-				iconURL = item.image;
-				if (/^https?:/.test(iconURL)) {
-					iconURL = 'moz-anno:favicon:' + iconURL;
-				}
-			} else {
-				iconURL = 'chrome://mozapps/skin/places/defaultFavicon.png';
-			}
+		// 	if (item.image) {
+		// 		iconURL = item.image;
+		// 		if (/^https?:/.test(iconURL)) {
+		// 			iconURL = 'moz-anno:favicon:' + iconURL;
+		// 		}
+		// 	} else {
+		// 		iconURL = 'chrome://mozapps/skin/places/defaultFavicon.png';
+		// 	}
 
-			let tabData = item.state;
-			let activeIndex = (tabData.index || tabData.entries.length) - 1;
-			if (activeIndex >= 0 && tabData.entries[activeIndex]) {
-				url = tabData.entries[activeIndex].url;
-				if (url == 'about:newtab' && tabData.entries.length == 1) {
-					continue;
-				}
-			}
+		// 	let tabData = item.state;
+		// 	let activeIndex = (tabData.index || tabData.entries.length) - 1;
+		// 	if (activeIndex >= 0 && tabData.entries[activeIndex]) {
+		// 		url = tabData.entries[activeIndex].url;
+		// 		if (url == 'about:newtab' && tabData.entries.length == 1) {
+		// 			continue;
+		// 		}
+		// 	}
 
-			let a = document.createElementNS(HTML_NAMESPACE, 'a');
-			a.href = url;
-			a.className = 'recent';
-			a.title = (item.title == url ? item.title : item.title + '\n' + url);
-			a.onclick = function() {
-				newTabTools.browserWindow.undoCloseTab(index);
-				return false;
-			}; // jshint ignore:line
-			let img = document.createElementNS(HTML_NAMESPACE, 'img');
-			img.className = 'favicon';
-			img.src = iconURL;
-			a.appendChild(img);
-			a.appendChild(document.createTextNode(item.title));
-			this.recentList.appendChild(a);
-			added++;
-		}
-		this.trimRecent();
-		this.recentList.hidden = !added;
+		// 	let a = document.createElementNS(HTML_NAMESPACE, 'a');
+		// 	a.href = url;
+		// 	a.className = 'recent';
+		// 	a.title = (item.title == url ? item.title : item.title + '\n' + url);
+		// 	a.onclick = function() {
+		// 		newTabTools.browserWindow.undoCloseTab(index);
+		// 		return false;
+		// 	}; // jshint ignore:line
+		// 	let img = document.createElementNS(HTML_NAMESPACE, 'img');
+		// 	img.className = 'favicon';
+		// 	img.src = iconURL;
+		// 	a.appendChild(img);
+		// 	a.appendChild(document.createTextNode(item.title));
+		// 	this.recentList.appendChild(a);
+		// 	added++;
+		// }
+		// this.trimRecent();
+		// this.recentList.hidden = !added;
 	},
 	trimRecent: function() {
-		this.recentList.style.width = '0';
+		// this.recentList.style.width = '0';
 
-		let width = this.recentListOuter.clientWidth;
-		let elements = document.querySelectorAll('.recent');
+		// let width = this.recentListOuter.clientWidth;
+		// let elements = document.querySelectorAll('.recent');
 
-		for (let recent of elements) {
-			// see .recent
-			let right = recent.offsetLeft + recent.offsetWidth - this.recentList.offsetLeft + 4;
-			if (right == 4) {
-				requestAnimationFrame(this.trimRecent.bind(this));
-				return;
-			}
-			if (right <= width) {
-				this.recentList.style.width = right + 'px';
-			} else {
-				break;
-			}
-		}
+		// for (let recent of elements) {
+		// 	// see .recent
+		// 	let right = recent.offsetLeft + recent.offsetWidth - this.recentList.offsetLeft + 4;
+		// 	if (right == 4) {
+		// 		requestAnimationFrame(this.trimRecent.bind(this));
+		// 		return;
+		// 	}
+		// 	if (right <= width) {
+		// 		this.recentList.style.width = right + 'px';
+		// 	} else {
+		// 		break;
+		// 	}
+		// }
 	},
 	onVisible: function() {
 		this.startRecent();
-		if (!this.prefs.getBoolPref('optionspointershown')) {
-			this.optionsTogglePointer.hidden = false;
-			this.optionsTogglePointer.style.animationPlayState = 'running';
-		}
+		// if (!this.prefs.getBoolPref('optionspointershown')) {
+		// 	this.optionsTogglePointer.hidden = false;
+		// 	this.optionsTogglePointer.style.animationPlayState = 'running';
+		// }
 		this.onVisible = function() {};
 	},
 	set selectedSiteIndex(index) { // jshint ignore:line
 		this._selectedSiteIndex = index;
 		let site = this.selectedSite;
-		let disabled = site == null;
+		let disabled = site === null;
 
 		this.setSavedThumbInput.value = '';
-		this.browseSavedThumbButton.disabled =
 			this.setSavedThumbInput.disabled =
 			this.setTitleInput.disabled =
 			this.setTitleButton.disabled =
@@ -595,64 +498,48 @@ var newTabTools = {
 			this.siteThumbnail.style.backgroundImage =
 				this.siteThumbnail.style.backgroundColor =
 				this.setBgColourDisplay.style.backgroundColor = null;
-			this.siteURL.textContent = this.strings.GetStringFromName('tileurl.empty');
+			this.siteURL.textContent = '';// this.strings.GetStringFromName('tileurl.empty');
 			this.setTitleInput.value = '';
-			this.captureThumbButton.disabled =
-				this.removeThumbButton.disabled =
-				this.saveThumbButton.disabled =
-				this.removeSavedThumbButton.disabled =
+			this.removeSavedThumbButton.disabled =
 				this.setBgColourButton.disabled =
-				this.resetBgColourButton.disabled =
-				this.resetTitleButton.disabled = true;
+				this.resetBgColourButton.disabled = true;
 			return;
 		}
 
-		SavedThumbs.getThumbnailURL(site.url).then((thumbnail) => {
-			this.siteThumbnail.style.backgroundImage = 'url("' + thumbnail + '")';
-			if (thumbnail.startsWith('file:')) {
-				this.captureThumbButton.disabled =
-					this.removeThumbButton.disabled =
-					this.saveThumbButton.disabled = true;
-				this.removeSavedThumbButton.disabled = false;
-				this.siteThumbnail.classList.add('custom-thumbnail');
-			} else {
-				OS.File.exists(PageThumbsStorage.getFilePathForURL(site.url)).then((exists) => {
-					this.captureThumbButton.disabled = false;
-					this.removeThumbButton.disabled =
-						this.saveThumbButton.disabled = !exists;
-				});
-				this.removeSavedThumbButton.disabled = true;
-				this.siteThumbnail.classList.remove('custom-thumbnail');
-			}
-		});
+		if (site.link.image) {
+			let thumbnailURL = URL.createObjectURL(site.link.image);
+			this.siteThumbnail.style.backgroundImage = 'url("' + thumbnailURL + '")';
+			this.removeSavedThumbButton.disabled = false;
+		} else {
+			this.siteThumbnail.style.backgroundImage = null;
+			this.removeSavedThumbButton.disabled = true;
+		}
 
 		let { gridRows, gridColumns } = GridPrefs;
 		let row = Math.floor(index / gridColumns);
 		let column = index % gridColumns;
-		this.tilePreviousRow.style.opacity = row == 0 ? 0.25 : null;
-		this.tilePrevious.style.opacity = column == 0 ? 0.25 : null;
+		this.tilePreviousRow.style.opacity = row === 0 ? 0.25 : null;
+		this.tilePrevious.style.opacity = column === 0 ? 0.25 : null;
 		this.tileNext.style.opacity = (column + 1 == gridColumns) ? 0.25 : null;
 		this.tileNextRow.style.opacity = (row + 1 == gridRows) ? 0.25 : null;
 
 		this.siteURL.textContent = site.url;
-		let backgroundColor = TileData.get(site.url, 'backgroundColor');
+		let backgroundColor = site.link.backgroundColor;
 		this.siteThumbnail.style.backgroundColor =
 			this.setBgColourInput.value =
-			this.setBgColourDisplay.style.backgroundColor = backgroundColor;
+			this.setBgColourDisplay.style.backgroundColor = backgroundColor || null;
 		this.setBgColourButton.disabled =
 			this.resetBgColourButton.disabled = !backgroundColor;
-		let title = TileData.get(site.url, 'title');
-		this.setTitleInput.value = title || site.title || site.url;
-		this.resetTitleButton.disabled = title === null;
+		this.setTitleInput.value = site.title || site.url;
 	},
 	toggleOptions: function() {
 		if (document.documentElement.hasAttribute('options-hidden')) {
 			this.optionsTogglePointer.hidden = true;
-			this.prefs.setBoolPref('optionspointershown', true);
+			// this.prefs.setBoolPref('optionspointershown', true);
 			document.documentElement.removeAttribute('options-hidden');
 			this.selectedSiteIndex = 0;
 			this.resizeOptionsThumbnail();
-			this.pinURLInput.focus();
+			// this.pinURLInput.focus();
 		} else {
 			this.hideOptions();
 		}
@@ -661,7 +548,7 @@ var newTabTools = {
 		document.documentElement.setAttribute('options-hidden', 'true');
 	},
 	resizeOptionsThumbnail: function() {
-		let node = Grid._cells[0]._node.querySelector('.newtab-thumbnail');
+		let node = Grid._node.querySelector('.newtab-thumbnail');
 		let ratio = node.offsetWidth / node.offsetHeight;
 		if (ratio > 1.6666) {
 			this.siteThumbnail.style.width = '250px';
@@ -674,27 +561,27 @@ var newTabTools = {
 };
 
 (function() {
-	function getTopWindow() {
-		return window.QueryInterface(Ci.nsIInterfaceRequestor)
-		.getInterface(Ci.nsIWebNavigation)
-		.QueryInterface(Ci.nsIDocShellTreeItem)
-		.rootTreeItem
-		.QueryInterface(Ci.nsIInterfaceRequestor)
-		.getInterface(Ci.nsIDOMWindow)
-		.wrappedJSObject;
-	}
+	// function getTopWindow() {
+	// 	return window.QueryInterface(Ci.nsIInterfaceRequestor)
+	// 	.getInterface(Ci.nsIWebNavigation)
+	// 	.QueryInterface(Ci.nsIDocShellTreeItem)
+	// 	.rootTreeItem
+	// 	.QueryInterface(Ci.nsIInterfaceRequestor)
+	// 	.getInterface(Ci.nsIDOMWindow)
+	// 	.wrappedJSObject;
+	// }
 
-	XPCOMUtils.defineLazyGetter(newTabTools, 'browserWindow', function() {
-		return getTopWindow();
-	});
+	// XPCOMUtils.defineLazyGetter(newTabTools, 'browserWindow', function() {
+	// 	return getTopWindow();
+	// });
 
-	XPCOMUtils.defineLazyGetter(newTabTools, 'prefs', function() {
-		return Services.prefs.getBranch('extensions.newtabtools.');
-	});
+	// XPCOMUtils.defineLazyGetter(newTabTools, 'prefs', function() {
+	// 	return Services.prefs.getBranch('extensions.newtabtools.');
+	// });
 
-	XPCOMUtils.defineLazyGetter(newTabTools, 'strings', function() {
-		return Services.strings.createBundle('chrome://newtabtools/locale/newTabTools.properties');
-	});
+	// XPCOMUtils.defineLazyGetter(newTabTools, 'strings', function() {
+	// 	return Services.strings.createBundle('chrome://newtabtools/locale/newTabTools.properties');
+	// });
 
 	let uiElements = {
 		'page': 'newtab-scrollbox', // used in fx-newTab.js
@@ -709,11 +596,7 @@ var newTabTools = {
 		'tileNextRow': 'options-next-row-tile',
 		'siteThumbnail': 'options-thumbnail',
 		'siteURL': 'options-url',
-		'captureThumbButton': 'options-thumb-refresh',
-		'removeThumbButton': 'options-thumb-remove',
-		'saveThumbButton': 'options-thumb-save',
 		'setSavedThumbInput': 'options-savedthumb-input',
-		'browseSavedThumbButton': 'options-savedthumb-browse',
 		'setSavedThumbButton': 'options-savedthumb-set',
 		'removeSavedThumbButton': 'options-savedthumb-remove',
 		'setBgColourInput': 'options-bgcolor-input',
@@ -721,9 +604,7 @@ var newTabTools = {
 		'setBgColourButton': 'options-bgcolor-set',
 		'resetBgColourButton': 'options-bgcolor-reset',
 		'setTitleInput': 'options-title-input',
-		'resetTitleButton': 'options-title-reset',
 		'setTitleButton': 'options-title-set',
-		'backgroundOptions': 'options-bg-group',
 		'setBackgroundInput': 'options-bg-input',
 		'setBackgroundButton': 'options-bg-set',
 		'removeBackgroundButton': 'options-bg-remove',
@@ -735,16 +616,16 @@ var newTabTools = {
 	};
 	for (let key in uiElements) {
 		let value = uiElements[key];
-		XPCOMUtils.defineLazyGetter(newTabTools, key, () => document.getElementById(value));
+		newTabTools[key] = document.getElementById(value);
 	}
 
-	if (Services.appinfo.OS == 'WINNT') {
-		document.getElementById('settingsUnix').style.display = 'none';
-		newTabTools.optionsToggleButton.title = document.getElementById('settingsWin').textContent;
-	} else {
-		document.getElementById('settingsWin').style.display = 'none';
-		newTabTools.optionsToggleButton.title = document.getElementById('settingsUnix').textContent;
-	}
+	// if (Services.appinfo.OS == 'WINNT') {
+	// 	document.getElementById('settingsUnix').style.display = 'none';
+	// 	newTabTools.optionsToggleButton.title = document.getElementById('settingsWin').textContent;
+	// } else {
+	// 	document.getElementById('settingsWin').style.display = 'none';
+	// 	newTabTools.optionsToggleButton.title = document.getElementById('settingsUnix').textContent;
+	// }
 
 	function keyUpHandler(event) {
 		if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].indexOf(event.key) > -1) {
@@ -755,6 +636,7 @@ var newTabTools = {
 	}
 
 	newTabTools.optionsToggleButton.addEventListener('click', newTabTools.toggleOptions.bind(newTabTools), false);
+	newTabTools.optionsBackground.addEventListener('click', newTabTools.hideOptions.bind(newTabTools));
 	newTabTools.optionsPane.addEventListener('click', newTabTools.optionsOnClick.bind(newTabTools), false);
 	newTabTools.optionsPane.addEventListener('change', newTabTools.optionsOnChange.bind(newTabTools), false);
 	for (let c of newTabTools.optionsPane.querySelectorAll('select, input[type="range"]')) {
@@ -762,14 +644,16 @@ var newTabTools = {
 	}
 	newTabTools.launcher.addEventListener('click', newTabTools.launcherOnClick, false);
 	newTabTools.setSavedThumbInput.addEventListener('input', function() {
-		newTabTools.setSavedThumbButton.disabled = !/^(file|ftp|http|https):\/\//.exec(this.value);
+		// newTabTools.setSavedThumbButton.disabled = !/^(file|ftp|http|https):\/\//.exec(this.value);
+		newTabTools.setSavedThumbButton.disabled = !this.files.length;
 	});
 	newTabTools.setBgColourInput.addEventListener('change', function() {
 		newTabTools.setBgColourDisplay.style.backgroundColor = this.value;
 		newTabTools.setBgColourButton.disabled = false;
 	});
 	newTabTools.setBackgroundInput.addEventListener('input', function() {
-		newTabTools.setBackgroundButton.disabled = !/^(file|ftp|http|https):\/\//.exec(this.value);
+		// newTabTools.setBackgroundButton.disabled = !/^(file|ftp|http|https):\/\//.exec(this.value);
+		newTabTools.setBackgroundButton.disabled = !this.files.length;
 	});
 	window.addEventListener('keypress', function(event) {
 		if (event.keyCode == 27) {
@@ -777,24 +661,20 @@ var newTabTools = {
 		}
 	});
 
-	newTabTools.refreshBackgroundImage();
-	newTabTools.updateUI();
-	newTabTools.updateGridPrefs();
-
 	let preloaded = document.visibilityState == 'hidden';
 	if (!preloaded) {
 		newTabTools.onVisible();
 	}
 
-	SessionStore.promiseInitialized.then(function() {
-		if (SessionStore.canRestoreLastSession && !inPrivateBrowsingMode()) {
-			newTabTools.launcher.setAttribute('session', 'true');
-			Services.obs.addObserver({
-				observe: function() {
-					newTabTools.launcher.removeAttribute('session');
-				},
-				QueryInterface: XPCOMUtils.generateQI([Ci.nsIObserver, Ci.nsISupportsWeakReference])
-			}, 'sessionstore-last-session-cleared', true);
-		}
-	});
+	// SessionStore.promiseInitialized.then(function() {
+	// 	if (SessionStore.canRestoreLastSession && !inPrivateBrowsingMode()) {
+	// 		newTabTools.launcher.setAttribute('session', 'true');
+	// 		Services.obs.addObserver({
+	// 			observe: function() {
+	// 				newTabTools.launcher.removeAttribute('session');
+	// 			},
+	// 			QueryInterface: XPCOMUtils.generateQI([Ci.nsIObserver, Ci.nsISupportsWeakReference])
+	// 		}, 'sessionstore-last-session-cleared', true);
+	// 	}
+	// });
 })();

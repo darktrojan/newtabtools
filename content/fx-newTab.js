@@ -1,29 +1,30 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this file,
  * You can obtain one at http://mozilla.org/MPL/2.0/. */
-/* globals Services, XPCOMUtils, TileData, SavedThumbs, -length */
-/* globals Ci, Cu, HTML_NAMESPACE, inPrivateBrowsingMode, GridPrefs, newTabTools */
 
-/* globals BackgroundPageThumbs, NewTabUtils, NewTabToolsLinks, ThumbnailPrefs */
-Cu.import('resource://gre/modules/BackgroundPageThumbs.jsm');
-Cu.import('resource://gre/modules/NewTabUtils.jsm');
+/* globals DOMRect, GridPrefs, getAllTiles, initDB, newTabTools, putTile */
+DOMRect.prototype.isEmpty = function() {
+	return this.left >= this.right || this.top >= this.bottom;
+};
 
-/* globals Rect, faviconService, StringBundle */
-XPCOMUtils.defineLazyModuleGetter(this, 'Rect', 'resource://gre/modules/Geometry.jsm');
-XPCOMUtils.defineLazyServiceGetter(this, 'faviconService', '@mozilla.org/browser/favicon-service;1', 'mozIAsyncFavicons');
-XPCOMUtils.defineLazyGetter(this, 'StringBundle', function() {
-	return Services.strings.createBundle('chrome://browser/locale/newTab.properties');
-});
+DOMRect.prototype.intersect = function(other) {
+    if (this.isEmpty() || other.isEmpty()) {
+		return new DOMRect(0, 0, 0, 0);
+	}
 
-var {
-	links: Links,
-	allPages: AllPages,
-	linkChecker: LinkChecker,
-	pinnedLinks: PinnedLinks,
-	blockedLinks: BlockedLinks
-} = NewTabUtils;
+	let x1 = Math.max(this.left, other.left);
+	let x2 = Math.min(this.right, other.right);
+	let y1 = Math.max(this.top, other.top);
+	let y2 = Math.min(this.bottom, other.bottom);
+	// If width or height is 0, the intersection was empty.
+	return new DOMRect(x1, y1, Math.max(0, x2 - x1), Math.max(0, y2 - y1));
+};
 
-function newTabString(name) { return StringBundle.GetStringFromName('newtab.' + name); }
+var HTML_NAMESPACE = 'http://www.w3.org/1999/xhtml';
+
+function newTabString(name) {
+	return name;
+}
 
 /**
  * This singleton allows to transform the grid by repositioning a site's node
@@ -39,7 +40,7 @@ var Transformation = {
 	getNodePosition: function Transformation_getNodePosition(node) {
 		let {left, top, width, height} = node.getBoundingClientRect();
 		let {offsetLeft, offsetTop} = newTabTools.page.firstElementChild;
-		return new Rect(left - offsetLeft, top - offsetTop, width, height);
+		return new DOMRect(left - offsetLeft, top - offsetTop, width, height);
 	},
 
 	/**
@@ -279,56 +280,9 @@ var Page = {
 	   * Initializes the page.
 	   */
 	init: function Page_init() {
-		// Add ourselves to the list of pages to receive notifications.
-		AllPages.register(this);
-
-		// Listen for 'unload' to unregister this page.
-		addEventListener('unload', this, false);
-
-		// Listen for toggle button clicks.
-		let button = document.getElementById('newtab-toggle');
-		button.addEventListener('click', this, false);
-
-		// Check if the new tab feature is enabled.
-		let enabled = AllPages.enabled;
-		if (enabled)
-			this._init();
-
-		this._updateAttributes(enabled);
+		this._init();
 
 		addEventListener('resize', Grid.cacheCellPositions);
-	},
-
-	/**
-	   * True if the page is allowed to capture thumbnails using the background
-	   * thumbnail service.
-	   */
-	get allowBackgroundCaptures() {
-		return document.documentElement.getAttribute('allow-background-captures') ==
-		'true';
-	},
-
-	/**
-	   * Listens for notifications specific to this page.
-	   */
-	observe: function Page_observe(subject, topic, data) {
-		if (topic == 'nsPref:changed') {
-			let enabled = AllPages.enabled;
-			this._updateAttributes(enabled);
-
-			// Initialize the whole page if we haven't done that, yet.
-			if (enabled) {
-				this._init();
-			} else {
-				UndoDialog.hide();
-			}
-		} else if (topic == 'page-thumbnail:create' && Grid.ready) {
-			for (let site of Grid.sites) {
-				if (site && site.url === data) {
-					site.refreshThumbnail();
-				}
-			}
-		}
 	},
 
 	/**
@@ -359,52 +313,10 @@ var Page = {
 
 		this._initialized = true;
 
-		this._mutationObserver = new MutationObserver(() => {
-			if (this.allowBackgroundCaptures) {
-				for (let site of Grid.sites) {
-					if (site) {
-						site.captureIfMissing();
-					}
-				}
-			}
-		});
-		this._mutationObserver.observe(document.documentElement, {
-			attributes: true,
-			attributeFilter: ['allow-background-captures'],
-		});
+		Grid.init();
 
-		Links.populateCache(function() {
-			// Initialize and render the grid.
-			Grid.init();
-
-			// Initialize the drop target shim.
-			DropTargetShim.init();
-
-		}.bind(this));
-	},
-
-	/**
-	   * Updates the 'page-disabled' attributes of the respective DOM nodes.
-	   * @param value Whether the New Tab Page is enabled or not.
-	   */
-	_updateAttributes: function Page_updateAttributes(value) {
-		// Set the nodes' states.
-		let nodeSelector = '#newtab-scrollbox, #newtab-toggle, #newtab-grid';
-		for (let node of document.querySelectorAll(nodeSelector)) {
-			if (value)
-				node.removeAttribute('page-disabled');
-			else
-				node.setAttribute('page-disabled', 'true');
-		}
-
-		// Enables/disables the control and link elements.
-		let inputSelector = '.newtab-control, .newtab-link';
-		for (let input of document.querySelectorAll(inputSelector)) {
-			if (value)
-				input.removeAttribute('tabindex');
-			else
-				input.setAttribute('tabindex', '-1');
-		}
+		// Initialize the drop target shim.
+		DropTargetShim.init();
 	},
 
 	/**
@@ -412,14 +324,6 @@ var Page = {
 	   */
 	handleEvent: function Page_handleEvent(event) {
 		switch (event.type) {
-		case 'unload':
-			if (this._mutationObserver)
-				this._mutationObserver.disconnect();
-			AllPages.unregister(this);
-			break;
-		case 'click':
-			AllPages.enabled = !AllPages.enabled;
-			break;
 		case 'dragover':
 			if (Drag.isValid(event) && Drag.draggedSite)
 				event.preventDefault();
@@ -580,13 +484,15 @@ var Grid = {
 	_renderSites: function Grid_renderSites() {
 		let cells = this.cells;
 		// Put sites into the cells.
-		let links = NewTabToolsLinks.getLinks();
-		let length = Math.min(links.length, cells.length);
+		getAllTiles().then(links => {
+			let length = Math.min(links.length, cells.length);
 
-		for (let i = 0; i < length; i++) {
-			if (links[i])
-				this.createSite(links[i], cells[i]);
-		}
+			for (let i = 0; i < length; i++) {
+				if (links[i]) {
+					this.createSite(links[i], cells[i]);
+				}
+			}
+		});
 	},
 
 	/**
@@ -598,7 +504,6 @@ var Grid = {
 		}
 
 		this._renderSites();
-		this.setThumbnailPrefs();
 	},
 
 	_shouldRenderGrid: function Grid_shouldRenderGrid() {
@@ -607,21 +512,6 @@ var Grid = {
 
 		return (rowsLength != GridPrefs.gridRows ||
 		cellsLength != (GridPrefs.gridRows * GridPrefs.gridColumns));
-	},
-
-	setThumbnailPrefs: function Grid_setThumbnailPrefs() {
-		let delay = ThumbnailPrefs.delay;
-		if (delay < 0) {
-			return;
-		}
-
-		let firstCell = this._cells[0]._node.querySelector('.newtab-thumbnail');
-		setTimeout(function() {
-			let { clientWidth: w, clientHeight: h } = firstCell;
-			if (w > 0 && h > 0) {
-				ThumbnailPrefs.setOnce(w * 2, h * 2);
-			}
-		}, delay * 1000);
 	}
 };
 
@@ -719,9 +609,7 @@ Cell.prototype = {
 	   * Handles all cell events.
 	   */
 	handleEvent: function Cell_handleEvent(event) {
-		// We're not responding to external drag/drop events
-		// when our parent window is in private browsing mode.
-		if (inPrivateBrowsingMode() && !Drag.draggedSite) {
+		if (!Drag.draggedSite) {
 			return;
 		}
 		if (event.type != 'dragexit' && !Drag.isValid(event)) {
@@ -802,18 +690,21 @@ Site.prototype = {
 			index = this.cell.index;
 
 		this._updateAttributes(true);
-		PinnedLinks.pin(this._link, index);
+		this.link.position = index;
+		putTile(this.link);
+
+		Grid.cells[index].node.appendChild(this.node);
 	},
 
 	/**
 	   * Unpins the site and calls the given callback when done.
 	   */
 	unpin: function Site_unpin() {
-		if (this.isPinned()) {
-			this._updateAttributes(false);
-			PinnedLinks.unpin(this._link);
-			Updater.updateGrid();
-		}
+		// if (this.isPinned()) {
+		// 	this._updateAttributes(false);
+		// 	PinnedLinks.unpin(this._link);
+		// 	Updater.updateGrid();
+		// }
 	},
 
 	/**
@@ -821,7 +712,7 @@ Site.prototype = {
 	   * @return Whether this site is pinned.
 	   */
 	isPinned: function Site_isPinned() {
-		return PinnedLinks.isPinned(this._link);
+		return true;// PinnedLinks.isPinned(this._link);
 	},
 
 	/**
@@ -829,11 +720,11 @@ Site.prototype = {
 	   * when done.
 	   */
 	block: function Site_block() {
-		if (!BlockedLinks.isBlocked(this._link)) {
-			UndoDialog.show(this);
-			BlockedLinks.block(this._link);
-			Updater.updateGrid();
-		}
+		// if (!BlockedLinks.isBlocked(this._link)) {
+		// 	UndoDialog.show(this);
+		// 	BlockedLinks.block(this._link);
+		// 	Updater.updateGrid();
+		// }
 	},
 
 	/**
@@ -868,9 +759,6 @@ Site.prototype = {
 	_render: function Site_render() {
 		if (this.isPinned())
 			this._updateAttributes(true);
-		// Capture the page if the thumbnail is missing, which will cause page.js
-		// to be notified and call our refreshThumbnail() method.
-		this.captureIfMissing();
 		// but still display whatever thumbnail might be available now.
 		this.refreshThumbnail();
 		this._addTitleAndFavicon();
@@ -878,10 +766,8 @@ Site.prototype = {
 
 	_addTitleAndFavicon: function() {
 		let url = this.url;
-		let title = TileData.get(this.url, 'title') || this.title || url;
+		let title = this.title || url;
 		let tooltip = title == url ? title : title + '\n' + url;
-
-		let uri = Services.io.newURI(url, null, null);
 
 		let titleElement = this.node.querySelector('.newtab-title');
 		titleElement.textContent = title;
@@ -889,45 +775,18 @@ Site.prototype = {
 		let link = this._querySelector('.newtab-link');
 		link.setAttribute('title', tooltip);
 		link.setAttribute('href', url);
-
-		faviconService.getFaviconURLForPage(uri, function(uri) {
-			if (!uri)
-				return;
-
-			let icon;
-			if (titleElement.firstChild && titleElement.firstChild.nodeType == Node.ELEMENT_NODE) {
-				// This shouldn't happen, but sometimes it does.
-				icon = titleElement.firstChild;
-			} else {
-				icon = document.createElementNS(HTML_NAMESPACE, 'img');
-			}
-			icon.src = 'moz-anno:favicon:' + uri.spec;
-			icon.className = 'favicon';
-			titleElement.insertBefore(icon, titleElement.firstChild);
-		});
-	},
-
-	/**
-	   * Captures the site's thumbnail in the background, but only if there's no
-	   * existing thumbnail and the page allows background captures.
-	   */
-	captureIfMissing: function Site_captureIfMissing() {
-		if (Page.allowBackgroundCaptures)
-			BackgroundPageThumbs.captureIfMissing(this.url);
 	},
 
 	/**
 	   * Refreshes the thumbnail for the site.
 	   */
 	refreshThumbnail: function Site_refreshThumbnail() {
-		SavedThumbs.getThumbnailURL(this.url).then((thumbnailURL) => {
-			let thumbnail = this._querySelector('.newtab-thumbnail');
+		let thumbnail = this._querySelector('.newtab-thumbnail');
+		thumbnail.style.backgroundColor = this.link.backgroundColor || null;
+		if (this.link.image) {
+			let thumbnailURL = URL.createObjectURL(this.link.image);
 			thumbnail.style.backgroundImage = 'url(' + thumbnailURL + ')';
-			thumbnail.style.backgroundColor = TileData.get(this.url, 'backgroundColor');
-			if (thumbnailURL.startsWith('file://')) {
-				thumbnail.classList.add('custom-thumbnail');
-			}
-		});
+		}
 	},
 
 	/**
@@ -945,9 +804,9 @@ Site.prototype = {
 	   * Speculatively opens a connection to the current site.
 	   */
 	_speculativeConnect: function Site_speculativeConnect() {
-		let sc = Services.io.QueryInterface(Ci.nsISpeculativeConnect);
-		let uri = Services.io.newURI(this.url, null, null);
-		sc.speculativeConnect(uri, null);
+		// let sc = Services.io.QueryInterface(Ci.nsISpeculativeConnect);
+		// let uri = Services.io.newURI(this.url, null, null);
+		// sc.speculativeConnect(uri, null);
 	},
 
 	/**
@@ -1100,6 +959,8 @@ var Drag = {
 
 		Drop._lastDropTarget = null;
 		this._draggedSite = null;
+
+		Grid.sites.filter(s => s).forEach(Transformation.unfreezeSitePosition.bind(Transformation));
 	},
 
 	/**
@@ -1108,20 +969,21 @@ var Drag = {
 	   * @return Whether we should handle this drag and drop operation.
 	   */
 	isValid: function Drag_isValid(event) {
-		let link = DragDataHelper.getLinkFromDragEvent(event);
+		return true;
+		// let link = DragDataHelper.getLinkFromDragEvent(event);
 
-		// Check that the drag data is non-empty.
-		// Can happen when dragging places folders.
-		if (!link || !link.url) {
-			return false;
-		}
+		// // Check that the drag data is non-empty.
+		// // Can happen when dragging places folders.
+		// if (!link || !link.url) {
+		// 	return false;
+		// }
 
-		// File URLs fail the link checker, but we want to allow them.
-		if (/^file:/.test(link.url)) return true;
+		// // File URLs fail the link checker, but we want to allow them.
+		// if (/^file:/.test(link.url)) return true;
 
-		// Check that we're not accepting URLs which would inherit the caller's
-		// principal (such as javascript: or data:).
-		return LinkChecker.checkLoadURI(link.url);
+		// // Check that we're not accepting URLs which would inherit the caller's
+		// // principal (such as javascript: or data:).
+		// return LinkChecker.checkLoadURI(link.url);
 	},
 
 	/**
@@ -1157,22 +1019,24 @@ var Drag = {
 	}
 };
 
-var DragDataHelper = {
-	get mimeType() {
-		return 'text/x-moz-url';
-	},
+// var DragDataHelper = {
+// 	get mimeType() {
+// 		return 'text/x-moz-url';
+// 	},
 
-	getLinkFromDragEvent: function DragDataHelper_getLinkFromDragEvent(event) {
-		let dt = event.dataTransfer;
-		if (!dt || !dt.types.contains(this.mimeType)) {
-			return null;
-		}
+// 	getLinkFromDragEvent: function DragDataHelper_getLinkFromDragEvent(event) {
+// 		let dt = event.dataTransfer;
+// 		if (!dt || !dt.types.includes(this.mimeType)) {
+// 			console.log(dt.types);
+// 			return null;
+// 		}
 
-		let data = dt.getData(this.mimeType) || '';
-		let [url, title] = data.split(/[\r\n]+/);
-		return {url: url, title: title};
-	}
-};
+// 		console.log(dt);
+// 		let data = dt.getData(this.mimeType) || '';
+// 		let [url, title] = data.split(/[\r\n]+/);
+// 		return {url: url, title: title};
+// 	}
+// };
 
 // A little delay that prevents the grid from being too sensitive when dragging
 // sites around.
@@ -1259,15 +1123,15 @@ var Drop = {
 			// Pin the dragged site at its new place.
 			if (cell != draggedSite.cell)
 				draggedSite.pin(index);
-		} else {
-			let link = DragDataHelper.getLinkFromDragEvent(event);
-			if (link) {
-				// A new link was dragged onto the grid. Create it by pinning its URL.
-				PinnedLinks.pin(link, index);
+		// } else {
+		// 	let link = DragDataHelper.getLinkFromDragEvent(event);
+		// 	if (link) {
+		// 		// A new link was dragged onto the grid. Create it by pinning its URL.
+		// 		PinnedLinks.pin(link, index);
 
-				// Make sure the newly added link is not blocked.
-				BlockedLinks.unblock(link);
-			}
+		// 		// Make sure the newly added link is not blocked.
+		// 		BlockedLinks.unblock(link);
+		// 	}
 		}
 	},
 
@@ -1499,7 +1363,7 @@ var DropTargetShim = {
 		let minHeight = Drag.cellHeight / 2;
 
 		let cellPositions = this._getCellPositions();
-		let rect = new Rect(Drag._cellLeft, Drag._cellTop, Drag.cellWidth, Drag.cellHeight);
+		let rect = new DOMRect(Drag._cellLeft, Drag._cellTop, Drag.cellWidth, Drag.cellHeight);
 
 		// Compare each cell's position to the dragged site's position.
 		for (let i = 0; i < cellPositions.length; i++) {
@@ -1656,16 +1520,16 @@ var DropPreview = {
 
 		// We need a pinned range only when dropping on a pinned site.
 		if (cell.containsPinnedSite()) {
-			let links = PinnedLinks.links;
+			// let links = PinnedLinks.links;
 
 			// Find all previous siblings of the drop target that are pinned as well.
-			while (range.start && links[range.start - 1])
+			while (range.start && Grid.cells[range.start - 1].containsPinnedSite())
 				range.start--;
 
-			let maxEnd = links.length - 1;
+			let maxEnd = Grid.cells.length - 1;
 
 			// Find all next siblings of the drop target that are pinned as well.
-			while (range.end < maxEnd && links[range.end + 1])
+			while (range.end < maxEnd && Grid.cells[range.end + 1].containsPinnedSite())
 				range.end++;
 		}
 
@@ -1767,46 +1631,50 @@ var Updater = {
 	   * @param callback The callback to call when finished.
 	   */
 	updateGrid: function Updater_updateGrid(callback) {
-		let links = NewTabToolsLinks.getLinks().slice(0, Grid.cells.length);
+		// let links = NewTabToolsLinks.getLinks().slice(0, Grid.cells.length);
+		getAllTiles().then(links => {
 
-		// Find all sites that remain in the grid.
-		let sites = this._findRemainingSites(links);
+			// Find all sites that remain in the grid.
+			let sites = this._findRemainingSites(links);
 
-		let self = this;
+			let self = this;
 
-		// Remove sites that are no longer in the grid.
-		this._removeLegacySites(sites, function() {
-			// Freeze all site positions so that we can move their DOM nodes around
-			// without any visual impact.
-			self._freezeSitePositions(sites);
+			// Remove sites that are no longer in the grid.
+			this._removeLegacySites(sites, function() {
+				// Freeze all site positions so that we can move their DOM nodes around
+				// without any visual impact.
+				self._freezeSitePositions(sites);
 
-			// Move the sites' DOM nodes to their new position in the DOM. This will
-			// have no visual effect as all the sites have been frozen and will
-			// remain in their current position.
-			self._moveSiteNodes(sites);
+				// Move the sites' DOM nodes to their new position in the DOM. This will
+				// have no visual effect as all the sites have been frozen and will
+				// remain in their current position.
+				self._moveSiteNodes(sites);
 
-			// Now it's time to animate the sites actually moving to their new
-			// positions.
-			self._rearrangeSites(sites, function() {
-				// Try to fill empty cells and finish.
-				self._fillEmptyCells(links, callback);
+				// Now it's time to animate the sites actually moving to their new
+				// positions.
+				self._rearrangeSites(sites, function() {
+					// Try to fill empty cells and finish.
+					self._fillEmptyCells(links, callback);
 
-				// Update other pages that might be open to keep them synced.
-				AllPages.update(Page);
+					// Update other pages that might be open to keep them synced.
+					// AllPages.update(Page);
+				});
 			});
 		});
 	},
 
 	fastUpdateGrid: function Updater_fastUpdateGrid() {
-		let links = NewTabToolsLinks.getLinks().slice(0, Grid.cells.length);
+		// let links = NewTabToolsLinks.getLinks().slice(0, Grid.cells.length);
+		getAllTiles().then(function(links) {
 
-		// Find all sites that remain in the grid.
-		let sites = this._findRemainingSites(links);
+			// Find all sites that remain in the grid.
+			let sites = this._findRemainingSites(links);
 
-		// Remove sites that are no longer in the grid.
-		this._removeLegacySites(sites, () => {
-			// Try to fill empty cells and finish.
-			this._fillEmptyCells(links);
+			// Remove sites that are no longer in the grid.
+			this._removeLegacySites(sites, () => {
+				// Try to fill empty cells and finish.
+				this._fillEmptyCells(links);
+			});
 		});
 	},
 
@@ -1947,116 +1815,124 @@ var Updater = {
  * Dialog allowing to undo the removal of single site or to completely restore
  * the grid's original state.
  */
-var UndoDialog = {
-	/**
-	   * The undo dialog's timeout in miliseconds.
-	   */
-	HIDE_TIMEOUT_MS: 15000,
+// var UndoDialog = {
+// 	/**
+// 	   * The undo dialog's timeout in miliseconds.
+// 	   */
+// 	HIDE_TIMEOUT_MS: 15000,
 
-	/**
-	   * Contains undo information.
-	   */
-	_undoData: null,
+// 	/**
+// 	   * Contains undo information.
+// 	   */
+// 	_undoData: null,
 
-	/**
-	   * Initializes the undo dialog.
-	   */
-	init: function UndoDialog_init() {
-		this._undoContainer = document.getElementById('newtab-undo-container');
-		this._undoContainer.addEventListener('click', this, false);
-		this._undoButton = document.getElementById('newtab-undo-button');
-		this._undoCloseButton = document.getElementById('newtab-undo-close-button');
-		this._undoRestoreButton = document.getElementById('newtab-undo-restore-button');
-	},
+// 	/**
+// 	   * Initializes the undo dialog.
+// 	   */
+// 	init: function UndoDialog_init() {
+// 		this._undoContainer = document.getElementById('newtab-undo-container');
+// 		this._undoContainer.addEventListener('click', this, false);
+// 		this._undoButton = document.getElementById('newtab-undo-button');
+// 		this._undoCloseButton = document.getElementById('newtab-undo-close-button');
+// 		this._undoRestoreButton = document.getElementById('newtab-undo-restore-button');
+// 	},
 
-	/**
-	   * Shows the undo dialog.
-	   * @param site The site that just got removed.
-	   */
-	show: function UndoDialog_show(site) {
-		if (this._undoData)
-			clearTimeout(this._undoData.timeout);
+// 	/**
+// 	   * Shows the undo dialog.
+// 	   * @param site The site that just got removed.
+// 	   */
+// 	show: function UndoDialog_show(site) {
+// 		if (this._undoData)
+// 			clearTimeout(this._undoData.timeout);
 
-		this._undoData = {
-			index: site.cell.index,
-			wasPinned: site.isPinned(),
-			blockedLink: site.link,
-			timeout: setTimeout(this.hide.bind(this), this.HIDE_TIMEOUT_MS)
-		};
+// 		this._undoData = {
+// 			index: site.cell.index,
+// 			wasPinned: site.isPinned(),
+// 			blockedLink: site.link,
+// 			timeout: setTimeout(this.hide.bind(this), this.HIDE_TIMEOUT_MS)
+// 		};
 
-		this._undoContainer.removeAttribute('undo-disabled');
-		this._undoButton.removeAttribute('tabindex');
-		this._undoCloseButton.removeAttribute('tabindex');
-		this._undoRestoreButton.removeAttribute('tabindex');
+// 		this._undoContainer.removeAttribute('undo-disabled');
+// 		this._undoButton.removeAttribute('tabindex');
+// 		this._undoCloseButton.removeAttribute('tabindex');
+// 		this._undoRestoreButton.removeAttribute('tabindex');
 
-		newTabTools.trimRecent();
-	},
+// 		newTabTools.trimRecent();
+// 	},
 
-	/**
-	   * Hides the undo dialog.
-	   */
-	hide: function UndoDialog_hide() {
-		if (!this._undoData)
-			return;
+// 	/**
+// 	   * Hides the undo dialog.
+// 	   */
+// 	hide: function UndoDialog_hide() {
+// 		if (!this._undoData)
+// 			return;
 
-		clearTimeout(this._undoData.timeout);
-		this._undoData = null;
-		this._undoContainer.setAttribute('undo-disabled', 'true');
-		this._undoButton.setAttribute('tabindex', '-1');
-		this._undoCloseButton.setAttribute('tabindex', '-1');
-		this._undoRestoreButton.setAttribute('tabindex', '-1');
+// 		clearTimeout(this._undoData.timeout);
+// 		this._undoData = null;
+// 		this._undoContainer.setAttribute('undo-disabled', 'true');
+// 		this._undoButton.setAttribute('tabindex', '-1');
+// 		this._undoCloseButton.setAttribute('tabindex', '-1');
+// 		this._undoRestoreButton.setAttribute('tabindex', '-1');
 
-		newTabTools.trimRecent();
-	},
+// 		newTabTools.trimRecent();
+// 	},
 
-	/**
-	   * The undo dialog event handler.
-	   * @param event The event to handle.
-	   */
-	handleEvent: function UndoDialog_handleEvent(event) {
-		switch (event.target.id) {
-		case 'newtab-undo-button':
-			this._undo();
-			break;
-		case 'newtab-undo-restore-button':
-			this._undoAll();
-			break;
-		case 'newtab-undo-close-button':
-			this.hide();
-			break;
-		}
-	},
+// 	/**
+// 	   * The undo dialog event handler.
+// 	   * @param event The event to handle.
+// 	   */
+// 	handleEvent: function UndoDialog_handleEvent(event) {
+// 		switch (event.target.id) {
+// 		case 'newtab-undo-button':
+// 			this._undo();
+// 			break;
+// 		case 'newtab-undo-restore-button':
+// 			this._undoAll();
+// 			break;
+// 		case 'newtab-undo-close-button':
+// 			this.hide();
+// 			break;
+// 		}
+// 	},
 
-	/**
-	   * Undo the last blocked site.
-	   */
-	_undo: function UndoDialog_undo() {
-		if (!this._undoData)
-			return;
+// 	/**
+// 	   * Undo the last blocked site.
+// 	   */
+// 	_undo: function UndoDialog_undo() {
+// 		if (!this._undoData)
+// 			return;
 
-		let {index, wasPinned, blockedLink} = this._undoData;
-		BlockedLinks.unblock(blockedLink);
+// 		let {index, wasPinned, blockedLink} = this._undoData;
+// 		BlockedLinks.unblock(blockedLink);
 
-		if (wasPinned) {
-			PinnedLinks.pin(blockedLink, index);
-		}
+// 		if (wasPinned) {
+// 			PinnedLinks.pin(blockedLink, index);
+// 		}
 
-		Updater.updateGrid();
-		this.hide();
-	},
+// 		Updater.updateGrid();
+// 		this.hide();
+// 	},
 
-	/**
-	   * Undo all blocked sites.
-	   */
-	_undoAll: function UndoDialog_undoAll() {
-		NewTabUtils.undoAll(function() {
-			Updater.updateGrid();
-			this.hide();
-		}.bind(this));
-	}
-};
+// 	/**
+// 	   * Undo all blocked sites.
+// 	   */
+// 	_undoAll: function UndoDialog_undoAll() {
+// 		NewTabUtils.undoAll(function() {
+// 			Updater.updateGrid();
+// 			this.hide();
+// 		}.bind(this));
+// 	}
+// };
 
-UndoDialog.init();
+// UndoDialog.init();
 
-// Everything is loaded. Initialize the New Tab Page.
-Page.init();
+Promise.all([
+	GridPrefs.init(),
+	initDB()
+]).then(function() {
+	// Everything is loaded. Initialize the New Tab Page.
+	Page.init();
+	newTabTools.updateUI();
+	newTabTools.updateGridPrefs();
+	newTabTools.refreshBackgroundImage();
+});

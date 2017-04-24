@@ -779,6 +779,10 @@ input[type="button"] {
 #options button:disabled {
 	color: #888;
 }
+.options-row-label {
+	display: block;
+	margin: 8px 0 4px;
+}
 .options-row {
 	align-items: baseline;
 	justify-content: center;
