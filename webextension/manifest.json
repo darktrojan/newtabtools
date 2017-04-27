@@ -1,0 +1,17 @@
+{
+	"name": "New Tab Tools",
+	"description": "Customizes the new tab page. You can add more tiles, the launcher from Firefox start, or a background image. And you can set new tile images and titles.",
+	"version": "1",
+	"applications": {
+		"gecko": {
+			"id": "newtabtools@darktrojan.net"
+		}
+	},
+	"chrome_url_overrides": {
+		"newtab": "newTab.xhtml"
+	},
+	"permissions": [
+		"storage"
+	],
+	"manifest_version": 2
+}

@@ -217,6 +217,8 @@ function shutdown(params, reason) {
 }
 
 function uiStartup(params) {
+	params.webExtension.startup().then(function() { Services.console.logStringMessage('webExtension started') });
+
 	Services.scriptloader.loadSubScript(params.resourceURI.spec + 'components/autocomplete.js', autocomplete);
 	componentRegistrar.registerFactory(
 		autocomplete.HostsAutoCompleteSearch.prototype.classID,

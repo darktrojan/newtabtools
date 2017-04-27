@@ -9,6 +9,7 @@
 		<em:bootstrap>true</em:bootstrap>
 		<em:type>2</em:type>
 		<em:multiprocessCompatible>true</em:multiprocessCompatible>
+		<em:hasEmbeddedWebExtension>true</em:hasEmbeddedWebExtension>
 
 		<em:targetApplication>
 			<Description>

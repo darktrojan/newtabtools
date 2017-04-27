@@ -23,13 +23,13 @@ function initDB() {
 			// 	db.deleteObjectStore('tiles');
 			// }
 
-			// let tilesOS = db.createObjectStore('tiles', { autoIncrement: true, keyPath: 'id' });
+			let tilesOS = db.createObjectStore('tiles', { autoIncrement: true, keyPath: 'id' });
 			// tilesOS.add({ url: 'http://localhost:5000/', title: 'This is fake' });
 			// tilesOS.add({ url: 'https://www.google.co.nz/', title: 'Google?' });
 
-			if (db.objectStoreNames.contains('backgrounds')) {
-				db.deleteObjectStore('backgrounds');
-			}
+			// if (db.objectStoreNames.contains('backgrounds')) {
+			// 	db.deleteObjectStore('backgrounds');
+			// }
 
 			db.createObjectStore('background', { autoIncrement: true });
 		};
