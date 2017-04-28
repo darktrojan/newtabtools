@@ -325,7 +325,7 @@ var newTabTools = {
 			document.documentElement.setAttribute('titlesize', titleSize);
 		}
 
-		if (!keys || keys.includes('gridMargin')) {
+		if (!keys || keys.includes('margin')) {
 			let gridMargin = GridPrefs.gridMargin;
 			document.querySelector('[name="grid.margin"]').value = gridMargin.join(' ');
 			this.setGridMargin('top', gridMargin[0]);
@@ -336,7 +336,7 @@ var newTabTools = {
 			this.setGridMargin('left-top', gridMargin[3]);
 		}
 
-		if (!keys || keys.includes('gridSpacing')) {
+		if (!keys || keys.includes('spacing')) {
 			let gridSpacing = GridPrefs.gridSpacing;
 			document.querySelector('[name="grid.spacing"]').value = gridSpacing;
 			document.documentElement.setAttribute('spacing', gridSpacing);

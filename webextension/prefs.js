@@ -54,6 +54,11 @@ var GridPrefs = {
 		newTabTools.updateGridPrefs();
 		Grid.refresh();
 	},
+	getPrefsFromOldExtension: function() {
+		browser.runtime.sendMessage('prefs').then(function(result) {
+			browser.storage.local.set(result);
+		});
+	},
 	get theme() {
 		return this._theme;
 	},

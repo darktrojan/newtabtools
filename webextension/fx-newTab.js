@@ -785,7 +785,9 @@ Site.prototype = {
 		thumbnail.style.backgroundColor = this.link.backgroundColor || null;
 		if (this.link.image) {
 			let thumbnailURL = URL.createObjectURL(this.link.image);
-			thumbnail.style.backgroundImage = 'url(' + thumbnailURL + ')';
+			thumbnail.style.backgroundImage = 'url("' + thumbnailURL + '")';
+		} else {
+			thumbnail.style.backgroundImage = 'url("moz-page-thumb://thumbnail/?url=' + encodeURIComponent(this.url) + '")';
 		}
 	},
 

@@ -220,44 +220,58 @@ function shutdown(params, reason) {
 function uiStartup(params) {
 	params.webExtension.startup().then(function({ browser }) {
 		browser.runtime.onMessage.addListener(function(message, sender, sendReply) {
-			Task.spawn(function*() {
-				Cu.importGlobalProperties(['fetch']);
+			if (message == 'whatever') {
+				Task.spawn(function*() {
+					Cu.importGlobalProperties(['fetch']);
 
-				yield SavedThumbs._readDir();
+					yield SavedThumbs._readDir();
 
-				let links = [];
-				let position = -1;
-				for (let link of NewTabUtils.pinnedLinks.links) {
-					position++;
+					let links = [];
+					let position = -1;
+					for (let link of NewTabUtils.pinnedLinks.links) {
+						position++;
 
-					if (!link) {
-						continue;
+						if (!link) {
+							continue;
+						}
+
+						let data = {
+							url: link.url,
+							title: TileData.get(link.url, 'title') || link.title,
+							position: position
+						};
+						let backgroundColor = TileData.get(link.url, 'backgroundColor');
+						if (backgroundColor) {
+							data.backgroundColor = backgroundColor;
+						}
+
+						if (SavedThumbs.hasSavedThumb(link.url)) {
+							let backgroundURL = yield SavedThumbs.getThumbnailURL(link.url);
+							let response = yield fetch(backgroundURL);
+							let blob = yield response.blob();
+							data.image = blob;
+						}
+
+						links.push(data);
 					}
 
-					let data = {
-						url: link.url,
-						title: TileData.get(link.url, 'title') || link.title,
-						position: position
-					};
-					let backgroundColor = TileData.get(link.url, 'backgroundColor');
-					if (backgroundColor) {
-						data.backgroundColor = backgroundColor;
-					}
+					sendReply(links);
+				});
 
-					if (SavedThumbs.hasSavedThumb(link.url)) {
-						let backgroundURL = yield SavedThumbs.getThumbnailURL(link.url);
-						let response = yield fetch(backgroundURL);
-						let blob = yield response.blob();
-						data.image = blob;
-					}
+				return true;
+			}
 
-					links.push(data);
-				}
+			let prefs = {};
+			prefs.theme = userPrefs.getCharPref('theme');
+			prefs.opacity = userPrefs.getIntPref('foreground.opacity');
+			prefs.rows = userPrefs.getIntPref('rows');
+			prefs.columns = userPrefs.getIntPref('columns');
+			prefs.margin = userPrefs.getCharPref('grid.margin').split(' ');
+			prefs.spacing = userPrefs.getCharPref('grid.spacing');
+			prefs.titleSize = userPrefs.getCharPref('thumbs.titlesize');
+			prefs.locked = userPrefs.getBoolPref('locked');
 
-				sendReply(links);
-			});
-
-			return true;
+			sendReply(prefs);
 		});
 	});
 
