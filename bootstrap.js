@@ -226,17 +226,23 @@ function uiStartup(params) {
 				yield SavedThumbs._readDir();
 
 				let links = [];
+				let position = -1;
 				for (let link of NewTabUtils.pinnedLinks.links) {
+					position++;
+
 					if (!link) {
-						links.push(null);
 						continue;
 					}
 
 					let data = {
 						url: link.url,
-						title: link.title,
-						backgroundColor: TileData.get(link.url, 'backgroundColor')
+						title: TileData.get(link.url, 'title') || link.title,
+						position: position
 					};
+					let backgroundColor = TileData.get(link.url, 'backgroundColor');
+					if (backgroundColor) {
+						data.backgroundColor = backgroundColor;
+					}
 
 					if (SavedThumbs.hasSavedThumb(link.url)) {
 						let backgroundURL = yield SavedThumbs.getThumbnailURL(link.url);

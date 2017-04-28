@@ -1,8 +1,10 @@
+/* exported initDB, getAllTiles, addTile, putTile, getBackground, setBackground, getTilesFromOldExtension */
+/* globals Grid, browser, indexedDB */
 var db;
 
 function initDB() {
 	return new Promise(function(resolve, reject) {
-		var request = indexedDB.open('newTabTools', 5);
+		let request = indexedDB.open('newTabTools', 5);
 
 		request.onsuccess = function(event) {
 			// console.log(event.type, event);
@@ -23,9 +25,7 @@ function initDB() {
 			// 	db.deleteObjectStore('tiles');
 			// }
 
-			let tilesOS = db.createObjectStore('tiles', { autoIncrement: true, keyPath: 'id' });
-			// tilesOS.add({ url: 'http://localhost:5000/', title: 'This is fake' });
-			// tilesOS.add({ url: 'https://www.google.co.nz/', title: 'Google?' });
+			db.createObjectStore('tiles', { autoIncrement: true, keyPath: 'id' });
 
 			// if (db.objectStoreNames.contains('backgrounds')) {
 			// 	db.deleteObjectStore('backgrounds');
@@ -86,5 +86,20 @@ function setBackground(file) {
 				resolve();
 			}
 		};
+	});
+}
+
+function getTilesFromOldExtension() {
+	browser.runtime.sendMessage('whatever').then(function(result) {
+		let t = db.transaction('tiles', 'readwrite');
+		t.oncomplete = function() {
+			Grid.refresh();
+		};
+
+		let os = t.objectStore('tiles');
+		os.clear();
+		for (let tile of result) {
+			os.add(tile);
+		}
 	});
 }
