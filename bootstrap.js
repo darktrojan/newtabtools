@@ -31,13 +31,14 @@ XPCOMUtils.defineLazyGetter(this, 'strings', function() {
 });
 
 /* globals CustomizableUI, GridPrefs, NewTabToolsExporter, NewTabToolsLinks,
-	OS, PageThumbs, Task, TileData */
+	OS, PageThumbs, SavedThumbs, Task, TileData */
 XPCOMUtils.defineLazyModuleGetter(this, 'CustomizableUI', 'resource:///modules/CustomizableUI.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'GridPrefs', 'chrome://newtabtools/content/newTabTools.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'NewTabToolsExporter', 'chrome://newtabtools/content/export.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'NewTabToolsLinks', 'chrome://newtabtools/content/newTabTools.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'OS', 'resource://gre/modules/osfile.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'PageThumbs', 'resource://gre/modules/PageThumbs.jsm');
+XPCOMUtils.defineLazyModuleGetter(this, 'SavedThumbs', 'chrome://newtabtools/content/newTabTools.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'Task', 'resource://gre/modules/Task.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'TileData', 'chrome://newtabtools/content/newTabTools.jsm');
 
@@ -217,7 +218,42 @@ function shutdown(params, reason) {
 }
 
 function uiStartup(params) {
-	params.webExtension.startup().then(function() { Services.console.logStringMessage('webExtension started') });
+	params.webExtension.startup().then(function({ browser }) {
+		browser.runtime.onMessage.addListener(function(message, sender, sendReply) {
+			Task.spawn(function*() {
+				Cu.importGlobalProperties(['fetch']);
+
+				yield SavedThumbs._readDir();
+
+				let links = [];
+				for (let link of NewTabUtils.pinnedLinks.links) {
+					if (!link) {
+						links.push(null);
+						continue;
+					}
+
+					let data = {
+						url: link.url,
+						title: link.title,
+						backgroundColor: TileData.get(link.url, 'backgroundColor')
+					};
+
+					if (SavedThumbs.hasSavedThumb(link.url)) {
+						let backgroundURL = yield SavedThumbs.getThumbnailURL(link.url);
+						let response = yield fetch(backgroundURL);
+						let blob = yield response.blob();
+						data.image = blob;
+					}
+
+					links.push(data);
+				}
+
+				sendReply(links);
+			});
+
+			return true;
+		});
+	});
 
 	Services.scriptloader.loadSubScript(params.resourceURI.spec + 'components/autocomplete.js', autocomplete);
 	componentRegistrar.registerFactory(
