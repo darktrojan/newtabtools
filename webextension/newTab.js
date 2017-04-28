@@ -3,7 +3,7 @@ This Source Code Form is subject to the terms of the Mozilla Public
 License, v. 2.0. If a copy of the MPL was not distributed with this file,
 You can obtain one at http://mozilla.org/MPL/2.0/.
 */
-/* globals GridPrefs, Grid, addTile, putTile, setBackground */
+/* globals GridPrefs, Grid, Tiles, Background */
 
 var HTML_NAMESPACE = 'http://www.w3.org/1999/xhtml';
 
@@ -90,12 +90,12 @@ var newTabTools = {
 			break;
 		case 'options-pinURL':
 			let link = this.pinURLInput.value;
-			addTile(link, '').then(tile => {
+			Tiles.addTile(link, '').then(tile => {
 				for (let i = 0; i < Grid.sites.length; i++) {
 					if (Grid.sites[i] === null) {
 						Grid.createSite(tile, Grid.cells[i]);
 						tile.position = i;
-						putTile(tile);
+						Tiles.putTile(tile);
 						this.selectedSiteIndex = i;
 						break;
 					}
@@ -130,14 +130,14 @@ var newTabTools = {
 		case 'options-bgcolor-set':
 			this.selectedSite.link.backgroundColor = this.setBgColourInput.value;
 			this.selectedSite.refreshThumbnail();
-			putTile(this.selectedSite.link);
+			Tiles.putTile(this.selectedSite.link);
 			this.siteThumbnail.style.backgroundColor = this.setBgColourInput.value;
 			this.resetBgColourButton.disabled = false;
 			break;
 		case 'options-bgcolor-reset':
 			delete this.selectedSite.link.backgroundColor;
 			this.selectedSite.refreshThumbnail();
-			putTile(this.selectedSite.link);
+			Tiles.putTile(this.selectedSite.link);
 			this.siteThumbnail.style.backgroundColor =
 				this.setBgColourInput.value =
 				this.setBgColourDisplay.style.backgroundColor = null;
@@ -147,18 +147,18 @@ var newTabTools = {
 		case 'options-title-set':
 			this.selectedSite.link.title = this.setTitleInput.value;
 			this.selectedSite._addTitleAndFavicon();
-			putTile(this.selectedSite.link);
+			Tiles.putTile(this.selectedSite.link);
 			break;
 		case 'options-bg-set':
 			if (this.setBackgroundInput.files.length) {
 				let file = this.setBackgroundInput.files[0];
-				setBackground(file).then(() => {
+				Background.setBackground(file).then(() => {
 					this.refreshBackgroundImage();
 				});
 			}
 			break;
 		case 'options-bg-remove':
-			setBackground().then(() => {
+			Background.setBackground().then(() => {
 				this.refreshBackgroundImage();
 			});
 			break;
@@ -257,7 +257,7 @@ var newTabTools = {
 				let thumbnailURL = URL.createObjectURL(site.link.image);
 				newTabTools.siteThumbnail.style.backgroundImage = 'url("' + thumbnailURL + '")';
 
-				putTile(site.link);
+				Tiles.putTile(site.link);
 			}, 'image/png');
 		};
 		image.onerror = function(error) {
@@ -271,10 +271,10 @@ var newTabTools = {
 
 		this.siteThumbnail.style.backgroundImage = null;
 
-		putTile(site.link);
+		Tiles.putTile(site.link);
 	},
 	refreshBackgroundImage: function() {
-		getBackground().then(background => {
+		Background.getBackground().then(background => {
 			if (!background) {
 				document.body.style.backgroundImage = null;
 				this.removeBackgroundButton.disabled = true;
@@ -311,7 +311,7 @@ var newTabTools = {
 		// document.documentElement.classList[hideButtons ? 'add' : 'remove']('hideButtons');
 
 		if (!keys || keys.includes('locked')) {
-			let locked = GridPrefs.locked;
+			let locked = GridPrefs.gridLocked;
 			document.querySelector('[name="locked"]').checked = locked;
 		}
 

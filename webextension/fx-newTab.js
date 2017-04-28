@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this file,
  * You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-/* globals DOMRect, GridPrefs, getAllTiles, initDB, newTabTools, putTile */
+/* globals DOMRect, GridPrefs, Tiles, initDB, newTabTools */
 DOMRect.prototype.isEmpty = function() {
 	return this.left >= this.right || this.top >= this.bottom;
 };
@@ -484,7 +484,7 @@ var Grid = {
 	_renderSites: function Grid_renderSites() {
 		let cells = this.cells;
 		// Put sites into the cells.
-		getAllTiles().then(links => {
+		Tiles.getAllTiles().then(links => {
 			let length = Math.min(links.length, cells.length);
 
 			for (let i = 0; i < length; i++) {
@@ -691,7 +691,7 @@ Site.prototype = {
 
 		this._updateAttributes(true);
 		this.link.position = index;
-		putTile(this.link);
+		Tiles.putTile(this.link);
 
 		Grid.cells[index].node.appendChild(this.node);
 	},
@@ -720,6 +720,9 @@ Site.prototype = {
 	   * when done.
 	   */
 	block: function Site_block() {
+		Tiles.removeTile(this._link.id).then(() => {
+			this.node.remove();
+		});
 		// if (!BlockedLinks.isBlocked(this._link)) {
 		// 	UndoDialog.show(this);
 		// 	BlockedLinks.block(this._link);
@@ -1634,7 +1637,7 @@ var Updater = {
 	   */
 	updateGrid: function Updater_updateGrid(callback) {
 		// let links = NewTabToolsLinks.getLinks().slice(0, Grid.cells.length);
-		getAllTiles().then(links => {
+		Tiles.getAllTiles().then(links => {
 
 			// Find all sites that remain in the grid.
 			let sites = this._findRemainingSites(links);
@@ -1667,7 +1670,7 @@ var Updater = {
 
 	fastUpdateGrid: function Updater_fastUpdateGrid() {
 		// let links = NewTabToolsLinks.getLinks().slice(0, Grid.cells.length);
-		getAllTiles().then(function(links) {
+		Tiles.getAllTiles().then(function(links) {
 
 			// Find all sites that remain in the grid.
 			let sites = this._findRemainingSites(links);

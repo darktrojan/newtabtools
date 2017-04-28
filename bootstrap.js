@@ -30,9 +30,10 @@ XPCOMUtils.defineLazyGetter(this, 'strings', function() {
 	return Services.strings.createBundle('chrome://newtabtools/locale/newTabTools.properties');
 });
 
-/* globals CustomizableUI, GridPrefs, NewTabToolsExporter, NewTabToolsLinks,
+/* globals CustomizableUI, FileUtils, GridPrefs, NewTabToolsExporter, NewTabToolsLinks,
 	OS, PageThumbs, SavedThumbs, Task, TileData */
 XPCOMUtils.defineLazyModuleGetter(this, 'CustomizableUI', 'resource:///modules/CustomizableUI.jsm');
+XPCOMUtils.defineLazyModuleGetter(this, 'FileUtils', 'resource://gre/modules/FileUtils.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'GridPrefs', 'chrome://newtabtools/content/newTabTools.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'NewTabToolsExporter', 'chrome://newtabtools/content/export.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'NewTabToolsLinks', 'chrome://newtabtools/content/newTabTools.jsm');
@@ -219,11 +220,12 @@ function shutdown(params, reason) {
 
 function uiStartup(params) {
 	params.webExtension.startup().then(function({ browser }) {
-		browser.runtime.onMessage.addListener(function(message, sender, sendReply) {
-			if (message == 'whatever') {
-				Task.spawn(function*() {
-					Cu.importGlobalProperties(['fetch']);
+		Cu.importGlobalProperties(['fetch']);
 
+		browser.runtime.onMessage.addListener(function(message, sender, sendReply) {
+			switch (message) {
+			case 'tiles':
+				Task.spawn(function*() {
 					yield SavedThumbs._readDir();
 
 					let links = [];
@@ -257,21 +259,38 @@ function uiStartup(params) {
 
 					sendReply(links);
 				});
-
 				return true;
+
+			case 'background':
+				Task.spawn(function*() {
+					let backgroundImageFile = FileUtils.getFile('ProfD', ['newtab-background'], true);
+					if (!backgroundImageFile.exists()) {
+						sendReply(null);
+						return;
+					}
+
+					let backgroundImageURL = Services.io.newFileURI(backgroundImageFile);
+					let response = yield fetch(backgroundImageURL.spec);
+					let blob = yield response.blob();
+
+					sendReply(blob);
+				});
+				return true;
+
+			case 'prefs':
+				let prefs = {};
+				prefs.theme = userPrefs.getCharPref('theme');
+				prefs.opacity = userPrefs.getIntPref('foreground.opacity');
+				prefs.rows = userPrefs.getIntPref('rows');
+				prefs.columns = userPrefs.getIntPref('columns');
+				prefs.margin = userPrefs.getCharPref('grid.margin').split(' ');
+				prefs.spacing = userPrefs.getCharPref('grid.spacing');
+				prefs.titleSize = userPrefs.getCharPref('thumbs.titlesize');
+				prefs.locked = userPrefs.getBoolPref('locked');
+
+				sendReply(prefs);
+				return;
 			}
-
-			let prefs = {};
-			prefs.theme = userPrefs.getCharPref('theme');
-			prefs.opacity = userPrefs.getIntPref('foreground.opacity');
-			prefs.rows = userPrefs.getIntPref('rows');
-			prefs.columns = userPrefs.getIntPref('columns');
-			prefs.margin = userPrefs.getCharPref('grid.margin').split(' ');
-			prefs.spacing = userPrefs.getCharPref('grid.spacing');
-			prefs.titleSize = userPrefs.getCharPref('thumbs.titlesize');
-			prefs.locked = userPrefs.getBoolPref('locked');
-
-			sendReply(prefs);
 		});
 	});
 
