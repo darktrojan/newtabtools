@@ -3,16 +3,14 @@ This Source Code Form is subject to the terms of the Mozilla Public
 License, v. 2.0. If a copy of the MPL was not distributed with this file,
 You can obtain one at http://mozilla.org/MPL/2.0/.
 */
-/* globals GridPrefs, Grid, Tiles, Background */
+/* globals GridPrefs, Grid, Tiles, Background, browser */
 
 var HTML_NAMESPACE = 'http://www.w3.org/1999/xhtml';
 
 var newTabTools = {
-	_previousAutocompleteString: '',
-	_previousAutocompleteResult: null,
 	autocomplete: function() {
-		let input = this.pinURLInput;
-		if (input.value.length < 2) {
+		let value = this.pinURLInput.value;
+		if (value.length < 2) {
 			while (this.pinURLAutocomplete.lastChild) {
 				this.pinURLAutocomplete.lastChild.remove();
 			}
@@ -20,34 +18,43 @@ var newTabTools = {
 		}
 
 		let count = 0;
-		let urls = Array.map(this.pinURLAutocomplete.children, function(u) {
+		let options = Array.from(this.pinURLAutocomplete.children);
+		let urls = options.map(function(u) {
 			let v = u.textContent;
-			if (v.includes(input.value)) {
+			if (v.includes(value)) {
 				count++;
 			}
 			return v;
 		});
 
+		let exact = options.find(function(u) {
+			return u.textContent == value;
+		});
+		if (exact) {
+			this.pinURLAutocomplete.insertBefore(exact, this.pinURLAutocomplete.firstChild);
+		}
+
 		if (count > 10) {
 			return;
 		}
 
-		autocompleteService.stopSearch();
-		autocompleteService.startSearch(input.value, '', this._previousAutocompleteResult, {
-			onSearchResult: (function(s, r) {
-				for (let i = 0; i < r.matchCount; i++) {
-					let url = r.getValueAt(i);
-					if (urls.includes(url)) {
-						continue;
-					}
-					let option = document.createElement('option');
-					option.textContent = url;
-					this.pinURLAutocomplete.appendChild(option);
-					urls.push(url);
+		browser.history.search({
+			text: value,
+			startTime: 0
+		}).then(result => {
+			for (let r of result) {
+				if (urls.includes(r.url)) {
+					continue;
 				}
-				this._previousAutocompleteResult = r;
-				this._previousAutocompleteString = input.value;
-			}).bind(this)
+				let option = document.createElement('option');
+				option.textContent = r.url;
+				if (r.url == value) {
+					this.pinURLAutocomplete.insertBefore(option, this.pinURLAutocomplete.firstChild);
+				} else {
+					this.pinURLAutocomplete.appendChild(option);
+				}
+				urls.push(r.url);
+			}
 		});
 	},
 	launcherOnClick: function(event) {
@@ -90,13 +97,30 @@ var newTabTools = {
 			break;
 		case 'options-pinURL':
 			let link = this.pinURLInput.value;
-			Tiles.addTile(link, '').then(tile => {
+			if (!link) {
+				return;
+			}
+
+			let title = '';
+			browser.history.search({
+				text: link,
+				startTime: 0
+			}).then(function(result) {
+				let entry = result.find(function(f) {
+					return f.url == link;
+				});
+				if (entry) {
+					title = entry.title;
+				}
+				return Tiles.addTile(link, title);
+			}).then(tile => {
 				for (let i = 0; i < Grid.sites.length; i++) {
 					if (Grid.sites[i] === null) {
 						Grid.createSite(tile, Grid.cells[i]);
 						tile.position = i;
 						Tiles.putTile(tile);
 						this.selectedSiteIndex = i;
+						this.pinURLInput.value = '';
 						break;
 					}
 				}
@@ -199,20 +223,6 @@ var newTabTools = {
 			GridPrefs.gridLocked = checked;
 			break;
 		}
-	},
-	pinURL: function(link, title) {
-		// let index = Grid.sites.length - 1;
-		// for (var i = 0; i < Grid.sites.length; i++) {
-		// 	let s = Grid.sites[i];
-		// 	if (!s || !s.isPinned()) {
-		// 		index = i;
-		// 		break;
-		// 	}
-		// }
-
-		// BlockedLinks.unblock(link);
-		// PinnedLinks.pin({url: link, title: title}, index);
-		// Updater.updateGrid();
 	},
 	onTileChanged: function(url, whatChanged) {
 		// for (let site of Grid.sites) {
@@ -637,6 +647,7 @@ var newTabTools = {
 
 	newTabTools.optionsToggleButton.addEventListener('click', newTabTools.toggleOptions.bind(newTabTools), false);
 	newTabTools.optionsBackground.addEventListener('click', newTabTools.hideOptions.bind(newTabTools));
+	newTabTools.pinURLInput.addEventListener('input', newTabTools.autocomplete.bind(newTabTools));
 	newTabTools.optionsPane.addEventListener('click', newTabTools.optionsOnClick.bind(newTabTools), false);
 	newTabTools.optionsPane.addEventListener('change', newTabTools.optionsOnChange.bind(newTabTools), false);
 	for (let c of newTabTools.optionsPane.querySelectorAll('select, input[type="range"]')) {

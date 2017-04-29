@@ -11,6 +11,7 @@
 		"newtab": "newTab.xhtml"
 	},
 	"permissions": [
+		"history",
 		"storage"
 	],
 	"manifest_version": 2
