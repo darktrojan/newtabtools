@@ -45,10 +45,6 @@ input[type="button"] {
 	-moz-user-focus: normal;
 	flex-direction: column;
 }
-:root[launcher="left"] #newtab-scrollbox,
-:root[launcher="right"] #newtab-scrollbox {
-	flex-direction: row;
-}
 #newtab-scrollbox[page-disabled] {
 	background-image: none !important;
 }
@@ -228,8 +224,7 @@ input[type="button"] {
 	align-items: flex-end;
 }
 #newtab-margin-top,
-#newtab-margin-bottom,
-:root[launcher="top"] #newtab-margin-top.medium {
+#newtab-margin-bottom {
 	height: 30px;
 }
 #newtab-margin-top.medium,
@@ -240,16 +235,6 @@ input[type="button"] {
 #newtab-margin-bottom.large {
 	height: 120px;
 }
-:root[launcher="bottom"] #newtab-margin-bottom {
-	height: 10px;
-}
-:root[launcher="bottom"] #newtab-margin-bottom.medium {
-	height: 20px;
-}
-:root[launcher="top"] #newtab-margin-top.large,
-:root[launcher="bottom"] #newtab-margin-bottom.large {
-	height: 40px;
-}
 .newtab-side-margin {
 	width: 30px;
 }
@@ -258,140 +243,6 @@ input[type="button"] {
 }
 .newtab-side-margin.large {
 	width: 120px;
-}
-:root[launcher="right"] .newtab-side-margin:last-child,
-:root[launcher="left"] .newtab-side-margin:first-child {
-	width: 10px;
-}
-:root[launcher="right"] .newtab-side-margin:last-child.medium,
-:root[launcher="left"] .newtab-side-margin:first-child.medium {
-	width: 20px;
-}
-:root[launcher="right"] .newtab-side-margin:last-child.large,
-:root[launcher="left"] .newtab-side-margin:first-child.large {
-	width: 40px;
-}
-/* LAUNCHER */
-#launcher {
-	display: none;
-}
-:root[launcher] #launcher {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	text-align: center;
-	order: 3;
-}
-:root[launcher="top"] #launcher,
-:root[launcher="bottom"] #launcher {
-	flex-direction: row;
-	width: 100%;
-}
-:root[launcher="right"] #launcher,
-:root[launcher="left"] #launcher {
-	flex-direction: column;
-	width: 90px;
-}
-:root[launcher="top"] #launcher,
-:root[launcher="left"] #launcher {
-	order: 1;
-}
-/* LAUNCH BUTTONS */
-.launchButton {
-	display: flex;
-	flex-direction: column;
-	margin: 1px 1px;
-	padding: 10px 6px;
-	vertical-align: top;
-	white-space: normal;
-	background: none;
-	border: none;
-	color: var(--text);
-	text-shadow: 0 0 3px var(--shadow), 0 0 1px var(--shadow);
-	font-family: inherit;
-	font-size: 12px;
-	cursor: pointer;
-}
-:root[launcher="left"] .launchButton,
-:root[launcher="right"] .launchButton {
-	width: 88px;
-	height: 75px;
-}
-:root[launcher="top"] .launchButton,
-:root[launcher="bottom"] .launchButton {
-	min-width: 88px;
-}
-.launchButton:hover {
-	color: var(--text-hover);
-	text-shadow: 0 0 3px var(--shadow-hover), 0 0 1px var(--shadow-hover);
-}
-.launchButton::before {
-	display: block;
-	height: 36px;
-	line-height: 0;
-	opacity: var(--opacity);
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: 36px 36px;
-	content: "";
-	margin-bottom: 2px;
-}
-.launchButton:hover::before {
-	opacity: 1;
-}
-#launcher:not([session]) > #restorePreviousSession {
-	display: none;
-}
-#downloads::before {
-	background-image: url("launcher/light/downloads.png");
-}
-#bookmarks::before {
-	background-image: url("launcher/light/bookmarks.png");
-}
-#history::before {
-	background-image: url("launcher/light/history.png");
-}
-#addons::before {
-	background-image: url("launcher/light/addons.png");
-}
-#sync::before {
-	background-image: url("launcher/light/sync.png");
-}
-#settingsWin::before,
-#settingsUnix::before {
-	background-image: url("launcher/light/settings.png");
-}
-#restorePreviousSession::before {
-	background-image: url("launcher/light/restore.png");
-}
-#restorePreviousSession:-moz-dir(rtl)::before {
-	transform: scaleX(-1);
-}
-:root[launcher="left"] #restorePreviousSession,
-:root[launcher="right"] #restorePreviousSession {
-	height: 105px;
-}
-:root[theme="dark"] #downloads::before {
-	background-image: url("launcher/dark/downloads.png");
-}
-:root[theme="dark"] #bookmarks::before {
-	background-image: url("launcher/dark/bookmarks.png");
-}
-:root[theme="dark"] #history::before {
-	background-image: url("launcher/dark/history.png");
-}
-:root[theme="dark"] #addons::before {
-	background-image: url("launcher/dark/addons.png");
-}
-:root[theme="dark"] #sync::before {
-	background-image: url("launcher/dark/sync.png");
-}
-:root[theme="dark"] #settingsWin::before,
-:root[theme="dark"] #settingsUnix::before {
-	background-image: url("launcher/dark/settings.png");
-}
-:root[theme="dark"] #restorePreviousSession::before {
-	background-image: url("launcher/dark/restore.png");
 }
 /* GRID */
 #newtab-grid {
@@ -702,7 +553,6 @@ input[type="button"] {
 }
 #newtab-scrollbox[page-disabled] #options-toggle,
 #newtab-scrollbox[page-disabled] #options-toggle-pointer,
-#newtab-scrollbox[page-disabled] #launcher,
 #newtab-scrollbox[page-disabled] #newtab-recent-outer,
 #newtab-scrollbox:not([page-disabled]) #newtab-toggle {
 	display: none;

@@ -57,32 +57,6 @@ var newTabTools = {
 			}
 		});
 	},
-	launcherOnClick: function(event) {
-		// switch (event.originalTarget.id) {
-		// case 'downloads':
-		// 	newTabTools.browserWindow.BrowserDownloadsUI();
-		// 	break;
-		// case 'bookmarks':
-		// 	newTabTools.browserWindow.PlacesCommandHook.showPlacesOrganizer('AllBookmarks');
-		// 	break;
-		// case 'history':
-		// 	newTabTools.browserWindow.PlacesCommandHook.showPlacesOrganizer('History');
-		// 	break;
-		// case 'addons':
-		// 	newTabTools.browserWindow.BrowserOpenAddonsMgr();
-		// 	break;
-		// case 'sync':
-		// 	newTabTools.browserWindow.openPreferences('paneSync');
-		// 	break;
-		// case 'settingsWin':
-		// case 'settingsUnix':
-		// 	newTabTools.browserWindow.openPreferences();
-		// 	break;
-		// case 'restorePreviousSession':
-		// 	SessionStore.restoreLastSession();
-		// 	break;
-		// }
-	},
 	get selectedSite() {
 		return Grid.sites[this._selectedSiteIndex];
 	},
@@ -297,15 +271,6 @@ var newTabTools = {
 		});
 	},
 	updateUI: function(keys) {
-		// let launcherPosition = this.prefs.getIntPref('launcher');
-		// document.querySelector('[name="launcher"]').value = launcherPosition;
-		// if (launcherPosition) {
-		// 	let positionNames = ['top', 'right', 'bottom', 'left'];
-		// 	document.documentElement.setAttribute('launcher', positionNames[launcherPosition - 1]);
-		// } else {
-		// 	document.documentElement.removeAttribute('launcher');
-		// }
-
 		if (!keys || keys.includes('theme')) {
 			let theme = GridPrefs.theme;
 			this.themePref.querySelector('[value="' + theme + '"]').checked = true;
@@ -595,7 +560,6 @@ var newTabTools = {
 
 	let uiElements = {
 		'page': 'newtab-scrollbox', // used in fx-newTab.js
-		'launcher': 'launcher',
 		'optionsToggleButton': 'options-toggle',
 		'optionsTogglePointer': 'options-toggle-pointer',
 		'pinURLInput': 'options-pinURL-input',
@@ -629,14 +593,6 @@ var newTabTools = {
 		newTabTools[key] = document.getElementById(value);
 	}
 
-	// if (Services.appinfo.OS == 'WINNT') {
-	// 	document.getElementById('settingsUnix').style.display = 'none';
-	// 	newTabTools.optionsToggleButton.title = document.getElementById('settingsWin').textContent;
-	// } else {
-	// 	document.getElementById('settingsWin').style.display = 'none';
-	// 	newTabTools.optionsToggleButton.title = document.getElementById('settingsUnix').textContent;
-	// }
-
 	function keyUpHandler(event) {
 		if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].indexOf(event.key) > -1) {
 			newTabTools.optionsOnChange(event);
@@ -653,7 +609,6 @@ var newTabTools = {
 	for (let c of newTabTools.optionsPane.querySelectorAll('select, input[type="range"]')) {
 		c.addEventListener('keyup', keyUpHandler);
 	}
-	newTabTools.launcher.addEventListener('click', newTabTools.launcherOnClick, false);
 	newTabTools.setSavedThumbInput.addEventListener('input', function() {
 		// newTabTools.setSavedThumbButton.disabled = !/^(file|ftp|http|https):\/\//.exec(this.value);
 		newTabTools.setSavedThumbButton.disabled = !this.files.length;
@@ -676,16 +631,4 @@ var newTabTools = {
 	if (!preloaded) {
 		newTabTools.onVisible();
 	}
-
-	// SessionStore.promiseInitialized.then(function() {
-	// 	if (SessionStore.canRestoreLastSession && !inPrivateBrowsingMode()) {
-	// 		newTabTools.launcher.setAttribute('session', 'true');
-	// 		Services.obs.addObserver({
-	// 			observe: function() {
-	// 				newTabTools.launcher.removeAttribute('session');
-	// 			},
-	// 			QueryInterface: XPCOMUtils.generateQI([Ci.nsIObserver, Ci.nsISupportsWeakReference])
-	// 		}, 'sessionstore-last-session-cleared', true);
-	// 	}
-	// });
 })();

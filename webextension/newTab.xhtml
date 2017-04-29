@@ -6,8 +6,6 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 <!DOCTYPE window [
 	<!ENTITY % newTabDTD SYSTEM "chrome://browser/locale/newTab.dtd">
 	%newTabDTD;
-	<!ENTITY % aboutHomeDTD SYSTEM "chrome://newtabtools/locale/aboutHome.dtd">
-	%aboutHomeDTD;
 	<!ENTITY % browserDTD SYSTEM "chrome://browser/locale/browser.dtd">
 	%browserDTD;
 	<!ENTITY % newTabToolsDTD SYSTEM "chrome://newtabtools/locale/newTab.dtd">
@@ -51,17 +49,6 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 
 		<div id="options-toggle-pointer" hidden="">&newtabtools.options.pointer;</div>
 		<input id="newtab-toggle" type="button" title="&newtabtools.page.show;" />
-
-		<div id="launcher">
-			<button class="launchButton" id="downloads">&abouthome.downloadsButton.label;</button>
-			<button class="launchButton" id="bookmarks">&abouthome.bookmarksButton.label;</button>
-			<button class="launchButton" id="history">&abouthome.historyButton.label;</button>
-			<button class="launchButton" id="addons">&abouthome.addonsButton.label;</button>
-			<button class="launchButton" id="sync">&abouthome.syncButton.label;</button>
-			<button class="launchButton" id="settingsWin">&abouthome.preferencesButtonWin.label;</button>
-			<button class="launchButton" id="settingsUnix">&abouthome.preferencesButtonUnix.label;</button>
-			<button class="launchButton" id="restorePreviousSession">&historyRestoreLastSession.label;</button>
-		</div>
 	</div>
 
 	<div id="options-bg"></div>
@@ -191,18 +178,6 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 								</select>
 							</td>
 						</tr>
-						<!-- <tr>
-							<th>&newtabtools.options.launcher;</th>
-							<td>
-								<select name="launcher">
-									<option value="0">&newtabtools.options.launcher.hidden;</option>
-									<option value="1">&newtabtools.options.launcher.top;</option>
-									<option value="3">&newtabtools.options.launcher.bottom;</option>
-									<option value="4">&newtabtools.options.launcher.left;</option>
-									<option value="2">&newtabtools.options.launcher.right;</option>
-								</select>
-							</td>
-						</tr> -->
 						<!-- <tr>
 							<th></th>
 							<td>
