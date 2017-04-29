@@ -327,10 +327,6 @@ var newTabTools = {
 		// document.querySelector('[name="historytiles.show"]').checked = showHistory;
 		// document.getElementById('historytiles-filter').disabled = !showHistory;
 
-		// let showRecent = this.prefs.getBoolPref('recent.show');
-		// document.querySelector('[name="recent.show"]').checked = showRecent;
-		// this.trimRecent();
-
 		if ('Grid' in window && 'cacheCellPositions' in Grid) {
 			requestAnimationFrame(Grid.cacheCellPositions);
 		}
@@ -351,107 +347,7 @@ var newTabTools = {
 			pieceElement.classList.add(size);
 		}
 	},
-	startRecent: function() {
-		// let tabContainer = this.browserWindow.gBrowser.tabContainer;
-		// let handler = this.refreshRecent.bind(this);
-		// tabContainer.addEventListener('TabOpen', handler, false);
-		// tabContainer.addEventListener('TabClose', handler, false);
-
-		// window.addEventListener('unload', function() {
-		// 	tabContainer.removeEventListener('TabOpen', handler, false);
-		// 	tabContainer.removeEventListener('TabClose', handler, false);
-		// }, false);
-		// handler();
-
-		// let previousWidth = window.innerWidth;
-		// window.addEventListener('resize', () => {
-		// 	if (window.innerWidth != previousWidth) {
-		// 		previousWidth = window.innerWidth;
-		// 		this.trimRecent();
-		// 	}
-		// });
-	},
-	refreshRecent: function(event) {
-		// if (event && event.originalTarget.linkedBrowser.contentWindow == window) {
-		// 	return;
-		// }
-
-		// if (!this.prefs.getBoolPref('recent.show')) {
-		// 	this.recentList.hidden = true;
-		// 	return;
-		// }
-
-		// for (let element of this.recentList.querySelectorAll('a')) {
-		// 	this.recentList.removeChild(element);
-		// }
-
-		// let added = 0;
-		// let undoItems = JSON.parse(SessionStore.getClosedTabData(this.browserWindow));
-		// for (let i = 0; i < undoItems.length; i++) {
-		// 	let item = undoItems[i];
-		// 	let index = i;
-		// 	let iconURL;
-		// 	let url;
-
-		// 	if (item.image) {
-		// 		iconURL = item.image;
-		// 		if (/^https?:/.test(iconURL)) {
-		// 			iconURL = 'moz-anno:favicon:' + iconURL;
-		// 		}
-		// 	} else {
-		// 		iconURL = 'chrome://mozapps/skin/places/defaultFavicon.png';
-		// 	}
-
-		// 	let tabData = item.state;
-		// 	let activeIndex = (tabData.index || tabData.entries.length) - 1;
-		// 	if (activeIndex >= 0 && tabData.entries[activeIndex]) {
-		// 		url = tabData.entries[activeIndex].url;
-		// 		if (url == 'about:newtab' && tabData.entries.length == 1) {
-		// 			continue;
-		// 		}
-		// 	}
-
-		// 	let a = document.createElementNS(HTML_NAMESPACE, 'a');
-		// 	a.href = url;
-		// 	a.className = 'recent';
-		// 	a.title = (item.title == url ? item.title : item.title + '\n' + url);
-		// 	a.onclick = function() {
-		// 		newTabTools.browserWindow.undoCloseTab(index);
-		// 		return false;
-		// 	}; // jshint ignore:line
-		// 	let img = document.createElementNS(HTML_NAMESPACE, 'img');
-		// 	img.className = 'favicon';
-		// 	img.src = iconURL;
-		// 	a.appendChild(img);
-		// 	a.appendChild(document.createTextNode(item.title));
-		// 	this.recentList.appendChild(a);
-		// 	added++;
-		// }
-		// this.trimRecent();
-		// this.recentList.hidden = !added;
-	},
-	trimRecent: function() {
-		// this.recentList.style.width = '0';
-
-		// let width = this.recentListOuter.clientWidth;
-		// let elements = document.querySelectorAll('.recent');
-
-		// for (let recent of elements) {
-		// 	// see .recent
-		// 	let right = recent.offsetLeft + recent.offsetWidth - this.recentList.offsetLeft + 4;
-		// 	if (right == 4) {
-		// 		requestAnimationFrame(this.trimRecent.bind(this));
-		// 		return;
-		// 	}
-		// 	if (right <= width) {
-		// 		this.recentList.style.width = right + 'px';
-		// 	} else {
-		// 		break;
-		// 	}
-		// }
-	},
 	onVisible: function() {
-		this.startRecent();
 		// if (!this.prefs.getBoolPref('optionspointershown')) {
 		// 	this.optionsTogglePointer.hidden = false;
 		// 	this.optionsTogglePointer.style.animationPlayState = 'running';
@@ -583,8 +479,6 @@ var newTabTools = {
 		'setBackgroundButton': 'options-bg-set',
 		'removeBackgroundButton': 'options-bg-remove',
 		'themePref': 'options-theme-pref',
-		'recentList': 'newtab-recent',
-		'recentListOuter': 'newtab-recent-outer',
 		'optionsBackground': 'options-bg',
 		'optionsPane': 'options'
 	};
