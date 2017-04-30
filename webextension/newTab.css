@@ -7,7 +7,7 @@
 	font: message-box;
 	font-size: 12px;
 	color: #444;
-	background-color: transparent;
+	background-color: #f2f2f2;
 	height: 100%;
 
 	--opacity: 0.8;
@@ -18,14 +18,13 @@
 	--background-fill: rgba(255, 255, 255, 0.2);
 }
 :root[theme="dark"] {
+	background-color: #171b1f;
+
 	--text-hover: rgb(255, 255, 255);
 	--text: rgba(255, 255, 255, var(--opacity));
 	--shadow-hover: rgb(31, 54, 76);
 	--shadow: rgba(31, 54, 76, var(--opacity));
 	--background-fill: rgba(31, 54, 76, 0.2);
-}
-:root:not([page-disabled]) {
-	background-color: #f2f2f2;
 }
 body {
 	height: 100%;
@@ -44,11 +43,6 @@ input[type="button"] {
 	flex: 1;
 	-moz-user-focus: normal;
 	flex-direction: column;
-}
-#newtab-scrollbox[page-disabled] {
-	background-image: none !important;
-}
-#newtab-scrollbox:not([page-disabled]) {
 	overflow: auto;
 	color: #000;
 }
@@ -133,31 +127,6 @@ input[type="button"] {
 #newtab-undo-close-button:-moz-focusring {
 	outline: 1px dotted;
 }
-/* TOGGLE */
-#newtab-toggle {
-	position: absolute;
-	top: 12px;
-	right: 12px;
-	width: 16px;
-	height: 16px;
-	padding: 0;
-	border: none;
-	background: -216px 0 transparent url("controls.png");
-	z-index: 1;
-}
-#newtab-toggle:-moz-locale-dir(rtl) {
-	left: 12px;
-	right: auto;
-}
-#newtab-toggle[page-disabled] {
-	background-position: -232px 0;
-}
-@media (min-resolution: 2dppx) {
-	#newtab-toggle {
-		background-image: url("controls@2x.png");
-		background-size: 296px;
-	}
-}
 /* MARGINS */
 #newtab-vertical-margin {
 	display: flex;
@@ -212,11 +181,7 @@ input[type="button"] {
 	transition: 100ms ease-out;
 	transition-property: opacity;
 }
-#newtab-grid[page-disabled] {
-	opacity: 0;
-}
-#newtab-grid[locked],
-#newtab-grid[page-disabled] {
+#newtab-grid[locked] {
 	pointer-events: none;
 }
 /* ROWS */
@@ -507,11 +472,6 @@ input[type="button"] {
 	100% {
 		transform: translatex(0px);
 	}
-}
-#newtab-scrollbox[page-disabled] #options-toggle,
-#newtab-scrollbox[page-disabled] #options-toggle-pointer,
-#newtab-scrollbox:not([page-disabled]) #newtab-toggle {
-	display: none;
 }
 :root[options-hidden] #options,
 :root[options-hidden] #options-bg,
