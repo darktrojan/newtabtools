@@ -468,11 +468,9 @@ var Grid = {
 		'  <span class="newtab-thumbnail"/>' +
 		'  <span class="newtab-title"/>' +
 		'</a>' +
-		'<input type="button" class="newtab-control newtab-control-pin"/>' +
-		'<input type="button" class="newtab-control newtab-control-block"/>';
+		'<input type="button" class="newtab-control newtab-control-pin"/>';
 
 		site.querySelector('input.newtab-control-pin').title = newTabString('pin');
-		site.querySelector('input.newtab-control-block').title = newTabString('block');
 
 		this._siteFragment = document.createDocumentFragment();
 		this._siteFragment.appendChild(site);
@@ -700,6 +698,9 @@ Site.prototype = {
 	   * Unpins the site and calls the given callback when done.
 	   */
 	unpin: function Site_unpin() {
+		Tiles.removeTile(this._link.id).then(() => {
+			this.node.remove();
+		});
 		// if (this.isPinned()) {
 		// 	this._updateAttributes(false);
 		// 	PinnedLinks.unpin(this._link);
@@ -720,9 +721,6 @@ Site.prototype = {
 	   * when done.
 	   */
 	block: function Site_block() {
-		Tiles.removeTile(this._link.id).then(() => {
-			this.node.remove();
-		});
 		// if (!BlockedLinks.isBlocked(this._link)) {
 		// 	UndoDialog.show(this);
 		// 	BlockedLinks.block(this._link);
