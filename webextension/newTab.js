@@ -3,7 +3,7 @@ This Source Code Form is subject to the terms of the Mozilla Public
 License, v. 2.0. If a copy of the MPL was not distributed with this file,
 You can obtain one at http://mozilla.org/MPL/2.0/.
 */
-/* globals GridPrefs, Grid, Tiles, Background, browser */
+/* globals GridPrefs, Grid, Page, Tiles, Background, browser, initDB, isFirstRun */
 
 var HTML_NAMESPACE = 'http://www.w3.org/1999/xhtml';
 
@@ -428,6 +428,32 @@ var newTabTools = {
 			this.siteThumbnail.style.width = 150 * ratio + 'px';
 			this.siteThumbnail.style.height = '150px';
 		}
+	},
+	startup: function() {
+		Promise.all([
+			GridPrefs.init(),
+			initDB()
+		]).then(function() {
+			// Everything is loaded. Initialize the New Tab Page.
+			Page.init();
+			newTabTools.updateUI();
+			newTabTools.updateGridPrefs();
+			newTabTools.refreshBackgroundImage();
+
+			if (isFirstRun) {
+				return newTabTools.getEverythingFromOldExtension();
+			}
+		}).catch(console.error.bind(console));
+	},
+	getEverythingFromOldExtension: function() {
+		return Promise.all([
+			Tiles.getTilesFromOldExtension(),
+			Background.getBackgroundFromOldExtension(),
+			GridPrefs.getPrefsFromOldExtension()
+		]).then(function() {
+			newTabTools.refreshBackgroundImage();
+			Grid.refresh();
+		});
 	}
 };
 

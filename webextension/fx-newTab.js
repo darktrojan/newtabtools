@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this file,
  * You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-/* globals DOMRect, GridPrefs, Tiles, initDB, newTabTools */
+/* globals DOMRect, GridPrefs, Tiles, newTabTools */
 DOMRect.prototype.isEmpty = function() {
 	return this.left >= this.right || this.top >= this.bottom;
 };
@@ -1925,13 +1925,4 @@ var Updater = {
 
 // UndoDialog.init();
 
-Promise.all([
-	GridPrefs.init(),
-	initDB()
-]).then(function() {
-	// Everything is loaded. Initialize the New Tab Page.
-	Page.init();
-	newTabTools.updateUI();
-	newTabTools.updateGridPrefs();
-	newTabTools.refreshBackgroundImage();
-});
+newTabTools.startup();

@@ -55,8 +55,8 @@ var GridPrefs = {
 		Grid.refresh();
 	},
 	getPrefsFromOldExtension: function() {
-		browser.runtime.sendMessage('prefs').then(function(result) {
-			browser.storage.local.set(result);
+		return browser.runtime.sendMessage('prefs').then(function(result) {
+			return browser.storage.local.set(result);
 		});
 	},
 	get theme() {

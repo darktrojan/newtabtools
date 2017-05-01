@@ -1,6 +1,7 @@
 /* exported initDB, getAllTiles, Tiles, Background */
 /* globals Grid, browser, indexedDB */
 var db;
+var isFirstRun = false;
 
 function initDB() {
 	return new Promise(function(resolve, reject) {
@@ -32,6 +33,10 @@ function initDB() {
 			// }
 
 			db.createObjectStore('background', { autoIncrement: true });
+
+			if (event.oldVersion < 5) {
+				isFirstRun = true;
+			}
 		};
 	});
 }
@@ -73,17 +78,19 @@ var Tiles = {
 		});
 	},
 	getTilesFromOldExtension: function() {
-		browser.runtime.sendMessage('tiles').then(function(result) {
-			let t = db.transaction('tiles', 'readwrite');
-			t.oncomplete = function() {
-				Grid.refresh();
-			};
+		return browser.runtime.sendMessage('tiles').then(function(result) {
+			return new Promise(function(resolve) {
+				let t = db.transaction('tiles', 'readwrite');
+				t.oncomplete = function() {
+					resolve();
+				};
 
-			let os = t.objectStore('tiles');
-			os.clear();
-			for (let tile of result) {
-				os.add(tile);
-			}
+				let os = t.objectStore('tiles');
+				os.clear();
+				for (let tile of result) {
+					os.add(tile);
+				}
+			});
 		});
 	}
 };
@@ -114,10 +121,8 @@ var Background = {
 		});
 	},
 	getBackgroundFromOldExtension: function() {
-		browser.runtime.sendMessage('background').then(result => {
-			this.setBackground(result).then(() => {
-				newTabTools.refreshBackgroundImage();
-			});
+		return browser.runtime.sendMessage('background').then(result => {
+			return this.setBackground(result);
 		});
 	}
 };
