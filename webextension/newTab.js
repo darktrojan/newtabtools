@@ -198,24 +198,6 @@ var newTabTools = {
 			break;
 		}
 	},
-	onTileChanged: function(url, whatChanged) {
-		// for (let site of Grid.sites) {
-		// 	if (!!site && site.url == url) {
-		// 		switch (whatChanged) {
-		// 		case 'backgroundColor':
-		// 			site._querySelector('.newtab-thumbnail').style.backgroundColor = TileData.get(url, 'backgroundColor');
-		// 			break;
-		// 		case 'thumbnail':
-		// 			site.refreshThumbnail();
-		// 			this.selectedSiteIndex = this._selectedSiteIndex;
-		// 			break;
-		// 		case 'title':
-		// 			site._addTitleAndFavicon();
-		// 			break;
-		// 		}
-		// 	}
-		// }
-	},
 	setThumbnail: function(site, src) {
 		let image = new Image();
 		image.onload = function() {
@@ -347,13 +329,6 @@ var newTabTools = {
 			pieceElement.classList.add(size);
 		}
 	},
-	onVisible: function() {
-		// if (!this.prefs.getBoolPref('optionspointershown')) {
-		// 	this.optionsTogglePointer.hidden = false;
-		// 	this.optionsTogglePointer.style.animationPlayState = 'running';
-		// }
-		this.onVisible = function() {};
-	},
 	set selectedSiteIndex(index) { // jshint ignore:line
 		this._selectedSiteIndex = index;
 		let site = this.selectedSite;
@@ -458,28 +433,6 @@ var newTabTools = {
 };
 
 (function() {
-	// function getTopWindow() {
-	// 	return window.QueryInterface(Ci.nsIInterfaceRequestor)
-	// 	.getInterface(Ci.nsIWebNavigation)
-	// 	.QueryInterface(Ci.nsIDocShellTreeItem)
-	// 	.rootTreeItem
-	// 	.QueryInterface(Ci.nsIInterfaceRequestor)
-	// 	.getInterface(Ci.nsIDOMWindow)
-	// 	.wrappedJSObject;
-	// }
-
-	// XPCOMUtils.defineLazyGetter(newTabTools, 'browserWindow', function() {
-	// 	return getTopWindow();
-	// });
-
-	// XPCOMUtils.defineLazyGetter(newTabTools, 'prefs', function() {
-	// 	return Services.prefs.getBranch('extensions.newtabtools.');
-	// });
-
-	// XPCOMUtils.defineLazyGetter(newTabTools, 'strings', function() {
-	// 	return Services.strings.createBundle('chrome://newtabtools/locale/newTabTools.properties');
-	// });
-
 	let uiElements = {
 		'page': 'newtab-scrollbox', // used in fx-newTab.js
 		'optionsToggleButton': 'options-toggle',
@@ -530,7 +483,6 @@ var newTabTools = {
 		c.addEventListener('keyup', keyUpHandler);
 	}
 	newTabTools.setSavedThumbInput.addEventListener('input', function() {
-		// newTabTools.setSavedThumbButton.disabled = !/^(file|ftp|http|https):\/\//.exec(this.value);
 		newTabTools.setSavedThumbButton.disabled = !this.files.length;
 	});
 	newTabTools.setBgColourInput.addEventListener('change', function() {
@@ -538,7 +490,6 @@ var newTabTools = {
 		newTabTools.setBgColourButton.disabled = false;
 	});
 	newTabTools.setBackgroundInput.addEventListener('input', function() {
-		// newTabTools.setBackgroundButton.disabled = !/^(file|ftp|http|https):\/\//.exec(this.value);
 		newTabTools.setBackgroundButton.disabled = !this.files.length;
 	});
 	window.addEventListener('keypress', function(event) {
@@ -546,9 +497,4 @@ var newTabTools = {
 			newTabTools.hideOptions();
 		}
 	});
-
-	let preloaded = document.visibilityState == 'hidden';
-	if (!preloaded) {
-		newTabTools.onVisible();
-	}
 })();
