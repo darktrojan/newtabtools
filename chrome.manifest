@@ -16,8 +16,3 @@ locale newtabtools pt-BR locale/pt-BR/
 locale newtabtools ru locale/ru/
 locale newtabtools zh-CN locale/zh-CN/
 locale newtabtools zh-TW locale/zh-TW/
-skin newtabtools classic/1.0 skin/linux/ os!=WINNT os!=Darwin
-skin newtabtools classic/1.0 skin/osx/ os=Darwin
-skin newtabtools classic/1.0 skin/windows/ os=WINNT
-
-override chrome://browser/content/newtab/newTab.xhtml chrome://newtabtools/content/newTab.xhtml
