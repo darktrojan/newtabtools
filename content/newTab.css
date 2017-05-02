@@ -882,9 +882,6 @@ a {
 	background-color: #f9f9f9;
 	text-align: center;
 }
-#options-donate-wrap > :first-child {
-	margin: 0.5em 0.5em 0;
-}
-#options-donate-wrap > :last-child {
-	margin: 0 0.5em 0.5em;
+#options-donate-wrap > div {
+	margin: 0.5em;
 }

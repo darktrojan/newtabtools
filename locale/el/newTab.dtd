@@ -45,5 +45,6 @@
 <!ENTITY newtabtools.donate.label "To New Tab Tools χρηματοδοτείται απο δωρεές χρηστών.">
 <!ENTITY newtabtools.donate "Δωρήστε…">
 <!ENTITY newtabtools.github "Το New Tab Tools στο GitHub">
+<!ENTITY newtabtools.webextensions "Info about New Tab Tools and WebExtensions">
 
 <!ENTITY newtabtools.recently-closed-tabs "Πρόσφατα κλεισμένες καρτέλες:">

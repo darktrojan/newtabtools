@@ -45,5 +45,6 @@
 <!ENTITY newtabtools.donate.label "NewTabTools tiek finansēts no lietotāju ziedojumiem.">
 <!ENTITY newtabtools.donate "Ziedot…">
 <!ENTITY newtabtools.github "NewTabTools on GitHub">
+<!ENTITY newtabtools.webextensions "Info about New Tab Tools and WebExtensions">
 
 <!ENTITY newtabtools.recently-closed-tabs "Nesen aizvērtās cilnes:">

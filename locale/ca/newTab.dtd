@@ -45,5 +45,6 @@
 <!ENTITY newtabtools.donate.label "Les Eines de pestanyes noves es financien amb donatius dels usuaris.">
 <!ENTITY newtabtools.donate "Feu un donatiu…">
 <!ENTITY newtabtools.github "Les Eines de pestanyes noves al GitHub">
+<!ENTITY newtabtools.webextensions "Info about New Tab Tools and WebExtensions">
 
 <!ENTITY newtabtools.recently-closed-tabs "Pestanyes tancades recentment:">

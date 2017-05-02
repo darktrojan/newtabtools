@@ -45,5 +45,6 @@
 <!ENTITY newtabtools.donate.label "New Tab Tools финансируется за счет пожертвований пользователей.">
 <!ENTITY newtabtools.donate "Пожертвовать…">
 <!ENTITY newtabtools.github "New Tab Tools на GitHub">
+<!ENTITY newtabtools.webextensions "Info about New Tab Tools and WebExtensions">
 
 <!ENTITY newtabtools.recently-closed-tabs "Закрытые вкладки:">

@@ -45,5 +45,6 @@
 <!ENTITY newtabtools.donate.label "New Tab Tools 依靠用户捐助维持。">
 <!ENTITY newtabtools.donate "捐助…">
 <!ENTITY newtabtools.github "New Tab Tools 在 GitHub 上">
+<!ENTITY newtabtools.webextensions "Info about New Tab Tools and WebExtensions">
 
 <!ENTITY newtabtools.recently-closed-tabs "最近关闭的标签页：">

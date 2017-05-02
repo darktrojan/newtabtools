@@ -45,5 +45,6 @@
 <!ENTITY newtabtools.donate.label "Neuer-Tab-Tools wird durch Spenden finanziert.">
 <!ENTITY newtabtools.donate "Spenden…">
 <!ENTITY newtabtools.github "Neuer-Tab-Tools auf GitHub">
+<!ENTITY newtabtools.webextensions "Info about New Tab Tools and WebExtensions">
 
 <!ENTITY newtabtools.recently-closed-tabs "Geschlossene Tabs:">

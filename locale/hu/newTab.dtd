@@ -45,5 +45,6 @@
 <!ENTITY newtabtools.donate.label "A New Tab Tools-t a felhasználói adományok finanszírozzák.">
 <!ENTITY newtabtools.donate "Adományozás…">
 <!ENTITY newtabtools.github "New Tab Tools a GitHub-on">
+<!ENTITY newtabtools.webextensions "Info about New Tab Tools and WebExtensions">
 
 <!ENTITY newtabtools.recently-closed-tabs "Nemrég bezárt lapok:">
