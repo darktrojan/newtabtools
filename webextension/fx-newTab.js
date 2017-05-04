@@ -960,8 +960,6 @@ var Drag = {
 
 		Drop._lastDropTarget = null;
 		this._draggedSite = null;
-
-		Grid.sites.filter(s => s).forEach(Transformation.unfreezeSitePosition.bind(Transformation));
 	},
 
 	/**

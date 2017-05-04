@@ -70,34 +70,35 @@ var newTabTools = {
 			newTabTools.hideOptions();
 			break;
 		case 'options-pinURL':
-			let link = this.pinURLInput.value;
-			if (!link) {
+			let url = this.pinURLInput.value;
+			if (!url) {
 				return;
 			}
+			if (Tiles.isPinned(url)) {
+				throw 'Already pinned';
+			}
 
-			let title = '';
+			let title = url;
 			browser.history.search({
-				text: link,
+				text: url,
 				startTime: 0
 			}).then(function(result) {
 				let entry = result.find(function(f) {
-					return f.url == link;
+					return f.url == url;
 				});
 				if (entry) {
 					title = entry.title;
 				}
-				return Tiles.addTile(link, title);
-			}).then(tile => {
-				for (let i = 0; i < Grid.sites.length; i++) {
-					if (Grid.sites[i] === null) {
-						Grid.createSite(tile, Grid.cells[i]);
-						tile.position = i;
-						Tiles.putTile(tile);
-						this.selectedSiteIndex = i;
-						this.pinURLInput.value = '';
-						break;
-					}
+
+				let emptyCell = Grid.cells.find(c => !c.containsPinnedSite());
+				if (!emptyCell) {
+					throw 'No free space';
 				}
+
+				let tile = { url, title, position: emptyCell.index };
+				return Tiles.putTile(tile);
+			}).then(function() {
+				Updater.updateGrid();
 			});
 			break;
 		case 'options-previous-row-tile':

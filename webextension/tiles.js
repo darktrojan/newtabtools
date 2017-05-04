@@ -77,15 +77,6 @@ var Tiles = {
 			};
 		});
 	},
-	addTile: function(url, title) {
-		return new Promise(function(resolve) {
-			let tile = { url, title };
-			db.transaction('tiles', 'readwrite').objectStore('tiles').add(tile).onsuccess = function() {
-				tile.id = this.result;
-				resolve(tile);
-			};
-		});
-	},
 	putTile: function(tile) {
 		return new Promise(function(resolve) {
 			db.transaction('tiles', 'readwrite').objectStore('tiles').put(tile).onsuccess = function() {
