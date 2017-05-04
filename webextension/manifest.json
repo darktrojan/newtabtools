@@ -12,7 +12,8 @@
 	},
 	"permissions": [
 		"history",
-		"storage"
+		"storage",
+		"topSites"
 	],
 	"manifest_version": 2
 }

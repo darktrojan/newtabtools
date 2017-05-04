@@ -1,5 +1,5 @@
 /* exported initDB, getAllTiles, Tiles, Background */
-/* globals Grid, browser, indexedDB */
+/* globals browser, indexedDB */
 var db;
 var isFirstRun = false;
 
@@ -42,15 +42,38 @@ function initDB() {
 }
 
 var Tiles = {
-	getAllTiles: function() {
+	_list: [],
+	isPinned: function(url) {
+		return this._list.includes(url);
+	},
+	getAllTiles: function(count) {
 		return new Promise(function(resolve) {
 			db.transaction('tiles').objectStore('tiles').getAll().onsuccess = function() {
 				let links = [];
+				Tiles._list.length = 0;
 				for (let t of this.result) {
 					links[t.position] = t;
+					Tiles._list.push(t.url);
 				}
 
-				resolve(links);
+				browser.topSites.get().then(r => {
+					let remaining = r.filter(s => {
+						let urls = Tiles._list.slice();
+						let isNew = !urls.includes(s.url);
+						if (isNew) {
+							urls.push(s.url);
+						}
+						return isNew;
+					});
+
+					for (let i = 0; i < count && remaining.length > 0; i++) {
+						if (!links[i]) {
+							links[i] = remaining.shift();
+						}
+					}
+
+					resolve(links);
+				});
 			};
 		});
 	},
@@ -66,6 +89,7 @@ var Tiles = {
 	putTile: function(tile) {
 		return new Promise(function(resolve) {
 			db.transaction('tiles', 'readwrite').objectStore('tiles').put(tile).onsuccess = function() {
+				tile.id = this.result;
 				resolve();
 			};
 		});

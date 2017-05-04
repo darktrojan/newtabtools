@@ -481,8 +481,9 @@ var Grid = {
 	   */
 	_renderSites: function Grid_renderSites() {
 		let cells = this.cells;
+
 		// Put sites into the cells.
-		Tiles.getAllTiles().then(links => {
+		Tiles.getAllTiles(Grid.cells.length).then(links => {
 			let length = Math.min(links.length, cells.length);
 
 			for (let i = 0; i < length; i++) {
@@ -688,24 +689,21 @@ Site.prototype = {
 			index = this.cell.index;
 
 		this._updateAttributes(true);
-		this.link.position = index;
-		Tiles.putTile(this.link);
-
-		Grid.cells[index].node.appendChild(this.node);
+		this._link.position = index;
+		Tiles.putTile(this._link);
 	},
 
 	/**
 	   * Unpins the site and calls the given callback when done.
 	   */
 	unpin: function Site_unpin() {
-		Tiles.removeTile(this._link.id).then(() => {
-			this.node.remove();
-		});
-		// if (this.isPinned()) {
-		// 	this._updateAttributes(false);
-		// 	PinnedLinks.unpin(this._link);
-		// 	Updater.updateGrid();
-		// }
+		if (this.isPinned()) {
+			this._updateAttributes(false);
+
+			Tiles.removeTile(this._link.id).then(() => {
+				Updater.updateGrid();
+			});
+		}
 	},
 
 	/**
@@ -713,7 +711,7 @@ Site.prototype = {
 	   * @return Whether this site is pinned.
 	   */
 	isPinned: function Site_isPinned() {
-		return true;// PinnedLinks.isPinned(this._link);
+		return Tiles.isPinned(this._link.url);
 	},
 
 	/**
@@ -1635,7 +1633,7 @@ var Updater = {
 	   */
 	updateGrid: function Updater_updateGrid(callback) {
 		// let links = NewTabToolsLinks.getLinks().slice(0, Grid.cells.length);
-		Tiles.getAllTiles().then(links => {
+		Tiles.getAllTiles(Grid.cells.length).then(links => {
 
 			// Find all sites that remain in the grid.
 			let sites = this._findRemainingSites(links);
@@ -1668,7 +1666,7 @@ var Updater = {
 
 	fastUpdateGrid: function Updater_fastUpdateGrid() {
 		// let links = NewTabToolsLinks.getLinks().slice(0, Grid.cells.length);
-		Tiles.getAllTiles().then(function(links) {
+		Tiles.getAllTiles(Grid.cells.length).then(function(links) {
 
 			// Find all sites that remain in the grid.
 			let sites = this._findRemainingSites(links);
