@@ -1,12 +1,12 @@
-/* exported GridPrefs */
+/* exported Prefs */
 /* globals browser, newTabTools, Grid */
-var GridPrefs = {
+var Prefs = {
 	_theme: 'light',
 	_opacity: 80,
-	_gridRows: 3,
-	_gridColumns: 3,
-	_gridMargin: ['small', 'small', 'small', 'small'],
-	_gridSpacing: 'small',
+	_rows: 3,
+	_columns: 3,
+	_margin: ['small', 'small', 'small', 'small'],
+	_spacing: 'small',
 	_titleSize: 'small',
 	_locked: false,
 
@@ -24,16 +24,16 @@ var GridPrefs = {
 			this._opacity = prefs.opacity;
 		}
 		if (Number.isInteger(prefs.rows) && prefs.rows >= 1 && prefs.rows <= 10) {
-			this._gridRows = prefs.rows;
+			this._rows = prefs.rows;
 		}
 		if (Number.isInteger(prefs.columns) && prefs.columns >= 1 && prefs.columns <= 10) {
-			this._gridColumns = prefs.columns;
+			this._columns = prefs.columns;
 		}
 		if (Array.isArray(prefs.margin) && prefs.margin.length == 4) {
-			this._gridMargin = prefs.margin;
+			this._margin = prefs.margin;
 		}
 		if (['small', 'medium', 'large'].includes(prefs.spacing)) {
-			this._gridSpacing = prefs.spacing;
+			this._spacing = prefs.spacing;
 		}
 		if (['hidden', 'small', 'medium', 'large'].includes(prefs.titleSize)) {
 			this._titleSize = prefs.titleSize;
@@ -50,9 +50,12 @@ var GridPrefs = {
 			}
 		}
 		this.parsePrefs(prefs);
-		newTabTools.updateUI(Object.keys(prefs));
-		newTabTools.updateGridPrefs();
-		Grid.refresh();
+
+		let keys = Object.keys(prefs);
+		newTabTools.updateUI(keys);
+		if (keys.includes('rows') || keys.includes('columns')) {
+			Grid.refresh();
+		}
 	},
 	getPrefsFromOldExtension: function() {
 		return browser.runtime.sendMessage('prefs').then(function(result) {
@@ -65,22 +68,22 @@ var GridPrefs = {
 	get opacity() {
 		return this._opacity;
 	},
-	get gridRows() {
-		return this._gridRows;
+	get rows() {
+		return this._rows;
 	},
-	get gridColumns() {
-		return this._gridColumns;
+	get columns() {
+		return this._columns;
 	},
-	get gridMargin() {
-		return this._gridMargin;
+	get margin() {
+		return this._margin;
 	},
-	get gridSpacing() {
-		return this._gridSpacing;
+	get spacing() {
+		return this._spacing;
 	},
 	get titleSize() {
 		return this._titleSize;
 	},
-	get gridLocked() {
+	get locked() {
 		return this._locked;
 	},
 	set theme(value) {
@@ -89,22 +92,22 @@ var GridPrefs = {
 	set opacity(value) {
 		browser.storage.local.set({ opacity: value });
 	},
-	set gridRows(value) {
+	set rows(value) {
 		browser.storage.local.set({ rows: value });
 	},
-	set gridColumns(value) {
+	set columns(value) {
 		browser.storage.local.set({ columns: value });
 	},
-	set gridMargin(value) {
+	set margin(value) {
 		browser.storage.local.set({ margin: value });
 	},
-	set gridSpacing(value) {
+	set spacing(value) {
 		browser.storage.local.set({ spacing: value });
 	},
 	set titleSize(value) {
 		browser.storage.local.set({ titleSize: value });
 	},
-	set gridLocked(value) {
+	set locked(value) {
 		browser.storage.local.set({ locked: value });
 	}
 };

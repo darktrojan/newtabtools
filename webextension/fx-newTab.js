@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this file,
  * You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-/* globals DOMRect, GridPrefs, Tiles, newTabTools */
+/* globals DOMRect, Prefs, Tiles, newTabTools */
 DOMRect.prototype.isEmpty = function() {
 	return this.left >= this.right || this.top >= this.bottom;
 };
@@ -433,11 +433,11 @@ var Grid = {
 		this._node.innerHTML = '';
 
 		// Creates the structure of one row
-		for (let i = 0; i < GridPrefs.gridColumns; i++) {
+		for (let i = 0; i < Prefs.columns; i++) {
 			row.appendChild(cell.cloneNode(true));
 		}
 		// Creates the grid
-		for (let j = 0; j < GridPrefs.gridRows; j++) {
+		for (let j = 0; j < Prefs.rows; j++) {
 			this._node.appendChild(row.cloneNode(true));
 		}
 
@@ -509,8 +509,7 @@ var Grid = {
 		let rowsLength = this._node.querySelectorAll('.newtab-row').length;
 		let cellsLength = this._node.querySelectorAll('.newtab-cell').length;
 
-		return (rowsLength != GridPrefs.gridRows ||
-		cellsLength != (GridPrefs.gridRows * GridPrefs.gridColumns));
+		return (rowsLength != Prefs.rows || cellsLength != (Prefs.rows * Prefs.columns));
 	}
 };
 
@@ -614,7 +613,7 @@ Cell.prototype = {
 		if (event.type != 'dragexit' && !Drag.isValid(event)) {
 			return;
 		}
-		if (GridPrefs.gridLocked) {
+		if (Prefs.locked) {
 			return;
 		}
 
@@ -842,7 +841,7 @@ Site.prototype = {
 			this._speculativeConnect();
 			break;
 		case 'dragstart':
-			if (GridPrefs.gridLocked) {
+			if (Prefs.locked) {
 				event.preventDefault();
 			} else {
 				Drag.start(this, event);
@@ -1233,7 +1232,7 @@ var DropTargetShim = {
 	   * Handles all shim events.
 	   */
 	handleEvent: function(event) {
-		if (GridPrefs.gridLocked) {
+		if (Prefs.locked) {
 			return;
 		}
 

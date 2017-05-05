@@ -3,7 +3,7 @@ This Source Code Form is subject to the terms of the Mozilla Public
 License, v. 2.0. If a copy of the MPL was not distributed with this file,
 You can obtain one at http://mozilla.org/MPL/2.0/.
 */
-/* globals GridPrefs, Grid, Page, Tiles, Background, browser, initDB, isFirstRun */
+/* globals Prefs, Grid, Page, Tiles, Updater, Background, browser, initDB, isFirstRun */
 
 var HTML_NAMESPACE = 'http://www.w3.org/1999/xhtml';
 
@@ -102,18 +102,18 @@ var newTabTools = {
 			});
 			break;
 		case 'options-previous-row-tile':
-			this.selectedSiteIndex = (this._selectedSiteIndex - GridPrefs.gridColumns + Grid.cells.length) % Grid.cells.length;
+			this.selectedSiteIndex = (this._selectedSiteIndex - Prefs.columns + Grid.cells.length) % Grid.cells.length;
 			break;
 		case 'options-previous-tile':
 		case 'options-next-tile':
-			let { gridColumns } = GridPrefs;
-			let row = Math.floor(this._selectedSiteIndex / gridColumns);
-			let column = (this._selectedSiteIndex + (id == 'options-previous-tile' ? -1 : 1) + gridColumns) % gridColumns;
+			let { columns } = Prefs;
+			let row = Math.floor(this._selectedSiteIndex / columns);
+			let column = (this._selectedSiteIndex + (id == 'options-previous-tile' ? -1 : 1) + columns) % columns;
 
-			this.selectedSiteIndex = row * gridColumns + column;
+			this.selectedSiteIndex = row * columns + column;
 			break;
 		case 'options-next-row-tile':
-			this.selectedSiteIndex = (this._selectedSiteIndex + GridPrefs.gridColumns) % Grid.cells.length;
+			this.selectedSiteIndex = (this._selectedSiteIndex + Prefs.columns) % Grid.cells.length;
 			break;
 		case 'options-savedthumb-set':
 			this.setThumbnail(this.selectedSite, URL.createObjectURL(this.setSavedThumbInput.files[0]));
@@ -174,28 +174,28 @@ var newTabTools = {
 		let {name, value, checked} = event.originalTarget;
 		switch (name) {
 		case 'theme':
-			GridPrefs.theme = value;
+			Prefs.theme = value;
 			break;
 		case 'foreground.opacity':
-			GridPrefs.opacity = parseInt(value, 10);
+			Prefs.opacity = parseInt(value, 10);
 			break;
 		case 'rows':
-			GridPrefs.gridRows = parseInt(value, 10);
+			Prefs.rows = parseInt(value, 10);
 			break;
 		case 'columns':
-			GridPrefs.gridColumns = parseInt(value, 10);
+			Prefs.columns = parseInt(value, 10);
 			break;
-		case 'grid.margin':
-			GridPrefs.gridMargin = value.split(' ');
+		case 'margin':
+			Prefs.margin = value.split(' ');
 			break;
-		case 'grid.spacing':
-			GridPrefs.gridSpacing = value;
+		case 'spacing':
+			Prefs.spacing = value;
 			break;
 		case 'thumbs.titlesize':
-			GridPrefs.titleSize = value;
+			Prefs.titleSize = value;
 			break;
 		case 'locked':
-			GridPrefs.gridLocked = checked;
+			Prefs.locked = checked;
 			break;
 		}
 	},
@@ -254,8 +254,25 @@ var newTabTools = {
 		});
 	},
 	updateUI: function(keys) {
+		function setMargin(piece, size) {
+			let pieceElement = document.getElementById('newtab-margin-' + piece);
+			pieceElement.classList.remove('medium');
+			pieceElement.classList.remove('large');
+			if (size == 'medium' || size == 'large') {
+				pieceElement.classList.add(size);
+			}
+		}
+
+		if (!keys || keys.includes('rows')) {
+			document.querySelector('[name="rows"]').value = Prefs.rows;
+		}
+
+		if (!keys || keys.includes('columns')) {
+			document.querySelector('[name="columns"]').value = Prefs.columns;
+		}
+
 		if (!keys || keys.includes('theme')) {
-			let theme = GridPrefs.theme;
+			let theme = Prefs.theme;
 			this.themePref.querySelector('[value="' + theme + '"]').checked = true;
 			document.documentElement.setAttribute('theme', theme);
 		}
@@ -264,13 +281,10 @@ var newTabTools = {
 		// document.querySelector('[name="thumbs.contain"]').checked = containThumbs;
 		// document.documentElement.classList[containThumbs ? 'add' : 'remove']('containThumbs');
 
-		// let hideButtons = this.prefs.getBoolPref('thumbs.hidebuttons');
-		// document.querySelector('[name="thumbs.hidebuttons"]').checked = !hideButtons;
-		// document.documentElement.classList[hideButtons ? 'add' : 'remove']('hideButtons');
-
 		if (!keys || keys.includes('locked')) {
-			let locked = GridPrefs.gridLocked;
+			let locked = Prefs.locked;
 			document.querySelector('[name="locked"]').checked = locked;
+			document.documentElement.classList[locked ? 'add' : 'remove']('hideButtons');
 		}
 
 		// let hideFavicons = this.prefs.getBoolPref('thumbs.hidefavicons');
@@ -278,30 +292,30 @@ var newTabTools = {
 		// document.documentElement.classList[hideFavicons ? 'add' : 'remove']('hideFavicons');
 
 		if (!keys || keys.includes('titleSize')) {
-			let titleSize = GridPrefs.titleSize;
+			let titleSize = Prefs.titleSize;
 			document.querySelector('[name="thumbs.titlesize"]').value = titleSize;
 			document.documentElement.setAttribute('titlesize', titleSize);
 		}
 
 		if (!keys || keys.includes('margin')) {
-			let gridMargin = GridPrefs.gridMargin;
-			document.querySelector('[name="grid.margin"]').value = gridMargin.join(' ');
-			this.setGridMargin('top', gridMargin[0]);
-			this.setGridMargin('right-top', gridMargin[1]);
-			this.setGridMargin('right-bottom', gridMargin[1]);
-			this.setGridMargin('bottom', gridMargin[2]);
-			this.setGridMargin('left-bottom', gridMargin[3]);
-			this.setGridMargin('left-top', gridMargin[3]);
+			let { margin } = Prefs;
+			document.querySelector('[name="margin"]').value = margin.join(' ');
+			setMargin('top', margin[0]);
+			setMargin('right-top', margin[1]);
+			setMargin('right-bottom', margin[1]);
+			setMargin('bottom', margin[2]);
+			setMargin('left-bottom', margin[3]);
+			setMargin('left-top', margin[3]);
 		}
 
 		if (!keys || keys.includes('spacing')) {
-			let gridSpacing = GridPrefs.gridSpacing;
-			document.querySelector('[name="grid.spacing"]').value = gridSpacing;
-			document.documentElement.setAttribute('spacing', gridSpacing);
+			let { spacing } = Prefs;
+			document.querySelector('[name="spacing"]').value = spacing;
+			document.documentElement.setAttribute('spacing', spacing);
 		}
 
 		if (!keys || keys.includes('opacity')) {
-			let opacity = Math.max(0, Math.min(100, GridPrefs.opacity));
+			let opacity = Math.max(0, Math.min(100, Prefs.opacity));
 			document.querySelector('[name="foreground.opacity"]').value = opacity;
 			document.documentElement.style.setProperty('--opacity', opacity / 100);
 		}
@@ -316,18 +330,6 @@ var newTabTools = {
 
 		if (!document.documentElement.hasAttribute('options-hidden')) {
 			this.resizeOptionsThumbnail();
-		}
-	},
-	updateGridPrefs: function() {
-		document.querySelector('[name="rows"]').value = GridPrefs.gridRows;
-		document.querySelector('[name="columns"]').value = GridPrefs.gridColumns;
-	},
-	setGridMargin: function(piece, size) {
-		let pieceElement = document.getElementById('newtab-margin-' + piece);
-		pieceElement.classList.remove('medium');
-		pieceElement.classList.remove('large');
-		if (size == 'medium' || size == 'large') {
-			pieceElement.classList.add(size);
 		}
 	},
 	set selectedSiteIndex(index) { // jshint ignore:line
@@ -362,13 +364,13 @@ var newTabTools = {
 			this.removeSavedThumbButton.disabled = true;
 		}
 
-		let { gridRows, gridColumns } = GridPrefs;
-		let row = Math.floor(index / gridColumns);
-		let column = index % gridColumns;
+		let { rows, columns } = Prefs;
+		let row = Math.floor(index / columns);
+		let column = index % columns;
 		this.tilePreviousRow.style.opacity = row === 0 ? 0.25 : null;
 		this.tilePrevious.style.opacity = column === 0 ? 0.25 : null;
-		this.tileNext.style.opacity = (column + 1 == gridColumns) ? 0.25 : null;
-		this.tileNextRow.style.opacity = (row + 1 == gridRows) ? 0.25 : null;
+		this.tileNext.style.opacity = (column + 1 == columns) ? 0.25 : null;
+		this.tileNextRow.style.opacity = (row + 1 == rows) ? 0.25 : null;
 
 		this.siteURL.textContent = site.url;
 		let backgroundColor = site.link.backgroundColor;
@@ -407,13 +409,12 @@ var newTabTools = {
 	},
 	startup: function() {
 		Promise.all([
-			GridPrefs.init(),
+			Prefs.init(),
 			initDB()
 		]).then(function() {
 			// Everything is loaded. Initialize the New Tab Page.
 			Page.init();
 			newTabTools.updateUI();
-			newTabTools.updateGridPrefs();
 			newTabTools.refreshBackgroundImage();
 
 			if (isFirstRun) {
@@ -425,7 +426,7 @@ var newTabTools = {
 		return Promise.all([
 			Tiles.getTilesFromOldExtension(),
 			Background.getBackgroundFromOldExtension(),
-			GridPrefs.getPrefsFromOldExtension()
+			Prefs.getPrefsFromOldExtension()
 		]).then(function() {
 			newTabTools.refreshBackgroundImage();
 			Grid.refresh();
