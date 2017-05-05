@@ -1,4 +1,4 @@
-/* exported initDB, getAllTiles, Tiles, Background */
+/* exported initDB, getAllTiles, Tiles, Background, Prefs */
 /* globals browser, indexedDB */
 var db;
 var isFirstRun = false;
@@ -54,6 +54,11 @@ var Tiles = {
 				for (let t of this.result) {
 					links[t.position] = t;
 					Tiles._list.push(t.url);
+				}
+
+				if (!Prefs.history) {
+					resolve(links);
+					return;
 				}
 
 				browser.topSites.get().then(r => {

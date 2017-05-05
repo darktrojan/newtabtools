@@ -1,5 +1,5 @@
 /* exported Prefs */
-/* globals browser, newTabTools, Grid */
+/* globals browser, newTabTools, Grid, Updater */
 var Prefs = {
 	_theme: 'light',
 	_opacity: 80,
@@ -9,6 +9,7 @@ var Prefs = {
 	_spacing: 'small',
 	_titleSize: 'small',
 	_locked: false,
+	_history: true,
 
 	init: function() {
 		return browser.storage.local.get().then(prefs => {
@@ -41,6 +42,9 @@ var Prefs = {
 		if ('locked' in prefs) {
 			this._locked = prefs.locked === true;
 		}
+		if ('history' in prefs) {
+			this._history = prefs.history !== false;
+		}
 	},
 	prefsChanged: function(changes) {
 		let prefs = Object.create(null);
@@ -53,8 +57,11 @@ var Prefs = {
 
 		let keys = Object.keys(prefs);
 		newTabTools.updateUI(keys);
+
 		if (keys.includes('rows') || keys.includes('columns')) {
 			Grid.refresh();
+		} else if (keys.includes('history')) {
+			Updater.updateGrid();
 		}
 	},
 	getPrefsFromOldExtension: function() {
@@ -86,6 +93,9 @@ var Prefs = {
 	get locked() {
 		return this._locked;
 	},
+	get history() {
+		return this._history;
+	},
 	set theme(value) {
 		browser.storage.local.set({ theme: value });
 	},
@@ -109,5 +119,8 @@ var Prefs = {
 	},
 	set locked(value) {
 		browser.storage.local.set({ locked: value });
+	},
+	set history(value) {
+		browser.storage.local.set({ history: value });
 	}
 };

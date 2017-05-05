@@ -170,6 +170,7 @@ function uiStartup(params) {
 				prefs.spacing = userPrefs.getCharPref('grid.spacing');
 				prefs.titleSize = userPrefs.getCharPref('thumbs.titlesize');
 				prefs.locked = userPrefs.getBoolPref('locked');
+				prefs.history = userPrefs.getBoolPref('historytiles.show');
 
 				sendReply(prefs);
 				return;

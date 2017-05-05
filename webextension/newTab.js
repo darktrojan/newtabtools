@@ -197,6 +197,9 @@ var newTabTools = {
 		case 'locked':
 			Prefs.locked = checked;
 			break;
+		case 'history':
+			Prefs.history = checked;
+			break;
 		}
 	},
 	setThumbnail: function(site, src) {
@@ -298,7 +301,7 @@ var newTabTools = {
 		}
 
 		if (!keys || keys.includes('margin')) {
-			let { margin } = Prefs;
+			let margin = Prefs.margin;
 			document.querySelector('[name="margin"]').value = margin.join(' ');
 			setMargin('top', margin[0]);
 			setMargin('right-top', margin[1]);
@@ -309,20 +312,22 @@ var newTabTools = {
 		}
 
 		if (!keys || keys.includes('spacing')) {
-			let { spacing } = Prefs;
+			let spacing = Prefs.spacing;
 			document.querySelector('[name="spacing"]').value = spacing;
 			document.documentElement.setAttribute('spacing', spacing);
 		}
 
 		if (!keys || keys.includes('opacity')) {
-			let opacity = Math.max(0, Math.min(100, Prefs.opacity));
+			let opacity = Prefs.opacity;
 			document.querySelector('[name="foreground.opacity"]').value = opacity;
 			document.documentElement.style.setProperty('--opacity', opacity / 100);
 		}
 
-		// let showHistory = this.prefs.getBoolPref('historytiles.show');
-		// document.querySelector('[name="historytiles.show"]').checked = showHistory;
-		// document.getElementById('historytiles-filter').disabled = !showHistory;
+		if (!keys || keys.includes('history')) {
+			let history = Prefs.history;
+			document.querySelector('[name="history"]').checked = history;
+			// document.getElementById('historytiles-filter').disabled = !history;
+		}
 
 		if ('Grid' in window && 'cacheCellPositions' in Grid) {
 			requestAnimationFrame(Grid.cacheCellPositions);
