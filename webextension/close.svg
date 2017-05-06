@@ -2,13 +2,15 @@
 <!-- This Source Code Form is subject to the terms of the Mozilla Public
 	 - License, v. 2.0. If a copy of the MPL was not distributed with this
 	 - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="48" height="16" viewBox="0 0 48 16">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="16" viewBox="0 0 64 16">
 	<defs>
 		<style>
 			/* X Glyph Styles */
 			.glyphShape-style-foreground {
-				fill: ButtonText;
-				fill-opacity: .8;
+				fill: #444;
+			}
+			.glyphShape-style-dark {
+				fill: #fff;
 			}
 			.glyphShape-style-hover {
 				fill: #fff;
@@ -18,7 +20,6 @@
 			}
 			.glyphShape-style-hover-active {
 				fill: #fff;
-				fill-opacity: .8;
 			}
 			.glyphShape-style-hover-active-shadow {
 				fill: #99260f;
@@ -38,6 +39,10 @@
 	<g id="icon-closeForeground-default">
 		<use xlink:href="#glyphShape-close" class="glyphShape-style-foreground"/>
 		<use xlink:href="#glyphShape-close-topHighlight" class="glyphShape-style-foreground"/>
+	</g>
+	<g id="icon-closeForeground-dark" transform="translate(48)">
+		<use xlink:href="#glyphShape-close" class="glyphShape-style-dark"/>
+		<use xlink:href="#glyphShape-close-topHighlight" class="glyphShape-style-dark"/>
 	</g>
 	<g id="icon-close-hover" transform="translate(16)">
 		<use xlink:href="#glyphShape-background" class="icon-background-hover"/>

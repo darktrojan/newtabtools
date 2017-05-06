@@ -53,9 +53,13 @@ var Prefs = {
 				prefs[name] = change.newValue;
 			}
 		}
-		this.parsePrefs(prefs);
 
 		let keys = Object.keys(prefs);
+		if (keys.length == 1 && keys[0] == 'blocked') {
+			return;
+		}
+		this.parsePrefs(prefs);
+
 		newTabTools.updateUI(keys);
 
 		if (keys.includes('rows') || keys.includes('columns')) {

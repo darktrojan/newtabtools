@@ -73,8 +73,8 @@ input[type="button"] {
 	line-height: 18px;
 	border: 1px solid;
 	border-color: rgba(8, 22, 37, 0.12) rgba(8, 22, 37, 0.14) rgba(8, 22, 37, 0.16);
-	background-color: rgba(255, 255, 255, 0.4);
-	color: #525e69;
+	background-color: var(--background-fill);
+	color: var(--text-hover);
 	transition: opacity 200ms, display 0s 200ms;
 }
 #newtab-undo-container[undo-disabled] {
@@ -116,13 +116,16 @@ input[type="button"] {
 	background-repeat: no-repeat;
 	vertical-align: middle;
 }
+:root[theme="dark"] #newtab-undo-close-button {
+	background-image: -moz-image-rect(url("close.svg"), 0, 64, 16, 48);
+}
 #newtab-undo-close-button:hover,
 #options-close > button:hover {
-	background-image: -moz-image-rect(url("close.svg"), 0, 32, 16, 16);
+	background-image: -moz-image-rect(url("close.svg"), 0, 32, 16, 16) !important;
 }
 #newtab-undo-close-button:hover:active,
 #options-close > button:hover:active {
-	background-image: -moz-image-rect(url("close.svg"), 0, 48, 16, 32);
+	background-image: -moz-image-rect(url("close.svg"), 0, 48, 16, 32) !important;
 }
 #newtab-undo-close-button:-moz-focusring {
 	outline: 1px dotted;
