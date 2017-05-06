@@ -50,10 +50,17 @@ var Tiles = {
 		return new Promise(function(resolve) {
 			db.transaction('tiles').objectStore('tiles').getAll().onsuccess = function() {
 				let links = [];
+				let urlMap = new Map();
 				Tiles._list.length = 0;
+
+
 				for (let t of this.result) {
-					links[t.position] = t;
-					Tiles._list.push(t.url);
+					if ('position' in t) {
+						links[t.position] = t;
+						Tiles._list.push(t.url);
+					} else {
+						urlMap.set(t.url, t);
+					}
 				}
 
 				if (!Prefs.history) {
@@ -77,7 +84,12 @@ var Tiles = {
 
 					for (let i = 0; i < count && remaining.length > 0; i++) {
 						if (!links[i]) {
-							links[i] = remaining.shift();
+							let next = remaining.shift();
+							if (next) {
+								links[i] = urlMap.get(next.url) || next;
+							} else {
+								break;
+							}
 						}
 					}
 

@@ -701,7 +701,15 @@ Site.prototype = {
 		if (this.isPinned()) {
 			this._updateAttributes(false);
 
-			Tiles.removeTile(this._link.id).then(() => {
+			let op;
+			if (Object.keys(this._link).some(k => !['id', 'title', 'url'].includes(k))) {
+				delete this._link.position;
+				op = Tiles.putTile(this._link);
+			} else {
+				op = Tiles.removeTile(this._link.id);
+			}
+
+			op.then(() => {
 				Updater.updateGrid();
 			});
 		}
