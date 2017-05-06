@@ -62,8 +62,12 @@ var Tiles = {
 				}
 
 				browser.topSites.get().then(r => {
+					let urls = Tiles._list.slice();
 					let remaining = r.filter(s => {
-						let urls = Tiles._list.slice();
+						if (Blocked.isBlocked(s.url)) {
+							return false;
+						}
+
 						let isNew = !urls.includes(s.url);
 						if (isNew) {
 							urls.push(s.url);
@@ -112,6 +116,25 @@ var Tiles = {
 				}
 			});
 		});
+	}
+};
+
+var Blocked = {
+	_list: [],
+	block: function(url) {
+		this._list.push(url);
+	},
+	unblock: function(url) {
+		let index = this._list.indexOf(url);
+		if (index >= 0) {
+			this._list.splice(index, 1);
+		}
+	},
+	isBlocked: function(url) {
+		return this._list.includes(url);
+	},
+	clear: function() {
+		this._list.length = 0;
 	}
 };
 
