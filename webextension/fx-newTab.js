@@ -286,24 +286,6 @@ var Page = {
 	},
 
 	/**
-	   * Updates the whole page and the grid when the storage has changed.
-	   */
-	update: function Page_update(reason) {
-		if (!document.hidden) {
-			if (typeof reason == 'boolean' && reason) { // Fx <= 35
-				return;
-			} else if (reason == 'links-changed') { // Fx >= 36
-				return;
-			}
-		}
-
-		// The grid might not be ready yet as we initialize it asynchronously.
-		if (Grid.ready) {
-			Grid.refresh();
-		}
-	},
-
-	/**
 	   * Internally initializes the page. This runs only when/if the feature
 	   * is/gets enabled.
 	   */
@@ -325,11 +307,11 @@ var Page = {
 	handleEvent: function Page_handleEvent(event) {
 		switch (event.type) {
 		case 'dragover':
-			if (Drag.isValid(event) && Drag.draggedSite)
+			if (Drag.draggedSite)
 				event.preventDefault();
 			break;
 		case 'drop':
-			if (Drag.isValid(event) && Drag.draggedSite) {
+			if (Drag.draggedSite) {
 				event.preventDefault();
 				event.stopPropagation();
 			}
@@ -612,7 +594,7 @@ Cell.prototype = {
 		if (!Drag.draggedSite) {
 			return;
 		}
-		if (event.type != 'dragexit' && !Drag.isValid(event)) {
+		if (event.type != 'dragexit') {
 			return;
 		}
 		if (Prefs.locked) {
@@ -809,17 +791,7 @@ Site.prototype = {
 		// Register drag-and-drop event handlers.
 		this._node.addEventListener('dragstart', this, false);
 		this._node.addEventListener('dragend', this, false);
-		this._node.addEventListener('mouseover', this, false);
 		this._node.addEventListener('click', this, false);
-	},
-
-	/**
-	   * Speculatively opens a connection to the current site.
-	   */
-	_speculativeConnect: function Site_speculativeConnect() {
-		// let sc = Services.io.QueryInterface(Ci.nsISpeculativeConnect);
-		// let uri = Services.io.newURI(this.url, null, null);
-		// sc.speculativeConnect(uri, null);
 	},
 
 	/**
@@ -848,10 +820,6 @@ Site.prototype = {
 		switch (event.type) {
 		case 'click':
 			this._onClick(event);
-			break;
-		case 'mouseover':
-			this._node.removeEventListener('mouseover', this, false);
-			this._speculativeConnect();
 			break;
 		case 'dragstart':
 			if (Prefs.locked) {
@@ -972,29 +940,6 @@ var Drag = {
 
 		Drop._lastDropTarget = null;
 		this._draggedSite = null;
-	},
-
-	/**
-	   * Checks whether we're responsible for a given drag event.
-	   * @param event The drag event to check.
-	   * @return Whether we should handle this drag and drop operation.
-	   */
-	isValid: function Drag_isValid(event) {
-		return true;
-		// let link = DragDataHelper.getLinkFromDragEvent(event);
-
-		// // Check that the drag data is non-empty.
-		// // Can happen when dragging places folders.
-		// if (!link || !link.url) {
-		// 	return false;
-		// }
-
-		// // File URLs fail the link checker, but we want to allow them.
-		// if (/^file:/.test(link.url)) return true;
-
-		// // Check that we're not accepting URLs which would inherit the caller's
-		// // principal (such as javascript: or data:).
-		// return LinkChecker.checkLoadURI(link.url);
 	},
 
 	/**
