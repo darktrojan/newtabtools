@@ -1,5 +1,5 @@
 /* exported Prefs */
-/* globals browser, newTabTools, Grid, Updater */
+/* globals browser, newTabTools, Grid, Updater, Blocked */
 var Prefs = {
 	_theme: 'light',
 	_opacity: 80,
@@ -44,6 +44,9 @@ var Prefs = {
 		}
 		if ('history' in prefs) {
 			this._history = prefs.history !== false;
+		}
+		if (Array.isArray(prefs.blocked)) {
+			Blocked._list = prefs.blocked;
 		}
 	},
 	prefsChanged: function(changes) {

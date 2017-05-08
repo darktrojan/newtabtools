@@ -684,11 +684,11 @@ Site.prototype = {
 			this._updateAttributes(false);
 
 			let op;
-			if (Object.keys(this._link).some(k => !['id', 'title', 'url'].includes(k))) {
+			if (Object.keys(this._link).some(k => !['id', 'title', 'url', 'position'].includes(k))) {
 				delete this._link.position;
 				op = Tiles.putTile(this._link);
 			} else {
-				op = Tiles.removeTile(this._link.id);
+				op = Tiles.removeTile(this._link);
 			}
 
 			op.then(() => {
@@ -714,7 +714,7 @@ Site.prototype = {
 			UndoDialog.show(this);
 			Blocked.block(this._link.url);
 
-			(this.isPinned() ? Tiles.removeTile(this._link.id) : Promise.resolve()).then(() => {
+			(this.isPinned() ? Tiles.removeTile(this._link) : Promise.resolve()).then(() => {
 				Updater.updateGrid();
 			});
 		}

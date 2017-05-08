@@ -99,6 +99,7 @@ var Tiles = {
 		});
 	},
 	putTile: function(tile) {
+		this._list.push(tile.url);
 		return new Promise(function(resolve) {
 			db.transaction('tiles', 'readwrite').objectStore('tiles').put(tile).onsuccess = function() {
 				tile.id = this.result;
@@ -106,9 +107,13 @@ var Tiles = {
 			};
 		});
 	},
-	removeTile: function(id) {
+	removeTile: function(tile) {
+		let index = this._list.indexOf(tile.url);
+		if (index > -1) {
+			this._list.splice(index, 1);
+		}
 		return new Promise(function(resolve) {
-			db.transaction('tiles', 'readwrite').objectStore('tiles').delete(id).onsuccess = function() {
+			db.transaction('tiles', 'readwrite').objectStore('tiles').delete(tile.id).onsuccess = function() {
 				resolve();
 			};
 		});
