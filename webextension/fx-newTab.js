@@ -22,10 +22,6 @@ DOMRect.prototype.intersect = function(other) {
 
 var HTML_NAMESPACE = 'http://www.w3.org/1999/xhtml';
 
-function newTabString(name) {
-	return name;
-}
-
 /**
  * This singleton allows to transform the grid by repositioning a site's node
  * in the DOM and by showing or hiding the node. It additionally provides
@@ -453,8 +449,8 @@ var Grid = {
 		'<input type="button" class="newtab-control newtab-control-pin"/>' +
 		'<input type="button" class="newtab-control newtab-control-block"/>';
 
-		site.querySelector('input.newtab-control-pin').title = newTabString('pin');
-		site.querySelector('input.newtab-control-block').title = newTabString('block');
+		site.querySelector('input.newtab-control-pin').title = newTabTools.getString('tile.pin');
+		site.querySelector('input.newtab-control-block').title = newTabTools.getString('tile.block');
 
 		this._siteFragment = document.createDocumentFragment();
 		this._siteFragment.appendChild(site);
@@ -739,10 +735,10 @@ Site.prototype = {
 
 		if (pinned) {
 			control.setAttribute('pinned', true);
-			control.setAttribute('title', newTabString('unpin'));
+			control.setAttribute('title', newTabTools.getString('tile.unpin'));
 		} else {
 			control.removeAttribute('pinned');
-			control.setAttribute('title', newTabString('pin'));
+			control.setAttribute('title', newTabTools.getString('tile.pin'));
 		}
 	},
 

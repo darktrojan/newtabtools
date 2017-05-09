@@ -8,6 +8,9 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 var HTML_NAMESPACE = 'http://www.w3.org/1999/xhtml';
 
 var newTabTools = {
+	getString: function(name) {
+		return browser.i18n.getMessage(name);
+	},
 	autocomplete: function() {
 		let value = this.pinURLInput.value;
 		if (value.length < 2) {
@@ -352,7 +355,7 @@ var newTabTools = {
 			this.siteThumbnail.style.backgroundImage =
 				this.siteThumbnail.style.backgroundColor =
 				this.setBgColourDisplay.style.backgroundColor = null;
-			this.siteURL.textContent = '';// this.strings.GetStringFromName('tileurl.empty');
+			this.siteURL.textContent = this.getString('tileurl.empty');
 			this.setTitleInput.value = '';
 			this.removeSavedThumbButton.disabled =
 				this.setBgColourButton.disabled =
@@ -440,6 +443,19 @@ var newTabTools = {
 };
 
 (function() {
+	document.querySelectorAll('[data-message]').forEach(n => {
+		n.textContent = newTabTools.getString(n.dataset.message);
+	});
+	document.querySelectorAll('[data-placeholder]').forEach(n => {
+		n.placeholder = newTabTools.getString(n.dataset.placeholder);
+	});
+	document.querySelectorAll('[data-title]').forEach(n => {
+		n.title = newTabTools.getString(n.dataset.title);
+	});
+	document.querySelectorAll('[data-label]').forEach(n => {
+		n.parentNode.insertBefore(document.createTextNode(newTabTools.getString(n.dataset.label)), n.nextSibling);
+	});
+
 	let uiElements = {
 		'page': 'newtab-scrollbox', // used in fx-newTab.js
 		'optionsToggleButton': 'options-toggle',

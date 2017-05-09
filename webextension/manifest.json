@@ -15,5 +15,6 @@
 		"storage",
 		"topSites"
 	],
+	"default_locale": "en",
 	"manifest_version": 2
 }
