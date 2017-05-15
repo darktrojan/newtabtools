@@ -416,6 +416,24 @@ var newTabTools = {
 		}
 	},
 	startup: function() {
+		if (!window.browser) {
+			// The page couldn't be loaded properly because WebExtensions is too slow. Sad.
+			return;
+		}
+
+		document.querySelectorAll('[data-message]').forEach(n => {
+			n.textContent = newTabTools.getString(n.dataset.message);
+		});
+		document.querySelectorAll('[data-placeholder]').forEach(n => {
+			n.placeholder = newTabTools.getString(n.dataset.placeholder);
+		});
+		document.querySelectorAll('[data-title]').forEach(n => {
+			n.title = newTabTools.getString(n.dataset.title);
+		});
+		document.querySelectorAll('[data-label]').forEach(n => {
+			n.parentNode.insertBefore(document.createTextNode(newTabTools.getString(n.dataset.label)), n.nextSibling);
+		});
+
 		Promise.all([
 			Prefs.init(),
 			initDB()
@@ -443,19 +461,6 @@ var newTabTools = {
 };
 
 (function() {
-	document.querySelectorAll('[data-message]').forEach(n => {
-		n.textContent = newTabTools.getString(n.dataset.message);
-	});
-	document.querySelectorAll('[data-placeholder]').forEach(n => {
-		n.placeholder = newTabTools.getString(n.dataset.placeholder);
-	});
-	document.querySelectorAll('[data-title]').forEach(n => {
-		n.title = newTabTools.getString(n.dataset.title);
-	});
-	document.querySelectorAll('[data-label]').forEach(n => {
-		n.parentNode.insertBefore(document.createTextNode(newTabTools.getString(n.dataset.label)), n.nextSibling);
-	});
-
 	let uiElements = {
 		'page': 'newtab-scrollbox', // used in fx-newTab.js
 		'optionsToggleButton': 'options-toggle',
