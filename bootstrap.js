@@ -171,6 +171,7 @@ function uiStartup(params) {
 				prefs.titleSize = userPrefs.getCharPref('thumbs.titlesize');
 				prefs.locked = userPrefs.getBoolPref('locked');
 				prefs.history = userPrefs.getBoolPref('historytiles.show');
+				prefs.recent = userPrefs.getBoolPref('recent.show');
 
 				sendReply(prefs);
 				return;

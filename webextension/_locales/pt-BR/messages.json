@@ -59,6 +59,9 @@
 	"options.pointer": {
 		"message": "Clique aqui para começar a personalizar a página 'Nova aba'"
 	},
+	"options.recent": {
+		"message": "Abas fechadas recentemente"
+	},
 	"options.rows": {
 		"message": "Linhas"
 	},
@@ -91,6 +94,9 @@
 	},
 	"pin-url.placeholder": {
 		"message": "Digite ou selecione uma URL"
+	},
+	"recently-closed-tabs": {
+		"message": "Abas fechadas recentemente:"
 	},
 	"tile-header": {
 		"message": "Blocos:"

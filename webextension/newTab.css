@@ -46,24 +46,66 @@ input[type="button"] {
 	overflow: auto;
 	color: #000;
 }
-
-/* UNDO */
-#newtab-undo-spacer {
-	flex: 1;
-}
+/* RECENT TABS */
+#newtab-recent-outer,
 #newtab-undo-container,
 #options-toggle {
 	margin-top: -1px;
 	margin-bottom: 3px;
 }
-:root[spacing="medium"] #newtab-margin-top:-moz-any(.medium, .large) :-moz-any(#newtab-undo-container, #options-toggle) {
+:root[spacing="medium"] #newtab-margin-top:-moz-any(.medium, .large) :-moz-any(#newtab-recent-outer, #newtab-undo-container, #options-toggle) {
 	margin-top: 0;
 	margin-bottom: 8px;
 }
-:root[spacing="large"] #newtab-margin-top:-moz-any(.medium, .large) :-moz-any(#newtab-undo-container, #options-toggle) {
+:root[spacing="large"] #newtab-margin-top:-moz-any(.medium, .large) :-moz-any(#newtab-recent-outer, #newtab-undo-container, #options-toggle) {
 	margin-top: 0;
 	margin-bottom: 18px;
 }
+
+#newtab-recent-outer {
+	white-space: nowrap;
+	line-height: 28px;
+	flex: 1;
+}
+#newtab-recent {
+	overflow: hidden;
+	height: 28px;
+}
+:root[titlesize="medium"] #newtab-recent {
+	font-size: 15px;
+}
+:root[titlesize="large"] #newtab-recent {
+	font-size: 18px;
+}
+#newtab-recent > span {
+	display: inline-block;
+	vertical-align: middle;
+	margin-inline-end: 4px;
+	color: var(--text);
+	text-shadow: 0 0 3px var(--shadow), 0 0 1px var(--shadow);
+}
+.recent {
+	padding: 2px 4px;
+	display: inline-block;
+	line-height: 20px;
+	border-radius: 4px;
+	/* see newTabTools.trimRecent */
+	margin-inline-end: 4px;
+	cursor: pointer;
+	text-decoration: none;
+	text-overflow: ellipsis;
+	max-width: 200px;
+	overflow-x: hidden;
+	white-space: nowrap;
+	vertical-align: middle;
+	color: var(--text);
+	text-shadow: 0 0 3px var(--shadow), 0 0 1px var(--shadow);
+}
+.recent:hover {
+	color: var(--text-hover);
+	text-shadow: 0 0 3px var(--shadow-hover), 0 0 1px var(--shadow-hover);
+}
+/* UNDO */
 #newtab-undo-container {
 	display: flex;
 	align-items: center;

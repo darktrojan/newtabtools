@@ -47,6 +47,9 @@
 	"options.launcher.hidden": {
 		"message": "表示しない"
 	},
+	"options.recent": {
+		"message": "最近閉じたタブを表示"
+	},
 	"options.rows": {
 		"message": "行"
 	},
@@ -73,6 +76,9 @@
 	},
 	"pin-url.header": {
 		"message": "タイル追加:"
+	},
+	"recently-closed-tabs": {
+		"message": "最近閉じたタブ:"
 	},
 	"tile-header": {
 		"message": "タイル:"

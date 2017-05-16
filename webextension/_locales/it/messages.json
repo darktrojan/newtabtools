@@ -53,6 +53,9 @@
 	"options.pointer": {
 		"message": "Clicca qui per iniziare a personalizzare la pagina Nuova Scheda"
 	},
+	"options.recent": {
+		"message": "Mostra le schede chiuse di recente"
+	},
 	"options.rows": {
 		"message": "Righe"
 	},
@@ -85,6 +88,9 @@
 	},
 	"pin-url.placeholder": {
 		"message": "Scrivi o seleziona un indirizzo web"
+	},
+	"recently-closed-tabs": {
+		"message": "Schede chiuse di recente:"
 	},
 	"tile-header": {
 		"message": "Icone:"

@@ -59,6 +59,9 @@
 	"options.pointer": {
 		"message": "Klick hier um die Neuer-Tab-Seite anzupassen"
 	},
+	"options.recent": {
+		"message": "Geschlossene Tabs"
+	},
 	"options.rows": {
 		"message": "Reihen"
 	},
@@ -91,6 +94,9 @@
 	},
 	"pin-url.placeholder": {
 		"message": "Adresse eingeben oder auswählen"
+	},
+	"recently-closed-tabs": {
+		"message": "Geschlossene Tabs:"
 	},
 	"tile-header": {
 		"message": "Kacheln:"

@@ -56,6 +56,9 @@
 	"options.pointer": {
 		"message": "Feu clic aquí per començar a personalitzar la pàgina de pestanya nova"
 	},
+	"options.recent": {
+		"message": "Pestanyes tancades recentment"
+	},
 	"options.rows": {
 		"message": "Files"
 	},
@@ -88,6 +91,9 @@
 	},
 	"pin-url.placeholder": {
 		"message": "Escriviu o seleccioneu un URL"
+	},
+	"recently-closed-tabs": {
+		"message": "Pestanyes tancades recentment:"
 	},
 	"tile-header": {
 		"message": "Mosaics:"

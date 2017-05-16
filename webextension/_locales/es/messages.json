@@ -41,6 +41,9 @@
 	"options.pointer": {
 		"message": "Haz clic aquí para empezar a personalizar tu página de Nueva Pestaña"
 	},
+	"options.recent": {
+		"message": "Pestañas cerradas recientemente"
+	},
 	"options.rows": {
 		"message": "Filas"
 	},
@@ -73,6 +76,9 @@
 	},
 	"pin-url.placeholder": {
 		"message": "Escribe o selecciona un URL"
+	},
+	"recently-closed-tabs": {
+		"message": "Cerrado recientemente:"
 	},
 	"tile-header": {
 		"message": "Contenedores:"

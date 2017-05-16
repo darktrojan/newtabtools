@@ -12,7 +12,9 @@
 	},
 	"permissions": [
 		"history",
+		"sessions",
 		"storage",
+		"tabs",
 		"topSites"
 	],
 	"default_locale": "en",

@@ -50,6 +50,9 @@
 	"options.launcher.hidden": {
 		"message": "Niet weergeven"
 	},
+	"options.recent": {
+		"message": "Onlangs gesloten tabbladen"
+	},
 	"options.rows": {
 		"message": "Rijen"
 	},
@@ -79,6 +82,9 @@
 	},
 	"pin-url.placeholder": {
 		"message": "Typ of selecteer een URL"
+	},
+	"recently-closed-tabs": {
+		"message": "Onlangs gesloten tabbladen:"
 	},
 	"tile-header": {
 		"message": "Tegels:"

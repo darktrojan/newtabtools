@@ -10,6 +10,7 @@ var Prefs = {
 	_titleSize: 'small',
 	_locked: false,
 	_history: true,
+	_recent: true,
 
 	init: function() {
 		return browser.storage.local.get().then(prefs => {
@@ -44,6 +45,9 @@ var Prefs = {
 		}
 		if ('history' in prefs) {
 			this._history = prefs.history !== false;
+		}
+		if ('recent' in prefs) {
+			this._recent = prefs.recent !== false;
 		}
 		if (Array.isArray(prefs.blocked)) {
 			Blocked._list = prefs.blocked;
@@ -103,6 +107,9 @@ var Prefs = {
 	get history() {
 		return this._history;
 	},
+	get recent() {
+		return this._recent;
+	},
 	set theme(value) {
 		browser.storage.local.set({ theme: value });
 	},
@@ -129,5 +136,8 @@ var Prefs = {
 	},
 	set history(value) {
 		browser.storage.local.set({ history: value });
+	},
+	set recent(value) {
+		browser.storage.local.set({ recent: value });
 	}
 };

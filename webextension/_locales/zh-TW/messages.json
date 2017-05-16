@@ -56,6 +56,9 @@
 	"options.pointer": {
 		"message": "點此來開始自訂你的新分頁"
 	},
+	"options.recent": {
+		"message": "最近關閉的分頁"
+	},
 	"options.rows": {
 		"message": "列"
 	},
@@ -88,6 +91,9 @@
 	},
 	"pin-url.placeholder": {
 		"message": "輸入或選擇網址"
+	},
+	"recently-closed-tabs": {
+		"message": "最近關閉的分頁:"
 	},
 	"tile-header": {
 		"message": "首頁磚:"

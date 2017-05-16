@@ -203,6 +203,9 @@ var newTabTools = {
 		case 'history':
 			Prefs.history = checked;
 			break;
+		case 'recent':
+			Prefs.recent = checked;
+			break;
 		}
 	},
 	setThumbnail: function(site, src) {
@@ -332,12 +335,78 @@ var newTabTools = {
 			// document.getElementById('historytiles-filter').disabled = !history;
 		}
 
+		if (!keys || keys.includes('recent')) {
+			let recent = Prefs.recent;
+			document.querySelector('[name="recent"]').checked = recent;
+			this.refreshRecent();
+		}
+
 		if ('Grid' in window && 'cacheCellPositions' in Grid) {
 			requestAnimationFrame(Grid.cacheCellPositions);
 		}
 
 		if (!document.documentElement.hasAttribute('options-hidden')) {
 			this.resizeOptionsThumbnail();
+		}
+	},
+	refreshRecent: function() {
+		if (!Prefs.recent) {
+			this.recentList.hidden = true;
+			return;
+		}
+
+		browser.sessions.getRecentlyClosed().then(undoItems => {
+			let added = 0;
+
+			for (let element of this.recentList.querySelectorAll('a')) {
+				this.recentList.removeChild(element);
+			}
+
+			function recent_onclick() {
+				browser.sessions.restore(this.dataset.sessionId);
+			}
+
+			for (let item of undoItems) {
+				let {url, title, sessionId, favIconUrl} = item.tab;
+
+				let a = document.createElementNS(HTML_NAMESPACE, 'a');
+				a.href = url;
+				a.className = 'recent';
+				a.title = (title == url ? title : title + '\n' + url);
+				a.dataset.sessionId = sessionId;
+				a.onclick = recent_onclick;
+				if (favIconUrl) {
+					let favIcon = document.createElement('img');
+					favIcon.classList.add('favicon');
+					favIcon.src = favIconUrl;
+					a.appendChild(favIcon);
+				}
+				a.appendChild(document.createTextNode(title));
+				this.recentList.appendChild(a);
+				added++;
+			}
+			this.trimRecent();
+			this.recentList.hidden = !added;
+		});
+	},
+	trimRecent: function() {
+		this.recentList.style.width = '0';
+
+		let width = this.recentListOuter.clientWidth;
+		let elements = document.querySelectorAll('.recent');
+
+		for (let recent of elements) {
+			// see .recent
+			let right = recent.offsetLeft + recent.offsetWidth - this.recentList.offsetLeft + 4;
+			if (right == 4) {
+				requestAnimationFrame(this.trimRecent.bind(this));
+				return;
+			}
+			if (right <= width) {
+				this.recentList.style.width = right + 'px';
+			} else {
+				break;
+			}
 		}
 	},
 	set selectedSiteIndex(index) { // jshint ignore:line
@@ -443,6 +512,10 @@ var newTabTools = {
 			newTabTools.updateUI();
 			newTabTools.refreshBackgroundImage();
 
+			browser.sessions.onChanged.addListener(function() {
+				newTabTools.refreshRecent();
+			});
+
 			if (isFirstRun) {
 				return newTabTools.getEverythingFromOldExtension();
 			}
@@ -486,6 +559,8 @@ var newTabTools = {
 		'setBackgroundButton': 'options-bg-set',
 		'removeBackgroundButton': 'options-bg-remove',
 		'themePref': 'options-theme-pref',
+		'recentList': 'newtab-recent',
+		'recentListOuter': 'newtab-recent-outer',
 		'optionsBackground': 'options-bg',
 		'optionsPane': 'options'
 	};
