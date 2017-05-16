@@ -1,6 +1,0 @@
-<!ENTITY title "Филтър на плочките от историята">
-<!ENTITY description "Този инструмент ограничава броя на плочките от историята на сърфирането, които се показват за всеки домейн. Не оказва ефект върху закачените плочки.">
-<!ENTITY domainheader "Домейн">
-<!ENTITY countheader "Максимален брой плочки">
-<!ENTITY addbuttonlabel "Добави">
-<!ENTITY removebuttonlabel "Премахни">

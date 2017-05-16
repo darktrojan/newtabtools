@@ -1,6 +1,0 @@
-<!ENTITY title "Filtrar Blocos do Histórico de Navegação">
-<!ENTITY description "Esta ferramenta limita o número de blocos do histórico de navegação que aparecem para cada domínio. Isto não afeta blocos fixados.">
-<!ENTITY domainheader "Domínio">
-<!ENTITY countheader "Máximo de Blocos">
-<!ENTITY addbuttonlabel "Adicionar">
-<!ENTITY removebuttonlabel "Remover">
