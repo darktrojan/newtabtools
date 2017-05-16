@@ -14,6 +14,9 @@
 	"donate.label": {
 		"message": "A New Tab Tools-t a felhasználói adományok finanszírozzák."
 	},
+	"extensionDescription": {
+		"message": "Személyre szabja az új lap oldalt. Hozzáadhat további csempéket, a Firefox start gyorsindítóját, vagy egy háttérképet. Megadhat új csempeképeket és feliratokat."
+	},
 	"github": {
 		"message": "New Tab Tools a GitHub-on"
 	},

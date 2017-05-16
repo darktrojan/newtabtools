@@ -14,6 +14,9 @@
 	"donate.label": {
 		"message": "New Tab Tools si sostiene con le donazioni degli utenti."
 	},
+	"extensionDescription": {
+		"message": "Personalizza la pagina nuova scheda. Puoi aggiungere più riquadri, la barra di avvio di Firefox, o un'immagine di sfondo. Ed è possibile impostare nuove immagini nei riquadri e nuovi titoli."
+	},
 	"github": {
 		"message": "New Tab Tools su GitHub"
 	},

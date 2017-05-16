@@ -14,6 +14,9 @@
 	"donate.label": {
 		"message": "New Tab Tools se financia a través de donaciones de usuarios."
 	},
+	"extensionDescription": {
+		"message": "Personaliza la página de Nueva Pestaña. Puedes añadir más contenedores (páginas), lanzar New Tab Tools al inicio de Firefox o incluir una imagen de fondo. También puedes modificar la imagen y el título de los contenedores."
+	},
 	"github": {
 		"message": "New Tab Tools en GitHub"
 	},

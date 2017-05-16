@@ -14,6 +14,9 @@
 	"donate.label": {
 		"message": "New Tab Tools 是由使用者的捐款資助。"
 	},
+	"extensionDescription": {
+		"message": "自訂新分頁頁面。你可以在新分頁增加更多首頁磚、加入 Firefox 開始頁的捷徑列或是自訂背景圖片，你也能為首頁磚設定新的圖片和標題。"
+	},
 	"newtab.pageTitle": {
 		"message": "新分頁"
 	},

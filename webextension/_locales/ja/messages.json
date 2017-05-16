@@ -14,6 +14,9 @@
 	"donate.label": {
 		"message": "New Tab Tools はユーザーからの寄付により成り立っています。"
 	},
+	"extensionDescription": {
+		"message": "新しいタブページをカスタマイズします。新しいタブページのタイル追加や Firefox スタートページのランチャーを表示したり、背景画像を追加することができます。また、新しいタイル画像やタイトルを設定することができます。"
+	},
 	"newtab.pageTitle": {
 		"message": "新しいタブ"
 	},
