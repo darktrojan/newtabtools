@@ -1,0 +1,143 @@
+{
+	"bg-header": {
+		"message": "Arrière-plan :"
+	},
+	"bg.remove": {
+		"message": "Supprimer"
+	},
+	"bg.set": {
+		"message": "Appliquer"
+	},
+	"donate": {
+		"message": "Faire un don…"
+	},
+	"donate.label": {
+		"message": "New Tab Tools est financé par vos dons."
+	},
+	"github": {
+		"message": "New Tab Tools sur GitHub"
+	},
+	"newtab.pageTitle": {
+		"message": "Nouvel onglet"
+	},
+	"newtab.undo.closeTooltip": {
+		"message": "Masquer"
+	},
+	"newtab.undo.removedLabel": {
+		"message": "Vignette retirée."
+	},
+	"newtab.undo.restoreButton": {
+		"message": "Tout restaurer."
+	},
+	"newtab.undo.undoButton": {
+		"message": "Annuler."
+	},
+	"options-header": {
+		"message": "Options :"
+	},
+	"options.columns": {
+		"message": "Colonnes"
+	},
+	"options.foreground.opacity": {
+		"message": "Opacité"
+	},
+	"options.grid.margin": {
+		"message": "Marge autour de la grille"
+	},
+	"options.grid.spacing": {
+		"message": "Marge entre les cases"
+	},
+	"options.historytiles": {
+		"message": "Cases vides remplies avec historique"
+	},
+	"options.launcher.hidden": {
+		"message": "Ne pas afficher"
+	},
+	"options.locked": {
+		"message": "Cases non déplaçables"
+	},
+	"options.pointer": {
+		"message": "Cliquez ici pour commencer à personnaliser votre page « Nouvel onglet »"
+	},
+	"options.rows": {
+		"message": "Lignes"
+	},
+	"options.size.large": {
+		"message": "Grande"
+	},
+	"options.size.medium": {
+		"message": "Moyenne"
+	},
+	"options.size.small": {
+		"message": "Réduite"
+	},
+	"options.theme": {
+		"message": "Thème"
+	},
+	"options.theme.dark": {
+		"message": "Thème sombre"
+	},
+	"options.theme.light": {
+		"message": "Thème clair"
+	},
+	"options.thumb-titlesize": {
+		"message": "Taille des titres"
+	},
+	"pin-url.button": {
+		"message": "Ajouter"
+	},
+	"pin-url.header": {
+		"message": "Ajouter une page :"
+	},
+	"pin-url.placeholder": {
+		"message": "Tapez ou sélectionnez une URL"
+	},
+	"tile-header": {
+		"message": "Pages :"
+	},
+	"tile-savedthumb.label": {
+		"message": "Miniature personnalisée :"
+	},
+	"tile-savedthumb.set": {
+		"message": "Appliquer"
+	},
+	"tile-selection.next.tooltip": {
+		"message": "Page suivante"
+	},
+	"tile-selection.nextrow.tooltip": {
+		"message": "Rangée inférieure"
+	},
+	"tile-selection.previous.tooltip": {
+		"message": "Page précédente"
+	},
+	"tile-selection.previousrow.tooltip": {
+		"message": "Rangée supérieure"
+	},
+	"tile-thumbnail.bgcolor": {
+		"message": "Couleur de fond :"
+	},
+	"tile-thumbnail.remove": {
+		"message": "Supprimer"
+	},
+	"tile-title.label": {
+		"message": "Titre :"
+	},
+	"tile-title.placeholder": {
+		"message": "Tapez un nouveau titre"
+	},
+	"tile-title.set": {
+		"message": "Appliquer"
+	},
+	"tile.block": {
+		"message": "Retirer ce site"
+	},
+	"tile.pin": {
+		"message": "Épingler ce site à son emplacement actuel"
+	},
+	"tile.unpin": {
+		"message": "Relâcher ce site"
+	},
+	"tileurl.empty": {
+		"message": "Aucune page enregistrée"
+	}
+}

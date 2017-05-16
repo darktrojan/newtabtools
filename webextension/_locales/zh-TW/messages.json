@@ -1,0 +1,140 @@
+{
+	"bg-header": {
+		"message": "背景圖片:"
+	},
+	"bg.remove": {
+		"message": "移除背景"
+	},
+	"bg.set": {
+		"message": "設為背景"
+	},
+	"donate": {
+		"message": "捐款…"
+	},
+	"donate.label": {
+		"message": "New Tab Tools 是由使用者的捐款資助。"
+	},
+	"newtab.pageTitle": {
+		"message": "新分頁"
+	},
+	"newtab.undo.closeTooltip": {
+		"message": "隱藏"
+	},
+	"newtab.undo.removedLabel": {
+		"message": "已移除縮圖。"
+	},
+	"newtab.undo.restoreButton": {
+		"message": "全部恢復。"
+	},
+	"newtab.undo.undoButton": {
+		"message": "還原。"
+	},
+	"options-header": {
+		"message": "選項:"
+	},
+	"options.columns": {
+		"message": "欄"
+	},
+	"options.foreground.opacity": {
+		"message": "前景不透明度"
+	},
+	"options.grid.margin": {
+		"message": "網格邊界"
+	},
+	"options.grid.spacing": {
+		"message": "網格間距"
+	},
+	"options.historytiles": {
+		"message": "從歷史紀錄產生首頁磚"
+	},
+	"options.launcher.hidden": {
+		"message": "不顯示"
+	},
+	"options.locked": {
+		"message": "禁止拖動首頁磚"
+	},
+	"options.pointer": {
+		"message": "點此來開始自訂你的新分頁"
+	},
+	"options.rows": {
+		"message": "列"
+	},
+	"options.size.large": {
+		"message": "大"
+	},
+	"options.size.medium": {
+		"message": "中"
+	},
+	"options.size.small": {
+		"message": "小"
+	},
+	"options.theme": {
+		"message": "佈景"
+	},
+	"options.theme.dark": {
+		"message": "暗色佈景"
+	},
+	"options.theme.light": {
+		"message": "淺色佈景"
+	},
+	"options.thumb-titlesize": {
+		"message": "標題大小"
+	},
+	"pin-url.button": {
+		"message": "新增"
+	},
+	"pin-url.header": {
+		"message": "新增首頁磚:"
+	},
+	"pin-url.placeholder": {
+		"message": "輸入或選擇網址"
+	},
+	"tile-header": {
+		"message": "首頁磚:"
+	},
+	"tile-savedthumb.label": {
+		"message": "保存的圖片:"
+	},
+	"tile-savedthumb.set": {
+		"message": "設為縮圖"
+	},
+	"tile-selection.next.tooltip": {
+		"message": "下一列"
+	},
+	"tile-selection.nextrow.tooltip": {
+		"message": "下一塊磚"
+	},
+	"tile-selection.previous.tooltip": {
+		"message": "前一塊磚"
+	},
+	"tile-selection.previousrow.tooltip": {
+		"message": "前一列"
+	},
+	"tile-thumbnail.bgcolor": {
+		"message": "背景顏色:"
+	},
+	"tile-thumbnail.remove": {
+		"message": "移除縮圖"
+	},
+	"tile-title.label": {
+		"message": "標題:"
+	},
+	"tile-title.placeholder": {
+		"message": "輸入新的首頁磚標題"
+	},
+	"tile-title.set": {
+		"message": "設為標題"
+	},
+	"tile.block": {
+		"message": "移除此網站"
+	},
+	"tile.pin": {
+		"message": "將此網站釘選於目前位置"
+	},
+	"tile.unpin": {
+		"message": "釘選此網站"
+	},
+	"tileurl.empty": {
+		"message": "空白磚"
+	}
+}

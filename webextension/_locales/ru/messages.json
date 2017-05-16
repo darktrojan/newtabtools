@@ -1,0 +1,143 @@
+{
+	"bg-header": {
+		"message": "Фоновое изображение Экспресс-панели:"
+	},
+	"bg.remove": {
+		"message": "Удалить"
+	},
+	"bg.set": {
+		"message": "Применить"
+	},
+	"donate": {
+		"message": "Пожертвовать…"
+	},
+	"donate.label": {
+		"message": "New Tab Tools финансируется за счет пожертвований пользователей."
+	},
+	"github": {
+		"message": "New Tab Tools на GitHub"
+	},
+	"newtab.pageTitle": {
+		"message": "Новая вкладка"
+	},
+	"newtab.undo.closeTooltip": {
+		"message": "Скрыть"
+	},
+	"newtab.undo.removedLabel": {
+		"message": "Миниатюра удалена."
+	},
+	"newtab.undo.restoreButton": {
+		"message": "Восстановить все."
+	},
+	"newtab.undo.undoButton": {
+		"message": "Отменить."
+	},
+	"options-header": {
+		"message": "Опции:"
+	},
+	"options.columns": {
+		"message": "Количество Столбцов"
+	},
+	"options.foreground.opacity": {
+		"message": "Непрозрачность"
+	},
+	"options.grid.margin": {
+		"message": "Отступ от края"
+	},
+	"options.grid.spacing": {
+		"message": "Отступ между плиток"
+	},
+	"options.historytiles": {
+		"message": "Плитки из истории браузера"
+	},
+	"options.launcher.hidden": {
+		"message": "Не отображать"
+	},
+	"options.locked": {
+		"message": "Предотвратить перетаскивание плиток"
+	},
+	"options.pointer": {
+		"message": "Нажмите здесь, чтобы начать настройку вашей страницы новой вкладки"
+	},
+	"options.rows": {
+		"message": "Количество Строк"
+	},
+	"options.size.large": {
+		"message": "Большой"
+	},
+	"options.size.medium": {
+		"message": "Средний"
+	},
+	"options.size.small": {
+		"message": "Небольшой"
+	},
+	"options.theme": {
+		"message": "Выбор темы оформления"
+	},
+	"options.theme.dark": {
+		"message": "Темная Тема"
+	},
+	"options.theme.light": {
+		"message": "Светлая Тема"
+	},
+	"options.thumb-titlesize": {
+		"message": "Размер названия плитки"
+	},
+	"pin-url.button": {
+		"message": "Добавить"
+	},
+	"pin-url.header": {
+		"message": "Добавить плитку:"
+	},
+	"pin-url.placeholder": {
+		"message": "Введите или выберите ссылку из списка"
+	},
+	"tile-header": {
+		"message": "Плитки Экспресс-панели:"
+	},
+	"tile-savedthumb.label": {
+		"message": "Сохраненное изображение:"
+	},
+	"tile-savedthumb.set": {
+		"message": "Применить"
+	},
+	"tile-selection.next.tooltip": {
+		"message": "Следующая плитка"
+	},
+	"tile-selection.nextrow.tooltip": {
+		"message": "Следующая строка"
+	},
+	"tile-selection.previous.tooltip": {
+		"message": "Предыдущая плитка"
+	},
+	"tile-selection.previousrow.tooltip": {
+		"message": "Предыдущая строка"
+	},
+	"tile-thumbnail.bgcolor": {
+		"message": "Цвет фона:"
+	},
+	"tile-thumbnail.remove": {
+		"message": "Удалить"
+	},
+	"tile-title.label": {
+		"message": "Название плитки:"
+	},
+	"tile-title.placeholder": {
+		"message": "Введите новое название плитки"
+	},
+	"tile-title.set": {
+		"message": "Применить"
+	},
+	"tile.block": {
+		"message": "Удалить этот сайт"
+	},
+	"tile.pin": {
+		"message": "Закрепить этот сайт в текущей позиции"
+	},
+	"tile.unpin": {
+		"message": "Открепить этот сайт"
+	},
+	"tileurl.empty": {
+		"message": "Пустая плитка"
+	}
+}

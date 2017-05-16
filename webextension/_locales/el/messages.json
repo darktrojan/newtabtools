@@ -1,0 +1,143 @@
+{
+	"bg-header": {
+		"message": "Εικόνα φόντου σελίδας:"
+	},
+	"bg.remove": {
+		"message": "Αφαίρεση"
+	},
+	"bg.set": {
+		"message": "Εφαρμογή"
+	},
+	"donate": {
+		"message": "Δωρήστε…"
+	},
+	"donate.label": {
+		"message": "To New Tab Tools χρηματοδοτείται απο δωρεές χρηστών."
+	},
+	"github": {
+		"message": "Το New Tab Tools στο GitHub"
+	},
+	"newtab.pageTitle": {
+		"message": "Νέα καρτέλα"
+	},
+	"newtab.undo.closeTooltip": {
+		"message": "Απόκρυψη"
+	},
+	"newtab.undo.removedLabel": {
+		"message": "Η μικρογραφία αφαιρέθηκε."
+	},
+	"newtab.undo.restoreButton": {
+		"message": "Επαναφορά όλων."
+	},
+	"newtab.undo.undoButton": {
+		"message": "Αναίρεση."
+	},
+	"options-header": {
+		"message": "Επιλογές:"
+	},
+	"options.columns": {
+		"message": "Στήλες"
+	},
+	"options.foreground.opacity": {
+		"message": "Διαφάνεια προσκηνίου"
+	},
+	"options.grid.margin": {
+		"message": "Περιθώριο Πλέγματος"
+	},
+	"options.grid.spacing": {
+		"message": "Απόσταση Πλέγματος"
+	},
+	"options.historytiles": {
+		"message": "Πλακίδια απο το ιστορικό περιήγησης"
+	},
+	"options.launcher.hidden": {
+		"message": "Να Μήν Εμφανίζεται"
+	},
+	"options.locked": {
+		"message": "Αποτροπή μετακίνησης πλακιδίων"
+	},
+	"options.pointer": {
+		"message": "Κάντε κλίκ εδώ για να παραμετροποιήσετε την σελίδα της νέας καρτέλας"
+	},
+	"options.rows": {
+		"message": "Σειρές"
+	},
+	"options.size.large": {
+		"message": "Μεγάλα"
+	},
+	"options.size.medium": {
+		"message": "Μεσαία"
+	},
+	"options.size.small": {
+		"message": "Μικρά"
+	},
+	"options.theme": {
+		"message": "Θέμα"
+	},
+	"options.theme.dark": {
+		"message": "Σκοτεινό Θέμα"
+	},
+	"options.theme.light": {
+		"message": "Φωτεινό Θέμα"
+	},
+	"options.thumb-titlesize": {
+		"message": "Μεγεθος Τίτλου Πλακιδίων"
+	},
+	"pin-url.button": {
+		"message": "Προσθήκη"
+	},
+	"pin-url.header": {
+		"message": "Προσθήκη τίτλου:"
+	},
+	"pin-url.placeholder": {
+		"message": "Πληκτρολογήστε ή επιλέξτε μία ιστοσελίδα"
+	},
+	"tile-header": {
+		"message": "Πλακίδιο:"
+	},
+	"tile-savedthumb.label": {
+		"message": "Αποθηκευμένη εικόνα:"
+	},
+	"tile-savedthumb.set": {
+		"message": "Εφαρμογή"
+	},
+	"tile-selection.next.tooltip": {
+		"message": "Επόμενο πλακίδιο"
+	},
+	"tile-selection.nextrow.tooltip": {
+		"message": "Επόμενη σειρά"
+	},
+	"tile-selection.previous.tooltip": {
+		"message": "Προηγούμενο πλακίδιο"
+	},
+	"tile-selection.previousrow.tooltip": {
+		"message": "Προηγούμενη σειρά"
+	},
+	"tile-thumbnail.bgcolor": {
+		"message": "Χρώμα Φόντου:"
+	},
+	"tile-thumbnail.remove": {
+		"message": "Αφαίρεση"
+	},
+	"tile-title.label": {
+		"message": "Τίτλος:"
+	},
+	"tile-title.placeholder": {
+		"message": "Πληκτρολογήστε νέο τίτλο πλακιδίου"
+	},
+	"tile-title.set": {
+		"message": "Εφαρμογή"
+	},
+	"tile.block": {
+		"message": "Αφαίρεση ιστοσελίδας"
+	},
+	"tile.pin": {
+		"message": "Καρφίτσωμα ιστοσελίδας στην τρέχουσα τοποθεσία της"
+	},
+	"tile.unpin": {
+		"message": "Ξεκαρφίτσωμα ιστοσελίδας"
+	},
+	"tileurl.empty": {
+		"message": "Κενό πλακίδιο"
+	}
+}

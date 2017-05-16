@@ -1,0 +1,131 @@
+{
+	"bg-header": {
+		"message": "Immagine di sfondo della pagina:"
+	},
+	"bg.remove": {
+		"message": "Rimuovi"
+	},
+	"bg.set": {
+		"message": "Imposta"
+	},
+	"donate": {
+		"message": "Fai una donazione…"
+	},
+	"donate.label": {
+		"message": "New Tab Tools si sostiene con le donazioni degli utenti."
+	},
+	"github": {
+		"message": "New Tab Tools su GitHub"
+	},
+	"newtab.pageTitle": {
+		"message": "Nuova scheda"
+	},
+	"newtab.undo.closeTooltip": {
+		"message": "Nascondi"
+	},
+	"newtab.undo.removedLabel": {
+		"message": "Miniatura rimossa."
+	},
+	"newtab.undo.restoreButton": {
+		"message": "Ripristina tutto."
+	},
+	"newtab.undo.undoButton": {
+		"message": "Annulla."
+	},
+	"options-header": {
+		"message": "Opzioni:"
+	},
+	"options.columns": {
+		"message": "Colonne"
+	},
+	"options.foreground.opacity": {
+		"message": "Foreground Opacity"
+	},
+	"options.grid.margin": {
+		"message": "Cornice della griglia"
+	},
+	"options.grid.spacing": {
+		"message": "Ampiezza della griglia"
+	},
+	"options.launcher.hidden": {
+		"message": "Non mostrare"
+	},
+	"options.pointer": {
+		"message": "Clicca qui per iniziare a personalizzare la pagina Nuova Scheda"
+	},
+	"options.rows": {
+		"message": "Righe"
+	},
+	"options.size.large": {
+		"message": "Grande"
+	},
+	"options.size.medium": {
+		"message": "Media"
+	},
+	"options.size.small": {
+		"message": "Piccola"
+	},
+	"options.theme": {
+		"message": "Tema"
+	},
+	"options.theme.dark": {
+		"message": "Tema scuro"
+	},
+	"options.theme.light": {
+		"message": "Tema chiaro"
+	},
+	"options.thumb-titlesize": {
+		"message": "Dimensione titolo"
+	},
+	"pin-url.button": {
+		"message": "Aggiungi"
+	},
+	"pin-url.header": {
+		"message": "Aggiungi icona:"
+	},
+	"pin-url.placeholder": {
+		"message": "Scrivi o seleziona un indirizzo web"
+	},
+	"tile-header": {
+		"message": "Icone:"
+	},
+	"tile-savedthumb.set": {
+		"message": "Imposta"
+	},
+	"tile-selection.next.tooltip": {
+		"message": "Riquadro sucessivo"
+	},
+	"tile-selection.nextrow.tooltip": {
+		"message": "Riga sucessiva"
+	},
+	"tile-selection.previous.tooltip": {
+		"message": "Riquadro precedente"
+	},
+	"tile-selection.previousrow.tooltip": {
+		"message": "Riga precedente"
+	},
+	"tile-thumbnail.bgcolor": {
+		"message": "Colore di sfondo:"
+	},
+	"tile-thumbnail.remove": {
+		"message": "Rimuovi"
+	},
+	"tile-title.label": {
+		"message": "Icona:"
+	},
+	"tile-title.placeholder": {
+		"message": "Scrivi il nuovo titolo dell'icona"
+	},
+	"tile-title.set": {
+		"message": "Imposta"
+	},
+	"tile.block": {
+		"message": "Rimuovi questo sito"
+	},
+	"tile.pin": {
+		"message": "Blocca questo sito nella posizione attuale"
+	},
+	"tile.unpin": {
+		"message": "Sblocca questo sito"
+	}
+}
