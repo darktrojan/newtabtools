@@ -21,8 +21,10 @@ XPCOMUtils.defineLazyGetter(this, 'strings', function() {
 	return Services.strings.createBundle('chrome://newtabtools/locale/newTabTools.properties');
 });
 
-/* globals FileUtils, SavedThumbs, Task, TileData */
+/* globals FileUtils, OS, PageThumbs, SavedThumbs, Task, TileData */
 XPCOMUtils.defineLazyModuleGetter(this, 'FileUtils', 'resource://gre/modules/FileUtils.jsm');
+XPCOMUtils.defineLazyModuleGetter(this, 'OS', 'resource://gre/modules/osfile.jsm');
+XPCOMUtils.defineLazyModuleGetter(this, 'PageThumbs', 'resource://gre/modules/PageThumbs.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'SavedThumbs', 'chrome://newtabtools/content/newTabTools.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'Task', 'resource://gre/modules/Task.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'TileData', 'chrome://newtabtools/content/newTabTools.jsm');
@@ -106,6 +108,11 @@ function uiStartup(params) {
 		Cu.importGlobalProperties(['fetch']);
 
 		browser.runtime.onMessage.addListener(function(message, sender, sendReply) {
+			if (typeof message == 'object' && message.action == 'thumbnails') {
+				thumbnailHandler.getThumbnails(message.urls).then(sendReply);
+				return true;
+			}
+
 			switch (message) {
 			case 'tiles':
 				Task.spawn(function*() {
@@ -190,6 +197,40 @@ function uiStartup(params) {
 		});
 	});
 }
+
+var thumbnailHandler = {
+	_cache: new Map(),
+
+	getThumbnail: function(url) {
+		if (thumbnailHandler._cache.has(url)) {
+			return Promise.resolve(thumbnailHandler._cache.get(url));
+		}
+
+		return Task.spawn(function*() {
+			let path = PageThumbs.getThumbnailPath(url);
+			let exists = yield OS.File.exists(path);
+			if (!exists) {
+				thumbnailHandler._cache.set(url, null);
+				return null;
+			}
+
+			let r = yield fetch(PageThumbs.getThumbnailURL(url));
+			let b = yield r.blob();
+			thumbnailHandler._cache.set(url, b);
+			return b;
+		});
+	},
+	getThumbnails: function(urls) {
+		let result = new Map();
+		return Promise.all(urls.map(u => {
+			return thumbnailHandler.getThumbnail(u).then(tu => {
+				if (tu) {
+					result.set(u, tu);
+				}
+			});
+		})).then(() => result);
+	}
+};
 
 var idleObserver = {
 	observe: function(service, state) {
