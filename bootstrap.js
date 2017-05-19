@@ -175,6 +175,17 @@ function uiStartup(params) {
 
 				sendReply(prefs);
 				return;
+
+			case 'topSites':
+				NewTabUtils.links.populateProviderCache(NewTabUtils.placesProvider, function() {
+					sendReply(NewTabUtils.getProviderLinks(NewTabUtils.placesProvider).map(link => {
+						return {
+							url: link.url,
+							title: link.title,
+						};
+					}));
+				});
+				return true;
 			}
 		});
 	});
