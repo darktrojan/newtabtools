@@ -367,6 +367,10 @@ var newTabTools = {
 			}
 
 			for (let item of undoItems) {
+				if (!item.tab) {
+					continue;
+				}
+
 				let {url, title, sessionId, favIconUrl} = item.tab;
 
 				let a = document.createElementNS(HTML_NAMESPACE, 'a');
