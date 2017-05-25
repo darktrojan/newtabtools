@@ -3,7 +3,7 @@ This Source Code Form is subject to the terms of the Mozilla Public
 License, v. 2.0. If a copy of the MPL was not distributed with this file,
 You can obtain one at http://mozilla.org/MPL/2.0/.
 */
-/* globals Prefs, Grid, Page, Tiles, Updater, Background, browser, initDB, isFirstRun */
+/* globals Prefs, Grid, Page, Tiles, Updater, Background, browser */
 
 var HTML_NAMESPACE = 'http://www.w3.org/1999/xhtml';
 
@@ -507,10 +507,7 @@ var newTabTools = {
 			n.parentNode.insertBefore(document.createTextNode(newTabTools.getString(n.dataset.label)), n.nextSibling);
 		});
 
-		Promise.all([
-			Prefs.init(),
-			initDB()
-		]).then(function() {
+		Prefs.init().then(function() {
 			// Everything is loaded. Initialize the New Tab Page.
 			Page.init();
 			newTabTools.updateUI();
@@ -519,21 +516,7 @@ var newTabTools = {
 			browser.sessions.onChanged.addListener(function() {
 				newTabTools.refreshRecent();
 			});
-
-			if (isFirstRun) {
-				return newTabTools.getEverythingFromOldExtension();
-			}
 		}).catch(console.error.bind(console));
-	},
-	getEverythingFromOldExtension: function() {
-		return Promise.all([
-			Tiles.getTilesFromOldExtension(),
-			Background.getBackgroundFromOldExtension(),
-			Prefs.getPrefsFromOldExtension()
-		]).then(function() {
-			newTabTools.refreshBackgroundImage();
-			Grid.refresh();
-		});
 	},
 	getThumbnails: function() {
 		browser.runtime.sendMessage({

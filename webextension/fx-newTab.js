@@ -706,14 +706,16 @@ Site.prototype = {
 	   * when done.
 	   */
 	block: function Site_block() {
-		if (!Blocked.isBlocked(this._link.url)) {
-			UndoDialog.show(this);
-			Blocked.block(this._link.url);
-
-			(this.isPinned() ? Tiles.removeTile(this._link) : Promise.resolve()).then(() => {
-				Updater.updateGrid();
-			});
-		}
+		Blocked.isBlocked(this._link.url).then(blocked => {
+			if (!blocked) {
+				UndoDialog.show(this);
+				Blocked.block(this._link.url).then(() => {
+					(this.isPinned() ? Tiles.removeTile(this._link) : Promise.resolve()).then(() => {
+						Updater.updateGrid();
+					});
+				});
+			}
+		});
 	},
 
 	/**

@@ -10,6 +10,13 @@
 	"chrome_url_overrides": {
 		"newtab": "newTab.xhtml"
 	},
+	"background": {
+		"scripts": [
+			"tiles.js",
+			"prefs.js",
+			"background.js"
+		]
+	},
 	"permissions": [
 		"history",
 		"sessions",

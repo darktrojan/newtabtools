@@ -1,5 +1,5 @@
-/* exported initDB, getAllTiles, Tiles, Background, Prefs */
-/* globals browser, indexedDB */
+/* exported initDB, Tiles, Background */
+/* globals Prefs, browser, indexedDB */
 var db;
 var isFirstRun = false;
 
@@ -43,9 +43,6 @@ function initDB() {
 
 var Tiles = {
 	_list: [],
-	isPinned: function(url) {
-		return this._list.includes(url);
-	},
 	getAllTiles: function(count) {
 		return new Promise(function(resolve) {
 			db.transaction('tiles').objectStore('tiles').getAll().onsuccess = function() {
@@ -68,7 +65,7 @@ var Tiles = {
 					return;
 				}
 
-				// browser.topSites.get().then(r => {
+				// browser.topSites.get({ providers: ['places'] }).then(r => {
 				browser.runtime.sendMessage('topSites').then(r => {
 					let urls = Tiles._list.slice();
 					let remaining = r.filter(s => {
