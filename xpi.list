@@ -8,6 +8,7 @@ install.rdf
 webextension
 webextension/_locales/*
 webextension/arrow.svg
+webextension/background.js
 webextension/close.svg
 webextension/controls.png
 webextension/controls@2x.png
@@ -22,3 +23,4 @@ webextension/pointer-rtl.png
 webextension/pointer.png
 webextension/prefs.js
 webextension/tiles.js
+webextension/tiles-shim.js

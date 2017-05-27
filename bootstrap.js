@@ -8,18 +8,10 @@ const { utils: Cu } = Components;
 
 const EXTENSION_PREFS = 'extensions.newtabtools.';
 
-const BROWSER_WINDOW = 'navigator:browser';
-const IDLE_TIMEOUT = 10;
-
 /* globals Services, NewTabUtils, XPCOMUtils */
 Cu.import('resource://gre/modules/Services.jsm');
 Cu.import('resource://gre/modules/NewTabUtils.jsm');
 Cu.import('resource://gre/modules/XPCOMUtils.jsm');
-
-/* globals strings */
-XPCOMUtils.defineLazyGetter(this, 'strings', function() {
-	return Services.strings.createBundle('chrome://newtabtools/locale/newTabTools.properties');
-});
 
 /* globals FileUtils, OS, PageThumbs, SavedThumbs, Task, TileData */
 XPCOMUtils.defineLazyModuleGetter(this, 'FileUtils', 'resource://gre/modules/FileUtils.jsm');
@@ -28,9 +20,6 @@ XPCOMUtils.defineLazyModuleGetter(this, 'PageThumbs', 'resource://gre/modules/Pa
 XPCOMUtils.defineLazyModuleGetter(this, 'SavedThumbs', 'chrome://newtabtools/content/newTabTools.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'Task', 'resource://gre/modules/Task.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'TileData', 'chrome://newtabtools/content/newTabTools.jsm');
-
-/* globals idleService */
-XPCOMUtils.defineLazyServiceGetter(this, 'idleService', '@mozilla.org/widget/idleservice;1', 'nsIIdleService');
 
 let userPrefs = Services.prefs.getBranch(EXTENSION_PREFS);
 
@@ -44,39 +33,15 @@ function startup(params, reason) {
 	defaultPrefs.setIntPref('foreground.opacity', 80);
 	defaultPrefs.setIntPref('rows', 3);
 	defaultPrefs.setIntPref('columns', 3);
-	defaultPrefs.setIntPref('donationreminder', 0);
 	defaultPrefs.setCharPref('grid.margin', 'small small small small');
 	defaultPrefs.setCharPref('grid.spacing', 'small');
 	defaultPrefs.setBoolPref('historytiles.show', true);
-	defaultPrefs.setIntPref('launcher', 3);
 	defaultPrefs.setBoolPref('locked', false);
-	defaultPrefs.setBoolPref('optionspointershown', false);
 	defaultPrefs.setBoolPref('recent.show', true);
 	defaultPrefs.setCharPref('theme', 'light');
-	defaultPrefs.setIntPref('thumbs.prefs.delay', 1);
-	defaultPrefs.setBoolPref('thumbs.contain', false);
-	defaultPrefs.setBoolPref('thumbs.hidebuttons', false);
-	defaultPrefs.setBoolPref('thumbs.hidefavicons', false);
 	defaultPrefs.setCharPref('thumbs.titlesize', 'small');
 	defaultPrefs.setCharPref('tiledata', '{}');
 
-	if (userPrefs.prefHasUserValue('version')) {
-		// Truncate version numbers to floats
-		let oldVersion = parseFloat(userPrefs.getCharPref('version'), 10);
-		let currentVersion = parseFloat(params.version, 10);
-		let lastReminder = userPrefs.getIntPref('donationreminder') * 1000;
-		let shouldRemind = Date.now() - lastReminder > 604800000;
-
-		if (Services.vc.compare(oldVersion, currentVersion) == -1) {
-			userPrefs.setBoolPref('optionspointershown', true);
-			if (lastReminder === 0) {
-				// Skip reminder the first time
-				userPrefs.setIntPref('donationreminder', Date.now() / 1000);
-			} else if (shouldRemind) {
-				idleService.addIdleObserver(idleObserver, IDLE_TIMEOUT);
-			}
-		}
-	}
 	userPrefs.setCharPref('version', params.version);
 
 	if (reason == APP_STARTUP) {
@@ -96,11 +61,6 @@ function shutdown(params, reason) {
 	}
 
 	Cu.unload('chrome://newtabtools/content/newTabTools.jsm');
-
-	try {
-		idleService.removeIdleObserver(idleObserver, IDLE_TIMEOUT);
-	} catch (e) { // might be already removed
-	}
 }
 
 function uiStartup(params) {
@@ -229,46 +189,5 @@ var thumbnailHandler = {
 				}
 			});
 		})).then(() => result);
-	}
-};
-
-var idleObserver = {
-	observe: function(service, state) {
-		if (state != 'idle') {
-			return;
-		}
-		idleService.removeIdleObserver(this, IDLE_TIMEOUT);
-
-		let version = userPrefs.getCharPref('version');
-		let recentWindow = Services.wm.getMostRecentWindow(BROWSER_WINDOW);
-		let notificationBox = recentWindow.document.getElementById('global-notificationbox');
-		let message = strings.formatStringFromName('newversion', [version], 1);
-		let changeLogLabel = strings.GetStringFromName('changelog.label');
-		let changeLogAccessKey = strings.GetStringFromName('changelog.accesskey');
-		let donateLabel = strings.GetStringFromName('donate.label');
-		let donateAccessKey = strings.GetStringFromName('donate.accesskey');
-
-		notificationBox.appendNotification(
-			message, 'newtabtools-donate', 'chrome://newtabtools/content/icon16.png',
-			notificationBox.PRIORITY_INFO_MEDIUM, [{
-				label: changeLogLabel,
-				accessKey: changeLogAccessKey,
-				callback: function() {
-					recentWindow.switchToTabHavingURI(
-						'https://addons.mozilla.org/addon/new-tab-tools/versions/' + version, true
-					);
-				}
-			}, {
-				label: donateLabel,
-				accessKey: donateAccessKey,
-				callback: function() {
-					recentWindow.switchToTabHavingURI(
-						'https://darktrojan.github.io/donate.html?newtabtools', true
-					);
-				}
-			}]
-		);
-
-		userPrefs.setIntPref('donationreminder', Date.now() / 1000);
 	}
 };
