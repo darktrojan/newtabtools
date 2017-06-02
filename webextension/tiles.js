@@ -1,5 +1,5 @@
 /* exported initDB, Tiles, Background */
-/* globals Prefs, browser, indexedDB */
+/* globals Blocked, Prefs, browser, indexedDB */
 var db;
 var isFirstRun = false;
 
@@ -131,31 +131,6 @@ var Tiles = {
 				}
 			});
 		});
-	}
-};
-
-var Blocked = {
-	_list: [],
-	_saveList: function() {
-		browser.storage.local.set({ 'blocked': this._list });
-	},
-	block: function(url) {
-		this._list.push(url);
-		this._saveList();
-	},
-	unblock: function(url) {
-		let index = this._list.indexOf(url);
-		if (index >= 0) {
-			this._list.splice(index, 1);
-		}
-		this._saveList();
-	},
-	isBlocked: function(url) {
-		return this._list.includes(url);
-	},
-	clear: function() {
-		this._list.length = 0;
-		this._saveList();
 	}
 };
 

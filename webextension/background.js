@@ -1,4 +1,4 @@
-/* globals Prefs, Tiles, Blocked, Background, browser, initDB, isFirstRun */
+/* globals Prefs, Tiles, Background, browser, initDB, isFirstRun */
 Promise.all([
 	Prefs.init(),
 	initDB()
@@ -25,19 +25,6 @@ browser.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 	case 'Tiles.removeTile':
 		Tiles.removeTile(message.tile).then(sendResponse);
 		return true;
-
-	case 'Blocked.block':
-		sendResponse(Blocked.block(message.url));
-		return;
-	case 'Blocked.unblock':
-		sendResponse(Blocked.unblock(message.url));
-		return;
-	case 'Blocked.isBlocked':
-		sendResponse(Blocked.isBlocked(message.url));
-		return;
-	case 'Blocked.clear':
-		sendResponse(Blocked.clear());
-		return;
 
 	case 'Background.getBackground':
 		Background.getBackground().then(sendResponse);

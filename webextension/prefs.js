@@ -1,5 +1,5 @@
-/* exported Prefs */
-/* globals browser, newTabTools, Grid, Updater, Blocked */
+/* exported Blocked, Prefs */
+/* globals browser, newTabTools, Grid, Updater */
 var Prefs = {
 	_theme: 'light',
 	_opacity: 80,
@@ -61,13 +61,12 @@ var Prefs = {
 			}
 		}
 
-		let keys = Object.keys(prefs);
-		if (keys.length == 1 && keys[0] == 'blocked') {
-			return;
-		}
 		this.parsePrefs(prefs);
 
-		newTabTools.updateUI(keys);
+		let keys = Object.keys(prefs);
+		if ('newTabTools' in window) {
+			newTabTools.updateUI(keys);
+		}
 
 		if (keys.includes('rows') || keys.includes('columns')) {
 			Grid.refresh();
@@ -139,5 +138,30 @@ var Prefs = {
 	},
 	set recent(value) {
 		browser.storage.local.set({ recent: value });
+	}
+};
+
+var Blocked = {
+	_list: [],
+	_saveList: function() {
+		browser.storage.local.set({ 'blocked': this._list });
+	},
+	block: function(url) {
+		this._list.push(url);
+		this._saveList();
+	},
+	unblock: function(url) {
+		let index = this._list.indexOf(url);
+		if (index >= 0) {
+			this._list.splice(index, 1);
+		}
+		this._saveList();
+	},
+	isBlocked: function(url) {
+		return this._list.includes(url);
+	},
+	clear: function() {
+		this._list.length = 0;
+		this._saveList();
 	}
 };

@@ -24,21 +24,6 @@ var Tiles = {
 	}
 };
 
-var Blocked = {
-	block: function(url) {
-		return browser.runtime.sendMessage({ name: 'Blocked.block', url });
-	},
-	unblock: function(url) {
-		return browser.runtime.sendMessage({ name: 'Blocked.unblock', url });
-	},
-	isBlocked: function(url) {
-		return browser.runtime.sendMessage({ name: 'Blocked.isBlocked', url });
-	},
-	clear: function() {
-		return browser.runtime.sendMessage({ name: 'Blocked.clear' });
-	}
-};
-
 var Background = {
 	getBackground: function() {
 		return browser.runtime.sendMessage({ name: 'Background.getBackground' });
