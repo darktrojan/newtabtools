@@ -376,7 +376,7 @@ var newTabTools = {
 				let a = document.createElementNS(HTML_NAMESPACE, 'a');
 				a.href = url;
 				a.className = 'recent';
-				a.title = (title == url ? title : title + '\n' + url);
+				a.title = (!title || title == url ? title : title + '\n' + url);
 				a.dataset.sessionId = sessionId;
 				a.onclick = recent_onclick;
 				if (favIconUrl) {
@@ -385,7 +385,7 @@ var newTabTools = {
 					favIcon.src = favIconUrl;
 					a.appendChild(favIcon);
 				}
-				a.appendChild(document.createTextNode(title));
+				a.appendChild(document.createTextNode(title || url));
 				this.recentList.appendChild(a);
 				added++;
 			}
