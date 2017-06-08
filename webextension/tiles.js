@@ -50,7 +50,6 @@ var Tiles = {
 				let urlMap = new Map();
 				Tiles._list.length = 0;
 
-
 				for (let t of this.result) {
 					if ('position' in t) {
 						links[t.position] = t;
@@ -84,7 +83,13 @@ var Tiles = {
 						if (!links[i]) {
 							let next = remaining.shift();
 							if (next) {
-								links[i] = urlMap.get(next.url) || next;
+								let mapData = urlMap.get(next.url);
+								if (mapData) {
+									for (let key of Object.keys(mapData)) {
+										next[key] = mapData[key];
+									}
+								}
+								links[i] = next;
 							} else {
 								break;
 							}

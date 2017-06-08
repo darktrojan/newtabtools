@@ -78,8 +78,37 @@ function uiStartup(params) {
 			case 'tiles':
 				Task.spawn(function*() {
 					yield SavedThumbs._readDir();
+					let urlMap = new Map();
 
-					let links = [];
+					for (let link of yield getTopSites()) {
+						let save = false;
+						delete link.title;
+
+						let title = TileData.get(link.url, 'title');
+						if (title) {
+							link.title = title;
+							save = true;
+						}
+
+						let backgroundColor = TileData.get(link.url, 'backgroundColor');
+						if (backgroundColor) {
+							link.backgroundColor = backgroundColor;
+							save = true;
+						}
+
+						if (SavedThumbs.hasSavedThumb(link.url)) {
+							let backgroundURL = yield SavedThumbs.getThumbnailURL(link.url);
+							let response = yield fetch(backgroundURL);
+							let blob = yield response.blob();
+							link.image = blob;
+							save = true;
+						}
+
+						if (save) {
+							urlMap.set(link.url, link);
+						}
+					}
+
 					let position = -1;
 					for (let link of NewTabUtils.pinnedLinks.links) {
 						position++;
@@ -88,27 +117,20 @@ function uiStartup(params) {
 							continue;
 						}
 
-						let data = {
-							url: link.url,
-							title: TileData.get(link.url, 'title') || link.title,
-							position: position
-						};
-						let backgroundColor = TileData.get(link.url, 'backgroundColor');
-						if (backgroundColor) {
-							data.backgroundColor = backgroundColor;
+						if (!urlMap.has(link.url)) {
+							urlMap.set(link.url, {
+								url: link.url
+							});
 						}
 
-						if (SavedThumbs.hasSavedThumb(link.url)) {
-							let backgroundURL = yield SavedThumbs.getThumbnailURL(link.url);
-							let response = yield fetch(backgroundURL);
-							let blob = yield response.blob();
-							data.image = blob;
+						let mapData = urlMap.get(link.url);
+						mapData.position = position;
+						if (!mapData.title && link.title != link.url) {
+							mapData.title = link.title;
 						}
-
-						links.push(data);
 					}
 
-					sendReply(links);
+					sendReply([...urlMap.values()]);
 				});
 				return true;
 
@@ -145,19 +167,24 @@ function uiStartup(params) {
 				return;
 
 			case 'topSites':
-				NewTabUtils.links.populateProviderCache(NewTabUtils.placesProvider, function() {
-					sendReply(NewTabUtils.getProviderLinks(NewTabUtils.placesProvider).map(link => {
-						return {
-							url: link.url,
-							title: link.title,
-						};
-					}));
-				});
+				getTopSites().then(sendReply);
 				return true;
 			}
 		});
 
 		messageListener.init();
+	});
+}
+function getTopSites() {
+	return new Promise(function(resolve) {
+		NewTabUtils.links.populateProviderCache(NewTabUtils.placesProvider, function() {
+			resolve(NewTabUtils.getProviderLinks(NewTabUtils.placesProvider).map(link => {
+				return {
+					url: link.url,
+					title: link.title,
+				};
+			}));
+		});
 	});
 }
 
