@@ -2,6 +2,7 @@ bootstrap.js
 chrome.manifest
 content
 content/newTabTools.jsm
+content/process.js
 icon.png
 icon64.png
 install.rdf
