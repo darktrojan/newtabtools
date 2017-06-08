@@ -471,6 +471,8 @@ var Grid = {
 					this.createSite(links[i], cells[i]);
 				}
 			}
+		}).then(function() {
+			newTabTools.getThumbnails();
 		});
 	},
 
@@ -1756,7 +1758,9 @@ var Updater = {
 				window.getComputedStyle(site.node).opacity; // jshint ignore:line
 				Transformation.showSite(site, resolve);
 			});
-		})).then(callback).catch(console.exception);
+		})).then(function() {
+			newTabTools.getThumbnails();
+		}).then(callback).catch(console.exception);
 	}
 };
 

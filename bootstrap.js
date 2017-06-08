@@ -61,6 +61,7 @@ function shutdown(params, reason) {
 	}
 
 	Cu.unload('chrome://newtabtools/content/newTabTools.jsm');
+	messageListener.destroy();
 }
 
 function uiStartup(params) {
@@ -155,6 +156,8 @@ function uiStartup(params) {
 				return true;
 			}
 		});
+
+		messageListener.init();
 	});
 }
 
@@ -189,5 +192,18 @@ var thumbnailHandler = {
 				}
 			});
 		})).then(() => result);
+	}
+};
+
+var messageListener = {
+	// Work around bug 1051238.
+	_processScriptURL: 'chrome://newtabtools/content/process.js?' + Math.random(),
+	init: function() {
+		Services.ppmm.loadProcessScript(this._processScriptURL, true);
+		Services.ppmm.broadcastAsyncMessage('NewTabTools:enable');
+	},
+	destroy: function() {
+		Services.ppmm.removeDelayedProcessScript(this._processScriptURL, true);
+		Services.ppmm.broadcastAsyncMessage('NewTabTools:disable');
 	}
 };
