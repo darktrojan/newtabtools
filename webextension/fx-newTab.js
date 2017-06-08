@@ -590,9 +590,6 @@ Cell.prototype = {
 		if (!Drag.draggedSite) {
 			return;
 		}
-		if (event.type != 'dragexit') {
-			return;
-		}
 		if (Prefs.locked) {
 			return;
 		}
