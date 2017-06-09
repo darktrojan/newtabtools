@@ -364,6 +364,7 @@ var newTabTools = {
 
 			function recent_onclick() {
 				browser.sessions.restore(this.dataset.sessionId);
+				return false;
 			}
 
 			for (let item of undoItems) {
