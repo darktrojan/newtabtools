@@ -442,7 +442,7 @@ var newTabTools = {
 			this.siteThumbnail.style.backgroundImage = 'url("' + thumbnailURL + '")';
 			this.removeSavedThumbButton.disabled = false;
 		} else {
-			this.siteThumbnail.style.backgroundImage = null;
+			this.siteThumbnail.style.backgroundImage = site._querySelector('.newtab-thumbnail').style.backgroundImage;
 			this.removeSavedThumbButton.disabled = true;
 		}
 
