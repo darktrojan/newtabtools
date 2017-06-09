@@ -61,6 +61,7 @@ function shutdown(params, reason) {
 	}
 
 	Cu.unload('chrome://newtabtools/content/newTabTools.jsm');
+	expirationFilter.cleanup();
 	messageListener.destroy();
 }
 
@@ -69,9 +70,15 @@ function uiStartup(params) {
 		Cu.importGlobalProperties(['fetch']);
 
 		browser.runtime.onMessage.addListener(function(message, sender, sendReply) {
-			if (typeof message == 'object' && message.action == 'thumbnails') {
-				thumbnailHandler.getThumbnails(message.urls).then(sendReply);
-				return true;
+			if (typeof message == 'object') {
+				switch (message.action) {
+				case 'thumbnails':
+					thumbnailHandler.getThumbnails(message.urls).then(sendReply);
+					return true;
+				case 'expirationFilter':
+					expirationFilter.init(message.count);
+					return;
+				}
 			}
 
 			switch (message) {
@@ -219,6 +226,33 @@ var thumbnailHandler = {
 				}
 			});
 		})).then(() => result);
+	}
+};
+
+var expirationFilter = {
+	added: false,
+	count: -1,
+
+	init: function(count) {
+		if (!this.added) {
+			this.count = count;
+			this.added = true;
+			PageThumbs.addExpirationFilter(this);
+		}
+	},
+
+	cleanup: function() {
+		if (this.added) {
+			this.added = false;
+			PageThumbs.removeExpirationFilter(this);
+		}
+	},
+
+	filterForThumbnailExpiration: function(callback) {
+		NewTabUtils.links.populateCache(function() {
+			// Add all URLs to the list that we want to keep thumbnails for.
+			callback(getTopSites().slice(0, this.count).map(s => s.url));
+		});
 	}
 };
 
