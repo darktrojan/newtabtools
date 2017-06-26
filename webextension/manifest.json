@@ -4,7 +4,8 @@
 	"version": "81b7",
 	"applications": {
 		"gecko": {
-			"id": "newtabtools@darktrojan.net"
+			"id": "newtabtools@darktrojan.net",
+			"strict_min_version": "55a1"
 		}
 	},
 	"chrome_url_overrides": {

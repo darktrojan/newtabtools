@@ -517,6 +517,10 @@ var newTabTools = {
 			browser.sessions.onChanged.addListener(function() {
 				newTabTools.refreshRecent();
 			});
+		}).then(function() {
+			// Forget about visiting this page. It shouldn't be in the history.
+			// Maybe if bug 1322304 is ever fixed we could remove this.
+			browser.history.deleteUrl({ url: location.href });
 		}).catch(console.error.bind(console));
 	},
 	getThumbnails: function() {
