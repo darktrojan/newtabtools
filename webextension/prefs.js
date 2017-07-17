@@ -63,15 +63,14 @@ var Prefs = {
 
 		this.parsePrefs(prefs);
 
-		let keys = Object.keys(prefs);
 		if ('newTabTools' in window) {
+			let keys = Object.keys(prefs);
 			newTabTools.updateUI(keys);
-		}
-
-		if (keys.includes('rows') || keys.includes('columns')) {
-			Grid.refresh();
-		} else if (keys.includes('history')) {
-			Updater.updateGrid();
+			if (keys.includes('rows') || keys.includes('columns')) {
+				Grid.refresh();
+			} else if (keys.includes('history')) {
+				Updater.updateGrid();
+			}
 		}
 	},
 	getPrefsFromOldExtension: function() {
