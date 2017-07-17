@@ -8,6 +8,9 @@
 	"bg.set": {
 		"message": "Übernehmen"
 	},
+	"changelog.label": {
+		"message": "Was ist neu?"
+	},
 	"donate": {
 		"message": "Spenden…"
 	},
@@ -37,6 +40,9 @@
 	},
 	"newtab.undo.undoButton": {
 		"message": "Rückgängig"
+	},
+	"newversion": {
+		"message": "Neuer-Tab-Tools wurde auf Version %S aktualisiert. Bitte erwägen Sie eine Spende."
 	},
 	"options-header": {
 		"message": "Einstellungen:"

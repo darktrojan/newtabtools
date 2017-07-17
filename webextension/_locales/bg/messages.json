@@ -8,6 +8,9 @@
 	"bg.set": {
 		"message": "Задай"
 	},
+	"changelog.label": {
+		"message": "Какво се промени?"
+	},
 	"donate": {
 		"message": "Дарение…"
 	},
@@ -31,6 +34,9 @@
 	},
 	"newtab.undo.undoButton": {
 		"message": "Отмяна."
+	},
+	"newversion": {
+		"message": "New Tab Tools се обнови до версия %S. New Tab Tools е безплатно, но даренията са добре дошли!"
 	},
 	"options-header": {
 		"message": "Опции:"

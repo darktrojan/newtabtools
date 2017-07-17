@@ -8,6 +8,9 @@
 	"bg.set": {
 		"message": "Beállítás"
 	},
+	"changelog.label": {
+		"message": "Mi változott?"
+	},
 	"donate": {
 		"message": "Adományozás…"
 	},
@@ -34,6 +37,9 @@
 	},
 	"newtab.undo.undoButton": {
 		"message": "Visszavonás."
+	},
+	"newversion": {
+		"message": "A New Tab Tools frissítve lett a %S verzióra. A New Tab Tools ingyenes, de minden támogatást szívesen fogadok!"
 	},
 	"options-header": {
 		"message": "Beállítások:"

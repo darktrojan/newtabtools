@@ -12,7 +12,7 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 	<div id="newtab-scrollbox">
 		<div id="newtab-vertical-margin">
 			<div id="newtab-margin-top">
-				<div id="newtab-margin-left-top" class="newtab-side-margin"></div>
+				<div class="newtab-side-margin newtab-margin-left"></div>
 				<div id="newtab-recent-outer">
 					<div id="newtab-recent" hidden=""><span data-message="recently-closed-tabs"></span></div>
 				</div>
@@ -20,25 +20,34 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 					<label id="newtab-undo-label" data-message="newtab.undo.removedLabel"></label>
 					<button id="newtab-undo-button" tabindex="-1" class="newtab-undo-button" data-message="newtab.undo.undoButton"></button>
 					<button id="newtab-undo-restore-button" tabindex="-1" class="newtab-undo-button" data-message="newtab.undo.restoreButton"></button>
-					<button id="newtab-undo-close-button" tabindex="-1" data-title="newtab.undo.closeTooltip"></button>
+					<button id="newtab-undo-close-button" class="close-button" tabindex="-1" data-title="newtab.undo.closeTooltip"></button>
 				</div>
-				<div id="newtab-margin-right-top" class="newtab-side-margin">
+				<div class="newtab-side-margin newtab-margin-right">
 					<input id="options-toggle" type="button"/>
 				</div>
 			</div>
 			<div id="newtab-horizontal-margin">
-				<div id="newtab-margin-left-bottom" class="newtab-side-margin"></div>
+				<div class="newtab-side-margin newtab-margin-left"></div>
 				<div id="newtab-grid"></div>
-				<div id="newtab-margin-right-bottom" class="newtab-side-margin"></div>
+				<div class="newtab-side-margin newtab-margin-right"></div>
 			</div>
-			<div id="newtab-margin-bottom"></div>
+			<div id="newtab-margin-bottom">
+				<div class="newtab-side-margin newtab-margin-left"></div>
+				<div id="newtab-update-notice" hidden="">
+					<span id="newtab-update-text"></span>
+					<button id="newtab-update-changelog" data-message="changelog.label"></button>
+					<button id="newtab-update-donate" data-message="donate"></button>
+					<button id="newtab-update-hide" class="close-button"></button>
+				</div>
+				<div class="newtab-side-margin newtab-margin-right"></div>
+			</div>
 		</div>
 		<div id="options-toggle-pointer" hidden="" data-message="options.pointer"></div>
 	</div>
 	<div id="options-bg"></div>
 	<div id="options">
 		<div id="options-close">
-			<button id="options-close-button" class="close-icon"></button>
+			<button id="options-close-button" class="close-button"></button>
 		</div>
 		<div id="options-inner">
 			<div id="options-tile">

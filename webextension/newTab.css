@@ -26,6 +26,12 @@
 	--shadow: rgba(31, 54, 76, var(--opacity));
 	--background-fill: rgba(31, 54, 76, 0.2);
 }
+:root[titlesize="medium"] {
+	font-size: 15px;
+}
+:root[titlesize="large"] {
+	font-size: 18px;
+}
 body {
 	height: 100%;
 	display: flex;
@@ -70,12 +76,6 @@ input[type="button"] {
 #newtab-recent {
 	overflow: hidden;
 	height: 28px;
-}
-:root[titlesize="medium"] #newtab-recent {
-	font-size: 15px;
-}
-:root[titlesize="large"] #newtab-recent {
-	font-size: 18px;
 }
 #newtab-recent > span {
 	display: inline-block;
@@ -145,8 +145,7 @@ input[type="button"] {
 .newtab-undo-button:-moz-focusring {
 	outline: 1px dotted;
 }
-#newtab-undo-close-button,
-#options-close > button {
+.close-button {
 	-moz-appearance: none;
 	height: 16px;
 	width: 16px;
@@ -158,19 +157,41 @@ input[type="button"] {
 	background-repeat: no-repeat;
 	vertical-align: middle;
 }
-:root[theme="dark"] #newtab-undo-close-button {
+:root[theme="dark"] #newtab-undo-close-button,
+:root[theme="dark"] #newtab-update-hide {
 	background-image: -moz-image-rect(url("close.svg"), 0, 64, 16, 48);
 }
-#newtab-undo-close-button:hover,
-#options-close > button:hover {
+.close-button:hover {
 	background-image: -moz-image-rect(url("close.svg"), 0, 32, 16, 16) !important;
 }
-#newtab-undo-close-button:hover:active,
-#options-close > button:hover:active {
+.close-button:hover:active {
 	background-image: -moz-image-rect(url("close.svg"), 0, 48, 16, 32) !important;
 }
-#newtab-undo-close-button:-moz-focusring {
+.close-button:-moz-focusring {
 	outline: 1px dotted;
+}
+/* UPDATE NOTICE */
+#newtab-update-notice {
+	flex: 1;
+	text-align: center;
+	margin-top: 3px;
+}
+:root[spacing="medium"] #newtab-margin-bottom:-moz-any(.medium, .large) #newtab-update-notice {
+	margin-top: 8px;
+}
+:root[spacing="large"] #newtab-margin-bottom:-moz-any(.medium, .large) #newtab-update-notice {
+	margin-top: 18px;
+}
+#newtab-update-text {
+	color: var(--text);
+	margin-inline-end: 1em;
+}
+#newtab-update-notice button {
+	min-width: 0;
+	padding: 0;
+	font-size: 12px;
+	color: #444;
+	margin: 0;
 }
 /* MARGINS */
 #newtab-vertical-margin {
@@ -194,6 +215,9 @@ input[type="button"] {
 }
 #newtab-margin-top {
 	align-items: flex-end;
+}
+#newtab-margin-bottom {
+	align-items: flex-start;
 }
 #newtab-margin-top,
 #newtab-margin-bottom {
@@ -355,12 +379,6 @@ input[type="button"] {
 :root[titlesize="hidden"] .newtab-title {
 	visibility: collapse;
 }
-:root[titlesize="medium"] .newtab-title {
-	font-size: 15px;
-}
-:root[titlesize="large"] .newtab-title {
-	font-size: 18px;
-}
 /* CONTROLS */
 .newtab-control {
 	position: absolute;
@@ -438,18 +456,18 @@ input[type="button"] {
 	opacity: 0.01;
 }
 /* OPTIONS */
-#newtab-margin-right-top {
+.newtab-margin-right {
 	justify-content: flex-start;
 }
-:root[spacing="medium"] #newtab-margin-right-top:-moz-any(.medium, .large) #options-toggle {
+:root[spacing="medium"] .newtab-margin-right:-moz-any(.medium, .large) #options-toggle {
 	margin-inline-start: 8px;
 	margin-inline-end: 0;
 }
-:root[spacing="large"] #newtab-margin-right-top:-moz-any(.medium, .large) #options-toggle {
+:root[spacing="large"] .newtab-margin-right:-moz-any(.medium, .large) #options-toggle {
 	margin-inline-start: 18px;
 	margin-inline-end: 0;
 }
-#newtab-margin-right-top:not(.medium):not(.large) #options-toggle {
+.newtab-margin-right:not(.medium):not(.large) #options-toggle {
 	margin-inline-end: 0;
 	padding-inline-start: 1px;
 	width: 27px;
@@ -546,6 +564,7 @@ input[type="button"] {
 	padding: 1em;
 	box-sizing: border-box;
 	box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5);
+	font-size: 12px;
 }
 #options-close {
 	position: absolute;

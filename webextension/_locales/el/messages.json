@@ -8,6 +8,9 @@
 	"bg.set": {
 		"message": "Εφαρμογή"
 	},
+	"changelog.label": {
+		"message": "Τί άλλαξε?"
+	},
 	"donate": {
 		"message": "Δωρήστε…"
 	},
@@ -34,6 +37,9 @@
 	},
 	"newtab.undo.undoButton": {
 		"message": "Αναίρεση."
+	},
+	"newversion": {
+		"message": "Το New Tab Tools έχει ενημερωθεί στην έκδοση %S. Το New Tab Tools είναι δωρεάν, αλλα η συνεισφορά σας θα εκτιμηθεί!"
 	},
 	"options-header": {
 		"message": "Επιλογές:"

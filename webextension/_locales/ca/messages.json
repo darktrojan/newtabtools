@@ -8,6 +8,9 @@
 	"bg.set": {
 		"message": "Estableix"
 	},
+	"changelog.label": {
+		"message": "Novetats"
+	},
 	"donate": {
 		"message": "Feu un donatiu…"
 	},
@@ -37,6 +40,9 @@
 	},
 	"newtab.undo.undoButton": {
 		"message": "Desfés."
+	},
+	"newversion": {
+		"message": "Les Eines de pestanyes noves s’han actualitzat a la versió %S. Aquestes eines són gratuïtes, però agraïm els donatius!"
 	},
 	"options-header": {
 		"message": "Paràmetres:"

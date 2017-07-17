@@ -8,6 +8,9 @@
 	"bg.set": {
 		"message": "Iestatīt"
 	},
+	"changelog.label": {
+		"message": "Kas mainījies?"
+	},
 	"donate": {
 		"message": "Ziedot…"
 	},
@@ -37,6 +40,9 @@
 	},
 	"newtab.undo.undoButton": {
 		"message": "Atcelt."
+	},
+	"newversion": {
+		"message": "NewTabTools ir atjaunināts uz versiju %S. NewTabTools ir bezmaksas, taču jūsu ziedojums tiks novērtēts!"
 	},
 	"options-header": {
 		"message": "Opcijas:"

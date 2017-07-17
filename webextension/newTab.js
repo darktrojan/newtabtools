@@ -165,7 +165,17 @@ var newTabTools = {
 			});
 			break;
 		case 'options-donate':
+		case 'newtab-update-donate':
 			window.open('https://darktrojan.github.io/donate.html?newtabtools');
+			Prefs.versionLastAck = new Date();
+			break;
+		case 'newtab-update-changelog':
+			window.open('https://addons.mozilla.org/addon/new-tab-tools/versions/' + this.updateNotice.dataset.version);
+			Prefs.versionLastAck = new Date();
+			break;
+		case 'newtab-update-hide':
+			this.updateNotice.hidden = true;
+			Prefs.versionLastAck = new Date();
 			break;
 		}
 	},
@@ -264,11 +274,12 @@ var newTabTools = {
 	},
 	updateUI: function(keys) {
 		function setMargin(piece, size) {
-			let pieceElement = document.getElementById('newtab-margin-' + piece);
-			pieceElement.classList.remove('medium');
-			pieceElement.classList.remove('large');
-			if (size == 'medium' || size == 'large') {
-				pieceElement.classList.add(size);
+			for (let pieceElement of document.querySelectorAll(piece)) {
+				pieceElement.classList.remove('medium');
+				pieceElement.classList.remove('large');
+				if (size == 'medium' || size == 'large') {
+					pieceElement.classList.add(size);
+				}
 			}
 		}
 
@@ -309,12 +320,10 @@ var newTabTools = {
 		if (!keys || keys.includes('margin')) {
 			let margin = Prefs.margin;
 			document.querySelector('[name="margin"]').value = margin.join(' ');
-			setMargin('top', margin[0]);
-			setMargin('right-top', margin[1]);
-			setMargin('right-bottom', margin[1]);
-			setMargin('bottom', margin[2]);
-			setMargin('left-bottom', margin[3]);
-			setMargin('left-top', margin[3]);
+			setMargin('#newtab-margin-top', margin[0]);
+			setMargin('.newtab-margin-right', margin[1]);
+			setMargin('#newtab-margin-bottom', margin[2]);
+			setMargin('.newtab-margin-left', margin[3]);
 		}
 
 		if (!keys || keys.includes('spacing')) {
@@ -521,6 +530,21 @@ var newTabTools = {
 			// Forget about visiting this page. It shouldn't be in the history.
 			// Maybe if bug 1322304 is ever fixed we could remove this.
 			browser.history.deleteUrl({ url: location.href });
+
+			browser.management.getSelf().then(s => {
+				newTabTools.updateText.textContent = newTabTools.getString('newversion').replace('%S', s.version);
+				newTabTools.updateNotice.dataset.version = s.version;
+
+				let currentVersion = parseFloat(s.version, 10);
+				let now = new Date();
+				if (currentVersion > Prefs.version) {
+					Prefs.version = currentVersion;
+					Prefs.versionLastUpdate = now;
+				}
+				if (now - Prefs.versionLastUpdate < 43200000 && now - Prefs.versionLastAck > 604800000) {
+					newTabTools.updateNotice.hidden = false;
+				}
+			});
 		}).catch(console.error.bind(console));
 	},
 	getThumbnails: function() {
@@ -567,7 +591,9 @@ var newTabTools = {
 		'recentList': 'newtab-recent',
 		'recentListOuter': 'newtab-recent-outer',
 		'optionsBackground': 'options-bg',
-		'optionsPane': 'options'
+		'optionsPane': 'options',
+		'updateNotice': 'newtab-update-notice',
+		'updateText': 'newtab-update-text'
 	};
 	for (let key in uiElements) {
 		let value = uiElements[key];
@@ -582,6 +608,7 @@ var newTabTools = {
 		}
 	}
 
+	newTabTools.updateNotice.addEventListener('click', newTabTools.optionsOnClick.bind(newTabTools), false);
 	newTabTools.optionsToggleButton.addEventListener('click', newTabTools.toggleOptions.bind(newTabTools), false);
 	newTabTools.optionsBackground.addEventListener('click', newTabTools.hideOptions.bind(newTabTools));
 	newTabTools.pinURLInput.addEventListener('input', newTabTools.autocomplete.bind(newTabTools));

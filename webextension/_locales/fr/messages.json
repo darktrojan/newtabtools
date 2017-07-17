@@ -8,6 +8,9 @@
 	"bg.set": {
 		"message": "Appliquer"
 	},
+	"changelog.label": {
+		"message": "Nouveautés"
+	},
 	"donate": {
 		"message": "Faire un don…"
 	},
@@ -34,6 +37,9 @@
 	},
 	"newtab.undo.undoButton": {
 		"message": "Annuler."
+	},
+	"newversion": {
+		"message": "New Tab Tools a été mis à jour à la version %S. Si vous appréciez ce module, merci de faire un petit don."
 	},
 	"options-header": {
 		"message": "Options :"

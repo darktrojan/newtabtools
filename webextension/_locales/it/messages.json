@@ -35,6 +35,9 @@
 	"newtab.undo.undoButton": {
 		"message": "Annulla."
 	},
+	"newversion": {
+		"message": "New Tab Tools è stato aggiornato alla versione %S. Per favore fai una donazione."
+	},
 	"options-header": {
 		"message": "Opzioni:"
 	},

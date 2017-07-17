@@ -8,6 +8,9 @@
 	"bg.set": {
 		"message": "設為背景"
 	},
+	"changelog.label": {
+		"message": "有那些變更?"
+	},
 	"donate": {
 		"message": "捐款…"
 	},
@@ -31,6 +34,9 @@
 	},
 	"newtab.undo.undoButton": {
 		"message": "還原。"
+	},
+	"newversion": {
+		"message": "New Tab Tools 已更新至 %S。希望您能考慮捐助。"
 	},
 	"options-header": {
 		"message": "選項:"

@@ -11,6 +11,9 @@ var Prefs = {
 	_locked: false,
 	_history: true,
 	_recent: true,
+	_version: 0,
+	_versionLastUpdate: new Date(0),
+	_versionLastAck: new Date(0),
 
 	init: function() {
 		return browser.storage.local.get().then(prefs => {
@@ -51,6 +54,15 @@ var Prefs = {
 		}
 		if (Array.isArray(prefs.blocked)) {
 			Blocked._list = prefs.blocked;
+		}
+		if ('version' in prefs && typeof prefs.version == 'number') {
+			this._version = prefs.version;
+		}
+		if ('versionLastUpdate' in prefs) {
+			this._versionLastUpdate = prefs.versionLastUpdate;
+		}
+		if ('versionLastAck' in prefs) {
+			this._versionLastAck = prefs.versionLastAck;
 		}
 	},
 	prefsChanged: function(changes) {
@@ -108,6 +120,15 @@ var Prefs = {
 	get recent() {
 		return this._recent;
 	},
+	get version() {
+		return this._version;
+	},
+	get versionLastUpdate() {
+		return this._versionLastUpdate;
+	},
+	get versionLastAck() {
+		return this._versionLastAck;
+	},
 	set theme(value) {
 		browser.storage.local.set({ theme: value });
 	},
@@ -137,6 +158,17 @@ var Prefs = {
 	},
 	set recent(value) {
 		browser.storage.local.set({ recent: value });
+	},
+	set version(value) {
+		browser.storage.local.set({ version: value });
+	},
+	set versionLastUpdate(value) {
+		// Make sure this is up to date for synchronous code.
+		this._versionLastUpdate = value;
+		browser.storage.local.set({ versionLastUpdate: value });
+	},
+	set versionLastAck(value) {
+		browser.storage.local.set({ versionLastAck: value });
 	}
 };
 

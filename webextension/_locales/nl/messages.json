@@ -35,6 +35,9 @@
 	"newtab.undo.undoButton": {
 		"message": "Ongedaan maken"
 	},
+	"newversion": {
+		"message": "New Tab Tools is bijgewerkt naar versie %S. New Tab Tools is gratis maar uw donatie is welkom!"
+	},
 	"options-header": {
 		"message": "Opties:"
 	},
