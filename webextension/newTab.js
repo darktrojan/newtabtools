@@ -377,7 +377,7 @@ var newTabTools = {
 			}
 
 			for (let item of undoItems) {
-				if (!item.tab) {
+				if (!item.tab || item.tab.incognito) {
 					continue;
 				}
 
