@@ -526,10 +526,10 @@ var newTabTools = {
 	getThumbnails: function() {
 		browser.runtime.sendMessage({
 			action: 'thumbnails',
-			urls: Grid.sites.filter(s => !s._link.image).map(s => s.link.url)
+			urls: Grid.sites.filter(s => s && !s._link.image).map(s => s.link.url)
 		}).then(function(thumbs) {
 			Grid.sites.forEach(s => {
-				if (!s._link.image && thumbs.has(s._link.url)) {
+				if (s && !s._link.image && thumbs.has(s._link.url)) {
 					s._querySelector('.newtab-thumbnail').style.backgroundImage =
 						'url(' + URL.createObjectURL(thumbs.get(s._link.url)) + ')';
 				}
