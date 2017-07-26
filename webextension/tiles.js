@@ -1,46 +1,5 @@
 /* exported initDB, Tiles, Background */
-/* globals Blocked, Prefs, browser, indexedDB */
-var db;
-var isFirstRun = false;
-
-function initDB() {
-	return new Promise(function(resolve, reject) {
-		let request = indexedDB.open('newTabTools', 5);
-
-		request.onsuccess = function(event) {
-			// console.log(event.type, event);
-			db = this.result;
-			resolve();
-		};
-
-		request.onerror = function(event) {
-			console.error(event.type, event);
-			reject();
-		};
-
-		request.onupgradeneeded = function(event) {
-			// console.log(event.type, event);
-			db = this.result;
-
-			// if (db.objectStoreNames.contains('tiles')) {
-			// 	db.deleteObjectStore('tiles');
-			// }
-
-			db.createObjectStore('tiles', { autoIncrement: true, keyPath: 'id' });
-
-			// if (db.objectStoreNames.contains('backgrounds')) {
-			// 	db.deleteObjectStore('backgrounds');
-			// }
-
-			db.createObjectStore('background', { autoIncrement: true });
-
-			if (event.oldVersion < 5) {
-				isFirstRun = true;
-			}
-		};
-	});
-}
-
+/* globals Blocked, Prefs, browser, db */
 var Tiles = {
 	_list: [],
 	getAllTiles: function(count) {
