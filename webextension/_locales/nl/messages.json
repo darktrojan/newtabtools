@@ -1,0 +1,125 @@
+{
+	"bg-header": {
+		"message": "Achtergrondafbeelding van pagina:"
+	},
+	"bg.remove": {
+		"message": "Verwijderen"
+	},
+	"bg.set": {
+		"message": "Instellen"
+	},
+	"donate": {
+		"message": "Doneren…"
+	},
+	"donate.label": {
+		"message": "New Tab Tools wordt gefinancierd door gebruikersdonaties."
+	},
+	"extensionDescription": {
+		"message": "Maakt de nieuwe tabblad-pagina aanpasbaar. U kunt meer tegels toevoegen, de starter van de Firefox-homepage of een achtergrond. En natuurlijk nieuwe tegels en tegelafbeeldingen."
+	},
+	"github": {
+		"message": "New Tab Tools op GitHub"
+	},
+	"newtab.pageTitle": {
+		"message": "Nieuw tabblad"
+	},
+	"newtab.undo.closeTooltip": {
+		"message": "Verbergen"
+	},
+	"newtab.undo.removedLabel": {
+		"message": "Miniatuur verwijderd."
+	},
+	"newtab.undo.restoreButton": {
+		"message": "Alles herstellen"
+	},
+	"newtab.undo.undoButton": {
+		"message": "Ongedaan maken"
+	},
+	"newversion": {
+		"message": "New Tab Tools is bijgewerkt naar versie %S. New Tab Tools is gratis maar uw donatie is welkom!"
+	},
+	"options-header": {
+		"message": "Opties:"
+	},
+	"options.columns": {
+		"message": "Kolommen"
+	},
+	"options.foreground.opacity": {
+		"message": "Foreground Opacity"
+	},
+	"options.grid.margin": {
+		"message": "Rasterafmeting"
+	},
+	"options.grid.spacing": {
+		"message": "Raster-tussenruimte"
+	},
+	"options.launcher.hidden": {
+		"message": "Niet weergeven"
+	},
+	"options.recent": {
+		"message": "Onlangs gesloten tabbladen"
+	},
+	"options.rows": {
+		"message": "Rijen"
+	},
+	"options.size.large": {
+		"message": "Groot"
+	},
+	"options.size.medium": {
+		"message": "Gemiddeld"
+	},
+	"options.size.small": {
+		"message": "Klein"
+	},
+	"options.theme": {
+		"message": "Thema"
+	},
+	"options.theme.dark": {
+		"message": "Donker thema"
+	},
+	"options.theme.light": {
+		"message": "Licht thema"
+	},
+	"pin-url.button": {
+		"message": "Toevoegen"
+	},
+	"pin-url.header": {
+		"message": "Tegel toevoegen:"
+	},
+	"pin-url.placeholder": {
+		"message": "Typ of selecteer een URL"
+	},
+	"recently-closed-tabs": {
+		"message": "Onlangs gesloten tabbladen:"
+	},
+	"tile-header": {
+		"message": "Tegels:"
+	},
+	"tile-savedthumb.set": {
+		"message": "Instellen"
+	},
+	"tile-thumbnail.bgcolor": {
+		"message": "Background Color:"
+	},
+	"tile-thumbnail.remove": {
+		"message": "Verwijderen"
+	},
+	"tile-title.label": {
+		"message": "Titel:"
+	},
+	"tile-title.placeholder": {
+		"message": "Typ een nieuwe titel voor de tegel"
+	},
+	"tile-title.set": {
+		"message": "Instellen"
+	},
+	"tile.block": {
+		"message": "Deze website verwijderen"
+	},
+	"tile.pin": {
+		"message": "Deze website op de huidige positie vastzetten"
+	},
+	"tile.unpin": {
+		"message": "Deze website losmaken"
+	}
+}

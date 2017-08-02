@@ -1,0 +1,161 @@
+{
+	"bg-header": {
+		"message": "Hintergrundbild:"
+	},
+	"bg.remove": {
+		"message": "Entfernen"
+	},
+	"bg.set": {
+		"message": "Übernehmen"
+	},
+	"changelog.label": {
+		"message": "Was ist neu?"
+	},
+	"donate": {
+		"message": "Spenden…"
+	},
+	"donate.label": {
+		"message": "Neuer-Tab-Tools wird durch Spenden finanziert."
+	},
+	"extensionDescription": {
+		"message": "Passt die Neuer-Tab-Seite an. Sie können neue Schaltflächen anlegen, die Schnellstartleiste versetzen, oder ein Hintergrundbild verwenden. Außerdem sind nun die Bilder der Schaltflächen und die Titel veränderbar."
+	},
+	"extensionName": {
+		"message": "Neuer-Tab-Tools"
+	},
+	"github": {
+		"message": "Neuer-Tab-Tools auf GitHub"
+	},
+	"newtab.pageTitle": {
+		"message": "Neuer Tab"
+	},
+	"newtab.undo.closeTooltip": {
+		"message": "Ausblenden"
+	},
+	"newtab.undo.removedLabel": {
+		"message": "Miniaturansicht entfernt"
+	},
+	"newtab.undo.restoreButton": {
+		"message": "Alle wiederherstellen"
+	},
+	"newtab.undo.undoButton": {
+		"message": "Rückgängig"
+	},
+	"newversion": {
+		"message": "Neuer-Tab-Tools wurde auf Version %S aktualisiert. Bitte erwägen Sie eine Spende."
+	},
+	"options-header": {
+		"message": "Einstellungen:"
+	},
+	"options.columns": {
+		"message": "Spalten"
+	},
+	"options.foreground.opacity": {
+		"message": "Vordergrunddeckkraft"
+	},
+	"options.grid.margin": {
+		"message": "Raster - Äußerer Rand"
+	},
+	"options.grid.spacing": {
+		"message": "Raster - Zwischenräume"
+	},
+	"options.historytiles": {
+		"message": "Kacheln aus der Chronik"
+	},
+	"options.launcher.hidden": {
+		"message": "Nicht anzeigen"
+	},
+	"options.locked": {
+		"message": "Verhindere das Ziehen von Kacheln"
+	},
+	"options.pointer": {
+		"message": "Klick hier um die Neuer-Tab-Seite anzupassen"
+	},
+	"options.recent": {
+		"message": "Geschlossene Tabs"
+	},
+	"options.rows": {
+		"message": "Reihen"
+	},
+	"options.size.large": {
+		"message": "Groß"
+	},
+	"options.size.medium": {
+		"message": "Mittel"
+	},
+	"options.size.small": {
+		"message": "Klein"
+	},
+	"options.theme": {
+		"message": "Design"
+	},
+	"options.theme.dark": {
+		"message": "Dunkles Design"
+	},
+	"options.theme.light": {
+		"message": "Helles Design"
+	},
+	"options.thumb-titlesize": {
+		"message": "Titel des Vorschaubildes"
+	},
+	"pin-url.button": {
+		"message": "Hinzufügen"
+	},
+	"pin-url.header": {
+		"message": "Kachel hinzufügen:"
+	},
+	"pin-url.placeholder": {
+		"message": "Adresse eingeben oder auswählen"
+	},
+	"recently-closed-tabs": {
+		"message": "Geschlossene Tabs:"
+	},
+	"tile-header": {
+		"message": "Kacheln:"
+	},
+	"tile-savedthumb.label": {
+		"message": "Gespeichertes Bild:"
+	},
+	"tile-savedthumb.set": {
+		"message": "Übernehmen"
+	},
+	"tile-selection.next.tooltip": {
+		"message": "Nächste Kachel"
+	},
+	"tile-selection.nextrow.tooltip": {
+		"message": "Nächste Reihe"
+	},
+	"tile-selection.previous.tooltip": {
+		"message": "Vorherige Kachel"
+	},
+	"tile-selection.previousrow.tooltip": {
+		"message": "Vorherige Reihe"
+	},
+	"tile-thumbnail.bgcolor": {
+		"message": "Hintergrundfarbe:"
+	},
+	"tile-thumbnail.remove": {
+		"message": "Entfernen"
+	},
+	"tile-title.label": {
+		"message": "Titel:"
+	},
+	"tile-title.placeholder": {
+		"message": "Neuen Titel eingeben"
+	},
+	"tile-title.set": {
+		"message": "Übernehmen"
+	},
+	"tile.block": {
+		"message": "Seite entfernen"
+	},
+	"tile.pin": {
+		"message": "Seite immer an aktueller Position anzeigen"
+	},
+	"tile.unpin": {
+		"message": "Seitenposition nicht mehr merken"
+	},
+	"tileurl.empty": {
+		"message": "Leere Kachel"
+	}
+}

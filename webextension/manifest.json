@@ -1,0 +1,30 @@
+{
+	"name": "__MSG_extensionName__",
+	"description": "__MSG_extensionDescription__",
+	"version": "82",
+	"applications": {
+		"gecko": {
+			"id": "newtabtools@darktrojan.net",
+			"strict_min_version": "55a1"
+		}
+	},
+	"chrome_url_overrides": {
+		"newtab": "newTab.xhtml"
+	},
+	"background": {
+		"scripts": [
+			"tiles.js",
+			"prefs.js",
+			"background.js"
+		]
+	},
+	"permissions": [
+		"history",
+		"sessions",
+		"storage",
+		"tabs",
+		"topSites"
+	],
+	"default_locale": "en",
+	"manifest_version": 2
+}

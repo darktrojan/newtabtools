@@ -1,0 +1,210 @@
+<!--
+This Source Code Form is subject to the terms of the Mozilla Public
+License, v. 2.0. If a copy of the MPL was not distributed with this file,
+You can obtain one at http://mozilla.org/MPL/2.0/.
+-->
+<html id="newtab-window" xmlns="http://www.w3.org/1999/xhtml" disablefastfind="true" options-hidden="true" class="containThumbs">
+<head>
+	<title data-message="newtab.pageTitle"></title>
+	<link rel="stylesheet" href="newTab.css" type="text/css" />
+</head>
+<body>
+	<div id="newtab-scrollbox">
+		<div id="newtab-vertical-margin">
+			<div id="newtab-margin-top">
+				<div class="newtab-side-margin newtab-margin-left"></div>
+				<div id="newtab-recent-outer">
+					<div id="newtab-recent" hidden=""><span data-message="recently-closed-tabs"></span></div>
+				</div>
+				<div id="newtab-undo-container" undo-disabled="true">
+					<label id="newtab-undo-label" data-message="newtab.undo.removedLabel"></label>
+					<button id="newtab-undo-button" tabindex="-1" class="newtab-undo-button" data-message="newtab.undo.undoButton"></button>
+					<button id="newtab-undo-restore-button" tabindex="-1" class="newtab-undo-button" data-message="newtab.undo.restoreButton"></button>
+					<button id="newtab-undo-close-button" class="close-button" tabindex="-1" data-title="newtab.undo.closeTooltip"></button>
+				</div>
+				<div class="newtab-side-margin newtab-margin-right">
+					<input id="options-toggle" type="button"/>
+				</div>
+			</div>
+			<div id="newtab-horizontal-margin">
+				<div class="newtab-side-margin newtab-margin-left"></div>
+				<div id="newtab-grid"></div>
+				<div class="newtab-side-margin newtab-margin-right"></div>
+			</div>
+			<div id="newtab-margin-bottom">
+				<div class="newtab-side-margin newtab-margin-left"></div>
+				<div id="newtab-update-notice" hidden="">
+					<span id="newtab-update-text"></span>
+					<button id="newtab-update-changelog" data-message="changelog.label"></button>
+					<button id="newtab-update-donate" data-message="donate"></button>
+					<button id="newtab-update-hide" class="close-button"></button>
+				</div>
+				<div class="newtab-side-margin newtab-margin-right"></div>
+			</div>
+		</div>
+		<div id="options-toggle-pointer" hidden="" data-message="options.pointer"></div>
+	</div>
+	<div id="options-bg"></div>
+	<div id="options">
+		<div id="options-close">
+			<button id="options-close-button" class="close-button"></button>
+		</div>
+		<div id="options-inner">
+			<div id="options-tile">
+				<fieldset>
+					<legend data-message="pin-url.header"></legend>
+					<div class="options-row">
+						<input id="options-pinURL-input" type="url" list="autocomplete" autocomplete="off" data-placeholder="pin-url.placeholder" />
+						<datalist id="autocomplete"></datalist>
+						<button id="options-pinURL" data-message="pin-url.button"></button>
+					</div>
+				</fieldset>
+				<fieldset>
+					<legend data-message="tile-header"></legend>
+					<div class="options-row">
+						<button id="options-previous-row-tile" class="arrow" data-title="tile-selection.previousrow.tooltip"></button>
+					</div>
+					<div id="options-thumbnail-wrap" class="options-row">
+						<button id="options-previous-tile" class="arrow" data-title="tile-selection.previous.tooltip"></button>
+						<div id="options-thumbnail" class="newtab-thumbnail"></div>
+						<button id="options-next-tile" class="arrow" data-title="tile-selection.next.tooltip"></button>
+					</div>
+					<div class="options-row">
+						<button id="options-next-row-tile" class="arrow" data-title="tile-selection.nextrow.tooltip"></button>
+					</div>
+					<label id="options-url"></label>
+					<label class="options-row-label" for="options-savedthumb-input" data-message="tile-savedthumb.label"></label>
+					<div class="options-row">
+						<input id="options-savedthumb-input" type="file" accept="image/*" />
+						<button id="options-savedthumb-set" disabled="" data-message="tile-savedthumb.set"></button>
+						<button id="options-savedthumb-remove" disabled="" data-message="tile-thumbnail.remove"></button>
+					</div>
+					<div class="options-row">
+						<label style="flex: 1" for="options-bgcolor-input" data-message="tile-thumbnail.bgcolor"></label>
+						<input id="options-bgcolor-input" type="color" />
+						<button id="options-bgcolor-displaybutton">
+							<div id="options-bgcolor-display">&#160;</div>
+						</button>
+						<button id="options-bgcolor-set" data-message="tile-savedthumb.set"></button>
+						<button id="options-bgcolor-reset" data-message="tile-thumbnail.remove"></button>
+					</div>
+					<label class="options-row-label" for="options-title-input" data-message="tile-title.label"></label>
+					<div class="options-row">
+						<input id="options-title-input" data-placeholder="tile-title.placeholder" />
+						<button id="options-title-set" data-message="tile-title.set"></button>
+					</div>
+				</fieldset>
+				<fieldset id="options-bg-group">
+					<legend data-message="bg-header"></legend>
+					<div class="options-row">
+						<input id="options-bg-input" type="file" accept="image/*" />
+						<button id="options-bg-set" disabled="" data-message="bg.set"></button>
+						<button id="options-bg-remove" disabled="" data-message="bg.remove"></button>
+					</div>
+				</fieldset>
+			</div>
+			<div id="options-page">
+				<fieldset>
+					<legend data-message="options-header"></legend>
+					<table>
+						<tr id="options-theme-pref">
+							<th data-message="options.theme"></th>
+							<td>
+								<label><input type="radio" name="theme" value="light" data-label="options.theme.light" /></label>
+								<label><input type="radio" name="theme" value="dark" data-label="options.theme.dark" /></label>
+							</td>
+						</tr>
+						<tr>
+							<th data-message="options.foreground.opacity"></th>
+							<td>
+								<input type="range" name="foreground.opacity" max="100" min="0" step="10" />
+							</td>
+						</tr>
+						<tr>
+							<th data-message="options.rows"></th>
+							<td>
+								<input type="number" name="rows" max="10" min="1" size="2" />
+							</td>
+						</tr>
+						<tr>
+							<th data-message="options.columns"></th>
+							<td>
+								<input type="number" name="columns" max="10" min="1" size="2" />
+							</td>
+						</tr>
+						<tr>
+							<th data-message="options.grid.margin"></th>
+							<td>
+								<select name="margin">
+									<option value="small small small small" data-message="options.size.small"></option>
+									<option value="medium medium medium medium" data-message="options.size.medium"></option>
+									<option value="large large large large" data-message="options.size.large"></option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th data-message="options.grid.spacing"></th>
+							<td>
+								<select name="spacing">
+									<option value="small" data-message="options.size.small"></option>
+									<option value="medium" data-message="options.size.medium"></option>
+									<option value="large" data-message="options.size.large"></option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th data-message="options.thumb-titlesize"></th>
+							<td>
+								<select name="thumbs.titlesize">
+									<option value="hidden" data-message="options.launcher.hidden"></option>
+									<option value="small" data-message="options.size.small"></option>
+									<option value="medium" data-message="options.size.medium"></option>
+									<option value="large" data-message="options.size.large"></option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th></th>
+							<td>
+								<label>
+									<input type="checkbox" name="history" data-label="options.historytiles" />
+								</label>
+							</td>
+						</tr>
+						<tr>
+							<th></th>
+							<td>
+								<label>
+									<input type="checkbox" name="recent" data-label="options.recent" />
+								</label>
+							</td>
+						</tr>
+						<tr>
+							<th></th>
+							<td>
+								<label>
+									<input type="checkbox" name="locked" data-label="options.locked" />
+								</label>
+							</td>
+						</tr>
+					</table>
+				</fieldset>
+				<div class="spacer"></div>
+				<fieldset id="options-donate-wrap">
+					<div>
+						<label data-message="donate.label"></label>
+						<button id="options-donate" data-message="donate"></button>
+					</div>
+					<div>
+						<a href="https://github.com/darktrojan/newtabtools" data-message="github"></a>
+					</div>
+				</fieldset>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="tiles-shim.js"></script>
+	<script type="text/javascript" src="prefs.js"></script>
+	<script type="text/javascript" src="newTab.js"></script>
+	<script type="text/javascript" src="fx-newTab.js"></script>
+</body>
+</html>

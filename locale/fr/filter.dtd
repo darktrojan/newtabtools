@@ -1,6 +1,0 @@
-<!ENTITY title "Filtrage des domaines">
-<!ENTITY description "Les cases vides sont remplies à l'aide de votre historique de navigation. Cet outil limite le nombre de cases occupées par chaque domaine. Il ne tient pas compte des cases épinglées.">
-<!ENTITY domainheader "Domaine">
-<!ENTITY countheader "Nombre max de cases">
-<!ENTITY addbuttonlabel "Ajouter">
-<!ENTITY removebuttonlabel "Supprimer">

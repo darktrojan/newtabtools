@@ -1,0 +1,155 @@
+{
+	"bg-header": {
+		"message": "Imatge de fons de la pàgina:"
+	},
+	"bg.remove": {
+		"message": "Suprimeix"
+	},
+	"bg.set": {
+		"message": "Estableix"
+	},
+	"changelog.label": {
+		"message": "Novetats"
+	},
+	"donate": {
+		"message": "Feu un donatiu…"
+	},
+	"donate.label": {
+		"message": "Les Eines de pestanyes noves es financien amb donatius dels usuaris."
+	},
+	"extensionDescription": {
+		"message": "Personalitza la pàgina de pestanya nova. Podeu afegir-hi més mosaics, el llançador de l’inici del Firefox o una imatge de fons. També podeu canviar els títols i les imatges dels mosaics."
+	},
+	"extensionName": {
+		"message": "Eines de pestanyes noves"
+	},
+	"github": {
+		"message": "Les Eines de pestanyes noves al GitHub"
+	},
+	"newtab.pageTitle": {
+		"message": "Pestanya nova"
+	},
+	"newtab.undo.closeTooltip": {
+		"message": "Amaga"
+	},
+	"newtab.undo.removedLabel": {
+		"message": "S'ha eliminat la miniatura."
+	},
+	"newtab.undo.restoreButton": {
+		"message": "Restaura-les totes."
+	},
+	"newtab.undo.undoButton": {
+		"message": "Desfés."
+	},
+	"newversion": {
+		"message": "Les Eines de pestanyes noves s’han actualitzat a la versió %S. Aquestes eines són gratuïtes, però agraïm els donatius!"
+	},
+	"options-header": {
+		"message": "Paràmetres:"
+	},
+	"options.columns": {
+		"message": "Columnes"
+	},
+	"options.foreground.opacity": {
+		"message": "Opacitat del primer pla"
+	},
+	"options.grid.margin": {
+		"message": "Marge de la graella"
+	},
+	"options.grid.spacing": {
+		"message": "Espaiament de la graella"
+	},
+	"options.historytiles": {
+		"message": "Mosaics de l’historial de navegació"
+	},
+	"options.launcher.hidden": {
+		"message": "No ho mostris"
+	},
+	"options.pointer": {
+		"message": "Feu clic aquí per començar a personalitzar la pàgina de pestanya nova"
+	},
+	"options.recent": {
+		"message": "Pestanyes tancades recentment"
+	},
+	"options.rows": {
+		"message": "Files"
+	},
+	"options.size.large": {
+		"message": "Gran"
+	},
+	"options.size.medium": {
+		"message": "Mitjà"
+	},
+	"options.size.small": {
+		"message": "Petit"
+	},
+	"options.theme": {
+		"message": "Tema"
+	},
+	"options.theme.dark": {
+		"message": "Tema fosc"
+	},
+	"options.theme.light": {
+		"message": "Tema clar"
+	},
+	"options.thumb-titlesize": {
+		"message": "Mida dels títols dels mosaics"
+	},
+	"pin-url.button": {
+		"message": "Afegeix"
+	},
+	"pin-url.header": {
+		"message": "Afegeix un mosaic:"
+	},
+	"pin-url.placeholder": {
+		"message": "Escriviu o seleccioneu un URL"
+	},
+	"recently-closed-tabs": {
+		"message": "Pestanyes tancades recentment:"
+	},
+	"tile-header": {
+		"message": "Mosaics:"
+	},
+	"tile-savedthumb.set": {
+		"message": "Estableix"
+	},
+	"tile-selection.next.tooltip": {
+		"message": "Mosaic següent"
+	},
+	"tile-selection.nextrow.tooltip": {
+		"message": "Fila següent"
+	},
+	"tile-selection.previous.tooltip": {
+		"message": "Mosaic anterior"
+	},
+	"tile-selection.previousrow.tooltip": {
+		"message": "Fila anterior"
+	},
+	"tile-thumbnail.bgcolor": {
+		"message": "Color del fons:"
+	},
+	"tile-thumbnail.remove": {
+		"message": "Elimina"
+	},
+	"tile-title.label": {
+		"message": "Títol:"
+	},
+	"tile-title.placeholder": {
+		"message": "Escriviu un títol nou per al mosaic"
+	},
+	"tile-title.set": {
+		"message": "Estableix"
+	},
+	"tile.block": {
+		"message": "Suprimeix aquest lloc"
+	},
+	"tile.pin": {
+		"message": "Fixa aquest lloc en aquesta posició"
+	},
+	"tile.unpin": {
+		"message": "No fixis aquest lloc"
+	},
+	"tileurl.empty": {
+		"message": "Mosaic buit"
+	}
+}

@@ -1,6 +1,0 @@
-<!ENTITY title "Pārlūkošanas vēstures elementu filtrs">
-<!ENTITY description "Šis rīks ierobežo parādāmo elementu skaitu domēniem no pārlūkošanas vēstures. Tas neietekmē piespraustos elementus.">
-<!ENTITY domainheader "Domēns">
-<!ENTITY countheader "Maksimālais skaits">
-<!ENTITY addbuttonlabel "Pievienot">
-<!ENTITY removebuttonlabel "Noņemt">

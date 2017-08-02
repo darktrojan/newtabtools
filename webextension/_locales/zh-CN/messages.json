@@ -1,0 +1,158 @@
+{
+	"bg-header": {
+		"message": "页面背景图片："
+	},
+	"bg.remove": {
+		"message": "移除背景"
+	},
+	"bg.set": {
+		"message": "设为背景"
+	},
+	"changelog.label": {
+		"message": "有什么变化？"
+	},
+	"donate": {
+		"message": "捐助…"
+	},
+	"donate.label": {
+		"message": "New Tab Tools 依靠用户捐助维持。"
+	},
+	"extensionDescription": {
+		"message": "自定义新标签页。您可以添加更多的磁贴，一个 Firefox 的快速启动栏，以及设置背景图片。您还可以设定新建磁贴的图片和标题。"
+	},
+	"github": {
+		"message": "New Tab Tools 在 GitHub 上"
+	},
+	"newtab.pageTitle": {
+		"message": "新标签页"
+	},
+	"newtab.undo.closeTooltip": {
+		"message": "隐藏"
+	},
+	"newtab.undo.removedLabel": {
+		"message": "缩略图已删除。"
+	},
+	"newtab.undo.restoreButton": {
+		"message": "全部恢复"
+	},
+	"newtab.undo.undoButton": {
+		"message": "撤销"
+	},
+	"newversion": {
+		"message": "New Tab Tools 已更新到版本 %S。请考虑做点捐助。"
+	},
+	"options-header": {
+		"message": "选项:"
+	},
+	"options.columns": {
+		"message": "横向行"
+	},
+	"options.foreground.opacity": {
+		"message": "前景不透明度"
+	},
+	"options.grid.margin": {
+		"message": "磁贴周围留白"
+	},
+	"options.grid.spacing": {
+		"message": "磁贴间距"
+	},
+	"options.historytiles": {
+		"message": "基于浏览记录的磁贴"
+	},
+	"options.launcher.hidden": {
+		"message": "不显示"
+	},
+	"options.locked": {
+		"message": "防止拖动磁贴"
+	},
+	"options.pointer": {
+		"message": "点击这里开始定制您的“新标签页”页面"
+	},
+	"options.recent": {
+		"message": "最近关闭的标签页"
+	},
+	"options.rows": {
+		"message": "纵向列"
+	},
+	"options.size.large": {
+		"message": "大"
+	},
+	"options.size.medium": {
+		"message": "中"
+	},
+	"options.size.small": {
+		"message": "小"
+	},
+	"options.theme": {
+		"message": "主题"
+	},
+	"options.theme.dark": {
+		"message": "暗色主题"
+	},
+	"options.theme.light": {
+		"message": "亮色主题"
+	},
+	"options.thumb-titlesize": {
+		"message": "磁贴标题大小"
+	},
+	"pin-url.button": {
+		"message": "添加"
+	},
+	"pin-url.header": {
+		"message": "添加磁贴:"
+	},
+	"pin-url.placeholder": {
+		"message": "输入或选择一个 URL"
+	},
+	"recently-closed-tabs": {
+		"message": "最近关闭的标签页："
+	},
+	"tile-header": {
+		"message": "磁贴:"
+	},
+	"tile-savedthumb.label": {
+		"message": "已保存图片:"
+	},
+	"tile-savedthumb.set": {
+		"message": "设为缩略图"
+	},
+	"tile-selection.next.tooltip": {
+		"message": "下一个磁贴"
+	},
+	"tile-selection.nextrow.tooltip": {
+		"message": "下一行"
+	},
+	"tile-selection.previous.tooltip": {
+		"message": "上一个磁贴"
+	},
+	"tile-selection.previousrow.tooltip": {
+		"message": "上一行"
+	},
+	"tile-thumbnail.bgcolor": {
+		"message": "背景色:"
+	},
+	"tile-thumbnail.remove": {
+		"message": "移除缩略图"
+	},
+	"tile-title.label": {
+		"message": "标题:"
+	},
+	"tile-title.placeholder": {
+		"message": "为磁贴输入一个新标题"
+	},
+	"tile-title.set": {
+		"message": "设为标题"
+	},
+	"tile.block": {
+		"message": "移除这个网站"
+	},
+	"tile.pin": {
+		"message": "将此网站固定在它当前的位置"
+	},
+	"tile.unpin": {
+		"message": "不再固定这个网站"
+	},
+	"tileurl.empty": {
+		"message": "空磁贴"
+	}
+}

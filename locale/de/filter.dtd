@@ -1,6 +1,0 @@
-<!ENTITY title "Kacheln aus der Chronik filtern">
-<!ENTITY description "Dieses Tool beschränkt die Anzahl der Kacheln aus der Browser-Chronik, die für jede Domain angezeigt werden. Es hat keine Auswirkungen auf angeheftete Kacheln.">
-<!ENTITY domainheader "Domain">
-<!ENTITY countheader "Max. Kachelanzahl">
-<!ENTITY addbuttonlabel "Hinzufügen">
-<!ENTITY removebuttonlabel "Entfernen">

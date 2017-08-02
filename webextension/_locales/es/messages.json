@@ -1,0 +1,128 @@
+{
+	"bg-header": {
+		"message": "Imagen de fondo de la página"
+	},
+	"bg.remove": {
+		"message": "Eliminar"
+	},
+	"bg.set": {
+		"message": "Fijar"
+	},
+	"changelog.label": {
+		"message": "¿Qué ha cambiado?"
+	},
+	"donate": {
+		"message": "Donar…"
+	},
+	"donate.label": {
+		"message": "New Tab Tools se financia a través de donaciones de usuarios."
+	},
+	"extensionDescription": {
+		"message": "Personaliza la página de Nueva Pestaña. Puedes añadir más contenedores (páginas), lanzar New Tab Tools al inicio de Firefox o incluir una imagen de fondo. También puedes modificar la imagen y el título de los contenedores."
+	},
+	"github": {
+		"message": "New Tab Tools en GitHub"
+	},
+	"newversion": {
+		"message": "New Tab Tools ha sido actualizado a la versión %S. Aunque New Tab Tools es gratis, ¡toda donación es bienvenida!"
+	},
+	"options-header": {
+		"message": "Opciones:"
+	},
+	"options.columns": {
+		"message": "Columnas"
+	},
+	"options.foreground.opacity": {
+		"message": "Opacidad de contenedores"
+	},
+	"options.grid.margin": {
+		"message": "Margen de cuadrícula"
+	},
+	"options.grid.spacing": {
+		"message": "Espaciado de cuadrícula"
+	},
+	"options.historytiles": {
+		"message": "Contenedores desde tu historial"
+	},
+	"options.launcher.hidden": {
+		"message": "No mostrar"
+	},
+	"options.pointer": {
+		"message": "Haz clic aquí para empezar a personalizar tu página de Nueva Pestaña"
+	},
+	"options.recent": {
+		"message": "Pestañas cerradas recientemente"
+	},
+	"options.rows": {
+		"message": "Filas"
+	},
+	"options.size.large": {
+		"message": "Grande"
+	},
+	"options.size.medium": {
+		"message": "Mediano"
+	},
+	"options.size.small": {
+		"message": "Pequeño"
+	},
+	"options.theme": {
+		"message": "Tema"
+	},
+	"options.theme.dark": {
+		"message": "Tema Oscuro"
+	},
+	"options.theme.light": {
+		"message": "Tema Claro"
+	},
+	"options.thumb-titlesize": {
+		"message": "Título de contenedor"
+	},
+	"pin-url.button": {
+		"message": "Añadir"
+	},
+	"pin-url.header": {
+		"message": "Nuevo contenedor:"
+	},
+	"pin-url.placeholder": {
+		"message": "Escribe o selecciona un URL"
+	},
+	"recently-closed-tabs": {
+		"message": "Cerrado recientemente:"
+	},
+	"tile-header": {
+		"message": "Contenedores:"
+	},
+	"tile-savedthumb.set": {
+		"message": "Fijar"
+	},
+	"tile-selection.next.tooltip": {
+		"message": "Siguiente contenedor"
+	},
+	"tile-selection.nextrow.tooltip": {
+		"message": "Siguiente fila"
+	},
+	"tile-selection.previous.tooltip": {
+		"message": "Contenedor anterior"
+	},
+	"tile-selection.previousrow.tooltip": {
+		"message": "Fila anterior"
+	},
+	"tile-thumbnail.bgcolor": {
+		"message": "Color de fondo:"
+	},
+	"tile-thumbnail.remove": {
+		"message": "Eliminar"
+	},
+	"tile-title.label": {
+		"message": "Título:"
+	},
+	"tile-title.placeholder": {
+		"message": "Escribe un nuevo título"
+	},
+	"tile-title.set": {
+		"message": "Fijar"
+	},
+	"tileurl.empty": {
+		"message": "Contenedor Vacío"
+	}
+}

@@ -1,6 +1,0 @@
-<!ENTITY title "Фильтр плиток из истории браузера">
-<!ENTITY description "Этот инструмент ограничивает количество плиток из истории просмотра для каждого домена. Не влияет на закрепленные плитки.">
-<!ENTITY domainheader "Домен">
-<!ENTITY countheader "Максимум плиток">
-<!ENTITY addbuttonlabel "Добавить">
-<!ENTITY removebuttonlabel "Удалить">

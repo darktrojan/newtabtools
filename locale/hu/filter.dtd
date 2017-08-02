@@ -1,6 +1,0 @@
-<!ENTITY title "A böngészési előzményekből származó csempék szűrése">
-<!ENTITY description "Ez az eszköz korlátozza a böngészési előzményekből származó csempék webcímenkéni számát. A rögzített csempékre nincs hatással.">
-<!ENTITY domainheader "Webcím">
-<!ENTITY countheader "Maximális csempeszám">
-<!ENTITY addbuttonlabel "Hozzáadás">
-<!ENTITY removebuttonlabel "Eltávolítás">

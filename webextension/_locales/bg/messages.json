@@ -1,0 +1,155 @@
+{
+	"bg-header": {
+		"message": "Фоново изображение:"
+	},
+	"bg.remove": {
+		"message": "Премахни"
+	},
+	"bg.set": {
+		"message": "Задай"
+	},
+	"changelog.label": {
+		"message": "Какво се промени?"
+	},
+	"donate": {
+		"message": "Дарение…"
+	},
+	"donate.label": {
+		"message": "New Tab Tools се издържа от дарения."
+	},
+	"github": {
+		"message": "New Tab Tools в GitHub"
+	},
+	"newtab.pageTitle": {
+		"message": "Нов раздел"
+	},
+	"newtab.undo.closeTooltip": {
+		"message": "Скриване"
+	},
+	"newtab.undo.removedLabel": {
+		"message": "Миниатюрата беше премахната."
+	},
+	"newtab.undo.restoreButton": {
+		"message": "Възстановяване на всички."
+	},
+	"newtab.undo.undoButton": {
+		"message": "Отмяна."
+	},
+	"newversion": {
+		"message": "New Tab Tools се обнови до версия %S. New Tab Tools е безплатно, но даренията са добре дошли!"
+	},
+	"options-header": {
+		"message": "Опции:"
+	},
+	"options.columns": {
+		"message": "Колони"
+	},
+	"options.foreground.opacity": {
+		"message": "Прозрачност"
+	},
+	"options.grid.margin": {
+		"message": "Разстоение от края"
+	},
+	"options.grid.spacing": {
+		"message": "Разстояние между"
+	},
+	"options.historytiles": {
+		"message": "Плочки от историята на сърфиране"
+	},
+	"options.launcher.hidden": {
+		"message": "Не показвай"
+	},
+	"options.locked": {
+		"message": "Забрани влачене на плочките"
+	},
+	"options.pointer": {
+		"message": "Натисни тук, за да персонализираш новия раздел"
+	},
+	"options.recent": {
+		"message": "Последно затворени раздели"
+	},
+	"options.rows": {
+		"message": "Редове"
+	},
+	"options.size.large": {
+		"message": "Голямо"
+	},
+	"options.size.medium": {
+		"message": "Средно"
+	},
+	"options.size.small": {
+		"message": "Малко"
+	},
+	"options.theme": {
+		"message": "Тема"
+	},
+	"options.theme.dark": {
+		"message": "Тъмна"
+	},
+	"options.theme.light": {
+		"message": "Светла"
+	},
+	"options.thumb-titlesize": {
+		"message": "Размер на заглавието"
+	},
+	"pin-url.button": {
+		"message": "Добави"
+	},
+	"pin-url.header": {
+		"message": "Добавяне на плочка:"
+	},
+	"pin-url.placeholder": {
+		"message": "Напиши или избери URL"
+	},
+	"recently-closed-tabs": {
+		"message": "Последно затворени раздели:"
+	},
+	"tile-header": {
+		"message": "Плочки:"
+	},
+	"tile-savedthumb.label": {
+		"message": "Запазено изображение:"
+	},
+	"tile-savedthumb.set": {
+		"message": "Задай"
+	},
+	"tile-selection.next.tooltip": {
+		"message": "Следваща плочка"
+	},
+	"tile-selection.nextrow.tooltip": {
+		"message": "Следващ ред"
+	},
+	"tile-selection.previous.tooltip": {
+		"message": "Предишна плочка"
+	},
+	"tile-selection.previousrow.tooltip": {
+		"message": "Предишен ред"
+	},
+	"tile-thumbnail.bgcolor": {
+		"message": "Фонов цвят:"
+	},
+	"tile-thumbnail.remove": {
+		"message": "Премахни"
+	},
+	"tile-title.label": {
+		"message": "Заглавие:"
+	},
+	"tile-title.placeholder": {
+		"message": "Напиши ново заглавие"
+	},
+	"tile-title.set": {
+		"message": "Задай"
+	},
+	"tile.block": {
+		"message": "Премахване на страница"
+	},
+	"tile.pin": {
+		"message": "Фиксиране на страницата тук"
+	},
+	"tile.unpin": {
+		"message": "Страницата да е не фиксирана"
+	},
+	"tileurl.empty": {
+		"message": "Празна плочка"
+	}
+}

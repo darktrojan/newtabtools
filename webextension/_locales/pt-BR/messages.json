@@ -1,0 +1,158 @@
+{
+	"bg-header": {
+		"message": "Imagem de fundo da página"
+	},
+	"bg.remove": {
+		"message": "Remover"
+	},
+	"bg.set": {
+		"message": "Definir"
+	},
+	"changelog.label": {
+		"message": "O Que Mudou?"
+	},
+	"donate": {
+		"message": "Doar…"
+	},
+	"donate.label": {
+		"message": "O New Tab Tools é mantido com doações de usuários."
+	},
+	"extensionDescription": {
+		"message": "Personaliza a página 'Nova Aba'. Você pode adicionar mais blocos, o iniciador do Firefox, ou uma imagem de fundo. E você pode definir novos blocos e suas imagens."
+	},
+	"github": {
+		"message": "New Tab Tools no GitHub"
+	},
+	"newtab.pageTitle": {
+		"message": "Nova aba"
+	},
+	"newtab.undo.closeTooltip": {
+		"message": "Ocultar"
+	},
+	"newtab.undo.removedLabel": {
+		"message": "Miniatura removida."
+	},
+	"newtab.undo.restoreButton": {
+		"message": "Restaurar tudo."
+	},
+	"newtab.undo.undoButton": {
+		"message": "Desfazer."
+	},
+	"newversion": {
+		"message": "O New Tab Tools foi atualizado para a versão %S. Por favor, considere fazer uma doação."
+	},
+	"options-header": {
+		"message": "Opções:"
+	},
+	"options.columns": {
+		"message": "Colunas"
+	},
+	"options.foreground.opacity": {
+		"message": "Opacidade"
+	},
+	"options.grid.margin": {
+		"message": "Margem da grade"
+	},
+	"options.grid.spacing": {
+		"message": "Espaçamento da grade"
+	},
+	"options.historytiles": {
+		"message": "Blocos do histórico de navegação"
+	},
+	"options.launcher.hidden": {
+		"message": "Não mostrar"
+	},
+	"options.locked": {
+		"message": "Prevenir que blocos sejam arrastados"
+	},
+	"options.pointer": {
+		"message": "Clique aqui para começar a personalizar a página 'Nova aba'"
+	},
+	"options.recent": {
+		"message": "Abas fechadas recentemente"
+	},
+	"options.rows": {
+		"message": "Linhas"
+	},
+	"options.size.large": {
+		"message": "Grande"
+	},
+	"options.size.medium": {
+		"message": "Médio"
+	},
+	"options.size.small": {
+		"message": "Pequeno"
+	},
+	"options.theme": {
+		"message": "Tema"
+	},
+	"options.theme.dark": {
+		"message": "Tema escuro"
+	},
+	"options.theme.light": {
+		"message": "Tema claro"
+	},
+	"options.thumb-titlesize": {
+		"message": "Tamanho do título do bloco"
+	},
+	"pin-url.button": {
+		"message": "Adicionar"
+	},
+	"pin-url.header": {
+		"message": "Adicionar título:"
+	},
+	"pin-url.placeholder": {
+		"message": "Digite ou selecione uma URL"
+	},
+	"recently-closed-tabs": {
+		"message": "Abas fechadas recentemente:"
+	},
+	"tile-header": {
+		"message": "Blocos:"
+	},
+	"tile-savedthumb.label": {
+		"message": "Imagem salva:"
+	},
+	"tile-savedthumb.set": {
+		"message": "Definir"
+	},
+	"tile-selection.next.tooltip": {
+		"message": "Próximo bloco"
+	},
+	"tile-selection.nextrow.tooltip": {
+		"message": "Próxima linha"
+	},
+	"tile-selection.previous.tooltip": {
+		"message": "Bloco anterior"
+	},
+	"tile-selection.previousrow.tooltip": {
+		"message": "Linha anterior"
+	},
+	"tile-thumbnail.bgcolor": {
+		"message": "Cor de Fundo:"
+	},
+	"tile-thumbnail.remove": {
+		"message": "Remover"
+	},
+	"tile-title.label": {
+		"message": "Título:"
+	},
+	"tile-title.placeholder": {
+		"message": "Digite o novo nome do bloco"
+	},
+	"tile-title.set": {
+		"message": "Definir"
+	},
+	"tile.block": {
+		"message": "Remover este site"
+	},
+	"tile.pin": {
+		"message": "Fixar este site em sua posição atual"
+	},
+	"tile.unpin": {
+		"message": "Desafixar este site"
+	},
+	"tileurl.empty": {
+		"message": "Bloco vazio"
+	}
+}
