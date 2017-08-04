@@ -21,7 +21,7 @@ var Tiles = {
 
 				if (!Prefs.history) {
 					Tiles._cache = links.map(l => l.url);
-					resolve(links);
+					resolve(links.slice(0, count));
 					return;
 				}
 
@@ -39,7 +39,9 @@ var Tiles = {
 						return isNew;
 					});
 
-					for (let i = 0; i < count && remaining.length > 0; i++) {
+					// Add some extras for thumbnail generation of tiles that might get promoted.
+					let extraCount = count + 10;
+					for (let i = 0; i < extraCount && remaining.length > 0; i++) {
 						if (!links[i]) {
 							let next = remaining.shift();
 							if (next) {
@@ -57,7 +59,7 @@ var Tiles = {
 					}
 
 					Tiles._cache = links.map(l => l.url);
-					resolve(links);
+					resolve(links.slice(0, count));
 				});
 			};
 		});

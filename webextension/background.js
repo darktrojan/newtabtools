@@ -1,4 +1,4 @@
-/* globals Prefs, Tiles, Background, browser, indexedDB */
+/* globals Prefs, Tiles, Background, browser, indexedDB, IDBKeyRange */
 Promise.all([
 	Prefs.init(),
 	initDB()
@@ -75,8 +75,12 @@ function waitForDB() {
 	});
 }
 
+Date.prototype.toTZDateString = function() {
+	return [this.getFullYear(), this.getMonth() + 1, this.getDate()].map(p => p.toString().padStart(2, '0')).join('-');
+};
+
 browser.runtime.onMessage.addListener(function(message, sender, sendResponse) {
-	let today = new Date().toJSON().substring(0, 10);
+	let today = new Date().toTZDateString();
 
 	switch (message.name) {
 	case 'Tiles.getAllTiles':
@@ -109,7 +113,6 @@ browser.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 		});
 		return;
 	case 'Thumbnails.get':
-		// TODO cache the shit out of this
 		let map = new Map();
 		db.transaction('thumbnails', 'readwrite').objectStore('thumbnails').openCursor().onsuccess = function() {
 			let cursor = this.result;
@@ -132,16 +135,24 @@ browser.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 });
 
 browser.webNavigation.onCompleted.addListener(function(details) {
-	if (details.frameId === 0 && Tiles._cache.includes(details.url)) { // TODO: wrong list // TODO check when last was stored
-		browser.tabs.executeScript(details.tabId, {file: 'thumbnail.js'});
-	}
+	// We might not have called getAllTiles yet.
+	let promise = Tiles._cache.length > 0 ? Promise.resolve(null) : Tiles.getAllTiles(Prefs.rows * Prefs.columns);
+	promise.then(function() {
+		if (details.frameId === 0 && Tiles._cache.includes(details.url)) {
+			db.transaction('thumbnails').objectStore('thumbnails').get(details.url).onsuccess = function() {
+				let today = new Date().toTZDateString();
+				if (!this.result || this.result.stored < today) {
+					browser.tabs.executeScript(details.tabId, {file: 'thumbnail.js'});
+				}
+			};
+		}
+	});
 });
 
-// TODO cleanup the old thumbnails
 function cleanupThumbnails() {
-	let expiry = new Date(Date.now() - 1209600000); // ms in two weeks.
+	let expiry = new Date(Date.now() - 1209600000).toTZDateString(); // ms in two weeks.
 	let index = db.transaction('thumbnails', 'readwrite').objectStore('thumbnails').index('used');
-	let keyRange = IDBKeyRange.upperBound(expiry.toJSON().substring(0, 10));
+	let keyRange = IDBKeyRange.upperBound(expiry);
 
 	index.openCursor(keyRange).onsuccess = function() {
 		let cursor = this.result;
@@ -151,3 +162,12 @@ function cleanupThumbnails() {
 		}
 	};
 }
+
+function idleListener(state) {
+	if (state == 'idle') {
+		browser.idle.onStateChanged.removeListener(idleListener);
+		cleanupThumbnails();
+	}
+}
+
+browser.idle.onStateChanged.addListener(idleListener);
