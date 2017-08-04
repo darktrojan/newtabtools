@@ -463,7 +463,7 @@ var Grid = {
 		let cells = this.cells;
 
 		// Put sites into the cells.
-		Tiles.getAllTiles(Grid.cells.length).then(links => {
+		Tiles.getAllTiles().then(links => {
 			let length = Math.min(links.length, cells.length);
 
 			for (let i = 0; i < length; i++) {
@@ -1585,7 +1585,7 @@ var Updater = {
 	   */
 	updateGrid: function Updater_updateGrid(callback) {
 		// let links = NewTabToolsLinks.getLinks().slice(0, Grid.cells.length);
-		Tiles.getAllTiles(Grid.cells.length).then(links => {
+		Tiles.getAllTiles().then(links => {
 
 			// Find all sites that remain in the grid.
 			let sites = this._findRemainingSites(links);
@@ -1618,7 +1618,7 @@ var Updater = {
 
 	fastUpdateGrid: function Updater_fastUpdateGrid() {
 		// let links = NewTabToolsLinks.getLinks().slice(0, Grid.cells.length);
-		Tiles.getAllTiles(Grid.cells.length).then(function(links) {
+		Tiles.getAllTiles().then(function(links) {
 
 			// Find all sites that remain in the grid.
 			let sites = this._findRemainingSites(links);

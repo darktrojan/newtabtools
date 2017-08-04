@@ -85,7 +85,7 @@ browser.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 	switch (message.name) {
 	case 'Tiles.getAllTiles':
 		waitForDB().then(function() {
-			return Tiles.getAllTiles(message.count);
+			return Tiles.getAllTiles();
 		}).then(function(tiles) {
 			sendResponse({ tiles, list: Tiles._list });
 		});
@@ -136,7 +136,7 @@ browser.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 
 browser.webNavigation.onCompleted.addListener(function(details) {
 	// We might not have called getAllTiles yet.
-	let promise = Tiles._cache.length > 0 ? Promise.resolve(null) : Tiles.getAllTiles(Prefs.rows * Prefs.columns);
+	let promise = Tiles._cache.length > 0 ? Promise.resolve(null) : Tiles.getAllTiles();
 	promise.then(function() {
 		if (details.frameId === 0 && Tiles._cache.includes(details.url)) {
 			db.transaction('thumbnails').objectStore('thumbnails').get(details.url).onsuccess = function() {

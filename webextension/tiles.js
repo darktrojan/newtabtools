@@ -3,7 +3,8 @@
 var Tiles = {
 	_cache: [],
 	_list: [],
-	getAllTiles: function(count) {
+	getAllTiles: function() {
+		let count = Prefs.rows * Prefs.columns;
 		return new Promise(function(resolve) {
 			db.transaction('tiles').objectStore('tiles').getAll().onsuccess = function() {
 				let links = [];

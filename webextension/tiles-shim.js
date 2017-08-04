@@ -5,8 +5,8 @@ var Tiles = {
 	isPinned: function(url) {
 		return this._list.includes(url);
 	},
-	getAllTiles: function(count) {
-		return browser.runtime.sendMessage({ name: 'Tiles.getAllTiles', count }).then(({ tiles, list }) => {
+	getAllTiles: function() {
+		return browser.runtime.sendMessage({ name: 'Tiles.getAllTiles' }).then(({ tiles, list }) => {
 			this._list = list;
 			return tiles;
 		});
