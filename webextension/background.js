@@ -24,7 +24,7 @@ var isFirstRun = false;
 
 function initDB() {
 	return new Promise(function(resolve, reject) {
-		let request = indexedDB.open('newTabTools', 7);
+		let request = indexedDB.open('newTabTools', 8);
 
 		request.onsuccess = function(/*event*/) {
 			// console.log(event.type, event);
@@ -52,6 +52,9 @@ function initDB() {
 			if (!db.objectStoreNames.contains('thumbnails')) {
 				db.createObjectStore('thumbnails', { keyPath: 'url' });
 			}
+			if (!this.transaction.objectStore('thumbnails').indexNames.contains('used')) {
+				this.transaction.objectStore('thumbnails').createIndex('used', 'used');
+			}
 
 			if (event.oldVersion < 5) {
 				isFirstRun = true;
@@ -73,6 +76,8 @@ function waitForDB() {
 }
 
 browser.runtime.onMessage.addListener(function(message, sender, sendResponse) {
+	let today = new Date().toJSON().substring(0, 10);
+
 	switch (message.name) {
 	case 'Tiles.getAllTiles':
 		waitForDB().then(function() {
@@ -99,21 +104,28 @@ browser.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 
 	case 'Thumbnails.save':
 		let {url, image} = message;
-		let today = new Date().toJSON().substring(0, 10);
 		db.transaction('thumbnails', 'readwrite').objectStore('thumbnails').put({
 			url, image, stored: today, used: today
 		});
 		return;
 	case 'Thumbnails.get':
 		// TODO cache the shit out of this
-		db.transaction('thumbnails').objectStore('thumbnails').getAll().onsuccess = function() {
-			let map = new Map();
-			for (let thumb of this.result) {
+		let map = new Map();
+		db.transaction('thumbnails', 'readwrite').objectStore('thumbnails').openCursor().onsuccess = function() {
+			let cursor = this.result;
+			if (cursor) {
+				let thumb = cursor.value;
 				if (message.urls.includes(thumb.url)) {
 					map.set(thumb.url, thumb.image);
+					if (thumb.used != today) {
+						thumb.used = today;
+						cursor.update(thumb);
+					}
 				}
+				cursor.continue();
+			} else {
+				sendResponse(map);
 			}
-			sendResponse(map);
 		};
 		return true;
 	}
@@ -126,3 +138,16 @@ browser.webNavigation.onCompleted.addListener(function(details) {
 });
 
 // TODO cleanup the old thumbnails
+function cleanupThumbnails() {
+	let expiry = new Date(Date.now() - 1209600000); // ms in two weeks.
+	let index = db.transaction('thumbnails', 'readwrite').objectStore('thumbnails').index('used');
+	let keyRange = IDBKeyRange.upperBound(expiry.toJSON().substring(0, 10));
+
+	index.openCursor(keyRange).onsuccess = function() {
+		let cursor = this.result;
+		if (cursor) {
+			cursor.delete();
+			cursor.continue();
+		}
+	};
+}
