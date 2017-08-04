@@ -19,11 +19,13 @@
 		]
 	},
 	"permissions": [
+		"<all_urls>",
 		"history",
 		"sessions",
 		"storage",
 		"tabs",
-		"topSites"
+		"topSites",
+		"webNavigation"
 	],
 	"default_locale": "en",
 	"manifest_version": 2

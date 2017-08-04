@@ -1,6 +1,7 @@
 /* exported initDB, Tiles, Background */
 /* globals Blocked, Prefs, browser, db */
 var Tiles = {
+	_cache: [],
 	_list: [],
 	getAllTiles: function(count) {
 		return new Promise(function(resolve) {
@@ -19,12 +20,13 @@ var Tiles = {
 				}
 
 				if (!Prefs.history) {
+					Tiles._cache = links.map(l => l.url);
 					resolve(links);
 					return;
 				}
 
-				// browser.topSites.get({ providers: ['places'] }).then(r => {
-				browser.runtime.sendMessage('topSites').then(r => {
+				browser.topSites.get({ providers: ['places'] }).then(r => {
+				// browser.runtime.sendMessage('topSites').then(r => {
 					let urls = Tiles._list.slice();
 					let remaining = r.filter(s => {
 						if (Blocked.isBlocked(s.url)) {
@@ -55,6 +57,7 @@ var Tiles = {
 						}
 					}
 
+					Tiles._cache = links.map(l => l.url);
 					resolve(links);
 				});
 			};

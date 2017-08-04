@@ -774,6 +774,10 @@ Site.prototype = {
 		if (this.link.image) {
 			let thumbnailURL = URL.createObjectURL(this.link.image);
 			thumbnail.style.backgroundImage = 'url("' + thumbnailURL + '")';
+			thumbnail.classList.add('custom-thumbnail');
+		} else {
+			thumbnail.style.backgroundImage = null;
+			thumbnail.classList.remove('custom-thumbnail');
 		}
 	},
 

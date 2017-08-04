@@ -29,7 +29,7 @@ var isFirstRun = false;
 
 function initDB() {
 	return new Promise(function(resolve, reject) {
-		let request = indexedDB.open('newTabTools', 5);
+		let request = indexedDB.open('newTabTools', 7);
 
 		request.onsuccess = function(/*event*/) {
 			// console.log(event.type, event);
@@ -43,20 +43,20 @@ function initDB() {
 		};
 
 		request.onupgradeneeded = function(event) {
-			// console.log(event.type, event);
+			console.log(event.type, event);
 			db = this.result;
 
-			// if (db.objectStoreNames.contains('tiles')) {
-			// 	db.deleteObjectStore('tiles');
-			// }
+			if (!db.objectStoreNames.contains('tiles')) {
+				db.createObjectStore('tiles', { autoIncrement: true, keyPath: 'id' });
+			}
 
-			db.createObjectStore('tiles', { autoIncrement: true, keyPath: 'id' });
+			if (!db.objectStoreNames.contains('background')) {
+				db.createObjectStore('background', { autoIncrement: true });
+			}
 
-			// if (db.objectStoreNames.contains('backgrounds')) {
-			// 	db.deleteObjectStore('backgrounds');
-			// }
-
-			db.createObjectStore('background', { autoIncrement: true });
+			if (!db.objectStoreNames.contains('thumbnails')) {
+				db.createObjectStore('thumbnails', { keyPath: 'url' });
+			}
 
 			if (event.oldVersion < 5) {
 				isFirstRun = true;
@@ -101,5 +101,33 @@ browser.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 	case 'Background.setBackground':
 		Background.setBackground(message.file).then(sendResponse);
 		return true;
+
+	case 'Thumbnails.save':
+		let {url, image} = message;
+		let today = new Date().toJSON().substring(0, 10);
+		db.transaction('thumbnails', 'readwrite').objectStore('thumbnails').put({
+			url, image, stored: today, used: today
+		});
+		return;
+	case 'Thumbnails.get':
+		// TODO cache the shit out of this
+		db.transaction('thumbnails').objectStore('thumbnails').getAll().onsuccess = function() {
+			let map = new Map();
+			for (let thumb of this.result) {
+				if (message.urls.includes(thumb.url)) {
+					map.set(thumb.url, thumb.image);
+				}
+			}
+			sendResponse(map);
+		};
+		return true;
 	}
 });
+
+browser.webNavigation.onCompleted.addListener(function(details) {
+	if (details.frameId === 0 && Tiles._cache.includes(details.url)) { // TODO: wrong list // TODO check when last was stored
+		browser.tabs.executeScript(details.tabId, {file: 'thumbnail.js'});
+	}
+});
+
+// TODO cleanup the old thumbnails

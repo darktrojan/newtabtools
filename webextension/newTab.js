@@ -242,6 +242,7 @@ var newTabTools = {
 
 				let thumbnailURL = URL.createObjectURL(site.link.image);
 				newTabTools.siteThumbnail.style.backgroundImage = 'url("' + thumbnailURL + '")';
+				newTabTools.siteThumbnail.classList.add('custom-thumbnail');
 
 				Tiles.putTile(site.link);
 			}, 'image/png');
@@ -254,8 +255,10 @@ var newTabTools = {
 	removeThumbnail: function(site) {
 		delete site.link.image;
 		site.refreshThumbnail();
+		this.getThumbnails();
 
 		this.siteThumbnail.style.backgroundImage = null;
+		this.siteThumbnail.classList.remove('custom-thumbnail');
 
 		Tiles.putTile(site.link);
 	},
@@ -449,9 +452,11 @@ var newTabTools = {
 		if (site.link.image) {
 			let thumbnailURL = URL.createObjectURL(site.link.image);
 			this.siteThumbnail.style.backgroundImage = 'url("' + thumbnailURL + '")';
+			this.siteThumbnail.classList.add('custom-thumbnail');
 			this.removeSavedThumbButton.disabled = false;
 		} else {
 			this.siteThumbnail.style.backgroundImage = site._querySelector('.newtab-thumbnail').style.backgroundImage;
+			this.siteThumbnail.classList.remove('custom-thumbnail');
 			this.removeSavedThumbButton.disabled = true;
 		}
 
@@ -549,13 +554,17 @@ var newTabTools = {
 	},
 	getThumbnails: function() {
 		browser.runtime.sendMessage({
-			action: 'thumbnails',
-			urls: Grid.sites.filter(s => s && !s._link.image).map(s => s.link.url)
+			name: 'Thumbnails.get',
+			urls: Grid.sites.filter(s => s && !s._querySelector('.newtab-thumbnail').style.backgroundImage).map(s => s.link.url)
 		}).then(function(thumbs) {
 			Grid.sites.forEach(s => {
 				if (s && !s._link.image && thumbs.has(s._link.url)) {
-					s._querySelector('.newtab-thumbnail').style.backgroundImage =
-						'url(' + URL.createObjectURL(thumbs.get(s._link.url)) + ')';
+					let css = 'url(' + URL.createObjectURL(thumbs.get(s._link.url)) + ')';
+					s._querySelector('.newtab-thumbnail').style.backgroundImage = css;
+
+					if (newTabTools.selectedSite == s) {
+						newTabTools.siteThumbnail.style.background = css;
+					}
 				}
 			});
 		});
