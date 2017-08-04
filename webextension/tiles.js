@@ -26,7 +26,6 @@ var Tiles = {
 				}
 
 				browser.topSites.get({ providers: ['places'] }).then(r => {
-				// browser.runtime.sendMessage('topSites').then(r => {
 					let urls = Tiles._list.slice();
 					let remaining = r.filter(s => {
 						if (Blocked.isBlocked(s.url)) {

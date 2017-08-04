@@ -17,11 +17,6 @@ Promise.all([
 			Prefs.getPrefsFromOldExtension()
 		]);
 	}
-}).then(function() {
-	browser.runtime.sendMessage({
-		action: 'expirationFilter',
-		count: Prefs.rows * Prefs.columns + 10
-	});
 });
 
 var db;

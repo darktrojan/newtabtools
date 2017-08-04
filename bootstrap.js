@@ -13,10 +13,8 @@ Cu.import('resource://gre/modules/Services.jsm');
 Cu.import('resource://gre/modules/NewTabUtils.jsm');
 Cu.import('resource://gre/modules/XPCOMUtils.jsm');
 
-/* globals FileUtils, OS, PageThumbs, SavedThumbs, Task, TileData */
+/* globals FileUtils, SavedThumbs, Task, TileData */
 XPCOMUtils.defineLazyModuleGetter(this, 'FileUtils', 'resource://gre/modules/FileUtils.jsm');
-XPCOMUtils.defineLazyModuleGetter(this, 'OS', 'resource://gre/modules/osfile.jsm');
-XPCOMUtils.defineLazyModuleGetter(this, 'PageThumbs', 'resource://gre/modules/PageThumbs.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'SavedThumbs', 'chrome://newtabtools/content/newTabTools.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'Task', 'resource://gre/modules/Task.jsm');
 XPCOMUtils.defineLazyModuleGetter(this, 'TileData', 'chrome://newtabtools/content/newTabTools.jsm');
@@ -61,8 +59,6 @@ function shutdown(params, reason) {
 	}
 
 	Cu.unload('chrome://newtabtools/content/newTabTools.jsm');
-	expirationFilter.cleanup();
-	messageListener.destroy();
 }
 
 function uiStartup(params) {
@@ -70,17 +66,6 @@ function uiStartup(params) {
 		Cu.importGlobalProperties(['fetch']);
 
 		browser.runtime.onMessage.addListener(function(message, sender, sendReply) {
-			if (typeof message == 'object') {
-				switch (message.action) {
-				case 'thumbnails':
-					thumbnailHandler.getThumbnails(message.urls).then(sendReply);
-					return true;
-				case 'expirationFilter':
-					expirationFilter.init(message.count);
-					return;
-				}
-			}
-
 			switch (message) {
 			case 'tiles':
 				Task.spawn(function*() {
@@ -172,14 +157,8 @@ function uiStartup(params) {
 
 				sendReply(prefs);
 				return;
-
-			case 'topSites':
-				getTopSites().then(sendReply);
-				return true;
 			}
 		});
-
-		messageListener.init();
 	});
 }
 function getTopSites() {
@@ -194,77 +173,3 @@ function getTopSites() {
 		});
 	});
 }
-
-var thumbnailHandler = {
-	_cache: new Map(),
-
-	getThumbnail: function(url) {
-		if (thumbnailHandler._cache.has(url)) {
-			return Promise.resolve(thumbnailHandler._cache.get(url));
-		}
-
-		return Task.spawn(function*() {
-			let path = PageThumbs.getThumbnailPath(url);
-			let exists = yield OS.File.exists(path);
-			if (!exists) {
-				thumbnailHandler._cache.set(url, null);
-				return null;
-			}
-
-			let r = yield fetch(PageThumbs.getThumbnailURL(url));
-			let b = yield r.blob();
-			thumbnailHandler._cache.set(url, b);
-			return b;
-		});
-	},
-	getThumbnails: function(urls) {
-		let result = new Map();
-		return Promise.all(urls.map(u => {
-			return thumbnailHandler.getThumbnail(u).then(tu => {
-				if (tu) {
-					result.set(u, tu);
-				}
-			});
-		})).then(() => result);
-	}
-};
-
-var expirationFilter = {
-	added: false,
-	count: -1,
-
-	init: function(count) {
-		if (!this.added) {
-			this.count = count;
-			this.added = true;
-			PageThumbs.addExpirationFilter(this);
-		}
-	},
-
-	cleanup: function() {
-		if (this.added) {
-			this.added = false;
-			PageThumbs.removeExpirationFilter(this);
-		}
-	},
-
-	filterForThumbnailExpiration: function(callback) {
-		NewTabUtils.links.populateCache(function() {
-			// Add all URLs to the list that we want to keep thumbnails for.
-			callback(getTopSites().slice(0, this.count).map(s => s.url));
-		});
-	}
-};
-
-var messageListener = {
-	// Work around bug 1051238.
-	_processScriptURL: 'chrome://newtabtools/content/process.js?' + Math.random(),
-	init: function() {
-		Services.ppmm.loadProcessScript(this._processScriptURL, true);
-		Services.ppmm.broadcastAsyncMessage('NewTabTools:enable');
-	},
-	destroy: function() {
-		Services.ppmm.removeDelayedProcessScript(this._processScriptURL, true);
-		Services.ppmm.broadcastAsyncMessage('NewTabTools:disable');
-	}
-};
