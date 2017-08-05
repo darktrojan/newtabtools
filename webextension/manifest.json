@@ -1,7 +1,7 @@
 {
 	"name": "__MSG_extensionName__",
 	"description": "__MSG_extensionDescription__",
-	"version": "82",
+	"version": "82.1",
 	"applications": {
 		"gecko": {
 			"id": "newtabtools@darktrojan.net",
