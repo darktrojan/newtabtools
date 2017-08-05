@@ -563,7 +563,7 @@ var newTabTools = {
 					s._querySelector('.newtab-thumbnail').style.backgroundImage = css;
 
 					if (newTabTools.selectedSite == s) {
-						newTabTools.siteThumbnail.style.background = css;
+						newTabTools.siteThumbnail.style.backgroundImage = css;
 					}
 				}
 			});
