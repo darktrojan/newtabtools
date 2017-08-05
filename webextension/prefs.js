@@ -59,10 +59,10 @@ var Prefs = {
 			this._version = prefs.version;
 		}
 		if ('versionLastUpdate' in prefs) {
-			this._versionLastUpdate = prefs.versionLastUpdate;
+			this._versionLastUpdate = new Date(prefs.versionLastUpdate);
 		}
 		if ('versionLastAck' in prefs) {
-			this._versionLastAck = prefs.versionLastAck;
+			this._versionLastAck = new Date(prefs.versionLastAck);
 		}
 	},
 	prefsChanged: function(changes) {
