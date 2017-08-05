@@ -139,12 +139,17 @@ browser.webNavigation.onCompleted.addListener(function(details) {
 	let promise = Tiles._cache.length > 0 ? Promise.resolve(null) : Tiles.getAllTiles();
 	promise.then(function() {
 		if (details.frameId === 0 && Tiles._cache.includes(details.url)) {
-			db.transaction('thumbnails').objectStore('thumbnails').get(details.url).onsuccess = function() {
-				let today = new Date().toTZDateString();
-				if (!this.result || this.result.stored < today) {
-					browser.tabs.executeScript(details.tabId, {file: 'thumbnail.js'});
+			browser.tabs.get(details.tabId).then(function(tab) {
+				if (tab.incognito) {
+					return;
 				}
-			};
+				db.transaction('thumbnails').objectStore('thumbnails').get(details.url).onsuccess = function() {
+					let today = new Date().toTZDateString();
+					if (!this.result || this.result.stored < today) {
+						browser.tabs.executeScript(details.tabId, {file: 'thumbnail.js'});
+					}
+				};
+			});
 		}
 	});
 });
