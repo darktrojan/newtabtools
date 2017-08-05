@@ -132,14 +132,14 @@ var newTabTools = {
 		case 'options-bgcolor-set':
 			this.selectedSite.link.backgroundColor = this.setBgColourInput.value;
 			Tiles.putTile(this.selectedSite.link);
-			this.selectedSite._querySelector('.newtab-thumbnail').style.backgroundColor =
+			this.selectedSite.thumbnail.style.backgroundColor =
 				this.siteThumbnail.style.backgroundColor = this.setBgColourInput.value;
 			this.resetBgColourButton.disabled = false;
 			break;
 		case 'options-bgcolor-reset':
 			delete this.selectedSite.link.backgroundColor;
 			Tiles.putTile(this.selectedSite.link);
-			this.selectedSite._querySelector('.newtab-thumbnail').style.backgroundColor =
+			this.selectedSite.thumbnail.style.backgroundColor =
 				this.siteThumbnail.style.backgroundColor =
 				this.setBgColourInput.value =
 				this.setBgColourDisplay.style.backgroundColor = null;
@@ -148,7 +148,7 @@ var newTabTools = {
 			break;
 		case 'options-title-set':
 			this.selectedSite.link.title = this.setTitleInput.value;
-			this.selectedSite._addTitleAndFavicon();
+			this.selectedSite.addTitle();
 			Tiles.putTile(this.selectedSite.link);
 			break;
 		case 'options-bg-set':
@@ -426,7 +426,10 @@ var newTabTools = {
 			}
 		}
 	},
-	set selectedSiteIndex(index) { // jshint ignore:line
+	get selectedSiteIndex() {
+		return this._selectedSiteIndex;
+	},
+	set selectedSiteIndex(index) {
 		this._selectedSiteIndex = index;
 		let site = this.selectedSite;
 		let disabled = site === null;
@@ -455,7 +458,7 @@ var newTabTools = {
 			this.siteThumbnail.classList.add('custom-thumbnail');
 			this.removeSavedThumbButton.disabled = false;
 		} else {
-			this.siteThumbnail.style.backgroundImage = site._querySelector('.newtab-thumbnail').style.backgroundImage;
+			this.siteThumbnail.style.backgroundImage = site.thumbnail.style.backgroundImage;
 			this.siteThumbnail.classList.remove('custom-thumbnail');
 			this.removeSavedThumbButton.disabled = true;
 		}
@@ -493,7 +496,7 @@ var newTabTools = {
 		document.documentElement.setAttribute('options-hidden', 'true');
 	},
 	resizeOptionsThumbnail: function() {
-		let node = Grid._node.querySelector('.newtab-thumbnail');
+		let node = Grid.node.querySelector('.newtab-thumbnail');
 		let ratio = node.offsetWidth / node.offsetHeight;
 		if (ratio > 1.6666) {
 			this.siteThumbnail.style.width = '250px';
@@ -555,12 +558,13 @@ var newTabTools = {
 	getThumbnails: function() {
 		browser.runtime.sendMessage({
 			name: 'Thumbnails.get',
-			urls: Grid.sites.filter(s => s && !s._querySelector('.newtab-thumbnail').style.backgroundImage).map(s => s.link.url)
+			urls: Grid.sites.filter(s => s && !s.thumbnail.style.backgroundImage).map(s => s.link.url)
 		}).then(function(thumbs) {
 			Grid.sites.forEach(s => {
-				if (s && !s._link.image && thumbs.has(s._link.url)) {
-					let css = 'url(' + URL.createObjectURL(thumbs.get(s._link.url)) + ')';
-					s._querySelector('.newtab-thumbnail').style.backgroundImage = css;
+				let link = s.link;
+				if (s && !link.image && thumbs.has(link.url)) {
+					let css = 'url(' + URL.createObjectURL(thumbs.get(link.url)) + ')';
+					s.thumbnail.style.backgroundImage = css;
 
 					if (newTabTools.selectedSite == s) {
 						newTabTools.siteThumbnail.style.backgroundImage = css;

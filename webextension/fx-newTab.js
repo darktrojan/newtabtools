@@ -658,6 +658,10 @@ Site.prototype = {
 		return parentNode && parentNode._newtabCell;
 	},
 
+	get thumbnail() {
+		return this._querySelector('.newtab-thumbnail');
+	},
+
 	/**
 	   * Pins the site on its current or a given index.
 	   * @param index The pinned index (optional).
@@ -749,10 +753,10 @@ Site.prototype = {
 			this._updateAttributes(true);
 		// but still display whatever thumbnail might be available now.
 		this.refreshThumbnail();
-		this._addTitleAndFavicon();
+		this.addTitle();
 	},
 
-	_addTitleAndFavicon: function() {
+	addTitle: function Site_addTitle() {
 		let url = this.url;
 		let title = this.title || url;
 		let tooltip = title == url ? title : title + '\n' + url;
@@ -769,7 +773,7 @@ Site.prototype = {
 	   * Refreshes the thumbnail for the site.
 	   */
 	refreshThumbnail: function Site_refreshThumbnail() {
-		let thumbnail = this._querySelector('.newtab-thumbnail');
+		let thumbnail = this.thumbnail;
 		thumbnail.style.backgroundColor = this.link.backgroundColor || null;
 		if (this.link.image) {
 			let thumbnailURL = URL.createObjectURL(this.link.image);
