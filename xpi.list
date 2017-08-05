@@ -2,7 +2,6 @@ bootstrap.js
 chrome.manifest
 content
 content/newTabTools.jsm
-content/process.js
 icon.png
 icon64.png
 install.rdf
@@ -23,5 +22,6 @@ webextension/options-light.svg
 webextension/pointer-rtl.png
 webextension/pointer.png
 webextension/prefs.js
+webextension/thumbnail.js
 webextension/tiles.js
 webextension/tiles-shim.js
