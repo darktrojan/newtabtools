@@ -131,16 +131,16 @@ var newTabTools = {
 			break;
 		case 'options-bgcolor-set':
 			this.selectedSite.link.backgroundColor = this.setBgColourInput.value;
-			this.selectedSite.refreshThumbnail();
 			Tiles.putTile(this.selectedSite.link);
-			this.siteThumbnail.style.backgroundColor = this.setBgColourInput.value;
+			this.selectedSite._querySelector('.newtab-thumbnail').style.backgroundColor =
+				this.siteThumbnail.style.backgroundColor = this.setBgColourInput.value;
 			this.resetBgColourButton.disabled = false;
 			break;
 		case 'options-bgcolor-reset':
 			delete this.selectedSite.link.backgroundColor;
-			this.selectedSite.refreshThumbnail();
 			Tiles.putTile(this.selectedSite.link);
-			this.siteThumbnail.style.backgroundColor =
+			this.selectedSite._querySelector('.newtab-thumbnail').style.backgroundColor =
+				this.siteThumbnail.style.backgroundColor =
 				this.setBgColourInput.value =
 				this.setBgColourDisplay.style.backgroundColor = null;
 			this.setBgColourButton.disabled =
