@@ -38,7 +38,7 @@ function initDB() {
 		};
 
 		request.onupgradeneeded = function(event) {
-			console.log(event.type, event);
+			// console.log(event.type, event);
 			db = this.result;
 
 			if (!db.objectStoreNames.contains('tiles')) {
