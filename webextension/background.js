@@ -75,12 +75,12 @@ function waitForDB() {
 	});
 }
 
-Date.prototype.toTZDateString = function() {
-	return [this.getFullYear(), this.getMonth() + 1, this.getDate()].map(p => p.toString().padStart(2, '0')).join('-');
-};
+function getTZDateString(date=new Date()) {
+	return [date.getFullYear(), date.getMonth() + 1, date.getDate()].map(p => p.toString().padStart(2, '0')).join('-');
+}
 
 browser.runtime.onMessage.addListener(function(message, sender, sendResponse) {
-	let today = new Date().toTZDateString();
+	let today = getTZDateString();
 
 	switch (message.name) {
 	case 'Tiles.getAllTiles':
@@ -144,7 +144,7 @@ browser.webNavigation.onCompleted.addListener(function(details) {
 					return;
 				}
 				db.transaction('thumbnails').objectStore('thumbnails').get(details.url).onsuccess = function() {
-					let today = new Date().toTZDateString();
+					let today = getTZDateString();
 					if (!this.result || this.result.stored < today) {
 						browser.tabs.executeScript(details.tabId, {file: 'thumbnail.js'});
 					}
@@ -155,7 +155,7 @@ browser.webNavigation.onCompleted.addListener(function(details) {
 });
 
 function cleanupThumbnails() {
-	let expiry = new Date(Date.now() - 1209600000).toTZDateString(); // ms in two weeks.
+	let expiry = getTZDateString(new Date(Date.now() - 1209600000)); // ms in two weeks.
 	let index = db.transaction('thumbnails', 'readwrite').objectStore('thumbnails').index('used');
 	let keyRange = IDBKeyRange.upperBound(expiry);
 
