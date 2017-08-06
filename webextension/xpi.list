@@ -5,6 +5,8 @@ close.svg
 controls.png
 controls@2x.png
 fx-newTab.js
+locked-dark.svg
+locked-light.svg
 manifest.json
 newTab.css
 newTab.js
@@ -17,3 +19,5 @@ prefs.js
 thumbnail.js
 tiles.js
 tiles-shim.js
+unlocked-dark.svg
+unlocked-light.svg

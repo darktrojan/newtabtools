@@ -171,15 +171,15 @@ input[type="button"] {
 	outline: 1px dotted;
 }
 /* UPDATE NOTICE */
-#newtab-update-notice {
+#newtab-update-outer {
 	flex: 1;
 	text-align: center;
 	margin-top: 3px;
 }
-:root[spacing="medium"] #newtab-margin-bottom:-moz-any(.medium, .large) #newtab-update-notice {
+:root[spacing="medium"] #newtab-margin-bottom:-moz-any(.medium, .large) :-moz-any(#newtab-update-outer, #locked-toggle) {
 	margin-top: 8px;
 }
-:root[spacing="large"] #newtab-margin-bottom:-moz-any(.medium, .large) #newtab-update-notice {
+:root[spacing="large"] #newtab-margin-bottom:-moz-any(.medium, .large) :-moz-any(#newtab-update-outer, #locked-toggle) {
 	margin-top: 18px;
 }
 #newtab-update-text {
@@ -390,7 +390,7 @@ input[type="button"] {
 	border: none;
 	background: transparent url("controls.png");
 }
-:root.hideButtons .newtab-control {
+:root[locked="true"] .newtab-control {
 	display: none;
 }
 .newtab-control:-moz-focusring,
@@ -458,38 +458,60 @@ input[type="button"] {
 .newtab-margin-right {
 	justify-content: flex-start;
 }
-:root[spacing="medium"] .newtab-margin-right:-moz-any(.medium, .large) #options-toggle {
+:root[spacing="medium"] .newtab-margin-right:-moz-any(.medium, .large) :-moz-any(#options-toggle, #locked-toggle) {
 	margin-inline-start: 8px;
 	margin-inline-end: 0;
 }
-:root[spacing="large"] .newtab-margin-right:-moz-any(.medium, .large) #options-toggle {
+:root[spacing="large"] .newtab-margin-right:-moz-any(.medium, .large) :-moz-any(#options-toggle, #locked-toggle) {
 	margin-inline-start: 18px;
 	margin-inline-end: 0;
 }
-.newtab-margin-right:not(.medium):not(.large) #options-toggle {
+/* Using :-moz-any on this causes bad things. */
+.newtab-margin-right:not(.medium):not(.large) #options-toggle,
+.newtab-margin-right:not(.medium):not(.large) #locked-toggle {
 	margin-inline-end: 0;
 	padding-inline-start: 1px;
 	width: 27px;
 }
-#options-toggle {
+#options-toggle,
+#locked-toggle {
 	margin-inline-end: -1px;
 	margin-inline-start: 3px;
 	width: 28px;
 	height: 28px;
 	padding: 0;
 	border: none;
-	background: transparent url("options-light.svg") center no-repeat;
+	background-color: transparent;
+	background-position: center;
+	background-repeat: no-repeat;
 	background-size: 18px;
 	z-index: 2;
 	opacity: var(--opacity);
 }
-#options-toggle:hover {
+#options-toggle {
+	background-image: url("options-light.svg");
+}
+#locked-toggle {
+	background-image: url("unlocked-light.svg");
+}
+:root[locked="true"] #locked-toggle {
+	background-image: url("locked-light.svg");
+}
+#options-toggle:hover,
+#locked-toggle:hover {
 	opacity: 1;
 }
 :root[theme="dark"] #options-toggle {
 	background-image: url("options-dark.svg");
 }
-#options-toggle:-moz-locale-dir(rtl) {
+:root[theme="dark"] #locked-toggle {
+	background-image: url("unlocked-dark.svg");
+}
+:root[theme="dark"][locked="true"] #locked-toggle {
+	background-image: url("locked-dark.svg");
+}
+#options-toggle:-moz-locale-dir(rtl),
+#locked-toggle:-moz-locale-dir(rtl) {
 	left: 10px;
 	right: auto;
 }
@@ -538,7 +560,8 @@ input[type="button"] {
 :root[options-hidden] #options,
 :root[options-hidden] #options-bg,
 :root:not([options-hidden]) #options-toggle,
-:root:not([options-hidden]) #options-toggle-pointer {
+:root:not([options-hidden]) #options-toggle-pointer,
+:root:not([options-hidden]) #locked-toggle {
 	visibility: hidden;
 }
 :root:not([options-hidden]) #newtab-scrollbox,

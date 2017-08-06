@@ -13,6 +13,8 @@ webextension/close.svg
 webextension/controls.png
 webextension/controls@2x.png
 webextension/fx-newTab.js
+webextension/locked-dark.svg
+webextension/locked-light.svg
 webextension/manifest.json
 webextension/newTab.css
 webextension/newTab.js
@@ -25,3 +27,5 @@ webextension/prefs.js
 webextension/thumbnail.js
 webextension/tiles.js
 webextension/tiles-shim.js
+webextension/unlocked-dark.svg
+webextension/unlocked-light.svg

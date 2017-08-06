@@ -307,7 +307,11 @@ var newTabTools = {
 		if (!keys || keys.includes('locked')) {
 			let locked = Prefs.locked;
 			document.querySelector('[name="locked"]').checked = locked;
-			document.documentElement.classList[locked ? 'add' : 'remove']('hideButtons');
+			if (locked) {
+				document.documentElement.setAttribute('locked', 'true');
+			} else {
+				document.documentElement.removeAttribute('locked');
+			}
 		}
 
 		// let hideFavicons = this.prefs.getBoolPref('thumbs.hidefavicons');
@@ -606,7 +610,8 @@ var newTabTools = {
 		'optionsBackground': 'options-bg',
 		'optionsPane': 'options',
 		'updateNotice': 'newtab-update-notice',
-		'updateText': 'newtab-update-text'
+		'updateText': 'newtab-update-text',
+		'lockedToggleButton': 'locked-toggle'
 	};
 	for (let key in uiElements) {
 		let value = uiElements[key];
@@ -622,6 +627,10 @@ var newTabTools = {
 	}
 
 	newTabTools.updateNotice.addEventListener('click', newTabTools.optionsOnClick.bind(newTabTools), false);
+	newTabTools.lockedToggleButton.addEventListener('click', function() {
+		Prefs.locked = !Prefs.locked;
+		this.blur();
+	}, false);
 	newTabTools.optionsToggleButton.addEventListener('click', newTabTools.toggleOptions.bind(newTabTools), false);
 	newTabTools.optionsBackground.addEventListener('click', newTabTools.hideOptions.bind(newTabTools));
 	newTabTools.pinURLInput.addEventListener('input', newTabTools.autocomplete.bind(newTabTools));
