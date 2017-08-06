@@ -616,6 +616,8 @@ input[type="button"] {
 	align-items: baseline;
 	justify-content: center;
 	display: flex;
+	width: 335px;
+	box-sizing: border-box;
 }
 .spacer {
 	flex: 1;
@@ -630,7 +632,7 @@ input[type="button"] {
 	box-shadow: 0 0 1.5px #ff0000;
 }
 #options-thumbnail-wrap {
-	margin: 0 1em;
+	padding: 0 1em;
 	display: flex;
 	align-items: center;
 }
