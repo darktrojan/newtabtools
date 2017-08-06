@@ -4,10 +4,21 @@
 	"disallowMultipleVarDecl": false,
 	"disallowNewlineBeforeBlockStatements": true,
 	"disallowQuotedKeysInObjects": false,
+	"disallowSpacesInAnonymousFunctionExpression": {
+		"beforeOpeningRoundBrace": true
+	},
+	"disallowSpacesInFunctionDeclaration": {
+		"beforeOpeningRoundBrace": true
+	},
+	"maximumLineLength": 120,
 	"requireCamelCaseOrUpperCaseIdentifiers": false,
 	"requireDotNotation": false,
 	"requirePaddingNewLinesAfterBlocks": false,
 	"requirePaddingNewLinesBeforeLineComments": false,
+	"requireSpacesInAnonymousFunctionExpression": {
+		"beforeOpeningCurlyBrace": true
+	},
+	"requireSpacesInsideObjectBrackets": false,
 	"requireTrailingComma": false,
 	"safeContextKeyword": null,
 	"validateIndentation": "\t",

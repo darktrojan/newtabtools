@@ -129,8 +129,6 @@ var Background = {
 		});
 	},
 	getBackgroundFromOldExtension: function() {
-		return browser.runtime.sendMessage('background').then(result => {
-			return this.setBackground(result);
-		});
+		return browser.runtime.sendMessage('background').then(result => this.setBackground(result));
 	}
 };

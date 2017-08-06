@@ -8,7 +8,7 @@ DOMRect.prototype.isEmpty = function() {
 };
 
 DOMRect.prototype.intersect = function(other) {
-    if (this.isEmpty() || other.isEmpty()) {
+	if (this.isEmpty() || other.isEmpty()) {
 		return new DOMRect(0, 0, 0, 0);
 	}
 

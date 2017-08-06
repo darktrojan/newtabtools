@@ -435,7 +435,7 @@ var newTabTools = {
 		let disabled = site === null;
 
 		this.setSavedThumbInput.value = '';
-			this.setSavedThumbInput.disabled =
+		this.setSavedThumbInput.disabled =
 			this.setTitleInput.disabled =
 			this.setTitleButton.disabled =
 			this.setBgColourDisplay.parentNode.disabled = disabled;
