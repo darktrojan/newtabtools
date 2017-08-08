@@ -1,7 +1,4 @@
 {
-	"options.pointer": {
-		"message": "Click here to begin customising your new tab page"
-	},
 	"tile-thumbnail.bgcolor": {
 		"message": "Background colour:"
 	}

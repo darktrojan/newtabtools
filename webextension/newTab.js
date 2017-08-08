@@ -300,10 +300,6 @@ var newTabTools = {
 			document.documentElement.setAttribute('theme', theme);
 		}
 
-		// let containThumbs = this.prefs.getBoolPref('thumbs.contain');
-		// document.querySelector('[name="thumbs.contain"]').checked = containThumbs;
-		// document.documentElement.classList[containThumbs ? 'add' : 'remove']('containThumbs');
-
 		if (!keys || keys.includes('locked')) {
 			let locked = Prefs.locked;
 			document.querySelector('[name="locked"]').checked = locked;
@@ -313,10 +309,6 @@ var newTabTools = {
 				document.documentElement.removeAttribute('locked');
 			}
 		}
-
-		// let hideFavicons = this.prefs.getBoolPref('thumbs.hidefavicons');
-		// document.querySelector('[name="thumbs.hidefavicons"]').checked = !hideFavicons;
-		// document.documentElement.classList[hideFavicons ? 'add' : 'remove']('hideFavicons');
 
 		if (!keys || keys.includes('titleSize')) {
 			let titleSize = Prefs.titleSize;
@@ -486,12 +478,10 @@ var newTabTools = {
 	},
 	toggleOptions: function() {
 		if (document.documentElement.hasAttribute('options-hidden')) {
-			this.optionsTogglePointer.hidden = true;
-			// this.prefs.setBoolPref('optionspointershown', true);
 			document.documentElement.removeAttribute('options-hidden');
 			this.selectedSiteIndex = 0;
 			this.resizeOptionsThumbnail();
-			// this.pinURLInput.focus();
+			this.pinURLInput.focus();
 		} else {
 			this.hideOptions();
 		}
@@ -583,7 +573,6 @@ var newTabTools = {
 	let uiElements = {
 		'page': 'newtab-scrollbox', // used in fx-newTab.js
 		'optionsToggleButton': 'options-toggle',
-		'optionsTogglePointer': 'options-toggle-pointer',
 		'pinURLInput': 'options-pinURL-input',
 		'pinURLAutocomplete': 'autocomplete',
 		'tilePreviousRow': 'options-previous-row-tile',

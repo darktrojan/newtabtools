@@ -68,9 +68,6 @@
 	"options.locked": {
 		"message": "Verhindere das Ziehen von Kacheln"
 	},
-	"options.pointer": {
-		"message": "Klick hier um die Neuer-Tab-Seite anzupassen"
-	},
 	"options.recent": {
 		"message": "Geschlossene Tabs"
 	},

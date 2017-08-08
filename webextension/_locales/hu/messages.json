@@ -65,9 +65,6 @@
 	"options.locked": {
 		"message": "Csempék mozgatásának megakadályozása"
 	},
-	"options.pointer": {
-		"message": "Kattintson ide az új lap oldal személyre szabásának megkezdéséhez"
-	},
 	"options.recent": {
 		"message": "Nemrég bezárt lapok"
 	},

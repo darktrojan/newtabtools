@@ -62,9 +62,6 @@
 	"options.locked": {
 		"message": "Забрани влачене на плочките"
 	},
-	"options.pointer": {
-		"message": "Натисни тук, за да персонализираш новия раздел"
-	},
 	"options.recent": {
 		"message": "Последно затворени раздели"
 	},

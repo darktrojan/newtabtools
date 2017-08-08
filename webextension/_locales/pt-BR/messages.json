@@ -65,9 +65,6 @@
 	"options.locked": {
 		"message": "Prevenir que blocos sejam arrastados"
 	},
-	"options.pointer": {
-		"message": "Clique aqui para começar a personalizar a página 'Nova aba'"
-	},
 	"options.recent": {
 		"message": "Abas fechadas recentemente"
 	},

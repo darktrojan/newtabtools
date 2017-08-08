@@ -62,9 +62,6 @@
 	"options.locked": {
 		"message": "禁止拖動首頁磚"
 	},
-	"options.pointer": {
-		"message": "點此來開始自訂你的新分頁"
-	},
 	"options.recent": {
 		"message": "最近關閉的分頁"
 	},

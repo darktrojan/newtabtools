@@ -312,9 +312,6 @@ input[type="button"] {
 .newtab-site:hover .newtab-title > .favicon {
 	opacity: 1;
 }
-:root.hideFavicons .favicon {
-	display: none;
-}
 .newtab-link,
 .newtab-thumbnail {
 	position: absolute;
@@ -515,52 +512,9 @@ input[type="button"] {
 	left: 10px;
 	right: auto;
 }
-#options-toggle-pointer {
-	position: absolute;
-	top: 3px;
-	right: 26px;
-	line-height: 18px;
-	color: white;
-	text-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
-	border-width: 0 17px 0 8px;
-	border-style: solid;
-	border-color: transparent;
-	padding: 1px 0 3px;
-	/* TODO replace with SVG image once that is fixed. */
-	border-image: url("pointer.png") 0 17% 0 8% fill;
-	animation: pointerslide 2s paused;
-}
-#options-toggle-pointer:-moz-locale-dir(rtl) {
-	left: 30px;
-	right: auto;
-	border-width: 0 8px 0 17px;
-	padding: 1px 0 3px;
-	/* TODO replace with SVG image once that is fixed. */
-	border-image: url("pointer-rtl.png") 0 8% 0 17% fill;
-	animation: pointerslide-rtl 2s paused;
-}
-@keyframes pointerslide {
-	0% {
-		transform: translatex(-100px);
-		opacity: 0;
-	}
-	100% {
-		transform: translatex(0px);
-	}
-}
-@keyframes pointerslide-rtl {
-	0% {
-		transform: translatex(100px);
-		opacity: 0;
-	}
-	100% {
-		transform: translatex(0px);
-	}
-}
 :root[options-hidden] #options,
 :root[options-hidden] #options-bg,
 :root:not([options-hidden]) #options-toggle,
-:root:not([options-hidden]) #options-toggle-pointer,
 :root:not([options-hidden]) #locked-toggle {
 	visibility: hidden;
 }
