@@ -584,7 +584,7 @@ Cell.prototype = {
 	   */
 	containsPinnedSite: function Cell_containsPinnedSite() {
 		let site = this.site;
-		return site && site.isPinned();
+		return site && site.isPinned;
 	},
 
 	/**
@@ -690,7 +690,7 @@ Site.prototype = {
 	   * Unpins the site and calls the given callback when done.
 	   */
 	unpin: function Site_unpin() {
-		if (this.isPinned()) {
+		if (this.isPinned) {
 			this._updateAttributes(false);
 
 			let op;
@@ -711,7 +711,7 @@ Site.prototype = {
 	   * Checks whether this site is pinned.
 	   * @return Whether this site is pinned.
 	   */
-	isPinned: function Site_isPinned() {
+	get isPinned() {
 		return Tiles.isPinned(this._link.url);
 	},
 
@@ -724,7 +724,7 @@ Site.prototype = {
 			UndoDialog.show(this);
 			Blocked.block(this._link.url);
 
-			(this.isPinned() ? Tiles.removeTile(this._link) : Promise.resolve()).then(() => {
+			(this.isPinned ? Tiles.removeTile(this._link) : Promise.resolve()).then(() => {
 				Updater.updateGrid();
 			});
 		}
@@ -760,7 +760,7 @@ Site.prototype = {
 	   * Renders the site's data (fills the HTML fragment).
 	   */
 	_render: function Site_render() {
-		if (this.isPinned()) {
+		if (this.isPinned) {
 			this._updateAttributes(true);
 		}
 		// but still display whatever thumbnail might be available now.
@@ -820,7 +820,7 @@ Site.prototype = {
 		event.preventDefault();
 		if (event.target.classList.contains('newtab-control-block')) {
 			this.block();
-		} else if (this.isPinned()) {
+		} else if (this.isPinned) {
 			this.unpin();
 		} else {
 			this.pin();
@@ -1058,7 +1058,7 @@ var Drop = {
 
 		// Filter out pinned sites.
 		let pinnedSites = sites.filter(function(site) {
-			return site && site.isPinned();
+			return site && site.isPinned;
 		});
 
 		// Re-pin all shifted pinned cells.
@@ -1448,7 +1448,7 @@ var DropPreview = {
 
 		return sites.filter(function(site) {
 			// The site must be valid, pinned and not the dragged site.
-			if (!site || site == draggedSite || !site.isPinned()) {
+			if (!site || site == draggedSite || !site.isPinned) {
 				return false;
 			}
 
@@ -1512,7 +1512,7 @@ var DropPreview = {
 		let overflowedSite = sites[cells.length];
 
 		// Nothing to do if the site that got pushed out of the grid is not pinned.
-		return (overflowedSite && overflowedSite.isPinned());
+		return (overflowedSite && overflowedSite.isPinned);
 	},
 
 	/**
@@ -1567,7 +1567,7 @@ var DropPreview = {
 			let site = sites[i];
 
 			// We can use the cell only if it's empty or the site is un-pinned.
-			if (!site || !site.isPinned()) {
+			if (!site || !site.isPinned) {
 				return i;
 			}
 		}
@@ -1812,7 +1812,7 @@ var UndoDialog = {
 
 		this._undoData = {
 			index: site.cell.index,
-			wasPinned: site.isPinned(),
+			wasPinned: site.isPinned,
 			blockedLink: site.link,
 			timeout: setTimeout(this.hide.bind(this), this.HIDE_TIMEOUT_MS)
 		};
