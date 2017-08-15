@@ -8,6 +8,9 @@
 	"bg_set": {
 		"message": "Appliquer"
 	},
+	"captureThumbnail": {
+		"message": "Capturer une miniature de cette page"
+	},
 	"changelog_label": {
 		"message": "Nouveautés"
 	},

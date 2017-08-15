@@ -21,6 +21,11 @@
 			"background.js"
 		]
 	},
+	"page_action": {
+		"default_icon": "capture.svg",
+		"default_title": "__MSG_captureThumbnail__",
+		"browser_style": true
+	},
 	"permissions": [
 		"<all_urls>",
 		"bookmarks",

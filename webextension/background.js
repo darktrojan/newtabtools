@@ -164,6 +164,8 @@ chrome.webNavigation.onCompleted.addListener(function(details) {
 		return;
 	}
 
+	chrome.pageAction.show(details.tabId);
+
 	// We might not have called getAllTiles yet.
 	let promise = Tiles._cache.length > 0 ? Promise.resolve(null) : waitForDB().then(Tiles.getAllTiles);
 	promise.then(function() {
@@ -181,6 +183,10 @@ chrome.webNavigation.onCompleted.addListener(function(details) {
 			});
 		}
 	}).catch(console.error);
+});
+
+chrome.pageAction.onClicked.addListener(function(tab) {
+	chrome.tabs.executeScript(tab.id, {file: 'thumbnail.js'});
 });
 
 function cleanupThumbnails() {

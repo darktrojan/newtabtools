@@ -8,6 +8,9 @@
 	"bg_set": {
 		"message": "Εφαρμογή"
 	},
+	"captureThumbnail": {
+		"message": "Απαθανατήστε το σκαρίφημα της ιστοσελίδας"
+	},
 	"changelog_label": {
 		"message": "Τί άλλαξε?"
 	},

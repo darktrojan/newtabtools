@@ -8,6 +8,9 @@
 	"bg_set": {
 		"message": "设为背景"
 	},
+	"captureThumbnail": {
+		"message": "捕捉页面缩略图"
+	},
 	"changelog_label": {
 		"message": "有什么变化？"
 	},

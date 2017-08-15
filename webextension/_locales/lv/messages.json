@@ -8,6 +8,9 @@
 	"bg_set": {
 		"message": "Iestatīt"
 	},
+	"captureThumbnail": {
+		"message": "Tvert lapas sīktēlu"
+	},
 	"changelog_label": {
 		"message": "Kas mainījies?"
 	},

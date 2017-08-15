@@ -8,6 +8,9 @@
 	"bg_set": {
 		"message": "Definir"
 	},
+	"captureThumbnail": {
+		"message": "Capturar miniatura da página"
+	},
 	"changelog_label": {
 		"message": "O Que Mudou?"
 	},
