@@ -239,6 +239,22 @@ var newTabTools = {
 		case 'options-next-row-tile':
 			this.selectedSiteIndex = (this._selectedSiteIndex + Prefs.columns) % Grid.cells.length;
 			break;
+		case 'options-savethumb':
+			let link = this.selectedSite.link;
+			let siteURL = link.url;
+			browser.runtime.sendMessage({
+				name: 'Thumbnails.get',
+				urls: [siteURL]
+			}).then(function(thumbs) {
+				let blob = thumbs.get(siteURL);
+				if (!blob) {
+					return;
+				}
+				link.image = blob;
+				link.imageIsThumbnail = true;
+				Tiles.putTile(link);
+			});
+			break;
 		case 'options-savedthumb-set':
 			this.setThumbnail(this.selectedSite, URL.createObjectURL(this.setSavedThumbInput.files[0]));
 			this.removeSavedThumbButton.disabled = false;
@@ -453,15 +469,17 @@ var newTabTools = {
 			let ctx = canvas.getContext('2d');
 			ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
 
+			let link = site.link;
 			canvas.toBlob(function(blob) {
-				site.link.image = blob;
+				link.image = blob;
+				delete link.imageIsThumbnail;
 				site.refreshThumbnail();
 
-				let thumbnailURL = URL.createObjectURL(site.link.image);
+				let thumbnailURL = URL.createObjectURL(link.image);
 				newTabTools.siteThumbnail.style.backgroundImage = 'url("' + thumbnailURL + '")';
 				newTabTools.siteThumbnail.classList.add('custom-thumbnail');
 
-				Tiles.putTile(site.link);
+				Tiles.putTile(link);
 			}, 'image/png');
 		};
 		image.onerror = function(error) {
@@ -470,14 +488,16 @@ var newTabTools = {
 		image.src = src;
 	},
 	removeThumbnail: function(site) {
-		delete site.link.image;
+		let link = site.link;
+		delete link.image;
+		delete link.imageIsThumbnail;
 		site.refreshThumbnail();
 		this.getThumbnails();
 
 		this.siteThumbnail.style.backgroundImage = null;
 		this.siteThumbnail.classList.remove('custom-thumbnail');
 
-		Tiles.putTile(site.link);
+		Tiles.putTile(link);
 	},
 	refreshBackgroundImage: function() {
 		Background.getBackground().then(background => {
@@ -672,7 +692,11 @@ var newTabTools = {
 		if (site.link.image) {
 			let thumbnailURL = URL.createObjectURL(site.link.image);
 			this.siteThumbnail.style.backgroundImage = 'url("' + thumbnailURL + '")';
-			this.siteThumbnail.classList.add('custom-thumbnail');
+			if (site.link.imageIsThumbnail) {
+				this.siteThumbnail.classList.remove('custom-thumbnail');
+			} else {
+				this.siteThumbnail.classList.add('custom-thumbnail');
+			}
 			this.removeSavedThumbButton.disabled = false;
 		} else {
 			this.siteThumbnail.style.backgroundImage = site.thumbnail.style.backgroundImage;
