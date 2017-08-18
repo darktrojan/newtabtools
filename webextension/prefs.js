@@ -85,11 +85,6 @@ var Prefs = {
 			}
 		}
 	},
-	getPrefsFromOldExtension: function() {
-		return browser.runtime.sendMessage('prefs').then(function(result) {
-			return browser.storage.local.set(result);
-		});
-	},
 	get theme() {
 		return this._theme;
 	},
