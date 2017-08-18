@@ -47,9 +47,6 @@
 	"options.launcher.hidden": {
 		"message": "No mostrar"
 	},
-	"options.pointer": {
-		"message": "Haz clic aquí para empezar a personalizar tu página de Nueva Pestaña"
-	},
 	"options.recent": {
 		"message": "Pestañas cerradas recientemente"
 	},

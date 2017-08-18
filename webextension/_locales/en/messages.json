@@ -22,7 +22,6 @@
 	"options.historytiles": { "message": "Tiles from your browsing history" },
 	"options.launcher.hidden": { "message": "Do not show" },
 	"options.locked": { "message": "Prevent tiles being dragged" },
-	"options.pointer": { "message": "Click here to begin customizing your new tab page" },
 	"options.recent": { "message": "Recently closed tabs" },
 	"options.rows": { "message": "Rows" },
 	"options.size.large": { "message": "Large" },

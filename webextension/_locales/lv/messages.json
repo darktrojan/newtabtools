@@ -68,9 +68,6 @@
 	"options.locked": {
 		"message": "Nepieļaut elementu pārvietošanu"
 	},
-	"options.pointer": {
-		"message": "Klikšķiniet, lai pielāgotu jaunas cilnes lapu "
-	},
 	"options.recent": {
 		"message": "Nesen aizvērtās cilnes"
 	},

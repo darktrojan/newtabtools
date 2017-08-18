@@ -8,7 +8,7 @@ DOMRect.prototype.isEmpty = function() {
 };
 
 DOMRect.prototype.intersect = function(other) {
-    if (this.isEmpty() || other.isEmpty()) {
+	if (this.isEmpty() || other.isEmpty()) {
 		return new DOMRect(0, 0, 0, 0);
 	}
 
@@ -49,8 +49,9 @@ var Transformation = {
 			// Clear the style property.
 			node.style.opacity = '';
 
-			if (callback)
+			if (callback) {
 				callback();
+			}
 		});
 	},
 
@@ -99,8 +100,9 @@ var Transformation = {
 	   * @param site The site to freeze.
 	   */
 	freezeSitePosition: function Transformation_freezeSitePosition(site) {
-		if (this._isFrozen(site))
+		if (this._isFrozen(site)) {
 			return;
+		}
 
 		let first = Grid.cells[0].position;
 		let style = site.node.style;
@@ -117,8 +119,9 @@ var Transformation = {
 	   * @param site The site to unfreeze.
 	   */
 	unfreezeSitePosition: function Transformation_unfreezeSitePosition(site) {
-		if (!this._isFrozen(site))
+		if (!this._isFrozen(site)) {
 			return;
+		}
 
 		let style = site.node.style;
 		style.left = style.top = style.width = style.height = '';
@@ -139,11 +142,13 @@ var Transformation = {
 		let callback = options && options.callback;
 
 		function finish() {
-			if (options && options.unfreeze)
+			if (options && options.unfreeze) {
 				self.unfreezeSitePosition(site);
+			}
 
-			if (callback)
+			if (callback) {
 				callback();
+			}
 		}
 
 		let currentIndex = 'index' in site ? site.index : site.cell.index;
@@ -174,8 +179,9 @@ var Transformation = {
 
 		sites.forEach(function(site, index) {
 			// Do not re-arrange empty cells or the dragged site.
-			if (!site || site == Drag.draggedSite)
+			if (!site || site == Drag.draggedSite) {
 				return;
+			}
 
 			batch.push(new Promise(resolve => {
 				if (!cells[index]) {
@@ -232,8 +238,9 @@ var Transformation = {
 	_setNodeOpacity: function Transformation_setNodeOpacity(node, opacity, callback) {
 
 		if (this._getNodeOpacity(node) == opacity) {
-			if (callback)
+			if (callback) {
 				callback();
+			}
 		} else {
 			if (callback) {
 				this._whenTransitionEnded(node, ['opacity'], callback);
@@ -286,8 +293,9 @@ var Page = {
 	   * is/gets enabled.
 	   */
 	_init: function Page_init() {
-		if (this._initialized)
+		if (this._initialized) {
 			return;
+		}
 
 		this._initialized = true;
 
@@ -303,8 +311,9 @@ var Page = {
 	handleEvent: function Page_handleEvent(event) {
 		switch (event.type) {
 		case 'dragover':
-			if (Drag.draggedSite)
+			if (Drag.draggedSite) {
 				event.preventDefault();
+			}
 			break;
 		case 'drop':
 			if (Drag.draggedSite) {
@@ -376,8 +385,9 @@ var Grid = {
 			let node = cell.node;
 			let child = node.firstElementChild;
 
-			if (child)
+			if (child) {
 				node.removeChild(child);
+			}
 		}, this);
 
 		// Render the grid again.
@@ -442,12 +452,12 @@ var Grid = {
 
 		// Create the site's inner HTML code.
 		site.innerHTML =
-		'<a class="newtab-link">' +
-		'  <span class="newtab-thumbnail"/>' +
-		'  <span class="newtab-title"/>' +
-		'</a>' +
-		'<input type="button" class="newtab-control newtab-control-pin"/>' +
-		'<input type="button" class="newtab-control newtab-control-block"/>';
+			'<a class="newtab-link">' +
+			'<span class="newtab-thumbnail"/>' +
+			'<span class="newtab-title"/>' +
+			'</a>' +
+			'<input type="button" class="newtab-control newtab-control-pin"/>' +
+			'<input type="button" class="newtab-control newtab-control-block"/>';
 
 		site.querySelector('input.newtab-control-pin').title = newTabTools.getString('tile.pin');
 		site.querySelector('input.newtab-control-block').title = newTabTools.getString('tile.block');
@@ -463,7 +473,7 @@ var Grid = {
 		let cells = this.cells;
 
 		// Put sites into the cells.
-		Tiles.getAllTiles(Grid.cells.length).then(links => {
+		Tiles.getAllTiles().then(links => {
 			let length = Math.min(links.length, cells.length);
 
 			for (let i = 0; i < length; i++) {
@@ -574,7 +584,7 @@ Cell.prototype = {
 	   */
 	containsPinnedSite: function Cell_containsPinnedSite() {
 		let site = this.site;
-		return site && site.isPinned();
+		return site && site.isPinned;
 	},
 
 	/**
@@ -658,13 +668,18 @@ Site.prototype = {
 		return parentNode && parentNode._newtabCell;
 	},
 
+	get thumbnail() {
+		return this._querySelector('.newtab-thumbnail');
+	},
+
 	/**
 	   * Pins the site on its current or a given index.
 	   * @param index The pinned index (optional).
 	   */
 	pin: function Site_pin(index) {
-		if (typeof index == 'undefined')
+		if (typeof index == 'undefined') {
 			index = this.cell.index;
+		}
 
 		this._updateAttributes(true);
 		this._link.position = index;
@@ -675,7 +690,7 @@ Site.prototype = {
 	   * Unpins the site and calls the given callback when done.
 	   */
 	unpin: function Site_unpin() {
-		if (this.isPinned()) {
+		if (this.isPinned) {
 			this._updateAttributes(false);
 
 			let op;
@@ -696,7 +711,7 @@ Site.prototype = {
 	   * Checks whether this site is pinned.
 	   * @return Whether this site is pinned.
 	   */
-	isPinned: function Site_isPinned() {
+	get isPinned() {
 		return Tiles.isPinned(this._link.url);
 	},
 
@@ -709,7 +724,7 @@ Site.prototype = {
 			UndoDialog.show(this);
 			Blocked.block(this._link.url);
 
-			(this.isPinned() ? Tiles.removeTile(this._link) : Promise.resolve()).then(() => {
+			(this.isPinned ? Tiles.removeTile(this._link) : Promise.resolve()).then(() => {
 				Updater.updateGrid();
 			});
 		}
@@ -745,14 +760,15 @@ Site.prototype = {
 	   * Renders the site's data (fills the HTML fragment).
 	   */
 	_render: function Site_render() {
-		if (this.isPinned())
+		if (this.isPinned) {
 			this._updateAttributes(true);
+		}
 		// but still display whatever thumbnail might be available now.
 		this.refreshThumbnail();
-		this._addTitleAndFavicon();
+		this.addTitle();
 	},
 
-	_addTitleAndFavicon: function() {
+	addTitle: function Site_addTitle() {
 		let url = this.url;
 		let title = this.title || url;
 		let tooltip = title == url ? title : title + '\n' + url;
@@ -769,11 +785,15 @@ Site.prototype = {
 	   * Refreshes the thumbnail for the site.
 	   */
 	refreshThumbnail: function Site_refreshThumbnail() {
-		let thumbnail = this._querySelector('.newtab-thumbnail');
+		let thumbnail = this.thumbnail;
 		thumbnail.style.backgroundColor = this.link.backgroundColor || null;
 		if (this.link.image) {
 			let thumbnailURL = URL.createObjectURL(this.link.image);
 			thumbnail.style.backgroundImage = 'url("' + thumbnailURL + '")';
+			thumbnail.classList.add('custom-thumbnail');
+		} else {
+			thumbnail.style.backgroundImage = null;
+			thumbnail.classList.remove('custom-thumbnail');
 		}
 	},
 
@@ -798,12 +818,13 @@ Site.prototype = {
 		}
 
 		event.preventDefault();
-		if (event.target.classList.contains('newtab-control-block'))
+		if (event.target.classList.contains('newtab-control-block')) {
 			this.block();
-		else if (this.isPinned())
+		} else if (this.isPinned) {
 			this.unpin();
-		else
+		} else {
 			this.pin();
+		}
 	},
 
 	/**
@@ -864,8 +885,9 @@ var Drag = {
 		let selector = '.newtab-site, .newtab-control, .newtab-thumbnail';
 		let parentCell = site.node.parentNode;
 		let nodes = parentCell.querySelectorAll(selector);
-		for (let i = 0; i < nodes.length; i++)
+		for (let i = 0; i < nodes.length; i++) {
 			nodes[i].setAttribute('dragged', 'true');
+		}
 
 		parentCell.setAttribute('dragged', 'true');
 
@@ -923,13 +945,15 @@ var Drag = {
 	   */
 	end: function Drag_end(site) {
 		let nodes = Grid.node.querySelectorAll('[dragged]');
-		for (let i = 0; i < nodes.length; i++)
+		for (let i = 0; i < nodes.length; i++) {
 			nodes[i].removeAttribute('dragged');
+		}
 
 		// Slide the dragged site back into its cell if it didn't move.
 		// Transformation_rearrangeSites will fix it if it did move.
-		if (!Drop._lastDropTarget || Drop._lastDropTarget.index === site.cell.index)
+		if (!Drop._lastDropTarget || Drop._lastDropTarget.index === site.cell.index) {
 			Transformation.slideSiteTo(site, site.cell, {unfreeze: true});
+		}
 
 		Drop._lastDropTarget = null;
 		this._draggedSite = null;
@@ -967,25 +991,6 @@ var Drag = {
 		setTimeout(function() { scrollbox.removeChild(dragElement); }, 0);
 	}
 };
-
-// var DragDataHelper = {
-// 	get mimeType() {
-// 		return 'text/x-moz-url';
-// 	},
-
-// 	getLinkFromDragEvent: function DragDataHelper_getLinkFromDragEvent(event) {
-// 		let dt = event.dataTransfer;
-// 		if (!dt || !dt.types.includes(this.mimeType)) {
-// 			console.log(dt.types);
-// 			return null;
-// 		}
-
-// 		console.log(dt);
-// 		let data = dt.getData(this.mimeType) || '';
-// 		let [url, title] = data.split(/[\r\n]+/);
-// 		return {url: url, title: title};
-// 	}
-// };
 
 // A little delay that prevents the grid from being too sensitive when dragging
 // sites around.
@@ -1031,8 +1036,9 @@ var Drop = {
 	drop: function Drop_drop(cell, event) {
 		// The cell that is the drop target could contain a pinned site. We need
 		// to find out where that site has gone and re-pin it there.
-		if (cell.containsPinnedSite())
+		if (cell.containsPinnedSite()) {
 			this._repinSitesAfterDrop(cell);
+		}
 
 		// Pin the dragged or insert the new site.
 		this._pinDraggedSite(cell, event);
@@ -1052,7 +1058,7 @@ var Drop = {
 
 		// Filter out pinned sites.
 		let pinnedSites = sites.filter(function(site) {
-			return site && site.isPinned();
+			return site && site.isPinned;
 		});
 
 		// Re-pin all shifted pinned cells.
@@ -1070,17 +1076,9 @@ var Drop = {
 
 		if (draggedSite) {
 			// Pin the dragged site at its new place.
-			if (cell != draggedSite.cell)
+			if (cell != draggedSite.cell) {
 				draggedSite.pin(index);
-		// } else {
-		// 	let link = DragDataHelper.getLinkFromDragEvent(event);
-		// 	if (link) {
-		// 		// A new link was dragged onto the grid. Create it by pinning its URL.
-		// 		PinnedLinks.pin(link, index);
-
-		// 		// Make sure the newly added link is not blocked.
-		// 		Blocked.unblock(link);
-		// 	}
+			}
 		}
 	},
 
@@ -1090,8 +1088,9 @@ var Drop = {
 	   */
 	_delayedRearrange: function Drop_delayedRearrange(cell) {
 		// The last drop target didn't change so there's no need to re-arrange.
-		if (this._lastDropTarget == cell)
+		if (this._lastDropTarget == cell) {
 			return;
+		}
 
 		let self = this;
 
@@ -1125,8 +1124,9 @@ var Drop = {
 		let sites = Grid.sites;
 
 		// We need to rearrange the grid only if there's a current drop target.
-		if (cell)
+		if (cell) {
 			sites = DropPreview.rearrange(cell);
+		}
 
 		Transformation.rearrangeSites(sites, {unfreeze: !cell});
 	}
@@ -1284,18 +1284,15 @@ var DropTargetShim = {
 		let target = this._findDropTarget(event);
 
 		if (target != this._lastDropTarget) {
-			if (this._lastDropTarget)
-			// We left the last drop target.
+			if (this._lastDropTarget) { // We left the last drop target.
 				this._dispatchEvent(event, 'dragexit', this._lastDropTarget);
-
-			if (target)
-			// We're now hovering a (new) drop target.
+			}
+			if (target) { // We're now hovering a (new) drop target.
 				this._dispatchEvent(event, 'dragenter', target);
-
-			if (this._lastDropTarget)
-			// We left the last drop target.
+			}
+			if (this._lastDropTarget) { // We left the last drop target.
 				this._dispatchEvent(event, 'dragleave', this._lastDropTarget);
-
+			}
 			this._lastDropTarget = target;
 		}
 	},
@@ -1319,8 +1316,9 @@ var DropTargetShim = {
 			let inter = rect.intersect(cellPositions[i].rect);
 
 			// If the intersection is big enough we found a drop target.
-			if (inter.width >= minWidth && inter.height >= minHeight)
+			if (inter.width >= minWidth && inter.height >= minHeight) {
 				return cellPositions[i].cell;
+			}
 		}
 
 		// No drop target found.
@@ -1332,8 +1330,9 @@ var DropTargetShim = {
 	   * @return The (cached) cell positions.
 	   */
 	_getCellPositions: function DropTargetShim_getCellPositions() {
-		if (this._cellPositions)
+		if (this._cellPositions) {
 			return this._cellPositions;
+		}
 
 		return this._cellPositions = Grid.cells.filter(function(cell) { // jshint ignore:line
 			return !cell.node.hasAttribute('dragged');
@@ -1428,8 +1427,9 @@ var DropPreview = {
 
 		// There might be a pinned cell that got pushed out of the grid, try to
 		// sneak it in by removing a lower-priority cell.
-		if (this._hasOverflowedPinnedSite(sites, cell))
+		if (this._hasOverflowedPinnedSite(sites, cell)) {
 			this._repositionOverflowedPinnedSite(sites, cell);
+		}
 	},
 
 	/**
@@ -1448,8 +1448,9 @@ var DropPreview = {
 
 		return sites.filter(function(site) {
 			// The site must be valid, pinned and not the dragged site.
-			if (!site || site == draggedSite || !site.isPinned())
+			if (!site || site == draggedSite || !site.isPinned) {
 				return false;
+			}
 
 			let index = site.cell.index;
 
@@ -1472,14 +1473,16 @@ var DropPreview = {
 			// let links = PinnedLinks.links;
 
 			// Find all previous siblings of the drop target that are pinned as well.
-			while (range.start && Grid.cells[range.start - 1].containsPinnedSite())
+			while (range.start && Grid.cells[range.start - 1].containsPinnedSite()) {
 				range.start--;
+			}
 
 			let maxEnd = Grid.cells.length - 1;
 
 			// Find all next siblings of the drop target that are pinned as well.
-			while (range.end < maxEnd && Grid.cells[range.end + 1].containsPinnedSite())
+			while (range.end < maxEnd && Grid.cells[range.end + 1].containsPinnedSite()) {
 				range.end++;
+			}
 		}
 
 		return range;
@@ -1495,19 +1498,21 @@ var DropPreview = {
 	_hasOverflowedPinnedSite: function DropPreview_hasOverflowedPinnedSite(sites, cell) {
 		// If the drop target isn't pinned there's no way a pinned site has been
 		// pushed out of the grid so we can just exit here.
-		if (!cell.containsPinnedSite())
+		if (!cell.containsPinnedSite()) {
 			return false;
+		}
 
 		let cells = Grid.cells;
 
 		// No cells have been pushed out of the grid, nothing to do here.
-		if (sites.length <= cells.length)
+		if (sites.length <= cells.length) {
 			return false;
+		}
 
 		let overflowedSite = sites[cells.length];
 
 		// Nothing to do if the site that got pushed out of the grid is not pinned.
-		return (overflowedSite && overflowedSite.isPinned());
+		return (overflowedSite && overflowedSite.isPinned);
 	},
 
 	/**
@@ -1555,14 +1560,16 @@ var DropPreview = {
 		// grid instead of the pinned site.
 		for (let i = cells.length - 1; i >= 0; i--) {
 			// The cell that is our drop target is not a good choice.
-			if (i == dropIndex)
+			if (i == dropIndex) {
 				continue;
+			}
 
 			let site = sites[i];
 
 			// We can use the cell only if it's empty or the site is un-pinned.
-			if (!site || !site.isPinned())
+			if (!site || !site.isPinned) {
 				return i;
+			}
 		}
 
 		return -1;
@@ -1581,7 +1588,7 @@ var Updater = {
 	   */
 	updateGrid: function Updater_updateGrid(callback) {
 		// let links = NewTabToolsLinks.getLinks().slice(0, Grid.cells.length);
-		Tiles.getAllTiles(Grid.cells.length).then(links => {
+		Tiles.getAllTiles().then(links => {
 
 			// Find all sites that remain in the grid.
 			let sites = this._findRemainingSites(links);
@@ -1614,7 +1621,7 @@ var Updater = {
 
 	fastUpdateGrid: function Updater_fastUpdateGrid() {
 		// let links = NewTabToolsLinks.getLinks().slice(0, Grid.cells.length);
-		Tiles.getAllTiles(Grid.cells.length).then(function(links) {
+		Tiles.getAllTiles().then(function(links) {
 
 			// Find all sites that remain in the grid.
 			let sites = this._findRemainingSites(links);
@@ -1639,8 +1646,9 @@ var Updater = {
 
 		// Create a map to easily retrieve the site for a given URL.
 		Grid.sites.forEach(function(site) {
-			if (site)
+			if (site) {
 				map[site.url] = site;
+			}
 		});
 
 		// Map each link to its corresponding site, if any.
@@ -1655,8 +1663,9 @@ var Updater = {
 	   */
 	_freezeSitePositions: function Updater_freezeSitePositions(sites) {
 		sites.forEach(function(site) {
-			if (site)
+			if (site) {
 				Transformation.freezeSitePosition(site);
+			}
 		});
 	},
 
@@ -1681,12 +1690,14 @@ var Updater = {
 				let cellNode = cell.node;
 
 				// Empty the cell if necessary.
-				if (cellSite)
+				if (cellSite) {
 					cellNode.removeChild(cellSite.node);
+				}
 
 				// Put the new site in place, if any.
-				if (site)
+				if (site) {
 					cellNode.appendChild(site.node);
+				}
 			}
 		}, this);
 	},
@@ -1713,8 +1724,9 @@ var Updater = {
 		// Delete sites that were removed from the grid.
 		Grid.sites.forEach(function(site) {
 			// The site must be valid and not in the current grid.
-			if (!site || sites.indexOf(site) != -1)
+			if (!site || sites.indexOf(site) != -1) {
 				return;
+			}
 
 			batch.push(new Promise(resolve => {
 				// Fade out the to-be-removed site.
@@ -1741,8 +1753,9 @@ var Updater = {
 
 		// Find empty cells and fill them.
 		Promise.all(sites.map((site, index) => {
-			if (site || !links[index])
+			if (site || !links[index]) {
 				return null;
+			}
 
 			return new Promise(resolve => {
 				// Create the new site and fade it in.
@@ -1793,12 +1806,13 @@ var UndoDialog = {
 	   * @param site The site that just got removed.
 	   */
 	show: function UndoDialog_show(site) {
-		if (this._undoData)
+		if (this._undoData) {
 			clearTimeout(this._undoData.timeout);
+		}
 
 		this._undoData = {
 			index: site.cell.index,
-			wasPinned: site.isPinned(),
+			wasPinned: site.isPinned,
 			blockedLink: site.link,
 			timeout: setTimeout(this.hide.bind(this), this.HIDE_TIMEOUT_MS)
 		};
@@ -1815,8 +1829,9 @@ var UndoDialog = {
 	   * Hides the undo dialog.
 	   */
 	hide: function UndoDialog_hide() {
-		if (!this._undoData)
+		if (!this._undoData) {
 			return;
+		}
 
 		clearTimeout(this._undoData.timeout);
 		this._undoData = null;
@@ -1850,8 +1865,9 @@ var UndoDialog = {
 	   * Undo the last blocked site.
 	   */
 	_undo: function UndoDialog_undo() {
-		if (!this._undoData)
+		if (!this._undoData) {
 			return;
+		}
 
 		let {wasPinned, blockedLink} = this._undoData;
 		Blocked.unblock(blockedLink.url);

@@ -3,7 +3,7 @@ This Source Code Form is subject to the terms of the Mozilla Public
 License, v. 2.0. If a copy of the MPL was not distributed with this file,
 You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
-<html id="newtab-window" xmlns="http://www.w3.org/1999/xhtml" disablefastfind="true" options-hidden="true" class="containThumbs">
+<html xmlns="http://www.w3.org/1999/xhtml" options-hidden="true">
 <head>
 	<title data-message="newtab.pageTitle"></title>
 	<link rel="stylesheet" href="newTab.css" type="text/css" />
@@ -33,16 +33,19 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 			</div>
 			<div id="newtab-margin-bottom">
 				<div class="newtab-side-margin newtab-margin-left"></div>
-				<div id="newtab-update-notice" hidden="">
-					<span id="newtab-update-text"></span>
-					<button id="newtab-update-changelog" data-message="changelog.label"></button>
-					<button id="newtab-update-donate" data-message="donate"></button>
-					<button id="newtab-update-hide" class="close-button"></button>
+				<div id="newtab-update-outer">
+					<div id="newtab-update-notice" hidden="">
+						<span id="newtab-update-text"></span>
+						<button id="newtab-update-changelog" data-message="changelog.label"></button>
+						<button id="newtab-update-donate" data-message="donate"></button>
+						<button id="newtab-update-hide" class="close-button"></button>
+					</div>
 				</div>
-				<div class="newtab-side-margin newtab-margin-right"></div>
+				<div class="newtab-side-margin newtab-margin-right">
+					<input id="locked-toggle" type="button" data-title="options.locked" />
+				</div>
 			</div>
 		</div>
-		<div id="options-toggle-pointer" hidden="" data-message="options.pointer"></div>
 	</div>
 	<div id="options-bg"></div>
 	<div id="options">

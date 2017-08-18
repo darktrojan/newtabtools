@@ -2,7 +2,6 @@ bootstrap.js
 chrome.manifest
 content
 content/newTabTools.jsm
-content/process.js
 icon.png
 icon64.png
 install.rdf
@@ -14,6 +13,8 @@ webextension/close.svg
 webextension/controls.png
 webextension/controls@2x.png
 webextension/fx-newTab.js
+webextension/locked-dark.svg
+webextension/locked-light.svg
 webextension/manifest.json
 webextension/newTab.css
 webextension/newTab.js
@@ -23,5 +24,8 @@ webextension/options-light.svg
 webextension/pointer-rtl.png
 webextension/pointer.png
 webextension/prefs.js
+webextension/thumbnail.js
 webextension/tiles.js
 webextension/tiles-shim.js
+webextension/unlocked-dark.svg
+webextension/unlocked-light.svg

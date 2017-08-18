@@ -56,9 +56,6 @@
 	"options.launcher.hidden": {
 		"message": "Non mostrare"
 	},
-	"options.pointer": {
-		"message": "Clicca qui per iniziare a personalizzare la pagina Nuova Scheda"
-	},
 	"options.recent": {
 		"message": "Mostra le schede chiuse di recente"
 	},

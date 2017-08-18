@@ -65,9 +65,6 @@
 	"options.locked": {
 		"message": "防止拖动磁贴"
 	},
-	"options.pointer": {
-		"message": "点击这里开始定制您的“新标签页”页面"
-	},
 	"options.recent": {
 		"message": "最近关闭的标签页"
 	},

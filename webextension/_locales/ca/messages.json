@@ -65,9 +65,6 @@
 	"options.launcher.hidden": {
 		"message": "No ho mostris"
 	},
-	"options.pointer": {
-		"message": "Feu clic aquí per començar a personalitzar la pàgina de pestanya nova"
-	},
 	"options.recent": {
 		"message": "Pestanyes tancades recentment"
 	},

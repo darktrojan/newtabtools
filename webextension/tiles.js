@@ -1,8 +1,10 @@
 /* exported initDB, Tiles, Background */
 /* globals Blocked, Prefs, browser, db */
 var Tiles = {
+	_cache: [],
 	_list: [],
-	getAllTiles: function(count) {
+	getAllTiles: function() {
+		let count = Prefs.rows * Prefs.columns;
 		return new Promise(function(resolve) {
 			db.transaction('tiles').objectStore('tiles').getAll().onsuccess = function() {
 				let links = [];
@@ -19,12 +21,12 @@ var Tiles = {
 				}
 
 				if (!Prefs.history) {
-					resolve(links);
+					Tiles._cache = links.map(l => l.url);
+					resolve(links.slice(0, count));
 					return;
 				}
 
-				// browser.topSites.get({ providers: ['places'] }).then(r => {
-				browser.runtime.sendMessage('topSites').then(r => {
+				browser.topSites.get({ providers: ['places'] }).then(r => {
 					let urls = Tiles._list.slice();
 					let remaining = r.filter(s => {
 						if (Blocked.isBlocked(s.url)) {
@@ -38,7 +40,9 @@ var Tiles = {
 						return isNew;
 					});
 
-					for (let i = 0; i < count && remaining.length > 0; i++) {
+					// Add some extras for thumbnail generation of tiles that might get promoted.
+					let extraCount = count + 10;
+					for (let i = 0; i < extraCount && remaining.length > 0; i++) {
 						if (!links[i]) {
 							let next = remaining.shift();
 							if (next) {
@@ -55,7 +59,8 @@ var Tiles = {
 						}
 					}
 
-					resolve(links);
+					Tiles._cache = links.map(l => l.url);
+					resolve(links.slice(0, count));
 				});
 			};
 		});
@@ -124,8 +129,6 @@ var Background = {
 		});
 	},
 	getBackgroundFromOldExtension: function() {
-		return browser.runtime.sendMessage('background').then(result => {
-			return this.setBackground(result);
-		});
+		return browser.runtime.sendMessage('background').then(result => this.setBackground(result));
 	}
 };
