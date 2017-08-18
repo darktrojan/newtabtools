@@ -555,8 +555,11 @@ var newTabTools = {
 			urls: Grid.sites.filter(s => s && !s.thumbnail.style.backgroundImage).map(s => s.link.url)
 		}).then(function(thumbs) {
 			Grid.sites.forEach(s => {
+				if (!s) {
+					return;
+				}
 				let link = s.link;
-				if (s && !link.image && thumbs.has(link.url)) {
+				if (!link.image && thumbs.has(link.url)) {
 					let css = 'url(' + URL.createObjectURL(thumbs.get(link.url)) + ')';
 					s.thumbnail.style.backgroundImage = css;
 
