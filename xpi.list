@@ -21,8 +21,6 @@ webextension/newTab.js
 webextension/newTab.xhtml
 webextension/options-dark.svg
 webextension/options-light.svg
-webextension/pointer-rtl.png
-webextension/pointer.png
 webextension/prefs.js
 webextension/thumbnail.js
 webextension/tiles.js
