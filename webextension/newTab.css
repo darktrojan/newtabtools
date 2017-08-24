@@ -36,8 +36,21 @@ body {
 	height: 100%;
 	display: flex;
 	margin: 0;
+}
+body, #background-fake {
 	background-size: cover;
 	background-position: 50% 50%;
+}
+#background-fake {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	filter: blur(2px);
+}
+:root[options-hidden] #background-fake {
+	display: none;
 }
 input[type="button"] {
 	cursor: pointer;
@@ -518,8 +531,7 @@ input[type="button"] {
 :root:not([options-hidden]) #locked-toggle {
 	visibility: hidden;
 }
-:root:not([options-hidden]) #newtab-scrollbox,
-:root:not([options-hidden]) .newtab-background {
+:root:not([options-hidden]) #newtab-scrollbox {
 	filter: blur(1px);
 }
 #options-bg {
