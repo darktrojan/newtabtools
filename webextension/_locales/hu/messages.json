@@ -33,10 +33,10 @@
 		"message": "Bélyegkép eltávolítva."
 	},
 	"newtab.undo.restoreButton": {
-		"message": "Összes visszaállítása."
+		"message": "Összes visszaállítása"
 	},
 	"newtab.undo.undoButton": {
-		"message": "Visszavonás."
+		"message": "Visszavonás"
 	},
 	"newversion": {
 		"message": "A New Tab Tools frissítve lett a %S verzióra. A New Tab Tools ingyenes, de minden támogatást szívesen fogadok!"

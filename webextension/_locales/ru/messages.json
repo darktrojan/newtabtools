@@ -33,10 +33,10 @@
 		"message": "Миниатюра удалена."
 	},
 	"newtab.undo.restoreButton": {
-		"message": "Восстановить все."
+		"message": "Восстановить все"
 	},
 	"newtab.undo.undoButton": {
-		"message": "Отменить."
+		"message": "Отменить"
 	},
 	"newversion": {
 		"message": "Расширение New Tab Tools было обновлено до версии %S. New Tab Tools распространяется бесплатно, но ваши пожертвования будут приняты с благодарностью!"

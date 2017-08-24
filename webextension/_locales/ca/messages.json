@@ -36,10 +36,10 @@
 		"message": "S'ha eliminat la miniatura."
 	},
 	"newtab.undo.restoreButton": {
-		"message": "Restaura-les totes."
+		"message": "Restaura-les totes"
 	},
 	"newtab.undo.undoButton": {
-		"message": "Desfés."
+		"message": "Desfés"
 	},
 	"newversion": {
 		"message": "Les Eines de pestanyes noves s’han actualitzat a la versió %S. Aquestes eines són gratuïtes, però agraïm els donatius!"
