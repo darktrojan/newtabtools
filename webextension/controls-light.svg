@@ -1,8 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="216" height="24" viewBox="0 0 216 24">
-	<path fill="#fff" d="M3 3h18v18H3z" style="filter: blur(1px)"/>
-	<path fill="#1f364c" d="M3 3h18v18H3zm10 1l.055 3L9 11H6l2.969 2.969-4.5 4.5L5.53 19.53l4.5-4.5L13 18v-3l4-4.055L20 11z"/>
-	<path fill="#fff" d="M75 3h18v18H75z" style="filter: blur(1px)"/>
-	<path fill="#1f364c" d="M75 3v18h18V3H75zm4 1h10l-2 2v6l2 2h-4.25v6h-1.5v-6H79l2-2V6l-2-2z"/>
-	<path fill="#fff" d="M147 3h18v18h-18z" style="filter: blur(1px)"/>
-	<path fill="#1f364c" d="M147 3h18v18h-18zm3.707 2.293l-1.414 1.414L154.586 12l-5.293 5.293 1.414 1.414L156 13.414l5.293 5.293 1.414-1.414L157.414 12l5.293-5.293-1.414-1.414L156 10.586z"/>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="72" height="24">
+	<defs>
+		<path id="a" d="M13 4l.055 3L9 11H6l2.969 2.969-4.5 4.5L5.53 19.53l4.5-4.5L13 18v-3l4-4.055L20 11zm18 0h10l-2 2v6l2 2h-4.25v6h-1.5v-6H31l2-2V6zm23.707 1.293l-1.414 1.414L58.586 12l-5.293 5.293 1.414 1.414L60 13.414l5.293 5.293 1.414-1.414L61.414 12l5.293-5.293-1.414-1.414L60 10.586z"/>
+	</defs>
+	<use fill="#fff" stroke="#fff" stroke-width="2" filter="blur(1px)" xlink:href="#a"/>
+	<use fill="#1f364c" xlink:href="#a"/>
 </svg>

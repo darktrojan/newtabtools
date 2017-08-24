@@ -1,7 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="18" width="18">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24">
 	<defs>
-		<path id="a" d="M12.5 2A4.515 4.515 0 0 0 8 6.5V8H0v9h11V8h-1V6.5A2.485 2.485 0 0 1 12.5 4a2.483 2.483 0 0 1 2.498 2.499V8H17V6.5A4.515 4.515 0 0 0 12.5 2z" />
+		<path id="a" d="M15.5 5A4.515 4.515 0 0 0 11 9.5V11H3v9h11v-9h-1V9.5A2.485 2.485 0 0 1 15.5 7a2.483 2.483 0 0 1 2.498 2.499V11H20V9.5A4.515 4.515 0 0 0 15.5 5z"/>
 	</defs>
-	<use xlink:href="#a" fill="#1f364c" style="filter: blur(1px)" />
-	<use xlink:href="#a" fill="#fff" />
+	<use fill="#1f364c" stroke="#1f364c" stroke-width="2" filter="blur(1px)" xlink:href="#a"/>
+	<use fill="#fff" xlink:href="#a"/>
 </svg>
