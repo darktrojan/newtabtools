@@ -5,7 +5,7 @@
 	"changelog.label": { "message": "What Changed?" },
 	"donate": { "message": "Donate…" },
 	"donate.label": { "message": "New Tab Tools is funded by user donations." },
-	"extensionDescription": { "message": "Customizes the new tab page. You can add more tiles, the launcher from Firefox start, or a background image. And you can set new tile images and titles." },
+	"extensionDescription": { "message": "Customizes the new tab page. You can add more tiles, or a background image. And you can set new tile images and titles." },
 	"extensionName": { "message": "New Tab Tools" },
 	"github": { "message": "New Tab Tools on GitHub" },
 	"newtab.pageTitle": { "message": "New Tab" },
