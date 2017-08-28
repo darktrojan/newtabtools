@@ -101,6 +101,14 @@
 
 		<em:localized>
 			<Description>
+				<em:locale>pl</em:locale>
+				<em:name>New Tab Tools</em:name>
+				<em:description>Modyfikuje stronę nowej karty. Możesz dodać więcej kafelków, pasek uruchamiania lub obrazek w tle. Możesz też ustawiać obrazy i tytuły dla kafelków.</em:description>
+			</Description>
+		</em:localized>
+
+		<em:localized>
+			<Description>
 				<em:locale>pt-BR</em:locale>
 				<em:name>New Tab Tools</em:name>
 				<em:description>Personaliza a página 'Nova Aba'. Você pode adicionar mais blocos, o iniciador do Firefox, ou uma imagem de fundo. E você pode definir novos blocos e suas imagens.</em:description>
