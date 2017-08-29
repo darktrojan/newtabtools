@@ -11,11 +11,39 @@ var Prefs = {
 	_locked: false,
 	_history: true,
 	_recent: true,
+	_thumbnailSize: 600,
 	_version: 0,
 	_versionLastUpdate: new Date(0),
 	_versionLastAck: new Date(0),
 
 	init: function() {
+		let names = [
+			'theme',
+			'opacity',
+			'rows',
+			'columns',
+			'margin',
+			'spacing',
+			'titleSize',
+			'locked',
+			'history',
+			'recent',
+			'thumbnailSize',
+			'version',
+			'versionLastAck'
+		];
+
+		for (let n of names) {
+			this.__defineGetter__(n, () => { // jshint ignore:line
+				return this['_' + n];
+			});
+			this.__defineSetter__(n, function(value) { // jshint ignore:line
+				let obj = {};
+				obj[n] = value;
+				browser.storage.local.set(obj);
+			});
+		}
+
 		return browser.storage.local.get().then(prefs => {
 			this.parsePrefs(prefs);
 			browser.storage.onChanged.addListener(this.prefsChanged.bind(this));
@@ -52,6 +80,9 @@ var Prefs = {
 		if ('recent' in prefs) {
 			this._recent = prefs.recent !== false;
 		}
+		if (Number.isInteger(prefs.thumbnailSize)) {
+			this._thumbnailSize = prefs.thumbnailSize;
+		}
 		if (Array.isArray(prefs.blocked)) {
 			Blocked._list = prefs.blocked;
 		}
@@ -85,86 +116,11 @@ var Prefs = {
 			}
 		}
 	},
-	get theme() {
-		return this._theme;
-	},
-	get opacity() {
-		return this._opacity;
-	},
-	get rows() {
-		return this._rows;
-	},
-	get columns() {
-		return this._columns;
-	},
-	get margin() {
-		return this._margin;
-	},
-	get spacing() {
-		return this._spacing;
-	},
-	get titleSize() {
-		return this._titleSize;
-	},
-	get locked() {
-		return this._locked;
-	},
-	get history() {
-		return this._history;
-	},
-	get recent() {
-		return this._recent;
-	},
-	get version() {
-		return this._version;
-	},
-	get versionLastUpdate() {
-		return this._versionLastUpdate;
-	},
-	get versionLastAck() {
-		return this._versionLastAck;
-	},
-	set theme(value) {
-		browser.storage.local.set({ theme: value });
-	},
-	set opacity(value) {
-		browser.storage.local.set({ opacity: value });
-	},
-	set rows(value) {
-		browser.storage.local.set({ rows: value });
-	},
-	set columns(value) {
-		browser.storage.local.set({ columns: value });
-	},
-	set margin(value) {
-		browser.storage.local.set({ margin: value });
-	},
-	set spacing(value) {
-		browser.storage.local.set({ spacing: value });
-	},
-	set titleSize(value) {
-		browser.storage.local.set({ titleSize: value });
-	},
-	set locked(value) {
-		browser.storage.local.set({ locked: value });
-	},
-	set history(value) {
-		browser.storage.local.set({ history: value });
-	},
-	set recent(value) {
-		browser.storage.local.set({ recent: value });
-	},
-	set version(value) {
-		browser.storage.local.set({ version: value });
-	},
-	set versionLastUpdate(value) {
+	set versionLastUpdate(value) { // jshint ignore:line
 		// Make sure this is up to date for synchronous code.
 		this._versionLastUpdate = value;
 		browser.storage.local.set({ versionLastUpdate: value });
 	},
-	set versionLastAck(value) {
-		browser.storage.local.set({ versionLastAck: value });
-	}
 };
 
 var Blocked = {

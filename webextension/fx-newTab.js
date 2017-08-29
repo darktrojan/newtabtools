@@ -3,6 +3,7 @@
  * You can obtain one at http://mozilla.org/MPL/2.0/. */
 
 /* globals DOMRect, Prefs, Tiles, Blocked, newTabTools */
+/* exported Page */
 DOMRect.prototype.isEmpty = function() {
 	return this.left >= this.right || this.top >= this.bottom;
 };
@@ -440,6 +441,9 @@ var Grid = {
 		for (let c of Grid.cells) {
 			c.position = Transformation.getNodePosition(c.node);
 		}
+
+		let firstCell = Grid.cells[0].node;
+		Prefs.thumbnailSize = Math.max(firstCell.offsetWidth, firstCell.offsetHeight, 150) * 2;
 	},
 
 	/**
@@ -1068,9 +1072,8 @@ var Drop = {
 	/**
 	   * Pins the dragged site in its new place.
 	   * @param cell The drop target cell.
-	   * @param event The 'dragexit' event.
 	   */
-	_pinDraggedSite: function Drop_pinDraggedSite(cell, event) {
+	_pinDraggedSite: function Drop_pinDraggedSite(cell) {
 		let index = cell.index;
 		let draggedSite = Drag.draggedSite;
 

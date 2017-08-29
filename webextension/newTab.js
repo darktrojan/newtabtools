@@ -221,9 +221,8 @@ var newTabTools = {
 	setThumbnail: function(site, src) {
 		let image = new Image();
 		image.onload = function() {
-			let firstCell = Grid.cells[0].node;
-			let [thumbnailWidth, thumbnailHeight] = [firstCell.offsetWidth * 2, firstCell.offsetHeight * 2];
-			let scale = Math.min(Math.max(thumbnailWidth / image.width, thumbnailHeight / image.height), 1);
+			let thumbnailSize = Prefs.thumbnailSize;
+			let scale = Math.min(thumbnailSize / image.width, thumbnailSize / image.height, 1);
 
 			let canvas = document.createElementNS(HTML_NAMESPACE, 'canvas');
 			canvas.mozOpaque = false;
