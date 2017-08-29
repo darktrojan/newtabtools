@@ -164,7 +164,9 @@ function uiStartup(params) {
 function getTopSites() {
 	return new Promise(function(resolve) {
 		NewTabUtils.links.populateProviderCache(NewTabUtils.placesProvider, function() {
-			resolve(NewTabUtils.getProviderLinks(NewTabUtils.placesProvider).map(link => {
+			resolve(NewTabUtils.pinnedLinks.links.filter(l => l)
+					.concat(NewTabUtils.getProviderLinks(NewTabUtils.placesProvider))
+					.map(link => {
 				return {
 					url: link.url,
 					title: link.title,

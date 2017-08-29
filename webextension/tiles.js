@@ -88,16 +88,15 @@ var Tiles = {
 	getTilesFromOldExtension: function() {
 		return browser.runtime.sendMessage('tiles').then(function(result) {
 			return new Promise(function(resolve) {
-				let t = db.transaction('tiles', 'readwrite');
-				t.oncomplete = function() {
-					resolve();
+				let os = db.transaction('tiles', 'readwrite').objectStore('tiles');
+				os.clear().onsuccess = function addNextTile() {
+					let nextTile = result.shift();
+					if (nextTile) {
+						os.add(nextTile).onsuccess = addNextTile;
+					} else {
+						resolve();
+					}
 				};
-
-				let os = t.objectStore('tiles');
-				os.clear();
-				for (let tile of result) {
-					os.add(tile);
-				}
 			});
 		});
 	}
