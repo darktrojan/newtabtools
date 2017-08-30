@@ -116,11 +116,14 @@ var Prefs = {
 			}
 		}
 	},
-	set versionLastUpdate(value) { // jshint ignore:line
+	get versionLastUpdate() {
+		return this._versionLastUpdate;
+	},
+	set versionLastUpdate(value) {
 		// Make sure this is up to date for synchronous code.
 		this._versionLastUpdate = value;
 		browser.storage.local.set({ versionLastUpdate: value });
-	},
+	}
 };
 
 var Blocked = {
