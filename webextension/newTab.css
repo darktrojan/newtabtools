@@ -145,13 +145,13 @@ input[type="button"] {
 	padding: 0;
 	border: none;
 	background-color: transparent;
-	background-image: url("close-light.svg");
+	background-image: url("images/close-light.svg");
 	background-position: center center;
 	background-repeat: no-repeat;
 	vertical-align: middle;
 }
 :root[theme="dark"] .close-button:not(#options-close-button) {
-	background-image: url("close-dark.svg");
+	background-image: url("images/close-dark.svg");
 }
 /* UPDATE NOTICE */
 #newtab-update-outer {
@@ -378,10 +378,10 @@ input[type="button"] {
 	padding: 1px 2px 3px;
 	border: none;
 	background-color: transparent;
-	background-image: url("controls-light.svg");
+	background-image: url("images/controls-light.svg");
 }
 :root[theme="dark"] .newtab-control {
-	background-image: url("controls-dark.svg");
+	background-image: url("images/controls-dark.svg");
 }
 :root[locked="true"] .newtab-control {
 	display: none;
@@ -461,26 +461,26 @@ input[type="button"] {
 	opacity: var(--opacity);
 }
 #options-toggle {
-	background-image: url("options-light.svg");
+	background-image: url("images/options-light.svg");
 }
 #locked-toggle {
-	background-image: url("unlocked-light.svg");
+	background-image: url("images/unlocked-light.svg");
 }
 :root[locked="true"] #locked-toggle {
-	background-image: url("locked-light.svg");
+	background-image: url("images/locked-light.svg");
 }
 #options-toggle:hover,
 #locked-toggle:hover {
 	opacity: 1;
 }
 :root[theme="dark"] #options-toggle {
-	background-image: url("options-dark.svg");
+	background-image: url("images/options-dark.svg");
 }
 :root[theme="dark"] #locked-toggle {
-	background-image: url("unlocked-dark.svg");
+	background-image: url("images/unlocked-dark.svg");
 }
 :root[theme="dark"][locked="true"] #locked-toggle {
-	background-image: url("locked-dark.svg");
+	background-image: url("images/locked-dark.svg");
 }
 #options-toggle:-moz-locale-dir(rtl),
 #locked-toggle:-moz-locale-dir(rtl) {
@@ -588,7 +588,7 @@ input[type="button"] {
 	align-items: center;
 }
 button.arrow {
-	background-image: url("arrow.svg");
+	background-image: url("images/arrow.svg");
 	width: 30px;
 	height: 30px;
 	margin: 0;

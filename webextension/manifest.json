@@ -3,7 +3,7 @@
 	"description": "__MSG_extensionDescription__",
 	"version": "84.0b2",
 	"icons": {
-		"64": "icon.svg"
+		"64": "images/icon.svg"
 	},
 	"applications": {
 		"gecko": {
