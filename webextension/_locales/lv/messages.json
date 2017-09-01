@@ -36,10 +36,10 @@
 		"message": "Bildītes nav."
 	},
 	"newtab.undo.restoreButton": {
-		"message": "Atjaunot visus."
+		"message": "Atjaunot visus"
 	},
 	"newtab.undo.undoButton": {
-		"message": "Atcelt."
+		"message": "Atcelt"
 	},
 	"newversion": {
 		"message": "NewTabTools ir atjaunināts uz versiju %S. NewTabTools ir bezmaksas, taču jūsu ziedojums tiks novērtēts!"

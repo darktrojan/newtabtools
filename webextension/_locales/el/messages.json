@@ -33,10 +33,10 @@
 		"message": "Η μικρογραφία αφαιρέθηκε."
 	},
 	"newtab.undo.restoreButton": {
-		"message": "Επαναφορά όλων."
+		"message": "Επαναφορά όλων"
 	},
 	"newtab.undo.undoButton": {
-		"message": "Αναίρεση."
+		"message": "Αναίρεση"
 	},
 	"newversion": {
 		"message": "Το New Tab Tools έχει ενημερωθεί στην έκδοση %S. Το New Tab Tools είναι δωρεάν, αλλα η συνεισφορά σας θα εκτιμηθεί!"

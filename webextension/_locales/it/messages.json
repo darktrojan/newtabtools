@@ -30,10 +30,10 @@
 		"message": "Miniatura rimossa."
 	},
 	"newtab.undo.restoreButton": {
-		"message": "Ripristina tutto."
+		"message": "Ripristina tutto"
 	},
 	"newtab.undo.undoButton": {
-		"message": "Annulla."
+		"message": "Annulla"
 	},
 	"newversion": {
 		"message": "New Tab Tools è stato aggiornato alla versione %S. Per favore fai una donazione."

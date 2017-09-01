@@ -36,8 +36,21 @@ body {
 	height: 100%;
 	display: flex;
 	margin: 0;
+}
+body, #background-fake {
 	background-size: cover;
 	background-position: 50% 50%;
+}
+#background-fake {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	filter: blur(2px);
+}
+:root[options-hidden] #background-fake {
+	display: none;
 }
 input[type="button"] {
 	cursor: pointer;
@@ -111,11 +124,7 @@ input[type="button"] {
 	align-items: center;
 	justify-content: center;
 	margin-inline-start: 1em;
-	padding: 4px 3px;
-	line-height: 18px;
-	border: 1px solid;
-	border-color: rgba(8, 22, 37, 0.12) rgba(8, 22, 37, 0.14) rgba(8, 22, 37, 0.16);
-	background-color: var(--background-fill);
+	line-height: 28px;
 	color: var(--text-hover);
 	transition: opacity 200ms, display 0s 200ms;
 }
@@ -127,54 +136,36 @@ input[type="button"] {
 #newtab-undo-label {
 	margin: 0 4px;
 }
-.newtab-undo-button {
-	-moz-appearance: none;
-	cursor: pointer;
-	padding: 0;
-	margin: 0 2px;
-	border: 0;
-	background: transparent;
-	text-decoration: none;
-	min-width: 0;
-	font-size: 100%;
-	color: -moz-nativehyperlinktext;
-}
-.newtab-undo-button:hover {
-	text-decoration: underline;
-}
-.newtab-undo-button:-moz-focusring {
-	outline: 1px dotted;
-}
 .close-button {
 	-moz-appearance: none;
-	height: 16px;
-	width: 16px;
+	cursor: pointer;
+	height: 18px;
+	width: 18px;
+	margin-inline-start: 8px;
 	padding: 0;
 	border: none;
 	background-color: transparent;
-	background-image: -moz-image-rect(url("close.svg"), 0, 16, 16, 0);
+	background-image: url("images/close-light.svg");
 	background-position: center center;
 	background-repeat: no-repeat;
 	vertical-align: middle;
 }
-:root[theme="dark"] #newtab-undo-close-button,
-:root[theme="dark"] #newtab-update-hide {
-	background-image: -moz-image-rect(url("close.svg"), 0, 64, 16, 48);
-}
-.close-button:hover {
-	background-image: -moz-image-rect(url("close.svg"), 0, 32, 16, 16) !important;
-}
-.close-button:hover:active {
-	background-image: -moz-image-rect(url("close.svg"), 0, 48, 16, 32) !important;
-}
-.close-button:-moz-focusring {
-	outline: 1px dotted;
+:root[theme="dark"] .close-button:not(#options-close-button) {
+	background-image: url("images/close-dark.svg");
 }
 /* UPDATE NOTICE */
 #newtab-update-outer {
 	flex: 1;
 	text-align: center;
-	margin-top: 3px;
+}
+#newtab-update-notice:not([hidden]) {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	line-height: 28px;
+}
+#newtab-update-notice:not(:hover) {
+	opacity: var(--opacity);
 }
 :root[spacing="medium"] #newtab-margin-bottom:-moz-any(.medium, .large) :-moz-any(#newtab-update-outer, #locked-toggle) {
 	margin-top: 8px;
@@ -183,15 +174,16 @@ input[type="button"] {
 	margin-top: 18px;
 }
 #newtab-update-text {
-	color: var(--text);
+	color: var(--text-hover);
 	margin-inline-end: 1em;
 }
-#newtab-update-notice button {
+#newtab-undo-container button:not(.close-button),
+#newtab-update-notice button:not(.close-button) {
 	min-width: 0;
 	padding: 0;
 	font-size: 12px;
 	color: #444;
-	margin: 0;
+	margin: 0 2px;
 }
 /* MARGINS */
 #newtab-vertical-margin {
@@ -385,14 +377,21 @@ input[type="button"] {
 	height: 24px;
 	padding: 1px 2px 3px;
 	border: none;
-	background: transparent url("controls.png");
+	background-color: transparent;
+	background-image: url("images/controls-light.svg");
+}
+:root[theme="dark"] .newtab-control {
+	background-image: url("images/controls-dark.svg");
 }
 :root[locked="true"] .newtab-control {
 	display: none;
 }
 .newtab-control:-moz-focusring,
 .newtab-site:hover > .newtab-control {
-	opacity: 1;
+	opacity: var(--opacity);
+}
+.newtab-control:hover {
+	opacity: 1 !important;
 }
 .newtab-control[dragged] {
 	opacity: 0 !important;
@@ -400,12 +399,6 @@ input[type="button"] {
 @media (-moz-touch-enabled) {
 	.newtab-control {
 		opacity: 1;
-	}
-}
-@media (min-resolution: 2dppx) {
-	.newtab-control {
-		background-image: url("controls@2x.png");
-		background-size: 296px;
 	}
 }
 .newtab-control-pin:-moz-locale-dir(ltr),
@@ -416,29 +409,11 @@ input[type="button"] {
 .newtab-control-pin:-moz-locale-dir(rtl) {
 	right: 4px;
 }
-.newtab-control-pin:hover {
+.newtab-control-pin[pinned] {
 	background-position: -24px 0;
 }
-.newtab-control-pin:active {
-	background-position: -48px 0;
-}
-.newtab-control-pin[pinned] {
-	background-position: -72px 0;
-}
-.newtab-control-pin[pinned]:hover {
-	background-position: -96px 0;
-}
-.newtab-control-pin[pinned]:active {
-	background-position: -120px 0;
-}
 .newtab-control-block {
-	background-position: -144px 0;
-}
-.newtab-control-block:hover {
-	background-position: -168px 0;
-}
-.newtab-control-block:active {
-	background-position: -192px 0;
+	background-position: -48px 0;
 }
 /* DRAG & DROP
  * This is just a temporary drag element used for dataTransfer.setDragImage()
@@ -481,31 +456,31 @@ input[type="button"] {
 	background-color: transparent;
 	background-position: center;
 	background-repeat: no-repeat;
-	background-size: 18px;
+	background-size: 24px;
 	z-index: 2;
 	opacity: var(--opacity);
 }
 #options-toggle {
-	background-image: url("options-light.svg");
+	background-image: url("images/options-light.svg");
 }
 #locked-toggle {
-	background-image: url("unlocked-light.svg");
+	background-image: url("images/unlocked-light.svg");
 }
 :root[locked="true"] #locked-toggle {
-	background-image: url("locked-light.svg");
+	background-image: url("images/locked-light.svg");
 }
 #options-toggle:hover,
 #locked-toggle:hover {
 	opacity: 1;
 }
 :root[theme="dark"] #options-toggle {
-	background-image: url("options-dark.svg");
+	background-image: url("images/options-dark.svg");
 }
 :root[theme="dark"] #locked-toggle {
-	background-image: url("unlocked-dark.svg");
+	background-image: url("images/unlocked-dark.svg");
 }
 :root[theme="dark"][locked="true"] #locked-toggle {
-	background-image: url("locked-dark.svg");
+	background-image: url("images/locked-dark.svg");
 }
 #options-toggle:-moz-locale-dir(rtl),
 #locked-toggle:-moz-locale-dir(rtl) {
@@ -518,8 +493,7 @@ input[type="button"] {
 :root:not([options-hidden]) #locked-toggle {
 	visibility: hidden;
 }
-:root:not([options-hidden]) #newtab-scrollbox,
-:root:not([options-hidden]) .newtab-background {
+:root:not([options-hidden]) #newtab-scrollbox {
 	filter: blur(1px);
 }
 #options-bg {
@@ -614,13 +588,14 @@ input[type="button"] {
 	align-items: center;
 }
 button.arrow {
-	background-image: url("arrow.svg");
-	width: 24px;
-	height: 24px;
-	margin: 3px;
+	background-image: url("images/arrow.svg");
+	width: 30px;
+	height: 30px;
+	margin: 0;
 	padding: 0;
 	-moz-appearance: none;
 	border: none;
+	cursor: pointer;
 }
 #options-previous-row-tile {
 	margin-top: -1.5em;

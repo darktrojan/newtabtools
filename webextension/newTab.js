@@ -221,9 +221,8 @@ var newTabTools = {
 	setThumbnail: function(site, src) {
 		let image = new Image();
 		image.onload = function() {
-			let firstCell = Grid.cells[0].node;
-			let [thumbnailWidth, thumbnailHeight] = [firstCell.offsetWidth * 2, firstCell.offsetHeight * 2];
-			let scale = Math.min(Math.max(thumbnailWidth / image.width, thumbnailHeight / image.height), 1);
+			let thumbnailSize = Prefs.thumbnailSize;
+			let scale = Math.min(thumbnailSize / image.width, thumbnailSize / image.height, 1);
 
 			let canvas = document.createElementNS(HTML_NAMESPACE, 'canvas');
 			canvas.mozOpaque = false;
@@ -266,13 +265,14 @@ var newTabTools = {
 	refreshBackgroundImage: function() {
 		Background.getBackground().then(background => {
 			if (!background) {
-				document.body.style.backgroundImage = null;
+				document.body.style.backgroundImage = this.backgroundFake.style.backgroundImage = null;
 				this.removeBackgroundButton.disabled = true;
 				this.removeBackgroundButton.blur();
 				return;
 			}
 
-			document.body.style.backgroundImage = 'url("' + URL.createObjectURL(background) + '")';
+			document.body.style.backgroundImage =
+				this.backgroundFake.style.backgroundImage = 'url("' + URL.createObjectURL(background) + '")';
 			this.removeBackgroundButton.disabled = false;
 		});
 	},
@@ -576,6 +576,7 @@ var newTabTools = {
 (function() {
 	let uiElements = {
 		'page': 'newtab-scrollbox', // used in fx-newTab.js
+		'backgroundFake': 'background-fake',
 		'optionsToggleButton': 'options-toggle',
 		'pinURLInput': 'options-pinURL-input',
 		'pinURLAutocomplete': 'autocomplete',

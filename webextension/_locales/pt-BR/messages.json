@@ -33,10 +33,10 @@
 		"message": "Miniatura removida."
 	},
 	"newtab.undo.restoreButton": {
-		"message": "Restaurar tudo."
+		"message": "Restaurar tudo"
 	},
 	"newtab.undo.undoButton": {
-		"message": "Desfazer."
+		"message": "Desfazer"
 	},
 	"newversion": {
 		"message": "O New Tab Tools foi atualizado para a versão %S. Por favor, considere fazer uma doação."

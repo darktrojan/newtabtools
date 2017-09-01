@@ -84,21 +84,6 @@ var Tiles = {
 				resolve();
 			};
 		});
-	},
-	getTilesFromOldExtension: function() {
-		return browser.runtime.sendMessage('tiles').then(function(result) {
-			return new Promise(function(resolve) {
-				let os = db.transaction('tiles', 'readwrite').objectStore('tiles');
-				os.clear().onsuccess = function addNextTile() {
-					let nextTile = result.shift();
-					if (nextTile) {
-						os.add(nextTile).onsuccess = addNextTile;
-					} else {
-						resolve();
-					}
-				};
-			});
-		});
 	}
 };
 
@@ -126,8 +111,5 @@ var Background = {
 				}
 			};
 		});
-	},
-	getBackgroundFromOldExtension: function() {
-		return browser.runtime.sendMessage('background').then(result => this.setBackground(result));
 	}
 };

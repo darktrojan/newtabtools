@@ -9,6 +9,7 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 	<link rel="stylesheet" href="newTab.css" type="text/css" />
 </head>
 <body>
+	<div id="background-fake"></div>
 	<div id="newtab-scrollbox">
 		<div id="newtab-vertical-margin">
 			<div id="newtab-margin-top">
@@ -18,8 +19,8 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 				</div>
 				<div id="newtab-undo-container" undo-disabled="true">
 					<label id="newtab-undo-label" data-message="newtab.undo.removedLabel"></label>
-					<button id="newtab-undo-button" tabindex="-1" class="newtab-undo-button" data-message="newtab.undo.undoButton"></button>
-					<button id="newtab-undo-restore-button" tabindex="-1" class="newtab-undo-button" data-message="newtab.undo.restoreButton"></button>
+					<button id="newtab-undo-button" tabindex="-1" data-message="newtab.undo.undoButton"></button>
+					<button id="newtab-undo-restore-button" tabindex="-1" data-message="newtab.undo.restoreButton"></button>
 					<button id="newtab-undo-close-button" class="close-button" tabindex="-1" data-title="newtab.undo.closeTooltip"></button>
 				</div>
 				<div class="newtab-side-margin newtab-margin-right">

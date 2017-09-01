@@ -30,10 +30,10 @@
 		"message": "已移除縮圖。"
 	},
 	"newtab.undo.restoreButton": {
-		"message": "全部恢復。"
+		"message": "全部恢復"
 	},
 	"newtab.undo.undoButton": {
-		"message": "還原。"
+		"message": "還原"
 	},
 	"newversion": {
 		"message": "New Tab Tools 已更新至 %S。希望您能考慮捐助。"

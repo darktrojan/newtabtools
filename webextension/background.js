@@ -9,18 +9,9 @@ Promise.all([
 		}
 		delete initDB.waitingQueue;
 	}
-
-	if (isFirstRun) {
-		return Promise.all([
-			Tiles.getTilesFromOldExtension(),
-			Background.getBackgroundFromOldExtension(),
-			Prefs.getPrefsFromOldExtension()
-		]);
-	}
 });
 
 var db;
-var isFirstRun = false;
 
 function initDB() {
 	return new Promise(function(resolve, reject) {
@@ -54,10 +45,6 @@ function initDB() {
 			}
 			if (!this.transaction.objectStore('thumbnails').indexNames.contains('used')) {
 				this.transaction.objectStore('thumbnails').createIndex('used', 'used');
-			}
-
-			if (event.oldVersion < 5) {
-				isFirstRun = true;
 			}
 		};
 	});
