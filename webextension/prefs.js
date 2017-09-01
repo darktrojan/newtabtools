@@ -56,10 +56,10 @@ var Prefs = {
 		if (Number.isInteger(prefs.opacity) && prefs.opacity >= 0 && prefs.opacity <= 100) {
 			this._opacity = prefs.opacity;
 		}
-		if (Number.isInteger(prefs.rows) && prefs.rows >= 1 && prefs.rows <= 10) {
+		if (Number.isInteger(prefs.rows) && prefs.rows >= 1 && prefs.rows <= 20) {
 			this._rows = prefs.rows;
 		}
-		if (Number.isInteger(prefs.columns) && prefs.columns >= 1 && prefs.columns <= 10) {
+		if (Number.isInteger(prefs.columns) && prefs.columns >= 1 && prefs.columns <= 20) {
 			this._columns = prefs.columns;
 		}
 		if (Array.isArray(prefs.margin) && prefs.margin.length == 4) {
