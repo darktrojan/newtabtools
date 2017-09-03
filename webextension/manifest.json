@@ -1,7 +1,7 @@
 {
 	"name": "__MSG_extensionName__",
 	"description": "__MSG_extensionDescription__",
-	"version": "84.0b2",
+	"version": "84.0b3",
 	"icons": {
 		"64": "images/icon.svg"
 	},
