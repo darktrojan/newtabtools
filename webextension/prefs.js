@@ -104,10 +104,18 @@ var Prefs = {
 			}
 		}
 
+		let keys = Object.keys(prefs);
+		if (keys.length === 0) {
+			return;
+		}
+
 		this.parsePrefs(prefs);
 
+		if (keys.length == 1 && keys[0] == 'thumbnailSize') {
+			return;
+		}
+
 		if ('newTabTools' in window) {
-			let keys = Object.keys(prefs);
 			newTabTools.updateUI(keys);
 			if (keys.includes('rows') || keys.includes('columns')) {
 				Grid.refresh();

@@ -443,7 +443,10 @@ var Grid = {
 		}
 
 		let firstCell = Grid.cells[0].node;
-		Prefs.thumbnailSize = Math.max(firstCell.offsetWidth, firstCell.offsetHeight, 150) * 2;
+		let size = Math.max(firstCell.offsetWidth, firstCell.offsetHeight, 150) * 2;
+		if (size != Prefs.thumbnailSize) {
+			Prefs.thumbnailSize = size;
+		}
 	},
 
 	/**
