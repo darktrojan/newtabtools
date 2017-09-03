@@ -141,7 +141,7 @@ input[type="button"] {
 	cursor: pointer;
 	height: 18px;
 	width: 18px;
-	margin-inline-start: 8px;
+	margin-inline-start: 2px;
 	padding: 0;
 	border: none;
 	background-color: transparent;
@@ -632,13 +632,13 @@ table {
 	width: 100%;
 	border-collapse: collapse;
 }
-tr {
+#options-page tr {
 	height: 31px;
 }
-th {
+#options-page th {
 	white-space: nowrap;
 }
-th, td {
+#options-page th, #options-page td {
 	text-align: left;
 	font-weight: normal;
 	margin: 0;
@@ -671,4 +671,24 @@ a {
 }
 #options-donate-wrap > div {
 	margin: 0.5em;
+}
+#options-filter table {
+	line-height: 24px;
+}
+.plus-button,
+.minus-button {
+	width: 18px;
+	height: 18px;
+	border: none;
+	background-color: transparent;
+	vertical-align: middle;
+}
+.plus-button {
+	background-image: url("images/plus.svg");
+}
+.minus-button {
+	background-image: url("images/minus.svg");
+}
+.minus-button[disabled] {
+	opacity: 0.5;
 }

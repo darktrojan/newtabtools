@@ -67,7 +67,7 @@ var newTabTools = {
 		if (event.target.disabled) {
 			return;
 		}
-		let id = event.target.id;
+		let {id, classList} = event.target;
 		switch (id) {
 		case 'options-close-button':
 			newTabTools.hideOptions();
@@ -177,6 +177,22 @@ var newTabTools = {
 			this.updateNotice.hidden = true;
 			Prefs.versionLastAck = new Date();
 			break;
+		}
+
+		if (classList.contains('plus-button') || classList.contains('minus-button')) {
+			let row = event.target.parentNode.parentNode;
+			let unpinnedCell = row.cells[2];
+			let count = parseInt(unpinnedCell.textContent, 10);
+
+			if (isNaN(count)) {
+				if (classList.contains('minus-button')) {
+					return;
+				}
+				count = -1;
+			}
+			count += classList.contains('plus-button') ? 1 : -1;
+			unpinnedCell.textContent = count == -1 ? 'unlimited' : count;
+			row.querySelector('.minus-button').disabled = count == -1;
 		}
 	},
 	optionsOnChange: function(event) {
@@ -573,6 +589,39 @@ var newTabTools = {
 	}
 };
 
+function fillFilterUI() {
+	let pinned = Grid.sites
+			.filter(s => s && 'position' in s.link)
+			.reduce((carry, s) => {
+		let hostname = new URL(s.url).hostname;
+		if (!(hostname in carry)) {
+			carry[hostname] = 0;
+		}
+		carry[hostname]++;
+		return carry;
+	}, Object.create(null));
+	let filters = {'localhost': 0, 'event.lan': 1, 'google.com': 0};
+
+	let table = newTabTools.optionsFilter.querySelector('table');
+	let template = table.querySelector('template');
+	let last = null;
+	for (let k of Object.keys(pinned).concat(Object.keys(filters)).sort()) {
+		if (k == last) {
+			continue;
+		}
+		last = k;
+
+		let row = template.content.firstElementChild.cloneNode(true);
+		row.cells[0].textContent = k;
+		row.cells[1].textContent = pinned[k] || 0;
+		row.cells[2].textContent = k in filters ? filters[k] : 'unlimited';
+		if (k in filters) {
+			row.querySelector('.minus-button').disabled = false;
+		}
+		table.tBodies[0].append(row);
+	}
+}
+
 (function() {
 	let uiElements = {
 		'page': 'newtab-scrollbox', // used in fx-newTab.js
@@ -603,6 +652,7 @@ var newTabTools = {
 		'recentListOuter': 'newtab-recent-outer',
 		'optionsBackground': 'options-bg',
 		'optionsPane': 'options',
+		'optionsFilter': 'options-filter',
 		'updateNotice': 'newtab-update-notice',
 		'updateText': 'newtab-update-text',
 		'lockedToggleButton': 'locked-toggle'

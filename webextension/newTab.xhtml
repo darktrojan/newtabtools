@@ -54,7 +54,7 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 			<button id="options-close-button" class="close-button"></button>
 		</div>
 		<div id="options-inner">
-			<div id="options-tile">
+			<div id="options-tile" hidden="">
 				<fieldset>
 					<legend data-message="pin-url.header"></legend>
 					<div class="options-row">
@@ -202,6 +202,50 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 					<div>
 						<a href="https://github.com/darktrojan/newtabtools" data-message="github"></a>
 					</div>
+				</fieldset>
+			</div>
+			<div id="options-filter" style="width: 350px; margin-inline-start: 2em;">
+				<fieldset>
+					<legend>Browsing History Tiles:</legend>
+					<table>
+						<thead>
+							<tr>
+								<th align="left">Domain</th>
+								<th>Pinned Tiles</th>
+								<th colspan="2">Unpinned Tiles Limit</th>
+							</tr>
+						</thead>
+						<tfoot>
+							<tr>
+								<th align="left" colspan="3">
+									Add filter:
+								</th>
+							</tr>
+							<tr>
+								<td colspan="2">
+									<input type="url" style="box-sizing: border-box;width: 100%;" data-placeholder="pin-url.placeholder"/>
+								</td>
+								<td colspan="2">
+									<div style="display: flex">
+										<input type="text" size="1" style="flex: 1" /><input type="button" value="Set" />
+									</div>
+								</td>
+							</tr>
+						</tfoot>
+						<tbody>
+						</tbody>
+						<template>
+							<tr>
+								<td></td>
+								<td align="center"></td>
+								<td align="center"></td>
+								<td width="40">
+									<button class="plus-button"></button>
+									<button class="minus-button" disabled=""></button>
+								</td>
+							</tr>
+						</template>
+					</table>
 				</fieldset>
 			</div>
 		</div>
