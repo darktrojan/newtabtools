@@ -29,6 +29,7 @@ var Tiles = {
 				browser.topSites.get({ providers: ['places'] }).then(r => {
 					let urls = Tiles._list.slice();
 					let filters = Filters.getList();
+					let dotFilters = Object.keys(filters).filter(f => f[0] == '.');
 					let remaining = r.filter(s => {
 						if (Blocked.isBlocked(s.url)) {
 							return false;
@@ -40,11 +41,14 @@ var Tiles = {
 
 						let isNew = !urls.includes(s.url);
 						if (isNew) {
-							if (url.host in filters) {
-								if (filters[url.host] === 0) {
+							let match = url.host in filters ? url.host : dotFilters.find(f => {
+								return url.host == f.substring(1) || url.host.endsWith(f);
+							});
+							if (match) {
+								if (filters[match] === 0) {
 									return false;
 								}
-								filters[url.host]--;
+								filters[match]--;
 							}
 							urls.push(s.url);
 						}
