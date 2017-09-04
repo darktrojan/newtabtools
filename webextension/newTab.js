@@ -3,7 +3,7 @@ This Source Code Form is subject to the terms of the Mozilla Public
 License, v. 2.0. If a copy of the MPL was not distributed with this file,
 You can obtain one at http://mozilla.org/MPL/2.0/.
 */
-/* globals Prefs, Grid, Page, Tiles, Updater, Background, browser */
+/* globals Prefs, Filters, Grid, Page, Tiles, Updater, Background, browser */
 
 var HTML_NAMESPACE = 'http://www.w3.org/1999/xhtml';
 
@@ -165,6 +165,12 @@ var newTabTools = {
 			});
 			break;
 		case 'options-donate':
+		case 'options-filter-set':
+			let xDomain = event.target.parentNode.parentNode.previousElementSibling.firstElementChild.value;
+			let xCount = parseInt(event.target.previousElementSibling.value, 10);
+			Filters.setFilter(xDomain, xCount);
+			fillFilterUI(xDomain);
+			return;
 		case 'newtab-update-donate':
 			window.open('https://darktrojan.github.io/donate.html?newtabtools');
 			Prefs.versionLastAck = new Date();
@@ -193,6 +199,8 @@ var newTabTools = {
 			count += classList.contains('plus-button') ? 1 : -1;
 			unpinnedCell.textContent = count == -1 ? 'unlimited' : count;
 			row.querySelector('.minus-button').disabled = count == -1;
+
+			Filters.setFilter(row.cells[0].textContent, count);
 		}
 	},
 	optionsOnChange: function(event) {
@@ -589,7 +597,7 @@ var newTabTools = {
 	}
 };
 
-function fillFilterUI() {
+function fillFilterUI(highlightDomain) {
 	let pinned = Grid.sites
 			.filter(s => s && 'position' in s.link)
 			.reduce((carry, s) => {
@@ -600,9 +608,13 @@ function fillFilterUI() {
 		carry[hostname]++;
 		return carry;
 	}, Object.create(null));
-	let filters = {'localhost': 0, 'event.lan': 1, 'google.com': 0};
+	let filters = Filters.list;
 
 	let table = newTabTools.optionsFilter.querySelector('table');
+	while (table.tBodies[0].rows.length) {
+		table.tBodies[0].rows[0].remove();
+	}
+
 	let template = table.querySelector('template');
 	let last = null;
 	for (let k of Object.keys(pinned).concat(Object.keys(filters)).sort()) {
@@ -612,6 +624,9 @@ function fillFilterUI() {
 		last = k;
 
 		let row = template.content.firstElementChild.cloneNode(true);
+		if (highlightDomain && k == highlightDomain) {
+			row.classList.add('highlight');
+		}
 		row.cells[0].textContent = k;
 		row.cells[1].textContent = pinned[k] || 0;
 		row.cells[2].textContent = k in filters ? filters[k] : 'unlimited';

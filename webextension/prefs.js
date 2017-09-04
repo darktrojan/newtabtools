@@ -1,4 +1,4 @@
-/* exported Blocked, Prefs */
+/* exported Blocked, Filters, Prefs */
 /* globals browser, newTabTools, Grid, Updater */
 var Prefs = {
 	_theme: 'light',
@@ -86,6 +86,9 @@ var Prefs = {
 		if (Array.isArray(prefs.blocked)) {
 			Blocked._list = prefs.blocked;
 		}
+		if ('filters' in prefs && typeof prefs.filters == 'object') {
+			Filters._list = prefs.filters;
+		}
 		if ('version' in prefs && typeof prefs.version == 'number') {
 			this._version = prefs.version;
 		}
@@ -155,6 +158,28 @@ var Blocked = {
 	},
 	clear: function() {
 		this._list.length = 0;
+		this._saveList();
+	}
+};
+
+var Filters = {
+	_list: Object.create(null),
+	_saveList: function() {
+		browser.storage.local.set({ 'filters': this._list });
+	},
+	get list() {
+		return this._list;
+	},
+	setFilter: function(domain, limit) {
+		if (limit == -1) {
+			delete this._list[domain];
+		} else {
+			this._list[domain] = limit;
+		}
+		this._saveList();
+	},
+	clear: function() {
+		this._list = Object.create(null);
 		this._saveList();
 	}
 };
