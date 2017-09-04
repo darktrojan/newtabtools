@@ -8,6 +8,7 @@
 	"extensionDescription": { "message": "Customizes the new tab page. You can add more tiles, or a background image. And you can set new tile images and titles." },
 	"extensionName": { "message": "New Tab Tools" },
 	"filter.button": { "message": "Filter…" },
+	"filter.helptext": { "message": "To limit a domain and all of its subdomains, add a dot in front of the domain, like this: .example.com" },
 	"filter.header.add": { "message": "Add filter:" },
 	"filter.header.domain": { "message": "Domain" },
 	"filter.header.pinned": { "message": "Pinned Tiles" },
