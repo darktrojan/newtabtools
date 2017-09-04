@@ -168,7 +168,6 @@ var newTabTools = {
 			document.documentElement.setAttribute('options-filter-shown', '');
 			this.fillFilterUI();
 			return;
-		case 'options-donate':
 		case 'options-filter-set':
 			Filters.setFilter(this.optionsFilterHost.value, parseInt(this.optionsFilterCount.value, 10));
 			Updater.updateGrid();
@@ -177,6 +176,7 @@ var newTabTools = {
 			this.optionsFilterCount.value = '';
 			this.optionsFilterHost.focus();
 			return;
+		case 'options-donate':
 		case 'newtab-update-donate':
 			window.open('https://darktrojan.github.io/donate.html?newtabtools');
 			Prefs.versionLastAck = new Date();
