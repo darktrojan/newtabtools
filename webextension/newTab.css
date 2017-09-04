@@ -510,11 +510,13 @@ input[type="button"] {
 	position: fixed;
 	top: 2em;
 	left: 50%;
-	margin-left: calc(-375px - 2em);
+	margin-left: calc(-376px - 2em);
+	width: calc(752px + 4em);
 	padding: 1em;
 	box-sizing: border-box;
 	box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5);
 	font-size: 12px;
+	transition: margin-left 500ms, width 500ms;
 }
 #options-close {
 	position: absolute;
@@ -672,7 +674,17 @@ a {
 #options-donate-wrap > div {
 	margin: 0.5em;
 }
-#options-filter table {
+#options-filter {
+	display: none;
+	margin-inline-start: 2em;
+	width: 350px;
+}
+:root[options-filter-shown] #options {
+	margin-left: calc(-551px - 3em);
+	width: calc(1102px + 6em);
+}
+#options-filter tfoot,
+#options-filter tbody {
 	line-height: 24px;
 }
 .highlight {
@@ -693,6 +705,7 @@ a {
 	border: none;
 	background-color: transparent;
 	vertical-align: middle;
+	cursor: pointer;
 }
 .plus-button {
 	background-image: url("images/plus.svg");
@@ -702,4 +715,8 @@ a {
 }
 .minus-button[disabled] {
 	opacity: 0.5;
+}
+#options-filter-host {
+	box-sizing: border-box;
+	width: 100%;
 }

@@ -164,13 +164,18 @@ var newTabTools = {
 				this.refreshBackgroundImage();
 			});
 			break;
+		case 'historytiles-filter':
+			document.documentElement.setAttribute('options-filter-shown', '');
+			this.fillFilterUI();
+			return;
 		case 'options-donate':
 		case 'options-filter-set':
-			let xHost = event.target.parentNode.parentNode.previousElementSibling.firstElementChild.value;
-			let xCount = parseInt(event.target.previousElementSibling.value, 10);
-			Filters.setFilter(xHost, xCount);
+			Filters.setFilter(this.optionsFilterHost.value, parseInt(this.optionsFilterCount.value, 10));
 			Updater.updateGrid();
-			fillFilterUI(xHost);
+			this.fillFilterUI(this.optionsFilterHost.value);
+			this.optionsFilterHost.value = '';
+			this.optionsFilterCount.value = '';
+			this.optionsFilterHost.focus();
 			return;
 		case 'newtab-update-donate':
 			window.open('https://darktrojan.github.io/donate.html?newtabtools');
@@ -367,7 +372,7 @@ var newTabTools = {
 		if (!keys || keys.includes('history')) {
 			let history = Prefs.history;
 			document.querySelector('[name="history"]').checked = history;
-			// document.getElementById('historytiles-filter').disabled = !history;
+			document.getElementById('historytiles-filter').disabled = !history;
 		}
 
 		if (!keys || keys.includes('recent')) {
@@ -527,6 +532,45 @@ var newTabTools = {
 			this.siteThumbnail.style.height = '150px';
 		}
 	},
+	fillFilterUI: function(highlightHost) {
+		let pinned = Grid.sites
+				.filter(s => s && 'position' in s.link)
+				.reduce((carry, s) => {
+			let host = new URL(s.url).host;
+			if (!(host in carry)) {
+				carry[host] = 0;
+			}
+			carry[host]++;
+			return carry;
+		}, Object.create(null));
+		let filters = Filters.getList();
+
+		let table = newTabTools.optionsFilter.querySelector('table');
+		while (table.tBodies[0].rows.length) {
+			table.tBodies[0].rows[0].remove();
+		}
+
+		let template = table.querySelector('template');
+		let last = null;
+		for (let k of Object.keys(pinned).concat(Object.keys(filters)).sort()) {
+			if (k == last) {
+				continue;
+			}
+			last = k;
+
+			let row = template.content.firstElementChild.cloneNode(true);
+			if (highlightHost && k == highlightHost) {
+				row.classList.add('highlight');
+			}
+			row.cells[0].textContent = k;
+			row.cells[1].textContent = pinned[k] || 0;
+			row.cells[2].textContent = k in filters ? filters[k] : 'unlimited';
+			if (k in filters) {
+				row.querySelector('.minus-button').disabled = false;
+			}
+			table.tBodies[0].append(row);
+		}
+	},
 	startup: function() {
 		if (!window.browser) {
 			// The page couldn't be loaded properly because WebExtensions is too slow. Sad.
@@ -599,46 +643,6 @@ var newTabTools = {
 	}
 };
 
-function fillFilterUI(highlightHost) {
-	let pinned = Grid.sites
-			.filter(s => s && 'position' in s.link)
-			.reduce((carry, s) => {
-		let host = new URL(s.url).host;
-		if (!(host in carry)) {
-			carry[host] = 0;
-		}
-		carry[host]++;
-		return carry;
-	}, Object.create(null));
-	let filters = Filters.getList();
-
-	let table = newTabTools.optionsFilter.querySelector('table');
-	while (table.tBodies[0].rows.length) {
-		table.tBodies[0].rows[0].remove();
-	}
-
-	let template = table.querySelector('template');
-	let last = null;
-	for (let k of Object.keys(pinned).concat(Object.keys(filters)).sort()) {
-		if (k == last) {
-			continue;
-		}
-		last = k;
-
-		let row = template.content.firstElementChild.cloneNode(true);
-		if (highlightHost && k == highlightHost) {
-			row.classList.add('highlight');
-		}
-		row.cells[0].textContent = k;
-		row.cells[1].textContent = pinned[k] || 0;
-		row.cells[2].textContent = k in filters ? filters[k] : 'unlimited';
-		if (k in filters) {
-			row.querySelector('.minus-button').disabled = false;
-		}
-		table.tBodies[0].append(row);
-	}
-}
-
 (function() {
 	let uiElements = {
 		'page': 'newtab-scrollbox', // used in fx-newTab.js
@@ -670,6 +674,9 @@ function fillFilterUI(highlightHost) {
 		'optionsBackground': 'options-bg',
 		'optionsPane': 'options',
 		'optionsFilter': 'options-filter',
+		'optionsFilterHost': 'options-filter-host',
+		'optionsFilterCount': 'options-filter-count',
+		'optionsFilterSet': 'options-filter-set',
 		'updateNotice': 'newtab-update-notice',
 		'updateText': 'newtab-update-text',
 		'lockedToggleButton': 'locked-toggle'
@@ -697,6 +704,9 @@ function fillFilterUI(highlightHost) {
 	newTabTools.pinURLInput.addEventListener('input', newTabTools.autocomplete.bind(newTabTools));
 	newTabTools.optionsPane.addEventListener('click', newTabTools.optionsOnClick.bind(newTabTools), false);
 	newTabTools.optionsPane.addEventListener('change', newTabTools.optionsOnChange.bind(newTabTools), false);
+	newTabTools.optionsPane.addEventListener('transitionend', function() {
+		newTabTools.optionsFilter.style.display = 'block';
+	});
 	for (let c of newTabTools.optionsPane.querySelectorAll('select, input[type="range"]')) {
 		c.addEventListener('keyup', keyUpHandler);
 	}
@@ -710,8 +720,15 @@ function fillFilterUI(highlightHost) {
 	newTabTools.setBackgroundInput.addEventListener('input', function() {
 		newTabTools.setBackgroundButton.disabled = !this.files.length;
 	});
+	newTabTools.optionsFilterCount.addEventListener('keydown', function(event) {
+		console.log(event.key);
+		if (event.key.length == 1 && (event.key < '0' || event.key > '9')) {
+			event.preventDefault();
+		}
+	});
+
 	window.addEventListener('keypress', function(event) {
-		if (event.keyCode == 27) {
+		if (event.key == 'Escape') {
 			newTabTools.hideOptions();
 		}
 	});
