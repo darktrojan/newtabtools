@@ -166,10 +166,11 @@ var newTabTools = {
 			break;
 		case 'options-donate':
 		case 'options-filter-set':
-			let xDomain = event.target.parentNode.parentNode.previousElementSibling.firstElementChild.value;
+			let xHost = event.target.parentNode.parentNode.previousElementSibling.firstElementChild.value;
 			let xCount = parseInt(event.target.previousElementSibling.value, 10);
-			Filters.setFilter(xDomain, xCount);
-			fillFilterUI(xDomain);
+			Filters.setFilter(xHost, xCount);
+			Updater.updateGrid();
+			fillFilterUI(xHost);
 			return;
 		case 'newtab-update-donate':
 			window.open('https://darktrojan.github.io/donate.html?newtabtools');
@@ -201,6 +202,7 @@ var newTabTools = {
 			row.querySelector('.minus-button').disabled = count == -1;
 
 			Filters.setFilter(row.cells[0].textContent, count);
+			Updater.updateGrid();
 		}
 	},
 	optionsOnChange: function(event) {
@@ -597,18 +599,18 @@ var newTabTools = {
 	}
 };
 
-function fillFilterUI(highlightDomain) {
+function fillFilterUI(highlightHost) {
 	let pinned = Grid.sites
 			.filter(s => s && 'position' in s.link)
 			.reduce((carry, s) => {
-		let hostname = new URL(s.url).hostname;
-		if (!(hostname in carry)) {
-			carry[hostname] = 0;
+		let host = new URL(s.url).host;
+		if (!(host in carry)) {
+			carry[host] = 0;
 		}
-		carry[hostname]++;
+		carry[host]++;
 		return carry;
 	}, Object.create(null));
-	let filters = Filters.list;
+	let filters = Filters.getList();
 
 	let table = newTabTools.optionsFilter.querySelector('table');
 	while (table.tBodies[0].rows.length) {
@@ -624,7 +626,7 @@ function fillFilterUI(highlightDomain) {
 		last = k;
 
 		let row = template.content.firstElementChild.cloneNode(true);
-		if (highlightDomain && k == highlightDomain) {
+		if (highlightHost && k == highlightHost) {
 			row.classList.add('highlight');
 		}
 		row.cells[0].textContent = k;

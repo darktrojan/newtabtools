@@ -167,14 +167,18 @@ var Filters = {
 	_saveList: function() {
 		browser.storage.local.set({ 'filters': this._list });
 	},
-	get list() {
-		return this._list;
+	getList: function() {
+		let copy = Object.create(null);
+		for (let k of Object.keys(this._list)) {
+			copy[k] = this._list[k];
+		}
+		return copy;
 	},
-	setFilter: function(domain, limit) {
+	setFilter: function(host, limit) {
 		if (limit == -1) {
-			delete this._list[domain];
+			delete this._list[host];
 		} else {
-			this._list[domain] = limit;
+			this._list[host] = limit;
 		}
 		this._saveList();
 	},

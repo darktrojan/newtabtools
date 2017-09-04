@@ -1,5 +1,5 @@
 /* exported initDB, Tiles, Background */
-/* globals Blocked, Prefs, browser, db */
+/* globals Blocked, Filters, Prefs, browser, db */
 var Tiles = {
 	_cache: [],
 	_list: [],
@@ -28,13 +28,24 @@ var Tiles = {
 
 				browser.topSites.get({ providers: ['places'] }).then(r => {
 					let urls = Tiles._list.slice();
+					let filters = Filters.getList();
 					let remaining = r.filter(s => {
 						if (Blocked.isBlocked(s.url)) {
+							return false;
+						}
+						let url = new URL(s.url);
+						if (!['http:', 'https:', 'ftp:'].includes(url.protocol)) {
 							return false;
 						}
 
 						let isNew = !urls.includes(s.url);
 						if (isNew) {
+							if (url.host in filters) {
+								if (filters[url.host] === 0) {
+									return false;
+								}
+								filters[url.host]--;
+							}
 							urls.push(s.url);
 						}
 						return isNew;
