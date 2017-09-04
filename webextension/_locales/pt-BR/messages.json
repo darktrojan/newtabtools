@@ -20,6 +20,9 @@
 	"extensionDescription": {
 		"message": "Personaliza a página 'Nova Aba'. Você pode adicionar mais blocos, o iniciador do Firefox, ou uma imagem de fundo. E você pode definir novos blocos e suas imagens."
 	},
+	"filter.button": {
+		"message": "Filtrar…"
+	},
 	"github": {
 		"message": "New Tab Tools no GitHub"
 	},

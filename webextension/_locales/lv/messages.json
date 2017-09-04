@@ -23,6 +23,9 @@
 	"extensionName": {
 		"message": "NewTabTools"
 	},
+	"filter.button": {
+		"message": "Filtrēt…"
+	},
 	"github": {
 		"message": "NewTabTools on GitHub"
 	},

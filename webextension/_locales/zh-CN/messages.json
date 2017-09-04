@@ -20,6 +20,9 @@
 	"extensionDescription": {
 		"message": "自定义新标签页。您可以添加更多的磁贴，一个 Firefox 的快速启动栏，以及设置背景图片。您还可以设定新建磁贴的图片和标题。"
 	},
+	"filter.button": {
+		"message": "过滤器…"
+	},
 	"github": {
 		"message": "New Tab Tools 在 GitHub 上"
 	},

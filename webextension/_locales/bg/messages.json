@@ -17,6 +17,9 @@
 	"donate.label": {
 		"message": "New Tab Tools се издържа от дарения."
 	},
+	"filter.button": {
+		"message": "Филтър…"
+	},
 	"github": {
 		"message": "New Tab Tools в GitHub"
 	},

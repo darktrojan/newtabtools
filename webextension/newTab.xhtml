@@ -173,7 +173,7 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 								<label>
 									<input type="checkbox" name="history" data-label="options.historytiles" />
 								</label><br />
-								<button id="historytiles-filter">Filter&#x2026;</button>
+								<button id="historytiles-filter" data-message="filter.button"></button>
 							</td>
 						</tr>
 						<tr>
@@ -207,29 +207,28 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 			</div>
 			<div id="options-filter">
 				<fieldset>
-					<legend>Browsing History Tiles:</legend>
+					<legend data-message="filter.title"></legend>
 					<table>
 						<thead>
 							<tr>
-								<th align="left">Domain</th>
-								<th>Pinned Tiles</th>
-								<th colspan="2">Unpinned Tiles Limit</th>
+								<th align="left" data-message="filter.header.domain"></th>
+								<th data-message="filter.header.pinned"></th>
+								<th colspan="2" data-message="filter.header.unpinned"></th>
 							</tr>
 						</thead>
 						<tfoot>
 							<tr>
-								<th align="left" colspan="3">
-									Add filter:
-								</th>
+								<th align="left" colspan="3" data-message="filter.header.add"></th>
 							</tr>
 							<tr>
 								<td colspan="2">
-									<input id="options-filter-host" type="text" />
+									<input id="options-filter-host" type="text" list="host-autocomplete" data-placeholder="filter.placeholder.host" />
+									<datalist id="host-autocomplete"></datalist>
 								</td>
 								<td colspan="2">
 									<div style="display: flex">
-										<input id="options-filter-count" type="text" size="1" maxlength="2" pattern="^\d+$" style="flex: 1; text-align: center;" />
-										<input id="options-filter-set" type="button" value="Set" />
+										<input id="options-filter-count" type="text" size="1" maxlength="2" pattern="^\d+$" style="flex: 1; text-align: center;" data-placeholder="filter.placeholder.limit" />
+										<button id="options-filter-set" disabled="" data-message="filter.set" />
 									</div>
 								</td>
 							</tr>
