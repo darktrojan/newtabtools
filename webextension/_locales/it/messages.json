@@ -36,7 +36,7 @@
 		"message": "Annulla"
 	},
 	"newversion": {
-		"message": "New Tab Tools è stato aggiornato alla versione %S. Per favore fai una donazione."
+		"message": "New Tab Tools è stato aggiornato alla versione $1. Per favore fai una donazione."
 	},
 	"options-header": {
 		"message": "Opzioni:"

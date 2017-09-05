@@ -42,7 +42,7 @@
 		"message": "Αναίρεση"
 	},
 	"newversion": {
-		"message": "Το New Tab Tools έχει ενημερωθεί στην έκδοση %S. Το New Tab Tools είναι δωρεάν, αλλα η συνεισφορά σας θα εκτιμηθεί!"
+		"message": "Το New Tab Tools έχει ενημερωθεί στην έκδοση $1. Το New Tab Tools είναι δωρεάν, αλλα η συνεισφορά σας θα εκτιμηθεί!"
 	},
 	"options-header": {
 		"message": "Επιλογές:"

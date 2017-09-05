@@ -13,7 +13,7 @@
 	"newtab.undo.removedLabel": { "message": "Miniaturka usunięta." },
 	"newtab.undo.restoreButton": { "message": "Przywróć wszystko." },
 	"newtab.undo.undoButton": { "message": "Cofnij." },
-	"newversion": { "message": "New Tab Tools zaktualizowano do wersji %S. New Tab Tools jest darmowe, ale Twoja darowizna jest mile widziana!" },
+	"newversion": { "message": "New Tab Tools zaktualizowano do wersji $1. New Tab Tools jest darmowe, ale Twoja darowizna jest mile widziana!" },
 	"options-header": { "message": "Opcje:" },
 	"options.columns": { "message": "Kolumny" },
 	"options.foreground.opacity": { "message": "Przezroczystość" },

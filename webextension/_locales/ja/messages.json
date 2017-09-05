@@ -33,7 +33,7 @@
 		"message": "元に戻す"
 	},
 	"newversion": {
-		"message": "New Tab Tools はバージョン %S に更新されました。よろしければ寄付をご検討ください。"
+		"message": "New Tab Tools はバージョン $1 に更新されました。よろしければ寄付をご検討ください。"
 	},
 	"options-header": {
 		"message": "オプション:"

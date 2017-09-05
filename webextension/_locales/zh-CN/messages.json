@@ -42,7 +42,7 @@
 		"message": "撤销"
 	},
 	"newversion": {
-		"message": "New Tab Tools 已更新到版本 %S。请考虑做点捐助。"
+		"message": "New Tab Tools 已更新到版本 $1。请考虑做点捐助。"
 	},
 	"options-header": {
 		"message": "选项:"

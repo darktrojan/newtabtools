@@ -42,7 +42,7 @@
 		"message": "Rückgängig"
 	},
 	"newversion": {
-		"message": "Neuer-Tab-Tools wurde auf Version %S aktualisiert. Bitte erwägen Sie eine Spende."
+		"message": "Neuer-Tab-Tools wurde auf Version $1 aktualisiert. Bitte erwägen Sie eine Spende."
 	},
 	"options-header": {
 		"message": "Einstellungen:"

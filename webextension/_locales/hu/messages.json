@@ -42,7 +42,7 @@
 		"message": "Visszavonás"
 	},
 	"newversion": {
-		"message": "A New Tab Tools frissítve lett a %S verzióra. A New Tab Tools ingyenes, de minden támogatást szívesen fogadok!"
+		"message": "A New Tab Tools frissítve lett a $1 verzióra. A New Tab Tools ingyenes, de minden támogatást szívesen fogadok!"
 	},
 	"options-header": {
 		"message": "Beállítások:"

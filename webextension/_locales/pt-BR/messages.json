@@ -42,7 +42,7 @@
 		"message": "Desfazer"
 	},
 	"newversion": {
-		"message": "O New Tab Tools foi atualizado para a versão %S. Por favor, considere fazer uma doação."
+		"message": "O New Tab Tools foi atualizado para a versão $1. Por favor, considere fazer uma doação."
 	},
 	"options-header": {
 		"message": "Opções:"

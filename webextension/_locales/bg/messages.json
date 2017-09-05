@@ -39,7 +39,7 @@
 		"message": "Отмяна"
 	},
 	"newversion": {
-		"message": "New Tab Tools се обнови до версия %S. New Tab Tools е безплатно, но даренията са добре дошли!"
+		"message": "New Tab Tools се обнови до версия $1. New Tab Tools е безплатно, но даренията са добре дошли!"
 	},
 	"options-header": {
 		"message": "Опции:"

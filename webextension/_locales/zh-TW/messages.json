@@ -36,7 +36,7 @@
 		"message": "還原"
 	},
 	"newversion": {
-		"message": "New Tab Tools 已更新至 %S。希望您能考慮捐助。"
+		"message": "New Tab Tools 已更新至 $1。希望您能考慮捐助。"
 	},
 	"options-header": {
 		"message": "選項:"

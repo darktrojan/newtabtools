@@ -24,7 +24,15 @@
 	"newtab.undo.removedLabel": { "message": "Thumbnail removed." },
 	"newtab.undo.restoreButton": { "message": "Restore All" },
 	"newtab.undo.undoButton": { "message": "Undo" },
-	"newversion": { "message": "New Tab Tools has been updated to version %S. New Tab Tools is free, but your donation is appreciated!" },
+	"newversion": {
+		"message": "New Tab Tools has been updated to version $VERSION$. New Tab Tools is free, but your donation is appreciated!",
+		"placeholders": {
+			"version": {
+				"content": "$1",
+				"example": "84"
+			}
+		}
+	},
 	"options-header": { "message": "Options:" },
 	"options.columns": { "message": "Columns" },
 	"options.foreground.opacity": { "message": "Foreground opacity" },

@@ -42,7 +42,7 @@
 		"message": "Desfés"
 	},
 	"newversion": {
-		"message": "Les Eines de pestanyes noves s’han actualitzat a la versió %S. Aquestes eines són gratuïtes, però agraïm els donatius!"
+		"message": "Les Eines de pestanyes noves s’han actualitzat a la versió $1. Aquestes eines són gratuïtes, però agraïm els donatius!"
 	},
 	"options-header": {
 		"message": "Paràmetres:"

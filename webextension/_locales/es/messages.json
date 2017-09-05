@@ -24,7 +24,7 @@
 		"message": "New Tab Tools en GitHub"
 	},
 	"newversion": {
-		"message": "New Tab Tools ha sido actualizado a la versión %S. Aunque New Tab Tools es gratis, ¡toda donación es bienvenida!"
+		"message": "New Tab Tools ha sido actualizado a la versión $1. Aunque New Tab Tools es gratis, ¡toda donación es bienvenida!"
 	},
 	"options-header": {
 		"message": "Opciones:"

@@ -8,8 +8,8 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 var HTML_NAMESPACE = 'http://www.w3.org/1999/xhtml';
 
 var newTabTools = {
-	getString: function(name) {
-		return browser.i18n.getMessage(name);
+	getString: function(name, ...substitutions) {
+		return browser.i18n.getMessage(name, substitutions);
 	},
 	autocomplete: function() {
 		let value = this.pinURLInput.value;
@@ -621,7 +621,7 @@ var newTabTools = {
 			browser.history.deleteUrl({ url: location.href });
 
 			browser.management.getSelf().then(s => {
-				newTabTools.updateText.textContent = newTabTools.getString('newversion').replace('%S', s.version);
+				newTabTools.updateText.textContent = newTabTools.getString('newversion', s.version);
 				newTabTools.updateNotice.dataset.version = s.version;
 
 				let currentVersion = parseFloat(s.version, 10);

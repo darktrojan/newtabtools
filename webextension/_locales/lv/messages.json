@@ -45,7 +45,7 @@
 		"message": "Atcelt"
 	},
 	"newversion": {
-		"message": "NewTabTools ir atjaunināts uz versiju %S. NewTabTools ir bezmaksas, taču jūsu ziedojums tiks novērtēts!"
+		"message": "NewTabTools ir atjaunināts uz versiju $1. NewTabTools ir bezmaksas, taču jūsu ziedojums tiks novērtēts!"
 	},
 	"options-header": {
 		"message": "Opcijas:"
