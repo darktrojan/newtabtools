@@ -620,20 +620,13 @@ var newTabTools = {
 			// Maybe if bug 1322304 is ever fixed we could remove this.
 			browser.history.deleteUrl({ url: location.href });
 
-			browser.management.getSelf().then(s => {
-				newTabTools.updateText.textContent = newTabTools.getString('newversion', s.version);
-				newTabTools.updateNotice.dataset.version = s.version;
+			newTabTools.updateText.textContent = newTabTools.getString('newversion', Prefs.version);
+			newTabTools.updateNotice.dataset.version = Prefs.version;
 
-				let currentVersion = parseFloat(s.version, 10);
-				let now = new Date();
-				if (currentVersion > Prefs.version) {
-					Prefs.version = currentVersion;
-					Prefs.versionLastUpdate = now;
-				}
-				if (now - Prefs.versionLastUpdate < 43200000 && now - Prefs.versionLastAck > 604800000) {
-					newTabTools.updateNotice.hidden = false;
-				}
-			});
+			let now = new Date();
+			if (now - Prefs.versionLastUpdate < 43200000 && now - Prefs.versionLastAck > 604800000) {
+				newTabTools.updateNotice.hidden = false;
+			}
 		}).catch(console.error.bind(console));
 	},
 	getThumbnails: function() {

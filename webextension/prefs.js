@@ -12,7 +12,7 @@ var Prefs = {
 	_history: true,
 	_recent: true,
 	_thumbnailSize: 600,
-	_version: 0,
+	_version: -1,
 	_versionLastUpdate: new Date(0),
 	_versionLastAck: new Date(0),
 
@@ -89,7 +89,7 @@ var Prefs = {
 		if ('filters' in prefs && typeof prefs.filters == 'object') {
 			Filters._list = prefs.filters;
 		}
-		if ('version' in prefs && typeof prefs.version == 'number') {
+		if ('version' in prefs && typeof prefs.version == 'number' || typeof prefs.version == 'string') {
 			this._version = prefs.version;
 		}
 		if ('versionLastUpdate' in prefs) {
