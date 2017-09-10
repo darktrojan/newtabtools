@@ -11,6 +11,21 @@
 	"changelog.label": {
 		"message": "Что нового?"
 	},
+	"contextmenu.block": {
+		"message": "Удалить эту плитку"
+	},
+	"contextmenu.edit": {
+		"message": "Редактировать эту плитку"
+	},
+	"contextmenu.options": {
+		"message": "Настройки New Tab Tools"
+	},
+	"contextmenu.pin": {
+		"message": "Закрепить эту плитку"
+	},
+	"contextmenu.unpin": {
+		"message": "Открепить эту плитку"
+	},
 	"donate": {
 		"message": "Пожертвовать…"
 	},

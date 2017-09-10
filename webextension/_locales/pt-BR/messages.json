@@ -11,6 +11,21 @@
 	"changelog.label": {
 		"message": "O Que Mudou?"
 	},
+	"contextmenu.block": {
+		"message": "Remover este bloco"
+	},
+	"contextmenu.edit": {
+		"message": "Editar este bloco"
+	},
+	"contextmenu.options": {
+		"message": "Opções do New Tab Tools"
+	},
+	"contextmenu.pin": {
+		"message": "Fixar este bloco"
+	},
+	"contextmenu.unpin": {
+		"message": "Desafixar este bloco"
+	},
 	"donate": {
 		"message": "Doar…"
 	},

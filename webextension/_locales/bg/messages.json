@@ -11,6 +11,21 @@
 	"changelog.label": {
 		"message": "Какво се промени?"
 	},
+	"contextmenu.block": {
+		"message": "Премахни плочката"
+	},
+	"contextmenu.edit": {
+		"message": "Редакция на плочката"
+	},
+	"contextmenu.options": {
+		"message": "New Tab Tools Опции"
+	},
+	"contextmenu.pin": {
+		"message": "Закачи плочката"
+	},
+	"contextmenu.unpin": {
+		"message": "Откачи плочката"
+	},
 	"donate": {
 		"message": "Дарение…"
 	},

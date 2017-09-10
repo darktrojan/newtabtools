@@ -11,6 +11,21 @@
 	"changelog.label": {
 		"message": "有什么变化？"
 	},
+	"contextmenu.block": {
+		"message": "移除此磁贴"
+	},
+	"contextmenu.edit": {
+		"message": "编辑此磁贴"
+	},
+	"contextmenu.options": {
+		"message": "New Tab Tools 选项"
+	},
+	"contextmenu.pin": {
+		"message": "固定此磁贴"
+	},
+	"contextmenu.unpin": {
+		"message": "解除固定此磁贴"
+	},
 	"donate": {
 		"message": "捐助…"
 	},

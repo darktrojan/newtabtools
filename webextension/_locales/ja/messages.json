@@ -8,6 +8,21 @@
 	"bg.set": {
 		"message": "設定"
 	},
+	"contextmenu.block": {
+		"message": "タイルを削除"
+	},
+	"contextmenu.edit": {
+		"message": "タイルを編集"
+	},
+	"contextmenu.options": {
+		"message": "New Tab Tools 設定"
+	},
+	"contextmenu.pin": {
+		"message": "タイルをピン止め"
+	},
+	"contextmenu.unpin": {
+		"message": "タイルのピン止めを外す"
+	},
 	"donate": {
 		"message": "寄付する…"
 	},

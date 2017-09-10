@@ -453,24 +453,10 @@ var Grid = {
 	   * Creates the DOM fragment that is re-used when creating sites.
 	   */
 	_createSiteFragment: function Grid_createSiteFragment() {
-		let site = document.createElementNS(HTML_NAMESPACE, 'div');
-		site.classList.add('newtab-site');
-		site.setAttribute('draggable', 'true');
-
-		// Create the site's inner HTML code.
-		site.innerHTML =
-			'<a class="newtab-link">' +
-			'<span class="newtab-thumbnail"/>' +
-			'<span class="newtab-title"/>' +
-			'</a>' +
-			'<input type="button" class="newtab-control newtab-control-pin"/>' +
-			'<input type="button" class="newtab-control newtab-control-block"/>';
-
-		site.querySelector('input.newtab-control-pin').title = newTabTools.getString('tile.pin');
-		site.querySelector('input.newtab-control-block').title = newTabTools.getString('tile.block');
-
-		this._siteFragment = document.createDocumentFragment();
-		this._siteFragment.appendChild(site);
+		this._siteFragment = document.getElementById('newtab-site').content.firstElementChild.cloneNode(true);
+		this._siteFragment.querySelectorAll('[data-title]').forEach(n => {
+			n.title = newTabTools.getString(n.dataset.title);
+		});
 	},
 
 	/**

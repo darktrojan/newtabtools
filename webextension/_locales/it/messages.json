@@ -8,6 +8,18 @@
 	"bg.set": {
 		"message": "Imposta"
 	},
+	"contextmenu.block": {
+		"message": "Rimuovi questo riquadro"
+	},
+	"contextmenu.edit": {
+		"message": "Modifica questo riquadro"
+	},
+	"contextmenu.pin": {
+		"message": "Blocca questo riquadro"
+	},
+	"contextmenu.unpin": {
+		"message": "Sblocca questo riquadro"
+	},
 	"donate": {
 		"message": "Fai una donazione…"
 	},

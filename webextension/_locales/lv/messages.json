@@ -11,6 +11,21 @@
 	"changelog.label": {
 		"message": "Kas mainījies?"
 	},
+	"contextmenu.block": {
+		"message": "Noņemt elementu"
+	},
+	"contextmenu.edit": {
+		"message": "Rediģēt elementu"
+	},
+	"contextmenu.options": {
+		"message": "NewTabTools iestatījumi"
+	},
+	"contextmenu.pin": {
+		"message": "Piespraust elementu"
+	},
+	"contextmenu.unpin": {
+		"message": "Atspraust elementu"
+	},
 	"donate": {
 		"message": "Ziedot…"
 	},

@@ -11,6 +11,21 @@
 	"changelog.label": {
 		"message": "有那些變更?"
 	},
+	"contextmenu.block": {
+		"message": "移除此首頁磚"
+	},
+	"contextmenu.edit": {
+		"message": "編輯此首頁磚"
+	},
+	"contextmenu.options": {
+		"message": "New Tab Tools 選項"
+	},
+	"contextmenu.pin": {
+		"message": "釘選此首頁磚"
+	},
+	"contextmenu.unpin": {
+		"message": "取消釘選此首頁磚"
+	},
 	"donate": {
 		"message": "捐款…"
 	},

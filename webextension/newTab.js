@@ -249,6 +249,60 @@ var newTabTools = {
 			break;
 		}
 	},
+	contextMenuShowing: function() {
+		let site = document.activeElement;
+		while (site != document && !site.classList.contains('newtab-site')) {
+			site = site.parentNode;
+		}
+		let onSite = site != document;
+		console.log(site, onSite);
+		for (let item of newTabTools.contextMenu.querySelectorAll('.tile-context-menu')) {
+			item.hidden = !onSite;
+		}
+		if (onSite) {
+			let pinned = site._newtabSite.isPinned;
+			newTabTools.contextMenuPin.hidden = pinned;
+			newTabTools.contextMenuUnpin.hidden = !pinned;
+		}
+	},
+	contextMenuOnClick: function(event) {
+		let site = document.activeElement;
+		while (site != document && !site.classList.contains('newtab-site')) {
+			site = site.parentNode;
+		}
+
+		switch (event.target.id) {
+		case 'newtabtools-edittile':
+			let index = 0;
+			let cell = site.parentNode;
+			while (cell.previousElementSibling) {
+				cell = cell.previousElementSibling;
+				index++;
+			}
+			cell = cell.parentNode;
+			while (cell.previousElementSibling) {
+				cell = cell.previousElementSibling;
+				index += cell.childElementCount;
+			}
+
+			newTabTools.toggleOptions();
+			newTabTools.selectedSiteIndex = index;
+			break;
+
+		case 'newtabtools-pintile':
+			site._newtabSite.pin();
+			break;
+		case 'newtabtools-unpintile':
+			site._newtabSite.unpin();
+			break;
+		case 'newtabtools-blocktile':
+			site._newtabSite.block();
+			break;
+		case 'newtabtools-options':
+			newTabTools.toggleOptions();
+			break;
+		}
+	},
 	setThumbnail: function(site, src) {
 		let image = new Image();
 		image.onload = function() {
@@ -654,8 +708,8 @@ var newTabTools = {
 
 (function() {
 	let uiElements = {
-		'page': 'newtab-scrollbox', // used in fx-newTab.js
 		'backgroundFake': 'background-fake',
+		'page': 'newtab-scrollbox', // used in fx-newTab.js
 		'optionsToggleButton': 'options-toggle',
 		'pinURLInput': 'options-pinURL-input',
 		'pinURLAutocomplete': 'autocomplete',
@@ -689,7 +743,10 @@ var newTabTools = {
 		'optionsFilterSet': 'options-filter-set',
 		'updateNotice': 'newtab-update-notice',
 		'updateText': 'newtab-update-text',
-		'lockedToggleButton': 'locked-toggle'
+		'lockedToggleButton': 'locked-toggle',
+		'contextMenu': 'context-menu',
+		'contextMenuPin': 'newtabtools-pintile',
+		'contextMenuUnpin': 'newtabtools-unpintile'
 	};
 	for (let key in uiElements) {
 		let value = uiElements[key];
@@ -740,6 +797,8 @@ var newTabTools = {
 	newTabTools.optionsFilterHost.oninput = newTabTools.optionsFilterCount.oninput = function() {
 		newTabTools.optionsFilterSet.disabled = !newTabTools.optionsFilterHost.value || !newTabTools.optionsFilterCount.checkValidity();
 	};
+	document.body.oncontextmenu = newTabTools.contextMenuShowing;
+	newTabTools.contextMenu.onclick = newTabTools.contextMenuOnClick;
 
 	window.addEventListener('keypress', function(event) {
 		if (event.key == 'Escape') {

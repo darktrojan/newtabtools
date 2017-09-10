@@ -11,6 +11,21 @@
 	"changelog.label": {
 		"message": "¿Qué ha cambiado?"
 	},
+	"contextmenu.block": {
+		"message": "Eliminar este contenedor"
+	},
+	"contextmenu.edit": {
+		"message": "Editar este contenedor"
+	},
+	"contextmenu.options": {
+		"message": "Opciones de New Tab Tools"
+	},
+	"contextmenu.pin": {
+		"message": "Fijar este contenedor"
+	},
+	"contextmenu.unpin": {
+		"message": "Soltar este contenedor"
+	},
 	"donate": {
 		"message": "Donar…"
 	},

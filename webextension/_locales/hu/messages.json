@@ -11,6 +11,21 @@
 	"changelog.label": {
 		"message": "Mi változott?"
 	},
+	"contextmenu.block": {
+		"message": "Csempe eltávolítása"
+	},
+	"contextmenu.edit": {
+		"message": "Csempe szerkesztése"
+	},
+	"contextmenu.options": {
+		"message": "New Tab Tools beállítások"
+	},
+	"contextmenu.pin": {
+		"message": "Csempe rögzítése"
+	},
+	"contextmenu.unpin": {
+		"message": "Csempe rögzítésének feloldása"
+	},
 	"donate": {
 		"message": "Adományozás…"
 	},

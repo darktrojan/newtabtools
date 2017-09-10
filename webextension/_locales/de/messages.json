@@ -11,6 +11,21 @@
 	"changelog.label": {
 		"message": "Was ist neu?"
 	},
+	"contextmenu.block": {
+		"message": "Kachel entfernen"
+	},
+	"contextmenu.edit": {
+		"message": "Kachel bearbeiten"
+	},
+	"contextmenu.options": {
+		"message": "Neuer-Tab-Tools Einstellungen"
+	},
+	"contextmenu.pin": {
+		"message": "Kachel anheften"
+	},
+	"contextmenu.unpin": {
+		"message": "Kachel ablösen"
+	},
 	"donate": {
 		"message": "Spenden…"
 	},

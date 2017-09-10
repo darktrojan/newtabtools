@@ -11,6 +11,21 @@
 	"changelog.label": {
 		"message": "Τί άλλαξε?"
 	},
+	"contextmenu.block": {
+		"message": "Αφαίρεση πλακιδίου"
+	},
+	"contextmenu.edit": {
+		"message": "Επεξεργασία τίτλου"
+	},
+	"contextmenu.options": {
+		"message": "New Tab Tools Επιλογές"
+	},
+	"contextmenu.pin": {
+		"message": "Καρφίτσωμα πλακιδίου"
+	},
+	"contextmenu.unpin": {
+		"message": "Ξεκαρφίτσωμα πλακιδίου"
+	},
 	"donate": {
 		"message": "Δωρήστε…"
 	},

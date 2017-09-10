@@ -11,6 +11,21 @@
 	"changelog.label": {
 		"message": "Nouveautés"
 	},
+	"contextmenu.block": {
+		"message": "Bloquer cette page"
+	},
+	"contextmenu.edit": {
+		"message": "Modifier cette page"
+	},
+	"contextmenu.options": {
+		"message": "Options de New Tab Tools"
+	},
+	"contextmenu.pin": {
+		"message": "Épingler cette page"
+	},
+	"contextmenu.unpin": {
+		"message": "Relâcher cette page"
+	},
 	"donate": {
 		"message": "Faire un don…"
 	},

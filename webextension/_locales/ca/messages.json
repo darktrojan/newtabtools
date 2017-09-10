@@ -11,6 +11,21 @@
 	"changelog.label": {
 		"message": "Novetats"
 	},
+	"contextmenu.block": {
+		"message": "Elimina aquest mosaic"
+	},
+	"contextmenu.edit": {
+		"message": "Edita aquest mosaic"
+	},
+	"contextmenu.options": {
+		"message": "Paràmetres de les Eines de pestanyes noves"
+	},
+	"contextmenu.pin": {
+		"message": "Fixa aquest mosaic"
+	},
+	"contextmenu.unpin": {
+		"message": "Desfixa aquest mosaic"
+	},
 	"donate": {
 		"message": "Feu un donatiu…"
 	},

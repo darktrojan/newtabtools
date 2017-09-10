@@ -10,7 +10,7 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 </head>
 <body>
 	<div id="background-fake"></div>
-	<div id="newtab-scrollbox">
+	<div id="newtab-scrollbox" contextmenu="context-menu">
 		<div id="newtab-vertical-margin">
 			<div id="newtab-margin-top">
 				<div class="newtab-side-margin newtab-margin-left"></div>
@@ -254,6 +254,24 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 			</div>
 		</div>
 	</div>
+	<template id="newtab-site">
+		<div class="newtab-site" draggable="true">
+			<a class="newtab-link">
+				<span class="newtab-thumbnail" />
+				<span class="newtab-title" />
+			</a>
+			<input type="button" class="newtab-control newtab-control-pin" data-title="tile.pin" />
+			<input type="button" class="newtab-control newtab-control-block" data-title="tile.block" />
+		</div>
+	</template>
+	<menu type="context" id="context-menu">
+		<menuitem id="newtabtools-edittile" class="tile-context-menu" data-message="contextmenu.edit"></menuitem>
+		<menuitem id="newtabtools-pintile" class="tile-context-menu" data-message="contextmenu.pin"></menuitem>
+		<menuitem id="newtabtools-unpintile" class="tile-context-menu" data-message="contextmenu.unpin"></menuitem>
+		<menuitem id="newtabtools-blocktile" class="tile-context-menu" data-message="contextmenu.block"></menuitem>
+		<hr class="tile-context-menu" />
+		<menuitem id="newtabtools-options" data-message="contextmenu.options"></menuitem>
+	</menu>
 	<script type="text/javascript" src="tiles-shim.js"></script>
 	<script type="text/javascript" src="prefs.js"></script>
 	<script type="text/javascript" src="newTab.js"></script>
