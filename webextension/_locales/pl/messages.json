@@ -1,54 +1,158 @@
 {
-	"bg-header": { "message": "Obraz tła strony:" },
-	"bg.remove": { "message": "Usuń" },
-	"bg.set": { "message": "Ustaw" },
-	"changelog.label": { "message": "Co nowego?" },
-	"donate": { "message": "Wspomóż…" },
-	"donate.label": { "message": "New Tab Tools jest finansowany przez darowizny użytkowników." },
-	"extensionDescription": { "message": "Modyfikuje stronę nowej karty. Możesz dodać więcej kafelków, pasek uruchamiania lub obrazek w tle. Możesz też ustawiać obrazy i tytuły dla kafelków." },
-	"extensionName": { "message": "New Tab Tools" },
-	"github": { "message": "New Tab Tools na GitHubie" },
-	"newtab.pageTitle": { "message": "Nowa karta" },
-	"newtab.undo.closeTooltip": { "message": "Ukryj" },
-	"newtab.undo.removedLabel": { "message": "Miniaturka usunięta." },
-	"newtab.undo.restoreButton": { "message": "Przywróć wszystko." },
-	"newtab.undo.undoButton": { "message": "Cofnij." },
-	"newversion": { "message": "New Tab Tools zaktualizowano do wersji $1. New Tab Tools jest darmowe, ale Twoja darowizna jest mile widziana!" },
-	"options-header": { "message": "Opcje:" },
-	"options.columns": { "message": "Kolumny" },
-	"options.foreground.opacity": { "message": "Przezroczystość" },
-	"options.grid.margin": { "message": "Margines siatki" },
-	"options.grid.spacing": { "message": "Odstępy siatki" },
-	"options.historytiles": { "message": "Kafelki z historii przeglądania" },
-	"options.launcher.hidden": { "message": "Nie pokazuj" },
-	"options.locked": { "message": "Blokada przesuwania kafelków" },
-	"options.recent": { "message": "Ostatnio zamnięte zakładki" },
-	"options.rows": { "message": "Wiersze" },
-	"options.size.large": { "message": "Duże" },
-	"options.size.medium": { "message": "Średnie" },
-	"options.size.small": { "message": "Małe" },
-	"options.theme": { "message": "Temat" },
-	"options.theme.dark": { "message": "Ciemny" },
-	"options.theme.light": { "message": "Jasny" },
-	"options.thumb-titlesize": { "message": "Wielkość tytułu kafelków" },
-	"pin-url.button": { "message": "Dodaj" },
-	"pin-url.header": { "message": "Dodaj tytuł:" },
-	"pin-url.placeholder": { "message": "Wpisz lub wybierz adres strony" },
-	"recently-closed-tabs": { "message": "Ostatnio zamknięte zakładki:" },
-	"tile-header": { "message": "Kafelki:" },
-	"tile-savedthumb.label": { "message": "Zapisany obraz:" },
-	"tile-savedthumb.set": { "message": "Ustaw" },
-	"tile-selection.next.tooltip": { "message": "Następny kafelek" },
-	"tile-selection.nextrow.tooltip": { "message": "Następny wiersz" },
-	"tile-selection.previous.tooltip": { "message": "Poprzedni kafelek" },
-	"tile-selection.previousrow.tooltip": { "message": "Poprzedni wiersz" },
-	"tile-thumbnail.bgcolor": { "message": "Kolor tła:" },
-	"tile-thumbnail.remove": { "message": "Usuń" },
-	"tile-title.label": { "message": "Tytuł:" },
-	"tile-title.placeholder": { "message": "Wprowadź nowy tytuł kafelka" },
-	"tile-title.set": { "message": "Ustaw" },
-	"tile.block": { "message": "Usuń tę stronę" },
-	"tile.pin": { "message": "Przypnij tę stronę w tym miejscu" },
-	"tile.unpin": { "message": "Odepnij stronę" },
-	"tileurl.empty": { "message": "Pusty kafelek" }
+	"bg_header": {
+		"message": "Obraz tła strony:"
+	},
+	"bg_remove": {
+		"message": "Usuń"
+	},
+	"bg_set": {
+		"message": "Ustaw"
+	},
+	"changelog_label": {
+		"message": "Co nowego?"
+	},
+	"donate": {
+		"message": "Wspomóż…"
+	},
+	"donate_label": {
+		"message": "New Tab Tools jest finansowany przez darowizny użytkowników."
+	},
+	"extensionDescription": {
+		"message": "Modyfikuje stronę nowej karty. Możesz dodać więcej kafelków, pasek uruchamiania lub obrazek w tle. Możesz też ustawiać obrazy i tytuły dla kafelków."
+	},
+	"extensionName": {
+		"message": "New Tab Tools"
+	},
+	"github": {
+		"message": "New Tab Tools na GitHubie"
+	},
+	"newtab_pageTitle": {
+		"message": "Nowa karta"
+	},
+	"newtab_undo_closeTooltip": {
+		"message": "Ukryj"
+	},
+	"newtab_undo_removedLabel": {
+		"message": "Miniaturka usunięta."
+	},
+	"newtab_undo_restoreButton": {
+		"message": "Przywróć wszystko."
+	},
+	"newtab_undo_undoButton": {
+		"message": "Cofnij."
+	},
+	"newversion": {
+		"message": "New Tab Tools zaktualizowano do wersji $1. New Tab Tools jest darmowe, ale Twoja darowizna jest mile widziana!"
+	},
+	"options_header": {
+		"message": "Opcje:"
+	},
+	"options_columns": {
+		"message": "Kolumny"
+	},
+	"options_foreground_opacity": {
+		"message": "Przezroczystość"
+	},
+	"options_grid_margin": {
+		"message": "Margines siatki"
+	},
+	"options_grid_spacing": {
+		"message": "Odstępy siatki"
+	},
+	"options_historytiles": {
+		"message": "Kafelki z historii przeglądania"
+	},
+	"options_launcher_hidden": {
+		"message": "Nie pokazuj"
+	},
+	"options_locked": {
+		"message": "Blokada przesuwania kafelków"
+	},
+	"options_recent": {
+		"message": "Ostatnio zamnięte zakładki"
+	},
+	"options_rows": {
+		"message": "Wiersze"
+	},
+	"options_size_large": {
+		"message": "Duże"
+	},
+	"options_size_medium": {
+		"message": "Średnie"
+	},
+	"options_size_small": {
+		"message": "Małe"
+	},
+	"options_theme": {
+		"message": "Temat"
+	},
+	"options_theme_dark": {
+		"message": "Ciemny"
+	},
+	"options_theme_light": {
+		"message": "Jasny"
+	},
+	"options_thumb_titlesize": {
+		"message": "Wielkość tytułu kafelków"
+	},
+	"pin_url_button": {
+		"message": "Dodaj"
+	},
+	"pin_url_header": {
+		"message": "Dodaj tytuł:"
+	},
+	"pin_url_placeholder": {
+		"message": "Wpisz lub wybierz adres strony"
+	},
+	"recently_closed_tabs": {
+		"message": "Ostatnio zamknięte zakładki:"
+	},
+	"tile_header": {
+		"message": "Kafelki:"
+	},
+	"tile_savedthumb_label": {
+		"message": "Zapisany obraz:"
+	},
+	"tile_savedthumb_set": {
+		"message": "Ustaw"
+	},
+	"tile_selection_next_tooltip": {
+		"message": "Następny kafelek"
+	},
+	"tile_selection_nextrow_tooltip": {
+		"message": "Następny wiersz"
+	},
+	"tile_selection_previous_tooltip": {
+		"message": "Poprzedni kafelek"
+	},
+	"tile_selection_previousrow_tooltip": {
+		"message": "Poprzedni wiersz"
+	},
+	"tile_thumbnail_bgcolor": {
+		"message": "Kolor tła:"
+	},
+	"tile_thumbnail_remove": {
+		"message": "Usuń"
+	},
+	"tile_title_label": {
+		"message": "Tytuł:"
+	},
+	"tile_title_placeholder": {
+		"message": "Wprowadź nowy tytuł kafelka"
+	},
+	"tile_title_set": {
+		"message": "Ustaw"
+	},
+	"tile_block": {
+		"message": "Usuń tę stronę"
+	},
+	"tile_pin": {
+		"message": "Przypnij tę stronę w tym miejscu"
+	},
+	"tile_unpin": {
+		"message": "Odepnij stronę"
+	},
+	"tileurl_empty": {
+		"message": "Pusty kafelek"
+	}
 }

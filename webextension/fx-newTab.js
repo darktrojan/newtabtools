@@ -742,10 +742,10 @@ Site.prototype = {
 
 		if (pinned) {
 			control.setAttribute('pinned', true);
-			control.setAttribute('title', newTabTools.getString('tile.unpin'));
+			control.setAttribute('title', newTabTools.getString('tile_unpin'));
 		} else {
 			control.removeAttribute('pinned');
-			control.setAttribute('title', newTabTools.getString('tile.pin'));
+			control.setAttribute('title', newTabTools.getString('tile_pin'));
 		}
 	},
 

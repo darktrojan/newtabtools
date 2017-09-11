@@ -1,173 +1,173 @@
 {
-	"bg-header": {
+	"bg_header": {
 		"message": "页面背景图片："
 	},
-	"bg.remove": {
+	"bg_remove": {
 		"message": "移除背景"
 	},
-	"bg.set": {
+	"bg_set": {
 		"message": "设为背景"
 	},
-	"changelog.label": {
+	"changelog_label": {
 		"message": "有什么变化？"
 	},
-	"contextmenu.block": {
+	"contextmenu_block": {
 		"message": "移除此磁贴"
 	},
-	"contextmenu.edit": {
+	"contextmenu_edit": {
 		"message": "编辑此磁贴"
 	},
-	"contextmenu.options": {
+	"contextmenu_options": {
 		"message": "New Tab Tools 选项"
 	},
-	"contextmenu.pin": {
+	"contextmenu_pin": {
 		"message": "固定此磁贴"
 	},
-	"contextmenu.unpin": {
+	"contextmenu_unpin": {
 		"message": "解除固定此磁贴"
 	},
 	"donate": {
 		"message": "捐助…"
 	},
-	"donate.label": {
+	"donate_label": {
 		"message": "New Tab Tools 依靠用户捐助维持。"
 	},
 	"extensionDescription": {
 		"message": "自定义新标签页。您可以添加更多的磁贴，一个 Firefox 的快速启动栏，以及设置背景图片。您还可以设定新建磁贴的图片和标题。"
 	},
-	"filter.button": {
+	"filter_button": {
 		"message": "过滤器…"
 	},
 	"github": {
 		"message": "New Tab Tools 在 GitHub 上"
 	},
-	"newtab.pageTitle": {
+	"newtab_pageTitle": {
 		"message": "新标签页"
 	},
-	"newtab.undo.closeTooltip": {
+	"newtab_undo_closeTooltip": {
 		"message": "隐藏"
 	},
-	"newtab.undo.removedLabel": {
+	"newtab_undo_removedLabel": {
 		"message": "缩略图已删除。"
 	},
-	"newtab.undo.restoreButton": {
+	"newtab_undo_restoreButton": {
 		"message": "全部恢复"
 	},
-	"newtab.undo.undoButton": {
+	"newtab_undo_undoButton": {
 		"message": "撤销"
 	},
 	"newversion": {
 		"message": "New Tab Tools 已更新到版本 $1。请考虑做点捐助。"
 	},
-	"options-header": {
+	"options_header": {
 		"message": "选项:"
 	},
-	"options.columns": {
+	"options_columns": {
 		"message": "横向行"
 	},
-	"options.foreground.opacity": {
+	"options_foreground_opacity": {
 		"message": "前景不透明度"
 	},
-	"options.grid.margin": {
+	"options_grid_margin": {
 		"message": "磁贴周围留白"
 	},
-	"options.grid.spacing": {
+	"options_grid_spacing": {
 		"message": "磁贴间距"
 	},
-	"options.historytiles": {
+	"options_historytiles": {
 		"message": "基于浏览记录的磁贴"
 	},
-	"options.launcher.hidden": {
+	"options_launcher_hidden": {
 		"message": "不显示"
 	},
-	"options.locked": {
+	"options_locked": {
 		"message": "防止拖动磁贴"
 	},
-	"options.recent": {
+	"options_recent": {
 		"message": "最近关闭的标签页"
 	},
-	"options.rows": {
+	"options_rows": {
 		"message": "纵向列"
 	},
-	"options.size.large": {
+	"options_size_large": {
 		"message": "大"
 	},
-	"options.size.medium": {
+	"options_size_medium": {
 		"message": "中"
 	},
-	"options.size.small": {
+	"options_size_small": {
 		"message": "小"
 	},
-	"options.theme": {
+	"options_theme": {
 		"message": "主题"
 	},
-	"options.theme.dark": {
+	"options_theme_dark": {
 		"message": "暗色主题"
 	},
-	"options.theme.light": {
+	"options_theme_light": {
 		"message": "亮色主题"
 	},
-	"options.thumb-titlesize": {
+	"options_thumb_titlesize": {
 		"message": "磁贴标题大小"
 	},
-	"pin-url.button": {
+	"pin_url_button": {
 		"message": "添加"
 	},
-	"pin-url.header": {
+	"pin_url_header": {
 		"message": "添加磁贴:"
 	},
-	"pin-url.placeholder": {
+	"pin_url_placeholder": {
 		"message": "输入或选择一个 URL"
 	},
-	"recently-closed-tabs": {
+	"recently_closed_tabs": {
 		"message": "最近关闭的标签页："
 	},
-	"tile-header": {
+	"tile_header": {
 		"message": "磁贴:"
 	},
-	"tile-savedthumb.label": {
+	"tile_savedthumb_label": {
 		"message": "已保存图片:"
 	},
-	"tile-savedthumb.set": {
+	"tile_savedthumb_set": {
 		"message": "设为缩略图"
 	},
-	"tile-selection.next.tooltip": {
+	"tile_selection_next_tooltip": {
 		"message": "下一个磁贴"
 	},
-	"tile-selection.nextrow.tooltip": {
+	"tile_selection_nextrow_tooltip": {
 		"message": "下一行"
 	},
-	"tile-selection.previous.tooltip": {
+	"tile_selection_previous_tooltip": {
 		"message": "上一个磁贴"
 	},
-	"tile-selection.previousrow.tooltip": {
+	"tile_selection_previousrow_tooltip": {
 		"message": "上一行"
 	},
-	"tile-thumbnail.bgcolor": {
+	"tile_thumbnail_bgcolor": {
 		"message": "背景色:"
 	},
-	"tile-thumbnail.remove": {
+	"tile_thumbnail_remove": {
 		"message": "移除缩略图"
 	},
-	"tile-title.label": {
+	"tile_title_label": {
 		"message": "标题:"
 	},
-	"tile-title.placeholder": {
+	"tile_title_placeholder": {
 		"message": "为磁贴输入一个新标题"
 	},
-	"tile-title.set": {
+	"tile_title_set": {
 		"message": "设为标题"
 	},
-	"tile.block": {
+	"tile_block": {
 		"message": "移除这个网站"
 	},
-	"tile.pin": {
+	"tile_pin": {
 		"message": "将此网站固定在它当前的位置"
 	},
-	"tile.unpin": {
+	"tile_unpin": {
 		"message": "不再固定这个网站"
 	},
-	"tileurl.empty": {
+	"tileurl_empty": {
 		"message": "空磁贴"
 	}
 }

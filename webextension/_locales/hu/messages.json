@@ -1,173 +1,173 @@
 {
-	"bg-header": {
+	"bg_header": {
 		"message": "Oldal háttérképe:"
 	},
-	"bg.remove": {
+	"bg_remove": {
 		"message": "Eltávolítás"
 	},
-	"bg.set": {
+	"bg_set": {
 		"message": "Beállítás"
 	},
-	"changelog.label": {
+	"changelog_label": {
 		"message": "Mi változott?"
 	},
-	"contextmenu.block": {
+	"contextmenu_block": {
 		"message": "Csempe eltávolítása"
 	},
-	"contextmenu.edit": {
+	"contextmenu_edit": {
 		"message": "Csempe szerkesztése"
 	},
-	"contextmenu.options": {
+	"contextmenu_options": {
 		"message": "New Tab Tools beállítások"
 	},
-	"contextmenu.pin": {
+	"contextmenu_pin": {
 		"message": "Csempe rögzítése"
 	},
-	"contextmenu.unpin": {
+	"contextmenu_unpin": {
 		"message": "Csempe rögzítésének feloldása"
 	},
 	"donate": {
 		"message": "Adományozás…"
 	},
-	"donate.label": {
+	"donate_label": {
 		"message": "A New Tab Tools-t a felhasználói adományok finanszírozzák."
 	},
 	"extensionDescription": {
 		"message": "Személyre szabja az új lap oldalt. Hozzáadhat további csempéket, a Firefox start gyorsindítóját, vagy egy háttérképet. Megadhat új csempeképeket és feliratokat."
 	},
-	"filter.button": {
+	"filter_button": {
 		"message": "Szűrés…"
 	},
 	"github": {
 		"message": "New Tab Tools a GitHub-on"
 	},
-	"newtab.pageTitle": {
+	"newtab_pageTitle": {
 		"message": "Új lap"
 	},
-	"newtab.undo.closeTooltip": {
+	"newtab_undo_closeTooltip": {
 		"message": "Elrejtés"
 	},
-	"newtab.undo.removedLabel": {
+	"newtab_undo_removedLabel": {
 		"message": "Bélyegkép eltávolítva."
 	},
-	"newtab.undo.restoreButton": {
+	"newtab_undo_restoreButton": {
 		"message": "Összes visszaállítása"
 	},
-	"newtab.undo.undoButton": {
+	"newtab_undo_undoButton": {
 		"message": "Visszavonás"
 	},
 	"newversion": {
 		"message": "A New Tab Tools frissítve lett a $1 verzióra. A New Tab Tools ingyenes, de minden támogatást szívesen fogadok!"
 	},
-	"options-header": {
+	"options_header": {
 		"message": "Beállítások:"
 	},
-	"options.columns": {
+	"options_columns": {
 		"message": "Oszlopok"
 	},
-	"options.foreground.opacity": {
+	"options_foreground_opacity": {
 		"message": "Előtér átlátszatlansága"
 	},
-	"options.grid.margin": {
+	"options_grid_margin": {
 		"message": "Rács margója"
 	},
-	"options.grid.spacing": {
+	"options_grid_spacing": {
 		"message": "Rács térköze"
 	},
-	"options.historytiles": {
+	"options_historytiles": {
 		"message": "Csempék a böngészési előzményeiből"
 	},
-	"options.launcher.hidden": {
+	"options_launcher_hidden": {
 		"message": "Ne mutassa"
 	},
-	"options.locked": {
+	"options_locked": {
 		"message": "Csempék mozgatásának megakadályozása"
 	},
-	"options.recent": {
+	"options_recent": {
 		"message": "Nemrég bezárt lapok"
 	},
-	"options.rows": {
+	"options_rows": {
 		"message": "Sorok"
 	},
-	"options.size.large": {
+	"options_size_large": {
 		"message": "Nagy"
 	},
-	"options.size.medium": {
+	"options_size_medium": {
 		"message": "Közepes"
 	},
-	"options.size.small": {
+	"options_size_small": {
 		"message": "Kicsi"
 	},
-	"options.theme": {
+	"options_theme": {
 		"message": "Téma"
 	},
-	"options.theme.dark": {
+	"options_theme_dark": {
 		"message": "Sötét téma"
 	},
-	"options.theme.light": {
+	"options_theme_light": {
 		"message": "Világos téma"
 	},
-	"options.thumb-titlesize": {
+	"options_thumb_titlesize": {
 		"message": "A csempe címének mérete"
 	},
-	"pin-url.button": {
+	"pin_url_button": {
 		"message": "Hozzáadás"
 	},
-	"pin-url.header": {
+	"pin_url_header": {
 		"message": "Csempe hozzáadása:"
 	},
-	"pin-url.placeholder": {
+	"pin_url_placeholder": {
 		"message": "Adjon meg vagy válasszon egy webcímet"
 	},
-	"recently-closed-tabs": {
+	"recently_closed_tabs": {
 		"message": "Nemrég bezárt lapok:"
 	},
-	"tile-header": {
+	"tile_header": {
 		"message": "Csempék:"
 	},
-	"tile-savedthumb.label": {
+	"tile_savedthumb_label": {
 		"message": "Mentett kép:"
 	},
-	"tile-savedthumb.set": {
+	"tile_savedthumb_set": {
 		"message": "Beállítás"
 	},
-	"tile-selection.next.tooltip": {
+	"tile_selection_next_tooltip": {
 		"message": "Következő csempe"
 	},
-	"tile-selection.nextrow.tooltip": {
+	"tile_selection_nextrow_tooltip": {
 		"message": "Következő sor"
 	},
-	"tile-selection.previous.tooltip": {
+	"tile_selection_previous_tooltip": {
 		"message": "Előző csempe"
 	},
-	"tile-selection.previousrow.tooltip": {
+	"tile_selection_previousrow_tooltip": {
 		"message": "Előző sor"
 	},
-	"tile-thumbnail.bgcolor": {
+	"tile_thumbnail_bgcolor": {
 		"message": "Háttérszín:"
 	},
-	"tile-thumbnail.remove": {
+	"tile_thumbnail_remove": {
 		"message": "Eltávolítás"
 	},
-	"tile-title.label": {
+	"tile_title_label": {
 		"message": "Felirat:"
 	},
-	"tile-title.placeholder": {
+	"tile_title_placeholder": {
 		"message": "Adjon meg egy új csempefeliratot"
 	},
-	"tile-title.set": {
+	"tile_title_set": {
 		"message": "Beállítás"
 	},
-	"tile.block": {
+	"tile_block": {
 		"message": "Eltávolítás"
 	},
-	"tile.pin": {
+	"tile_pin": {
 		"message": "Webhely rögzítése ezen a helyen"
 	},
-	"tile.unpin": {
+	"tile_unpin": {
 		"message": "Rögzítés feloldása"
 	},
-	"tileurl.empty": {
+	"tileurl_empty": {
 		"message": "Üres csempe"
 	}
 }

@@ -1,34 +1,94 @@
 {
-	"bg-header": { "message": "Page background image:" },
-	"bg.remove": { "message": "Remove" },
-	"bg.set": { "message": "Set" },
-	"changelog.label": { "message": "What Changed?" },
-	"contextmenu.edit": { "message": "Edit this tile" },
-	"contextmenu.pin": { "message": "Pin this tile" },
-	"contextmenu.unpin": { "message": "Unpin this tile" },
-	"contextmenu.block": { "message": "Remove this tile" },
-	"contextmenu.options": { "message": "New Tab Tools options" },
-	"donate": { "message": "Donate…" },
-	"donate.label": { "message": "New Tab Tools is funded by user donations." },
-	"extensionDescription": { "message": "Customizes the new tab page. You can add more tiles, or a background image. And you can set new tile images and titles." },
-	"extensionName": { "message": "New Tab Tools" },
-	"filter.button": { "message": "Filter…" },
-	"filter.helptext": { "message": "To limit a domain and all of its subdomains, add a dot in front of the domain, like this: .example.com" },
-	"filter.header.add": { "message": "Add filter:" },
-	"filter.header.domain": { "message": "Domain" },
-	"filter.header.pinned": { "message": "Pinned Tiles" },
-	"filter.header.unpinned": { "message": "Unpinned Tiles Limit" },
-	"filter.placeholder.host": { "message": "Type or select a domain" },
-	"filter.placeholder.limit": { "message": "Limit" },
-	"filter.set": { "message": "Set" },
-	"filter.title": { "message": "Browsing History Tiles:" },
-	"filter.unlimited": { "message": "unlimited" },
-	"github": { "message": "New Tab Tools on GitHub" },
-	"newtab.pageTitle": { "message": "New Tab" },
-	"newtab.undo.closeTooltip": { "message": "Hide" },
-	"newtab.undo.removedLabel": { "message": "Thumbnail removed." },
-	"newtab.undo.restoreButton": { "message": "Restore All" },
-	"newtab.undo.undoButton": { "message": "Undo" },
+	"bg_header": {
+		"message": "Page background image:"
+	},
+	"bg_remove": {
+		"message": "Remove"
+	},
+	"bg_set": {
+		"message": "Set"
+	},
+	"changelog_label": {
+		"message": "What Changed?"
+	},
+	"contextmenu_edit": {
+		"message": "Edit this tile"
+	},
+	"contextmenu_pin": {
+		"message": "Pin this tile"
+	},
+	"contextmenu_unpin": {
+		"message": "Unpin this tile"
+	},
+	"contextmenu_block": {
+		"message": "Remove this tile"
+	},
+	"contextmenu_options": {
+		"message": "New Tab Tools options"
+	},
+	"donate": {
+		"message": "Donate…"
+	},
+	"donate_label": {
+		"message": "New Tab Tools is funded by user donations."
+	},
+	"extensionDescription": {
+		"message": "Customizes the new tab page. You can add more tiles, or a background image. And you can set new tile images and titles."
+	},
+	"extensionName": {
+		"message": "New Tab Tools"
+	},
+	"filter_button": {
+		"message": "Filter…"
+	},
+	"filter_helptext": {
+		"message": "To limit a domain and all of its subdomains, add a dot in front of the domain, like this: .example.com"
+	},
+	"filter_header_add": {
+		"message": "Add filter:"
+	},
+	"filter_header_domain": {
+		"message": "Domain"
+	},
+	"filter_header_pinned": {
+		"message": "Pinned Tiles"
+	},
+	"filter_header_unpinned": {
+		"message": "Unpinned Tiles Limit"
+	},
+	"filter_placeholder_host": {
+		"message": "Type or select a domain"
+	},
+	"filter_placeholder_limit": {
+		"message": "Limit"
+	},
+	"filter_set": {
+		"message": "Set"
+	},
+	"filter_title": {
+		"message": "Browsing History Tiles:"
+	},
+	"filter_unlimited": {
+		"message": "unlimited"
+	},
+	"github": {
+		"message": "New Tab Tools on GitHub"
+	},
+	"newtab_pageTitle": {
+		"message": "New Tab"
+	},
+	"newtab_undo_closeTooltip": {
+		"message": "Hide"
+	},
+	"newtab_undo_removedLabel": {
+		"message": "Thumbnail removed."
+	},
+	"newtab_undo_restoreButton": {
+		"message": "Restore All"
+	},
+	"newtab_undo_undoButton": {
+		"message": "Undo"
+	},
 	"newversion": {
 		"message": "New Tab Tools has been updated to version $VERSION$. New Tab Tools is free, but your donation is appreciated!",
 		"placeholders": {
@@ -38,41 +98,115 @@
 			}
 		}
 	},
-	"options-header": { "message": "Options:" },
-	"options.columns": { "message": "Columns" },
-	"options.foreground.opacity": { "message": "Foreground opacity" },
-	"options.grid.margin": { "message": "Grid margin" },
-	"options.grid.spacing": { "message": "Grid spacing" },
-	"options.historytiles": { "message": "Tiles from your browsing history" },
-	"options.launcher.hidden": { "message": "Do not show" },
-	"options.locked": { "message": "Prevent tiles being dragged" },
-	"options.recent": { "message": "Recently closed tabs" },
-	"options.rows": { "message": "Rows" },
-	"options.size.large": { "message": "Large" },
-	"options.size.medium": { "message": "Medium" },
-	"options.size.small": { "message": "Small" },
-	"options.theme": { "message": "Theme" },
-	"options.theme.dark": { "message": "Dark theme" },
-	"options.theme.light": { "message": "Light theme" },
-	"options.thumb-titlesize": { "message": "Tile title size" },
-	"pin-url.button": { "message": "Add" },
-	"pin-url.header": { "message": "Add tile:" },
-	"pin-url.placeholder": { "message": "Type or select a URL" },
-	"recently-closed-tabs": { "message": "Recently closed tabs:" },
-	"tile-header": { "message": "Tiles:" },
-	"tile-savedthumb.label": { "message": "Saved image:" },
-	"tile-savedthumb.set": { "message": "Set" },
-	"tile-selection.next.tooltip": { "message": "Next tile" },
-	"tile-selection.nextrow.tooltip": { "message": "Next row" },
-	"tile-selection.previous.tooltip": { "message": "Previous tile" },
-	"tile-selection.previousrow.tooltip": { "message": "Previous row" },
-	"tile-thumbnail.bgcolor": { "message": "Background color:" },
-	"tile-thumbnail.remove": { "message": "Remove" },
-	"tile-title.label": { "message": "Title:" },
-	"tile-title.placeholder": { "message": "Type a new tile title" },
-	"tile-title.set": { "message": "Set" },
-	"tile.block": { "message": "Remove this site" },
-	"tile.pin": { "message": "Pin this site at its current position" },
-	"tile.unpin": { "message": "Unpin this site" },
-	"tileurl.empty": { "message": "Empty Tile" }
+	"options_header": {
+		"message": "Options:"
+	},
+	"options_columns": {
+		"message": "Columns"
+	},
+	"options_foreground_opacity": {
+		"message": "Foreground opacity"
+	},
+	"options_grid_margin": {
+		"message": "Grid margin"
+	},
+	"options_grid_spacing": {
+		"message": "Grid spacing"
+	},
+	"options_historytiles": {
+		"message": "Tiles from your browsing history"
+	},
+	"options_launcher_hidden": {
+		"message": "Do not show"
+	},
+	"options_locked": {
+		"message": "Prevent tiles being dragged"
+	},
+	"options_recent": {
+		"message": "Recently closed tabs"
+	},
+	"options_rows": {
+		"message": "Rows"
+	},
+	"options_size_large": {
+		"message": "Large"
+	},
+	"options_size_medium": {
+		"message": "Medium"
+	},
+	"options_size_small": {
+		"message": "Small"
+	},
+	"options_theme": {
+		"message": "Theme"
+	},
+	"options_theme_dark": {
+		"message": "Dark theme"
+	},
+	"options_theme_light": {
+		"message": "Light theme"
+	},
+	"options_thumb_titlesize": {
+		"message": "Tile title size"
+	},
+	"pin_url_button": {
+		"message": "Add"
+	},
+	"pin_url_header": {
+		"message": "Add tile:"
+	},
+	"pin_url_placeholder": {
+		"message": "Type or select a URL"
+	},
+	"recently_closed_tabs": {
+		"message": "Recently closed tabs:"
+	},
+	"tile_header": {
+		"message": "Tiles:"
+	},
+	"tile_savedthumb_label": {
+		"message": "Saved image:"
+	},
+	"tile_savedthumb_set": {
+		"message": "Set"
+	},
+	"tile_selection_next_tooltip": {
+		"message": "Next tile"
+	},
+	"tile_selection_nextrow_tooltip": {
+		"message": "Next row"
+	},
+	"tile_selection_previous_tooltip": {
+		"message": "Previous tile"
+	},
+	"tile_selection_previousrow_tooltip": {
+		"message": "Previous row"
+	},
+	"tile_thumbnail_bgcolor": {
+		"message": "Background color:"
+	},
+	"tile_thumbnail_remove": {
+		"message": "Remove"
+	},
+	"tile_title_label": {
+		"message": "Title:"
+	},
+	"tile_title_placeholder": {
+		"message": "Type a new tile title"
+	},
+	"tile_title_set": {
+		"message": "Set"
+	},
+	"tile_block": {
+		"message": "Remove this site"
+	},
+	"tile_pin": {
+		"message": "Pin this site at its current position"
+	},
+	"tile_unpin": {
+		"message": "Unpin this site"
+	},
+	"tileurl_empty": {
+		"message": "Empty Tile"
+	}
 }

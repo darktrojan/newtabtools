@@ -1,35 +1,35 @@
 {
-	"bg-header": {
+	"bg_header": {
 		"message": "Imatge de fons de la pàgina:"
 	},
-	"bg.remove": {
+	"bg_remove": {
 		"message": "Suprimeix"
 	},
-	"bg.set": {
+	"bg_set": {
 		"message": "Estableix"
 	},
-	"changelog.label": {
+	"changelog_label": {
 		"message": "Novetats"
 	},
-	"contextmenu.block": {
+	"contextmenu_block": {
 		"message": "Elimina aquest mosaic"
 	},
-	"contextmenu.edit": {
+	"contextmenu_edit": {
 		"message": "Edita aquest mosaic"
 	},
-	"contextmenu.options": {
+	"contextmenu_options": {
 		"message": "Paràmetres de les Eines de pestanyes noves"
 	},
-	"contextmenu.pin": {
+	"contextmenu_pin": {
 		"message": "Fixa aquest mosaic"
 	},
-	"contextmenu.unpin": {
+	"contextmenu_unpin": {
 		"message": "Desfixa aquest mosaic"
 	},
 	"donate": {
 		"message": "Feu un donatiu…"
 	},
-	"donate.label": {
+	"donate_label": {
 		"message": "Les Eines de pestanyes noves es financien amb donatius dels usuaris."
 	},
 	"extensionDescription": {
@@ -41,127 +41,127 @@
 	"github": {
 		"message": "Les Eines de pestanyes noves al GitHub"
 	},
-	"newtab.pageTitle": {
+	"newtab_pageTitle": {
 		"message": "Pestanya nova"
 	},
-	"newtab.undo.closeTooltip": {
+	"newtab_undo_closeTooltip": {
 		"message": "Amaga"
 	},
-	"newtab.undo.removedLabel": {
+	"newtab_undo_removedLabel": {
 		"message": "S'ha eliminat la miniatura."
 	},
-	"newtab.undo.restoreButton": {
+	"newtab_undo_restoreButton": {
 		"message": "Restaura-les totes"
 	},
-	"newtab.undo.undoButton": {
+	"newtab_undo_undoButton": {
 		"message": "Desfés"
 	},
 	"newversion": {
 		"message": "Les Eines de pestanyes noves s’han actualitzat a la versió $1. Aquestes eines són gratuïtes, però agraïm els donatius!"
 	},
-	"options-header": {
+	"options_header": {
 		"message": "Paràmetres:"
 	},
-	"options.columns": {
+	"options_columns": {
 		"message": "Columnes"
 	},
-	"options.foreground.opacity": {
+	"options_foreground_opacity": {
 		"message": "Opacitat del primer pla"
 	},
-	"options.grid.margin": {
+	"options_grid_margin": {
 		"message": "Marge de la graella"
 	},
-	"options.grid.spacing": {
+	"options_grid_spacing": {
 		"message": "Espaiament de la graella"
 	},
-	"options.historytiles": {
+	"options_historytiles": {
 		"message": "Mosaics de l’historial de navegació"
 	},
-	"options.launcher.hidden": {
+	"options_launcher_hidden": {
 		"message": "No ho mostris"
 	},
-	"options.recent": {
+	"options_recent": {
 		"message": "Pestanyes tancades recentment"
 	},
-	"options.rows": {
+	"options_rows": {
 		"message": "Files"
 	},
-	"options.size.large": {
+	"options_size_large": {
 		"message": "Gran"
 	},
-	"options.size.medium": {
+	"options_size_medium": {
 		"message": "Mitjà"
 	},
-	"options.size.small": {
+	"options_size_small": {
 		"message": "Petit"
 	},
-	"options.theme": {
+	"options_theme": {
 		"message": "Tema"
 	},
-	"options.theme.dark": {
+	"options_theme_dark": {
 		"message": "Tema fosc"
 	},
-	"options.theme.light": {
+	"options_theme_light": {
 		"message": "Tema clar"
 	},
-	"options.thumb-titlesize": {
+	"options_thumb_titlesize": {
 		"message": "Mida dels títols dels mosaics"
 	},
-	"pin-url.button": {
+	"pin_url_button": {
 		"message": "Afegeix"
 	},
-	"pin-url.header": {
+	"pin_url_header": {
 		"message": "Afegeix un mosaic:"
 	},
-	"pin-url.placeholder": {
+	"pin_url_placeholder": {
 		"message": "Escriviu o seleccioneu un URL"
 	},
-	"recently-closed-tabs": {
+	"recently_closed_tabs": {
 		"message": "Pestanyes tancades recentment:"
 	},
-	"tile-header": {
+	"tile_header": {
 		"message": "Mosaics:"
 	},
-	"tile-savedthumb.set": {
+	"tile_savedthumb_set": {
 		"message": "Estableix"
 	},
-	"tile-selection.next.tooltip": {
+	"tile_selection_next_tooltip": {
 		"message": "Mosaic següent"
 	},
-	"tile-selection.nextrow.tooltip": {
+	"tile_selection_nextrow_tooltip": {
 		"message": "Fila següent"
 	},
-	"tile-selection.previous.tooltip": {
+	"tile_selection_previous_tooltip": {
 		"message": "Mosaic anterior"
 	},
-	"tile-selection.previousrow.tooltip": {
+	"tile_selection_previousrow_tooltip": {
 		"message": "Fila anterior"
 	},
-	"tile-thumbnail.bgcolor": {
+	"tile_thumbnail_bgcolor": {
 		"message": "Color del fons:"
 	},
-	"tile-thumbnail.remove": {
+	"tile_thumbnail_remove": {
 		"message": "Elimina"
 	},
-	"tile-title.label": {
+	"tile_title_label": {
 		"message": "Títol:"
 	},
-	"tile-title.placeholder": {
+	"tile_title_placeholder": {
 		"message": "Escriviu un títol nou per al mosaic"
 	},
-	"tile-title.set": {
+	"tile_title_set": {
 		"message": "Estableix"
 	},
-	"tile.block": {
+	"tile_block": {
 		"message": "Suprimeix aquest lloc"
 	},
-	"tile.pin": {
+	"tile_pin": {
 		"message": "Fixa aquest lloc en aquesta posició"
 	},
-	"tile.unpin": {
+	"tile_unpin": {
 		"message": "No fixis aquest lloc"
 	},
-	"tileurl.empty": {
+	"tileurl_empty": {
 		"message": "Mosaic buit"
 	}
 }

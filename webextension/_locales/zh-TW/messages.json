@@ -1,167 +1,167 @@
 {
-	"bg-header": {
+	"bg_header": {
 		"message": "背景圖片:"
 	},
-	"bg.remove": {
+	"bg_remove": {
 		"message": "移除背景"
 	},
-	"bg.set": {
+	"bg_set": {
 		"message": "設為背景"
 	},
-	"changelog.label": {
+	"changelog_label": {
 		"message": "有那些變更?"
 	},
-	"contextmenu.block": {
+	"contextmenu_block": {
 		"message": "移除此首頁磚"
 	},
-	"contextmenu.edit": {
+	"contextmenu_edit": {
 		"message": "編輯此首頁磚"
 	},
-	"contextmenu.options": {
+	"contextmenu_options": {
 		"message": "New Tab Tools 選項"
 	},
-	"contextmenu.pin": {
+	"contextmenu_pin": {
 		"message": "釘選此首頁磚"
 	},
-	"contextmenu.unpin": {
+	"contextmenu_unpin": {
 		"message": "取消釘選此首頁磚"
 	},
 	"donate": {
 		"message": "捐款…"
 	},
-	"donate.label": {
+	"donate_label": {
 		"message": "New Tab Tools 是由使用者的捐款資助。"
 	},
 	"extensionDescription": {
 		"message": "自訂新分頁頁面。你可以在新分頁增加更多首頁磚、加入 Firefox 開始頁的捷徑列或是自訂背景圖片，你也能為首頁磚設定新的圖片和標題。"
 	},
-	"newtab.pageTitle": {
+	"newtab_pageTitle": {
 		"message": "新分頁"
 	},
-	"newtab.undo.closeTooltip": {
+	"newtab_undo_closeTooltip": {
 		"message": "隱藏"
 	},
-	"newtab.undo.removedLabel": {
+	"newtab_undo_removedLabel": {
 		"message": "已移除縮圖。"
 	},
-	"newtab.undo.restoreButton": {
+	"newtab_undo_restoreButton": {
 		"message": "全部恢復"
 	},
-	"newtab.undo.undoButton": {
+	"newtab_undo_undoButton": {
 		"message": "還原"
 	},
 	"newversion": {
 		"message": "New Tab Tools 已更新至 $1。希望您能考慮捐助。"
 	},
-	"options-header": {
+	"options_header": {
 		"message": "選項:"
 	},
-	"options.columns": {
+	"options_columns": {
 		"message": "欄"
 	},
-	"options.foreground.opacity": {
+	"options_foreground_opacity": {
 		"message": "前景不透明度"
 	},
-	"options.grid.margin": {
+	"options_grid_margin": {
 		"message": "網格邊界"
 	},
-	"options.grid.spacing": {
+	"options_grid_spacing": {
 		"message": "網格間距"
 	},
-	"options.historytiles": {
+	"options_historytiles": {
 		"message": "從歷史紀錄產生首頁磚"
 	},
-	"options.launcher.hidden": {
+	"options_launcher_hidden": {
 		"message": "不顯示"
 	},
-	"options.locked": {
+	"options_locked": {
 		"message": "禁止拖動首頁磚"
 	},
-	"options.recent": {
+	"options_recent": {
 		"message": "最近關閉的分頁"
 	},
-	"options.rows": {
+	"options_rows": {
 		"message": "列"
 	},
-	"options.size.large": {
+	"options_size_large": {
 		"message": "大"
 	},
-	"options.size.medium": {
+	"options_size_medium": {
 		"message": "中"
 	},
-	"options.size.small": {
+	"options_size_small": {
 		"message": "小"
 	},
-	"options.theme": {
+	"options_theme": {
 		"message": "佈景"
 	},
-	"options.theme.dark": {
+	"options_theme_dark": {
 		"message": "暗色佈景"
 	},
-	"options.theme.light": {
+	"options_theme_light": {
 		"message": "淺色佈景"
 	},
-	"options.thumb-titlesize": {
+	"options_thumb_titlesize": {
 		"message": "標題大小"
 	},
-	"pin-url.button": {
+	"pin_url_button": {
 		"message": "新增"
 	},
-	"pin-url.header": {
+	"pin_url_header": {
 		"message": "新增首頁磚:"
 	},
-	"pin-url.placeholder": {
+	"pin_url_placeholder": {
 		"message": "輸入或選擇網址"
 	},
-	"recently-closed-tabs": {
+	"recently_closed_tabs": {
 		"message": "最近關閉的分頁:"
 	},
-	"tile-header": {
+	"tile_header": {
 		"message": "首頁磚:"
 	},
-	"tile-savedthumb.label": {
+	"tile_savedthumb_label": {
 		"message": "保存的圖片:"
 	},
-	"tile-savedthumb.set": {
+	"tile_savedthumb_set": {
 		"message": "設為縮圖"
 	},
-	"tile-selection.next.tooltip": {
+	"tile_selection_next_tooltip": {
 		"message": "下一列"
 	},
-	"tile-selection.nextrow.tooltip": {
+	"tile_selection_nextrow_tooltip": {
 		"message": "下一塊磚"
 	},
-	"tile-selection.previous.tooltip": {
+	"tile_selection_previous_tooltip": {
 		"message": "前一塊磚"
 	},
-	"tile-selection.previousrow.tooltip": {
+	"tile_selection_previousrow_tooltip": {
 		"message": "前一列"
 	},
-	"tile-thumbnail.bgcolor": {
+	"tile_thumbnail_bgcolor": {
 		"message": "背景顏色:"
 	},
-	"tile-thumbnail.remove": {
+	"tile_thumbnail_remove": {
 		"message": "移除縮圖"
 	},
-	"tile-title.label": {
+	"tile_title_label": {
 		"message": "標題:"
 	},
-	"tile-title.placeholder": {
+	"tile_title_placeholder": {
 		"message": "輸入新的首頁磚標題"
 	},
-	"tile-title.set": {
+	"tile_title_set": {
 		"message": "設為標題"
 	},
-	"tile.block": {
+	"tile_block": {
 		"message": "移除此網站"
 	},
-	"tile.pin": {
+	"tile_pin": {
 		"message": "將此網站釘選於目前位置"
 	},
-	"tile.unpin": {
+	"tile_unpin": {
 		"message": "釘選此網站"
 	},
-	"tileurl.empty": {
+	"tileurl_empty": {
 		"message": "空白磚"
 	}
 }

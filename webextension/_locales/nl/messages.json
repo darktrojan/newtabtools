@@ -1,17 +1,17 @@
 {
-	"bg-header": {
+	"bg_header": {
 		"message": "Achtergrondafbeelding van pagina:"
 	},
-	"bg.remove": {
+	"bg_remove": {
 		"message": "Verwijderen"
 	},
-	"bg.set": {
+	"bg_set": {
 		"message": "Instellen"
 	},
 	"donate": {
 		"message": "Doneren…"
 	},
-	"donate.label": {
+	"donate_label": {
 		"message": "New Tab Tools wordt gefinancierd door gebruikersdonaties."
 	},
 	"extensionDescription": {
@@ -20,106 +20,106 @@
 	"github": {
 		"message": "New Tab Tools op GitHub"
 	},
-	"newtab.pageTitle": {
+	"newtab_pageTitle": {
 		"message": "Nieuw tabblad"
 	},
-	"newtab.undo.closeTooltip": {
+	"newtab_undo_closeTooltip": {
 		"message": "Verbergen"
 	},
-	"newtab.undo.removedLabel": {
+	"newtab_undo_removedLabel": {
 		"message": "Miniatuur verwijderd."
 	},
-	"newtab.undo.restoreButton": {
+	"newtab_undo_restoreButton": {
 		"message": "Alles herstellen"
 	},
-	"newtab.undo.undoButton": {
+	"newtab_undo_undoButton": {
 		"message": "Ongedaan maken"
 	},
 	"newversion": {
 		"message": "New Tab Tools is bijgewerkt naar versie $1. New Tab Tools is gratis maar uw donatie is welkom!"
 	},
-	"options-header": {
+	"options_header": {
 		"message": "Opties:"
 	},
-	"options.columns": {
+	"options_columns": {
 		"message": "Kolommen"
 	},
-	"options.foreground.opacity": {
+	"options_foreground_opacity": {
 		"message": "Foreground Opacity"
 	},
-	"options.grid.margin": {
+	"options_grid_margin": {
 		"message": "Rasterafmeting"
 	},
-	"options.grid.spacing": {
+	"options_grid_spacing": {
 		"message": "Raster-tussenruimte"
 	},
-	"options.launcher.hidden": {
+	"options_launcher_hidden": {
 		"message": "Niet weergeven"
 	},
-	"options.recent": {
+	"options_recent": {
 		"message": "Onlangs gesloten tabbladen"
 	},
-	"options.rows": {
+	"options_rows": {
 		"message": "Rijen"
 	},
-	"options.size.large": {
+	"options_size_large": {
 		"message": "Groot"
 	},
-	"options.size.medium": {
+	"options_size_medium": {
 		"message": "Gemiddeld"
 	},
-	"options.size.small": {
+	"options_size_small": {
 		"message": "Klein"
 	},
-	"options.theme": {
+	"options_theme": {
 		"message": "Thema"
 	},
-	"options.theme.dark": {
+	"options_theme_dark": {
 		"message": "Donker thema"
 	},
-	"options.theme.light": {
+	"options_theme_light": {
 		"message": "Licht thema"
 	},
-	"pin-url.button": {
+	"pin_url_button": {
 		"message": "Toevoegen"
 	},
-	"pin-url.header": {
+	"pin_url_header": {
 		"message": "Tegel toevoegen:"
 	},
-	"pin-url.placeholder": {
+	"pin_url_placeholder": {
 		"message": "Typ of selecteer een URL"
 	},
-	"recently-closed-tabs": {
+	"recently_closed_tabs": {
 		"message": "Onlangs gesloten tabbladen:"
 	},
-	"tile-header": {
+	"tile_header": {
 		"message": "Tegels:"
 	},
-	"tile-savedthumb.set": {
+	"tile_savedthumb_set": {
 		"message": "Instellen"
 	},
-	"tile-thumbnail.bgcolor": {
+	"tile_thumbnail_bgcolor": {
 		"message": "Background Color:"
 	},
-	"tile-thumbnail.remove": {
+	"tile_thumbnail_remove": {
 		"message": "Verwijderen"
 	},
-	"tile-title.label": {
+	"tile_title_label": {
 		"message": "Titel:"
 	},
-	"tile-title.placeholder": {
+	"tile_title_placeholder": {
 		"message": "Typ een nieuwe titel voor de tegel"
 	},
-	"tile-title.set": {
+	"tile_title_set": {
 		"message": "Instellen"
 	},
-	"tile.block": {
+	"tile_block": {
 		"message": "Deze website verwijderen"
 	},
-	"tile.pin": {
+	"tile_pin": {
 		"message": "Deze website op de huidige positie vastzetten"
 	},
-	"tile.unpin": {
+	"tile_unpin": {
 		"message": "Deze website losmaken"
 	}
 }

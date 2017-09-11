@@ -1,29 +1,29 @@
 {
-	"bg-header": {
+	"bg_header": {
 		"message": "Immagine di sfondo della pagina:"
 	},
-	"bg.remove": {
+	"bg_remove": {
 		"message": "Rimuovi"
 	},
-	"bg.set": {
+	"bg_set": {
 		"message": "Imposta"
 	},
-	"contextmenu.block": {
+	"contextmenu_block": {
 		"message": "Rimuovi questo riquadro"
 	},
-	"contextmenu.edit": {
+	"contextmenu_edit": {
 		"message": "Modifica questo riquadro"
 	},
-	"contextmenu.pin": {
+	"contextmenu_pin": {
 		"message": "Blocca questo riquadro"
 	},
-	"contextmenu.unpin": {
+	"contextmenu_unpin": {
 		"message": "Sblocca questo riquadro"
 	},
 	"donate": {
 		"message": "Fai una donazione…"
 	},
-	"donate.label": {
+	"donate_label": {
 		"message": "New Tab Tools si sostiene con le donazioni degli utenti."
 	},
 	"extensionDescription": {
@@ -32,121 +32,121 @@
 	"github": {
 		"message": "New Tab Tools su GitHub"
 	},
-	"newtab.pageTitle": {
+	"newtab_pageTitle": {
 		"message": "Nuova scheda"
 	},
-	"newtab.undo.closeTooltip": {
+	"newtab_undo_closeTooltip": {
 		"message": "Nascondi"
 	},
-	"newtab.undo.removedLabel": {
+	"newtab_undo_removedLabel": {
 		"message": "Miniatura rimossa."
 	},
-	"newtab.undo.restoreButton": {
+	"newtab_undo_restoreButton": {
 		"message": "Ripristina tutto"
 	},
-	"newtab.undo.undoButton": {
+	"newtab_undo_undoButton": {
 		"message": "Annulla"
 	},
 	"newversion": {
 		"message": "New Tab Tools è stato aggiornato alla versione $1. Per favore fai una donazione."
 	},
-	"options-header": {
+	"options_header": {
 		"message": "Opzioni:"
 	},
-	"options.columns": {
+	"options_columns": {
 		"message": "Colonne"
 	},
-	"options.foreground.opacity": {
+	"options_foreground_opacity": {
 		"message": "Foreground Opacity"
 	},
-	"options.grid.margin": {
+	"options_grid_margin": {
 		"message": "Cornice della griglia"
 	},
-	"options.grid.spacing": {
+	"options_grid_spacing": {
 		"message": "Ampiezza della griglia"
 	},
-	"options.launcher.hidden": {
+	"options_launcher_hidden": {
 		"message": "Non mostrare"
 	},
-	"options.recent": {
+	"options_recent": {
 		"message": "Mostra le schede chiuse di recente"
 	},
-	"options.rows": {
+	"options_rows": {
 		"message": "Righe"
 	},
-	"options.size.large": {
+	"options_size_large": {
 		"message": "Grande"
 	},
-	"options.size.medium": {
+	"options_size_medium": {
 		"message": "Media"
 	},
-	"options.size.small": {
+	"options_size_small": {
 		"message": "Piccola"
 	},
-	"options.theme": {
+	"options_theme": {
 		"message": "Tema"
 	},
-	"options.theme.dark": {
+	"options_theme_dark": {
 		"message": "Tema scuro"
 	},
-	"options.theme.light": {
+	"options_theme_light": {
 		"message": "Tema chiaro"
 	},
-	"options.thumb-titlesize": {
+	"options_thumb_titlesize": {
 		"message": "Dimensione titolo"
 	},
-	"pin-url.button": {
+	"pin_url_button": {
 		"message": "Aggiungi"
 	},
-	"pin-url.header": {
+	"pin_url_header": {
 		"message": "Aggiungi icona:"
 	},
-	"pin-url.placeholder": {
+	"pin_url_placeholder": {
 		"message": "Scrivi o seleziona un indirizzo web"
 	},
-	"recently-closed-tabs": {
+	"recently_closed_tabs": {
 		"message": "Schede chiuse di recente:"
 	},
-	"tile-header": {
+	"tile_header": {
 		"message": "Icone:"
 	},
-	"tile-savedthumb.set": {
+	"tile_savedthumb_set": {
 		"message": "Imposta"
 	},
-	"tile-selection.next.tooltip": {
+	"tile_selection_next_tooltip": {
 		"message": "Riquadro sucessivo"
 	},
-	"tile-selection.nextrow.tooltip": {
+	"tile_selection_nextrow_tooltip": {
 		"message": "Riga sucessiva"
 	},
-	"tile-selection.previous.tooltip": {
+	"tile_selection_previous_tooltip": {
 		"message": "Riquadro precedente"
 	},
-	"tile-selection.previousrow.tooltip": {
+	"tile_selection_previousrow_tooltip": {
 		"message": "Riga precedente"
 	},
-	"tile-thumbnail.bgcolor": {
+	"tile_thumbnail_bgcolor": {
 		"message": "Colore di sfondo:"
 	},
-	"tile-thumbnail.remove": {
+	"tile_thumbnail_remove": {
 		"message": "Rimuovi"
 	},
-	"tile-title.label": {
+	"tile_title_label": {
 		"message": "Icona:"
 	},
-	"tile-title.placeholder": {
+	"tile_title_placeholder": {
 		"message": "Scrivi il nuovo titolo dell'icona"
 	},
-	"tile-title.set": {
+	"tile_title_set": {
 		"message": "Imposta"
 	},
-	"tile.block": {
+	"tile_block": {
 		"message": "Rimuovi questo sito"
 	},
-	"tile.pin": {
+	"tile_pin": {
 		"message": "Blocca questo sito nella posizione attuale"
 	},
-	"tile.unpin": {
+	"tile_unpin": {
 		"message": "Sblocca questo sito"
 	}
 }

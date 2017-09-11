@@ -5,7 +5,7 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 <html xmlns="http://www.w3.org/1999/xhtml" options-hidden="true">
 <head>
-	<title data-message="newtab.pageTitle"></title>
+	<title data-message="newtab_pageTitle"></title>
 	<link rel="stylesheet" href="newTab.css" type="text/css" />
 </head>
 <body>
@@ -15,13 +15,13 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 			<div id="newtab-margin-top">
 				<div class="newtab-side-margin newtab-margin-left"></div>
 				<div id="newtab-recent-outer">
-					<div id="newtab-recent" hidden=""><span data-message="recently-closed-tabs"></span></div>
+					<div id="newtab-recent" hidden=""><span data-message="recently_closed_tabs"></span></div>
 				</div>
 				<div id="newtab-undo-container" undo-disabled="true">
-					<label id="newtab-undo-label" data-message="newtab.undo.removedLabel"></label>
-					<button id="newtab-undo-button" tabindex="-1" data-message="newtab.undo.undoButton"></button>
-					<button id="newtab-undo-restore-button" tabindex="-1" data-message="newtab.undo.restoreButton"></button>
-					<button id="newtab-undo-close-button" class="close-button" tabindex="-1" data-title="newtab.undo.closeTooltip"></button>
+					<label id="newtab-undo-label" data-message="newtab_undo_removedLabel"></label>
+					<button id="newtab-undo-button" tabindex="-1" data-message="newtab_undo_undoButton"></button>
+					<button id="newtab-undo-restore-button" tabindex="-1" data-message="newtab_undo_restoreButton"></button>
+					<button id="newtab-undo-close-button" class="close-button" tabindex="-1" data-title="newtab_undo_closeTooltip"></button>
 				</div>
 				<div class="newtab-side-margin newtab-margin-right">
 					<input id="options-toggle" type="button"/>
@@ -37,13 +37,13 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 				<div id="newtab-update-outer">
 					<div id="newtab-update-notice" hidden="">
 						<span id="newtab-update-text"></span>
-						<button id="newtab-update-changelog" data-message="changelog.label"></button>
+						<button id="newtab-update-changelog" data-message="changelog_label"></button>
 						<button id="newtab-update-donate" data-message="donate"></button>
 						<button id="newtab-update-hide" class="close-button"></button>
 					</div>
 				</div>
 				<div class="newtab-side-margin newtab-margin-right">
-					<input id="locked-toggle" type="button" data-title="options.locked" />
+					<input id="locked-toggle" type="button" data-title="options_locked" />
 				</div>
 			</div>
 		</div>
@@ -56,114 +56,114 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 		<div id="options-inner">
 			<div id="options-tile">
 				<fieldset>
-					<legend data-message="pin-url.header"></legend>
+					<legend data-message="pin_url_header"></legend>
 					<div class="options-row">
-						<input id="options-pinURL-input" type="url" list="autocomplete" autocomplete="off" data-placeholder="pin-url.placeholder" />
+						<input id="options-pinURL-input" type="url" list="autocomplete" autocomplete="off" data-placeholder="pin_url_placeholder" />
 						<datalist id="autocomplete"></datalist>
-						<button id="options-pinURL" data-message="pin-url.button"></button>
+						<button id="options-pinURL" data-message="pin_url_button"></button>
 					</div>
 				</fieldset>
 				<fieldset>
-					<legend data-message="tile-header"></legend>
+					<legend data-message="tile_header"></legend>
 					<div class="options-row">
-						<button id="options-previous-row-tile" class="arrow" data-title="tile-selection.previousrow.tooltip"></button>
+						<button id="options-previous-row-tile" class="arrow" data-title="tile_selection_previousrow_tooltip"></button>
 					</div>
 					<div id="options-thumbnail-wrap" class="options-row">
-						<button id="options-previous-tile" class="arrow" data-title="tile-selection.previous.tooltip"></button>
+						<button id="options-previous-tile" class="arrow" data-title="tile_selection_previous_tooltip"></button>
 						<div id="options-thumbnail" class="newtab-thumbnail"></div>
-						<button id="options-next-tile" class="arrow" data-title="tile-selection.next.tooltip"></button>
+						<button id="options-next-tile" class="arrow" data-title="tile_selection_next_tooltip"></button>
 					</div>
 					<div class="options-row">
-						<button id="options-next-row-tile" class="arrow" data-title="tile-selection.nextrow.tooltip"></button>
+						<button id="options-next-row-tile" class="arrow" data-title="tile_selection_nextrow_tooltip"></button>
 					</div>
 					<label id="options-url"></label>
-					<label class="options-row-label" for="options-savedthumb-input" data-message="tile-savedthumb.label"></label>
+					<label class="options-row-label" for="options-savedthumb-input" data-message="tile_savedthumb_label"></label>
 					<div class="options-row">
 						<input id="options-savedthumb-input" type="file" accept="image/*" />
-						<button id="options-savedthumb-set" disabled="" data-message="tile-savedthumb.set"></button>
-						<button id="options-savedthumb-remove" disabled="" data-message="tile-thumbnail.remove"></button>
+						<button id="options-savedthumb-set" disabled="" data-message="tile_savedthumb_set"></button>
+						<button id="options-savedthumb-remove" disabled="" data-message="tile_thumbnail_remove"></button>
 					</div>
 					<div class="options-row">
-						<label style="flex: 1" for="options-bgcolor-input" data-message="tile-thumbnail.bgcolor"></label>
+						<label style="flex: 1" for="options-bgcolor-input" data-message="tile_thumbnail_bgcolor"></label>
 						<input id="options-bgcolor-input" type="color" />
 						<button id="options-bgcolor-displaybutton">
 							<div id="options-bgcolor-display">&#160;</div>
 						</button>
-						<button id="options-bgcolor-set" data-message="tile-savedthumb.set"></button>
-						<button id="options-bgcolor-reset" data-message="tile-thumbnail.remove"></button>
+						<button id="options-bgcolor-set" data-message="tile_savedthumb_set"></button>
+						<button id="options-bgcolor-reset" data-message="tile_thumbnail_remove"></button>
 					</div>
-					<label class="options-row-label" for="options-title-input" data-message="tile-title.label"></label>
+					<label class="options-row-label" for="options-title-input" data-message="tile_title_label"></label>
 					<div class="options-row">
-						<input id="options-title-input" data-placeholder="tile-title.placeholder" />
-						<button id="options-title-set" data-message="tile-title.set"></button>
+						<input id="options-title-input" data-placeholder="tile_title_placeholder" />
+						<button id="options-title-set" data-message="tile_title_set"></button>
 					</div>
 				</fieldset>
 				<fieldset id="options-bg-group">
-					<legend data-message="bg-header"></legend>
+					<legend data-message="bg_header"></legend>
 					<div class="options-row">
 						<input id="options-bg-input" type="file" accept="image/*" />
-						<button id="options-bg-set" disabled="" data-message="bg.set"></button>
-						<button id="options-bg-remove" disabled="" data-message="bg.remove"></button>
+						<button id="options-bg-set" disabled="" data-message="bg_set"></button>
+						<button id="options-bg-remove" disabled="" data-message="bg_remove"></button>
 					</div>
 				</fieldset>
 			</div>
 			<div id="options-page">
 				<fieldset>
-					<legend data-message="options-header"></legend>
+					<legend data-message="options_header"></legend>
 					<table>
 						<tr id="options-theme-pref">
-							<th data-message="options.theme"></th>
+							<th data-message="options_theme"></th>
 							<td>
-								<label><input type="radio" name="theme" value="light" data-label="options.theme.light" /></label>
-								<label><input type="radio" name="theme" value="dark" data-label="options.theme.dark" /></label>
+								<label><input type="radio" name="theme" value="light" data-label="options_theme_light" /></label>
+								<label><input type="radio" name="theme" value="dark" data-label="options_theme_dark" /></label>
 							</td>
 						</tr>
 						<tr>
-							<th data-message="options.foreground.opacity"></th>
+							<th data-message="options_foreground_opacity"></th>
 							<td>
 								<input type="range" name="foreground.opacity" max="100" min="0" step="10" />
 							</td>
 						</tr>
 						<tr>
-							<th data-message="options.rows"></th>
+							<th data-message="options_rows"></th>
 							<td>
 								<input type="number" name="rows" max="10" min="1" size="2" />
 							</td>
 						</tr>
 						<tr>
-							<th data-message="options.columns"></th>
+							<th data-message="options_columns"></th>
 							<td>
 								<input type="number" name="columns" max="10" min="1" size="2" />
 							</td>
 						</tr>
 						<tr>
-							<th data-message="options.grid.margin"></th>
+							<th data-message="options_grid_margin"></th>
 							<td>
 								<select name="margin">
-									<option value="small small small small" data-message="options.size.small"></option>
-									<option value="medium medium medium medium" data-message="options.size.medium"></option>
-									<option value="large large large large" data-message="options.size.large"></option>
+									<option value="small small small small" data-message="options_size_small"></option>
+									<option value="medium medium medium medium" data-message="options_size_medium"></option>
+									<option value="large large large large" data-message="options_size_large"></option>
 								</select>
 							</td>
 						</tr>
 						<tr>
-							<th data-message="options.grid.spacing"></th>
+							<th data-message="options_grid_spacing"></th>
 							<td>
 								<select name="spacing">
-									<option value="small" data-message="options.size.small"></option>
-									<option value="medium" data-message="options.size.medium"></option>
-									<option value="large" data-message="options.size.large"></option>
+									<option value="small" data-message="options_size_small"></option>
+									<option value="medium" data-message="options_size_medium"></option>
+									<option value="large" data-message="options_size_large"></option>
 								</select>
 							</td>
 						</tr>
 						<tr>
-							<th data-message="options.thumb-titlesize"></th>
+							<th data-message="options_thumb_titlesize"></th>
 							<td>
 								<select name="thumbs.titlesize">
-									<option value="hidden" data-message="options.launcher.hidden"></option>
-									<option value="small" data-message="options.size.small"></option>
-									<option value="medium" data-message="options.size.medium"></option>
-									<option value="large" data-message="options.size.large"></option>
+									<option value="hidden" data-message="options_launcher_hidden"></option>
+									<option value="small" data-message="options_size_small"></option>
+									<option value="medium" data-message="options_size_medium"></option>
+									<option value="large" data-message="options_size_large"></option>
 								</select>
 							</td>
 						</tr>
@@ -171,16 +171,16 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 							<th></th>
 							<td>
 								<label>
-									<input type="checkbox" name="history" data-label="options.historytiles" />
+									<input type="checkbox" name="history" data-label="options_historytiles" />
 								</label><br />
-								<button id="historytiles-filter" data-message="filter.button"></button>
+								<button id="historytiles-filter" data-message="filter_button"></button>
 							</td>
 						</tr>
 						<tr>
 							<th></th>
 							<td>
 								<label>
-									<input type="checkbox" name="recent" data-label="options.recent" />
+									<input type="checkbox" name="recent" data-label="options_recent" />
 								</label>
 							</td>
 						</tr>
@@ -188,7 +188,7 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 							<th></th>
 							<td>
 								<label>
-									<input type="checkbox" name="locked" data-label="options.locked" />
+									<input type="checkbox" name="locked" data-label="options_locked" />
 								</label>
 							</td>
 						</tr>
@@ -197,7 +197,7 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 				<div class="spacer"></div>
 				<fieldset id="options-donate-wrap">
 					<div>
-						<label data-message="donate.label"></label>
+						<label data-message="donate_label"></label>
 						<button id="options-donate" data-message="donate"></button>
 					</div>
 					<div>
@@ -207,33 +207,33 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 			</div>
 			<div id="options-filter">
 				<fieldset>
-					<legend data-message="filter.title"></legend>
+					<legend data-message="filter_title"></legend>
 					<table>
 						<thead>
 							<tr>
-								<th align="left" data-message="filter.header.domain"></th>
-								<th data-message="filter.header.pinned"></th>
-								<th colspan="2" data-message="filter.header.unpinned"></th>
+								<th align="left" data-message="filter_header_domain"></th>
+								<th data-message="filter_header_pinned"></th>
+								<th colspan="2" data-message="filter_header_unpinned"></th>
 							</tr>
 						</thead>
 						<tfoot>
 							<tr>
-								<th align="left" colspan="4" data-message="filter.header.add"></th>
+								<th align="left" colspan="4" data-message="filter_header_add"></th>
 							</tr>
 							<tr>
 								<td colspan="2">
-									<input id="options-filter-host" type="text" list="host-autocomplete" data-placeholder="filter.placeholder.host" required="" />
+									<input id="options-filter-host" type="text" list="host-autocomplete" data-placeholder="filter_placeholder_host" required="" />
 									<datalist id="host-autocomplete"></datalist>
 								</td>
 								<td colspan="2">
 									<div style="display: flex">
-										<input id="options-filter-count" type="text" size="1" maxlength="2" required="" pattern="^\d+$" style="flex: 1; text-align: center;" data-placeholder="filter.placeholder.limit" />
-										<button id="options-filter-set" disabled="" data-message="filter.set" />
+										<input id="options-filter-count" type="text" size="1" maxlength="2" required="" pattern="^\d+$" style="flex: 1; text-align: center;" data-placeholder="filter_placeholder_limit" />
+										<button id="options-filter-set" disabled="" data-message="filter_set" />
 									</div>
 								</td>
 							</tr>
 							<tr>
-								<td colspan="4" style="font-style: italic; text-align: center; line-height: 1.5;" data-message="filter.helptext"></td>
+								<td colspan="4" style="font-style: italic; text-align: center; line-height: 1.5;" data-message="filter_helptext"></td>
 							</tr>
 						</tfoot>
 						<tbody>
@@ -260,17 +260,17 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 				<span class="newtab-thumbnail" />
 				<span class="newtab-title" />
 			</a>
-			<input type="button" class="newtab-control newtab-control-pin" data-title="tile.pin" />
-			<input type="button" class="newtab-control newtab-control-block" data-title="tile.block" />
+			<input type="button" class="newtab-control newtab-control-pin" data-title="tile_pin" />
+			<input type="button" class="newtab-control newtab-control-block" data-title="tile_block" />
 		</div>
 	</template>
 	<menu type="context" id="context-menu">
-		<menuitem id="newtabtools-edittile" class="tile-context-menu" data-message="contextmenu.edit"></menuitem>
-		<menuitem id="newtabtools-pintile" class="tile-context-menu" data-message="contextmenu.pin"></menuitem>
-		<menuitem id="newtabtools-unpintile" class="tile-context-menu" data-message="contextmenu.unpin"></menuitem>
-		<menuitem id="newtabtools-blocktile" class="tile-context-menu" data-message="contextmenu.block"></menuitem>
+		<menuitem id="newtabtools-edittile" class="tile-context-menu" data-message="contextmenu_edit"></menuitem>
+		<menuitem id="newtabtools-pintile" class="tile-context-menu" data-message="contextmenu_pin"></menuitem>
+		<menuitem id="newtabtools-unpintile" class="tile-context-menu" data-message="contextmenu_unpin"></menuitem>
+		<menuitem id="newtabtools-blocktile" class="tile-context-menu" data-message="contextmenu_block"></menuitem>
 		<hr class="tile-context-menu" />
-		<menuitem id="newtabtools-options" data-message="contextmenu.options"></menuitem>
+		<menuitem id="newtabtools-options" data-message="contextmenu_options"></menuitem>
 	</menu>
 	<script type="text/javascript" src="tiles-shim.js"></script>
 	<script type="text/javascript" src="prefs.js"></script>

@@ -1,170 +1,170 @@
 {
-	"bg-header": {
+	"bg_header": {
 		"message": "Фоново изображение:"
 	},
-	"bg.remove": {
+	"bg_remove": {
 		"message": "Премахни"
 	},
-	"bg.set": {
+	"bg_set": {
 		"message": "Задай"
 	},
-	"changelog.label": {
+	"changelog_label": {
 		"message": "Какво се промени?"
 	},
-	"contextmenu.block": {
+	"contextmenu_block": {
 		"message": "Премахни плочката"
 	},
-	"contextmenu.edit": {
+	"contextmenu_edit": {
 		"message": "Редакция на плочката"
 	},
-	"contextmenu.options": {
+	"contextmenu_options": {
 		"message": "New Tab Tools Опции"
 	},
-	"contextmenu.pin": {
+	"contextmenu_pin": {
 		"message": "Закачи плочката"
 	},
-	"contextmenu.unpin": {
+	"contextmenu_unpin": {
 		"message": "Откачи плочката"
 	},
 	"donate": {
 		"message": "Дарение…"
 	},
-	"donate.label": {
+	"donate_label": {
 		"message": "New Tab Tools се издържа от дарения."
 	},
-	"filter.button": {
+	"filter_button": {
 		"message": "Филтър…"
 	},
 	"github": {
 		"message": "New Tab Tools в GitHub"
 	},
-	"newtab.pageTitle": {
+	"newtab_pageTitle": {
 		"message": "Нов раздел"
 	},
-	"newtab.undo.closeTooltip": {
+	"newtab_undo_closeTooltip": {
 		"message": "Скриване"
 	},
-	"newtab.undo.removedLabel": {
+	"newtab_undo_removedLabel": {
 		"message": "Миниатюрата беше премахната."
 	},
-	"newtab.undo.restoreButton": {
+	"newtab_undo_restoreButton": {
 		"message": "Възстановяване на всички"
 	},
-	"newtab.undo.undoButton": {
+	"newtab_undo_undoButton": {
 		"message": "Отмяна"
 	},
 	"newversion": {
 		"message": "New Tab Tools се обнови до версия $1. New Tab Tools е безплатно, но даренията са добре дошли!"
 	},
-	"options-header": {
+	"options_header": {
 		"message": "Опции:"
 	},
-	"options.columns": {
+	"options_columns": {
 		"message": "Колони"
 	},
-	"options.foreground.opacity": {
+	"options_foreground_opacity": {
 		"message": "Прозрачност"
 	},
-	"options.grid.margin": {
+	"options_grid_margin": {
 		"message": "Разстоение от края"
 	},
-	"options.grid.spacing": {
+	"options_grid_spacing": {
 		"message": "Разстояние между"
 	},
-	"options.historytiles": {
+	"options_historytiles": {
 		"message": "Плочки от историята на сърфиране"
 	},
-	"options.launcher.hidden": {
+	"options_launcher_hidden": {
 		"message": "Не показвай"
 	},
-	"options.locked": {
+	"options_locked": {
 		"message": "Забрани влачене на плочките"
 	},
-	"options.recent": {
+	"options_recent": {
 		"message": "Последно затворени раздели"
 	},
-	"options.rows": {
+	"options_rows": {
 		"message": "Редове"
 	},
-	"options.size.large": {
+	"options_size_large": {
 		"message": "Голямо"
 	},
-	"options.size.medium": {
+	"options_size_medium": {
 		"message": "Средно"
 	},
-	"options.size.small": {
+	"options_size_small": {
 		"message": "Малко"
 	},
-	"options.theme": {
+	"options_theme": {
 		"message": "Тема"
 	},
-	"options.theme.dark": {
+	"options_theme_dark": {
 		"message": "Тъмна"
 	},
-	"options.theme.light": {
+	"options_theme_light": {
 		"message": "Светла"
 	},
-	"options.thumb-titlesize": {
+	"options_thumb_titlesize": {
 		"message": "Размер на заглавието"
 	},
-	"pin-url.button": {
+	"pin_url_button": {
 		"message": "Добави"
 	},
-	"pin-url.header": {
+	"pin_url_header": {
 		"message": "Добавяне на плочка:"
 	},
-	"pin-url.placeholder": {
+	"pin_url_placeholder": {
 		"message": "Напиши или избери URL"
 	},
-	"recently-closed-tabs": {
+	"recently_closed_tabs": {
 		"message": "Последно затворени раздели:"
 	},
-	"tile-header": {
+	"tile_header": {
 		"message": "Плочки:"
 	},
-	"tile-savedthumb.label": {
+	"tile_savedthumb_label": {
 		"message": "Запазено изображение:"
 	},
-	"tile-savedthumb.set": {
+	"tile_savedthumb_set": {
 		"message": "Задай"
 	},
-	"tile-selection.next.tooltip": {
+	"tile_selection_next_tooltip": {
 		"message": "Следваща плочка"
 	},
-	"tile-selection.nextrow.tooltip": {
+	"tile_selection_nextrow_tooltip": {
 		"message": "Следващ ред"
 	},
-	"tile-selection.previous.tooltip": {
+	"tile_selection_previous_tooltip": {
 		"message": "Предишна плочка"
 	},
-	"tile-selection.previousrow.tooltip": {
+	"tile_selection_previousrow_tooltip": {
 		"message": "Предишен ред"
 	},
-	"tile-thumbnail.bgcolor": {
+	"tile_thumbnail_bgcolor": {
 		"message": "Фонов цвят:"
 	},
-	"tile-thumbnail.remove": {
+	"tile_thumbnail_remove": {
 		"message": "Премахни"
 	},
-	"tile-title.label": {
+	"tile_title_label": {
 		"message": "Заглавие:"
 	},
-	"tile-title.placeholder": {
+	"tile_title_placeholder": {
 		"message": "Напиши ново заглавие"
 	},
-	"tile-title.set": {
+	"tile_title_set": {
 		"message": "Задай"
 	},
-	"tile.block": {
+	"tile_block": {
 		"message": "Премахване на страница"
 	},
-	"tile.pin": {
+	"tile_pin": {
 		"message": "Фиксиране на страницата тук"
 	},
-	"tile.unpin": {
+	"tile_unpin": {
 		"message": "Страницата да е не фиксирана"
 	},
-	"tileurl.empty": {
+	"tileurl_empty": {
 		"message": "Празна плочка"
 	}
 }

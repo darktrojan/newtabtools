@@ -204,7 +204,7 @@ var newTabTools = {
 				count = -1;
 			}
 			count += classList.contains('plus-button') ? 1 : -1;
-			unpinnedCell.textContent = count == -1 ? this.getString('filter.unlimited') : count;
+			unpinnedCell.textContent = count == -1 ? this.getString('filter_unlimited') : count;
 			row.querySelector('.minus-button').disabled = count == -1;
 
 			Filters.setFilter(row.cells[0].textContent, count);
@@ -526,7 +526,7 @@ var newTabTools = {
 			this.siteThumbnail.style.backgroundImage =
 				this.siteThumbnail.style.backgroundColor =
 				this.setBgColourDisplay.style.backgroundColor = null;
-			this.siteURL.textContent = this.getString('tileurl.empty');
+			this.siteURL.textContent = this.getString('tileurl_empty');
 			this.setTitleInput.value = '';
 			this.removeSavedThumbButton.disabled =
 				this.setBgColourButton.disabled =
@@ -618,7 +618,7 @@ var newTabTools = {
 			}
 			row.cells[0].textContent = k;
 			row.cells[1].textContent = pinned[k] || 0;
-			row.cells[2].textContent = k in filters ? filters[k] : this.getString('filter.unlimited');
+			row.cells[2].textContent = k in filters ? filters[k] : this.getString('filter_unlimited');
 			if (k in filters) {
 				row.querySelector('.minus-button').disabled = false;
 			}

@@ -1,173 +1,173 @@
 {
-	"bg-header": {
+	"bg_header": {
 		"message": "Фоновое изображение Экспресс-панели:"
 	},
-	"bg.remove": {
+	"bg_remove": {
 		"message": "Удалить"
 	},
-	"bg.set": {
+	"bg_set": {
 		"message": "Применить"
 	},
-	"changelog.label": {
+	"changelog_label": {
 		"message": "Что нового?"
 	},
-	"contextmenu.block": {
+	"contextmenu_block": {
 		"message": "Удалить эту плитку"
 	},
-	"contextmenu.edit": {
+	"contextmenu_edit": {
 		"message": "Редактировать эту плитку"
 	},
-	"contextmenu.options": {
+	"contextmenu_options": {
 		"message": "Настройки New Tab Tools"
 	},
-	"contextmenu.pin": {
+	"contextmenu_pin": {
 		"message": "Закрепить эту плитку"
 	},
-	"contextmenu.unpin": {
+	"contextmenu_unpin": {
 		"message": "Открепить эту плитку"
 	},
 	"donate": {
 		"message": "Пожертвовать…"
 	},
-	"donate.label": {
+	"donate_label": {
 		"message": "New Tab Tools финансируется за счет пожертвований пользователей."
 	},
 	"extensionDescription": {
 		"message": "Настраиваемая Экспресс-панель. Вы можете настроить количество отображаемых плиток, включить панель быстрого доступа и настроить фоновое изображение. А так же, можете менять названия и изображения плиток."
 	},
-	"filter.button": {
+	"filter_button": {
 		"message": "Фильтр…"
 	},
 	"github": {
 		"message": "New Tab Tools на GitHub"
 	},
-	"newtab.pageTitle": {
+	"newtab_pageTitle": {
 		"message": "Новая вкладка"
 	},
-	"newtab.undo.closeTooltip": {
+	"newtab_undo_closeTooltip": {
 		"message": "Скрыть"
 	},
-	"newtab.undo.removedLabel": {
+	"newtab_undo_removedLabel": {
 		"message": "Миниатюра удалена."
 	},
-	"newtab.undo.restoreButton": {
+	"newtab_undo_restoreButton": {
 		"message": "Восстановить все"
 	},
-	"newtab.undo.undoButton": {
+	"newtab_undo_undoButton": {
 		"message": "Отменить"
 	},
 	"newversion": {
 		"message": "Расширение New Tab Tools было обновлено до версии $1. New Tab Tools распространяется бесплатно, но ваши пожертвования будут приняты с благодарностью!"
 	},
-	"options-header": {
+	"options_header": {
 		"message": "Опции:"
 	},
-	"options.columns": {
+	"options_columns": {
 		"message": "Количество Столбцов"
 	},
-	"options.foreground.opacity": {
+	"options_foreground_opacity": {
 		"message": "Непрозрачность"
 	},
-	"options.grid.margin": {
+	"options_grid_margin": {
 		"message": "Отступ от края"
 	},
-	"options.grid.spacing": {
+	"options_grid_spacing": {
 		"message": "Отступ между плиток"
 	},
-	"options.historytiles": {
+	"options_historytiles": {
 		"message": "Плитки из истории браузера"
 	},
-	"options.launcher.hidden": {
+	"options_launcher_hidden": {
 		"message": "Не отображать"
 	},
-	"options.locked": {
+	"options_locked": {
 		"message": "Предотвратить перетаскивание плиток"
 	},
-	"options.recent": {
+	"options_recent": {
 		"message": "Закрытые вкладки"
 	},
-	"options.rows": {
+	"options_rows": {
 		"message": "Количество Строк"
 	},
-	"options.size.large": {
+	"options_size_large": {
 		"message": "Большой"
 	},
-	"options.size.medium": {
+	"options_size_medium": {
 		"message": "Средний"
 	},
-	"options.size.small": {
+	"options_size_small": {
 		"message": "Небольшой"
 	},
-	"options.theme": {
+	"options_theme": {
 		"message": "Выбор темы оформления"
 	},
-	"options.theme.dark": {
+	"options_theme_dark": {
 		"message": "Темная Тема"
 	},
-	"options.theme.light": {
+	"options_theme_light": {
 		"message": "Светлая Тема"
 	},
-	"options.thumb-titlesize": {
+	"options_thumb_titlesize": {
 		"message": "Размер названия плитки"
 	},
-	"pin-url.button": {
+	"pin_url_button": {
 		"message": "Добавить"
 	},
-	"pin-url.header": {
+	"pin_url_header": {
 		"message": "Добавить плитку:"
 	},
-	"pin-url.placeholder": {
+	"pin_url_placeholder": {
 		"message": "Введите или выберите ссылку из списка"
 	},
-	"recently-closed-tabs": {
+	"recently_closed_tabs": {
 		"message": "Закрытые вкладки:"
 	},
-	"tile-header": {
+	"tile_header": {
 		"message": "Плитки Экспресс-панели:"
 	},
-	"tile-savedthumb.label": {
+	"tile_savedthumb_label": {
 		"message": "Сохраненное изображение:"
 	},
-	"tile-savedthumb.set": {
+	"tile_savedthumb_set": {
 		"message": "Применить"
 	},
-	"tile-selection.next.tooltip": {
+	"tile_selection_next_tooltip": {
 		"message": "Следующая плитка"
 	},
-	"tile-selection.nextrow.tooltip": {
+	"tile_selection_nextrow_tooltip": {
 		"message": "Следующая строка"
 	},
-	"tile-selection.previous.tooltip": {
+	"tile_selection_previous_tooltip": {
 		"message": "Предыдущая плитка"
 	},
-	"tile-selection.previousrow.tooltip": {
+	"tile_selection_previousrow_tooltip": {
 		"message": "Предыдущая строка"
 	},
-	"tile-thumbnail.bgcolor": {
+	"tile_thumbnail_bgcolor": {
 		"message": "Цвет фона:"
 	},
-	"tile-thumbnail.remove": {
+	"tile_thumbnail_remove": {
 		"message": "Удалить"
 	},
-	"tile-title.label": {
+	"tile_title_label": {
 		"message": "Название плитки:"
 	},
-	"tile-title.placeholder": {
+	"tile_title_placeholder": {
 		"message": "Введите новое название плитки"
 	},
-	"tile-title.set": {
+	"tile_title_set": {
 		"message": "Применить"
 	},
-	"tile.block": {
+	"tile_block": {
 		"message": "Удалить этот сайт"
 	},
-	"tile.pin": {
+	"tile_pin": {
 		"message": "Закрепить этот сайт в текущей позиции"
 	},
-	"tile.unpin": {
+	"tile_unpin": {
 		"message": "Открепить этот сайт"
 	},
-	"tileurl.empty": {
+	"tileurl_empty": {
 		"message": "Пустая плитка"
 	}
 }

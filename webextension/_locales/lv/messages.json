@@ -1,35 +1,35 @@
 {
-	"bg-header": {
+	"bg_header": {
 		"message": "Cilnes fona attēls:"
 	},
-	"bg.remove": {
+	"bg_remove": {
 		"message": "Noņemt"
 	},
-	"bg.set": {
+	"bg_set": {
 		"message": "Iestatīt"
 	},
-	"changelog.label": {
+	"changelog_label": {
 		"message": "Kas mainījies?"
 	},
-	"contextmenu.block": {
+	"contextmenu_block": {
 		"message": "Noņemt elementu"
 	},
-	"contextmenu.edit": {
+	"contextmenu_edit": {
 		"message": "Rediģēt elementu"
 	},
-	"contextmenu.options": {
+	"contextmenu_options": {
 		"message": "NewTabTools iestatījumi"
 	},
-	"contextmenu.pin": {
+	"contextmenu_pin": {
 		"message": "Piespraust elementu"
 	},
-	"contextmenu.unpin": {
+	"contextmenu_unpin": {
 		"message": "Atspraust elementu"
 	},
 	"donate": {
 		"message": "Ziedot…"
 	},
-	"donate.label": {
+	"donate_label": {
 		"message": "NewTabTools tiek finansēts no lietotāju ziedojumiem."
 	},
 	"extensionDescription": {
@@ -38,139 +38,139 @@
 	"extensionName": {
 		"message": "NewTabTools"
 	},
-	"filter.button": {
+	"filter_button": {
 		"message": "Filtrēt…"
 	},
 	"github": {
 		"message": "NewTabTools on GitHub"
 	},
-	"newtab.pageTitle": {
+	"newtab_pageTitle": {
 		"message": "Jauna cilne"
 	},
-	"newtab.undo.closeTooltip": {
+	"newtab_undo_closeTooltip": {
 		"message": "Paslēpt"
 	},
-	"newtab.undo.removedLabel": {
+	"newtab_undo_removedLabel": {
 		"message": "Bildītes nav."
 	},
-	"newtab.undo.restoreButton": {
+	"newtab_undo_restoreButton": {
 		"message": "Atjaunot visus"
 	},
-	"newtab.undo.undoButton": {
+	"newtab_undo_undoButton": {
 		"message": "Atcelt"
 	},
 	"newversion": {
 		"message": "NewTabTools ir atjaunināts uz versiju $1. NewTabTools ir bezmaksas, taču jūsu ziedojums tiks novērtēts!"
 	},
-	"options-header": {
+	"options_header": {
 		"message": "Opcijas:"
 	},
-	"options.columns": {
+	"options_columns": {
 		"message": "Kolonnas"
 	},
-	"options.foreground.opacity": {
+	"options_foreground_opacity": {
 		"message": "Necaurredzamība"
 	},
-	"options.grid.margin": {
+	"options_grid_margin": {
 		"message": "Režģa malas"
 	},
-	"options.grid.spacing": {
+	"options_grid_spacing": {
 		"message": "Režģa atstarpes"
 	},
-	"options.historytiles": {
+	"options_historytiles": {
 		"message": "Elementi no pārlūkošanas vēstures"
 	},
-	"options.launcher.hidden": {
+	"options_launcher_hidden": {
 		"message": "Nerādīt"
 	},
-	"options.locked": {
+	"options_locked": {
 		"message": "Nepieļaut elementu pārvietošanu"
 	},
-	"options.recent": {
+	"options_recent": {
 		"message": "Nesen aizvērtās cilnes"
 	},
-	"options.rows": {
+	"options_rows": {
 		"message": "Rindas"
 	},
-	"options.size.large": {
+	"options_size_large": {
 		"message": "Platas"
 	},
-	"options.size.medium": {
+	"options_size_medium": {
 		"message": "Vidējas"
 	},
-	"options.size.small": {
+	"options_size_small": {
 		"message": "Šauras"
 	},
-	"options.theme": {
+	"options_theme": {
 		"message": "Tēma"
 	},
-	"options.theme.dark": {
+	"options_theme_dark": {
 		"message": "Tumša"
 	},
-	"options.theme.light": {
+	"options_theme_light": {
 		"message": "Gaiša"
 	},
-	"options.thumb-titlesize": {
+	"options_thumb_titlesize": {
 		"message": "Nosaukuma joslas"
 	},
-	"pin-url.button": {
+	"pin_url_button": {
 		"message": "Pievienot"
 	},
-	"pin-url.header": {
+	"pin_url_header": {
 		"message": "Pievienot vietni:"
 	},
-	"pin-url.placeholder": {
+	"pin_url_placeholder": {
 		"message": "Ierakstiet vai atlasiet URL"
 	},
-	"recently-closed-tabs": {
+	"recently_closed_tabs": {
 		"message": "Nesen aizvērtās cilnes:"
 	},
-	"tile-header": {
+	"tile_header": {
 		"message": "Elementi:"
 	},
-	"tile-savedthumb.label": {
+	"tile_savedthumb_label": {
 		"message": "Saglabātais attēls:"
 	},
-	"tile-savedthumb.set": {
+	"tile_savedthumb_set": {
 		"message": "Iestatīt"
 	},
-	"tile-selection.next.tooltip": {
+	"tile_selection_next_tooltip": {
 		"message": "Nākamā"
 	},
-	"tile-selection.nextrow.tooltip": {
+	"tile_selection_nextrow_tooltip": {
 		"message": "Nākamā rinda"
 	},
-	"tile-selection.previous.tooltip": {
+	"tile_selection_previous_tooltip": {
 		"message": "Iepriekšējā"
 	},
-	"tile-selection.previousrow.tooltip": {
+	"tile_selection_previousrow_tooltip": {
 		"message": "Iepriekšējā rinda"
 	},
-	"tile-thumbnail.bgcolor": {
+	"tile_thumbnail_bgcolor": {
 		"message": "Fona krāsa:"
 	},
-	"tile-thumbnail.remove": {
+	"tile_thumbnail_remove": {
 		"message": "Noņemt"
 	},
-	"tile-title.label": {
+	"tile_title_label": {
 		"message": "Nosaukums:"
 	},
-	"tile-title.placeholder": {
+	"tile_title_placeholder": {
 		"message": "Ierakstiet jauno nosaukumu"
 	},
-	"tile-title.set": {
+	"tile_title_set": {
 		"message": "Iestatīt"
 	},
-	"tile.block": {
+	"tile_block": {
 		"message": "Aizvākt šo lapu"
 	},
-	"tile.pin": {
+	"tile_pin": {
 		"message": "Pielīmēt šo lapu tās pašreizējā vietā"
 	},
-	"tile.unpin": {
+	"tile_unpin": {
 		"message": "Atbrīvot šo lapu"
 	},
-	"tileurl.empty": {
+	"tileurl_empty": {
 		"message": "Tukšs elements"
 	}
 }

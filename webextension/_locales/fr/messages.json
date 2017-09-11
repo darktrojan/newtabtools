@@ -1,173 +1,173 @@
 {
-	"bg-header": {
+	"bg_header": {
 		"message": "Arrière-plan :"
 	},
-	"bg.remove": {
+	"bg_remove": {
 		"message": "Supprimer"
 	},
-	"bg.set": {
+	"bg_set": {
 		"message": "Appliquer"
 	},
-	"changelog.label": {
+	"changelog_label": {
 		"message": "Nouveautés"
 	},
-	"contextmenu.block": {
+	"contextmenu_block": {
 		"message": "Bloquer cette page"
 	},
-	"contextmenu.edit": {
+	"contextmenu_edit": {
 		"message": "Modifier cette page"
 	},
-	"contextmenu.options": {
+	"contextmenu_options": {
 		"message": "Options de New Tab Tools"
 	},
-	"contextmenu.pin": {
+	"contextmenu_pin": {
 		"message": "Épingler cette page"
 	},
-	"contextmenu.unpin": {
+	"contextmenu_unpin": {
 		"message": "Relâcher cette page"
 	},
 	"donate": {
 		"message": "Faire un don…"
 	},
-	"donate.label": {
+	"donate_label": {
 		"message": "New Tab Tools est financé par vos dons."
 	},
 	"extensionDescription": {
 		"message": "Personnalise la page Nouvel onglet. Permet d'ajouter un nombre plus important de sites, des raccourcis vers les menus de Firefox et une image d'arrière-plan. Permet également de personnaliser les titres et miniatures donnés aux sites."
 	},
-	"filter.button": {
+	"filter_button": {
 		"message": "Filtrer…"
 	},
 	"github": {
 		"message": "New Tab Tools sur GitHub"
 	},
-	"newtab.pageTitle": {
+	"newtab_pageTitle": {
 		"message": "Nouvel onglet"
 	},
-	"newtab.undo.closeTooltip": {
+	"newtab_undo_closeTooltip": {
 		"message": "Masquer"
 	},
-	"newtab.undo.removedLabel": {
+	"newtab_undo_removedLabel": {
 		"message": "Vignette retirée."
 	},
-	"newtab.undo.restoreButton": {
+	"newtab_undo_restoreButton": {
 		"message": "Tout restaurer"
 	},
-	"newtab.undo.undoButton": {
+	"newtab_undo_undoButton": {
 		"message": "Annuler"
 	},
 	"newversion": {
 		"message": "New Tab Tools a été mis à jour à la version $1. Si vous appréciez ce module, merci de faire un petit don."
 	},
-	"options-header": {
+	"options_header": {
 		"message": "Options :"
 	},
-	"options.columns": {
+	"options_columns": {
 		"message": "Colonnes"
 	},
-	"options.foreground.opacity": {
+	"options_foreground_opacity": {
 		"message": "Opacité"
 	},
-	"options.grid.margin": {
+	"options_grid_margin": {
 		"message": "Marge autour de la grille"
 	},
-	"options.grid.spacing": {
+	"options_grid_spacing": {
 		"message": "Marge entre les cases"
 	},
-	"options.historytiles": {
+	"options_historytiles": {
 		"message": "Cases vides remplies avec historique"
 	},
-	"options.launcher.hidden": {
+	"options_launcher_hidden": {
 		"message": "Ne pas afficher"
 	},
-	"options.locked": {
+	"options_locked": {
 		"message": "Cases non déplaçables"
 	},
-	"options.recent": {
+	"options_recent": {
 		"message": "Onglets récemment fermés"
 	},
-	"options.rows": {
+	"options_rows": {
 		"message": "Lignes"
 	},
-	"options.size.large": {
+	"options_size_large": {
 		"message": "Grande"
 	},
-	"options.size.medium": {
+	"options_size_medium": {
 		"message": "Moyenne"
 	},
-	"options.size.small": {
+	"options_size_small": {
 		"message": "Réduite"
 	},
-	"options.theme": {
+	"options_theme": {
 		"message": "Thème"
 	},
-	"options.theme.dark": {
+	"options_theme_dark": {
 		"message": "Thème sombre"
 	},
-	"options.theme.light": {
+	"options_theme_light": {
 		"message": "Thème clair"
 	},
-	"options.thumb-titlesize": {
+	"options_thumb_titlesize": {
 		"message": "Taille des titres"
 	},
-	"pin-url.button": {
+	"pin_url_button": {
 		"message": "Ajouter"
 	},
-	"pin-url.header": {
+	"pin_url_header": {
 		"message": "Ajouter une page :"
 	},
-	"pin-url.placeholder": {
+	"pin_url_placeholder": {
 		"message": "Tapez ou sélectionnez une URL"
 	},
-	"recently-closed-tabs": {
+	"recently_closed_tabs": {
 		"message": "Onglets récemment fermés :"
 	},
-	"tile-header": {
+	"tile_header": {
 		"message": "Pages :"
 	},
-	"tile-savedthumb.label": {
+	"tile_savedthumb_label": {
 		"message": "Miniature personnalisée :"
 	},
-	"tile-savedthumb.set": {
+	"tile_savedthumb_set": {
 		"message": "Appliquer"
 	},
-	"tile-selection.next.tooltip": {
+	"tile_selection_next_tooltip": {
 		"message": "Page suivante"
 	},
-	"tile-selection.nextrow.tooltip": {
+	"tile_selection_nextrow_tooltip": {
 		"message": "Rangée inférieure"
 	},
-	"tile-selection.previous.tooltip": {
+	"tile_selection_previous_tooltip": {
 		"message": "Page précédente"
 	},
-	"tile-selection.previousrow.tooltip": {
+	"tile_selection_previousrow_tooltip": {
 		"message": "Rangée supérieure"
 	},
-	"tile-thumbnail.bgcolor": {
+	"tile_thumbnail_bgcolor": {
 		"message": "Couleur de fond :"
 	},
-	"tile-thumbnail.remove": {
+	"tile_thumbnail_remove": {
 		"message": "Supprimer"
 	},
-	"tile-title.label": {
+	"tile_title_label": {
 		"message": "Titre :"
 	},
-	"tile-title.placeholder": {
+	"tile_title_placeholder": {
 		"message": "Tapez un nouveau titre"
 	},
-	"tile-title.set": {
+	"tile_title_set": {
 		"message": "Appliquer"
 	},
-	"tile.block": {
+	"tile_block": {
 		"message": "Retirer ce site"
 	},
-	"tile.pin": {
+	"tile_pin": {
 		"message": "Épingler ce site à son emplacement actuel"
 	},
-	"tile.unpin": {
+	"tile_unpin": {
 		"message": "Relâcher ce site"
 	},
-	"tileurl.empty": {
+	"tileurl_empty": {
 		"message": "Aucune page enregistrée"
 	}
 }

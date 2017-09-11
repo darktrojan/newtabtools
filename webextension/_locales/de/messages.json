@@ -1,35 +1,35 @@
 {
-	"bg-header": {
+	"bg_header": {
 		"message": "Hintergrundbild:"
 	},
-	"bg.remove": {
+	"bg_remove": {
 		"message": "Entfernen"
 	},
-	"bg.set": {
+	"bg_set": {
 		"message": "Übernehmen"
 	},
-	"changelog.label": {
+	"changelog_label": {
 		"message": "Was ist neu?"
 	},
-	"contextmenu.block": {
+	"contextmenu_block": {
 		"message": "Kachel entfernen"
 	},
-	"contextmenu.edit": {
+	"contextmenu_edit": {
 		"message": "Kachel bearbeiten"
 	},
-	"contextmenu.options": {
+	"contextmenu_options": {
 		"message": "Neuer-Tab-Tools Einstellungen"
 	},
-	"contextmenu.pin": {
+	"contextmenu_pin": {
 		"message": "Kachel anheften"
 	},
-	"contextmenu.unpin": {
+	"contextmenu_unpin": {
 		"message": "Kachel ablösen"
 	},
 	"donate": {
 		"message": "Spenden…"
 	},
-	"donate.label": {
+	"donate_label": {
 		"message": "Neuer-Tab-Tools wird durch Spenden finanziert."
 	},
 	"extensionDescription": {
@@ -41,133 +41,133 @@
 	"github": {
 		"message": "Neuer-Tab-Tools auf GitHub"
 	},
-	"newtab.pageTitle": {
+	"newtab_pageTitle": {
 		"message": "Neuer Tab"
 	},
-	"newtab.undo.closeTooltip": {
+	"newtab_undo_closeTooltip": {
 		"message": "Ausblenden"
 	},
-	"newtab.undo.removedLabel": {
+	"newtab_undo_removedLabel": {
 		"message": "Miniaturansicht entfernt"
 	},
-	"newtab.undo.restoreButton": {
+	"newtab_undo_restoreButton": {
 		"message": "Alle wiederherstellen"
 	},
-	"newtab.undo.undoButton": {
+	"newtab_undo_undoButton": {
 		"message": "Rückgängig"
 	},
 	"newversion": {
 		"message": "Neuer-Tab-Tools wurde auf Version $1 aktualisiert. Bitte erwägen Sie eine Spende."
 	},
-	"options-header": {
+	"options_header": {
 		"message": "Einstellungen:"
 	},
-	"options.columns": {
+	"options_columns": {
 		"message": "Spalten"
 	},
-	"options.foreground.opacity": {
+	"options_foreground_opacity": {
 		"message": "Vordergrunddeckkraft"
 	},
-	"options.grid.margin": {
+	"options_grid_margin": {
 		"message": "Raster - Äußerer Rand"
 	},
-	"options.grid.spacing": {
+	"options_grid_spacing": {
 		"message": "Raster - Zwischenräume"
 	},
-	"options.historytiles": {
+	"options_historytiles": {
 		"message": "Kacheln aus der Chronik"
 	},
-	"options.launcher.hidden": {
+	"options_launcher_hidden": {
 		"message": "Nicht anzeigen"
 	},
-	"options.locked": {
+	"options_locked": {
 		"message": "Verhindere das Ziehen von Kacheln"
 	},
-	"options.recent": {
+	"options_recent": {
 		"message": "Geschlossene Tabs"
 	},
-	"options.rows": {
+	"options_rows": {
 		"message": "Reihen"
 	},
-	"options.size.large": {
+	"options_size_large": {
 		"message": "Groß"
 	},
-	"options.size.medium": {
+	"options_size_medium": {
 		"message": "Mittel"
 	},
-	"options.size.small": {
+	"options_size_small": {
 		"message": "Klein"
 	},
-	"options.theme": {
+	"options_theme": {
 		"message": "Design"
 	},
-	"options.theme.dark": {
+	"options_theme_dark": {
 		"message": "Dunkles Design"
 	},
-	"options.theme.light": {
+	"options_theme_light": {
 		"message": "Helles Design"
 	},
-	"options.thumb-titlesize": {
+	"options_thumb_titlesize": {
 		"message": "Titel des Vorschaubildes"
 	},
-	"pin-url.button": {
+	"pin_url_button": {
 		"message": "Hinzufügen"
 	},
-	"pin-url.header": {
+	"pin_url_header": {
 		"message": "Kachel hinzufügen:"
 	},
-	"pin-url.placeholder": {
+	"pin_url_placeholder": {
 		"message": "Adresse eingeben oder auswählen"
 	},
-	"recently-closed-tabs": {
+	"recently_closed_tabs": {
 		"message": "Geschlossene Tabs:"
 	},
-	"tile-header": {
+	"tile_header": {
 		"message": "Kacheln:"
 	},
-	"tile-savedthumb.label": {
+	"tile_savedthumb_label": {
 		"message": "Gespeichertes Bild:"
 	},
-	"tile-savedthumb.set": {
+	"tile_savedthumb_set": {
 		"message": "Übernehmen"
 	},
-	"tile-selection.next.tooltip": {
+	"tile_selection_next_tooltip": {
 		"message": "Nächste Kachel"
 	},
-	"tile-selection.nextrow.tooltip": {
+	"tile_selection_nextrow_tooltip": {
 		"message": "Nächste Reihe"
 	},
-	"tile-selection.previous.tooltip": {
+	"tile_selection_previous_tooltip": {
 		"message": "Vorherige Kachel"
 	},
-	"tile-selection.previousrow.tooltip": {
+	"tile_selection_previousrow_tooltip": {
 		"message": "Vorherige Reihe"
 	},
-	"tile-thumbnail.bgcolor": {
+	"tile_thumbnail_bgcolor": {
 		"message": "Hintergrundfarbe:"
 	},
-	"tile-thumbnail.remove": {
+	"tile_thumbnail_remove": {
 		"message": "Entfernen"
 	},
-	"tile-title.label": {
+	"tile_title_label": {
 		"message": "Titel:"
 	},
-	"tile-title.placeholder": {
+	"tile_title_placeholder": {
 		"message": "Neuen Titel eingeben"
 	},
-	"tile-title.set": {
+	"tile_title_set": {
 		"message": "Übernehmen"
 	},
-	"tile.block": {
+	"tile_block": {
 		"message": "Seite entfernen"
 	},
-	"tile.pin": {
+	"tile_pin": {
 		"message": "Seite immer an aktueller Position anzeigen"
 	},
-	"tile.unpin": {
+	"tile_unpin": {
 		"message": "Seitenposition nicht mehr merken"
 	},
-	"tileurl.empty": {
+	"tileurl_empty": {
 		"message": "Leere Kachel"
 	}
 }
