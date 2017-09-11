@@ -38,63 +38,7 @@ Promise.all([
 	}
 });
 
-var db;
 const NEW_TAB_URL = chrome.runtime.getURL('newTab.xhtml');
-
-function initDB() {
-	return new Promise(function(resolve, reject) {
-		let request = indexedDB.open('newTabTools', 9);
-
-		request.onsuccess = function(/* event */) {
-			// console.log(event.type, event);
-			db = this.result;
-			resolve();
-		};
-
-		request.onblocked = request.onerror = function(event) {
-			reject(event);
-		};
-
-		request.onupgradeneeded = function(/* event */) {
-			// console.log(event.type, event);
-			db = this.result;
-
-			if (!db.objectStoreNames.contains('tiles')) {
-				db.createObjectStore('tiles', { autoIncrement: true, keyPath: 'id' });
-			}
-			if (!this.transaction.objectStore('tiles').indexNames.contains('url')) {
-				this.transaction.objectStore('tiles').createIndex('url', 'url');
-			}
-
-			if (!db.objectStoreNames.contains('background')) {
-				db.createObjectStore('background', { autoIncrement: true });
-			}
-
-			if (!db.objectStoreNames.contains('thumbnails')) {
-				db.createObjectStore('thumbnails', { keyPath: 'url' });
-			}
-			if (!this.transaction.objectStore('thumbnails').indexNames.contains('used')) {
-				this.transaction.objectStore('thumbnails').createIndex('used', 'used');
-			}
-		};
-	});
-}
-
-function waitForDB() {
-	return new Promise(function(resolve, reject) {
-		if (db) {
-			if (db == 'broken') {
-				reject('Database connection failed.');
-			} else {
-				resolve();
-			}
-			return;
-		}
-
-		initDB.waitingQueue = initDB.waitingQueue || [];
-		initDB.waitingQueue.push({resolve, reject});
-	});
-}
 
 function getTZDateString(date = new Date()) {
 	return [date.getFullYear(), date.getMonth() + 1, date.getDate()].map(p => p.toString().padStart(2, '0')).join('-');

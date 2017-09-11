@@ -5,12 +5,6 @@
 	"icons": {
 		"48": "images/icon.svg"
 	},
-	"applications": {
-		"gecko": {
-			"id": "newtabtools@darktrojan.net",
-			"strict_min_version": "64.0"
-		}
-	},
 	"chrome_url_overrides": {
 		"newtab": "newTab.xhtml"
 	},
@@ -26,13 +20,6 @@
 	},
 	"browser_action": {
 		"default_icon": "images/tools-light.svg",
-		"theme_icons": [
-			{
-				"dark": "images/tools-light.svg",
-				"light": "images/tools-dark.svg",
-				"size": 16
-			}
-		],
 		"default_popup": "action.html",
 		"default_title": "__MSG_extensionName__",
 		"browser_style": true
