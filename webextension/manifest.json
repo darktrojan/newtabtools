@@ -5,12 +5,6 @@
 	"icons": {
 		"64": "images/icon.svg"
 	},
-	"applications": {
-		"gecko": {
-			"id": "newtabtools@darktrojan.net",
-			"strict_min_version": "55.0a1"
-		}
-	},
 	"chrome_url_overrides": {
 		"newtab": "newTab.xhtml"
 	},

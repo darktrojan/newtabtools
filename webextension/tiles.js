@@ -1,3 +1,60 @@
+var db;
+
+function initDB() {
+	return new Promise(function(resolve, reject) {
+		let request = indexedDB.open('newTabTools', 9);
+
+		request.onsuccess = function(/*event*/) {
+			// console.log(event.type, event);
+			db = this.result;
+			resolve();
+		};
+
+		request.onblocked = request.onerror = function(event) {
+			reject(event);
+		};
+
+		request.onupgradeneeded = function(/*event*/) {
+			// console.log(event.type, event);
+			db = this.result;
+
+			if (!db.objectStoreNames.contains('tiles')) {
+				db.createObjectStore('tiles', { autoIncrement: true, keyPath: 'id' });
+			}
+			if (!this.transaction.objectStore('tiles').indexNames.contains('url')) {
+				this.transaction.objectStore('tiles').createIndex('url', 'url');
+			}
+
+			if (!db.objectStoreNames.contains('background')) {
+				db.createObjectStore('background', { autoIncrement: true });
+			}
+
+			if (!db.objectStoreNames.contains('thumbnails')) {
+				db.createObjectStore('thumbnails', { keyPath: 'url' });
+			}
+			if (!this.transaction.objectStore('thumbnails').indexNames.contains('used')) {
+				this.transaction.objectStore('thumbnails').createIndex('used', 'used');
+			}
+		};
+	});
+}
+
+function waitForDB() {
+	return new Promise(function(resolve, reject) {
+		if (db) {
+			if (db == 'broken') {
+				reject('Database connection failed.');
+			} else {
+				resolve();
+			}
+			return;
+		}
+
+		initDB.waitingQueue = initDB.waitingQueue || [];
+		initDB.waitingQueue.push({resolve, reject});
+	});
+}
+
 /* exported initDB, Tiles, Background */
 /* globals Blocked, Filters, Prefs, chrome, db */
 var Tiles = {
@@ -32,7 +89,8 @@ var Tiles = {
 					return;
 				}
 
-				chrome.topSites.get({ providers: ['places'] }, r => {
+				// chrome.topSites.get({ providers: ['places'] }, r => {
+				chrome.topSites.get(r => {
 					let urls = Tiles._list.slice();
 					let filters = Filters.getList();
 					let dotFilters = Object.keys(filters).filter(f => f[0] == '.');
