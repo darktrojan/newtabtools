@@ -21,7 +21,7 @@ Promise.all([
 			}
 		}
 	});
-});
+}).catch(console.error);
 
 var db;
 
@@ -36,11 +36,10 @@ function initDB() {
 		};
 
 		request.onerror = function(event) {
-			console.error(event.type, event);
-			reject();
+			reject(event);
 		};
 
-		request.onupgradeneeded = function(event) {
+		request.onupgradeneeded = function(/*event*/) {
 			// console.log(event.type, event);
 			db = this.result;
 
