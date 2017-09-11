@@ -4,6 +4,18 @@
 
 /* globals DOMRect, Prefs, Tiles, Blocked, newTabTools */
 /* exported Page */
+if (!('DOMRect' in window)) {
+       window.DOMRect = function(left, top, width, height) {
+               this.left = left;
+               this.top = top;
+               this.width = width;
+               this.height = height;
+               this.right = left + width;
+               this.bottom = top + height;
+       }
+       DOMRect.prototype = {};
+}
+
 DOMRect.prototype.isEmpty = function() {
 	return this.left >= this.right || this.top >= this.bottom;
 };
@@ -432,7 +444,7 @@ var Grid = {
 
 		// (Re-)initialize all cells.
 		let cellElements = this.node.querySelectorAll('.newtab-cell');
-		this._cells = Array.map(cellElements, cell => new Cell(this, cell));
+		this._cells = [...cellElements].map(cell => new Cell(this, cell));
 
 		requestAnimationFrame(this.cacheCellPositions);
 	},

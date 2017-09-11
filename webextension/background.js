@@ -1,4 +1,4 @@
-/* globals Prefs, Tiles, Background, browser, indexedDB, IDBKeyRange */
+/* globals Prefs, Tiles, Background, chrome, indexedDB, IDBKeyRange */
 Promise.all([
 	Prefs.init(),
 	initDB()
@@ -11,7 +11,7 @@ Promise.all([
 	}
 
 	let previousVersion = Prefs.version;
-	browser.management.getSelf().then(function({version: currentVersion}) {
+	chrome.management.getSelf(function({version: currentVersion}) {
 		if (previousVersion != currentVersion) {
 			Prefs.version = currentVersion;
 			if (previousVersion != -1 &&
@@ -77,7 +77,7 @@ function getTZDateString(date=new Date()) {
 	return [date.getFullYear(), date.getMonth() + 1, date.getDate()].map(p => p.toString().padStart(2, '0')).join('-');
 }
 
-browser.runtime.onMessage.addListener(function(message, sender, sendResponse) {
+chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 	let today = getTZDateString();
 
 	switch (message.name) {
@@ -132,19 +132,19 @@ browser.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 	}
 });
 
-browser.webNavigation.onCompleted.addListener(function(details) {
+chrome.webNavigation.onCompleted.addListener(function(details) {
 	// We might not have called getAllTiles yet.
 	let promise = Tiles._cache.length > 0 ? Promise.resolve(null) : Tiles.getAllTiles();
 	promise.then(function() {
 		if (details.frameId === 0 && Tiles._cache.includes(details.url)) {
-			browser.tabs.get(details.tabId).then(function(tab) {
+			chrome.tabs.get(details.tabId, function(tab) {
 				if (tab.incognito) {
 					return;
 				}
 				db.transaction('thumbnails').objectStore('thumbnails').get(details.url).onsuccess = function() {
 					let today = getTZDateString();
 					if (!this.result || this.result.stored < today) {
-						browser.tabs.executeScript(details.tabId, {file: 'thumbnail.js'});
+						chrome.tabs.executeScript(details.tabId, {file: 'thumbnail.js'});
 					}
 				};
 			});
@@ -168,12 +168,12 @@ function cleanupThumbnails() {
 
 function idleListener(state) {
 	if (state == 'idle') {
-		browser.idle.onStateChanged.removeListener(idleListener);
+		chrome.idle.onStateChanged.removeListener(idleListener);
 		cleanupThumbnails();
 	}
 }
 
-browser.idle.onStateChanged.addListener(idleListener);
+chrome.idle.onStateChanged.addListener(idleListener);
 
 function compareVersions(a, b) {
 	function splitApart(name) {

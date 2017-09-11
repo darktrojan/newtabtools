@@ -3,13 +3,13 @@ This Source Code Form is subject to the terms of the Mozilla Public
 License, v. 2.0. If a copy of the MPL was not distributed with this file,
 You can obtain one at http://mozilla.org/MPL/2.0/.
 */
-/* globals Prefs, Filters, Grid, Page, Tiles, Updater, Background, browser */
+/* globals Prefs, Filters, Grid, Page, Tiles, Updater, Background, chrome */
 
 var HTML_NAMESPACE = 'http://www.w3.org/1999/xhtml';
 
 var newTabTools = {
 	getString: function(name, ...substitutions) {
-		return browser.i18n.getMessage(name, substitutions);
+		return chrome.i18n.getMessage(name, substitutions);
 	},
 	autocomplete: function() {
 		let value = this.pinURLInput.value;
@@ -41,10 +41,10 @@ var newTabTools = {
 			return;
 		}
 
-		browser.history.search({
+		chrome.history.search({
 			text: value,
 			startTime: 0
-		}).then(result => {
+		}, result => {
 			for (let r of result) {
 				if (urls.includes(r.url)) {
 					continue;
@@ -82,10 +82,10 @@ var newTabTools = {
 			}
 
 			let title = url;
-			browser.history.search({
+			chrome.history.search({
 				text: url,
 				startTime: 0
-			}).then(function(result) {
+			}, function(result) {
 				let entry = result.find(function(f) {
 					return f.url == url;
 				});
@@ -449,7 +449,7 @@ var newTabTools = {
 			return;
 		}
 
-		browser.sessions.getRecentlyClosed().then(undoItems => {
+		chrome.sessions.getRecentlyClosed(undoItems => {
 			let added = 0;
 
 			for (let element of this.recentList.querySelectorAll('a')) {
@@ -457,7 +457,7 @@ var newTabTools = {
 			}
 
 			function recent_onclick() {
-				browser.sessions.restore(this.dataset.sessionId);
+				chrome.sessions.restore(this.dataset.sessionId);
 				return false;
 			}
 
@@ -626,7 +626,7 @@ var newTabTools = {
 		}
 
 		if (this.optionsFilterHostAutocomplete.childElementCount === 0) {
-			browser.topSites.get({ providers: ['places'] }).then(sites => {
+			chrome.topSites.get({ providers: ['places'] }, sites => {
 				for (let s of sites.reduce((carry, site) => {
 					let {protocol, host} = new URL(site.url);
 					if (host && ['http:', 'https:', 'ftp:'].includes(protocol) && !carry.includes(host)) {
@@ -642,7 +642,7 @@ var newTabTools = {
 		}
 	},
 	startup: function() {
-		if (!window.browser) {
+		if (!window.chrome) {
 			// The page couldn't be loaded properly because WebExtensions is too slow. Sad.
 			return;
 		}
@@ -666,13 +666,13 @@ var newTabTools = {
 			newTabTools.updateUI();
 			newTabTools.refreshBackgroundImage();
 
-			browser.sessions.onChanged.addListener(function() {
+			chrome.sessions.onChanged.addListener(function() {
 				newTabTools.refreshRecent();
 			});
 		}).then(function() {
 			// Forget about visiting this page. It shouldn't be in the history.
 			// Maybe if bug 1322304 is ever fixed we could remove this.
-			browser.history.deleteUrl({ url: location.href });
+			chrome.history.deleteUrl({ url: location.href });
 
 			newTabTools.updateText.textContent = newTabTools.getString('newversion', Prefs.version);
 			newTabTools.updateNotice.dataset.version = Prefs.version;
@@ -684,10 +684,10 @@ var newTabTools = {
 		}).catch(console.error.bind(console));
 	},
 	getThumbnails: function() {
-		browser.runtime.sendMessage({
+		chrome.runtime.sendMessage({
 			name: 'Thumbnails.get',
 			urls: Grid.sites.filter(s => s && !s.thumbnail.style.backgroundImage).map(s => s.link.url)
-		}).then(function(thumbs) {
+		}, function(thumbs) {
 			Grid.sites.forEach(s => {
 				if (!s) {
 					return;

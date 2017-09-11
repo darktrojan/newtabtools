@@ -1,5 +1,5 @@
 /* exported initDB, Tiles, Background */
-/* globals Blocked, Filters, Prefs, browser, db */
+/* globals Blocked, Filters, Prefs, chrome, db */
 var Tiles = {
 	_cache: [],
 	_list: [],
@@ -26,7 +26,7 @@ var Tiles = {
 					return;
 				}
 
-				browser.topSites.get({ providers: ['places'] }).then(r => {
+				chrome.topSites.get({ providers: ['places'] }, r => {
 					let urls = Tiles._list.slice();
 					let filters = Filters.getList();
 					let dotFilters = Object.keys(filters).filter(f => f[0] == '.');
