@@ -222,12 +222,12 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 							</tr>
 							<tr>
 								<td colspan="2">
-									<input id="options-filter-host" type="text" list="host-autocomplete" data-placeholder="filter.placeholder.host" />
+									<input id="options-filter-host" type="text" list="host-autocomplete" data-placeholder="filter.placeholder.host" required="" />
 									<datalist id="host-autocomplete"></datalist>
 								</td>
 								<td colspan="2">
 									<div style="display: flex">
-										<input id="options-filter-count" type="text" size="1" maxlength="2" pattern="^\d+$" style="flex: 1; text-align: center;" data-placeholder="filter.placeholder.limit" />
+										<input id="options-filter-count" type="text" size="1" maxlength="2" required="" pattern="^\d+$" style="flex: 1; text-align: center;" data-placeholder="filter.placeholder.limit" />
 										<button id="options-filter-set" disabled="" data-message="filter.set" />
 									</div>
 								</td>

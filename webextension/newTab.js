@@ -175,6 +175,7 @@ var newTabTools = {
 			this.optionsFilterHost.value = '';
 			this.optionsFilterCount.value = '';
 			this.optionsFilterHost.focus();
+			this.optionsFilterSet.disabled = true;
 			return;
 		case 'options-donate':
 		case 'newtab-update-donate':
@@ -255,7 +256,6 @@ var newTabTools = {
 			site = site.parentNode;
 		}
 		let onSite = site != document;
-		console.log(site, onSite);
 		for (let item of newTabTools.contextMenu.querySelectorAll('.tile-context-menu')) {
 			item.hidden = !onSite;
 		}
@@ -795,7 +795,7 @@ var newTabTools = {
 		}
 	});
 	newTabTools.optionsFilterHost.oninput = newTabTools.optionsFilterCount.oninput = function() {
-		newTabTools.optionsFilterSet.disabled = !newTabTools.optionsFilterHost.value || !newTabTools.optionsFilterCount.checkValidity();
+		newTabTools.optionsFilterSet.disabled = !newTabTools.optionsFilterHost.checkValidity() || !newTabTools.optionsFilterCount.checkValidity();
 	};
 	document.body.oncontextmenu = newTabTools.contextMenuShowing;
 	newTabTools.contextMenu.onclick = newTabTools.contextMenuOnClick;
