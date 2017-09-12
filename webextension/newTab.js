@@ -911,6 +911,33 @@ var newTabTools = {
 		}).catch(console.error);
 	},
 	getThumbnails() {
+		function getTZDateString(date = new Date()) {
+			return [date.getFullYear(), date.getMonth() + 1, date.getDate()].map(p => p.toString().padStart(2, '0')).join('-');
+		}
+
+		let today = getTZDateString();
+		let urls = new Map(Grid.sites.filter(s => s && !s.thumbnail.style.backgroundImage).map(s => [s.link.url, s]));
+		db.transaction('thumbnails', 'readwrite').objectStore('thumbnails').openCursor().onsuccess = function() {
+			let cursor = this.result;
+			if (cursor) {
+				let thumb = cursor.value;
+				if (urls.has(thumb.url)) {
+					let site = urls.get(thumb.url);
+					let css = 'url(' + URL.createObjectURL(thumb.image) + ')';
+					site.thumbnail.style.backgroundImage = css;
+
+					if (newTabTools.selectedSite == site) {
+						newTabTools.siteThumbnail.style.backgroundImage = css;
+					}
+
+					if (thumb.used != today) {
+						thumb.used = today;
+						cursor.update(thumb);
+					}
+				}
+				cursor.continue();
+			}
+		};
 	}
 };
 

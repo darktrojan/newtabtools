@@ -53,25 +53,6 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 			sendResponse(Tiles.isPinned(message.url));
 		});
 		return true;
-	case 'Tiles.getAllTiles':
-		waitForDB().then(function() {
-			return Tiles.getAllTiles();
-		}).then(function(tiles) {
-			sendResponse({ tiles, list: Tiles._list });
-		}).catch(function(event) {
-			console.error(event);
-			sendResponse(null);
-		});
-		return true;
-	case 'Tiles.getTile':
-		Tiles.getTile(message.url).then(sendResponse, console.error);
-		return true;
-	case 'Tiles.putTile':
-		Tiles.putTile(message.tile).then(sendResponse, console.error);
-		return true;
-	case 'Tiles.removeTile':
-		Tiles.removeTile(message.tile).then(sendResponse, console.error);
-		return true;
 	case 'Tiles.pinTile':
 		Tiles.pinTile(message.title, message.url).then(function(id) {
 			for (let view of chrome.extension.getViews()) {
@@ -81,56 +62,6 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 			}
 			sendResponse(id);
 		}, console.error);
-		return true;
-
-	case 'Background.getBackground':
-		waitForDB().then(function() {
-			return Background.getBackground();
-		}).then(sendResponse).catch(function(event) {
-			console.error(event);
-			sendResponse(null);
-		});
-		return true;
-	case 'Background.setBackground':
-		Background.setBackground(message.file).then(sendResponse);
-		return true;
-
-	case 'Thumbnails.save':
-		let {url, image} = message;
-		if (url && image) {
-			db.transaction('thumbnails', 'readwrite').objectStore('thumbnails').put({
-				url,
-				image,
-				stored: today,
-				used: today
-			});
-		}
-		return false;
-	case 'Thumbnails.get':
-		let map = new Map();
-		db.transaction('thumbnails', 'readwrite').objectStore('thumbnails').openCursor().onsuccess = function() {
-			let cursor = this.result;
-			if (cursor) {
-				let thumb = cursor.value;
-				if (message.urls.includes(thumb.url)) {
-					map.set(thumb.url, thumb.image);
-					if (thumb.used != today) {
-						thumb.used = today;
-						cursor.update(thumb);
-					}
-				}
-				cursor.continue();
-			} else {
-				sendResponse(map);
-			}
-		};
-		return true;
-
-	case 'Export:backup':
-		makeZip().then(sendResponse());
-		return true;
-	case 'Import:restore':
-		readZip(message.file).then(sendResponse());
 		return true;
 	}
 	return false;
@@ -158,7 +89,25 @@ chrome.webNavigation.onCompleted.addListener(function(details) {
 				db.transaction('thumbnails').objectStore('thumbnails').get(details.url).onsuccess = function() {
 					let today = getTZDateString();
 					if (!this.result || this.result.stored < today) {
-						chrome.tabs.executeScript(details.tabId, {file: 'thumbnail.js'});
+						chrome.tabs.captureVisibleTab(dataURL => {
+							let img = new Image();
+							img.onload = function() {
+								let canvas1 = document.createElement('canvas');
+								canvas1.width = Prefs.thumbnailSize;
+								let context1 = canvas1.getContext('2d');
+								let scale = canvas1.width / this.width;
+								canvas1.height = Math.min(canvas1.width, scale * this.height);
+								context1.imageSmoothingEnabled = true;
+								context1.drawImage(this, 0, 0, canvas1.width, canvas1.height);
+								canvas1.toBlob(function(blob) {
+									objectStore.put({
+										url: details.url, image: blob, stored: today, used: today
+									});
+								});
+							};
+							img.onerror = console.error;
+							img.src = dataURL;
+						});
 					}
 				};
 			});
