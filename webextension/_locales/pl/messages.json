@@ -11,6 +11,21 @@
 	"changelog_label": {
 		"message": "Co nowego?"
 	},
+	"contextmenu_edit": {
+		"message": "Zmień ten kafelek"
+	},
+	"contextmenu_pin": {
+		"message": "Przypnij ten kafelek"
+	},
+	"contextmenu_unpin": {
+		"message": "Odepnij ten kafelek"
+	},
+	"contextmenu_block": {
+		"message": "Usuń ten kafelek"
+	},
+	"contextmenu_options": {
+		"message": "Opcje"
+	},
 	"donate": {
 		"message": "Wspomóż…"
 	},
@@ -22,6 +37,39 @@
 	},
 	"extensionName": {
 		"message": "New Tab Tools"
+	},
+	"filter_button": {
+		"message": "Filtrowanie…"
+	},
+	"filter_helptext": {
+		"message": "Aby ograniczyć domenę z poddomenami dodaj kropkę z przodu, np.: .example.com"
+	},
+	"filter_header_add": {
+		"message": "Dodaj filtr:"
+	},
+	"filter_header_domain": {
+		"message": "Domena"
+	},
+	"filter_header_pinned": {
+		"message": "Przypięte kafelki"
+	},
+	"filter_header_unpinned": {
+		"message": "Limit odpiętych kafelków"
+	},
+	"filter_placeholder_host": {
+		"message": "Wpisz lub wybierz domenę"
+	},
+	"filter_placeholder_limit": {
+		"message": "Limit"
+	},
+	"filter_set": {
+		"message": "Ustaw"
+	},
+	"filter_title": {
+		"message": "Przeglądanie historii kafelków:"
+	},
+	"filter_unlimited": {
+		"message": "bez limitu"
 	},
 	"github": {
 		"message": "New Tab Tools na GitHubie"
@@ -42,7 +90,13 @@
 		"message": "Cofnij."
 	},
 	"newversion": {
-		"message": "New Tab Tools zaktualizowano do wersji $1. New Tab Tools jest darmowe, ale Twoja darowizna jest mile widziana!"
+		"message": "New Tab Tools zaktualizowano do wersji $VERSION$. New Tab Tools jest darmowe, ale Twoja darowizna jest mile widziana!",
+		"placeholders": {
+			"version": {
+				"content": "$1",
+				"example": "84"
+			}
+		}
 	},
 	"options_header": {
 		"message": "Opcje:"
