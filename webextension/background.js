@@ -35,7 +35,7 @@ function initDB() {
 			resolve();
 		};
 
-		request.onerror = function(event) {
+		request.onblocked = request.onerror = function(event) {
 			reject(event);
 		};
 
