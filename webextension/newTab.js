@@ -82,6 +82,7 @@ var newTabTools = {
 			}
 
 			let title = url;
+			let index = -1;
 			browser.history.search({
 				text: url,
 				startTime: 0
@@ -97,11 +98,16 @@ var newTabTools = {
 				if (!emptyCell) {
 					throw 'No free space';
 				}
+				index = emptyCell.index;
 
-				let tile = { url, title, position: emptyCell.index };
-				return Tiles.putTile(tile);
-			}).then(function() {
-				Updater.updateGrid();
+				let tile = { url, title, position: index };
+				Tiles.putTile(tile).then(() => {
+					Updater.updateGrid(() => {
+						// Ensure that the just added site is pinned and selected.
+						Grid.sites[index]._updateAttributes(true);
+						newTabTools.selectedSiteIndex = index;
+					});
+				});
 			});
 			break;
 		case 'options-previous-row-tile':
