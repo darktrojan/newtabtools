@@ -87,11 +87,18 @@ var newTabTools = {
 				text: url,
 				startTime: 0
 			}).then(function(result) {
-				let entry = result.find(function(f) {
-					return f.url == url;
-				});
-				if (entry) {
-					title = entry.title;
+				let tile;
+				let site = Grid.sites.find(s => s.link.url == url);
+				if (site) {
+					tile = site.link;
+				} else {
+					let entry = result.find(function(f) {
+						return f.url == url;
+					});
+					if (entry) {
+						title = entry.title;
+					}
+					tile = { url, title };
 				}
 
 				let emptyCell = Grid.cells.find(c => !c.containsPinnedSite());
@@ -99,8 +106,7 @@ var newTabTools = {
 					throw 'No free space';
 				}
 				index = emptyCell.index;
-
-				let tile = { url, title, position: index };
+				tile.position = index;
 				Tiles.putTile(tile).then(() => {
 					Updater.updateGrid(() => {
 						// Ensure that the just added site is pinned and selected.
