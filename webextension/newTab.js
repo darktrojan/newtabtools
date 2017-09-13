@@ -109,6 +109,7 @@ var newTabTools = {
 				tile.position = index;
 				Tiles.putTile(tile).then(() => {
 					Updater.updateGrid(() => {
+						newTabTools.pinURLInput.value = '';
 						// Ensure that the just added site is pinned and selected.
 						Grid.sites[index]._updateAttributes(true);
 						newTabTools.selectedSiteIndex = index;
