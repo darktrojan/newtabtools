@@ -108,11 +108,44 @@ var newTabTools = {
 				index = emptyCell.index;
 				tile.position = index;
 				Tiles.putTile(tile).then(() => {
-					Updater.updateGrid(() => {
-						newTabTools.pinURLInput.value = '';
-						// Ensure that the just added site is pinned and selected.
-						Grid.sites[index]._updateAttributes(true);
-						newTabTools.selectedSiteIndex = index;
+					let bcr = emptyCell.node.getBoundingClientRect();
+					let width = Math.round(bcr.width);
+					let height = Math.round(bcr.height);
+					let halfLength = width + height;
+					let length = halfLength * 2;
+
+					let svg = document.querySelector('svg');
+					svg.style.left = Math.round(bcr.left - 1) + 'px';
+					svg.style.top = Math.round(bcr.top - 1) + 'px';
+					svg.width = width + 2;
+					svg.height = height + 2;
+
+					let path = svg.querySelector('path');
+					path.setAttribute('d', 'M1 1V' + (height + 1) + 'H' + (width + 1) + 'V1Z');
+					path.style.strokeDasharray = [halfLength, halfLength, halfLength, length].join(' ');
+
+					newTabTools.optionsPane.animate([
+						{'opacity': 1},
+						{'opacity': 0}
+					], {duration: 150, fill: 'both'}).finished.then(() => {
+						Updater.updateGrid(() => {
+							svg.style.display = null;
+							path.animate([
+								{'strokeDashoffset': 0 - length},
+								{'strokeDashoffset': length * 1.5}
+							], {duration: 1500, fill: 'both'}).finished.then(() => {
+								svg.style.display = 'none';
+								newTabTools.optionsPane.animate([
+									{'opacity': 0},
+									{'opacity': 1}
+								], {duration: 150, fill: 'both'});
+							});
+
+							// Ensure that the just added site is pinned and selected.
+							Grid.sites[index]._updateAttributes(true);
+							newTabTools.pinURLInput.value = '';
+							newTabTools.selectedSiteIndex = index;
+						});
 					});
 				});
 			});
@@ -626,9 +659,6 @@ var newTabTools = {
 			last = k;
 
 			let row = template.content.firstElementChild.cloneNode(true);
-			if (highlightHost && k == highlightHost) {
-				row.classList.add('highlight');
-			}
 			row.cells[0].textContent = k;
 			row.cells[1].textContent = pinned[k] || 0;
 			row.cells[2].textContent = k in filters ? filters[k] : this.getString('filter_unlimited');
@@ -636,6 +666,12 @@ var newTabTools = {
 				row.querySelector('.minus-button').disabled = false;
 			}
 			table.tBodies[0].append(row);
+			if (highlightHost && k == highlightHost) {
+				row.animate([
+					{'backgroundColor': '#f0ff'},
+					{'backgroundColor': '#f0f0'}
+				], {duration: 500, fill: 'both'});
+			}
 		}
 
 		if (this.optionsFilterHostAutocomplete.childElementCount === 0) {

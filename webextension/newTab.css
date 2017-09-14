@@ -688,17 +688,6 @@ a {
 #options-filter tbody {
 	line-height: 24px;
 }
-.highlight {
-	animation: highlight 1000ms;
-}
-@keyframes highlight {
-	0% {
-		background-color: #f09;
-	}
-	100% {
-		background-color: transparent;
-	}
-}
 .plus-button,
 .minus-button {
 	width: 18px;
