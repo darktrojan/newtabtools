@@ -27,7 +27,7 @@ var db;
 
 function initDB() {
 	return new Promise(function(resolve, reject) {
-		let request = indexedDB.open('newTabTools', 8);
+		let request = indexedDB.open('newTabTools', 9);
 
 		request.onsuccess = function(/*event*/) {
 			// console.log(event.type, event);
@@ -45,6 +45,9 @@ function initDB() {
 
 			if (!db.objectStoreNames.contains('tiles')) {
 				db.createObjectStore('tiles', { autoIncrement: true, keyPath: 'id' });
+			}
+			if (!this.transaction.objectStore('tiles').indexNames.contains('url')) {
+				this.transaction.objectStore('tiles').createIndex('url', 'url');
 			}
 
 			if (!db.objectStoreNames.contains('background')) {
@@ -87,6 +90,9 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 		}).then(function(tiles) {
 			sendResponse({ tiles, list: Tiles._list });
 		});
+		return true;
+	case 'Tiles.getTile':
+		Tiles.getTile(message.url).then(sendResponse, console.error);
 		return true;
 	case 'Tiles.putTile':
 		Tiles.putTile(message.tile).then(sendResponse, console.error);

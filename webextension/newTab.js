@@ -3,7 +3,7 @@ This Source Code Form is subject to the terms of the Mozilla Public
 License, v. 2.0. If a copy of the MPL was not distributed with this file,
 You can obtain one at http://mozilla.org/MPL/2.0/.
 */
-/* globals Prefs, Filters, Grid, Page, Tiles, Updater, Background, chrome */
+/* globals Prefs, Filters, Grid, Page, Tiles, Updater, Background, chrome, -length */
 
 var HTML_NAMESPACE = 'http://www.w3.org/1999/xhtml';
 
@@ -73,82 +73,88 @@ var newTabTools = {
 			newTabTools.hideOptions();
 			break;
 		case 'options-pinURL':
-			let url = this.pinURLInput.value;
-			if (!url) {
-				return;
-			}
-			if (Tiles.isPinned(url)) {
-				throw 'Already pinned';
+			if (!this.pinURLInput.checkValidity()) {
+				throw 'URL is invalid';
 			}
 
-			let title = url;
-			let index = -1;
-			chrome.history.search({
-				text: url,
-				startTime: 0
-			}, function(result) {
-				let tile;
-				let site = Grid.sites.find(s => s && s.link.url == url);
-				if (site) {
-					tile = site.link;
-				} else {
-					let entry = result.find(function(f) {
-						return f.url == url;
+			let position, cell, length, svg, path;
+			let shouldUpdateGrid = true;
+			let url = this.pinURLInput.value;
+			Tiles.getTile(url).then(tile => {
+				return tile ? tile : new Promise(resolve => {
+					chrome.history.search({
+						text: url,
+						startTime: 0
+					}, function(result) {
+						let entry = result.find(function(f) {
+							return f.url == url;
+						});
+						resolve({ url, title: entry ? entry.title : url });
 					});
-					if (entry) {
-						title = entry.title;
-					}
-					tile = { url, title };
+				});
+			}).then(tile => {
+				if ('position' in tile && tile.position < Prefs.rows * Prefs.columns) {
+					console.warn('Already pinned');
+					position = tile.position;
+					cell = Grid.cells[tile.position];
+					shouldUpdateGrid = false;
+					return Promise.resolve();
 				}
 
-				let emptyCell = Grid.cells.find(c => !c.containsPinnedSite());
-				if (!emptyCell) {
+				cell = Grid.cells.find(c => !c.containsPinnedSite());
+				if (!cell) {
 					throw 'No free space';
 				}
-				index = emptyCell.index;
-				tile.position = index;
-				Tiles.putTile(tile).then(() => {
-					let bcr = emptyCell.node.getBoundingClientRect();
+				tile.position = position = cell.index;
+				return Tiles.putTile(tile);
+			}).then(() => {
+				return new Promise(resolve => {
+					let bcr = cell.node.getBoundingClientRect();
 					let width = Math.round(bcr.width);
 					let height = Math.round(bcr.height);
 					let halfLength = width + height;
-					let length = halfLength * 2;
+					length = halfLength * 2;
 
-					let svg = document.querySelector('svg');
+					svg = document.querySelector('svg');
 					svg.style.left = Math.round(bcr.left - 1) + 'px';
 					svg.style.top = Math.round(bcr.top - 1) + 'px';
 					svg.setAttribute('width', width + 2);
 					svg.setAttribute('height', height + 2);
 
-					let path = svg.querySelector('path');
+					path = svg.querySelector('path');
 					path.setAttribute('d', 'M1 1V' + (height + 1) + 'H' + (width + 1) + 'V1Z');
 					path.style.strokeDasharray = [halfLength, halfLength, halfLength, length].join(' ');
 
 					newTabTools.optionsPane.animate([
 						{'opacity': 1},
 						{'opacity': 0}
-					], {duration: 150, fill: 'both'}).onfinish = () => {
-						Updater.updateGrid(() => {
-							svg.style.display = null;
-							path.animate([
-								{'strokeDashoffset': 0 - length},
-								{'strokeDashoffset': length * 1.5}
-							], {duration: 1500, fill: 'both'}).onfinish = () => {
-								svg.style.display = 'none';
-								newTabTools.optionsPane.animate([
-									{'opacity': 0},
-									{'opacity': 1}
-								], {duration: 150, fill: 'both'});
-							};
-
-							// Ensure that the just added site is pinned and selected.
-							Grid.sites[index]._updateAttributes(true);
-							newTabTools.pinURLInput.value = '';
-							newTabTools.selectedSiteIndex = index;
-						});
+					], {duration: 150, fill: 'both'}).onfinish = resolve;
+				});
+			}).then(() => {
+				return shouldUpdateGrid ? new Promise(resolve => {
+					Updater.updateGrid(resolve);
+				}) : Promise.resolve();
+			}).then(() => {
+				// Ensure that the just added site is pinned and selected.
+				Grid.sites[position]._updateAttributes(true);
+				newTabTools.pinURLInput.value = '';
+				newTabTools.pinURLInput.focus();
+				newTabTools.selectedSiteIndex = position;
+			}).then(() => {
+				return new Promise(resolve => {
+					svg.style.display = null;
+					path.animate([
+						{'strokeDashoffset': 0 - length},
+						{'strokeDashoffset': length * 1.5}
+					], {duration: 1500, fill: 'both'}).onfinish = () => {
+						svg.style.display = 'none';
+						newTabTools.optionsPane.animate([
+							{'opacity': 0},
+							{'opacity': 1}
+						], {duration: 150, fill: 'both'}).onfinish = resolve;
 					};
 				});
-			});
+			}).catch(console.error);
 			break;
 		case 'options-previous-row-tile':
 			this.selectedSiteIndex = (this._selectedSiteIndex - Prefs.columns + Grid.cells.length) % Grid.cells.length;

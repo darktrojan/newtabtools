@@ -84,6 +84,13 @@ var Tiles = {
 			};
 		});
 	},
+	getTile: function(url) {
+		return new Promise(function(resolve, reject) {
+			let op = db.transaction('tiles').objectStore('tiles').index('url').get(url);
+			op.onsuccess = () => resolve(op.result || null);
+			op.onerror = reject;
+		});
+	},
 	putTile: function(tile) {
 		if (!this._list.includes(tile.url)) {
 			this._list.push(tile.url);

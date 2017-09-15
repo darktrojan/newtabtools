@@ -13,6 +13,11 @@ var Tiles = {
 			});
 		});
 	},
+	getTile: function(url) {
+		return new Promise(resolve => {
+			chrome.runtime.sendMessage({ name: 'Tiles.getTile', url }, resolve);
+		});
+	},
 	putTile: function(tile) {
 		if (!this._list.includes(tile.url)) {
 			this._list.push(tile.url);

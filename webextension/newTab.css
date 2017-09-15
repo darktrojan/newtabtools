@@ -581,7 +581,7 @@ input[type="button"] {
 #options-bg-input {
 	flex: 1;
 }
-#options-pinURL-input:-moz-ui-invalid {
+#options :-moz-ui-invalid {
 	box-shadow: 0 0 1.5px #ff0000;
 }
 #options-thumbnail-wrap {
