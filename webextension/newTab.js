@@ -117,8 +117,8 @@ var newTabTools = {
 					let svg = document.querySelector('svg');
 					svg.style.left = Math.round(bcr.left - 1) + 'px';
 					svg.style.top = Math.round(bcr.top - 1) + 'px';
-					svg.width = width + 2;
-					svg.height = height + 2;
+					svg.setAttribute('width', width + 2);
+					svg.setAttribute('height', height + 2);
 
 					let path = svg.querySelector('path');
 					path.setAttribute('d', 'M1 1V' + (height + 1) + 'H' + (width + 1) + 'V1Z');
