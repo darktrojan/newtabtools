@@ -12,13 +12,18 @@ var Tiles = {
 		});
 	},
 	putTile: function(tile) {
-		this._list.push(tile.url);
-		return browser.runtime.sendMessage({ name: 'Tiles.putTile', tile });
+		if (!this._list.includes(tile.url)) {
+			this._list.push(tile.url);
+		}
+		return browser.runtime.sendMessage({ name: 'Tiles.putTile', tile }).then(function(id) {
+			tile.id = id;
+		});
 	},
 	removeTile: function(tile) {
 		let index = this._list.indexOf(tile.url);
-		if (index > -1) {
+		while (index > -1) {
 			this._list.splice(index, 1);
+			index = this._list.indexOf(tile.url);
 		}
 		return browser.runtime.sendMessage({ name: 'Tiles.removeTile', tile });
 	}

@@ -91,10 +91,10 @@ browser.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 		});
 		return true;
 	case 'Tiles.putTile':
-		Tiles.putTile(message.tile).then(sendResponse);
+		Tiles.putTile(message.tile).then(sendResponse, console.error);
 		return true;
 	case 'Tiles.removeTile':
-		Tiles.removeTile(message.tile).then(sendResponse);
+		Tiles.removeTile(message.tile).then(sendResponse, console.error);
 		return true;
 
 	case 'Background.getBackground':

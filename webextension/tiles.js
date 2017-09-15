@@ -13,6 +13,10 @@ var Tiles = {
 
 				for (let t of this.result) {
 					if ('position' in t) {
+						if (Tiles._list.includes(t.url)) {
+							console.error('This URL appears twice: ' + t.url);
+							continue;
+						}
 						links[t.position] = t;
 						Tiles._list.push(t.url);
 					} else {
@@ -66,23 +70,25 @@ var Tiles = {
 		});
 	},
 	putTile: function(tile) {
-		this._list.push(tile.url);
-		return new Promise(function(resolve) {
-			db.transaction('tiles', 'readwrite').objectStore('tiles').put(tile).onsuccess = function() {
-				tile.id = this.result;
-				resolve();
-			};
+		if (!this._list.includes(tile.url)) {
+			this._list.push(tile.url);
+		}
+		return new Promise(function(resolve, reject) {
+			let op = db.transaction('tiles', 'readwrite').objectStore('tiles').put(tile);
+			op.onsuccess = () => resolve(op.result);
+			op.onerror = reject;
 		});
 	},
 	removeTile: function(tile) {
 		let index = this._list.indexOf(tile.url);
-		if (index > -1) {
+		while (index > -1) {
 			this._list.splice(index, 1);
+			index = this._list.indexOf(tile.url);
 		}
-		return new Promise(function(resolve) {
-			db.transaction('tiles', 'readwrite').objectStore('tiles').delete(tile.id).onsuccess = function() {
-				resolve();
-			};
+		return new Promise(function(resolve, reject) {
+			let op = db.transaction('tiles', 'readwrite').objectStore('tiles').delete(tile.id);
+			op.onsuccess = () => resolve();
+			op.onerror = reject;
 		});
 	},
 	getTilesFromOldExtension: function() {
