@@ -127,26 +127,26 @@ var newTabTools = {
 					newTabTools.optionsPane.animate([
 						{'opacity': 1},
 						{'opacity': 0}
-					], {duration: 150, fill: 'both'}).finished.then(() => {
+					], {duration: 150, fill: 'both'}).onfinish = () => {
 						Updater.updateGrid(() => {
 							svg.style.display = null;
 							path.animate([
 								{'strokeDashoffset': 0 - length},
 								{'strokeDashoffset': length * 1.5}
-							], {duration: 1500, fill: 'both'}).finished.then(() => {
+							], {duration: 1500, fill: 'both'}).onfinish = () => {
 								svg.style.display = 'none';
 								newTabTools.optionsPane.animate([
 									{'opacity': 0},
 									{'opacity': 1}
 								], {duration: 150, fill: 'both'});
-							});
+							};
 
 							// Ensure that the just added site is pinned and selected.
 							Grid.sites[index]._updateAttributes(true);
 							newTabTools.pinURLInput.value = '';
 							newTabTools.selectedSiteIndex = index;
 						});
-					});
+					};
 				});
 			});
 			break;
