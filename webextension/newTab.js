@@ -88,7 +88,7 @@ var newTabTools = {
 				startTime: 0
 			}, function(result) {
 				let tile;
-				let site = Grid.sites.find(s => s.link.url == url);
+				let site = Grid.sites.find(s => s && s.link.url == url);
 				if (site) {
 					tile = site.link;
 				} else {
