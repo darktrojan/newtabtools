@@ -686,7 +686,7 @@ Site.prototype = {
 			index = this.cell.index;
 		}
 
-		this._updateAttributes(true);
+		this.updateAttributes(true);
 		this._link.position = index;
 		Tiles.putTile(this._link);
 	},
@@ -696,18 +696,20 @@ Site.prototype = {
 	   */
 	unpin: function Site_unpin() {
 		if (this.isPinned) {
-			this._updateAttributes(false);
+			this.updateAttributes(false);
 
 			let op;
 			if (Object.keys(this._link).some(k => !['id', 'title', 'url', 'position'].includes(k))) {
+				delete this._link.position;
 				op = Tiles.putTile(this._link);
 			} else {
-				op = Tiles.removeTile(this._link);
+				op = Tiles.removeTile(this._link).then(() => {
+					delete this._link.id;
+					delete this._link.position;
+				});
 			}
 
 			op.then(() => {
-				delete this._link.id;
-				delete this._link.position;
 				Updater.updateGrid();
 			});
 		}
@@ -750,7 +752,7 @@ Site.prototype = {
 	   * pinned or unpinned.
 	   * @param pinned Whether this site is now pinned or unpinned.
 	   */
-	_updateAttributes: function(pinned) {
+	updateAttributes: function(pinned) {
 		let control = this._querySelector('.newtab-control-pin');
 
 		if (pinned) {
@@ -767,7 +769,7 @@ Site.prototype = {
 	   */
 	_render: function Site_render() {
 		if (this.isPinned) {
-			this._updateAttributes(true);
+			this.updateAttributes(true);
 		}
 		// but still display whatever thumbnail might be available now.
 		this.refreshThumbnail();

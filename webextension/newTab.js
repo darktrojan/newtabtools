@@ -136,7 +136,8 @@ var newTabTools = {
 				}) : Promise.resolve();
 			}).then(() => {
 				// Ensure that the just added site is pinned and selected.
-				Grid.sites[position]._updateAttributes(true);
+				Grid.sites[position].link.position = position;
+				Grid.sites[position].updateAttributes(true);
 				newTabTools.pinURLInput.value = '';
 				newTabTools.pinURLInput.focus();
 				newTabTools.selectedSiteIndex = position;
