@@ -12,7 +12,7 @@ if (!('DOMRect' in window)) {
                this.height = height;
                this.right = left + width;
                this.bottom = top + height;
-       }
+       };
        DOMRect.prototype = {};
 }
 
@@ -700,13 +700,14 @@ Site.prototype = {
 
 			let op;
 			if (Object.keys(this._link).some(k => !['id', 'title', 'url', 'position'].includes(k))) {
-				delete this._link.position;
 				op = Tiles.putTile(this._link);
 			} else {
 				op = Tiles.removeTile(this._link);
 			}
 
 			op.then(() => {
+				delete this._link.id;
+				delete this._link.position;
 				Updater.updateGrid();
 			});
 		}
