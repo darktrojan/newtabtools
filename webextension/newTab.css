@@ -516,6 +516,10 @@ input[type="button"] {
 	box-sizing: border-box;
 	box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5);
 	font-size: 12px;
+}
+:root[options-filter-shown] #options {
+	margin-left: calc(-551px - 3em);
+	width: calc(1102px + 6em);
 	transition: margin-left 500ms, width 500ms;
 }
 #options-close {
@@ -679,10 +683,6 @@ a {
 	display: none;
 	margin-inline-start: 2em;
 	width: 350px;
-}
-:root[options-filter-shown] #options {
-	margin-left: calc(-551px - 3em);
-	width: calc(1102px + 6em);
 }
 #options-filter tfoot,
 #options-filter tbody {

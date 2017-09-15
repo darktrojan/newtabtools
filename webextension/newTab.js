@@ -626,6 +626,8 @@ var newTabTools = {
 	},
 	hideOptions: function() {
 		document.documentElement.setAttribute('options-hidden', 'true');
+		document.documentElement.removeAttribute('options-filter-shown');
+		newTabTools.optionsFilter.style.display = null;
 	},
 	resizeOptionsThumbnail: function() {
 		let node = Grid.node.querySelector('.newtab-thumbnail');
