@@ -6,8 +6,12 @@ var Tiles = {
 		return this._list.includes(url);
 	},
 	getAllTiles: function() {
-		return new Promise(resolve => {
-			chrome.runtime.sendMessage({ name: 'Tiles.getAllTiles' }, ({ tiles, list }) => {
+		return new Promise((resolve, reject) => {
+			chrome.runtime.sendMessage({ name: 'Tiles.getAllTiles' }, response => {
+				if (response === null) {
+					reject();
+				}
+				let { tiles, list } = response;
 				this._list = list;
 				resolve(tiles);
 			});

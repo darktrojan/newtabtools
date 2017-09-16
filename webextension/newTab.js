@@ -802,6 +802,7 @@ var newTabTools = {
 		'updateNotice': 'newtab-update-notice',
 		'updateText': 'newtab-update-text',
 		'lockedToggleButton': 'locked-toggle',
+		'databaseError': 'database-error',
 		'contextMenu': 'context-menu',
 		'contextMenuPin': 'newtabtools-pintile',
 		'contextMenuUnpin': 'newtabtools-unpintile'

@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this file,
  * You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-/* globals DOMRect, Prefs, Tiles, Blocked, newTabTools */
+/* globals DOMRect, Prefs, Tiles, Blocked, newTabTools, chrome */
 /* exported Page */
 if (!('DOMRect' in window)) {
        window.DOMRect = function(left, top, width, height) {
@@ -488,6 +488,17 @@ var Grid = {
 			}
 		}).then(function() {
 			newTabTools.getThumbnails();
+		}, function() {
+			console.error('Failed to get tiles');
+			newTabTools.page.style.display = 'none';
+
+			let message = newTabTools.getString('database_error_message', '$1').split('$1');
+			let pre = document.createElementNS(HTML_NAMESPACE, 'pre');
+			pre.textContent = chrome.runtime.getURL('');
+			newTabTools.databaseError.appendChild(document.createTextNode(message[0]));
+			newTabTools.databaseError.appendChild(pre);
+			newTabTools.databaseError.appendChild(document.createTextNode(message[1]));
+			newTabTools.databaseError.style.display = 'block';
 		});
 	},
 

@@ -26,6 +26,16 @@
 	"contextmenu_options": {
 		"message": "New Tab Tools options"
 	},
+	"database_error_message": {
+		"description": "This message will be split into three lines with $URL$ in the middle line.",
+		"message": "New Tab Tools couldn't start properly. Add an exception for $URL$ in Firefox's cookie settings and restart New Tab Tools.",
+		"placeholders": {
+			"url": {
+				"content": "$1",
+				"example": "moz-extension://cdea0cc6-fa00-4a9f-b60e-c011fa0decb9/"
+			}
+		}
+	},
 	"donate": {
 		"message": "Donate…"
 	},

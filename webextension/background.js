@@ -4,8 +4,8 @@ Promise.all([
 	initDB()
 ]).then(function() {
 	if (initDB.waitingQueue) {
-		for (let waitingResolve of initDB.waitingQueue) {
-			waitingResolve.call();
+		for (let waiting of initDB.waitingQueue) {
+			waiting.resolve.call();
 		}
 		delete initDB.waitingQueue;
 	}
@@ -21,7 +21,16 @@ Promise.all([
 			}
 		}
 	});
-}).catch(console.error);
+}).catch(function(event) {
+	console.error(event);
+	db = 'broken';
+	if (initDB.waitingQueue) {
+		for (let waiting of initDB.waitingQueue) {
+			waiting.reject.call();
+		}
+		delete initDB.waitingQueue;
+	}
+});
 
 var db;
 
@@ -65,14 +74,18 @@ function initDB() {
 }
 
 function waitForDB() {
-	return new Promise(function(resolve) {
+	return new Promise(function(resolve, reject) {
 		if (db) {
-			resolve();
+			if (db == 'broken') {
+				reject('Database connection failed.');
+			} else {
+				resolve();
+			}
 			return;
 		}
 
 		initDB.waitingQueue = initDB.waitingQueue || [];
-		initDB.waitingQueue.push(resolve);
+		initDB.waitingQueue.push({resolve, reject});
 	});
 }
 
@@ -89,6 +102,9 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 			return Tiles.getAllTiles();
 		}).then(function(tiles) {
 			sendResponse({ tiles, list: Tiles._list });
+		}).catch(function(event) {
+			console.error(event);
+			sendResponse(null);
 		});
 		return true;
 	case 'Tiles.getTile':
@@ -104,7 +120,10 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 	case 'Background.getBackground':
 		waitForDB().then(function() {
 			return Background.getBackground();
-		}).then(sendResponse);
+		}).then(sendResponse).catch(function(event) {
+			console.error(event);
+			sendResponse(null);
+		});
 		return true;
 	case 'Background.setBackground':
 		Background.setBackground(message.file).then(sendResponse);
@@ -139,8 +158,12 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 });
 
 chrome.webNavigation.onCompleted.addListener(function(details) {
+	if (!['http:', 'https:', 'ftp:'].includes(new URL(details.url).protocol)) {
+		return;
+	}
+
 	// We might not have called getAllTiles yet.
-	let promise = Tiles._cache.length > 0 ? Promise.resolve(null) : Tiles.getAllTiles();
+	let promise = Tiles._cache.length > 0 ? Promise.resolve(null) : waitForDB().then(Tiles.getAllTiles);
 	promise.then(function() {
 		if (details.frameId === 0 && Tiles._cache.includes(details.url)) {
 			chrome.tabs.get(details.tabId, function(tab) {
@@ -155,7 +178,7 @@ chrome.webNavigation.onCompleted.addListener(function(details) {
 				};
 			});
 		}
-	});
+	}).catch(console.error);
 });
 
 function cleanupThumbnails() {
