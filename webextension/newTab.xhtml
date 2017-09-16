@@ -225,7 +225,7 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 									<input id="options-filter-host" type="text" list="host-autocomplete" data-placeholder="filter_placeholder_host" required="" />
 									<datalist id="host-autocomplete"></datalist>
 								</td>
-								<td colspan="2">
+								<td>
 									<div style="display: flex">
 										<input id="options-filter-count" type="text" size="1" maxlength="2" required="" pattern="^\d+$" style="flex: 1; text-align: center;" data-placeholder="filter_placeholder_limit" />
 										<button id="options-filter-set" disabled="" data-message="filter_set" />
@@ -233,7 +233,7 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 								</td>
 							</tr>
 							<tr>
-								<td colspan="4" style="font-style: italic; text-align: center; line-height: 1.5;" data-message="filter_helptext"></td>
+								<td colspan="3" style="font-style: italic; text-align: center; line-height: 1.5;" data-message="filter_helptext"></td>
 							</tr>
 						</tfoot>
 						<tbody>
@@ -242,10 +242,10 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 							<tr>
 								<td></td>
 								<td align="center"></td>
-								<td align="center"></td>
-								<td width="40">
-									<button class="plus-button"></button>
+								<td align="center">
 									<button class="minus-button" disabled=""></button>
+									<span></span>
+									<button class="plus-button"></button>
 								</td>
 							</tr>
 						</template>

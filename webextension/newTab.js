@@ -247,8 +247,8 @@ var newTabTools = {
 
 		if (classList.contains('plus-button') || classList.contains('minus-button')) {
 			let row = event.target.parentNode.parentNode;
-			let unpinnedCell = row.cells[2];
-			let count = parseInt(unpinnedCell.textContent, 10);
+			let unpinned = row.cells[2].querySelector('span');
+			let count = parseInt(unpinned.textContent, 10);
 
 			if (isNaN(count)) {
 				if (classList.contains('minus-button')) {
@@ -257,7 +257,7 @@ var newTabTools = {
 				count = -1;
 			}
 			count += classList.contains('plus-button') ? 1 : -1;
-			unpinnedCell.textContent = count == -1 ? this.getString('filter_unlimited') : count;
+			unpinned.textContent = count == -1 ? this.getString('filter_unlimited') : count;
 			row.querySelector('.minus-button').disabled = count == -1;
 
 			Filters.setFilter(row.cells[0].textContent, count);
@@ -670,7 +670,7 @@ var newTabTools = {
 			let row = template.content.firstElementChild.cloneNode(true);
 			row.cells[0].textContent = k;
 			row.cells[1].textContent = pinned[k] || 0;
-			row.cells[2].textContent = k in filters ? filters[k] : this.getString('filter_unlimited');
+			row.cells[2].querySelector('span').textContent = k in filters ? filters[k] : this.getString('filter_unlimited');
 			if (k in filters) {
 				row.querySelector('.minus-button').disabled = false;
 			}
