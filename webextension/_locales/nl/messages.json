@@ -17,6 +17,9 @@
 	"extensionDescription": {
 		"message": "Maakt de nieuwe tabblad-pagina aanpasbaar. U kunt meer tegels toevoegen, de starter van de Firefox-homepage of een achtergrond. En natuurlijk nieuwe tegels en tegelafbeeldingen."
 	},
+	"extensionName": {
+		"message": "New Tab Tools"
+	},
 	"github": {
 		"message": "New Tab Tools op GitHub"
 	},

@@ -38,6 +38,9 @@
 	"extensionDescription": {
 		"message": "Személyre szabja az új lap oldalt. Hozzáadhat további csempéket, a Firefox start gyorsindítóját, vagy egy háttérképet. Megadhat új csempeképeket és feliratokat."
 	},
+	"extensionName": {
+		"message": "New Tab Tools"
+	},
 	"filter_button": {
 		"message": "Szűrés…"
 	},
