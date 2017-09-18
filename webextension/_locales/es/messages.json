@@ -35,6 +35,9 @@
 	"extensionDescription": {
 		"message": "Personaliza la página de Nueva Pestaña. Puedes añadir más contenedores (páginas), lanzar New Tab Tools al inicio de Firefox o incluir una imagen de fondo. También puedes modificar la imagen y el título de los contenedores."
 	},
+	"extensionName": {
+		"message": "New Tab Tools"
+	},
 	"github": {
 		"message": "New Tab Tools en GitHub"
 	},

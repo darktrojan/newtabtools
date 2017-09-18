@@ -35,6 +35,9 @@
 	"donate_label": {
 		"message": "New Tab Tools се издържа от дарения."
 	},
+	"extensionName": {
+		"message": "New Tab Tools"
+	},
 	"filter_button": {
 		"message": "Филтър…"
 	},
