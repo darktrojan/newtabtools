@@ -838,14 +838,14 @@ var newTabTools = {
 	for (let c of newTabTools.optionsPane.querySelectorAll('select, input[type="range"]')) {
 		c.addEventListener('keyup', keyUpHandler);
 	}
-	newTabTools.setSavedThumbInput.addEventListener('input', function() {
+	newTabTools.setSavedThumbInput.addEventListener('change', function() {
 		newTabTools.setSavedThumbButton.disabled = !this.files.length;
 	});
 	newTabTools.setBgColourInput.addEventListener('change', function() {
 		newTabTools.setBgColourDisplay.style.backgroundColor = this.value;
 		newTabTools.setBgColourButton.disabled = false;
 	});
-	newTabTools.setBackgroundInput.addEventListener('input', function() {
+	newTabTools.setBackgroundInput.addEventListener('change', function() {
 		newTabTools.setBackgroundButton.disabled = !this.files.length;
 	});
 	newTabTools.optionsFilterCount.addEventListener('keydown', function(event) {
