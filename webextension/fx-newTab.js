@@ -492,12 +492,32 @@ var Grid = {
 			console.error('Failed to get tiles');
 			newTabTools.page.style.display = 'none';
 
-			let message = newTabTools.getString('database_error_message', '$1').split('$1');
-			let pre = document.createElementNS(HTML_NAMESPACE, 'pre');
-			pre.textContent = chrome.runtime.getURL('');
-			newTabTools.databaseError.appendChild(document.createTextNode(message[0]));
-			newTabTools.databaseError.appendChild(pre);
-			newTabTools.databaseError.appendChild(document.createTextNode(message[1]));
+			let list = newTabTools.databaseError.querySelector('ul');
+
+			let message = newTabTools.getString('database_error_cookies', '$1').split('$1');
+			let item = document.createElementNS(HTML_NAMESPACE, 'li');
+			let code = document.createElementNS(HTML_NAMESPACE, 'code');
+			code.textContent = chrome.runtime.getURL('');
+			item.appendChild(document.createTextNode(message[0]));
+			item.appendChild(code);
+			item.appendChild(document.createTextNode(message[1]));
+			list.appendChild(item);
+
+			message = newTabTools.getString('database_error_indexeddb').split('`');
+			item = document.createElementNS(HTML_NAMESPACE, 'li');
+			while (message.length) {
+				let next = message.shift();
+				item.appendChild(document.createTextNode(next));
+
+				next = message.shift();
+				if (next) {
+					code = document.createElementNS(HTML_NAMESPACE, 'code');
+					code.textContent = next;
+					item.appendChild(code);
+				}
+			}
+			list.appendChild(item);
+
 			newTabTools.databaseError.style.display = 'block';
 		});
 	},

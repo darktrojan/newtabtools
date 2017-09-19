@@ -58,13 +58,24 @@ input[type="button"] {
 #database-error {
 	display: none;
 	flex-grow: 1;
+	margin: 0 auto;
 	padding: 4em;
-	text-align: center;
+	text-align: start;
 	font-size: 15px;
 	line-height: 2;
+	max-width: 55em;
 }
-#database-error pre {
+#database-error ul {
 	margin: 0;
+}
+#database-error code {
+	font-size: smaller;
+	white-space: nowrap;
+	padding: 2px 5px;
+	background-color: #171b1f20;
+}
+:root[theme="dark"] #database-error code {
+	background-color: #ffffff20;
 }
 /* SCROLLBOX */
 #newtab-scrollbox {

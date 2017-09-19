@@ -10,6 +10,7 @@ var Tiles = {
 			chrome.runtime.sendMessage({ name: 'Tiles.getAllTiles' }, response => {
 				if (response === null) {
 					reject();
+					return;
 				}
 				let { tiles, list } = response;
 				this._list = list;
