@@ -77,7 +77,7 @@ var newTabTools = {
 				throw 'URL is invalid';
 			}
 
-			let position, cell, length, svg, path;
+			let position, cell, length, svg, path, dbID;
 			let shouldUpdateGrid = true;
 			let url = this.pinURLInput.value;
 			Tiles.getTile(url).then(tile => {
@@ -107,7 +107,8 @@ var newTabTools = {
 				}
 				tile.position = position = cell.index;
 				return Tiles.putTile(tile);
-			}).then(() => {
+			}).then(id => {
+				dbID = id;
 				return new Promise(resolve => {
 					let bcr = cell.node.getBoundingClientRect();
 					let width = Math.round(bcr.width);
@@ -136,6 +137,7 @@ var newTabTools = {
 				}) : Promise.resolve();
 			}).then(() => {
 				// Ensure that the just added site is pinned and selected.
+				Grid.sites[position].link.id = dbID;
 				Grid.sites[position].link.position = position;
 				Grid.sites[position].updateAttributes(true);
 				newTabTools.pinURLInput.value = '';

@@ -30,7 +30,7 @@ var Tiles = {
 		return new Promise(resolve => {
 			chrome.runtime.sendMessage({ name: 'Tiles.putTile', tile }, function(id) {
 				tile.id = id;
-				resolve();
+				resolve(id);
 			});
 		});
 	},
