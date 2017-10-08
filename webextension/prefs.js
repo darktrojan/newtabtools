@@ -29,8 +29,7 @@ var Prefs = {
 			'history',
 			'recent',
 			'thumbnailSize',
-			'version',
-			'versionLastAck'
+			'version'
 		];
 
 		for (let n of names) {
@@ -128,13 +127,19 @@ var Prefs = {
 			}
 		}
 	},
+	get versionLastAck() {
+		return this._versionLastAck;
+	},
+	set versionLastAck(value) {
+		chrome.storage.local.set({ versionLastAck: value.toJSON() });
+	},
 	get versionLastUpdate() {
 		return this._versionLastUpdate;
 	},
 	set versionLastUpdate(value) {
 		// Make sure this is up to date for synchronous code.
 		this._versionLastUpdate = value;
-		chrome.storage.local.set({ versionLastUpdate: value });
+		chrome.storage.local.set({ versionLastUpdate: value.toJSON() });
 	}
 };
 
