@@ -35,6 +35,9 @@
 			}
 		}
 	},
+	"database_error_history_settings": {
+		"message": "New Tab Tools cannot start if Firefox is set to \"never remember history\" or \"always open in private browsing mode\"."
+	},
 	"database_error_indexeddb": {
 		"description": "Words between ` characters will be placed in HTML <code> blocks",
 		"message": "Go to `about:config` and check `dom.indexedDB.enabled` is set to true."
