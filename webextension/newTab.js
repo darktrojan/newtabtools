@@ -265,6 +265,7 @@ var newTabTools = {
 			this.removeThumbnail(this.selectedSite);
 			this.removeSavedThumbButton.disabled = true;
 			break;
+		case 'options-bgcolor-display':
 		case 'options-bgcolor-displaybutton':
 			this.setBgColourInput.click();
 			break;
