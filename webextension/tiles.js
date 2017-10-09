@@ -163,7 +163,10 @@ var Tiles = {
 		}
 		return new Promise(function(resolve, reject) {
 			let op = db.transaction('tiles', 'readwrite').objectStore('tiles').put(tile);
-			op.onsuccess = () => resolve(op.result);
+			op.onsuccess = () => {
+				tile.id = op.result;
+				resolve(op.result);
+			};
 			op.onerror = reject;
 		});
 	},
