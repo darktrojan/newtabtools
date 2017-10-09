@@ -710,6 +710,14 @@ a {
 #options-filter tbody {
 	line-height: 24px;
 }
+#options-filter td:nth-child(1) {
+	text-overflow: ellipsis;
+	overflow-x: hidden;
+	max-width: 180px;
+}
+#options-filter td:nth-child(3) {
+	white-space: nowrap;
+}
 .plus-button,
 .minus-button {
 	width: 18px;
