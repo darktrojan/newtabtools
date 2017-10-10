@@ -655,7 +655,9 @@ Cell.prototype = {
 			break;
 		case 'drop':
 			event.preventDefault();
-			Drop.drop(this, event);
+			if (!event.isTrusted) {
+				Drop.drop(this, event);
+			}
 			break;
 		}
 	}
@@ -1264,9 +1266,10 @@ var DropTargetShim = {
 	   * @param event The 'dragover' event.
 	   */
 	_dragover: function(event) {
-		// XXX bug 505521 - Use the dragover event to retrieve the
-		//                  current mouse coordinates while dragging.
-		let sourceNode = event.dataTransfer.mozSourceNode.parentNode;
+		let sourceNode = event.target;
+		while (sourceNode && !sourceNode.classList.contains('newtab-site')) {
+			sourceNode = sourceNode.parentNode;
+		}
 		Drag.drag(sourceNode._newtabSite, event);
 
 		// Find the current drop target, if there's one.
@@ -1391,12 +1394,7 @@ var DropTargetShim = {
 	   */
 	_dispatchEvent: function({dataTransfer}, type, target) {
 		let node = target.node;
-		let event = document.createEvent('DragEvent');
-
-		// The event should not bubble to prevent recursion.
-		event.initDragEvent(type, false, true, window, 0, 0, 0, 0, 0, false, false,
-		false, false, 0, node, dataTransfer);
-
+		let event = new DragEvent(type, {dataTransfer});
 		node.dispatchEvent(event);
 	}
 };
