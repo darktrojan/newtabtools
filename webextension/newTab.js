@@ -89,7 +89,11 @@ var newTabTools = {
 						let entry = result.find(function(f) {
 							return f.url == url;
 						});
-						resolve({ url, title: entry ? entry.title : url });
+						tile = { url };
+						if (entry && entry.title) {
+							tile.title = entry.title;
+						}
+						resolve(tile);
 					});
 				});
 			}).then(tile => {

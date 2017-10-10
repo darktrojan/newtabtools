@@ -19,9 +19,8 @@ var Tiles = {
 						}
 						links[t.position] = t;
 						Tiles._list.push(t.url);
-					} else {
-						urlMap.set(t.url, t);
 					}
+					urlMap.set(t.url, t);
 				}
 
 				if (!Prefs.history) {
@@ -55,6 +54,12 @@ var Tiles = {
 								filters[match]--;
 							}
 							urls.push(s.url);
+						} else {
+							// If we pin a tile we've never visited, it has no title.
+							let t = urlMap.get(s.url);
+							if (t && !('title' in t)) {
+								t.title = s.title;
+							}
 						}
 						return isNew;
 					});
