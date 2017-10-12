@@ -313,6 +313,15 @@ input[type="button"] {
 	z-index: 10;
 	transition-property: none;
 }
+.newtab-site[highlighted] {
+	filter: none !important;
+	z-index: 1;
+}
+svg {
+	position: fixed;
+	display: none;
+	z-index: 2;
+}
 /* FAVICON + LINK + THUMBNAIL */
 .favicon {
 	margin-top: -2px;
@@ -514,7 +523,9 @@ input[type="button"] {
 :root:not([options-hidden]) #locked-toggle {
 	visibility: hidden;
 }
-:root:not([options-hidden]) #newtab-scrollbox {
+:root:not([options-hidden]) #newtab-margin-top,
+:root:not([options-hidden]) #newtab-margin-bottom,
+:root:not([options-hidden]) .newtab-site {
 	filter: blur(1px);
 }
 #options-bg {

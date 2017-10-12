@@ -115,14 +115,14 @@ var newTabTools = {
 				dbID = id;
 				return new Promise(resolve => {
 					let bcr = cell.node.getBoundingClientRect();
-					let width = Math.round(bcr.width);
-					let height = Math.round(bcr.height);
+					let width = Math.round(bcr.width) + 2;
+					let height = Math.round(bcr.height) + 2;
 					let halfLength = width + height;
 					length = halfLength * 2;
 
 					svg = document.querySelector('svg');
-					svg.style.left = Math.round(bcr.left - 1) + 'px';
-					svg.style.top = Math.round(bcr.top - 1) + 'px';
+					svg.style.left = Math.round(bcr.left - 2) + 'px';
+					svg.style.top = Math.round(bcr.top - 2) + 'px';
 					svg.setAttribute('width', width + 2);
 					svg.setAttribute('height', height + 2);
 
@@ -141,20 +141,25 @@ var newTabTools = {
 				}) : Promise.resolve();
 			}).then(() => {
 				// Ensure that the just added site is pinned and selected.
-				Grid.sites[position].link.id = dbID;
-				Grid.sites[position].link.position = position;
-				Grid.sites[position].updateAttributes(true);
+				let site = Grid.sites[position];
+				site.link.id = dbID;
+				site.link.position = position;
+				site.updateAttributes(true);
 				newTabTools.pinURLInput.value = '';
 				newTabTools.pinURLInput.focus();
 				newTabTools.selectedSiteIndex = position;
-			}).then(() => {
+
+				Transformation.freezeSitePosition(site);
+				site.node.setAttribute('highlighted', 'true');
 				return new Promise(resolve => {
-					svg.style.display = null;
+					svg.style.display = 'block';
 					path.animate([
 						{'strokeDashoffset': 0 - length},
 						{'strokeDashoffset': length * 1.5}
 					], {duration: 1500, fill: 'both'}).onfinish = () => {
-						svg.style.display = 'none';
+						svg.style.display = null;
+						site.node.removeAttribute('highlighted');
+						Transformation.unfreezeSitePosition(site);
 						newTabTools.optionsPane.animate([
 							{'opacity': 0},
 							{'opacity': 1}
