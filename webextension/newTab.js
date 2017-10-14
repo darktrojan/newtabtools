@@ -3,7 +3,7 @@ This Source Code Form is subject to the terms of the Mozilla Public
 License, v. 2.0. If a copy of the MPL was not distributed with this file,
 You can obtain one at http://mozilla.org/MPL/2.0/.
 */
-/* globals Prefs, Filters, Grid, Page, Tiles, Updater, Background, chrome, -length */
+/* globals Prefs, Filters, Grid, Page, Tiles, Updater, Transformation, Background, chrome, -length */
 
 var HTML_NAMESPACE = 'http://www.w3.org/1999/xhtml';
 
@@ -538,9 +538,12 @@ var newTabTools = {
 				a.title = (!title || title == url ? title : title + '\n' + url);
 				a.dataset.sessionId = sessionId;
 				a.onclick = recent_onclick;
-				if (favIconUrl) {
+				if (favIconUrl && ['http:', 'https:', 'ftp:'].includes(new URL(favIconUrl).protocol)) {
 					let favIcon = document.createElement('img');
 					favIcon.classList.add('favicon');
+					favIcon.onerror	= function() {
+						this.remove();
+					};
 					favIcon.src = favIconUrl;
 					a.appendChild(favIcon);
 				}
