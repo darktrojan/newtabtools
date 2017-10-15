@@ -23,6 +23,7 @@
 	},
 	"permissions": [
 		"<all_urls>",
+		"bookmarks",
 		"history",
 		"idle",
 		"sessions",

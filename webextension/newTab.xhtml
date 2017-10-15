@@ -58,9 +58,20 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 				<fieldset>
 					<legend data-message="pin_url_header"></legend>
 					<div class="options-row">
-						<input id="options-pinURL-input" type="url" required="true" list="autocomplete" autocomplete="off" data-placeholder="pin_url_placeholder" />
-						<datalist id="autocomplete"></datalist>
+						<input id="options-pinURL-input" type="url" required="true" autocomplete="off" data-placeholder="pin_url_placeholder" />
 						<button id="options-pinURL" data-message="pin_url_button"></button>
+					</div>
+					<div class="options-row" style="position: relative;">
+						<ul id="autocomplete" hidden=""></ul>
+						<template>
+							<li>
+								<div class="autocomplete-icon"></div>
+								<div class="autocomplete-detail">
+									<div class="autocomplete-title"></div>
+									<div class="autocomplete-url"></div>
+								</div>
+							</li>
+						</template>
 					</div>
 				</fieldset>
 				<fieldset>

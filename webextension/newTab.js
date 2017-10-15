@@ -11,53 +11,110 @@ var newTabTools = {
 	getString: function(name, ...substitutions) {
 		return chrome.i18n.getMessage(name, substitutions);
 	},
+	isValidURL: function(url) {
+		try {
+			return ['http:', 'https:', 'ftp:'].includes(new URL(url).protocol);
+		} catch (ex) {
+			return false;
+		}
+	},
 	autocomplete: function() {
+		this.pinURLAutocomplete.hidden = false;
 		let value = this.pinURLInput.value;
 		if (value.length < 2) {
 			while (this.pinURLAutocomplete.lastChild) {
 				this.pinURLAutocomplete.lastChild.remove();
 			}
+			this.pinURLAutocomplete.hidden = true;
 			return;
 		}
+		let valueParts = value.toLowerCase().split(/\s+/);
 
 		let count = 0;
 		let options = Array.from(this.pinURLAutocomplete.children);
-		let urls = options.map(function(u) {
-			let v = u.textContent;
-			if (v.includes(value)) {
+		let urls = options.filter(function(u) {
+			let matches = valueParts.every(vp => u.dataset.url.toLowerCase().includes(vp) || u.dataset.title.toLowerCase().includes(vp));
+			if (matches) {
 				count++;
 			}
-			return v;
-		});
+			u.hidden = count > 10 || !matches;
+			return matches;
+		}).map(u => u.dataset.url);
 
 		let exact = options.find(function(u) {
-			return u.textContent == value;
+			return u.dataset.url == value;
 		});
 		if (exact) {
 			this.pinURLAutocomplete.insertBefore(exact, this.pinURLAutocomplete.firstChild);
 		}
 
-		if (count > 10) {
+		if (count >= 10) {
 			return;
 		}
 
-		chrome.history.search({
-			text: value,
-			startTime: 0
-		}, result => {
-			for (let r of result) {
-				if (urls.includes(r.url)) {
-					continue;
-				}
-				let option = document.createElement('option');
-				option.textContent = r.url;
-				if (r.url == value) {
-					this.pinURLAutocomplete.insertBefore(option, this.pinURLAutocomplete.firstChild);
-				} else {
-					this.pinURLAutocomplete.appendChild(option);
-				}
-				urls.push(r.url);
+		let template = newTabTools.pinURLAutocomplete.nextElementSibling;
+		let maybeAddItem = (item, type) => {
+			if (!this.isValidURL(item.url) || urls.includes(item.url)) {
+				return;
 			}
+			if (!valueParts.every(vp => item.url.toLowerCase().includes(vp) || item.title.toLowerCase().includes(vp))) {
+				return;
+			}
+
+			let option = template.content.firstElementChild.cloneNode(true);
+			option.classList.add(type);
+			if (Tiles.isPinned(item.url)) {
+				option.classList.add('pinned');
+			}
+			option.dataset.title = option.querySelector('.autocomplete-title').textContent = item.title;
+			option.dataset.url = option.querySelector('.autocomplete-url').textContent = item.url;
+			if (++count > 10) {
+				option.hidden = true;
+			}
+			if (item.url == value) {
+				this.pinURLAutocomplete.insertBefore(option, this.pinURLAutocomplete.firstChild);
+			} else {
+				this.pinURLAutocomplete.appendChild(option);
+			}
+			urls.push(item.url);
+		}
+
+		chrome.bookmarks.getTree(tree => {
+			function traverse(children) {
+				for (let c of children) {
+					if (c.type == 'folder') {
+						traverse(c.children);
+					} else if (c.type == 'bookmark') {
+						maybeAddItem(c, 'bookmark');
+					}
+				}
+			}
+
+			traverse(tree[0].children);
+
+			if (count >= 10) {
+				return;
+			}
+
+			chrome.tabs.query({}, tabs => {
+				for (let t of tabs) {
+					maybeAddItem(t, 'tab');
+				}
+
+				if (count >= 10) {
+					return;
+				}
+
+				chrome.history.search({
+					text: value,
+					startTime: 0
+				}, result => {
+					for (let r of result) {
+						maybeAddItem(r, 'history');
+					}
+					this.pinURLAutocomplete.hidden = !count;
+				});
+			});
 		});
 	},
 	get selectedSite() {
@@ -273,6 +330,17 @@ var newTabTools = {
 
 			Filters.setFilter(row.cells[0].textContent, count);
 			Updater.updateGrid();
+		}
+
+		if (this.pinURLAutocomplete.compareDocumentPosition(event.target) & Node.DOCUMENT_POSITION_CONTAINED_BY) {
+			let target = event.target;
+			while (target.nodeName != 'li') {
+				target = target.parentNode;
+			}
+			this.pinURLInput.value = target.dataset.url;
+			this.pinURLInput.focus();
+			this.pinURLInput.selectionStart = this.pinURLInput.selectionEnd = this.pinURLInput.value.length;
+			this.pinURLAutocomplete.hidden = true;
 		}
 	},
 	optionsOnChange: function(event) {
@@ -538,7 +606,7 @@ var newTabTools = {
 				a.title = (!title || title == url ? title : title + '\n' + url);
 				a.dataset.sessionId = sessionId;
 				a.onclick = recent_onclick;
-				if (favIconUrl && ['http:', 'https:', 'ftp:'].includes(new URL(favIconUrl).protocol)) {
+				if (favIconUrl && newTabTools.isValidURL(favIconUrl)) {
 					let favIcon = document.createElement('img');
 					favIcon.classList.add('favicon');
 					favIcon.onerror	= function() {
@@ -642,6 +710,7 @@ var newTabTools = {
 	hideOptions: function() {
 		document.documentElement.setAttribute('options-hidden', 'true');
 		document.documentElement.removeAttribute('options-filter-shown');
+		newTabTools.pinURLAutocomplete.hidden = true;
 		newTabTools.optionsFilter.style.display = null;
 	},
 	resizeOptionsThumbnail: function() {
@@ -878,7 +947,39 @@ var newTabTools = {
 
 	window.addEventListener('keypress', function(event) {
 		if (event.key == 'Escape') {
-			newTabTools.hideOptions();
+			if (newTabTools.pinURLAutocomplete.hidden) {
+				newTabTools.hideOptions();
+			} else {
+				newTabTools.pinURLAutocomplete.hidden = true;
+			}
+		} else if (document.activeElement == newTabTools.pinURLInput) {
+			let current = newTabTools.pinURLAutocomplete.querySelector('li.current');
+			switch (event.key) {
+			case 'ArrowDown':
+			case 'ArrowUp':
+				let items = [...newTabTools.pinURLAutocomplete.querySelectorAll('li:not([hidden])')];
+				if (!items.length) {
+					return;
+				}
+
+				let index = event.key == 'ArrowDown' ? 0 : items.length - 1;
+				if (current) {
+					current.classList.remove('current');
+					let newIndex = items.indexOf(current) + (event.key == 'ArrowDown' ? 1 : -1);
+					if (items[newIndex]) {
+						index = newIndex;
+					}
+				}
+				items[index].classList.add('current');
+				break;
+			case 'Enter':
+				if (current) {
+					newTabTools.pinURLInput.value = current.dataset.url;
+					newTabTools.pinURLInput.selectionStart = newTabTools.pinURLInput.selectionEnd = newTabTools.pinURLInput.value.length;
+					newTabTools.pinURLAutocomplete.hidden = true;
+				}
+				break;
+			}
 		}
 	});
 })();
