@@ -131,9 +131,11 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 
 	case 'Thumbnails.save':
 		let {url, image} = message;
-		db.transaction('thumbnails', 'readwrite').objectStore('thumbnails').put({
-			url, image, stored: today, used: today
-		});
+		if (url && image) {
+			db.transaction('thumbnails', 'readwrite').objectStore('thumbnails').put({
+				url, image, stored: today, used: today
+			});
+		}
 		return;
 	case 'Thumbnails.get':
 		let map = new Map();

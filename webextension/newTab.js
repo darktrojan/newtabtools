@@ -765,12 +765,15 @@ var newTabTools = {
 					return;
 				}
 				let link = s.link;
-				if (!link.image && thumbs.has(link.url)) {
-					let css = 'url(' + URL.createObjectURL(thumbs.get(link.url)) + ')';
-					s.thumbnail.style.backgroundImage = css;
+				if (!link.image) {
+					let thumb = thumbs.get(link.url);
+					if (thumb) {
+						let css = 'url(' + URL.createObjectURL(thumb) + ')';
+						s.thumbnail.style.backgroundImage = css;
 
-					if (newTabTools.selectedSite == s) {
-						newTabTools.siteThumbnail.style.backgroundImage = css;
+						if (newTabTools.selectedSite == s) {
+							newTabTools.siteThumbnail.style.backgroundImage = css;
+						}
 					}
 				}
 			});
