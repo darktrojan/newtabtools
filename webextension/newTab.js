@@ -77,7 +77,7 @@ var newTabTools = {
 				this.pinURLAutocomplete.appendChild(option);
 			}
 			urls.push(item.url);
-		}
+		};
 
 		chrome.bookmarks.getTree(tree => {
 			function traverse(children) {
@@ -822,7 +822,7 @@ var newTabTools = {
 			if (now - Prefs.versionLastUpdate < 43200000 && now - Prefs.versionLastAck > 604800000) {
 				newTabTools.updateNotice.hidden = false;
 			}
-		}).catch(console.error.bind(console));
+		}).catch(console.error);
 	},
 	getThumbnails: function() {
 		chrome.runtime.sendMessage({

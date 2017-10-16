@@ -24,6 +24,7 @@
 	"requireDotNotation": false,
 	"requirePaddingNewLinesAfterBlocks": false,
 	"requirePaddingNewLinesBeforeLineComments": false,
+	"requireShorthandArrowFunctions": false,
 	"requireSpacesInAnonymousFunctionExpression": {
 		"beforeOpeningCurlyBrace": true
 	},

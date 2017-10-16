@@ -5,15 +5,15 @@
 /* globals DOMRect, Prefs, Tiles, Blocked, newTabTools, chrome */
 /* exported Page */
 if (!('DOMRect' in window)) {
-       window.DOMRect = function(left, top, width, height) {
-               this.left = left;
-               this.top = top;
-               this.width = width;
-               this.height = height;
-               this.right = left + width;
-               this.bottom = top + height;
-       };
-       DOMRect.prototype = {};
+	window.DOMRect = function(left, top, width, height) {
+		this.left = left;
+		this.top = top;
+		this.width = width;
+		this.height = height;
+		this.right = left + width;
+		this.bottom = top + height;
+	};
+	DOMRect.prototype = {};
 }
 
 DOMRect.prototype.isEmpty = function() {

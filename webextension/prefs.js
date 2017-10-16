@@ -34,9 +34,7 @@ var Prefs = {
 		];
 
 		for (let n of names) {
-			this.__defineGetter__(n, () => { // jshint ignore:line
-				return this['_' + n];
-			});
+			this.__defineGetter__(n, () => this['_' + n]); // jshint ignore:line
 			this.__defineSetter__(n, function(value) { // jshint ignore:line
 				let obj = {};
 				obj[n] = value;

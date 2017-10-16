@@ -44,9 +44,9 @@ var Tiles = {
 
 						let isNew = !urls.includes(s.url);
 						if (isNew) {
-							let match = url.host in filters ? url.host : dotFilters.find(f => {
-								return url.host == f.substring(1) || url.host.endsWith(f);
-							});
+							let match = url.host in filters ? url.host : dotFilters.find(
+								f => url.host == f.substring(1) || url.host.endsWith(f)
+							);
 							if (match) {
 								if (filters[match] === 0) {
 									return false;
