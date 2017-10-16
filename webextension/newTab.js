@@ -82,9 +82,9 @@ var newTabTools = {
 		chrome.bookmarks.getTree(tree => {
 			function traverse(children) {
 				for (let c of children) {
-					if (c.type == 'folder') {
+					if ('children' in c) { // c.type == 'folder' in >=57
 						traverse(c.children);
-					} else if (c.type == 'bookmark') {
+					} else { // c.type == 'bookmark' in >=57
 						maybeAddItem(c, 'bookmark');
 					}
 				}
