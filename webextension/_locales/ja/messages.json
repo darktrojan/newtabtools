@@ -8,20 +8,39 @@
 	"bg_set": {
 		"message": "設定"
 	},
-	"contextmenu_block": {
-		"message": "タイルを削除"
+	"changelog_label": {
+		"message": "変更履歴"
 	},
 	"contextmenu_edit": {
 		"message": "タイルを編集"
-	},
-	"contextmenu_options": {
-		"message": "New Tab Tools 設定"
 	},
 	"contextmenu_pin": {
 		"message": "タイルをピン止め"
 	},
 	"contextmenu_unpin": {
 		"message": "タイルのピン止めを外す"
+	},
+	"contextmenu_block": {
+		"message": "タイルを削除"
+	},
+	"contextmenu_options": {
+		"message": "New Tab Tools 設定"
+	},
+	"database_error_cookies": {
+		"message": "cookies が無効になっている場合は、$URL$ を例外に追加してください。"
+	},
+	"database_error_history_settings": {
+		"message": "Firefox が\"履歴を記憶させない\"または\"常にプライベートブラウジングモードで開く\"に設定されている場合、New Tab Tools は起動できません。"
+	},
+	"database_error_indexeddb": {
+		"description": "Words between ` characters will be placed in HTML <code> blocks",
+		"message": "`about:config` を開き、`dom.indexedDB.enabled` の値を true に設定します。"
+	},
+	"database_error_message": {
+		"message": "New Tab Tools を正常に起動できませんでした。次の手順を試してください:"
+	},
+	"database_error_restart": {
+		"message": "これらの変更を有効にするには、New Tab Tools または Firefox を再起動する必要があります。"
 	},
 	"donate": {
 		"message": "寄付する…"
@@ -31,6 +50,45 @@
 	},
 	"extensionDescription": {
 		"message": "新しいタブページをカスタマイズします。新しいタブページのタイル追加や Firefox スタートページのランチャーを表示したり、背景画像を追加することができます。また、新しいタイル画像やタイトルを設定することができます。"
+	},
+	"extensionName": {
+		"message": "New Tab Tools"
+	},
+	"filter_button": {
+		"message": "フィルタ…"
+	},
+	"filter_helptext": {
+		"message": "ドメインとそのサブドメインをすべて制限するには、ドメインの前に\".\"を追加します。例: .example.com"
+	},
+	"filter_header_add": {
+		"message": "フィルタを追加:"
+	},
+	"filter_header_domain": {
+		"message": "ドメイン"
+	},
+	"filter_header_pinned": {
+		"message": "ピン留めしたタイル"
+	},
+	"filter_header_unpinned": {
+		"message": "ピン留めしていないタイルの制限"
+	},
+	"filter_placeholder_host": {
+		"message": "ドメインを入力または選択する"
+	},
+	"filter_placeholder_limit": {
+		"message": "制限"
+	},
+	"filter_set": {
+		"message": "設定"
+	},
+	"filter_title": {
+		"message": "閲覧履歴のタイル:"
+	},
+	"filter_unlimited": {
+		"message": "無制限"
+	},
+	"github": {
+		"message": "New Tab Tools on GitHub"
 	},
 	"newtab_pageTitle": {
 		"message": "新しいタブ"
@@ -57,7 +115,7 @@
 		"message": "列"
 	},
 	"options_foreground_opacity": {
-		"message": "Foreground Opacity"
+		"message": "不透明度"
 	},
 	"options_grid_margin": {
 		"message": "マージン"
@@ -65,8 +123,14 @@
 	"options_grid_spacing": {
 		"message": "スペース"
 	},
+	"options_historytiles": {
+		"message": "閲覧履歴のタイル"
+	},
 	"options_launcher_hidden": {
 		"message": "表示しない"
+	},
+	"options_locked": {
+		"message": "タイルのドラッグを禁止する"
 	},
 	"options_recent": {
 		"message": "最近閉じたタブを表示"
@@ -83,11 +147,14 @@
 	"options_size_small": {
 		"message": "小"
 	},
+	"options_theme": {
+		"message": "テーマ"
+	},
 	"options_theme_dark": {
-		"message": "Dark Theme"
+		"message": "暗いテーマ"
 	},
 	"options_theme_light": {
-		"message": "Light Theme"
+		"message": "明るいテーマ"
 	},
 	"options_thumb_titlesize": {
 		"message": "タイルのタイトルサイズ"
@@ -98,11 +165,17 @@
 	"pin_url_header": {
 		"message": "タイル追加:"
 	},
+	"pin_url_placeholder": {
+		"message": "URLを入力または選択する"
+	},
 	"recently_closed_tabs": {
 		"message": "最近閉じたタブ:"
 	},
 	"tile_header": {
 		"message": "タイル:"
+	},
+	"tile_savedthumb_label": {
+		"message": "保存した画像:"
 	},
 	"tile_savedthumb_set": {
 		"message": "設定"
@@ -142,5 +215,8 @@
 	},
 	"tile_unpin": {
 		"message": "このサイトのピン留めを外す"
+	},
+	"tileurl_empty": {
+		"message": "空のタイル"
 	}
 }
