@@ -1,0 +1,246 @@
+{
+	"action_captureThumbnail": {
+		"message": "Zachytit miniaturu"
+	},
+	"action_isPinned": {
+		"message": "Připnuto do nového panelu"
+	},
+	"action_pin": {
+		"message": "Připnout na nový panel"
+	},
+	"bg_header": {
+		"message": "Obrázek pozadí:"
+	},
+	"bg_remove": {
+		"message": "Odebrat"
+	},
+	"bg_set": {
+		"message": "Nastavit"
+	},
+	"changelog_label": {
+		"message": "Co se změnilo?"
+	},
+	"contextmenu_edit": {
+		"message": "Upravit popis"
+	},
+	"contextmenu_pin": {
+		"message": "Připnout dlaždici"
+	},
+	"contextmenu_unpin": {
+		"message": "Odepnout dlaždici"
+	},
+	"contextmenu_block": {
+		"message": "Odebrat dlaždici"
+	},
+	"contextmenu_options": {
+		"message": "New Tab Tools - Nastavení"
+	},
+	"database_error_cookies": {
+		"message": "Pokud jsou soubory cookie zakázány, přidejte výjimku pro $URL$.",
+		"placeholders": {
+			"url": {
+				"content": "$1",
+				"example": "moz-extension://cdea0cc6-fa00-4a9f-b60e-c011fa0decb9/"
+			}
+		}
+	},
+	"database_error_history_settings": {
+		"message": "New Tab Tools nelze spustit ve Firefoxu protože je nastaveno \"Nikdy neukládat historii\" nebo \"Vždy použít režim anonymního prohlížení\"."
+	},
+	"database_error_indexeddb": {
+		"description": "Text mezi ` bude umístěn do HTML <code> bloku",
+		"message": "Jděte do `about:config` a nastavte `dom.indexedDB.enabled` na true."
+	},
+	"database_error_message": {
+		"message": "New Tab Tools nelze spustit korektně. Zkuste toto:"
+	},
+	"database_error_restart": {
+		"message": "Budete muset restartovat New Tab Tools (nebo jen restartovat Firefox), jinak se změny neprojeví."
+	},
+	"donate": {
+		"message": "Darovat…"
+	},
+	"donate_label": {
+		"message": "New Tab Tools je financován z darů uživatelů."
+	},
+	"extensionDescription": {
+		"message": "Přizpůsobí stránku nového panelu. Můžete přidat další dlaždice nebo obrázek na pozadí. Také můžete nastavit vlastní obrázek a název dlaždice."
+	},
+	"extensionName": {
+		"message": "New Tab Tools"
+	},
+	"filter_button": {
+		"message": "Filtr…"
+	},
+	"filter_helptext": {
+		"message": "Pokud potřebujete omezit doménu a všechny její subdomény, přidejte před doménu tečku např.: .example.com"
+	},
+	"filter_header_add": {
+		"message": "Přidat filtr:"
+	},
+	"filter_header_domain": {
+		"message": "Doména"
+	},
+	"filter_header_pinned": {
+		"message": "Připnuté dlaždice"
+	},
+	"filter_header_unpinned": {
+		"message": "Limit odepnutých dlaždic"
+	},
+	"filter_placeholder_host": {
+		"message": "Napište nebo vyberte doménu"
+	},
+	"filter_placeholder_limit": {
+		"message": "Limit"
+	},
+	"filter_set": {
+		"message": "Nastavit"
+	},
+	"filter_title": {
+		"message": "Procházet historii dlaždic:"
+	},
+	"filter_unlimited": {
+		"message": "bez limitu"
+	},
+	"github": {
+		"message": "New Tab Tools na GitHub"
+	},
+	"newtab_pageTitle": {
+		"message": "Nový panel"
+	},
+	"newtab_undo_closeTooltip": {
+		"message": "Skrýt"
+	},
+	"newtab_undo_removedLabel": {
+		"message": "Miniatura odebrána."
+	},
+	"newtab_undo_restoreButton": {
+		"message": "Vše obnovit"
+	},
+	"newtab_undo_undoButton": {
+		"message": "Zpět"
+	},
+	"newversion": {
+		"message": "New Tab Tools byl aktualizován na verzi $VERSION$. New Tab Tools je volně použitelný, ale váš dar potěší!",
+		"placeholders": {
+			"version": {
+				"content": "$1",
+				"example": "84"
+			}
+		}
+	},
+	"options_header": {
+		"message": "Nastavení:"
+	},
+	"options_columns": {
+		"message": "Sloupců"
+	},
+	"options_foreground_opacity": {
+		"message": "Průhlednost"
+	},
+	"options_grid_margin": {
+		"message": "Velikost okraje"
+	},
+	"options_grid_spacing": {
+		"message": "Velikost mezery"
+	},
+	"options_historytiles": {
+		"message": "Dlaždice z vaší historie"
+	},
+	"options_launcher_hidden": {
+		"message": "Nezobrazovat"
+	},
+	"options_locked": {
+		"message": "Uzamknout dlaždice"
+	},
+	"options_recent": {
+		"message": "Nedávno zavřené panely"
+	},
+	"options_rows": {
+		"message": "Řádků"
+	},
+	"options_size_large": {
+		"message": "Velká"
+	},
+	"options_size_medium": {
+		"message": "Střední"
+	},
+	"options_size_small": {
+		"message": "Malá"
+	},
+	"options_theme": {
+		"message": "Vzhled"
+	},
+	"options_theme_dark": {
+		"message": "Tmavý motiv"
+	},
+	"options_theme_light": {
+		"message": "Světlý motiv"
+	},
+	"options_thumb_titlesize": {
+		"message": "Velikost popisu dlaždice"
+	},
+	"pin_url_button": {
+		"message": "Přidat"
+	},
+	"pin_url_header": {
+		"message": "Přidat dlaždici:"
+	},
+	"pin_url_placeholder": {
+		"message": "Napište nebo vyberte URL"
+	},
+	"recently_closed_tabs": {
+		"message": "Nedávno zavřené panely:"
+	},
+	"tile_header": {
+		"message": "Tiles:"
+	},
+	"tile_savedthumb_label": {
+		"message": "Uložený obrázek:"
+	},
+	"tile_savedthumb_savecurrent": {
+		"message": "Uložit aktuální náhled"
+	},
+	"tile_savedthumb_set": {
+		"message": "Nastavit"
+	},
+	"tile_selection_next_tooltip": {
+		"message": "Další dlaždice"
+	},
+	"tile_selection_nextrow_tooltip": {
+		"message": "Další řádek"
+	},
+	"tile_selection_previous_tooltip": {
+		"message": "Předchozí dlaždice"
+	},
+	"tile_selection_previousrow_tooltip": {
+		"message": "Předchozí řádek"
+	},
+	"tile_thumbnail_bgcolor": {
+		"message": "Barva pozadí:"
+	},
+	"tile_thumbnail_remove": {
+		"message": "Odebrat"
+	},
+	"tile_title_label": {
+		"message": "Popisek:"
+	},
+	"tile_title_placeholder": {
+		"message": "Zadejte nový popisek dlaždice"
+	},
+	"tile_title_set": {
+		"message": "Nastavit"
+	},
+	"tile_block": {
+		"message": "Odstranit tuto stránku"
+	},
+	"tile_pin": {
+		"message": "Připnout stránku na aktuální pozici"
+	},
+	"tile_unpin": {
+		"message": "Odepnout stránku"
+	},
+	"tileurl_empty": {
+		"message": "Prázdná dlaždice"
+	}
+}
