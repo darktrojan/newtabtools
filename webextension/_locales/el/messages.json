@@ -1,4 +1,7 @@
 {
+	"action_captureThumbnail": {
+		"message": "Απαθανατήστε το σκαρίφημα της ιστοσελίδας"
+	},
 	"bg_header": {
 		"message": "Εικόνα φόντου σελίδας:"
 	},
@@ -7,9 +10,6 @@
 	},
 	"bg_set": {
 		"message": "Εφαρμογή"
-	},
-	"captureThumbnail": {
-		"message": "Απαθανατήστε το σκαρίφημα της ιστοσελίδας"
 	},
 	"changelog_label": {
 		"message": "Τί άλλαξε?"

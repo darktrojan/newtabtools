@@ -1,4 +1,7 @@
 {
+	"action_captureThumbnail": {
+		"message": "捕捉页面缩略图"
+	},
 	"bg_header": {
 		"message": "页面背景图片："
 	},
@@ -7,9 +10,6 @@
 	},
 	"bg_set": {
 		"message": "设为背景"
-	},
-	"captureThumbnail": {
-		"message": "捕捉页面缩略图"
 	},
 	"changelog_label": {
 		"message": "有什么变化？"

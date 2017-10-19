@@ -1,4 +1,13 @@
 {
+	"action_captureThumbnail": {
+		"message": "Capture thumbnail"
+	},
+	"action_isPinned": {
+		"message": "Pinned to the New Tab page"
+	},
+	"action_pin": {
+		"message": "Pin to the New Tab page"
+	},
 	"bg_header": {
 		"message": "Page background image:"
 	},
@@ -7,9 +16,6 @@
 	},
 	"bg_set": {
 		"message": "Set"
-	},
-	"captureThumbnail": {
-		"message": "Capture thumbnail"
 	},
 	"changelog_label": {
 		"message": "What Changed?"
@@ -191,6 +197,9 @@
 	},
 	"tile_savedthumb_label": {
 		"message": "Saved image:"
+	},
+	"tile_savedthumb_savecurrent": {
+		"message": "Save current thumbnail"
 	},
 	"tile_savedthumb_set": {
 		"message": "Set"

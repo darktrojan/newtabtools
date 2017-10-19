@@ -1,4 +1,7 @@
 {
+	"action_captureThumbnail": {
+		"message": "Capturar miniatura da página"
+	},
 	"bg_header": {
 		"message": "Imagem de fundo da página"
 	},
@@ -7,9 +10,6 @@
 	},
 	"bg_set": {
 		"message": "Definir"
-	},
-	"captureThumbnail": {
-		"message": "Capturar miniatura da página"
 	},
 	"changelog_label": {
 		"message": "O Que Mudou?"

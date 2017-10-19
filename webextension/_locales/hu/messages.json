@@ -1,4 +1,7 @@
 {
+	"action_captureThumbnail": {
+		"message": "Oldal előnézeti képének rögzítése"
+	},
 	"bg_header": {
 		"message": "Oldal háttérképe:"
 	},
@@ -7,9 +10,6 @@
 	},
 	"bg_set": {
 		"message": "Beállítás"
-	},
-	"captureThumbnail": {
-		"message": "Oldal előnézeti képének rögzítése"
 	},
 	"changelog_label": {
 		"message": "Mi változott?"

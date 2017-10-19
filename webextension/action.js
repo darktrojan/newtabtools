@@ -1,4 +1,8 @@
 /* globals chrome */
+function getString(name) {
+	return chrome.i18n.getMessage(name);
+}
+
 function getTab() {
 	return new Promise(function(resolve) {
 		chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
@@ -6,6 +10,10 @@ function getTab() {
 		});
 	});
 }
+
+document.querySelectorAll('[data-message]').forEach(n => {
+	n.textContent = getString(n.dataset.message);
+});
 
 getTab().then(tab => {
 	chrome.runtime.sendMessage({name: 'Tiles.isPinned', url: tab.url}, isPinned => {

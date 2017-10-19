@@ -1,4 +1,7 @@
 {
+	"action_captureThumbnail": {
+		"message": "Создать превью страницы"
+	},
 	"bg_header": {
 		"message": "Фоновое изображение Экспресс-панели:"
 	},
@@ -7,9 +10,6 @@
 	},
 	"bg_set": {
 		"message": "Применить"
-	},
-	"captureThumbnail": {
-		"message": "Создать превью страницы"
 	},
 	"changelog_label": {
 		"message": "Что нового?"

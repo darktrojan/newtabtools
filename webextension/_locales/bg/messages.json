@@ -1,4 +1,7 @@
 {
+	"action_captureThumbnail": {
+		"message": "Снимка на миниатюрата"
+	},
 	"bg_header": {
 		"message": "Фоново изображение:"
 	},
@@ -7,9 +10,6 @@
 	},
 	"bg_set": {
 		"message": "Задай"
-	},
-	"captureThumbnail": {
-		"message": "Снимка на миниатюрата"
 	},
 	"changelog_label": {
 		"message": "Какво се промени?"

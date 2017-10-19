@@ -1,4 +1,7 @@
 {
+	"action_captureThumbnail": {
+		"message": "Capturer une miniature de cette page"
+	},
 	"bg_header": {
 		"message": "Arrière-plan :"
 	},
@@ -7,9 +10,6 @@
 	},
 	"bg_set": {
 		"message": "Appliquer"
-	},
-	"captureThumbnail": {
-		"message": "Capturer une miniature de cette page"
 	},
 	"changelog_label": {
 		"message": "Nouveautés"

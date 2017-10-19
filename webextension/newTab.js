@@ -242,10 +242,10 @@ var newTabTools = {
 		case 'options-savethumb':
 			let link = this.selectedSite.link;
 			let siteURL = link.url;
-			browser.runtime.sendMessage({
+			chrome.runtime.sendMessage({
 				name: 'Thumbnails.get',
 				urls: [siteURL]
-			}).then(function(thumbs) {
+			}, thumbs => {
 				let blob = thumbs.get(siteURL);
 				if (!blob) {
 					return;
@@ -253,6 +253,8 @@ var newTabTools = {
 				link.image = blob;
 				link.imageIsThumbnail = true;
 				Tiles.putTile(link);
+				this.saveCurrentThumbButton.disabled = true;
+				this.removeSavedThumbButton.disabled = false;
 			});
 			break;
 		case 'options-savedthumb-set':
@@ -478,6 +480,7 @@ var newTabTools = {
 				let thumbnailURL = URL.createObjectURL(link.image);
 				newTabTools.siteThumbnail.style.backgroundImage = 'url("' + thumbnailURL + '")';
 				newTabTools.siteThumbnail.classList.add('custom-thumbnail');
+				newTabTools.saveCurrentThumbButton.disabled = true;
 
 				Tiles.putTile(link);
 			}, 'image/png');
@@ -492,10 +495,9 @@ var newTabTools = {
 		delete link.image;
 		delete link.imageIsThumbnail;
 		site.refreshThumbnail();
-		this.getThumbnails();
-
 		this.siteThumbnail.style.backgroundImage = null;
 		this.siteThumbnail.classList.remove('custom-thumbnail');
+		this.getThumbnails();
 
 		Tiles.putTile(link);
 	},
@@ -683,7 +685,8 @@ var newTabTools = {
 				this.setBgColourDisplay.style.backgroundColor = null;
 			this.siteURL.textContent = this.getString('tileurl_empty');
 			this.setTitleInput.value = '';
-			this.removeSavedThumbButton.disabled =
+			this.saveCurrentThumbButton.disabled =
+				this.removeSavedThumbButton.disabled =
 				this.setBgColourButton.disabled =
 				this.resetBgColourButton.disabled = true;
 			return;
@@ -697,10 +700,12 @@ var newTabTools = {
 			} else {
 				this.siteThumbnail.classList.add('custom-thumbnail');
 			}
+			this.saveCurrentThumbButton.disabled = true;
 			this.removeSavedThumbButton.disabled = false;
 		} else {
 			this.siteThumbnail.style.backgroundImage = site.thumbnail.style.backgroundImage;
 			this.siteThumbnail.classList.remove('custom-thumbnail');
+			this.saveCurrentThumbButton.disabled = !this.siteThumbnail.style.backgroundImage;
 			this.removeSavedThumbButton.disabled = true;
 		}
 
@@ -866,6 +871,7 @@ var newTabTools = {
 
 						if (newTabTools.selectedSite == s) {
 							newTabTools.siteThumbnail.style.backgroundImage = css;
+							newTabTools.saveCurrentThumbButton.disabled = false;
 						}
 					}
 				}
@@ -887,6 +893,7 @@ var newTabTools = {
 		'tileNextRow': 'options-next-row-tile',
 		'siteThumbnail': 'options-thumbnail',
 		'siteURL': 'options-url',
+		'saveCurrentThumbButton': 'options-savethumb',
 		'setSavedThumbInput': 'options-savedthumb-input',
 		'setSavedThumbButton': 'options-savedthumb-set',
 		'removeSavedThumbButton': 'options-savedthumb-remove',
