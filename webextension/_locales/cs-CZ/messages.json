@@ -133,114 +133,114 @@
 		"message": "Nastavení:"
 	},
 	"options_columns": {
-		"message": "Sloupce"
+		"message": "Sloupců"
 	},
 	"options_foreground_opacity": {
 		"message": "Průhlednost"
 	},
 	"options_grid_margin": {
-		"message": "Grid margin"
+		"message": "Velikost okraje"
 	},
 	"options_grid_spacing": {
-		"message": "Grid spacing"
+		"message": "Velikost mezery"
 	},
 	"options_historytiles": {
-		"message": "Tiles from your browsing history"
+		"message": "Dlaždice z vaší historie"
 	},
 	"options_launcher_hidden": {
-		"message": "Do not show"
+		"message": "Nezobrazovat"
 	},
 	"options_locked": {
-		"message": "Prevent tiles being dragged"
+		"message": "Uzamknout dlaždice"
 	},
 	"options_recent": {
-		"message": "Recently closed tabs"
+		"message": "Nedávno zavřené panely"
 	},
 	"options_rows": {
-		"message": "Rows"
+		"message": "Řádků"
 	},
 	"options_size_large": {
-		"message": "Large"
+		"message": "Velká"
 	},
 	"options_size_medium": {
-		"message": "Medium"
+		"message": "Střední"
 	},
 	"options_size_small": {
-		"message": "Small"
+		"message": "Malá"
 	},
 	"options_theme": {
-		"message": "Theme"
+		"message": "Vzhled"
 	},
 	"options_theme_dark": {
-		"message": "Dark theme"
+		"message": "Tmavý motiv"
 	},
 	"options_theme_light": {
-		"message": "Light theme"
+		"message": "Světlý motiv"
 	},
 	"options_thumb_titlesize": {
-		"message": "Tile title size"
+		"message": "Velikost popisu dlaždice"
 	},
 	"pin_url_button": {
-		"message": "Add"
+		"message": "Přidat"
 	},
 	"pin_url_header": {
-		"message": "Add tile:"
+		"message": "Přidat dlaždici:"
 	},
 	"pin_url_placeholder": {
-		"message": "Type or select a URL"
+		"message": "Napište nebo vyberte URL"
 	},
 	"recently_closed_tabs": {
-		"message": "Recently closed tabs:"
+		"message": "Nedávno zavřené panely:"
 	},
 	"tile_header": {
 		"message": "Tiles:"
 	},
 	"tile_savedthumb_label": {
-		"message": "Saved image:"
+		"message": "Uložený obrázek:"
 	},
 	"tile_savedthumb_savecurrent": {
-		"message": "Save current thumbnail"
+		"message": "Uložit aktuální náhled"
 	},
 	"tile_savedthumb_set": {
-		"message": "Set"
+		"message": "Nastavit"
 	},
 	"tile_selection_next_tooltip": {
-		"message": "Next tile"
+		"message": "Další dlaždice"
 	},
 	"tile_selection_nextrow_tooltip": {
-		"message": "Next row"
+		"message": "Další řádek"
 	},
 	"tile_selection_previous_tooltip": {
-		"message": "Previous tile"
+		"message": "Předchozí dlaždice"
 	},
 	"tile_selection_previousrow_tooltip": {
-		"message": "Previous row"
+		"message": "Předchozí řádek"
 	},
 	"tile_thumbnail_bgcolor": {
-		"message": "Background color:"
+		"message": "Barva pozadí:"
 	},
 	"tile_thumbnail_remove": {
-		"message": "Remove"
+		"message": "Odebrat"
 	},
 	"tile_title_label": {
-		"message": "Title:"
+		"message": "Popisek:"
 	},
 	"tile_title_placeholder": {
-		"message": "Type a new tile title"
+		"message": "Zadejte nový popisek dlaždice"
 	},
 	"tile_title_set": {
-		"message": "Set"
+		"message": "Nastavit"
 	},
 	"tile_block": {
-		"message": "Remove this site"
+		"message": "Odstranit tuto stránku"
 	},
 	"tile_pin": {
-		"message": "Pin this site at its current position"
+		"message": "Připnout stránku na aktuální pozici"
 	},
 	"tile_unpin": {
-		"message": "Unpin this site"
+		"message": "Odepnout stránku"
 	},
 	"tileurl_empty": {
-		"message": "Empty Tile"
+		"message": "Prázdná dlaždice"
 	}
 }
