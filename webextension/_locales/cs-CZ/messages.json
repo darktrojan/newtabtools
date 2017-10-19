@@ -18,7 +18,7 @@
 		"message": "Nastavit"
 	},
 	"changelog_label": {
-		"message": "What Changed?"
+		"message": "Co se změnilo?"
 	},
 	"contextmenu_edit": {
 		"message": "Upravit popis"
@@ -48,80 +48,80 @@
 		"message": "New Tab Tools nelze spustit ve Firefoxu protože je nastaveno \"Nikdy neukládat historii\" nebo \"Vždy použít režim anonymního prohlížení\"."
 	},
 	"database_error_indexeddb": {
-		"description": "Words between ` characters will be placed in HTML <code> blocks",
-		"message": "Go to `about:config` and check `dom.indexedDB.enabled` is set to true."
+		"description": "Text mezi ` bude umístěn do HTML <code> bloku",
+		"message": "Jděte do `about:config` a nastavte `dom.indexedDB.enabled` na true."
 	},
 	"database_error_message": {
 		"message": "New Tab Tools nelze spustit korektně. Zkuste toto:"
 	},
 	"database_error_restart": {
-		"message": "You will need to restart New Tab Tools (or just restart Firefox) for these changes to have an effect."
+		"message": "Budete muset restartovat New Tab Tools (nebo jen restartovat Firefox), jinak se změny neprojeví."
 	},
 	"donate": {
-		"message": "Donate…"
+		"message": "Darovat…"
 	},
 	"donate_label": {
-		"message": "New Tab Tools is funded by user donations."
+		"message": "New Tab Tools je financován z darů uživatelů."
 	},
 	"extensionDescription": {
-		"message": "Customizes the new tab page. You can add more tiles, or a background image. And you can set new tile images and titles."
+		"message": "Přizpůsobí stránku nového panelu. Můžete přidat další dlaždice nebo obrázek na pozadí. Také můžete nastavit vlastní obrázek a název dlaždice."
 	},
 	"extensionName": {
 		"message": "New Tab Tools"
 	},
 	"filter_button": {
-		"message": "Filter…"
+		"message": "Filtr…"
 	},
 	"filter_helptext": {
-		"message": "To limit a domain and all of its subdomains, add a dot in front of the domain, like this: .example.com"
+		"message": "Pokud potřebujete omezit doménu a všechny její subdomény, přidejte před doménu tečku např.: .example.com"
 	},
 	"filter_header_add": {
-		"message": "Add filter:"
+		"message": "Přidat filtr:"
 	},
 	"filter_header_domain": {
-		"message": "Domain"
+		"message": "Doména"
 	},
 	"filter_header_pinned": {
-		"message": "Pinned Tiles"
+		"message": "Připnuté dlaždice"
 	},
 	"filter_header_unpinned": {
-		"message": "Unpinned Tiles Limit"
+		"message": "Limit odepnutých dlaždic"
 	},
 	"filter_placeholder_host": {
-		"message": "Type or select a domain"
+		"message": "Napište nebo vyberte doménu"
 	},
 	"filter_placeholder_limit": {
 		"message": "Limit"
 	},
 	"filter_set": {
-		"message": "Set"
+		"message": "Nastavit"
 	},
 	"filter_title": {
-		"message": "Browsing History Tiles:"
+		"message": "Procházet historii dlaždic:"
 	},
 	"filter_unlimited": {
-		"message": "unlimited"
+		"message": "bez limitu"
 	},
 	"github": {
-		"message": "New Tab Tools on GitHub"
+		"message": "New Tab Tools na GitHub"
 	},
 	"newtab_pageTitle": {
-		"message": "New Tab"
+		"message": "Nový panel"
 	},
 	"newtab_undo_closeTooltip": {
-		"message": "Hide"
+		"message": "Skrýt"
 	},
 	"newtab_undo_removedLabel": {
-		"message": "Thumbnail removed."
+		"message": "Miniatura odebrána."
 	},
 	"newtab_undo_restoreButton": {
-		"message": "Restore All"
+		"message": "Vše obnovit"
 	},
 	"newtab_undo_undoButton": {
-		"message": "Undo"
+		"message": "Zpět"
 	},
 	"newversion": {
-		"message": "New Tab Tools has been updated to version $VERSION$. New Tab Tools is free, but your donation is appreciated!",
+		"message": "New Tab Tools byl aktualizován na verzi $VERSION$. New Tab Tools je volně použitelný, ale váš dar potěší!",
 		"placeholders": {
 			"version": {
 				"content": "$1",
@@ -130,13 +130,13 @@
 		}
 	},
 	"options_header": {
-		"message": "Options:"
+		"message": "Nastavení:"
 	},
 	"options_columns": {
-		"message": "Columns"
+		"message": "Sloupce"
 	},
 	"options_foreground_opacity": {
-		"message": "Foreground opacity"
+		"message": "Průhlednost"
 	},
 	"options_grid_margin": {
 		"message": "Grid margin"
