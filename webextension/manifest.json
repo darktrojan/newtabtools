@@ -22,7 +22,8 @@
 		]
 	},
 	"page_action": {
-		"default_icon": "capture.svg",
+		"default_icon": "images/tools.svg",
+		"default_popup": "action.html",
 		"default_title": "__MSG_captureThumbnail__",
 		"browser_style": true
 	},

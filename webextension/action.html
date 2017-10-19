@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<style type="text/css">
+	ul {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	.name {
+		-webkit-margin-start: 8px;
+		margin-inline-start: 8px;
+		white-space: nowrap;
+	}
+	.panel-section-footer-button {
+		margin: 0;
+	}
+</style>
+</head>
+<body>
+<div class="panel">
+	<div class="panel-section panel-section-list">
+		<ul id="browsers">
+			<li id="pinned" class="panel-list-item">
+				<img src="images/pinned.svg" width="16" height="16" />
+				<div class="name text">Pinned to the New Tab page</div>
+			</li>
+			<li id="pin" class="panel-list-item">
+				<img src="images/unpinned.svg" width="16" height="16" />
+				<div class="name text">Pin to the New Tab page</div>
+			</li>
+			<li id="capture" class="panel-list-item">
+				<img src="images/capture.svg" width="16" height="16" />
+				<div class="name text">Capture thumbnail</div>
+			</li>
+		</ul>
+	</div>
+</div>
+<script type="text/javascript" src="action.js"></script>
+</body>
+</html>

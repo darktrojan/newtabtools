@@ -3,6 +3,9 @@
 var Tiles = {
 	_cache: [],
 	_list: [],
+	isPinned: function(url) {
+		return this._list.includes(url);
+	},
 	getAllTiles: function() {
 		let count = Prefs.rows * Prefs.columns;
 		return new Promise(function(resolve) {
@@ -116,6 +119,23 @@ var Tiles = {
 			let op = db.transaction('tiles', 'readwrite').objectStore('tiles').delete(tile.id);
 			op.onsuccess = () => resolve();
 			op.onerror = reject;
+		});
+	},
+	pinTile: function(title, url) {
+		if (this.isPinned(url)) {
+			return Promise.resolve();
+		}
+		return new Promise(function(resolve) {
+			db.transaction('tiles').objectStore('tiles').getAll().onsuccess = function() {
+				let p = 0;
+				for (let tile of this.result.filter(t => 'position' in t).sort((a, b) => a.position - b.position)) {
+					if (p != tile.position) {
+						break;
+					}
+					p++;
+				}
+				Tiles.putTile({title, url, position: p}).then(resolve);
+			};
 		});
 	}
 };

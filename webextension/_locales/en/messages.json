@@ -8,6 +8,9 @@
 	"bg_set": {
 		"message": "Set"
 	},
+	"captureThumbnail": {
+		"message": "Capture thumbnail"
+	},
 	"changelog_label": {
 		"message": "What Changed?"
 	},

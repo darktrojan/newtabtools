@@ -97,6 +97,9 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 	let today = getTZDateString();
 
 	switch (message.name) {
+	case 'Tiles.isPinned':
+		sendResponse(Tiles.isPinned(message.url));
+		return;
 	case 'Tiles.getAllTiles':
 		waitForDB().then(function() {
 			return Tiles.getAllTiles();
@@ -115,6 +118,16 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 		return true;
 	case 'Tiles.removeTile':
 		Tiles.removeTile(message.tile).then(sendResponse, console.error);
+		return true;
+	case 'Tiles.pinTile':
+		Tiles.pinTile(message.title, message.url).then(function(id) {
+			for (let view of chrome.extension.getViews()) {
+				if (view.location.pathname == '/newTab.xhtml') {
+					view.Updater.updateGrid();
+				}
+			}
+			sendResponse(id);
+		}, console.error);
 		return true;
 
 	case 'Background.getBackground':
@@ -183,10 +196,6 @@ chrome.webNavigation.onCompleted.addListener(function(details) {
 			});
 		}
 	}).catch(console.error);
-});
-
-chrome.pageAction.onClicked.addListener(function(tab) {
-	chrome.tabs.executeScript(tab.id, {file: 'thumbnail.js'});
 });
 
 function cleanupThumbnails() {
