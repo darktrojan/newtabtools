@@ -34,7 +34,7 @@ document.getElementById('pin').onclick = function() {
 
 document.getElementById('capture').onclick = function() {
 	getTab().then(function(tab) {
-		chrome.tabs.executeScript(tab.id, {file: 'thumbnail.js'}, () => {
+		chrome.runtime.sendMessage({name: 'Thumbnails.capture', url: tab.url}, function() {
 			window.close();
 		});
 	});

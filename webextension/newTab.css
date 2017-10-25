@@ -278,9 +278,6 @@ input[type="button"] {
 	transition: 100ms ease-out;
 	transition-property: opacity;
 }
-#newtab-grid[locked] {
-	/*pointer-events: none;*/
-}
 /* ROWS */
 .newtab-row {
 	display: flex;
@@ -326,7 +323,6 @@ input[type="button"] {
 }
 .newtab-site[frozen] {
 	position: absolute;
-	/*pointer-events: none;*/
 }
 .newtab-site[dragged] {
 	z-index: 10;

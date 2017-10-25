@@ -45,8 +45,6 @@ function getTZDateString(date = new Date()) {
 }
 
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
-	let today = getTZDateString();
-
 	switch (message.name) {
 	case 'Tiles.isPinned':
 		Tiles.ensureReady().then(() => {
@@ -63,6 +61,11 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 			sendResponse(id);
 		}, console.error);
 		return true;
+
+	case 'Thumbnails.capture':
+		let today = getTZDateString();
+		captureThumbnail(message.url, today);
+		return;
 	}
 	return false;
 });
@@ -89,25 +92,7 @@ chrome.webNavigation.onCompleted.addListener(function(details) {
 				db.transaction('thumbnails').objectStore('thumbnails').get(details.url).onsuccess = function() {
 					let today = getTZDateString();
 					if (!this.result || this.result.stored < today) {
-						chrome.tabs.captureVisibleTab(dataURL => {
-							let img = new Image();
-							img.onload = function() {
-								let canvas1 = document.createElement('canvas');
-								canvas1.width = Prefs.thumbnailSize;
-								let context1 = canvas1.getContext('2d');
-								let scale = canvas1.width / this.width;
-								canvas1.height = Math.min(canvas1.width, scale * this.height);
-								context1.imageSmoothingEnabled = true;
-								context1.drawImage(this, 0, 0, canvas1.width, canvas1.height);
-								canvas1.toBlob(function(blob) {
-									objectStore.put({
-										url: details.url, image: blob, stored: today, used: today
-									});
-								});
-							};
-							img.onerror = console.error;
-							img.src = dataURL;
-						});
+						captureThumbnail(details.url, today);
 					}
 				};
 			});
@@ -126,6 +111,28 @@ chrome.tabs.query({}, function(tabs) {
 		}
 	}
 });
+
+function captureThumbnail(url, today) {
+	chrome.tabs.captureVisibleTab(dataURL => {
+		let img = new Image();
+		img.onload = function() {
+			let canvas1 = document.createElement('canvas');
+			canvas1.width = Prefs.thumbnailSize;
+			let context1 = canvas1.getContext('2d');
+			let scale = canvas1.width / this.width;
+			canvas1.height = Math.min(canvas1.width, scale * this.height);
+			context1.imageSmoothingEnabled = true;
+			context1.drawImage(this, 0, 0, canvas1.width, canvas1.height);
+			canvas1.toBlob(function(blob) {
+				db.transaction('thumbnails', 'readwrite').objectStore('thumbnails').put({
+					url: url, image: blob, stored: today, used: today
+				});
+			});
+		};
+		img.onerror = console.error;
+		img.src = dataURL;
+	});
+}
 
 function cleanupThumbnails() {
 	let expiry = getTZDateString(new Date(Date.now() - 1209600000)); // ms in two weeks.

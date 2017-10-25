@@ -276,20 +276,17 @@ var newTabTools = {
 		case 'options-savethumb':
 			let link = this.selectedSite.link;
 			let siteURL = link.url;
-			chrome.runtime.sendMessage({
-				name: 'Thumbnails.get',
-				urls: [siteURL]
-			}, thumbs => {
-				let blob = thumbs.get(siteURL);
+			db.transaction('thumbnails').objectStore('thumbnails').get(siteURL).onsuccess = function() {
+				let blob = this.result.image;
 				if (!blob) {
 					return;
 				}
 				link.image = blob;
 				link.imageIsThumbnail = true;
 				Tiles.putTile(link);
-				this.saveCurrentThumbButton.disabled = true;
-				this.removeSavedThumbButton.disabled = false;
-			});
+				newTabTools.saveCurrentThumbButton.disabled = true;
+				newTabTools.removeSavedThumbButton.disabled = false;
+			};
 			break;
 		case 'options-savedthumb-set':
 			this.setThumbnail(this.selectedSite, URL.createObjectURL(this.setSavedThumbInput.files[0]));
@@ -899,6 +896,10 @@ var newTabTools = {
 					chrome.history.deleteUrl({ url: location.href });
 					this.pinURLBlocked.hidden = true;
 				}
+			});
+
+			chrome.tabs.query({active: true, currentWindow: true}, tabs => {
+				chrome.browserAction.disable(tabs[0].tabId);
 			});
 
 			newTabTools.updateText.textContent = newTabTools.getString('newversion', Prefs.version);

@@ -24,7 +24,14 @@
 		]
 	},
 	"browser_action": {
-		"default_icon": "images/tools-light.svg",
+		"default_icon": {
+			"16": "images/tools-light16.png",
+			"24": "images/tools-light24.png",
+			"32": "images/tools-light32.png",
+			"48": "images/tools-light48.png",
+			"64": "images/tools-light64.png",
+			"96": "images/tools-light96.png"
+		},
 		"default_popup": "action.html",
 		"default_title": "__MSG_extensionName__",
 		"browser_style": true
