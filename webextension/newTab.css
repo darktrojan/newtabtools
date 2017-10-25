@@ -739,20 +739,19 @@ a {
 .autocomplete-icon {
 	width: 16px;
 	height: 16px;
-	background-color: #1f364c;
 	margin-top: 8px;
 }
 li.bookmark .autocomplete-icon {
-	mask: url("images/bookmark.svg");
+	background-image: url("images/bookmark.svg");
 }
 li.tab .autocomplete-icon {
-	mask: url("images/tab.svg");
+	background-image: url("images/tab.svg");
 }
 li.history .autocomplete-icon {
-	mask: url("images/history.svg");
+	background-image: url("images/history.svg");
 }
 li.pinned .autocomplete-icon {
-	mask: url("images/pinned.svg");
+	background-image: url("images/pinned.svg");
 }
 li.current .autocomplete-icon {
 	background-color: highlighttext;

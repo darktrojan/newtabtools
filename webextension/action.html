@@ -11,7 +11,7 @@
 	.disabled > img {
 		opacity: 0.6;
 	}
-	.name {
+	.text {
 		-webkit-margin-start: 8px;
 		margin-inline-start: 8px;
 		white-space: nowrap;
@@ -24,18 +24,18 @@
 <body>
 <div class="panel">
 	<div class="panel-section panel-section-list">
-		<ul id="browsers">
+		<ul>
 			<li id="pinned" class="panel-list-item disabled">
-				<img src="images/pinned.svg" width="16" height="16" />
-				<div class="name" data-message="action_isPinned"></div>
+				<img class="icon" src="images/pinned.svg" width="16" height="16" />
+				<div class="text" data-message="action_isPinned"></div>
 			</li>
 			<li id="pin" class="panel-list-item">
-				<img src="images/unpinned.svg" width="16" height="16" />
-				<div class="name" data-message="action_pin"></div>
+				<img class="icon" src="images/unpinned.svg" width="16" height="16" />
+				<div class="text" data-message="action_pin"></div>
 			</li>
 			<li id="capture" class="panel-list-item">
-				<img src="images/capture.svg" width="16" height="16" />
-				<div class="name" data-message="action_captureThumbnail"></div>
+				<img class="icon" src="images/capture.svg" width="16" height="16" />
+				<div class="text" data-message="action_captureThumbnail"></div>
 			</li>
 		</ul>
 	</div>
