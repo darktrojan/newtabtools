@@ -8,6 +8,9 @@
 		padding: 0;
 		list-style: none;
 	}
+	.disabled > img {
+		opacity: 0.6;
+	}
 	.name {
 		-webkit-margin-start: 8px;
 		margin-inline-start: 8px;
@@ -22,7 +25,7 @@
 <div class="panel">
 	<div class="panel-section panel-section-list">
 		<ul id="browsers">
-			<li id="pinned" class="panel-list-item">
+			<li id="pinned" class="panel-list-item disabled">
 				<img src="images/pinned.svg" width="16" height="16" />
 				<div class="name" data-message="action_isPinned"></div>
 			</li>

@@ -174,10 +174,11 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 
 chrome.webNavigation.onCompleted.addListener(function(details) {
 	if (!['http:', 'https:', 'ftp:'].includes(new URL(details.url).protocol)) {
+		chrome.browserAction.disable(details.tabId);
 		return;
 	}
 
-	chrome.pageAction.show(details.tabId);
+	chrome.browserAction.enable(details.tabId);
 
 	// We might not have called getAllTiles yet.
 	let promise = Tiles._cache.length > 0 ? Promise.resolve(null) : waitForDB().then(Tiles.getAllTiles);

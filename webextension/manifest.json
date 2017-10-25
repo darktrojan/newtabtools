@@ -21,7 +21,7 @@
 			"background.js"
 		]
 	},
-	"page_action": {
+	"browser_action": {
 		"default_icon": "images/tools.svg",
 		"default_popup": "action.html",
 		"default_title": "__MSG_extensionName__",
