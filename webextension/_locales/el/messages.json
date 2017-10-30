@@ -1,6 +1,6 @@
 {
 	"action_captureThumbnail": {
-		"message": "Απαθανατήστε το σκαρίφημα της ιστοσελίδας"
+		"message": "Δημιουργήστε μια μικρογραφία της ιστοσελίδας"
 	},
 	"bg_header": {
 		"message": "Εικόνα φόντου σελίδας:"
@@ -12,7 +12,7 @@
 		"message": "Εφαρμογή"
 	},
 	"changelog_label": {
-		"message": "Τί άλλαξε?"
+		"message": "Τι άλλαξε;"
 	},
 	"contextmenu_block": {
 		"message": "Αφαίρεση πλακιδίου"
@@ -21,7 +21,7 @@
 		"message": "Επεξεργασία τίτλου"
 	},
 	"contextmenu_options": {
-		"message": "New Tab Tools Επιλογές"
+		"message": "Επιλογές New Tab Tools"
 	},
 	"contextmenu_pin": {
 		"message": "Καρφίτσωμα πλακιδίου"
@@ -30,13 +30,13 @@
 		"message": "Ξεκαρφίτσωμα πλακιδίου"
 	},
 	"donate": {
-		"message": "Δωρήστε…"
+		"message": "Δωρίστε…"
 	},
 	"donate_label": {
 		"message": "To New Tab Tools χρηματοδοτείται απο δωρεές χρηστών."
 	},
 	"extensionDescription": {
-		"message": "Παραμετροποιεί την σελίδα της νέας καρτέλας.Μπορείτε να προσθέσετε περισσότερους τίτλους, μπάρα εκκίνησης του Firefox, ή εικόνας φόντου. Επίσης μπορείτε να προσθέσετε νέες εικόνες πλακιδίων και τίτλους."
+		"message": "Παραμετροποιεί την σελίδα της νέας καρτέλας. Μπορείτε να προσθέσετε περισσότερα πλακίδια, ή μια εικόνα παρασκηνίου. Επίσης μπορείτε να προσθέσετε νέες εικόνες πλακιδίων και τίτλους."
 	},
 	"filter_button": {
 		"message": "Φιλτράρισμα…"
@@ -60,7 +60,7 @@
 		"message": "Αναίρεση"
 	},
 	"newversion": {
-		"message": "Το New Tab Tools έχει ενημερωθεί στην έκδοση $1. Το New Tab Tools είναι δωρεάν, αλλα η συνεισφορά σας θα εκτιμηθεί!"
+		"message": "Το New Tab Tools έχει ενημερωθεί στην έκδοση $1. Το New Tab Tools είναι δωρεάν, αλλά η συνεισφορά σας θα εκτιμηθεί!"
 	},
 	"options_header": {
 		"message": "Επιλογές:"
@@ -72,22 +72,22 @@
 		"message": "Διαφάνεια προσκηνίου"
 	},
 	"options_grid_margin": {
-		"message": "Περιθώριο Πλέγματος"
+		"message": "Περιθώριο πλέγματος"
 	},
 	"options_grid_spacing": {
-		"message": "Απόσταση Πλέγματος"
+		"message": "Απόσταση πλέγματος"
 	},
 	"options_historytiles": {
-		"message": "Πλακίδια απο το ιστορικό περιήγησης"
+		"message": "Πλακίδια από το ιστορικό περιήγησης"
 	},
 	"options_launcher_hidden": {
-		"message": "Να Μήν Εμφανίζεται"
+		"message": "Να μην εμφανίζεται"
 	},
 	"options_locked": {
 		"message": "Αποτροπή μετακίνησης πλακιδίων"
 	},
 	"options_recent": {
-		"message": "Πρόσφατα Κλεισμένες Καρτέλες"
+		"message": "Πρόσφατα κλεισμένες καρτέλες"
 	},
 	"options_rows": {
 		"message": "Σειρές"
@@ -105,13 +105,13 @@
 		"message": "Θέμα"
 	},
 	"options_theme_dark": {
-		"message": "Σκοτεινό Θέμα"
+		"message": "Σκοτεινό θέμα"
 	},
 	"options_theme_light": {
-		"message": "Φωτεινό Θέμα"
+		"message": "Φωτεινό θέμα"
 	},
 	"options_thumb_titlesize": {
-		"message": "Μεγεθος Τίτλου Πλακιδίων"
+		"message": "Μεγεθος τίτλου πλακιδίων"
 	},
 	"pin_url_button": {
 		"message": "Προσθήκη"
@@ -126,11 +126,14 @@
 		"message": "Πρόσφατα κλεισμένες καρτέλες:"
 	},
 	"tile_header": {
-		"message": "Πλακίδιο:"
+		"message": "Πλακίδια:"
 	},
 	"tile_savedthumb_label": {
 		"message": "Αποθηκευμένη εικόνα:"
 	},
+	"tile_savedthumb_savecurrent": {
+		"message": "Αποθήκευση τρέχουσας μικρογραφίας"
+},
 	"tile_savedthumb_set": {
 		"message": "Εφαρμογή"
 	},
