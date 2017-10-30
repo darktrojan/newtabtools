@@ -2,8 +2,14 @@
 	"action_captureThumbnail": {
 		"message": "Δημιουργήστε μια μικρογραφία της ιστοσελίδας"
 	},
+	"action_isPinned": {
+		"message": "Καρφιτσώθηκε στην σελίδα Νέας Καρτέλας"
+	},
+	"action_pin": {
+		"message": "Καρφίτσωμα στην σελίδα Νέας Καρτέλας"
+	},
 	"bg_header": {
-		"message": "Εικόνα φόντου σελίδας:"
+		"message": "Εικόνα παρασκηνίου σελίδας:"
 	},
 	"bg_remove": {
 		"message": "Αφαίρεση"
@@ -29,6 +35,22 @@
 	"contextmenu_unpin": {
 		"message": "Ξεκαρφίτσωμα πλακιδίου"
 	},
+	"database_error_cookies": {
+		"message": "Εάν τα cookies είναι απενεργοποιημένα, προσθέστε μία εξαίρεση για το $1."
+	},
+	"database_error_history_settings": {
+		"message": "Το New Tab Tools δεν μπορεί να ξεκινήσει εάν στον Firefox έχει επιλεγεί ότι \"Δεν θα διατηρεί ποτέ το ιστορικό\" ή \"Μόνιμη λειτουργία ιδιωτικής περιήγησης\"."
+	},
+	"database_error_indexeddb": {
+		"description": "Λέξεις ανάμεσα σε χαρακτήρες ` θα τοποθετούνται σε τμήματα HTML <code>",
+		"message": "Πηγαίνετε στο `about:config` και ελέγξτε ότι το `dom.indexedDB.enabled` έχει οριστεί σε true."
+	},
+	"database_error_message": {
+		"message": "Το New Tab Tools δεν μπόρεσε να ξεκινήσει σωστά. Δοκιμάστε αυτά:"
+	},
+	"database_error_restart": {
+		"message": "Θα πρέπει να ξαναξεκινήσετε το New Tab Tools (ή απλώς ξαναξεκινστε τον Firefox) για να εφαρμοστούν οι αλλαγές."
+	},
 	"donate": {
 		"message": "Δωρίστε…"
 	},
@@ -40,6 +62,36 @@
 	},
 	"filter_button": {
 		"message": "Φιλτράρισμα…"
+	},
+	"filter_helptext": {
+		"message": "Για να περιορίσετε έναν τομέα και όλους τους υποτομείς του, προσθέστε μία τελεία μπροστά από τον τομέα, έτσι: .example.com"
+	},
+	"filter_header_add": {
+		"message": "Προσθήκη φίλτρου:"
+	},
+	"filter_header_domain": {
+		"message": "Τομέας"
+	},
+	"filter_header_pinned": {
+		"message": "Καρφιτσωμένα Πλακίδια"
+	},
+	"filter_header_unpinned": {
+		"message": "Όριο Μη-καρφιτσωμένων Πλακιδίων"
+	},
+	"filter_placeholder_host": {
+		"message": "Πληκτρολογήστε ή επιλέξτε τομέα"
+	},
+	"filter_placeholder_limit": {
+		"message": "Όριο"
+	},
+	"filter_set": {
+		"message": "Εφαρμογή"
+	},
+	"filter_title": {
+		"message": "Πλακίδια Ιστορικού Περιήγησης:"
+	},
+	"filter_unlimited": {
+		"message": "απεριόριστα"
 	},
 	"github": {
 		"message": "Το New Tab Tools στο GitHub"
