@@ -173,6 +173,10 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 });
 
 chrome.webNavigation.onCompleted.addListener(function(details) {
+	if (details.frameId !== 0) {
+		return;
+	}
+
 	if (!['http:', 'https:', 'ftp:'].includes(new URL(details.url).protocol)) {
 		chrome.browserAction.disable(details.tabId);
 		return;
@@ -183,7 +187,7 @@ chrome.webNavigation.onCompleted.addListener(function(details) {
 	// We might not have called getAllTiles yet.
 	let promise = Tiles._cache.length > 0 ? Promise.resolve(null) : waitForDB().then(Tiles.getAllTiles);
 	promise.then(function() {
-		if (details.frameId === 0 && Tiles._cache.includes(details.url)) {
+		if (Tiles._cache.includes(details.url)) {
 			chrome.tabs.get(details.tabId, function(tab) {
 				if (tab.incognito) {
 					return;
@@ -197,6 +201,17 @@ chrome.webNavigation.onCompleted.addListener(function(details) {
 			});
 		}
 	}).catch(console.error);
+});
+
+chrome.tabs.query({}, function(tabs) {
+	for (let tab of tabs) {
+		if (!['http:', 'https:', 'ftp:'].includes(new URL(tab.url).protocol)) {
+			chrome.browserAction.disable(tab.id);
+			return;
+		}
+
+		chrome.browserAction.enable(tab.id);
+	}
 });
 
 function cleanupThumbnails() {
