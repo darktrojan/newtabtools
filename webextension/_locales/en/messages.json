@@ -180,6 +180,9 @@
 	"options_thumb_titlesize": {
 		"message": "Tile title size"
 	},
+	"options_toolbar_icon": {
+		"message": "Toolbar icon"
+	},
 	"pin_url_button": {
 		"message": "Add"
 	},

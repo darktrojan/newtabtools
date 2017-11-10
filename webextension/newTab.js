@@ -368,35 +368,24 @@ var newTabTools = {
 
 		let {name, value, checked} = event.originalTarget;
 		switch (name) {
+		case 'toolbarIcon':
 		case 'theme':
-			Prefs.theme = value;
+		case 'spacing':
+		case 'titleSize':
+			Prefs[name] = value;
 			break;
-		case 'foreground.opacity':
-			Prefs.opacity = parseInt(value, 10);
-			break;
+		case 'opacity':
 		case 'rows':
-			Prefs.rows = parseInt(value, 10);
-			break;
 		case 'columns':
-			Prefs.columns = parseInt(value, 10);
+			Prefs[name] = parseInt(value, 10);
 			break;
 		case 'margin':
 			Prefs.margin = value.split(' ');
 			break;
-		case 'spacing':
-			Prefs.spacing = value;
-			break;
-		case 'thumbs.titlesize':
-			Prefs.titleSize = value;
-			break;
 		case 'locked':
-			Prefs.locked = checked;
-			break;
 		case 'history':
-			Prefs.history = checked;
-			break;
 		case 'recent':
-			Prefs.recent = checked;
+			Prefs[name] = checked;
 			break;
 		}
 	},
@@ -534,9 +523,14 @@ var newTabTools = {
 			document.querySelector('[name="columns"]').value = Prefs.columns;
 		}
 
+		if (!keys || keys.includes('toolbarIcon')) {
+			let toolbarIcon = Prefs.toolbarIcon;
+			document.querySelector('[name="toolbarIcon"][value="' + toolbarIcon + '"]').checked = true;
+		}
+
 		if (!keys || keys.includes('theme')) {
 			let theme = Prefs.theme;
-			this.themePref.querySelector('[value="' + theme + '"]').checked = true;
+			document.querySelector('[name="theme"][value="' + theme + '"]').checked = true;
 			document.documentElement.setAttribute('theme', theme);
 		}
 
@@ -552,7 +546,7 @@ var newTabTools = {
 
 		if (!keys || keys.includes('titleSize')) {
 			let titleSize = Prefs.titleSize;
-			document.querySelector('[name="thumbs.titlesize"]').value = titleSize;
+			document.querySelector('[name="titleSize"]').value = titleSize;
 			document.documentElement.setAttribute('titlesize', titleSize);
 		}
 
@@ -573,7 +567,7 @@ var newTabTools = {
 
 		if (!keys || keys.includes('opacity')) {
 			let opacity = Prefs.opacity;
-			document.querySelector('[name="foreground.opacity"]').value = opacity;
+			document.querySelector('[name="opacity"]').value = opacity;
 			document.documentElement.style.setProperty('--opacity', opacity / 100);
 		}
 
@@ -906,7 +900,6 @@ var newTabTools = {
 		'setBackgroundInput': 'options-bg-input',
 		'setBackgroundButton': 'options-bg-set',
 		'removeBackgroundButton': 'options-bg-remove',
-		'themePref': 'options-theme-pref',
 		'recentList': 'newtab-recent',
 		'recentListOuter': 'newtab-recent-outer',
 		'optionsBackground': 'options-bg',

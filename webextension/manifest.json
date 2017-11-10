@@ -22,7 +22,7 @@
 		]
 	},
 	"browser_action": {
-		"default_icon": "images/tools.svg",
+		"default_icon": "images/tools-light.svg",
 		"default_popup": "action.html",
 		"default_title": "__MSG_extensionName__",
 		"browser_style": true
