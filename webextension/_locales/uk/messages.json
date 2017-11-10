@@ -1,0 +1,240 @@
+{
+	"action_captureThumbnail": {
+		"message": "Створити мініатуру сторінки"
+	},
+	"action_isPinned": {
+		"message": "Закріплено до Експрес-панелі"
+	},
+	"action_pin": {
+		"message": "Закріпити до Експрес-панелі"
+	},
+	"bg_header": {
+		"message": "Фонове зображення Експрес-панелі:"
+	},
+	"bg_remove": {
+		"message": "Видалити"
+	},
+	"bg_set": {
+		"message": "Застосувати"
+	},
+	"changelog_label": {
+		"message": "Що нового?"
+	},
+	"contextmenu_block": {
+		"message": "Видалити цю плитку"
+	},
+	"contextmenu_edit": {
+		"message": "Редагувати цю плитку"
+	},
+	"contextmenu_options": {
+		"message": "Налаштування New Tab Tools"
+	},
+	"contextmenu_pin": {
+		"message": "Закріпити цю плитку"
+	},
+	"contextmenu_unpin": {
+		"message": "Відкріпити плитку"
+	},
+	"database_error_cookies": {
+		"message": "Якщо кукі вимкнені, додайте виняток для $URL$.",
+		"placeholders": {
+			"url": {
+				"content": "$1",
+				"example": "moz-extension://cdea0cc6-fa00-4a9f-b60e-c011fa0decb9/"
+			}
+		}
+	},
+	"database_error_history_settings": {
+		"message": "New Tab Tools не запуститься, якщо Firefox налаштований на \"never remember history\" або \"always open in private browsing mode\"."
+	},
+	"database_error_indexeddb": {
+		"description": "Words between ` characters will be placed in HTML <code> blocks",
+		"message": "Перейдіть до `about:config` та перевірте, що `dom.indexedDB.enabled` з параметром true."
+	},
+	"database_error_message": {
+		"message": "New Tab Tools не запустився. Спробуйте це:"
+	},
+	"database_error_restart": {
+		"message": "Вам доведеться перезапустити New Tab Tools (або просто перезапустіть Firefox) для того, щоб зміни задіялись."
+	},
+	"donate": {
+		"message": "Здійснити пожертву…"
+	},
+	"donate_label": {
+		"message": "New Tab Tools фінансується за рахунок пожертв користувачів."
+	},
+	"extensionDescription": {
+		"message": "Налаштовувана Експрес-панель. Ви маєте можливість налаштувати кількість відображених плиток, увімкнути панель швидкого доступу та обрати фонове зображення. А також, можете змінювати назви та зображення плиток."
+	},
+	"extensionName": {
+		"message": "New Tab Tools"
+	},
+	"filter_button": {
+		"message": "Фільтр…"
+	},
+  	"filter_helptext": {
+		"message": "Для виставлення ліміту на домен та усі його похідні, додайте перед ним крапку, наприклад: .example.com"
+	},
+	"filter_header_add": {
+		"message": "Додати фільтр:"
+	},
+	"filter_header_domain": {
+		"message": "Домен"
+	},
+	"filter_header_pinned": {
+		"message": "Закріплені плитки"
+	},
+	"filter_header_unpinned": {
+		"message": "Відкріплені плитки"
+	},
+	"filter_placeholder_host": {
+		"message": "Введіть домен або оберіть із випадаючого списку"
+	},
+	"filter_placeholder_limit": {
+		"message": "Ліміт"
+	},
+	"filter_set": {
+		"message": "Застосувати"
+	},
+	"filter_title": {
+		"message": "Плитки з Історії:"
+	},
+	"filter_unlimited": {
+		"message": "безмежно"
+	},
+	"github": {
+		"message": "New Tab Tools на GitHub"
+	},
+	"newtab_pageTitle": {
+		"message": "Нова вкладка"
+	},
+	"newtab_undo_closeTooltip": {
+		"message": "Сховати"
+	},
+	"newtab_undo_removedLabel": {
+		"message": "Мініатюра видалена."
+	},
+	"newtab_undo_restoreButton": {
+		"message": "Відновити все"
+	},
+	"newtab_undo_undoButton": {
+		"message": "Відміна"
+	},
+	"newversion": {
+		"message": "Додаток New Tab Tools був оновлений до версії $1. New Tab Tools поширюється безкоштовно, але ваші пожертви будуть сприйняті з вдячністю!"
+	},
+	"options_header": {
+		"message": "Опції:"
+	},
+	"options_columns": {
+		"message": "Стовбці"
+	},
+	"options_foreground_opacity": {
+		"message": "Непрозорість плиток"
+	},
+	"options_grid_margin": {
+		"message": "Відступ від краю"
+	},
+	"options_grid_spacing": {
+		"message": "відступ поміж плиток"
+	},
+	"options_historytiles": {
+		"message": "Плитки з Історії"
+	},
+	"options_launcher_hidden": {
+		"message": "Приховати"
+	},
+	"options_locked": {
+		"message": "Попередити перетаскування плиток"
+	},
+	"options_recent": {
+		"message": "Нещодавно закриті вкладки"
+	},
+	"options_rows": {
+		"message": "Рядки"
+	},
+	"options_size_large": {
+		"message": "Великі"
+	},
+	"options_size_medium": {
+		"message": "Середні"
+	},
+	"options_size_small": {
+		"message": "Малі"
+	},
+	"options_theme": {
+		"message": "Выбір теми оформлення"
+	},
+	"options_theme_dark": {
+		"message": "Темна Тема"
+	},
+	"options_theme_light": {
+		"message": "Світла Тема"
+	},
+	"options_thumb_titlesize": {
+		"message": "Назви плиток"
+	},
+	"pin_url_button": {
+		"message": "Додати"
+	},
+	"pin_url_header": {
+		"message": "Додати плитку:"
+	},
+	"pin_url_placeholder": {
+		"message": "Введіть адресу або оберіть із випадаючого списку"
+	},
+	"recently_closed_tabs": {
+		"message": "Нещодавно закриті вкладки:"
+	},
+	"tile_header": {
+		"message": "Плитки:"
+	},
+	"tile_savedthumb_label": {
+		"message": "Збережене зображення:"
+	},
+	"tile_savedthumb_savecurrent": {
+		"message": "Зберегти поточну мініатюру"
+	},
+	"tile_savedthumb_set": {
+		"message": "Застосувати"
+	},
+	"tile_selection_next_tooltip": {
+		"message": "Наступна плитка"
+	},
+	"tile_selection_nextrow_tooltip": {
+		"message": "Наступний рядок"
+	},
+	"tile_selection_previous_tooltip": {
+		"message": "Попередня плитка"
+	},
+	"tile_selection_previousrow_tooltip": {
+		"message": "Попередній рядок"
+	},
+	"tile_thumbnail_bgcolor": {
+		"message": "Колір фону:"
+	},
+	"tile_thumbnail_remove": {
+		"message": "Видалити"
+	},
+	"tile_title_label": {
+		"message": "Назва плитки:"
+	},
+	"tile_title_placeholder": {
+		"message": "Введіть нову назву плитки"
+	},
+	"tile_title_set": {
+		"message": "Застосувати"
+	},
+	"tile_block": {
+		"message": "Видалити цю адресу"
+	},
+	"tile_pin": {
+		"message": "Прикріпити дану адресу на цьому місці"
+	},
+	"tile_unpin": {
+		"message": "Відкріпити цю адресу"
+	},
+	"tileurl_empty": {
+		"message": "Порожня плитка"
+	}
+}
