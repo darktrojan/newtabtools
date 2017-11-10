@@ -36,7 +36,7 @@
 		"message": "New Tab Tools 設定"
 	},
 	"database_error_cookies": {
-		"message": "cookies が無効になっている場合は、$URL$ を例外に追加してください。"
+		"message": "cookies が無効になっている場合は、$1 を例外に追加してください。"
 	},
 	"database_error_history_settings": {
 		"message": "Firefox が\"履歴を記憶させない\"または\"常にプライベートブラウジングモードで開く\"に設定されている場合、New Tab Tools は起動できません。"
