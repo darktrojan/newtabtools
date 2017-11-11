@@ -655,7 +655,9 @@ Cell.prototype = {
 			break;
 		case 'drop':
 			event.preventDefault();
-			Drop.drop(this, event);
+			if (!event.isTrusted) {
+				Drop.drop(this, event);
+			}
 			break;
 		}
 	}
@@ -1391,12 +1393,7 @@ var DropTargetShim = {
 	   */
 	_dispatchEvent: function({dataTransfer}, type, target) {
 		let node = target.node;
-		let event = document.createEvent('DragEvent');
-
-		// The event should not bubble to prevent recursion.
-		event.initDragEvent(type, false, true, window, 0, 0, 0, 0, 0, false, false,
-		false, false, 0, node, dataTransfer);
-
+		let event = new DragEvent(type, {dataTransfer});
 		node.dispatchEvent(event);
 	}
 };

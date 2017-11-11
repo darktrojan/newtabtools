@@ -97,7 +97,15 @@ input[type="button"] {
 	margin-top: 0;
 	margin-bottom: 8px;
 }
+:root[spacing="medium"] #newtab-margin-top:-webkit-any(.medium, .large) :-webkit-any(#newtab-recent-outer, #newtab-undo-container, #options-toggle) {
+	margin-top: 0;
+	margin-bottom: 8px;
+}
 :root[spacing="large"] #newtab-margin-top:-moz-any(.medium, .large) :-moz-any(#newtab-recent-outer, #newtab-undo-container, #options-toggle) {
+	margin-top: 0;
+	margin-bottom: 18px;
+}
+:root[spacing="large"] #newtab-margin-top:-webkit-any(.medium, .large) :-webkit-any(#newtab-recent-outer, #newtab-undo-container, #options-toggle) {
 	margin-top: 0;
 	margin-bottom: 18px;
 }
@@ -114,6 +122,7 @@ input[type="button"] {
 #newtab-recent > span {
 	display: inline-block;
 	vertical-align: middle;
+	-webkit-margin-end: 4px;
 	margin-inline-end: 4px;
 	color: var(--text);
 	text-shadow: 0 0 3px var(--shadow), 0 0 1px var(--shadow);
@@ -124,6 +133,7 @@ input[type="button"] {
 	line-height: 20px;
 	border-radius: 4px;
 	/* see newTabTools.trimRecent */
+	-webkit-margin-end: 4px;
 	margin-inline-end: 4px;
 	cursor: pointer;
 	text-decoration: none;
@@ -144,6 +154,7 @@ input[type="button"] {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	-webkit-margin-start: 1em;
 	margin-inline-start: 1em;
 	line-height: 28px;
 	color: var(--text-hover);
@@ -162,6 +173,7 @@ input[type="button"] {
 	cursor: pointer;
 	height: 18px;
 	width: 18px;
+	-webkit-margin-start: 2px;
 	margin-inline-start: 2px;
 	padding: 0;
 	border: none;
@@ -191,17 +203,23 @@ input[type="button"] {
 :root[spacing="medium"] #newtab-margin-bottom:-moz-any(.medium, .large) :-moz-any(#newtab-update-outer, #locked-toggle) {
 	margin-top: 8px;
 }
+:root[spacing="medium"] #newtab-margin-bottom:-webkit-any(.medium, .large) :-webkit-any(#newtab-update-outer, #locked-toggle) {
+	margin-top: 8px;
+}
 :root[spacing="large"] #newtab-margin-bottom:-moz-any(.medium, .large) :-moz-any(#newtab-update-outer, #locked-toggle) {
+	margin-top: 18px;
+}
+:root[spacing="large"] #newtab-margin-bottom:-webkit-any(.medium, .large) :-webkit-any(#newtab-update-outer, #locked-toggle) {
 	margin-top: 18px;
 }
 #newtab-update-text {
 	color: var(--text-hover);
+	-webkit-margin-end: 1em;
 	margin-inline-end: 1em;
 }
 #newtab-undo-container button:not(.close-button),
 #newtab-update-notice button:not(.close-button) {
 	min-width: 0;
-	padding: 0;
 	font-size: 12px;
 	color: #444;
 	margin: 0 2px;
@@ -286,15 +304,19 @@ input[type="button"] {
 .newtab-cell {
 	display: flex;
 	flex: 1;
+	-webkit-margin-end: 5px;
 	margin-inline-end: 5px;
 }
 :root[spacing="medium"] .newtab-cell:not(:last-child) {
+	-webkit-margin-end: 10px;
 	margin-inline-end: 10px;
 }
 :root[spacing="large"] .newtab-cell:not(:last-child) {
+	-webkit-margin-end: 20px;
 	margin-inline-end: 20px;
 }
 .newtab-cell:last-child {
+	-webkit-margin-end: 0;
 	margin-inline-end: 0;
 }
 /* SITES */
@@ -325,6 +347,7 @@ svg {
 /* FAVICON + LINK + THUMBNAIL */
 .favicon {
 	margin-top: -2px;
+	-webkit-margin-end: 3px;
 	margin-inline-end: 3px;
 	vertical-align: middle;
 	width: 16px;
@@ -359,7 +382,6 @@ svg {
 	background-position: 50% 50%;
 }
 .newtab-thumbnail[dragged],
-.newtab-link:-moz-focusring > .newtab-thumbnail,
 .newtab-site:active > .newtab-link > .newtab-thumbnail,
 .newtab-site:hover > .newtab-link > .newtab-thumbnail {
 	opacity: 1;
@@ -416,7 +438,7 @@ svg {
 :root[locked="true"] .newtab-control {
 	display: none;
 }
-.newtab-control:-moz-focusring,
+.newtab-control:active,
 .newtab-site:hover > .newtab-control {
 	opacity: var(--opacity);
 }
@@ -431,12 +453,10 @@ svg {
 		opacity: 1;
 	}
 }
-.newtab-control-pin:-moz-locale-dir(ltr),
-.newtab-control-block:-moz-locale-dir(rtl) {
+.newtab-control-pin {
 	left: 4px;
 }
-.newtab-control-block:-moz-locale-dir(ltr),
-.newtab-control-pin:-moz-locale-dir(rtl) {
+.newtab-control-block {
 	right: 4px;
 }
 .newtab-control-pin[pinned] {
@@ -464,20 +484,32 @@ svg {
 	margin-inline-start: 8px;
 	margin-inline-end: 0;
 }
+:root[spacing="medium"] .newtab-margin-right:-webkit-any(.medium, .large) :-webkit-any(#options-toggle, #locked-toggle) {
+	-webkit-margin-start: 8px;
+	-webkit-margin-end: 0;
+}
 :root[spacing="large"] .newtab-margin-right:-moz-any(.medium, .large) :-moz-any(#options-toggle, #locked-toggle) {
 	margin-inline-start: 18px;
 	margin-inline-end: 0;
 }
+:root[spacing="large"] .newtab-margin-right:-webkit-any(.medium, .large) :-webkit-any(#options-toggle, #locked-toggle) {
+	-webkit-margin-start: 18px;
+	-webkit-margin-end: 0;
+}
 /* Using :-moz-any on this causes bad things. */
 .newtab-margin-right:not(.medium):not(.large) #options-toggle,
 .newtab-margin-right:not(.medium):not(.large) #locked-toggle {
+	-webkit-margin-end: 0;
 	margin-inline-end: 0;
+	-webkit-padding-start: 1px;
 	padding-inline-start: 1px;
 	width: 27px;
 }
 #options-toggle,
 #locked-toggle {
+	-webkit-margin-end: -1px;
 	margin-inline-end: -1px;
+	-webkit-margin-start: 3px;
 	margin-inline-start: 3px;
 	width: 28px;
 	height: 28px;
@@ -511,11 +543,6 @@ svg {
 }
 :root[theme="dark"][locked="true"] #locked-toggle {
 	background-image: url("images/locked-dark.svg");
-}
-#options-toggle:-moz-locale-dir(rtl),
-#locked-toggle:-moz-locale-dir(rtl) {
-	left: 10px;
-	right: auto;
 }
 :root[options-hidden] #options,
 :root[options-hidden] #options-bg,
@@ -567,6 +594,7 @@ svg {
 }
 #options-tile {
 	width: 350px;
+	-webkit-margin-end: 2em;
 	margin-inline-end: 2em;
 }
 #options-page {
@@ -584,7 +612,9 @@ svg {
 }
 #options button:not(.arrow) {
 	min-width: 0;
+	-webkit-margin-start: 0;
 	margin-inline-start: 0;
+	-webkit-margin-end: 0;
 	margin-inline-end: 0;
 	padding: 0;
 }
@@ -687,6 +717,7 @@ table {
 	vertical-align: middle;
 }
 #options-page td > label:not(:first-child) {
+	-webkit-margin-start: 1em;
 	margin-inline-start: 1em;
 }
 #options-page td img {
@@ -699,6 +730,7 @@ table {
 }
 #options input[type="checkbox"],
 #options input[type="radio"] {
+	-webkit-margin-end: 4px;
 	margin-inline-end: 4px;
 	vertical-align: middle;
 }
@@ -709,6 +741,7 @@ input[type="number"] {
 	width: 4em;
 }
 #options #historytiles-filter {
+	-webkit-margin-start: 20px;
 	margin-inline-start: 20px;
 }
 a {
@@ -788,6 +821,7 @@ li.current .autocomplete-icon {
 /* FILTER */
 #options-filter {
 	display: none;
+	-webkit-margin-start: 2em;
 	margin-inline-start: 2em;
 	width: 350px;
 }

@@ -265,6 +265,7 @@ var newTabTools = {
 			this.removeThumbnail(this.selectedSite);
 			this.removeSavedThumbButton.disabled = true;
 			break;
+		case 'options-bgcolor-display':
 		case 'options-bgcolor-displaybutton':
 			this.setBgColourInput.click();
 			break;
@@ -366,7 +367,7 @@ var newTabTools = {
 			return;
 		}
 
-		let {name, value, checked} = event.originalTarget;
+		let {name, value, checked} = event.target;
 		switch (name) {
 		case 'toolbarIcon':
 		case 'theme':
