@@ -72,7 +72,7 @@
 	"filter_button": {
 		"message": "Фільтр…"
 	},
-  	"filter_helptext": {
+	"filter_helptext": {
 		"message": "Для виставлення ліміту на домен та усі його похідні, додайте перед ним крапку, наприклад: .example.com"
 	},
 	"filter_header_add": {
