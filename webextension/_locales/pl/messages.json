@@ -1,4 +1,13 @@
 {
+	"action_captureThumbnail": {
+		"message": "Przechwyć miniaturkę"
+	},
+	"action_isPinned": {
+		"message": "Przypięte do strony New Tab"
+	},
+	"action_pin": {
+		"message": "Przypnij do strony New Tab"
+	},
 	"bg_header": {
 		"message": "Obraz tła strony:"
 	},
@@ -24,13 +33,35 @@
 		"message": "Usuń ten kafelek"
 	},
 	"contextmenu_options": {
-		"message": "Opcje"
+		"message": "Opcje New Tab Tools"
+	},
+	"database_error_cookies": {
+		"message": "Jeżeli ciasteczka są wyłączone, dodaj wyjątek dla $URL$.",
+		"placeholders": {
+			"url": {
+				"content": "$1",
+				"example": "moz-extension://cdea0cc6-fa00-4a9f-b60e-c011fa0decb9/"
+			}
+		}
+	},
+	"database_error_history_settings": {
+		"message": "New Tab Tools nie może być uruchomione, jeżeli w Firefox jest wybrane \"nie będzie zachowywał historii\" or \"Zawsze aktywny tryb przeglądania prywatnego\"."
+	},
+	"database_error_indexeddb": {
+		"description": "Słowa między znakami ` będą umieszczone w HTMLowych blokach <code>",
+		"message": "Uruchom `about:config` i sprawdź czy `dom.indexedDB.enabled` jest ustawione na TAK."
+	},
+	"database_error_message": {
+		"message": "New Tab Tools nie może być uruchomione poprawnie. Spróbuj poniższych:"
+	},
+	"database_error_restart": {
+		"message": "Musisz zrestartować New Tab Tools (lub zrestartować Firefoxa), aby te zmiany odniosły efekt."
 	},
 	"donate": {
 		"message": "Wspomóż…"
 	},
 	"donate_label": {
-		"message": "New Tab Tools jest finansowany przez darowizny użytkowników."
+		"message": "New Tab Tools jest finansowany z darowizn użytkowników."
 	},
 	"extensionDescription": {
 		"message": "Modyfikuje stronę nowej karty. Możesz dodać więcej kafelków, pasek uruchamiania lub obrazek w tle. Możesz też ustawiać obrazy i tytuły dla kafelków."
@@ -149,6 +180,9 @@
 	"options_thumb_titlesize": {
 		"message": "Wielkość tytułu kafelków"
 	},
+	"options_toolbar_icon": {
+		"message": "Ikona paska narzędzi"
+	},
 	"pin_url_button": {
 		"message": "Dodaj"
 	},
@@ -166,6 +200,9 @@
 	},
 	"tile_savedthumb_label": {
 		"message": "Zapisany obraz:"
+	},
+	"tile_savedthumb_savecurrent": {
+		"message": "Zapisanie aktualnej miniturki"
 	},
 	"tile_savedthumb_set": {
 		"message": "Ustaw"
