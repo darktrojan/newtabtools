@@ -168,6 +168,9 @@
 	"options_thumb_titlesize": {
 		"message": "Μεγεθος τίτλου πλακιδίων"
 	},
+	"options_toolbar_icon": {
+		"message": "Εικονίδιο γραμμής εργαλείων"
+	},
 	"pin_url_button": {
 		"message": "Προσθήκη"
 	},
