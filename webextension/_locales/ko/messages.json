@@ -1,0 +1,250 @@
+{
+	"action_captureThumbnail": {
+		"message": "섬네일 캡처"
+	},
+	"action_isPinned": {
+		"message": "새 탭 페이지에 고정됨"
+	},
+	"action_pin": {
+		"message": "새 탭 페이지에 고정"
+	},
+	"bg_header": {
+		"message": "새 탭 페이지 백그라운드 이미지:"
+	},
+	"bg_remove": {
+		"message": "제거"
+	},
+	"bg_set": {
+		"message": "설정"
+	},
+	"changelog_label": {
+		"message": "변경 내용"
+	},
+	"contextmenu_edit": {
+		"message": "선택한 타일 수정"
+	},
+	"contextmenu_pin": {
+		"message": "선택한 타일 고정"
+	},
+	"contextmenu_unpin": {
+		"message": "선택한 타일 고정 해제"
+	},
+	"contextmenu_block": {
+		"message": "선택한 타일 제거"
+	},
+	"contextmenu_options": {
+		"message": "New Tab Tools 옵션"
+	},
+	"database_error_cookies": {
+		"message": "쿠키가 비활성화 되어 있으면, $URL$을 예외로 설정해 주세요.",
+		"placeholders": {
+			"url": {
+				"content": "$1",
+				"example": "moz-extension://cdea0cc6-fa00-4a9f-b60e-c011fa0decb9/"
+			}
+		}
+	},
+	"database_error_history_settings": {
+		"message": "Firefox가 \"방문 기록 저장 안함\"또는 \"항상 사생활보호 브라우징 모드로 열기\"으로 설정된 경우 New Tab Tools를 시작할 수 없습니다."
+	},
+	"database_error_indexeddb": {
+		"description": "Words between ` characters will be placed in HTML <code> blocks",
+		"message": "`about:config`에서 `dom.indexedDB.enabled`이 true로 되어있는지 확인하십시오."
+	},
+	"database_error_message": {
+		"message": "New Tab Tools를 제대로 시작할 수 없습니다. 다음을 시도하십시오:"
+	},
+	"database_error_restart": {
+		"message": "변경된 설정을 적용하기 위해서는 New Tab Tools 또는 Firefox 재시작이 필요할 수 있습니다."
+	},
+	"donate": {
+		"message": "기부하기..."
+	},
+	"donate_label": {
+		"message": "New Tab Tools은 여러분의 기부로 개발됩니다."
+	},
+	"extensionDescription": {
+		"message": "새 탭 페에지를 커스텀 하며, 새로운 탭과 백그라운드 이미지를 추가할 수 있습니다. 그리고 새로운 타일 이미지와 타일 타이틀을 설정할 수 있습니다."
+	},
+	"extensionName": {
+		"message": "New Tab Tools"
+	},
+	"filter_button": {
+		"message": "필터…"
+	},
+	"filter_helptext": {
+		"message": "도메인 및 모든 하위 도메인을 제한하려면 .example.com 같이 도메인 앞에 점을 추가하십시오."
+		
+	},
+	"filter_header_add": {
+		"message": "필터 추가:"
+	},
+	"filter_header_domain": {
+		"message": "도메인"
+	},
+	"filter_header_pinned": {
+		"message": "고정된 타일"
+	},
+	"filter_header_unpinned": {
+		"message": "고정하지 않은 타일 제한"
+	},
+	"filter_placeholder_host": {
+		"message": "도메인 선택 또는 입력"
+	},
+	"filter_placeholder_limit": {
+		"message": "제한"
+	},
+	"filter_set": {
+		"message": "설정"
+	},
+	"filter_title": {
+		"message": "방문 기록 타일:"
+	},
+	"filter_unlimited": {
+		"message": "제한 없음"
+	},
+	"github": {
+		"message": "New Tab Tools GitHub 바로가기"
+	},
+	"newtab_pageTitle": {
+		"message": "New Tab"
+	},
+	"newtab_undo_closeTooltip": {
+		"message": "숨기기"
+	},
+	"newtab_undo_removedLabel": {
+		"message": "섬네일이 제거되었습니다."
+	},
+	"newtab_undo_restoreButton": {
+		"message": "전부 복원하기"
+	},
+	"newtab_undo_undoButton": {
+		"message": "취소"
+	},
+	"newversion": {
+		"message": "New Tab Tools이 $VERSION$으로 업데이트 되었습니다. New Tab Tools은 무료이며, 여러분의 기부를 언제나 환영합니다!",
+		"placeholders": {
+			"version": {
+				"content": "$1",
+				"example": "84"
+			}
+		}
+	},
+	"options_header": {
+		"message": "옵션:"
+	},
+	"options_columns": {
+		"message": "모든 열"
+	},
+	"options_foreground_opacity": {
+		"message": "불투명도"
+	},
+	"options_grid_margin": {
+		"message": "테두리 여백"
+	},
+	"options_grid_spacing": {
+		"message": "테투리 간격"
+	},
+	"options_historytiles": {
+		"message": "방문 기록 타일"
+	},
+	"options_launcher_hidden": {
+		"message": "표시 안함"
+	},
+	"options_locked": {
+		"message": "타일 이동 잠구기"
+	},
+	"options_recent": {
+		"message": "최근 닫은 탭"
+	},
+	"options_rows": {
+		"message": "모든 행"
+	},
+	"options_size_large": {
+		"message": "큰 사이즈"
+	},
+	"options_size_medium": {
+		"message": "중간 사이즈"
+	},
+	"options_size_small": {
+		"message": "작은 사이즈"
+	},
+	"options_theme": {
+		"message": "테마"
+	},
+	"options_theme_dark": {
+		"message": "어두은 테마"
+	},
+	"options_theme_light": {
+		"message": "밝은 테마"
+	},
+	"options_thumb_titlesize": {
+		"message": "타일 타이틀 크기"
+	},
+	"options_toolbar_icon": {
+		"message": "툴바 아이콘"
+	},
+	"pin_url_button": {
+		"message": "추가"
+	},
+	"pin_url_header": {
+		"message": "타일 추가:"
+	},
+	"pin_url_placeholder": {
+		"message": "URL 입력 또는 선택"
+	},
+	"recently_closed_tabs": {
+		"message": "최근 닫은 탭:"
+	},
+	"tile_header": {
+		"message": "모든 타일:"
+	},
+	"tile_savedthumb_label": {
+		"message": "저장된 이미지:"
+	},
+	"tile_savedthumb_savecurrent": {
+		"message": "현재 섬네일 저장"
+	},
+	"tile_savedthumb_set": {
+		"message": "설정"
+	},
+	"tile_selection_next_tooltip": {
+		"message": "다음 타일"
+	},
+	"tile_selection_nextrow_tooltip": {
+		"message": "다음 행"
+	},
+	"tile_selection_previous_tooltip": {
+		"message": "이전 타일"
+	},
+	"tile_selection_previousrow_tooltip": {
+		"message": "이전 행"
+	},
+	"tile_thumbnail_bgcolor": {
+		"message": "백그라운드 색상:"
+	},
+	"tile_thumbnail_remove": {
+		"message": "제거"
+	},
+	"tile_title_label": {
+		"message": "타이틀:"
+	},
+	"tile_title_placeholder": {
+		"message": "타일에 새로운 타이틀 입력"
+	},
+	"tile_title_set": {
+		"message": "설정"
+	},
+	"tile_block": {
+		"message": "선택한 사이트 제거"
+	},
+	"tile_pin": {
+		"message": "선택한 사이트를 현재 위치에 고정"
+	},
+	"tile_unpin": {
+		"message": "선택한 사이트 고정 해제"
+	},
+	"tileurl_empty": {
+		"message": "빈 타일"
+	}
+}
