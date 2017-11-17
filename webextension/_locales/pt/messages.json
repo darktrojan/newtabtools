@@ -1,0 +1,248 @@
+{
+	"action_captureThumbnail": {
+		"message": "Capturar miniatura da página"
+	},
+	"action_isPinned": {
+		"message": "Afixado na página de Novo Separador"
+	},
+	"action_pin": {
+		"message": "Afixar na página de Novo Separador"
+	},
+	"bg_header": {
+		"message": "Imagem de fundo da página:"
+	},
+	"bg_remove": {
+		"message": "Remover"
+	},
+	"bg_set": {
+		"message": "Definir"
+	},
+	"changelog_label": {
+		"message": "O Que Mudou?"
+	},
+	"contextmenu_edit": {
+		"message": "Editar este azulejo"
+	},
+	"contextmenu_pin": {
+		"message": "Afixar este azulejo"
+	},
+	"contextmenu_unpin": {
+		"message": "Desafixar este azulejo"
+	},
+	"contextmenu_block": {
+		"message": "Remover este azulejo"
+	},
+	"contextmenu_options": {
+		"message": "Opções das Ferramentas do Novo Separador"
+	},
+	"database_error_cookies": {
+		"message": "Se as cookies estão desactivadas, adicionar uma excepção para $URL$.",
+		"placeholders": {
+			"url": {
+				"content": "$1",
+				"example": "moz-extension://cdea0cc6-fa00-4a9f-b60e-c011fa0decb9/"
+			}
+		}
+	},
+	"database_error_history_settings": {
+		"message": "As Ferramentas do Novo Separador não podem ser iniciadas se o Firefox está definido para \"never remember history\" ou \"always open in private browsing mode\"."
+	},
+	"database_error_indexeddb": {
+		"description": "Words between ` characters will be placed in HTML <code> blocks",
+		"message": "Go to `about:config` and check `dom.indexedDB.enabled` is set to true."
+	},
+	"database_error_message": {
+		"message": "As Ferramentas do Novo Separador não foram iniciadas correctamente. Tenta o seguinte:"
+	},
+	"database_error_restart": {
+		"message": "Tens de reiniciar as Ferramentas do Novo Separador (ou apenas o Firefox) para estas alterações terem efeito."
+	},
+	"donate": {
+		"message": "Doar…"
+	},
+	"donate_label": {
+		"message": "As Ferramentas do Novo Separador são financiadas por doações de utilizadores."
+	},
+	"extensionDescription": {
+		"message": "Personaliza a página de Novo Separador. Podes adicionar mais azulejos, ou uma imagem de fundo. Podes também definir novas imagens de azulejo e títulos."
+	},
+	"extensionName": {
+		"message": "Ferramentas do Novo Separador"
+	},
+	"filter_button": {
+		"message": "Filtros…"
+	},
+	"filter_helptext": {
+		"message": "Para limitar um domínio e todos os seus subdomínios, adiciona um ponto final á frente do domínio, assim: .exemplo.com"
+	},
+	"filter_header_add": {
+		"message": "Adicionar filtro:"
+	},
+	"filter_header_domain": {
+		"message": "Domínio"
+	},
+	"filter_header_pinned": {
+		"message": "Azulejos Afixados"
+	},
+	"filter_header_unpinned": {
+		"message": "Limite de Azulejos Desafixados"
+	},
+	"filter_placeholder_host": {
+		"message": "Escreve ou selecciona um dominio"
+	},
+	"filter_placeholder_limit": {
+		"message": "Limite"
+    },
+	"filter_set": {
+		"message": "Selecionar"
+	},
+	"filter_title": {
+		"message": "A Pesquisar Histórico de Azulejos:"
+	},
+	"filter_unlimited": {
+		"message": "ilimitado"
+	},
+	"github": {
+		"message": "Ferramentas do Novo Separador no GitHub"
+	},
+	"newtab_pageTitle": {
+		"message": "Novo Separador"
+	},
+	"newtab_undo_closeTooltip": {
+		"message": "Esconder"
+	},
+	"newtab_undo_removedLabel": {
+		"message": "Miniatura removida."
+	},
+	"newtab_undo_restoreButton": {
+		"message": "Restaurar Tudo"
+	},
+	"newtab_undo_undoButton": {
+		"message": "Anular"
+	},
+	"newversion": {
+		"message": "As Ferramentas do Novo Separador foram actualizadas para a versão $VERSION$. As Ferramentas do Novo Separador são grátis, mas as tuas doações são apreciadas!",
+		"placeholders": {
+			"version": {
+				"content": "$1",
+				"example": "84"
+			}
+		}
+	},
+	"options_header": {
+		"message": "Opções:"
+	},
+	"options_columns": {
+		"message": "Colunas"
+	},
+	"options_foreground_opacity": {
+		"message": "Opacidade de primeiro plano"
+	},
+	"options_grid_margin": {
+		"message": "Margem da grelha"
+	},
+	"options_grid_spacing": {
+		"message": "Espaçamento da grelha"
+	},
+	"options_historytiles": {
+		"message": "Azulejos do teu histórico de navegação"
+	},
+	"options_launcher_hidden": {
+		"message": "Não mostrar"
+	},
+	"options_locked": {
+		"message": "Impedir azulejos de serem arrastados"
+	},
+	"options_recent": {
+		"message": "Separadores fechados recentemente"
+	},
+	"options_rows": {
+		"message": "Filas"
+	},
+	"options_size_large": {
+		"message": "Grande"
+	},
+	"options_size_medium": {
+		"message": "Médio"
+	},
+	"options_size_small": {
+		"message": "Pequeno"
+	},
+	"options_theme": {
+		"message": "Tema"
+	},
+	"options_theme_dark": {
+		"message": "Tema negro"
+	},
+	"options_theme_light": {
+		"message": "Tema branco"
+	},
+	"options_thumb_titlesize": {
+		"message": "Tamanho do titulo do azulejo"
+	},
+	"options_toolbar_icon": {
+		"message": "Ícone da barra de ferramentas"
+	},
+	"pin_url_button": {
+		"message": "Adicionar"
+	},
+	"pin_url_header": {
+		"message": "Adicionar azulejo:"
+	},
+	"pin_url_placeholder": {
+		"message": "Type or select a URL"
+	},
+	"recently_closed_tabs": {
+		"message": "Separadores fechados recentemente:"
+	},
+	"tile_header": {
+		"message": "Azulejos:"
+	},
+	"tile_savedthumb_label": {
+		"message": "Imagem guardada:"
+	},
+	"tile_savedthumb_savecurrent": {
+		"message": "Guardar miniatura actual"
+	},
+	"tile_savedthumb_set": {
+		"message": "Seleccionar"
+	},
+	"tile_selection_next_tooltip": {
+		"message": "Azulejo seguinte"
+	},
+	"tile_selection_nextrow_tooltip": {
+		"message": "Próxima fila"
+	},
+	"tile_selection_previous_tooltip": {
+		"message": "Azulejo anterior"
+	},
+	"tile_selection_previousrow_tooltip": {
+		"message": "Fila anterior"
+	},
+	"tile_thumbnail_bgcolor": {
+		"message": "Cor de fundo:"
+	},
+	"tile_thumbnail_remove": {
+		"message": "Remover"
+	},
+	"tile_title_label": {
+		"message": "Titulo:"
+	},
+	"tile_title_placeholder": {
+		"message": "Escreve um novo titulo de azulejo"
+	},
+	"tile_title_set": {
+		"message": "Seleccionar"
+	},
+	"tile_block": {
+		"message": "Remover este sítio"
+	},
+	"tile_pin": {
+		"message": "Afixar este sítio na sua posição actual"
+	},
+	"tile_unpin": {
+		"message": "Desafixar este sítio"
+	},
+	"tileurl_empty": {
+		"message": "Azulejo Vazio"
+	}
