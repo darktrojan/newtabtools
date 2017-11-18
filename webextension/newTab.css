@@ -220,6 +220,7 @@ input[type="button"] {
 #newtab-undo-container button:not(.close-button),
 #newtab-update-notice button:not(.close-button) {
 	min-width: 0;
+	padding: 0 2px;
 	font-size: 12px;
 	color: #444;
 	margin: 0 2px;
@@ -616,7 +617,7 @@ svg {
 	margin-inline-start: 0;
 	-webkit-margin-end: 0;
 	margin-inline-end: 0;
-	padding: 0;
+	padding: 0 2px;
 }
 #options input,
 #options button:not(.arrow),
@@ -693,6 +694,9 @@ button.arrow {
 }
 #options-bgcolor-input {
 	visibility: collapse;
+}
+#options-bgcolor-displaybutton {
+	padding: 0 !important;
 }
 #options-bgcolor-display {
 	width: 24px;
