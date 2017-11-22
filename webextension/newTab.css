@@ -724,14 +724,6 @@ table {
 	-webkit-margin-start: 1em;
 	margin-inline-start: 1em;
 }
-#options-page td img {
-	padding: 2px;
-	vertical-align: middle;
-}
-#options-page td img[src="images/tools-dark.svg"] {
-	background-color: #1f364c;
-	box-shadow: 0 0 1px #1f364c;
-}
 #options input[type="checkbox"],
 #options input[type="radio"] {
 	-webkit-margin-end: 4px;

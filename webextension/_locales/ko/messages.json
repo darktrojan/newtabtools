@@ -181,9 +181,6 @@
 	"options_thumb_titlesize": {
 		"message": "타일 타이틀 크기"
 	},
-	"options_toolbar_icon": {
-		"message": "툴바 아이콘"
-	},
 	"pin_url_button": {
 		"message": "추가"
 	},

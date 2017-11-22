@@ -369,7 +369,6 @@ var newTabTools = {
 
 		let {name, value, checked} = event.target;
 		switch (name) {
-		case 'toolbarIcon':
 		case 'theme':
 		case 'spacing':
 		case 'titleSize':
@@ -522,11 +521,6 @@ var newTabTools = {
 
 		if (!keys || keys.includes('columns')) {
 			document.querySelector('[name="columns"]').value = Prefs.columns;
-		}
-
-		if (!keys || keys.includes('toolbarIcon')) {
-			let toolbarIcon = Prefs.toolbarIcon;
-			document.querySelector('[name="toolbarIcon"][value="' + toolbarIcon + '"]').checked = true;
 		}
 
 		if (!keys || keys.includes('theme')) {

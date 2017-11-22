@@ -1,7 +1,6 @@
 /* exported Blocked, Filters, Prefs */
 /* globals chrome, newTabTools, Grid, Updater */
 var Prefs = {
-	_toolbarIcon: 'images/tools-light.svg',
 	_theme: 'light',
 	_opacity: 80,
 	_rows: 3,
@@ -18,8 +17,9 @@ var Prefs = {
 	_versionLastAck: new Date(0),
 
 	init: function() {
+		chrome.storage.local.remove(['toolbarIcon']);
+
 		let names = [
-			'toolbarIcon',
 			'theme',
 			'opacity',
 			'rows',
@@ -52,13 +52,6 @@ var Prefs = {
 		});
 	},
 	parsePrefs: function(prefs) {
-		if ('toolbarIcon' in prefs && typeof prefs.toolbarIcon == 'string') {
-			this._toolbarIcon = prefs.toolbarIcon;
-
-			if (!('newTabTools' in window)) {
-				chrome.browserAction.setIcon({path: prefs.toolbarIcon});
-			}
-		}
 		if (['light', 'dark'].includes(prefs.theme)) {
 			this._theme = prefs.theme;
 		}
