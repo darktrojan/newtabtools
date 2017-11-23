@@ -1,39 +1,48 @@
 /* exported initDB, Tiles, Background */
 /* globals Blocked, Filters, Prefs, chrome, db */
 var Tiles = {
+	_ready: false,
 	_cache: [],
 	_list: [],
+	ensureReady: function() {
+		let promise = this._ready ? Promise.resolve(null) : this.getAllTiles();
+		return promise.then(() => {
+			return { cache: this._cache, list: this._list };
+		});
+	},
 	isPinned: function(url) {
 		return this._list.includes(url);
 	},
 	getAllTiles: function() {
+		this._ready = true;
 		let count = Prefs.rows * Prefs.columns;
-		return new Promise(function(resolve) {
-			db.transaction('tiles').objectStore('tiles').getAll().onsuccess = function() {
+		return new Promise(resolve => {
+			let op = db.transaction('tiles').objectStore('tiles').getAll();
+			op.onsuccess = () => {
 				let links = [];
 				let urlMap = new Map();
-				Tiles._list.length = 0;
+				this._list.length = 0;
 
-				for (let t of this.result) {
+				for (let t of op.result) {
 					if ('position' in t) {
-						if (Tiles._list.includes(t.url)) {
+						if (this._list.includes(t.url)) {
 							console.error('This URL appears twice: ' + t.url);
 							continue;
 						}
 						links[t.position] = t;
-						Tiles._list.push(t.url);
+						this._list.push(t.url);
 					}
 					urlMap.set(t.url, t);
 				}
 
 				if (!Prefs.history) {
-					Tiles._cache = links.map(l => l.url);
+					this._cache = links.map(l => l.url);
 					resolve(links.slice(0, count));
 					return;
 				}
 
 				chrome.topSites.get({ providers: ['places'] }, r => {
-					let urls = Tiles._list.slice();
+					let urls = this._list.slice();
 					let filters = Filters.getList();
 					let dotFilters = Object.keys(filters).filter(f => f[0] == '.');
 					let remaining = r.filter(s => {
@@ -68,7 +77,7 @@ var Tiles = {
 					});
 
 					// Add some extras for thumbnail generation of tiles that might get promoted.
-					let extraCount = count + 10;
+					let extraCount = count + 25;
 					for (let i = 0; i < extraCount && remaining.length > 0; i++) {
 						if (!links[i]) {
 							let next = remaining.shift();
@@ -86,7 +95,7 @@ var Tiles = {
 						}
 					}
 
-					Tiles._cache = links.map(l => l.url);
+					this._cache = links.map(l => l.url);
 					resolve(links.slice(0, count));
 				});
 			};

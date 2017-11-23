@@ -98,8 +98,10 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 
 	switch (message.name) {
 	case 'Tiles.isPinned':
-		sendResponse(Tiles.isPinned(message.url));
-		return;
+		Tiles.ensureReady().then(() => {
+			sendResponse(Tiles.isPinned(message.url));
+		});
+		return true;
 	case 'Tiles.getAllTiles':
 		waitForDB().then(function() {
 			return Tiles.getAllTiles();
@@ -185,9 +187,8 @@ chrome.webNavigation.onCompleted.addListener(function(details) {
 	chrome.browserAction.enable(details.tabId);
 
 	// We might not have called getAllTiles yet.
-	let promise = Tiles._cache.length > 0 ? Promise.resolve(null) : waitForDB().then(Tiles.getAllTiles);
-	promise.then(function() {
-		if (Tiles._cache.includes(details.url)) {
+	Tiles.ensureReady.then(function({cache}) {
+		if (cache.includes(details.url)) {
 			chrome.tabs.get(details.tabId, function(tab) {
 				if (tab.incognito) {
 					return;
