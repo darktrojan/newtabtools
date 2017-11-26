@@ -187,7 +187,7 @@ chrome.webNavigation.onCompleted.addListener(function(details) {
 	chrome.browserAction.enable(details.tabId);
 
 	// We might not have called getAllTiles yet.
-	Tiles.ensureReady.then(function({cache}) {
+	Tiles.ensureReady().then(function({cache}) {
 		if (cache.includes(details.url)) {
 			chrome.tabs.get(details.tabId, function(tab) {
 				if (tab.incognito) {
