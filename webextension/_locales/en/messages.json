@@ -8,6 +8,18 @@
 	"action_pin": {
 		"message": "Pin to the New Tab page"
 	},
+	"backup_button": {
+		"message": "Backup…"
+	},
+	"backup_description": {
+		"message": "New Tab Tools will create a file containing your settings, pinned tiles, and background image."
+	},
+	"backup_header": {
+		"message": "Backup:"
+	},
+	"backup_restore_button": {
+		"message": "Backup/Restore…"
+	},
 	"bg_header": {
 		"message": "Page background image:"
 	},
@@ -20,20 +32,20 @@
 	"changelog_label": {
 		"message": "What Changed?"
 	},
+	"contextmenu_block": {
+		"message": "Remove this tile"
+	},
 	"contextmenu_edit": {
 		"message": "Edit this tile"
+	},
+	"contextmenu_options": {
+		"message": "New Tab Tools options"
 	},
 	"contextmenu_pin": {
 		"message": "Pin this tile"
 	},
 	"contextmenu_unpin": {
 		"message": "Unpin this tile"
-	},
-	"contextmenu_block": {
-		"message": "Remove this tile"
-	},
-	"contextmenu_options": {
-		"message": "New Tab Tools options"
 	},
 	"database_error_cookies": {
 		"message": "If cookies are disabled, add an exception for $URL$.",
@@ -72,9 +84,6 @@
 	"filter_button": {
 		"message": "Filter…"
 	},
-	"filter_helptext": {
-		"message": "To limit a domain and all of its subdomains, add a dot in front of the domain, like this: .example.com"
-	},
 	"filter_header_add": {
 		"message": "Add filter:"
 	},
@@ -86,6 +95,9 @@
 	},
 	"filter_header_unpinned": {
 		"message": "Unpinned Tiles Limit"
+	},
+	"filter_helptext": {
+		"message": "To limit a domain and all of its subdomains, add a dot in front of the domain, like this: .example.com"
 	},
 	"filter_placeholder_host": {
 		"message": "Type or select a domain"
@@ -129,9 +141,6 @@
 			}
 		}
 	},
-	"options_header": {
-		"message": "Options:"
-	},
 	"options_columns": {
 		"message": "Columns"
 	},
@@ -143,6 +152,9 @@
 	},
 	"options_grid_spacing": {
 		"message": "Grid spacing"
+	},
+	"options_header": {
+		"message": "Options:"
 	},
 	"options_historytiles": {
 		"message": "Tiles from your browsing history"
@@ -192,8 +204,26 @@
 	"recently_closed_tabs": {
 		"message": "Recently closed tabs:"
 	},
+	"restore_button": {
+		"message": "Restore"
+	},
+	"restore_description": {
+		"message": "Select a New Tab Tools backup file to import from."
+	},
+	"restore_header": {
+		"message": "Restore:"
+	},
+	"restore_warning": {
+		"message": "This will override your existing settings, pinned tiles, and background image. It cannot be undone."
+	},
+	"tile_block": {
+		"message": "Remove this site"
+	},
 	"tile_header": {
 		"message": "Tiles:"
+	},
+	"tile_pin": {
+		"message": "Pin this site at its current position"
 	},
 	"tile_savedthumb_label": {
 		"message": "Saved image:"
@@ -230,12 +260,6 @@
 	},
 	"tile_title_set": {
 		"message": "Set"
-	},
-	"tile_block": {
-		"message": "Remove this site"
-	},
-	"tile_pin": {
-		"message": "Pin this site at its current position"
 	},
 	"tile_unpin": {
 		"message": "Unpin this site"

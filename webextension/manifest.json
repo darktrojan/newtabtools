@@ -18,7 +18,9 @@
 		"scripts": [
 			"tiles.js",
 			"prefs.js",
-			"background.js"
+			"background.js",
+			"lib/zip.js",
+			"export.js"
 		]
 	},
 	"browser_action": {
@@ -37,6 +39,7 @@
 	"permissions": [
 		"<all_urls>",
 		"bookmarks",
+		"downloads",
 		"history",
 		"idle",
 		"sessions",

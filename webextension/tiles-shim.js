@@ -5,7 +5,7 @@ var Tiles = {
 	isPinned: function(url) {
 		return this._list.includes(url);
 	},
-	getAllTiles: function() {
+	getAllTiles: function() { // TODO: This is a silly name.
 		return new Promise((resolve, reject) => {
 			chrome.runtime.sendMessage({ name: 'Tiles.getAllTiles' }, response => {
 				if (response === null) {

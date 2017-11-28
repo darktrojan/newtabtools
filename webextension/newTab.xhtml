@@ -207,6 +207,10 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 							</td>
 						</tr>
 					</table>
+
+					<div class="options-row" style="margin-top: 1em;">
+						<button id="options-backup-restore" data-message="backup_restore_button"></button>
+					</div>
 				</fieldset>
 				<div class="spacer"></div>
 				<fieldset id="options-donate-wrap">
@@ -219,7 +223,7 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 					</div>
 				</fieldset>
 			</div>
-			<div id="options-filter">
+			<div id="options-filter" class="options-extra">
 				<fieldset>
 					<legend data-message="filter_title"></legend>
 					<table>
@@ -264,6 +268,24 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 							</tr>
 						</template>
 					</table>
+				</fieldset>
+			</div>
+			<div id="options-export" class="options-extra">
+				<fieldset>
+					<legend data-message="backup_header"></legend>
+					<p data-message="backup_description"></p>
+					<div class="options-row">
+						<button id="options-backup" data-message="backup_button"></button>
+					</div>
+				</fieldset>
+				<fieldset>
+					<legend data-message="restore_header"></legend>
+					<p data-message="restore_description"></p>
+					<p data-message="restore_warning" style="font-style: italic;"></p>
+					<div class="options-row">
+						<input id="options-restore-file" type="file" accept="application/zip" />
+						<button id="options-restore" disabled="" data-message="restore_button"></button>
+					</div>
 				</fieldset>
 			</div>
 		</div>

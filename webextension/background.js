@@ -1,4 +1,4 @@
-/* globals Prefs, Tiles, Background, chrome, indexedDB, IDBKeyRange */
+/* globals Prefs, Tiles, Background, chrome, indexedDB, IDBKeyRange, makeZip, readZip */
 Promise.all([
 	Prefs.init(),
 	initDB()
@@ -170,6 +170,13 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 				sendResponse(map);
 			}
 		};
+		return true;
+
+	case 'Export:backup':
+		makeZip().then(sendResponse());
+		return true;
+	case 'Import:restore':
+		readZip(message.file).then(sendResponse());
 		return true;
 	}
 });
