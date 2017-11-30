@@ -65,7 +65,7 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 	case 'Thumbnails.capture':
 		let today = getTZDateString();
 		captureThumbnail(message.url, today);
-		return;
+		return false;
 	}
 	return false;
 });
@@ -125,7 +125,10 @@ function captureThumbnail(url, today) {
 			context1.drawImage(this, 0, 0, canvas1.width, canvas1.height);
 			canvas1.toBlob(function(blob) {
 				db.transaction('thumbnails', 'readwrite').objectStore('thumbnails').put({
-					url: url, image: blob, stored: today, used: today
+					url,
+					image: blob,
+					stored: today,
+					used: today
 				});
 			});
 		};
