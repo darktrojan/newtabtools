@@ -5,7 +5,6 @@
 :root {
 	-moz-appearance: none;
 	color: var(--text-hover);
-	background-color: #f2f2f2;
 	height: 100%;
 
 	--opacity: 0.8;
@@ -14,6 +13,9 @@
 	--shadow-hover: rgb(255, 255, 255);
 	--shadow: rgba(255, 255, 255, var(--opacity));
 	--background-fill: rgba(255, 255, 255, 0.2);
+}
+:root[theme="light"] {
+	background-color: #f2f2f2;
 }
 :root[theme="dark"] {
 	background-color: #171b1f;
