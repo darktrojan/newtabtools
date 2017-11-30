@@ -8,6 +8,18 @@
 	"action_pin": {
 		"message": "新しいタブページにピン留めする"
 	},
+	"backup_button": {
+		"message": "バックアップ…"
+	},
+	"backup_description": {
+		"message": "New Tab Toolsは現在の設定、ピン留めしたタイル、背景画像を含むバックアップファイルを作成します。"
+	},
+	"backup_header": {
+		"message": "バックアップ:"
+	},
+	"backup_restore_button": {
+		"message": "バックアップ/復元…"
+	},
 	"bg_header": {
 		"message": "新しいタブページの背景画像:"
 	},
@@ -20,20 +32,20 @@
 	"changelog_label": {
 		"message": "変更履歴"
 	},
+	"contextmenu_block": {
+		"message": "タイルを削除"
+	},
 	"contextmenu_edit": {
 		"message": "タイルを編集"
+	},
+	"contextmenu_options": {
+		"message": "New Tab Tools 設定"
 	},
 	"contextmenu_pin": {
 		"message": "タイルをピン留め"
 	},
 	"contextmenu_unpin": {
 		"message": "タイルのピン留めを外す"
-	},
-	"contextmenu_block": {
-		"message": "タイルを削除"
-	},
-	"contextmenu_options": {
-		"message": "New Tab Tools 設定"
 	},
 	"database_error_cookies": {
 		"message": "cookies が無効になっている場合は、$1 を例外に追加してください。"
@@ -66,9 +78,6 @@
 	"filter_button": {
 		"message": "フィルタ…"
 	},
-	"filter_helptext": {
-		"message": "ドメインとそのサブドメインをすべて制限するには、ドメインの前に\".\"を追加します。例: .example.com"
-	},
 	"filter_header_add": {
 		"message": "フィルタを追加:"
 	},
@@ -80,6 +89,9 @@
 	},
 	"filter_header_unpinned": {
 		"message": "ピン留めしていないタイルの制限"
+	},
+	"filter_helptext": {
+		"message": "ドメインとそのサブドメインをすべて制限するには、ドメインの前に\".\"を追加します。例: .example.com"
 	},
 	"filter_placeholder_host": {
 		"message": "ドメインを入力または選択する"
@@ -117,9 +129,6 @@
 	"newversion": {
 		"message": "New Tab Tools はバージョン $1 に更新されました。よろしければ寄付をご検討ください。"
 	},
-	"options_header": {
-		"message": "オプション:"
-	},
 	"options_columns": {
 		"message": "列"
 	},
@@ -131,6 +140,9 @@
 	},
 	"options_grid_spacing": {
 		"message": "スペース"
+	},
+	"options_header": {
+		"message": "オプション:"
 	},
 	"options_historytiles": {
 		"message": "閲覧履歴のタイル"
@@ -180,8 +192,26 @@
 	"recently_closed_tabs": {
 		"message": "最近閉じたタブ:"
 	},
+	"restore_button": {
+		"message": "Restore"
+	},
+	"restore_description": {
+		"message": "インポートするNew Tab Toolsのバックアップファイルを選択します。"
+	},
+	"restore_header": {
+		"message": "復元:"
+	},
+	"restore_warning": {
+		"message": "これにより、既存の設定、ピン留めしたタイル、背景画像が上書きされます。この操作は元に戻すことができません。"
+	},
+	"tile_block": {
+		"message": "このサイトを削除"
+	},
 	"tile_header": {
 		"message": "タイル:"
+	},
+	"tile_pin": {
+		"message": "このサイトをこの位置にピン留め"
 	},
 	"tile_savedthumb_label": {
 		"message": "保存した画像:"
@@ -218,12 +248,6 @@
 	},
 	"tile_title_set": {
 		"message": "設定"
-	},
-	"tile_block": {
-		"message": "このサイトを削除"
-	},
-	"tile_pin": {
-		"message": "このサイトをこの位置にピン留め"
 	},
 	"tile_unpin": {
 		"message": "このサイトのピン留めを外す"
