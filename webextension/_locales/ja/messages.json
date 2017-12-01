@@ -193,7 +193,7 @@
 		"message": "最近閉じたタブ:"
 	},
 	"restore_button": {
-		"message": "Restore"
+		"message": "復元"
 	},
 	"restore_description": {
 		"message": "インポートするNew Tab Toolsのバックアップファイルを選択します。"
