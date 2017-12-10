@@ -59,9 +59,6 @@
 	"newversion": {
 		"message": "Neuer-Tab-Tools wurde auf Version $1 aktualisiert. Bitte erwägen Sie eine Spende."
 	},
-	"options_header": {
-		"message": "Einstellungen:"
-	},
 	"options_columns": {
 		"message": "Spalten"
 	},
@@ -73,6 +70,9 @@
 	},
 	"options_grid_spacing": {
 		"message": "Raster - Zwischenräume"
+	},
+	"options_header": {
+		"message": "Einstellungen:"
 	},
 	"options_historytiles": {
 		"message": "Kacheln aus der Chronik"
@@ -122,8 +122,14 @@
 	"recently_closed_tabs": {
 		"message": "Geschlossene Tabs:"
 	},
+	"tile_block": {
+		"message": "Seite entfernen"
+	},
 	"tile_header": {
 		"message": "Kacheln:"
+	},
+	"tile_pin": {
+		"message": "Seite immer an aktueller Position anzeigen"
 	},
 	"tile_savedthumb_label": {
 		"message": "Gespeichertes Bild:"
@@ -157,12 +163,6 @@
 	},
 	"tile_title_set": {
 		"message": "Übernehmen"
-	},
-	"tile_block": {
-		"message": "Seite entfernen"
-	},
-	"tile_pin": {
-		"message": "Seite immer an aktueller Position anzeigen"
 	},
 	"tile_unpin": {
 		"message": "Seitenposition nicht mehr merken"

@@ -59,9 +59,6 @@
 	"newversion": {
 		"message": "Les Eines de pestanyes noves s’han actualitzat a la versió $1. Aquestes eines són gratuïtes, però agraïm els donatius!"
 	},
-	"options_header": {
-		"message": "Paràmetres:"
-	},
 	"options_columns": {
 		"message": "Columnes"
 	},
@@ -73,6 +70,9 @@
 	},
 	"options_grid_spacing": {
 		"message": "Espaiament de la graella"
+	},
+	"options_header": {
+		"message": "Paràmetres:"
 	},
 	"options_historytiles": {
 		"message": "Mosaics de l’historial de navegació"
@@ -119,8 +119,14 @@
 	"recently_closed_tabs": {
 		"message": "Pestanyes tancades recentment:"
 	},
+	"tile_block": {
+		"message": "Suprimeix aquest lloc"
+	},
 	"tile_header": {
 		"message": "Mosaics:"
+	},
+	"tile_pin": {
+		"message": "Fixa aquest lloc en aquesta posició"
 	},
 	"tile_savedthumb_set": {
 		"message": "Estableix"
@@ -151,12 +157,6 @@
 	},
 	"tile_title_set": {
 		"message": "Estableix"
-	},
-	"tile_block": {
-		"message": "Suprimeix aquest lloc"
-	},
-	"tile_pin": {
-		"message": "Fixa aquest lloc en aquesta posició"
 	},
 	"tile_unpin": {
 		"message": "No fixis aquest lloc"

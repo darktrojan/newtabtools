@@ -53,9 +53,6 @@
 	"newversion": {
 		"message": "New Tab Tools 已更新至 $1。希望您能考慮捐助。"
 	},
-	"options_header": {
-		"message": "選項:"
-	},
 	"options_columns": {
 		"message": "欄"
 	},
@@ -67,6 +64,9 @@
 	},
 	"options_grid_spacing": {
 		"message": "網格間距"
+	},
+	"options_header": {
+		"message": "選項:"
 	},
 	"options_historytiles": {
 		"message": "從歷史紀錄產生首頁磚"
@@ -116,8 +116,14 @@
 	"recently_closed_tabs": {
 		"message": "最近關閉的分頁:"
 	},
+	"tile_block": {
+		"message": "移除此網站"
+	},
 	"tile_header": {
 		"message": "首頁磚:"
+	},
+	"tile_pin": {
+		"message": "將此網站釘選於目前位置"
 	},
 	"tile_savedthumb_label": {
 		"message": "保存的圖片:"
@@ -151,12 +157,6 @@
 	},
 	"tile_title_set": {
 		"message": "設為標題"
-	},
-	"tile_block": {
-		"message": "移除此網站"
-	},
-	"tile_pin": {
-		"message": "將此網站釘選於目前位置"
 	},
 	"tile_unpin": {
 		"message": "釘選此網站"

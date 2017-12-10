@@ -62,9 +62,6 @@
 	"newversion": {
 		"message": "O New Tab Tools foi atualizado para a versão $1. Por favor, considere fazer uma doação."
 	},
-	"options_header": {
-		"message": "Opções:"
-	},
 	"options_columns": {
 		"message": "Colunas"
 	},
@@ -76,6 +73,9 @@
 	},
 	"options_grid_spacing": {
 		"message": "Espaçamento da grade"
+	},
+	"options_header": {
+		"message": "Opções:"
 	},
 	"options_historytiles": {
 		"message": "Blocos do histórico de navegação"
@@ -125,8 +125,14 @@
 	"recently_closed_tabs": {
 		"message": "Abas fechadas recentemente:"
 	},
+	"tile_block": {
+		"message": "Remover este site"
+	},
 	"tile_header": {
 		"message": "Blocos:"
+	},
+	"tile_pin": {
+		"message": "Fixar este site em sua posição atual"
 	},
 	"tile_savedthumb_label": {
 		"message": "Imagem salva:"
@@ -160,12 +166,6 @@
 	},
 	"tile_title_set": {
 		"message": "Definir"
-	},
-	"tile_block": {
-		"message": "Remover este site"
-	},
-	"tile_pin": {
-		"message": "Fixar este site em sua posição atual"
 	},
 	"tile_unpin": {
 		"message": "Desafixar este site"

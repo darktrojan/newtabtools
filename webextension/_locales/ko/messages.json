@@ -20,20 +20,20 @@
 	"changelog_label": {
 		"message": "변경 내용"
 	},
+	"contextmenu_block": {
+		"message": "선택한 타일 제거"
+	},
 	"contextmenu_edit": {
 		"message": "선택한 타일 수정"
+	},
+	"contextmenu_options": {
+		"message": "New Tab Tools 옵션"
 	},
 	"contextmenu_pin": {
 		"message": "선택한 타일 고정"
 	},
 	"contextmenu_unpin": {
 		"message": "선택한 타일 고정 해제"
-	},
-	"contextmenu_block": {
-		"message": "선택한 타일 제거"
-	},
-	"contextmenu_options": {
-		"message": "New Tab Tools 옵션"
 	},
 	"database_error_cookies": {
 		"message": "쿠키가 비활성화 되어 있으면, $URL$을 예외로 설정해 주세요.",
@@ -72,10 +72,6 @@
 	"filter_button": {
 		"message": "필터…"
 	},
-	"filter_helptext": {
-		"message": "도메인 및 모든 하위 도메인을 제한하려면 .example.com 같이 도메인 앞에 점을 추가하십시오."
-		
-	},
 	"filter_header_add": {
 		"message": "필터 추가:"
 	},
@@ -87,6 +83,9 @@
 	},
 	"filter_header_unpinned": {
 		"message": "고정하지 않은 타일 제한"
+	},
+	"filter_helptext": {
+		"message": "도메인 및 모든 하위 도메인을 제한하려면 .example.com 같이 도메인 앞에 점을 추가하십시오."
 	},
 	"filter_placeholder_host": {
 		"message": "도메인 선택 또는 입력"
@@ -130,9 +129,6 @@
 			}
 		}
 	},
-	"options_header": {
-		"message": "옵션:"
-	},
 	"options_columns": {
 		"message": "모든 열"
 	},
@@ -144,6 +140,9 @@
 	},
 	"options_grid_spacing": {
 		"message": "테투리 간격"
+	},
+	"options_header": {
+		"message": "옵션:"
 	},
 	"options_historytiles": {
 		"message": "방문 기록 타일"
@@ -193,8 +192,14 @@
 	"recently_closed_tabs": {
 		"message": "최근 닫은 탭:"
 	},
+	"tile_block": {
+		"message": "선택한 사이트 제거"
+	},
 	"tile_header": {
 		"message": "모든 타일:"
+	},
+	"tile_pin": {
+		"message": "선택한 사이트를 현재 위치에 고정"
 	},
 	"tile_savedthumb_label": {
 		"message": "저장된 이미지:"
@@ -231,12 +236,6 @@
 	},
 	"tile_title_set": {
 		"message": "설정"
-	},
-	"tile_block": {
-		"message": "선택한 사이트 제거"
-	},
-	"tile_pin": {
-		"message": "선택한 사이트를 현재 위치에 고정"
 	},
 	"tile_unpin": {
 		"message": "선택한 사이트 고정 해제"

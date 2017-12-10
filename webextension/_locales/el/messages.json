@@ -66,9 +66,6 @@
 	"filter_button": {
 		"message": "Φιλτράρισμα…"
 	},
-	"filter_helptext": {
-		"message": "Για να περιορίσετε έναν τομέα και όλους τους υποτομείς του, προσθέστε μία τελεία μπροστά από τον τομέα, έτσι: .example.com"
-	},
 	"filter_header_add": {
 		"message": "Προσθήκη φίλτρου:"
 	},
@@ -80,6 +77,9 @@
 	},
 	"filter_header_unpinned": {
 		"message": "Όριο Μη-καρφιτσωμένων Πλακιδίων"
+	},
+	"filter_helptext": {
+		"message": "Για να περιορίσετε έναν τομέα και όλους τους υποτομείς του, προσθέστε μία τελεία μπροστά από τον τομέα, έτσι: .example.com"
 	},
 	"filter_placeholder_host": {
 		"message": "Πληκτρολογήστε ή επιλέξτε τομέα"
@@ -117,9 +117,6 @@
 	"newversion": {
 		"message": "Το New Tab Tools έχει ενημερωθεί στην έκδοση $1. Το New Tab Tools είναι δωρεάν, αλλά η συνεισφορά σας θα εκτιμηθεί!"
 	},
-	"options_header": {
-		"message": "Επιλογές:"
-	},
 	"options_columns": {
 		"message": "Στήλες"
 	},
@@ -131,6 +128,9 @@
 	},
 	"options_grid_spacing": {
 		"message": "Απόσταση πλέγματος"
+	},
+	"options_header": {
+		"message": "Επιλογές:"
 	},
 	"options_historytiles": {
 		"message": "Πλακίδια από το ιστορικό περιήγησης"
@@ -180,15 +180,21 @@
 	"recently_closed_tabs": {
 		"message": "Πρόσφατα κλεισμένες καρτέλες:"
 	},
+	"tile_block": {
+		"message": "Αφαίρεση ιστοσελίδας"
+	},
 	"tile_header": {
 		"message": "Πλακίδια:"
+	},
+	"tile_pin": {
+		"message": "Καρφίτσωμα ιστοσελίδας στην τρέχουσα τοποθεσία της"
 	},
 	"tile_savedthumb_label": {
 		"message": "Αποθηκευμένη εικόνα:"
 	},
 	"tile_savedthumb_savecurrent": {
 		"message": "Αποθήκευση τρέχουσας μικρογραφίας"
-},
+	},
 	"tile_savedthumb_set": {
 		"message": "Εφαρμογή"
 	},
@@ -218,12 +224,6 @@
 	},
 	"tile_title_set": {
 		"message": "Εφαρμογή"
-	},
-	"tile_block": {
-		"message": "Αφαίρεση ιστοσελίδας"
-	},
-	"tile_pin": {
-		"message": "Καρφίτσωμα ιστοσελίδας στην τρέχουσα τοποθεσία της"
 	},
 	"tile_unpin": {
 		"message": "Ξεκαρφίτσωμα ιστοσελίδας"

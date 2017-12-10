@@ -65,9 +65,6 @@
 	"newversion": {
 		"message": "New Tab Tools a été mis à jour à la version $1. Si vous appréciez ce module, merci de faire un petit don."
 	},
-	"options_header": {
-		"message": "Options :"
-	},
 	"options_columns": {
 		"message": "Colonnes"
 	},
@@ -79,6 +76,9 @@
 	},
 	"options_grid_spacing": {
 		"message": "Marge entre les cases"
+	},
+	"options_header": {
+		"message": "Options :"
 	},
 	"options_historytiles": {
 		"message": "Cases vides remplies avec historique"
@@ -128,8 +128,14 @@
 	"recently_closed_tabs": {
 		"message": "Onglets récemment fermés :"
 	},
+	"tile_block": {
+		"message": "Retirer ce site"
+	},
 	"tile_header": {
 		"message": "Pages :"
+	},
+	"tile_pin": {
+		"message": "Épingler ce site à son emplacement actuel"
 	},
 	"tile_savedthumb_label": {
 		"message": "Miniature personnalisée :"
@@ -163,12 +169,6 @@
 	},
 	"tile_title_set": {
 		"message": "Appliquer"
-	},
-	"tile_block": {
-		"message": "Retirer ce site"
-	},
-	"tile_pin": {
-		"message": "Épingler ce site à son emplacement actuel"
 	},
 	"tile_unpin": {
 		"message": "Relâcher ce site"

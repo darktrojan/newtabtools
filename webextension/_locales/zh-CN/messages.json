@@ -62,9 +62,6 @@
 	"newversion": {
 		"message": "New Tab Tools 已更新到版本 $1。请考虑做点捐助。"
 	},
-	"options_header": {
-		"message": "选项:"
-	},
 	"options_columns": {
 		"message": "横向行"
 	},
@@ -76,6 +73,9 @@
 	},
 	"options_grid_spacing": {
 		"message": "磁贴间距"
+	},
+	"options_header": {
+		"message": "选项:"
 	},
 	"options_historytiles": {
 		"message": "基于浏览记录的磁贴"
@@ -125,8 +125,14 @@
 	"recently_closed_tabs": {
 		"message": "最近关闭的标签页："
 	},
+	"tile_block": {
+		"message": "移除这个网站"
+	},
 	"tile_header": {
 		"message": "磁贴:"
+	},
+	"tile_pin": {
+		"message": "将此网站固定在它当前的位置"
 	},
 	"tile_savedthumb_label": {
 		"message": "已保存图片:"
@@ -160,12 +166,6 @@
 	},
 	"tile_title_set": {
 		"message": "设为标题"
-	},
-	"tile_block": {
-		"message": "移除这个网站"
-	},
-	"tile_pin": {
-		"message": "将此网站固定在它当前的位置"
 	},
 	"tile_unpin": {
 		"message": "不再固定这个网站"

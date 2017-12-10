@@ -65,9 +65,6 @@
 	"newversion": {
 		"message": "A New Tab Tools frissítve lett a $1 verzióra. A New Tab Tools ingyenes, de minden támogatást szívesen fogadok!"
 	},
-	"options_header": {
-		"message": "Beállítások:"
-	},
 	"options_columns": {
 		"message": "Oszlopok"
 	},
@@ -79,6 +76,9 @@
 	},
 	"options_grid_spacing": {
 		"message": "Rács térköze"
+	},
+	"options_header": {
+		"message": "Beállítások:"
 	},
 	"options_historytiles": {
 		"message": "Csempék a böngészési előzményeiből"
@@ -128,8 +128,14 @@
 	"recently_closed_tabs": {
 		"message": "Nemrég bezárt lapok:"
 	},
+	"tile_block": {
+		"message": "Eltávolítás"
+	},
 	"tile_header": {
 		"message": "Csempék:"
+	},
+	"tile_pin": {
+		"message": "Webhely rögzítése ezen a helyen"
 	},
 	"tile_savedthumb_label": {
 		"message": "Mentett kép:"
@@ -163,12 +169,6 @@
 	},
 	"tile_title_set": {
 		"message": "Beállítás"
-	},
-	"tile_block": {
-		"message": "Eltávolítás"
-	},
-	"tile_pin": {
-		"message": "Webhely rögzítése ezen a helyen"
 	},
 	"tile_unpin": {
 		"message": "Rögzítés feloldása"

@@ -65,9 +65,6 @@
 	"newversion": {
 		"message": "Расширение New Tab Tools было обновлено до версии $1. New Tab Tools распространяется бесплатно, но ваши пожертвования будут приняты с благодарностью!"
 	},
-	"options_header": {
-		"message": "Опции:"
-	},
 	"options_columns": {
 		"message": "Количество Столбцов"
 	},
@@ -79,6 +76,9 @@
 	},
 	"options_grid_spacing": {
 		"message": "Отступ между плиток"
+	},
+	"options_header": {
+		"message": "Опции:"
 	},
 	"options_historytiles": {
 		"message": "Плитки из истории браузера"
@@ -128,8 +128,14 @@
 	"recently_closed_tabs": {
 		"message": "Закрытые вкладки:"
 	},
+	"tile_block": {
+		"message": "Удалить этот сайт"
+	},
 	"tile_header": {
 		"message": "Плитки Экспресс-панели:"
+	},
+	"tile_pin": {
+		"message": "Закрепить этот сайт в текущей позиции"
 	},
 	"tile_savedthumb_label": {
 		"message": "Сохраненное изображение:"
@@ -163,12 +169,6 @@
 	},
 	"tile_title_set": {
 		"message": "Применить"
-	},
-	"tile_block": {
-		"message": "Удалить этот сайт"
-	},
-	"tile_pin": {
-		"message": "Закрепить этот сайт в текущей позиции"
 	},
 	"tile_unpin": {
 		"message": "Открепить этот сайт"

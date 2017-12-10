@@ -41,9 +41,6 @@
 	"newversion": {
 		"message": "New Tab Tools is bijgewerkt naar versie $1. New Tab Tools is gratis maar uw donatie is welkom!"
 	},
-	"options_header": {
-		"message": "Opties:"
-	},
 	"options_columns": {
 		"message": "Kolommen"
 	},
@@ -55,6 +52,9 @@
 	},
 	"options_grid_spacing": {
 		"message": "Raster-tussenruimte"
+	},
+	"options_header": {
+		"message": "Opties:"
 	},
 	"options_launcher_hidden": {
 		"message": "Niet weergeven"
@@ -95,8 +95,14 @@
 	"recently_closed_tabs": {
 		"message": "Onlangs gesloten tabbladen:"
 	},
+	"tile_block": {
+		"message": "Deze website verwijderen"
+	},
 	"tile_header": {
 		"message": "Tegels:"
+	},
+	"tile_pin": {
+		"message": "Deze website op de huidige positie vastzetten"
 	},
 	"tile_savedthumb_set": {
 		"message": "Instellen"
@@ -115,12 +121,6 @@
 	},
 	"tile_title_set": {
 		"message": "Instellen"
-	},
-	"tile_block": {
-		"message": "Deze website verwijderen"
-	},
-	"tile_pin": {
-		"message": "Deze website op de huidige positie vastzetten"
 	},
 	"tile_unpin": {
 		"message": "Deze website losmaken"

@@ -20,20 +20,20 @@
 	"changelog_label": {
 		"message": "O Que Mudou?"
 	},
+	"contextmenu_block": {
+		"message": "Remover este azulejo"
+	},
 	"contextmenu_edit": {
 		"message": "Editar este azulejo"
+	},
+	"contextmenu_options": {
+		"message": "Opções das Ferramentas do Novo Separador"
 	},
 	"contextmenu_pin": {
 		"message": "Afixar este azulejo"
 	},
 	"contextmenu_unpin": {
 		"message": "Desafixar este azulejo"
-	},
-	"contextmenu_block": {
-		"message": "Remover este azulejo"
-	},
-	"contextmenu_options": {
-		"message": "Opções das Ferramentas do Novo Separador"
 	},
 	"database_error_cookies": {
 		"message": "Se as cookies estão desactivadas, adicionar uma excepção para $URL$.",
@@ -72,9 +72,6 @@
 	"filter_button": {
 		"message": "Filtros…"
 	},
-	"filter_helptext": {
-		"message": "Para limitar um domínio e todos os seus subdomínios, adiciona um ponto final á frente do domínio, assim: .exemplo.com"
-	},
 	"filter_header_add": {
 		"message": "Adicionar filtro:"
 	},
@@ -87,12 +84,15 @@
 	"filter_header_unpinned": {
 		"message": "Limite de Azulejos Desafixados"
 	},
+	"filter_helptext": {
+		"message": "Para limitar um domínio e todos os seus subdomínios, adiciona um ponto final á frente do domínio, assim: .exemplo.com"
+	},
 	"filter_placeholder_host": {
 		"message": "Escreve ou selecciona um dominio"
 	},
 	"filter_placeholder_limit": {
 		"message": "Limite"
-    },
+	},
 	"filter_set": {
 		"message": "Selecionar"
 	},
@@ -129,9 +129,6 @@
 			}
 		}
 	},
-	"options_header": {
-		"message": "Opções:"
-	},
 	"options_columns": {
 		"message": "Colunas"
 	},
@@ -143,6 +140,9 @@
 	},
 	"options_grid_spacing": {
 		"message": "Espaçamento da grelha"
+	},
+	"options_header": {
+		"message": "Opções:"
 	},
 	"options_historytiles": {
 		"message": "Azulejos do teu histórico de navegação"
@@ -192,8 +192,14 @@
 	"recently_closed_tabs": {
 		"message": "Separadores fechados recentemente:"
 	},
+	"tile_block": {
+		"message": "Remover este sítio"
+	},
 	"tile_header": {
 		"message": "Azulejos:"
+	},
+	"tile_pin": {
+		"message": "Afixar este sítio na sua posição actual"
 	},
 	"tile_savedthumb_label": {
 		"message": "Imagem guardada:"
@@ -230,12 +236,6 @@
 	},
 	"tile_title_set": {
 		"message": "Seleccionar"
-	},
-	"tile_block": {
-		"message": "Remover este sítio"
-	},
-	"tile_pin": {
-		"message": "Afixar este sítio na sua posição actual"
 	},
 	"tile_unpin": {
 		"message": "Desafixar este sítio"

@@ -62,9 +62,6 @@
 	"newversion": {
 		"message": "New Tab Tools се обнови до версия $1. New Tab Tools е безплатно, но даренията са добре дошли!"
 	},
-	"options_header": {
-		"message": "Опции:"
-	},
 	"options_columns": {
 		"message": "Колони"
 	},
@@ -76,6 +73,9 @@
 	},
 	"options_grid_spacing": {
 		"message": "Разстояние между"
+	},
+	"options_header": {
+		"message": "Опции:"
 	},
 	"options_historytiles": {
 		"message": "Плочки от историята на сърфиране"
@@ -125,8 +125,14 @@
 	"recently_closed_tabs": {
 		"message": "Последно затворени раздели:"
 	},
+	"tile_block": {
+		"message": "Премахване на страница"
+	},
 	"tile_header": {
 		"message": "Плочки:"
+	},
+	"tile_pin": {
+		"message": "Фиксиране на страницата тук"
 	},
 	"tile_savedthumb_label": {
 		"message": "Запазено изображение:"
@@ -160,12 +166,6 @@
 	},
 	"tile_title_set": {
 		"message": "Задай"
-	},
-	"tile_block": {
-		"message": "Премахване на страница"
-	},
-	"tile_pin": {
-		"message": "Фиксиране на страницата тук"
 	},
 	"tile_unpin": {
 		"message": "Страницата да е не фиксирана"

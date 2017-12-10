@@ -20,20 +20,20 @@
 	"changelog_label": {
 		"message": "Co se změnilo?"
 	},
+	"contextmenu_block": {
+		"message": "Odebrat dlaždici"
+	},
 	"contextmenu_edit": {
 		"message": "Upravit popis"
+	},
+	"contextmenu_options": {
+		"message": "New Tab Tools - Nastavení"
 	},
 	"contextmenu_pin": {
 		"message": "Připnout dlaždici"
 	},
 	"contextmenu_unpin": {
 		"message": "Odepnout dlaždici"
-	},
-	"contextmenu_block": {
-		"message": "Odebrat dlaždici"
-	},
-	"contextmenu_options": {
-		"message": "New Tab Tools - Nastavení"
 	},
 	"database_error_cookies": {
 		"message": "Pokud jsou soubory cookie zakázány, přidejte výjimku pro $URL$.",
@@ -72,9 +72,6 @@
 	"filter_button": {
 		"message": "Filtr…"
 	},
-	"filter_helptext": {
-		"message": "Pokud potřebujete omezit doménu a všechny její subdomény, přidejte před doménu tečku např.: .example.com"
-	},
 	"filter_header_add": {
 		"message": "Přidat filtr:"
 	},
@@ -86,6 +83,9 @@
 	},
 	"filter_header_unpinned": {
 		"message": "Limit odepnutých dlaždic"
+	},
+	"filter_helptext": {
+		"message": "Pokud potřebujete omezit doménu a všechny její subdomény, přidejte před doménu tečku např.: .example.com"
 	},
 	"filter_placeholder_host": {
 		"message": "Napište nebo vyberte doménu"
@@ -129,9 +129,6 @@
 			}
 		}
 	},
-	"options_header": {
-		"message": "Nastavení:"
-	},
 	"options_columns": {
 		"message": "Sloupců"
 	},
@@ -143,6 +140,9 @@
 	},
 	"options_grid_spacing": {
 		"message": "Velikost mezery"
+	},
+	"options_header": {
+		"message": "Nastavení:"
 	},
 	"options_historytiles": {
 		"message": "Dlaždice z vaší historie"
@@ -192,8 +192,14 @@
 	"recently_closed_tabs": {
 		"message": "Nedávno zavřené panely:"
 	},
+	"tile_block": {
+		"message": "Odstranit tuto stránku"
+	},
 	"tile_header": {
 		"message": "Tiles:"
+	},
+	"tile_pin": {
+		"message": "Připnout stránku na aktuální pozici"
 	},
 	"tile_savedthumb_label": {
 		"message": "Uložený obrázek:"
@@ -230,12 +236,6 @@
 	},
 	"tile_title_set": {
 		"message": "Nastavit"
-	},
-	"tile_block": {
-		"message": "Odstranit tuto stránku"
-	},
-	"tile_pin": {
-		"message": "Připnout stránku na aktuální pozici"
 	},
 	"tile_unpin": {
 		"message": "Odepnout stránku"

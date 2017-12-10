@@ -53,9 +53,6 @@
 	"newversion": {
 		"message": "New Tab Tools è stato aggiornato alla versione $1. Per favore fai una donazione."
 	},
-	"options_header": {
-		"message": "Opzioni:"
-	},
 	"options_columns": {
 		"message": "Colonne"
 	},
@@ -67,6 +64,9 @@
 	},
 	"options_grid_spacing": {
 		"message": "Ampiezza della griglia"
+	},
+	"options_header": {
+		"message": "Opzioni:"
 	},
 	"options_launcher_hidden": {
 		"message": "Non mostrare"
@@ -110,8 +110,14 @@
 	"recently_closed_tabs": {
 		"message": "Schede chiuse di recente:"
 	},
+	"tile_block": {
+		"message": "Rimuovi questo sito"
+	},
 	"tile_header": {
 		"message": "Icone:"
+	},
+	"tile_pin": {
+		"message": "Blocca questo sito nella posizione attuale"
 	},
 	"tile_savedthumb_set": {
 		"message": "Imposta"
@@ -142,12 +148,6 @@
 	},
 	"tile_title_set": {
 		"message": "Imposta"
-	},
-	"tile_block": {
-		"message": "Rimuovi questo sito"
-	},
-	"tile_pin": {
-		"message": "Blocca questo sito nella posizione attuale"
 	},
 	"tile_unpin": {
 		"message": "Sblocca questo sito"

@@ -72,9 +72,6 @@
 	"filter_button": {
 		"message": "Фільтр…"
 	},
-	"filter_helptext": {
-		"message": "Для виставлення ліміту на домен та усі його похідні, додайте перед ним крапку, наприклад: .example.com"
-	},
 	"filter_header_add": {
 		"message": "Додати фільтр:"
 	},
@@ -86,6 +83,9 @@
 	},
 	"filter_header_unpinned": {
 		"message": "Відкріплені плитки"
+	},
+	"filter_helptext": {
+		"message": "Для виставлення ліміту на домен та усі його похідні, додайте перед ним крапку, наприклад: .example.com"
 	},
 	"filter_placeholder_host": {
 		"message": "Введіть домен або оберіть із випадаючого списку"
@@ -123,9 +123,6 @@
 	"newversion": {
 		"message": "Додаток New Tab Tools був оновлений до версії $1. New Tab Tools поширюється безкоштовно, але ваші пожертви будуть сприйняті з вдячністю!"
 	},
-	"options_header": {
-		"message": "Опції:"
-	},
 	"options_columns": {
 		"message": "Стовбці"
 	},
@@ -137,6 +134,9 @@
 	},
 	"options_grid_spacing": {
 		"message": "відступ поміж плиток"
+	},
+	"options_header": {
+		"message": "Опції:"
 	},
 	"options_historytiles": {
 		"message": "Плитки з Історії"
@@ -186,8 +186,14 @@
 	"recently_closed_tabs": {
 		"message": "Нещодавно закриті вкладки:"
 	},
+	"tile_block": {
+		"message": "Видалити цю адресу"
+	},
 	"tile_header": {
 		"message": "Плитки:"
+	},
+	"tile_pin": {
+		"message": "Прикріпити дану адресу на цьому місці"
 	},
 	"tile_savedthumb_label": {
 		"message": "Збережене зображення:"
@@ -224,12 +230,6 @@
 	},
 	"tile_title_set": {
 		"message": "Застосувати"
-	},
-	"tile_block": {
-		"message": "Видалити цю адресу"
-	},
-	"tile_pin": {
-		"message": "Прикріпити дану адресу на цьому місці"
 	},
 	"tile_unpin": {
 		"message": "Відкріпити цю адресу"

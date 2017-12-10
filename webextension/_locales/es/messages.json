@@ -44,9 +44,6 @@
 	"newversion": {
 		"message": "New Tab Tools ha sido actualizado a la versión $1. Aunque New Tab Tools es gratis, ¡toda donación es bienvenida!"
 	},
-	"options_header": {
-		"message": "Opciones:"
-	},
 	"options_columns": {
 		"message": "Columnas"
 	},
@@ -58,6 +55,9 @@
 	},
 	"options_grid_spacing": {
 		"message": "Espaciado de cuadrícula"
+	},
+	"options_header": {
+		"message": "Opciones:"
 	},
 	"options_historytiles": {
 		"message": "Contenedores desde tu historial"

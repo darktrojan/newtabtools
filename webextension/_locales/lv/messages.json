@@ -65,9 +65,6 @@
 	"newversion": {
 		"message": "NewTabTools ir atjaunināts uz versiju $1. NewTabTools ir bezmaksas, taču jūsu ziedojums tiks novērtēts!"
 	},
-	"options_header": {
-		"message": "Opcijas:"
-	},
 	"options_columns": {
 		"message": "Kolonnas"
 	},
@@ -79,6 +76,9 @@
 	},
 	"options_grid_spacing": {
 		"message": "Režģa atstarpes"
+	},
+	"options_header": {
+		"message": "Opcijas:"
 	},
 	"options_historytiles": {
 		"message": "Elementi no pārlūkošanas vēstures"
@@ -128,8 +128,14 @@
 	"recently_closed_tabs": {
 		"message": "Nesen aizvērtās cilnes:"
 	},
+	"tile_block": {
+		"message": "Aizvākt šo lapu"
+	},
 	"tile_header": {
 		"message": "Elementi:"
+	},
+	"tile_pin": {
+		"message": "Pielīmēt šo lapu tās pašreizējā vietā"
 	},
 	"tile_savedthumb_label": {
 		"message": "Saglabātais attēls:"
@@ -163,12 +169,6 @@
 	},
 	"tile_title_set": {
 		"message": "Iestatīt"
-	},
-	"tile_block": {
-		"message": "Aizvākt šo lapu"
-	},
-	"tile_pin": {
-		"message": "Pielīmēt šo lapu tās pašreizējā vietā"
 	},
 	"tile_unpin": {
 		"message": "Atbrīvot šo lapu"
