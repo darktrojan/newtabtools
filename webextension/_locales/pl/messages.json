@@ -8,6 +8,18 @@
 	"action_pin": {
 		"message": "Przypnij do strony New Tab"
 	},
+	"backup_button": {
+		"message": "Utwórz…"
+	},
+	"backup_description": {
+		"message": "New Tab Tools stworzy plik zawierający bieżące ustawienia, przypiete kafelki oraz tło."
+	},
+	"backup_header": {
+		"message": "Kopia zapasowa:"
+	},
+	"backup_restore_button": {
+		"message": "Kopie zapasowe…"
+	},
 	"bg_header": {
 		"message": "Obraz tła strony:"
 	},
@@ -191,6 +203,18 @@
 	},
 	"recently_closed_tabs": {
 		"message": "Ostatnio zamknięte zakładki:"
+	},
+	"restore_button": {
+		"message": "Przywróć"
+	},
+	"restore_description": {
+		"message": "Wybierz plik kopii zapasowej New Tab Tools, aby przywrócić ustawienia."
+	},
+	"restore_header": {
+		"message": "Przywracanie kopii zapasowej:"
+	},
+	"restore_warning": {
+		"message": "Nadpisane zostaną bieżące ustawienia, przypięte kafelki oraz tło. Ta operacja jest nieodwracalna."
 	},
 	"tile_block": {
 		"message": "Usuń tę stronę"
