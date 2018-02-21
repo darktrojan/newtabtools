@@ -1,4 +1,25 @@
 {
+	"action_captureThumbnail": {
+		"message": "Miniatuur vastleggen"
+	},
+	"action_isPinned": {
+		"message": "Vastgemaakt aan de nieuw-tabbladpagina"
+	},
+	"action_pin": {
+		"message": "Vastmaken aan de nieuw-tabbladpagina"
+	},
+	"backup_button": {
+		"message": "Back-up maken…"
+	},
+	"backup_description": {
+		"message": "New Tab Tools maakt een bestand aan dat uw instellingen, vastgemaakte tegels en achtergrondafbeelding bevat."
+	},
+	"backup_header": {
+		"message": "Back-up:"
+	},
+	"backup_restore_button": {
+		"message": "Back-up maken/terugzetten…"
+	},
 	"bg_header": {
 		"message": "Achtergrondafbeelding van pagina:"
 	},
@@ -8,6 +29,46 @@
 	"bg_set": {
 		"message": "Instellen"
 	},
+	"changelog_label": {
+		"message": "Wat is er gewijzigd?"
+	},
+	"contextmenu_block": {
+		"message": "Deze tegel verwijderen"
+	},
+	"contextmenu_edit": {
+		"message": "Deze tegel bewerken"
+	},
+	"contextmenu_options": {
+		"message": "New Tab Tools-opties"
+	},
+	"contextmenu_pin": {
+		"message": "Deze tegel vastmaken"
+	},
+	"contextmenu_unpin": {
+		"message": "Deze tegel losmaken"
+	},
+	"database_error_cookies": {
+		"message": "Als cookies zijn uitgeschakeld, voeg dan een uitzondering toe voor $URL$.",
+		"placeholders": {
+			"url": {
+				"content": "$1",
+				"example": "moz-extension://cdea0cc6-fa00-4a9f-b60e-c011fa0decb9/"
+			}
+		}
+	},
+	"database_error_history_settings": {
+		"message": "New Tab Tools kan niet worden gestart als Firefox is ingesteld op ‘Nooit geschiedenis onthouden’ of ‘Altijd de privénavigatiemodus gebruiken’."
+	},
+	"database_error_indexeddb": {
+		"description": "Words between ` characters will be placed in HTML <code> blocks",
+		"message": "Ga naar `about:config` en controleer of `dom.indexedDB.enabled` is ingesteld op true."
+	},
+	"database_error_message": {
+		"message": "New Tab Tools kon niet goed worden gestart. Probeer dit:"
+	},
+	"database_error_restart": {
+		"message": "U dient New Tab Tools opnieuw te starten (of herstart gewoon Firefox) om deze wijzigingen van kracht te laten worden."
+	},
 	"donate": {
 		"message": "Doneren…"
 	},
@@ -15,10 +76,43 @@
 		"message": "New Tab Tools wordt gefinancierd door gebruikersdonaties."
 	},
 	"extensionDescription": {
-		"message": "Maakt de nieuwe tabblad-pagina aanpasbaar. U kunt meer tegels toevoegen, de starter van de Firefox-homepage of een achtergrond. En natuurlijk nieuwe tegels en tegelafbeeldingen."
+		"message": "Maakt de nieuw-tabbladpagina aanpasbaar. U kunt meer tegels toevoegen, of een achtergrondafbeelding. Ook kunt u nieuwe tegels en tegelafbeeldingen instellen."
 	},
 	"extensionName": {
 		"message": "New Tab Tools"
+	},
+	"filter_button": {
+		"message": "Filter…"
+	},
+	"filter_header_add": {
+		"message": "Filter toevoegen:"
+	},
+	"filter_header_domain": {
+		"message": "Domein"
+	},
+	"filter_header_pinned": {
+		"message": "Vastgemaakte tegels"
+	},
+	"filter_header_unpinned": {
+		"message": "Limiet voor losgemaakte tegels"
+	},
+	"filter_helptext": {
+		"message": "Om een domein en alle subdomeinen ervan te beperken, voegt u een punt toe voor het domein, zoals volgt: .example.com"
+	},
+	"filter_placeholder_host": {
+		"message": "Typ of selecteer een domein"
+	},
+	"filter_placeholder_limit": {
+		"message": "Limiet"
+	},
+	"filter_set": {
+		"message": "Instellen"
+	},
+	"filter_title": {
+		"message": "Tegels voor browsergeschiedenis:"
+	},
+	"filter_unlimited": {
+		"message": "onbeperkt"
 	},
 	"github": {
 		"message": "New Tab Tools op GitHub"
@@ -39,16 +133,22 @@
 		"message": "Ongedaan maken"
 	},
 	"newversion": {
-		"message": "New Tab Tools is bijgewerkt naar versie $1. New Tab Tools is gratis maar uw donatie is welkom!"
+		"message": "New Tab Tools is bijgewerkt naar versie $VERSION$. New Tab Tools is gratis, maar uw donatie is welkom!",
+		"placeholders": {
+			"version": {
+				"content": "$1",
+				"example": "84"
+			}
+		}
 	},
 	"options_columns": {
 		"message": "Kolommen"
 	},
 	"options_foreground_opacity": {
-		"message": "Foreground Opacity"
+		"message": "Ondoorzichtigheid van voorgrond"
 	},
 	"options_grid_margin": {
-		"message": "Rasterafmeting"
+		"message": "Rastermarge"
 	},
 	"options_grid_spacing": {
 		"message": "Raster-tussenruimte"
@@ -56,8 +156,14 @@
 	"options_header": {
 		"message": "Opties:"
 	},
+	"options_historytiles": {
+		"message": "Tegels uit uw browsergeschiedenis"
+	},
 	"options_launcher_hidden": {
-		"message": "Niet weergeven"
+		"message": "Niet tonen"
+	},
+	"options_locked": {
+		"message": "Verslepen van tegels voorkomen"
 	},
 	"options_recent": {
 		"message": "Onlangs gesloten tabbladen"
@@ -83,6 +189,9 @@
 	"options_theme_light": {
 		"message": "Licht thema"
 	},
+	"options_thumb_titlesize": {
+		"message": "Titelgrootte van tegel"
+	},
 	"pin_url_button": {
 		"message": "Toevoegen"
 	},
@@ -95,6 +204,18 @@
 	"recently_closed_tabs": {
 		"message": "Onlangs gesloten tabbladen:"
 	},
+	"restore_button": {
+		"message": "Terugzetten"
+	},
+	"restore_description": {
+		"message": "Selecteer een back-upbestand van New Tab Tools om uit te importeren."
+	},
+	"restore_header": {
+		"message": "Terugzetten:"
+	},
+	"restore_warning": {
+		"message": "Hierdoor worden uw bestaande instellingen, vastgemaakte tegels en de achtergrondafbeelding overschreven. Dit kan niet ongedaan worden gemaakt."
+	},
 	"tile_block": {
 		"message": "Deze website verwijderen"
 	},
@@ -104,11 +225,29 @@
 	"tile_pin": {
 		"message": "Deze website op de huidige positie vastzetten"
 	},
+	"tile_savedthumb_label": {
+		"message": "Opgeslagen afbeelding:"
+	},
+	"tile_savedthumb_savecurrent": {
+		"message": "Huidige miniatuur opslaan"
+	},
 	"tile_savedthumb_set": {
 		"message": "Instellen"
 	},
+	"tile_selection_next_tooltip": {
+		"message": "Volgende tegel"
+	},
+	"tile_selection_nextrow_tooltip": {
+		"message": "Volgende rij"
+	},
+	"tile_selection_previous_tooltip": {
+		"message": "Vorige tegel"
+	},
+	"tile_selection_previousrow_tooltip": {
+		"message": "Vorige rij"
+	},
 	"tile_thumbnail_bgcolor": {
-		"message": "Background Color:"
+		"message": "Achtergrondkleur:"
 	},
 	"tile_thumbnail_remove": {
 		"message": "Verwijderen"
@@ -124,5 +263,8 @@
 	},
 	"tile_unpin": {
 		"message": "Deze website losmaken"
+	},
+	"tileurl_empty": {
+		"message": "Lege tegel"
 	}
 }
