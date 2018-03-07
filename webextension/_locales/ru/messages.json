@@ -2,6 +2,24 @@
 	"action_captureThumbnail": {
 		"message": "Создать превью страницы"
 	},
+  "action_isPinned": {
+  "message": "Закреплено на Экспресс-панели"
+	},
+	"action_pin": {
+		"message": "Закрепить на Экспресс-панели"
+	},
+	"backup_button": {
+		"message": "Создать копию ..."
+	},
+	"backup_description": {
+		"message": "New Tab Tools сохранит в файл ваши настройки, закрепленные плитки и фоновый рисунок."
+	},
+	"backup_header": {
+		"message": "Резервная копия:"
+	},
+	"backup_restore_button": {
+		"message": "Резервное копирование ..."
+	},
 	"bg_header": {
 		"message": "Фоновое изображение Экспресс-панели:"
 	},
@@ -127,6 +145,18 @@
 	},
 	"recently_closed_tabs": {
 		"message": "Закрытые вкладки:"
+	},
+  "restore_button": {
+	"message": "Восстановить"
+	},
+	"restore_description": {
+		"message": "Выбирите файл с резервной копией."
+	},
+	"restore_header": {
+		"message": "Восстановление:"
+	},
+	"restore_warning": {
+		"message": "Существующие настройки, закрепленные плитки и фоновый рисунок перезапишутся. Это нельзя отменить."
 	},
 	"tile_block": {
 		"message": "Удалить этот сайт"
