@@ -3,7 +3,7 @@
 		"message": "Создать превью страницы"
 	},
   "action_isPinned": {
-  "message": "Закреплено на Экспресс-панели"
+    "message": "Закреплено на Экспресс-панели"
 	},
 	"action_pin": {
 		"message": "Закрепить на Экспресс-панели"
@@ -61,6 +61,36 @@
 	},
 	"filter_button": {
 		"message": "Фильтр…"
+	},
+  "filter_header_add": {
+		"message": "Добавить фильтр:"
+	},
+	"filter_header_domain": {
+		"message": "Домен"
+	},
+	"filter_header_pinned": {
+		"message": "Закреплено"
+	},
+	"filter_header_unpinned": {
+		"message": "Незакрепленных до:"
+	},
+	"filter_helptext": {
+		"message": "Чтобы выбрать домен и все его поддомены, добавьте точку в начале, например: .example.com"
+	},
+	"filter_placeholder_host": {
+		"message": "Введите или выберите домен"
+	},
+	"filter_placeholder_limit": {
+		"message": "Макс."
+	},
+	"filter_set": {
+		"message": "Добавить"
+	},
+	"filter_title": {
+		"message": "Плитки из истории:"
+	},
+	"filter_unlimited": {
+		"message": "бесконечности"
 	},
 	"github": {
 		"message": "New Tab Tools на GitHub"
@@ -150,7 +180,7 @@
 	"message": "Восстановить"
 	},
 	"restore_description": {
-		"message": "Выбирите файл с резервной копией."
+		"message": "Выберите файл с резервной копией."
 	},
 	"restore_header": {
 		"message": "Восстановление:"
@@ -169,6 +199,9 @@
 	},
 	"tile_savedthumb_label": {
 		"message": "Сохраненное изображение:"
+	},
+  "tile_savedthumb_savecurrent": {
+		"message": "Сохранить этот эскиз"
 	},
 	"tile_savedthumb_set": {
 		"message": "Применить"
