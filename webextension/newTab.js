@@ -806,7 +806,12 @@ var newTabTools = {
 		}
 
 		if (this.optionsFilterHostAutocomplete.childElementCount === 0) {
-			chrome.topSites.get({ providers: ['places'] }, sites => {
+			browser.runtime.getBrowserInfo().then(function({version}){
+				if (parseInt(version, 10) >= 60) {
+					return browser.topSites.get();
+				}
+				return browser.topSites.get({providers: ['places']});
+			}).then(sites => {
 				for (let s of sites.reduce((carry, site) => {
 					let {protocol, host} = new URL(site.url);
 					if (host && ['http:', 'https:', 'ftp:'].includes(protocol) && !carry.includes(host)) {

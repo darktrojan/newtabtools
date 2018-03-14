@@ -48,7 +48,12 @@ var Tiles = {
 					return;
 				}
 
-				chrome.topSites.get({ providers: ['places'] }, r => {
+				browser.runtime.getBrowserInfo().then(function({version}){
+					if (parseInt(version, 10) >= 60) {
+						return browser.topSites.get();
+					}
+					return browser.topSites.get({providers: ['places']});
+				}).then(r => {
 					let urls = this._list.slice();
 					let filters = Filters.getList();
 					let dotFilters = Object.keys(filters).filter(f => f[0] == '.');
