@@ -2,8 +2,8 @@
 	"action_captureThumbnail": {
 		"message": "Создать превью страницы"
 	},
-  "action_isPinned": {
-    "message": "Закреплено на Экспресс-панели"
+	"action_isPinned": {
+		"message": "Закреплено на Экспресс-панели"
 	},
 	"action_pin": {
 		"message": "Закрепить на Экспресс-панели"
@@ -62,7 +62,7 @@
 	"filter_button": {
 		"message": "Фильтр…"
 	},
-  "filter_header_add": {
+	"filter_header_add": {
 		"message": "Добавить фильтр:"
 	},
 	"filter_header_domain": {
@@ -176,8 +176,8 @@
 	"recently_closed_tabs": {
 		"message": "Закрытые вкладки:"
 	},
-  "restore_button": {
-	"message": "Восстановить"
+	"restore_button": {
+		"message": "Восстановить"
 	},
 	"restore_description": {
 		"message": "Выберите файл с резервной копией."
@@ -200,7 +200,7 @@
 	"tile_savedthumb_label": {
 		"message": "Сохраненное изображение:"
 	},
-  "tile_savedthumb_savecurrent": {
+	"tile_savedthumb_savecurrent": {
 		"message": "Сохранить этот эскиз"
 	},
 	"tile_savedthumb_set": {
