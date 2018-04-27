@@ -652,6 +652,9 @@ button.arrow {
 	border: none;
 	cursor: pointer;
 }
+:root[theme="dark"] button.arrow {
+	background-image: url("images/arrow-dark.svg");
+}
 #options-previous-row-tile {
 	margin-top: -1.5em;
 	transform: rotate(90deg);
