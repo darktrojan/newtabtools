@@ -123,7 +123,7 @@ var Prefs = {
 		if ('newTabTools' in window) {
 			newTabTools.updateUI(keys);
 			if (keys.includes('rows') || keys.includes('columns')) {
-				Grid.refresh();
+				Grid.refresh().then(newTabTools.resizeOptionsThumbnail.bind(newTabTools));
 			} else if (keys.includes('history')) {
 				Updater.updateGrid();
 			}

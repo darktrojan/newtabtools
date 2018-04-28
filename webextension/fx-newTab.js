@@ -404,7 +404,7 @@ var Grid = {
 		}, this);
 
 		// Render the grid again.
-		this._render();
+		return this._render();
 	},
 
 	/**
@@ -478,7 +478,7 @@ var Grid = {
 		let cells = this.cells;
 
 		// Put sites into the cells.
-		Tiles.getAllTiles().then(links => {
+		return Tiles.getAllTiles().then(links => {
 			let length = Math.min(links.length, cells.length);
 
 			for (let i = 0; i < length; i++) {
@@ -530,7 +530,7 @@ var Grid = {
 			this._renderGrid();
 		}
 
-		this._renderSites();
+		return this._renderSites();
 	},
 
 	_shouldRenderGrid: function Grid_shouldRenderGrid() {
