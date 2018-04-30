@@ -183,9 +183,6 @@ input[type="button"] {
 	background-repeat: no-repeat;
 	vertical-align: middle;
 }
-:root[theme="dark"] .close-button {
-	background-image: url("images/close-dark.svg");
-}
 /* UPDATE NOTICE */
 #newtab-update-outer {
 	flex: 1;
@@ -222,7 +219,6 @@ input[type="button"] {
 	min-width: 0;
 	padding: 0 2px;
 	font-size: 12px;
-	color: #444;
 	margin: 0 2px;
 }
 /* MARGINS */
@@ -433,9 +429,6 @@ svg {
 	background-color: transparent;
 	background-image: url("images/controls-light.svg");
 }
-:root[theme="dark"] .newtab-control {
-	background-image: url("images/controls-dark.svg");
-}
 :root[locked="true"] .newtab-control {
 	display: none;
 }
@@ -536,15 +529,6 @@ svg {
 #locked-toggle:hover {
 	opacity: 1;
 }
-:root[theme="dark"] #options-toggle {
-	background-image: url("images/options-dark.svg");
-}
-:root[theme="dark"] #locked-toggle {
-	background-image: url("images/unlocked-dark.svg");
-}
-:root[theme="dark"][locked="true"] #locked-toggle {
-	background-image: url("images/locked-dark.svg");
-}
 :root[options-hidden] #options,
 :root[options-hidden] #options-bg,
 :root:not([options-hidden]) #options-toggle,
@@ -623,11 +607,7 @@ svg {
 #options button:not(.arrow),
 #options select {
 	font-size: 12px;
-	color: #444;
 	margin: 0;
-}
-#options button:disabled {
-	color: #888;
 }
 .options-row-label {
 	display: block;
@@ -666,9 +646,6 @@ button.arrow {
 	-moz-appearance: none;
 	border: none;
 	cursor: pointer;
-}
-:root[theme="dark"] button.arrow {
-	background-image: url("images/arrow-dark.svg");
 }
 #options-previous-row-tile {
 	margin-top: -1.5em;
@@ -764,7 +741,8 @@ a {
 	white-space: nowrap;
 	position: absolute;
 	list-style: none;
-	background-color: #f9f9f9;
+	color: var(--fore-opaque);
+	background-color: var(--back-opaque);
 	z-index: 1;
 	border: 1px #b2aeaa solid;
 	box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.25);
@@ -784,19 +762,16 @@ a {
 	margin-top: 8px;
 }
 li.bookmark .autocomplete-icon {
-	background-image: url("images/bookmark.svg");
+	background-image: url("images/bookmark-light.svg");
 }
 li.tab .autocomplete-icon {
-	background-image: url("images/tab.svg");
+	background-image: url("images/tab-light.svg");
 }
 li.history .autocomplete-icon {
-	background-image: url("images/history.svg");
+	background-image: url("images/history-light.svg");
 }
 li.pinned .autocomplete-icon {
-	background-image: url("images/pinned.svg");
-}
-li.current .autocomplete-icon {
-	background-color: highlighttext;
+	background-image: url("images/pinned-light.svg");
 }
 .autocomplete-detail {
 	margin-left: 6px;
@@ -845,10 +820,10 @@ li.current .autocomplete-icon {
 	cursor: pointer;
 }
 .plus-button {
-	background-image: url("images/plus.svg");
+	background-image: url("images/plus-light.svg");
 }
 .minus-button {
-	background-image: url("images/minus.svg");
+	background-image: url("images/minus-light.svg");
 }
 .minus-button[disabled] {
 	opacity: 0.5;

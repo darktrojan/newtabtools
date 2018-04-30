@@ -537,6 +537,7 @@ var newTabTools = {
 			let theme = Prefs.theme;
 			document.querySelector('[name="theme"][value="' + theme + '"]').checked = true;
 			document.documentElement.setAttribute('theme', theme);
+			this.darkIcons.disabled = theme == 'light';
 		}
 
 		if (!keys || keys.includes('locked')) {
@@ -892,6 +893,7 @@ var newTabTools = {
 
 (function() {
 	let uiElements = {
+		'darkIcons': 'dark-icons',
 		'backgroundFake': 'background-fake',
 		'page': 'newtab-scrollbox', // used in fx-newTab.js
 		'optionsToggleButton': 'options-toggle',

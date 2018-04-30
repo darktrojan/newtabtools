@@ -1,0 +1,36 @@
+.close-button {
+	background-image: url("images/close-dark.svg");
+}
+.newtab-control {
+	background-image: url("images/controls-dark.svg");
+}
+#options-toggle {
+	background-image: url("images/options-dark.svg");
+}
+#locked-toggle {
+	background-image: url("images/unlocked-dark.svg");
+}
+:root[locked="true"] #locked-toggle {
+	background-image: url("images/locked-dark.svg");
+}
+button.arrow {
+	background-image: url("images/arrow-dark.svg");
+}
+li.bookmark .autocomplete-icon {
+	background-image: url("images/bookmark-dark.svg");
+}
+li.tab .autocomplete-icon {
+	background-image: url("images/tab-dark.svg");
+}
+li.history .autocomplete-icon {
+	background-image: url("images/history-dark.svg");
+}
+li.pinned .autocomplete-icon {
+	background-image: url("images/pinned-dark.svg");
+}
+.plus-button {
+	background-image: url("images/plus-dark.svg");
+}
+.minus-button {
+	background-image: url("images/minus-dark.svg");
+}
