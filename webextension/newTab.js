@@ -985,7 +985,7 @@ var newTabTools = {
 	document.body.oncontextmenu = newTabTools.contextMenuShowing;
 	newTabTools.contextMenu.onclick = newTabTools.contextMenuOnClick;
 
-	window.addEventListener('keypress', function(event) {
+	window.addEventListener('keydown', function(event) {
 		if (event.key == 'Escape') {
 			if (newTabTools.pinURLAutocomplete.hidden) {
 				newTabTools.hideOptions();
