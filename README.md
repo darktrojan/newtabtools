@@ -7,8 +7,6 @@ Releases
 ### Firefox
 Released versions can be downloaded from https://addons.mozilla.org/firefox/addon/new-tab-tools/
 
-Beta versions are sometimes available from https://addons.mozilla.org/firefox/addon/new-tab-tools/versions/beta
-
 ### Chrome
 Download from the Chrome store https://chrome.google.com/webstore/detail/new-tab-tools/gfonmeedigdbjpgpeojioadpimflbogh
 
