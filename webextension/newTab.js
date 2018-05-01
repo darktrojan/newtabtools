@@ -1012,6 +1012,9 @@ var newTabTools = {
 		}
 	});
 	window.addEventListener('click', function(event) {
+		if (event.button != 0) {
+			return;
+		}
 		if (newTabTools.pinURLInput == event.target) {
 			if (newTabTools.pinURLAutocomplete.hidden) {
 				newTabTools.autocomplete();
