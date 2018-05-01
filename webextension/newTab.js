@@ -360,17 +360,6 @@ var newTabTools = {
 			Filters.setFilter(row.cells[0].textContent, count);
 			Updater.updateGrid();
 		}
-
-		if (this.pinURLAutocomplete.compareDocumentPosition(event.target) & Node.DOCUMENT_POSITION_CONTAINED_BY) {
-			let target = event.target;
-			while (target.nodeName != 'li') {
-				target = target.parentNode;
-			}
-			this.pinURLInput.value = target.dataset.url;
-			this.pinURLInput.focus();
-			this.pinURLInput.selectionStart = this.pinURLInput.selectionEnd = this.pinURLInput.value.length;
-			this.pinURLAutocomplete.hidden = true;
-		}
 	},
 	optionsOnChange: function(event) {
 		if (event.target.disabled) {
@@ -1022,4 +1011,28 @@ var newTabTools = {
 			}
 		}
 	});
+	window.addEventListener('click', function(event) {
+		if (newTabTools.pinURLInput == event.target) {
+			if (newTabTools.pinURLAutocomplete.hidden) {
+				newTabTools.autocomplete();
+			}
+			return;
+		}
+		if (newTabTools.pinURLAutocomplete.hidden) {
+			return;
+		}
+		if (newTabTools.pinURLAutocomplete.compareDocumentPosition(event.target) & Node.DOCUMENT_POSITION_CONTAINED_BY) {
+			let target = event.target;
+			while (target.nodeName != 'li') {
+				target = target.parentNode;
+			}
+			newTabTools.pinURLInput.value = target.dataset.url;
+			newTabTools.pinURLInput.focus();
+			newTabTools.pinURLInput.selectionStart = newTabTools.pinURLInput.selectionEnd = newTabTools.pinURLInput.value.length;
+			newTabTools.pinURLAutocomplete.hidden = true;
+			return;
+		}
+		newTabTools.pinURLAutocomplete.hidden = true;
+		event.stopPropagation();
+	}, true);
 })();
