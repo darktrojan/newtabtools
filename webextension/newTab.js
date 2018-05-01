@@ -13,19 +13,19 @@ var newTabTools = {
 	},
 	isValidURL: function(url) {
 		try {
-			return ['http:', 'https:', 'ftp:'].includes(new URL(url).protocol);
+			return /^(https?|ftp):\/\//.test(url) && new URL(url);
 		} catch (ex) {
 			return false;
 		}
 	},
 	autocomplete: function() {
-		this.pinURLAutocomplete.hidden = false;
+		this.pinURLButton.disabled = !this.pinURLInput.checkValidity() || !this.isValidURL(this.pinURLInput.value);
 		let value = this.pinURLInput.value;
 		if (value.length < 2) {
+			this.pinURLAutocomplete.hidden = true;
 			while (this.pinURLAutocomplete.lastChild) {
 				this.pinURLAutocomplete.lastChild.remove();
 			}
-			this.pinURLAutocomplete.hidden = true;
 			return;
 		}
 		let valueParts = value.toLowerCase().split(/\s+/);
@@ -49,6 +49,7 @@ var newTabTools = {
 		}
 
 		if (count >= 10) {
+			this.pinURLAutocomplete.hidden = false;
 			return;
 		}
 
@@ -93,6 +94,7 @@ var newTabTools = {
 			traverse(tree[0].children);
 
 			if (count >= 10) {
+				this.pinURLAutocomplete.hidden = false;
 				return;
 			}
 
@@ -102,6 +104,7 @@ var newTabTools = {
 				}
 
 				if (count >= 10) {
+					this.pinURLAutocomplete.hidden = false;
 					return;
 				}
 
@@ -116,6 +119,13 @@ var newTabTools = {
 				});
 			});
 		});
+	},
+	setPinURLInputValue: function(url) {
+		this.pinURLInput.value = url;
+		this.pinURLInput.focus();
+		this.pinURLInput.selectionStart = this.pinURLInput.selectionEnd = url.length;
+		this.pinURLButton.disabled = !this.pinURLInput.checkValidity()  || !this.isValidURL(url);
+		this.pinURLAutocomplete.hidden = true;
 	},
 	get selectedSite() {
 		return Grid.sites[this._selectedSiteIndex];
@@ -202,8 +212,7 @@ var newTabTools = {
 				site.link.id = dbID;
 				site.link.position = position;
 				site.updateAttributes(true);
-				newTabTools.pinURLInput.value = '';
-				newTabTools.pinURLInput.focus();
+				newTabTools.setPinURLInputValue('');
 				newTabTools.selectedSiteIndex = position;
 
 				Transformation.freezeSitePosition(site);
@@ -887,6 +896,7 @@ var newTabTools = {
 		'page': 'newtab-scrollbox', // used in fx-newTab.js
 		'optionsToggleButton': 'options-toggle',
 		'pinURLInput': 'options-pinURL-input',
+		'pinURLButton': 'options-pinURL',
 		'pinURLAutocomplete': 'autocomplete',
 		'tilePreviousRow': 'options-previous-row-tile',
 		'tilePrevious': 'options-previous-tile',
@@ -1002,11 +1012,11 @@ var newTabTools = {
 				items[index].classList.add('current');
 				break;
 			case 'Enter':
+			case 'Tab':
 				if (current) {
-					newTabTools.pinURLInput.value = current.dataset.url;
-					newTabTools.pinURLInput.selectionStart = newTabTools.pinURLInput.selectionEnd = newTabTools.pinURLInput.value.length;
-					newTabTools.pinURLAutocomplete.hidden = true;
+					newTabTools.setPinURLInputValue(current.dataset.url);
 				}
+				newTabTools.pinURLAutocomplete.hidden = true;
 				break;
 			}
 		}
@@ -1029,10 +1039,7 @@ var newTabTools = {
 			while (target.nodeName != 'li') {
 				target = target.parentNode;
 			}
-			newTabTools.pinURLInput.value = target.dataset.url;
-			newTabTools.pinURLInput.focus();
-			newTabTools.pinURLInput.selectionStart = newTabTools.pinURLInput.selectionEnd = newTabTools.pinURLInput.value.length;
-			newTabTools.pinURLAutocomplete.hidden = true;
+			newTabTools.setPinURLInputValue(target.dataset.url);
 			return;
 		}
 		newTabTools.pinURLAutocomplete.hidden = true;
