@@ -12,7 +12,7 @@
 		"message": "備份…"
 	},
 	"backup_description": {
-		"message": "New Tab Tools將建立一個包含您的設定，已釘選首頁磚和背景圖片的檔案。"
+		"message": "New Tab Tools將建立包含您的設定，已釘選首頁磚和背景圖片的檔案。"
 	},
 	"backup_header": {
 		"message": "備份:"
@@ -39,7 +39,7 @@
 		"message": "編輯此首頁磚"
 	},
 	"contextmenu_options": {
-		"message": "New Tab Tools 選項"
+		"message": "New Tab Tools選項"
 	},
 	"contextmenu_pin": {
 		"message": "釘選此首頁磚"
@@ -48,7 +48,7 @@
 		"message": "取消釘選此首頁磚"
 	},
 	"database_error_cookies": {
-		"message": "If cookies are disabled, add an exception for $URL$.",
+		"message": "如果Cookie被禁用，則為$URL$添加例外。",
 		"placeholders": {
 			"url": {
 				"content": "$1",
@@ -57,26 +57,26 @@
 		}
 	},
 	"database_error_history_settings": {
-		"message": "New Tab Tools cannot start if Firefox is set to \"never remember history\" or \"always open in private browsing mode\"."
+		"message": "如果Firefox設定為\"不保留歷史記錄\"或\"始終以隱私瀏覽模式打開\"，New Tab Tools將無法啟動。"
 	},
 	"database_error_indexeddb": {
 		"description": "Words between ` characters will be placed in HTML <code> blocks",
-		"message": "Go to `about:config` and check `dom.indexedDB.enabled` is set to true."
+		"message": "請至`about:config`確認`dom.indexedDB.enabled`設定為true."
 	},
 	"database_error_message": {
-		"message": "New Tab Tools couldn't start properly. Try these:"
+		"message": "New Tab Tools無法正常啟動。試試這些:"
 	},
 	"database_error_restart": {
-		"message": "You will need to restart New Tab Tools (or just restart Firefox) for these changes to have an effect."
+		"message": "您需要重新啟動New Tab Tools（或者重新啟動Firefox）才能使這些更改生效。"
 	},
 	"donate": {
 		"message": "捐款…"
 	},
 	"donate_label": {
-		"message": "New Tab Tools 是由使用者的捐款資助。"
+		"message": "New Tab Tools是由使用者的捐款資助。"
 	},
 	"extensionDescription": {
-		"message": "自訂新分頁頁面。你可以增加更多首頁磚、或是自訂背景圖片，你也能為首頁磚設定新的圖片和標題。"
+		"message": "自訂新分頁頁面。你可以添加更多首頁磚、或是自訂背景圖片，你也能為首頁磚設定新的圖片和標題。"
 	},
 	"extensionName": {
 		"message": "New Tab Tools"
@@ -85,37 +85,37 @@
 		"message": "過濾…"
 	},
 	"filter_header_add": {
-		"message": "Add filter:"
+		"message": "添加過濾:"
 	},
 	"filter_header_domain": {
-		"message": "Domain"
+		"message": "域名"
 	},
 	"filter_header_pinned": {
-		"message": "Pinned Tiles"
+		"message": "已釘選首頁磚"
 	},
 	"filter_header_unpinned": {
-		"message": "Unpinned Tiles Limit"
+		"message": "未釘選首頁磚上限"
 	},
 	"filter_helptext": {
-		"message": "To limit a domain and all of its subdomains, add a dot in front of the domain, like this: .example.com"
+		"message": "要限制域名及其所有子域，請在域名前添加一個點，如下所示：.example.com"
 	},
 	"filter_placeholder_host": {
-		"message": "Type or select a domain"
+		"message": "輸入或選擇域名"
 	},
 	"filter_placeholder_limit": {
-		"message": "Limit"
+		"message": "上限"
 	},
 	"filter_set": {
-		"message": "Set"
+		"message": "設定"
 	},
 	"filter_title": {
-		"message": "Browsing History Tiles:"
+		"message": "瀏覽歷史首頁磚:"
 	},
 	"filter_unlimited": {
-		"message": "unlimited"
+		"message": "無限"
 	},
 	"github": {
-		"message": "New Tab Tools on GitHub"
+		"message": "GitHub上的New Tab Tools"
 	},
 	"newtab_pageTitle": {
 		"message": "新分頁"
@@ -133,7 +133,7 @@
 		"message": "恢復"
 	},
 	"newversion": {
-		"message": "New Tab Tools has been updated to version $VERSION$. New Tab Tools is free, but your donation is appreciated!",
+		"message": "New Tab Tools已更新至版本$VERSION$。New Tab Tools是免費的，但您的捐贈是值得讚賞的!",
 		"placeholders": {
 			"version": {
 				"content": "$1",
@@ -205,16 +205,16 @@
 		"message": "最近關閉的分頁:"
 	},
 	"restore_button": {
-		"message": "Restore"
+		"message": "還原"
 	},
 	"restore_description": {
-		"message": "Select a New Tab Tools backup file to import from."
+		"message": "選擇要匯入的New Tab Tools備份檔案。"
 	},
 	"restore_header": {
-		"message": "Restore:"
+		"message": "還原:"
 	},
 	"restore_warning": {
-		"message": "This will override your existing settings, pinned tiles, and background image. It cannot be undone."
+		"message": "這將覆蓋您現有的設定，已釘選首頁磚和背景圖片。它不能被撤消。"
 	},
 	"tile_block": {
 		"message": "移除此網站"
@@ -229,7 +229,7 @@
 		"message": "保存的圖片:"
 	},
 	"tile_savedthumb_savecurrent": {
-		"message": "Save current thumbnail"
+		"message": "保存當前縮圖"
 	},
 	"tile_savedthumb_set": {
 		"message": "設為縮圖"
