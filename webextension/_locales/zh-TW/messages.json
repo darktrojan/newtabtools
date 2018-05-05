@@ -1,4 +1,25 @@
 {
+	"action_captureThumbnail": {
+		"message": "擷取縮圖"
+	},
+	"action_isPinned": {
+		"message": "已釘選至新分頁"
+	},
+	"action_pin": {
+		"message": "釘選至新分頁"
+	},
+	"backup_button": {
+		"message": "備份…"
+	},
+	"backup_description": {
+		"message": "New Tab Tools將建立一個包含您的設定，已釘選首頁磚和背景圖片的檔案。"
+	},
+	"backup_header": {
+		"message": "備份:"
+	},
+	"backup_restore_button": {
+		"message": "備份/還原…"
+	},
 	"bg_header": {
 		"message": "背景圖片:"
 	},
@@ -26,6 +47,28 @@
 	"contextmenu_unpin": {
 		"message": "取消釘選此首頁磚"
 	},
+	"database_error_cookies": {
+		"message": "If cookies are disabled, add an exception for $URL$.",
+		"placeholders": {
+			"url": {
+				"content": "$1",
+				"example": "moz-extension://cdea0cc6-fa00-4a9f-b60e-c011fa0decb9/"
+			}
+		}
+	},
+	"database_error_history_settings": {
+		"message": "New Tab Tools cannot start if Firefox is set to \"never remember history\" or \"always open in private browsing mode\"."
+	},
+	"database_error_indexeddb": {
+		"description": "Words between ` characters will be placed in HTML <code> blocks",
+		"message": "Go to `about:config` and check `dom.indexedDB.enabled` is set to true."
+	},
+	"database_error_message": {
+		"message": "New Tab Tools couldn't start properly. Try these:"
+	},
+	"database_error_restart": {
+		"message": "You will need to restart New Tab Tools (or just restart Firefox) for these changes to have an effect."
+	},
 	"donate": {
 		"message": "捐款…"
 	},
@@ -33,7 +76,46 @@
 		"message": "New Tab Tools 是由使用者的捐款資助。"
 	},
 	"extensionDescription": {
-		"message": "自訂新分頁頁面。你可以在新分頁增加更多首頁磚、加入 Firefox 開始頁的捷徑列或是自訂背景圖片，你也能為首頁磚設定新的圖片和標題。"
+		"message": "自訂新分頁頁面。你可以增加更多首頁磚、或是自訂背景圖片，你也能為首頁磚設定新的圖片和標題。"
+	},
+	"extensionName": {
+		"message": "New Tab Tools"
+	},
+	"filter_button": {
+		"message": "過濾…"
+	},
+	"filter_header_add": {
+		"message": "Add filter:"
+	},
+	"filter_header_domain": {
+		"message": "Domain"
+	},
+	"filter_header_pinned": {
+		"message": "Pinned Tiles"
+	},
+	"filter_header_unpinned": {
+		"message": "Unpinned Tiles Limit"
+	},
+	"filter_helptext": {
+		"message": "To limit a domain and all of its subdomains, add a dot in front of the domain, like this: .example.com"
+	},
+	"filter_placeholder_host": {
+		"message": "Type or select a domain"
+	},
+	"filter_placeholder_limit": {
+		"message": "Limit"
+	},
+	"filter_set": {
+		"message": "Set"
+	},
+	"filter_title": {
+		"message": "Browsing History Tiles:"
+	},
+	"filter_unlimited": {
+		"message": "unlimited"
+	},
+	"github": {
+		"message": "New Tab Tools on GitHub"
 	},
 	"newtab_pageTitle": {
 		"message": "新分頁"
@@ -45,13 +127,19 @@
 		"message": "已移除縮圖。"
 	},
 	"newtab_undo_restoreButton": {
-		"message": "全部恢復"
+		"message": "全部還原"
 	},
 	"newtab_undo_undoButton": {
-		"message": "還原"
+		"message": "恢復"
 	},
 	"newversion": {
-		"message": "New Tab Tools 已更新至 $1。希望您能考慮捐助。"
+		"message": "New Tab Tools has been updated to version $VERSION$. New Tab Tools is free, but your donation is appreciated!",
+		"placeholders": {
+			"version": {
+				"content": "$1",
+				"example": "84"
+			}
+		}
 	},
 	"options_columns": {
 		"message": "欄"
@@ -116,6 +204,18 @@
 	"recently_closed_tabs": {
 		"message": "最近關閉的分頁:"
 	},
+	"restore_button": {
+		"message": "Restore"
+	},
+	"restore_description": {
+		"message": "Select a New Tab Tools backup file to import from."
+	},
+	"restore_header": {
+		"message": "Restore:"
+	},
+	"restore_warning": {
+		"message": "This will override your existing settings, pinned tiles, and background image. It cannot be undone."
+	},
 	"tile_block": {
 		"message": "移除此網站"
 	},
@@ -128,14 +228,17 @@
 	"tile_savedthumb_label": {
 		"message": "保存的圖片:"
 	},
+	"tile_savedthumb_savecurrent": {
+		"message": "Save current thumbnail"
+	},
 	"tile_savedthumb_set": {
 		"message": "設為縮圖"
 	},
 	"tile_selection_next_tooltip": {
-		"message": "下一列"
+		"message": "下一塊磚"
 	},
 	"tile_selection_nextrow_tooltip": {
-		"message": "下一塊磚"
+		"message": "下一列"
 	},
 	"tile_selection_previous_tooltip": {
 		"message": "前一塊磚"
