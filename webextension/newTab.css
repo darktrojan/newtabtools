@@ -620,6 +620,9 @@ svg {
 	width: 335px;
 	box-sizing: border-box;
 }
+.options-row[hidden] {
+	display: none;
+}
 .spacer {
 	flex: 1;
 }

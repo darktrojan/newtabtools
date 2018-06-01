@@ -139,6 +139,15 @@ var newTabTools = {
 		case 'options-close-button':
 			newTabTools.hideOptions();
 			break;
+		case 'options-pinURL-permissions':
+			chrome.permissions.request({permissions: ['bookmarks', 'history']}, (succeeded) => {
+				if (succeeded) {
+					this.pinURLBlocked.hidden = true;
+					this.pinURLAllowed.hidden = false;
+					this.pinURLInput.focus();
+				}
+			});
+			return;
 		case 'options-pinURL':
 			if (!this.pinURLInput.checkValidity()) {
 				throw 'URL is invalid';
@@ -331,7 +340,9 @@ var newTabTools = {
 			return;
 		case 'options-donate':
 		case 'options-backup':
-			chrome.runtime.sendMessage({name: 'Export:backup'});
+			chrome.permissions.request({permissions: ['downloads']}, function(succeeded) {
+				chrome.runtime.sendMessage({name: 'Export:backup'});
+			});
 			return;
 		case 'options-restore':
 			let input = newTabTools.optionsPane.querySelector('#options-export input[type="file"]');
@@ -839,7 +850,7 @@ var newTabTools = {
 			n.parentNode.insertBefore(document.createTextNode(newTabTools.getString(n.dataset.label)), n.nextSibling);
 		});
 
-		Prefs.init().then(function() {
+		Prefs.init().then(() => {
 			// Everything is loaded. Initialize the New Tab Page.
 			Page.init();
 			newTabTools.updateUI();
@@ -848,10 +859,16 @@ var newTabTools = {
 			chrome.sessions.onChanged.addListener(function() {
 				newTabTools.refreshRecent();
 			});
-		}).then(function() {
+
 			// Forget about visiting this page. It shouldn't be in the history.
 			// Maybe if bug 1322304 is ever fixed we could remove this.
-			chrome.history.deleteUrl({ url: location.href });
+			chrome.permissions.contains({permissions: ['history']}, contains => {
+				if (contains) {
+					chrome.history.deleteUrl({ url: location.href });
+					this.pinURLBlocked.hidden = true;
+					this.pinURLAllowed.hidden = false;
+				}
+			});
 
 			newTabTools.updateText.textContent = newTabTools.getString('newversion', Prefs.version);
 			newTabTools.updateNotice.dataset.version = Prefs.version;
@@ -895,6 +912,8 @@ var newTabTools = {
 		'backgroundFake': 'background-fake',
 		'page': 'newtab-scrollbox', // used in fx-newTab.js
 		'optionsToggleButton': 'options-toggle',
+		'pinURLBlocked': 'options-pinURL-blocked',
+		'pinURLAllowed': 'options-pinURL-allowed',
 		'pinURLInput': 'options-pinURL-input',
 		'pinURLButton': 'options-pinURL',
 		'pinURLAutocomplete': 'autocomplete',

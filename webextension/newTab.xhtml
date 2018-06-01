@@ -58,7 +58,13 @@ You can obtain one at http://mozilla.org/MPL/2.0/.
 			<div id="options-tile">
 				<fieldset>
 					<legend data-message="pin_url_header"></legend>
-					<div class="options-row">
+					<div id="options-pinURL-blocked">
+						<p data-message="pin_url_permissions"></p>
+						<div class="options-row">
+							<button id="options-pinURL-permissions" data-message="pin_url_request"></button>
+						</div>
+					</div>
+					<div id="options-pinURL-allowed" class="options-row" hidden="">
 						<input id="options-pinURL-input" type="url" required="true" autocomplete="off" data-placeholder="pin_url_placeholder" />
 						<button id="options-pinURL" data-message="pin_url_button"></button>
 					</div>

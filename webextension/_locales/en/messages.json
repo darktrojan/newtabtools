@@ -198,8 +198,14 @@
 	"pin_url_header": {
 		"message": "Add tile:"
 	},
+	"pin_url_permissions": {
+		"message": "New Tab Tools requires extra permissions to use your history and bookmarks."
+	},
 	"pin_url_placeholder": {
 		"message": "Type or select a URL"
+	},
+	"pin_url_request": {
+		"message": "Continue…"
 	},
 	"recently_closed_tabs": {
 		"message": "Recently closed tabs:"

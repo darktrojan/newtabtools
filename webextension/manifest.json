@@ -38,15 +38,17 @@
 	},
 	"permissions": [
 		"<all_urls>",
-		"bookmarks",
-		"downloads",
-		"history",
 		"idle",
 		"sessions",
 		"storage",
 		"tabs",
 		"topSites",
 		"webNavigation"
+	],
+	"optional_permissions": [
+		"bookmarks",
+		"downloads",
+		"history"
 	],
 	"default_locale": "en",
 	"manifest_version": 2
