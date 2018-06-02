@@ -32,7 +32,10 @@ var newTabTools = {
 
 		let count = 0;
 		let options = Array.from(this.pinURLAutocomplete.children);
-		let urls = options.filter(function(u) {
+		let urls = options.filter(u => {
+			if (u == this.pinURLBlocked) {
+				return false;
+			}
 			let matches = valueParts.every(vp => u.dataset.url.toLowerCase().includes(vp) || u.dataset.title.toLowerCase().includes(vp));
 			if (matches) {
 				count++;
@@ -80,28 +83,34 @@ var newTabTools = {
 			urls.push(item.url);
 		};
 
-		chrome.bookmarks.getTree(tree => {
-			function traverse(children) {
-				for (let c of children) {
-					if ('children' in c) { // c.type == 'folder' in >=57
-						traverse(c.children);
-					} else { // c.type == 'bookmark' in >=57
-						maybeAddItem(c, 'bookmark');
-					}
-				}
+		chrome.tabs.query({}, tabs => {
+			for (let t of tabs) {
+				maybeAddItem(t, 'tab');
 			}
-
-			traverse(tree[0].children);
 
 			if (count >= 10) {
 				this.pinURLAutocomplete.hidden = false;
 				return;
 			}
 
-			chrome.tabs.query({}, tabs => {
-				for (let t of tabs) {
-					maybeAddItem(t, 'tab');
+			if (!this.pinURLBlocked.hidden) {
+				this.pinURLAutocomplete.appendChild(this.pinURLBlocked);
+				this.pinURLAutocomplete.hidden = false;
+				return;
+			}
+
+			chrome.bookmarks.getTree(tree => {
+				function traverse(children) {
+					for (let c of children) {
+						if (c.type == 'folder') {
+							traverse(c.children);
+						} else if (c.type == 'bookmark') {
+							maybeAddItem(c, 'bookmark');
+						}
+					}
 				}
+
+				traverse(tree[0].children);
 
 				if (count >= 10) {
 					this.pinURLAutocomplete.hidden = false;
@@ -143,8 +152,8 @@ var newTabTools = {
 			chrome.permissions.request({permissions: ['bookmarks', 'history']}, (succeeded) => {
 				if (succeeded) {
 					this.pinURLBlocked.hidden = true;
-					this.pinURLAllowed.hidden = false;
 					this.pinURLInput.focus();
+					this.autocomplete();
 				}
 			});
 			return;
@@ -866,7 +875,6 @@ var newTabTools = {
 				if (contains) {
 					chrome.history.deleteUrl({ url: location.href });
 					this.pinURLBlocked.hidden = true;
-					this.pinURLAllowed.hidden = false;
 				}
 			});
 
@@ -913,7 +921,6 @@ var newTabTools = {
 		'page': 'newtab-scrollbox', // used in fx-newTab.js
 		'optionsToggleButton': 'options-toggle',
 		'pinURLBlocked': 'options-pinURL-blocked',
-		'pinURLAllowed': 'options-pinURL-allowed',
 		'pinURLInput': 'options-pinURL-input',
 		'pinURLButton': 'options-pinURL',
 		'pinURLAutocomplete': 'autocomplete',
@@ -1015,7 +1022,7 @@ var newTabTools = {
 			switch (event.key) {
 			case 'ArrowDown':
 			case 'ArrowUp':
-				let items = [...newTabTools.pinURLAutocomplete.querySelectorAll('li:not([hidden])')];
+				let items = [...newTabTools.pinURLAutocomplete.querySelectorAll('li:not([hidden]):not(#options-pinURL-blocked)')];
 				if (!items.length) {
 					return;
 				}
@@ -1058,7 +1065,9 @@ var newTabTools = {
 			while (target.nodeName != 'li') {
 				target = target.parentNode;
 			}
-			newTabTools.setPinURLInputValue(target.dataset.url);
+			if (target != newTabTools.pinURLBlocked) {
+				newTabTools.setPinURLInputValue(target.dataset.url);
+			}
 			return;
 		}
 		newTabTools.pinURLAutocomplete.hidden = true;

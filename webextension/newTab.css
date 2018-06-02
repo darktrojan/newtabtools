@@ -759,6 +759,10 @@ a {
 	background-color: highlight;
 	color: highlighttext;
 }
+#autocomplete li#options-pinURL-blocked {
+	white-space: normal;
+	align-items: center;
+}
 .autocomplete-icon {
 	width: 16px;
 	height: 16px;
