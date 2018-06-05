@@ -1,4 +1,25 @@
 {
+	"action_captureThumbnail": {
+		"message": "擷取縮圖"
+	},
+	"action_isPinned": {
+		"message": "已釘選至新分頁"
+	},
+	"action_pin": {
+		"message": "釘選至新分頁"
+	},
+	"backup_button": {
+		"message": "備份…"
+	},
+	"backup_description": {
+		"message": "New Tab Tools將建立包含您的設定，已釘選首頁磚和背景圖片的檔案。"
+	},
+	"backup_header": {
+		"message": "備份:"
+	},
+	"backup_restore_button": {
+		"message": "備份/還原…"
+	},
 	"bg_header": {
 		"message": "背景圖片:"
 	},
@@ -18,7 +39,7 @@
 		"message": "編輯此首頁磚"
 	},
 	"contextmenu_options": {
-		"message": "New Tab Tools 選項"
+		"message": "New Tab Tools選項"
 	},
 	"contextmenu_pin": {
 		"message": "釘選此首頁磚"
@@ -26,14 +47,75 @@
 	"contextmenu_unpin": {
 		"message": "取消釘選此首頁磚"
 	},
+	"database_error_cookies": {
+		"message": "如果Cookie被禁用，則為$URL$添加例外。",
+		"placeholders": {
+			"url": {
+				"content": "$1",
+				"example": "moz-extension://cdea0cc6-fa00-4a9f-b60e-c011fa0decb9/"
+			}
+		}
+	},
+	"database_error_history_settings": {
+		"message": "如果Firefox設定為\"不保留歷史記錄\"或\"始終以隱私瀏覽模式打開\"，New Tab Tools將無法啟動。"
+	},
+	"database_error_indexeddb": {
+		"description": "Words between ` characters will be placed in HTML <code> blocks",
+		"message": "請至`about:config`確認`dom.indexedDB.enabled`設定為true."
+	},
+	"database_error_message": {
+		"message": "New Tab Tools無法正常啟動。試試這些:"
+	},
+	"database_error_restart": {
+		"message": "您需要重新啟動New Tab Tools（或者重新啟動Firefox）才能使這些更改生效。"
+	},
 	"donate": {
 		"message": "捐款…"
 	},
 	"donate_label": {
-		"message": "New Tab Tools 是由使用者的捐款資助。"
+		"message": "New Tab Tools是由使用者的捐款資助。"
 	},
 	"extensionDescription": {
-		"message": "自訂新分頁頁面。你可以在新分頁增加更多首頁磚、加入 Firefox 開始頁的捷徑列或是自訂背景圖片，你也能為首頁磚設定新的圖片和標題。"
+		"message": "自訂新分頁頁面。你可以添加更多首頁磚、或是自訂背景圖片，你也能為首頁磚設定新的圖片和標題。"
+	},
+	"extensionName": {
+		"message": "New Tab Tools"
+	},
+	"filter_button": {
+		"message": "過濾…"
+	},
+	"filter_header_add": {
+		"message": "添加過濾:"
+	},
+	"filter_header_domain": {
+		"message": "域名"
+	},
+	"filter_header_pinned": {
+		"message": "已釘選首頁磚"
+	},
+	"filter_header_unpinned": {
+		"message": "未釘選首頁磚上限"
+	},
+	"filter_helptext": {
+		"message": "要限制域名及其所有子域，請在域名前添加一個點，如下所示：.example.com"
+	},
+	"filter_placeholder_host": {
+		"message": "輸入或選擇域名"
+	},
+	"filter_placeholder_limit": {
+		"message": "上限"
+	},
+	"filter_set": {
+		"message": "設定"
+	},
+	"filter_title": {
+		"message": "瀏覽歷史首頁磚:"
+	},
+	"filter_unlimited": {
+		"message": "無限"
+	},
+	"github": {
+		"message": "GitHub上的New Tab Tools"
 	},
 	"newtab_pageTitle": {
 		"message": "新分頁"
@@ -45,13 +127,19 @@
 		"message": "已移除縮圖。"
 	},
 	"newtab_undo_restoreButton": {
-		"message": "全部恢復"
+		"message": "全部還原"
 	},
 	"newtab_undo_undoButton": {
-		"message": "還原"
+		"message": "恢復"
 	},
 	"newversion": {
-		"message": "New Tab Tools 已更新至 $1。希望您能考慮捐助。"
+		"message": "New Tab Tools已更新至版本$VERSION$。New Tab Tools是免費的，但您的捐贈是值得讚賞的!",
+		"placeholders": {
+			"version": {
+				"content": "$1",
+				"example": "84"
+			}
+		}
 	},
 	"options_columns": {
 		"message": "欄"
@@ -116,6 +204,18 @@
 	"recently_closed_tabs": {
 		"message": "最近關閉的分頁:"
 	},
+	"restore_button": {
+		"message": "還原"
+	},
+	"restore_description": {
+		"message": "選擇要匯入的New Tab Tools備份檔案。"
+	},
+	"restore_header": {
+		"message": "還原:"
+	},
+	"restore_warning": {
+		"message": "這將覆蓋您現有的設定，已釘選首頁磚和背景圖片。它不能被撤消。"
+	},
 	"tile_block": {
 		"message": "移除此網站"
 	},
@@ -128,14 +228,17 @@
 	"tile_savedthumb_label": {
 		"message": "保存的圖片:"
 	},
+	"tile_savedthumb_savecurrent": {
+		"message": "保存當前縮圖"
+	},
 	"tile_savedthumb_set": {
 		"message": "設為縮圖"
 	},
 	"tile_selection_next_tooltip": {
-		"message": "下一列"
+		"message": "下一塊磚"
 	},
 	"tile_selection_nextrow_tooltip": {
-		"message": "下一塊磚"
+		"message": "下一列"
 	},
 	"tile_selection_previous_tooltip": {
 		"message": "前一塊磚"
