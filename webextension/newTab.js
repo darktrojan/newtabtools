@@ -13,7 +13,7 @@ var newTabTools = {
 	},
 	isValidURL: function(url) {
 		try {
-			return /^(https?|ftp):\/\//.test(url) && new URL(url);
+			return /^(https?|ftp|moz-extension):\/\//.test(url) && new URL(url);
 		} catch (ex) {
 			return false;
 		}
