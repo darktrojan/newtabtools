@@ -198,8 +198,14 @@
 	"pin_url_header": {
 		"message": "Tegel toevoegen:"
 	},
+	"pin_url_permissions": {
+		"message": "New Tab Tools vereist extra toestemmingen voor het gebruik van uw geschiedenis en bladwijzers."
+	},
 	"pin_url_placeholder": {
 		"message": "Typ of selecteer een URL"
+	},
+	"pin_url_request": {
+		"message": "Doorgaan…"
 	},
 	"recently_closed_tabs": {
 		"message": "Onlangs gesloten tabbladen:"
