@@ -186,8 +186,14 @@
 	"pin_url_header": {
 		"message": "タイル追加:"
 	},
+	"pin_url_permissions": {
+		"message": "New Tab Toolsには、履歴とブックマークを使用するための追加のアクセス許可が必要です。"
+	},
 	"pin_url_placeholder": {
 		"message": "URLを入力または選択する"
+	},
+	"pin_url_request": {
+		"message": "続行…"
 	},
 	"recently_closed_tabs": {
 		"message": "最近閉じたタブ:"
