@@ -3,7 +3,7 @@ This Source Code Form is subject to the terms of the Mozilla Public
 License, v. 2.0. If a copy of the MPL was not distributed with this file,
 You can obtain one at http://mozilla.org/MPL/2.0/.
 */
-/* globals Prefs, Filters, Grid, Page, Tiles, Updater, Transformation, Background, chrome, -length */
+/* globals Prefs, Filters, Grid, Page, Tiles, Updater, Transformation, Background, chrome, compareVersions, -length */
 
 var HTML_NAMESPACE = 'http://www.w3.org/1999/xhtml';
 
@@ -782,7 +782,7 @@ var newTabTools = {
 			oe.style.display = (oe.id == 'options-' + which) ? 'block' : null;
 		}
 	},
-	fillFilterUI: function(highlightHost) {
+	fillFilterUI: async function(highlightHost) {
 		let pinned = Grid.sites
 				.filter(s => s && 'position' in s.link)
 				.reduce((carry, s) => {
@@ -825,7 +825,14 @@ var newTabTools = {
 		}
 
 		if (this.optionsFilterHostAutocomplete.childElementCount === 0) {
-			chrome.topSites.get({ providers: ['places'] }, sites => {
+			let {version} = await browser.runtime.getBrowserInfo();
+			let options;
+			if (compareVersions(version, '63.0a1') >= 0) {
+				options = { limit:100, onePerDomain: false, includeBlocked: true };
+			} else {
+				options = { providers: ['places'] };
+			}
+			chrome.topSites.get(options, sites => {
 				for (let s of sites.reduce((carry, site) => {
 					let {protocol, host} = new URL(site.url);
 					if (host && ['http:', 'https:', 'ftp:'].includes(protocol) && !carry.includes(host)) {

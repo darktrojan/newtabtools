@@ -16,6 +16,7 @@
 	},
 	"background": {
 		"scripts": [
+			"common.js",
 			"tiles.js",
 			"prefs.js",
 			"background.js",

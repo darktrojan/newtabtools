@@ -1,5 +1,5 @@
 /* exported initDB, Tiles, Background */
-/* globals Blocked, Filters, Prefs, chrome, db */
+/* globals Blocked, Filters, Prefs, chrome, compareVersions, db */
 var Tiles = {
 	_ready: false,
 	_cache: [],
@@ -25,7 +25,7 @@ var Tiles = {
 		let count = Prefs.rows * Prefs.columns;
 		return new Promise(resolve => {
 			let op = db.transaction('tiles').objectStore('tiles').getAll();
-			op.onsuccess = () => {
+			op.onsuccess = async () => {
 				let links = [];
 				let urlMap = new Map();
 				this._list.length = 0;
@@ -48,7 +48,14 @@ var Tiles = {
 					return;
 				}
 
-				chrome.topSites.get({ providers: ['places'] }, r => {
+				let {version} = await browser.runtime.getBrowserInfo();
+				let options;
+				if (compareVersions(version, '63.0a1') >= 0) {
+					options = { limit:100, onePerDomain: false, includeBlocked: true };
+				} else {
+					options = { providers: ['places'] };
+				}
+				chrome.topSites.get(options, r => {
 					let urls = this._list.slice();
 					let filters = Filters.getList();
 					let dotFilters = Object.keys(filters).filter(f => f[0] == '.');
