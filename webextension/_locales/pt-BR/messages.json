@@ -133,7 +133,7 @@
 		"message": "Desfazer"
 	},
 	"newversion": {
-		"message": "O New Tab Tools foi atualizado para a versão $VERSION$. O New Tab Tools é gratuito, mas uma doação é bem vinda!"
+		"message": "O New Tab Tools foi atualizado para a versão $VERSION$. O New Tab Tools é gratuito, mas uma doação é bem vinda!",
 		"placeholders": {
 			"version": {
 				"content": "$1",
