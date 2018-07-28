@@ -33,6 +33,7 @@ Promise.all([
 });
 
 var db;
+const NEW_TAB_URL = chrome.runtime.getURL("newTab.xhtml");
 
 function initDB() {
 	return new Promise(function(resolve, reject) {
@@ -213,12 +214,15 @@ chrome.webNavigation.onCompleted.addListener(function(details) {
 
 chrome.tabs.query({}, function(tabs) {
 	for (let tab of tabs) {
-		if (!['http:', 'https:', 'ftp:'].includes(new URL(tab.url).protocol)) {
+		if (tab.url == "about:blank") {
+			chrome.tabs.update(tab.id, {url: NEW_TAB_URL});
+		} else if (tab.url == NEW_TAB_URL) {
+			chrome.tabs.reload(tab.id);
+		} else if (!['http:', 'https:', 'ftp:'].includes(new URL(tab.url).protocol)) {
 			chrome.browserAction.disable(tab.id);
-			return;
+		} else {
+			chrome.browserAction.enable(tab.id);
 		}
-
-		chrome.browserAction.enable(tab.id);
 	}
 });
 
