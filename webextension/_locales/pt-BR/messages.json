@@ -2,6 +2,24 @@
 	"action_captureThumbnail": {
 		"message": "Capturar miniatura da página"
 	},
+	"action_isPinned": {
+		"message": "Fixado na página Nova Aba"
+	},
+	"action_pin": {
+		"message": "Fixar na página Nova Aba"
+	},
+	"backup_button": {
+		"message": "Backup…"
+	},
+	"backup_description": {
+		"message": "O New Tab Tools irá criar um arquivo contendo as suas configurações, blocos fixados e imagem de fundo."
+	},
+	"backup_header": {
+		"message": "Backup:"
+	},
+	"backup_restore_button": {
+		"message": "Backup/Restaurar…"
+	},
 	"bg_header": {
 		"message": "Imagem de fundo da página"
 	},
@@ -29,6 +47,28 @@
 	"contextmenu_unpin": {
 		"message": "Desafixar este bloco"
 	},
+	"database_error_cookies": {
+		"message": "Se os cookies estão desativados, adicione uma exceção para $URL$.",
+		"placeholders": {
+			"url": {
+				"content": "$1",
+				"example": "moz-extension://cdea0cc6-fa00-4a9f-b60e-c011fa0decb9/"
+			}
+		}
+	},
+	"database_error_history_settings": {
+		"message": "O New Tab Tools não pode iniciar se o Firefox está definido para \"Nunca memorizar o histórico\" ou \"Sempre usar o modo de navegação privativa\"."
+	},
+	"database_error_indexeddb": {
+		"description": "Palavras entre caracteres ` serão colocados em blocos HTML <code>",
+		"message": "Acesse `about:config` e veja se `dom.indexedDB.enabled` está definido para true."
+	},
+	"database_error_message": {
+		"message": "O New Tab Tools não pôde iniciar corretamente. Tente isto:"
+	},
+	"database_error_restart": {
+		"message": "Você precisará reiniciar o New Tab Tools (ou só reiniciar o Firefox) para que as alterações sejam aplicadas."
+	},
 	"donate": {
 		"message": "Doar…"
 	},
@@ -38,8 +78,41 @@
 	"extensionDescription": {
 		"message": "Personaliza a página 'Nova Aba'. Você pode adicionar mais blocos, o iniciador do Firefox, ou uma imagem de fundo. E você pode definir novos blocos e suas imagens."
 	},
+	"extensionName": {
+		"message": "New Tab Tools"
+	},
 	"filter_button": {
 		"message": "Filtrar…"
+	},
+	"filter_header_add": {
+		"message": "Adicionar filtro:"
+	},
+	"filter_header_domain": {
+		"message": "Domínio"
+	},
+	"filter_header_pinned": {
+		"message": "Blocos Fixados"
+	},
+	"filter_header_unpinned": {
+		"message": "LImite de Blocos Não Fixados"
+	},
+	"filter_helptext": {
+		"message": "Para limitar um domínio e todos os seus subdomínios, adicione um ponto na frente do domínio, assim: .exemplo.com"
+	},
+	"filter_placeholder_host": {
+		"message": "Digite ou selecione um domínio"
+	},
+	"filter_placeholder_limit": {
+		"message": "Limite"
+	},
+	"filter_set": {
+		"message": "Definir"
+	},
+	"filter_title": {
+		"message": "Blocos do Histórico de Navegação:"
+	},
+	"filter_unlimited": {
+		"message": "ilimitado"
 	},
 	"github": {
 		"message": "New Tab Tools no GitHub"
@@ -60,7 +133,13 @@
 		"message": "Desfazer"
 	},
 	"newversion": {
-		"message": "O New Tab Tools foi atualizado para a versão $1. Por favor, considere fazer uma doação."
+		"message": "O New Tab Tools foi atualizado para a versão $VERSION$. O New Tab Tools é gratuito, mas uma doação é bem vinda!"
+		"placeholders": {
+			"version": {
+				"content": "$1",
+				"example": "84"
+			}
+		}
 	},
 	"options_columns": {
 		"message": "Colunas"
@@ -119,11 +198,29 @@
 	"pin_url_header": {
 		"message": "Adicionar título:"
 	},
+	"pin_url_permissions": {
+		"message": "O New Tab Tools necessita de permissões extras para usar o seu histórico e favoritos."
+	},
 	"pin_url_placeholder": {
 		"message": "Digite ou selecione uma URL"
 	},
+	"pin_url_request": {
+		"message": "Continuar…"
+	},
 	"recently_closed_tabs": {
 		"message": "Abas fechadas recentemente:"
+	},
+	"restore_button": {
+		"message": "Restaurar"
+	},
+	"restore_description": {
+		"message": "Selecione um arquivo de backup do New Tab Tools para importar."
+	},
+	"restore_header": {
+		"message": "Restaurar:"
+	},
+	"restore_warning": {
+		"message": "Isto irá substituir as configurações, blocos fixados e imagem de fundo existentes. Isto não pode ser desfeito."
 	},
 	"tile_block": {
 		"message": "Remover este site"
@@ -136,6 +233,9 @@
 	},
 	"tile_savedthumb_label": {
 		"message": "Imagem salva:"
+	},
+	"tile_savedthumb_savecurrent": {
+		"message": "Salvar miniatura atual"
 	},
 	"tile_savedthumb_set": {
 		"message": "Definir"
