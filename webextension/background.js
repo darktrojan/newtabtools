@@ -214,9 +214,9 @@ chrome.webNavigation.onCompleted.addListener(function(details) {
 
 chrome.tabs.query({}, function(tabs) {
 	for (let tab of tabs) {
-		if (tab.url == "about:blank") {
+		/*if (tab.url == "about:blank") {
 			chrome.tabs.update(tab.id, {url: NEW_TAB_URL});
-		} else if (tab.url == NEW_TAB_URL) {
+		} else */if (tab.url == NEW_TAB_URL) {
 			chrome.tabs.reload(tab.id);
 		} else if (!['http:', 'https:', 'ftp:'].includes(new URL(tab.url).protocol)) {
 			chrome.browserAction.disable(tab.id);
