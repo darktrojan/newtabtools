@@ -270,7 +270,7 @@ var newTabTools = {
 			this.selectedSite.link.url = this.siteURLInput.value;
 			this.selectedSite.addTitle();
 			Tiles.putTile(this.selectedSite.link);
-			break;			
+			break;
 		case 'options-savethumb':
 			let link = this.selectedSite.link;
 			let siteURL = link.url;
@@ -706,7 +706,9 @@ var newTabTools = {
 			this.siteThumbnail.style.backgroundImage =
 				this.siteThumbnail.style.backgroundColor =
 				this.setBgColourDisplay.style.backgroundColor = null;
-			this.siteURLInput.value = this.getString('tileurl_empty');
+			this.siteURL.textContent = this.getString('tileurl_empty');
+			this.siteURL.hidden = false;
+			this.editSiteURLRow.hidden = true;
 			this.setTitleInput.value = '';
 			this.saveCurrentThumbButton.disabled =
 				this.removeSavedThumbButton.disabled =
@@ -740,7 +742,10 @@ var newTabTools = {
 		this.tileNext.style.opacity = (column + 1 == columns) ? 0.25 : null;
 		this.tileNextRow.style.opacity = (row + 1 == rows) ? 0.25 : null;
 
+		this.siteURL.textContent = site.url;
 		this.siteURLInput.value = site.url;
+		this.siteURL.hidden = site.isPinned;
+		this.editSiteURLRow.hidden = !site.isPinned;
 		let backgroundColor = site.link.backgroundColor;
 		this.siteThumbnail.style.backgroundColor =
 			this.setBgColourInput.value =
@@ -755,6 +760,9 @@ var newTabTools = {
 			this.selectedSiteIndex = 0;
 			this.resizeOptionsThumbnail();
 			this.pinURLInput.focus();
+			requestAnimationFrame(() => {
+				this.siteURL.style.lineHeight = this.editSiteTitleRow.getBoundingClientRect().height + 'px';
+			});
 		} else {
 			this.hideOptions();
 		}
@@ -941,6 +949,8 @@ var newTabTools = {
 		'tileNext': 'options-next-tile',
 		'tileNextRow': 'options-next-row-tile',
 		'siteThumbnail': 'options-thumbnail',
+		'siteURL': 'options-url',
+		'editSiteURLRow': 'options-edit-url',
 		'siteURLInput': 'options-url-input',
 		'setURLButton': 'options-url-set',
 		'saveCurrentThumbButton': 'options-savethumb',
@@ -950,6 +960,7 @@ var newTabTools = {
 		'setBgColourDisplay': 'options-bgcolor-display',
 		'setBgColourButton': 'options-bgcolor-set',
 		'resetBgColourButton': 'options-bgcolor-reset',
+		'editSiteTitleRow': 'options-edit-title',
 		'setTitleInput': 'options-title-input',
 		'setTitleButton': 'options-title-set',
 		'setBackgroundInput': 'options-bg-input',

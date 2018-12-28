@@ -628,9 +628,7 @@ svg {
 }
 #options input[type="file"],
 #options-pinURL-input,
-#options-url-input {
-	flex: 1;
-}
+#options-url-input,
 #options-title-input {
 	flex: 1;
 }
@@ -669,13 +667,18 @@ button.arrow {
 	position: static;
 }
 #options-url {
-	display: block;
 	text-align: center;
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	width: 300px;
-	margin: 0 auto 10px;
+}
+#options-url,
+#options-edit-url {
+	margin: 5px auto 10px;
+}
+#options-url:not([hidden]) {
+	display: block;
 }
 #options-bgcolor-input {
 	visibility: collapse;
