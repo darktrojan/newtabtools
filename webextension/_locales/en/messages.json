@@ -272,5 +272,11 @@
 	},
 	"tileurl_empty": {
 		"message": "Empty Tile"
+	},
+	"tile_url_placeholder": {
+		"message": "Type a new tile URL"
+	},
+	"tile_url_set": {
+		"message": "Set"
 	}
 }

@@ -266,6 +266,11 @@ var newTabTools = {
 		case 'options-next-row-tile':
 			this.selectedSiteIndex = (this._selectedSiteIndex + Prefs.columns) % Grid.cells.length;
 			break;
+		case 'options-url-set':
+			this.selectedSite.link.url = this.siteURLInput.value;
+			this.selectedSite.addTitle();
+			Tiles.putTile(this.selectedSite.link);
+			break;			
 		case 'options-savethumb':
 			let link = this.selectedSite.link;
 			let siteURL = link.url;
@@ -701,7 +706,7 @@ var newTabTools = {
 			this.siteThumbnail.style.backgroundImage =
 				this.siteThumbnail.style.backgroundColor =
 				this.setBgColourDisplay.style.backgroundColor = null;
-			this.siteURL.textContent = this.getString('tileurl_empty');
+			this.siteURLInput.value = this.getString('tileurl_empty');
 			this.setTitleInput.value = '';
 			this.saveCurrentThumbButton.disabled =
 				this.removeSavedThumbButton.disabled =
@@ -735,7 +740,7 @@ var newTabTools = {
 		this.tileNext.style.opacity = (column + 1 == columns) ? 0.25 : null;
 		this.tileNextRow.style.opacity = (row + 1 == rows) ? 0.25 : null;
 
-		this.siteURL.textContent = site.url;
+		this.siteURLInput.value = site.url;
 		let backgroundColor = site.link.backgroundColor;
 		this.siteThumbnail.style.backgroundColor =
 			this.setBgColourInput.value =
@@ -936,7 +941,8 @@ var newTabTools = {
 		'tileNext': 'options-next-tile',
 		'tileNextRow': 'options-next-row-tile',
 		'siteThumbnail': 'options-thumbnail',
-		'siteURL': 'options-url',
+		'siteURLInput': 'options-url-input',
+		'setURLButton': 'options-url-set',
 		'saveCurrentThumbButton': 'options-savethumb',
 		'setSavedThumbInput': 'options-savedthumb-input',
 		'removeSavedThumbButton': 'options-savedthumb-remove',

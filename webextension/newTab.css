@@ -628,6 +628,9 @@ svg {
 }
 #options input[type="file"],
 #options-pinURL-input,
+#options-url-input {
+	flex: 1;
+}
 #options-title-input {
 	flex: 1;
 }
