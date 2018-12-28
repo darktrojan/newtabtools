@@ -1,11 +1,13 @@
-/* exported Tiles, Blocked, Background */
-/* globals chrome */
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this file,
+ * You can obtain one at http://mozilla.org/MPL/2.0/. */
+
 var Tiles = {
 	_list: [],
-	isPinned: function(url) {
+	isPinned(url) {
 		return this._list.includes(url);
 	},
-	getAllTiles: function() { // TODO: This is a silly name.
+	getAllTiles() { // TODO: This is a silly name.
 		return new Promise((resolve, reject) => {
 			chrome.runtime.sendMessage({ name: 'Tiles.getAllTiles' }, response => {
 				if (response === null) {
@@ -18,12 +20,12 @@ var Tiles = {
 			});
 		});
 	},
-	getTile: function(url) {
+	getTile(url) {
 		return new Promise(resolve => {
 			chrome.runtime.sendMessage({ name: 'Tiles.getTile', url }, resolve);
 		});
 	},
-	putTile: function(tile) {
+	putTile(tile) {
 		if (!this._list.includes(tile.url)) {
 			this._list.push(tile.url);
 		}
@@ -34,7 +36,7 @@ var Tiles = {
 			});
 		});
 	},
-	removeTile: function(tile) {
+	removeTile(tile) {
 		let index = this._list.indexOf(tile.url);
 		while (index > -1) {
 			this._list.splice(index, 1);
@@ -47,12 +49,12 @@ var Tiles = {
 };
 
 var Background = {
-	getBackground: function() {
+	getBackground() {
 		return new Promise(resolve => {
 			chrome.runtime.sendMessage({ name: 'Background.getBackground' }, resolve);
 		});
 	},
-	setBackground: function(file) {
+	setBackground(file) {
 		return new Promise(resolve => {
 			chrome.runtime.sendMessage({ name: 'Background.setBackground', file }, resolve);
 		});

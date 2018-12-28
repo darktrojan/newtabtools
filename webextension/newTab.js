@@ -1,24 +1,26 @@
-/*
-This Source Code Form is subject to the terms of the Mozilla Public
-License, v. 2.0. If a copy of the MPL was not distributed with this file,
-You can obtain one at http://mozilla.org/MPL/2.0/.
-*/
-/* globals Prefs, Filters, Grid, Page, Tiles, Updater, Transformation, Background, chrome, compareVersions, -length */
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this file,
+ * You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+/* import-globals-from common.js */
+/* import-globals-from fx-newTab.js */
+/* import-globals-from prefs.js */
+/* import-globals-from tiles-shim.js */
 
 var HTML_NAMESPACE = 'http://www.w3.org/1999/xhtml';
 
 var newTabTools = {
-	getString: function(name, ...substitutions) {
+	getString(name, ...substitutions) {
 		return chrome.i18n.getMessage(name, substitutions);
 	},
-	isValidURL: function(url) {
+	isValidURL(url) {
 		try {
 			return /^(https?|ftp|moz-extension):\/\//.test(url) && new URL(url);
 		} catch (ex) {
 			return false;
 		}
 	},
-	autocomplete: function() {
+	autocomplete() {
 		this.pinURLButton.disabled = !this.pinURLInput.checkValidity() || !this.isValidURL(this.pinURLInput.value);
 		let value = this.pinURLInput.value;
 		if (value.length < 2) {
@@ -129,17 +131,17 @@ var newTabTools = {
 			});
 		});
 	},
-	setPinURLInputValue: function(url) {
+	setPinURLInputValue(url) {
 		this.pinURLInput.value = url;
 		this.pinURLInput.focus();
 		this.pinURLInput.selectionStart = this.pinURLInput.selectionEnd = url.length;
-		this.pinURLButton.disabled = !this.pinURLInput.checkValidity()  || !this.isValidURL(url);
+		this.pinURLButton.disabled = !this.pinURLInput.checkValidity() || !this.isValidURL(url);
 		this.pinURLAutocomplete.hidden = true;
 	},
 	get selectedSite() {
 		return Grid.sites[this._selectedSiteIndex];
 	},
-	optionsOnClick: function(event) {
+	optionsOnClick(event) {
 		if (event.target.disabled) {
 			return;
 		}
@@ -395,7 +397,7 @@ var newTabTools = {
 			Updater.updateGrid();
 		}
 	},
-	optionsOnChange: function(event) {
+	optionsOnChange(event) {
 		if (event.target.disabled) {
 			return;
 		}
@@ -422,7 +424,7 @@ var newTabTools = {
 			break;
 		}
 	},
-	contextMenuShowing: function() {
+	contextMenuShowing() {
 		let site = document.activeElement;
 		while (site != document && !site.classList.contains('newtab-site')) {
 			site = site.parentNode;
@@ -437,7 +439,7 @@ var newTabTools = {
 			newTabTools.contextMenuUnpin.hidden = !pinned;
 		}
 	},
-	contextMenuOnClick: function(event) {
+	contextMenuOnClick(event) {
 		let site = document.activeElement;
 		while (site != document && !site.classList.contains('newtab-site')) {
 			site = site.parentNode;
@@ -475,7 +477,7 @@ var newTabTools = {
 			break;
 		}
 	},
-	setThumbnail: function(site, src) {
+	setThumbnail(site, src) {
 		let image = new Image();
 		image.onload = function() {
 			let thumbnailSize = Prefs.thumbnailSize;
@@ -512,7 +514,7 @@ var newTabTools = {
 		};
 		image.src = src;
 	},
-	removeThumbnail: function(site) {
+	removeThumbnail(site) {
 		let link = site.link;
 		delete link.image;
 		delete link.imageIsThumbnail;
@@ -523,7 +525,7 @@ var newTabTools = {
 
 		Tiles.putTile(link);
 	},
-	refreshBackgroundImage: function() {
+	refreshBackgroundImage() {
 		return Background.getBackground().then(background => {
 			if (!background) {
 				document.body.style.backgroundImage = this.backgroundFake.style.backgroundImage = null;
@@ -537,7 +539,7 @@ var newTabTools = {
 			this.removeBackgroundButton.disabled = false;
 		});
 	},
-	updateUI: function(keys) {
+	updateUI(keys) {
 		function setMargin(piece, size) {
 			for (let pieceElement of document.querySelectorAll(piece)) {
 				pieceElement.classList.remove('medium');
@@ -620,7 +622,7 @@ var newTabTools = {
 			this.resizeOptionsThumbnail();
 		}
 	},
-	refreshRecent: function() {
+	refreshRecent() {
 		if (!Prefs.recent) {
 			this.recentList.hidden = true;
 			return;
@@ -668,7 +670,7 @@ var newTabTools = {
 			this.recentList.hidden = !added;
 		});
 	},
-	trimRecent: function() {
+	trimRecent() {
 		this.recentList.style.width = '0';
 
 		let width = this.recentListOuter.clientWidth;
@@ -754,7 +756,7 @@ var newTabTools = {
 			this.resetBgColourButton.disabled = !backgroundColor;
 		this.setTitleInput.value = site.title || site.url;
 	},
-	toggleOptions: function() {
+	toggleOptions() {
 		if (document.documentElement.hasAttribute('options-hidden')) {
 			document.documentElement.removeAttribute('options-hidden');
 			this.selectedSiteIndex = 0;
@@ -767,12 +769,12 @@ var newTabTools = {
 			this.hideOptions();
 		}
 	},
-	hideOptions: function() {
+	hideOptions() {
 		document.documentElement.setAttribute('options-hidden', 'true');
 		newTabTools.pinURLAutocomplete.hidden = true;
 		this.showOptionsExtra();
 	},
-	resizeOptionsThumbnail: function() {
+	resizeOptionsThumbnail() {
 		let node = Grid.node.querySelector('.newtab-thumbnail');
 		let ratio = node.offsetWidth / node.offsetHeight;
 		if (ratio > 1.6666) {
@@ -783,7 +785,7 @@ var newTabTools = {
 			this.siteThumbnail.style.height = '150px';
 		}
 	},
-	showOptionsExtra: function(which) {
+	showOptionsExtra(which) {
 		if (!which) {
 			document.documentElement.removeAttribute('options-extra');
 		} else if (!document.documentElement.hasAttribute('options-extra')) {
@@ -795,10 +797,8 @@ var newTabTools = {
 			oe.style.display = (oe.id == 'options-' + which) ? 'block' : null;
 		}
 	},
-	fillFilterUI: async function(highlightHost) {
-		let pinned = Grid.sites
-				.filter(s => s && 'position' in s.link)
-				.reduce((carry, s) => {
+	async fillFilterUI(highlightHost) {
+		let pinned = Grid.sites.filter(s => s && 'position' in s.link).reduce((carry, s) => {
 			let host = new URL(s.url).host;
 			if (!(host in carry)) {
 				carry[host] = 0;
@@ -841,7 +841,7 @@ var newTabTools = {
 			let {version} = await browser.runtime.getBrowserInfo();
 			let options;
 			if (compareVersions(version, '63.0a1') >= 0) {
-				options = { limit:100, onePerDomain: false, includeBlocked: true };
+				options = { limit: 100, onePerDomain: false, includeBlocked: true };
 			} else {
 				options = { providers: ['places'] };
 			}
@@ -860,7 +860,7 @@ var newTabTools = {
 			});
 		}
 	},
-	startup: function() {
+	startup() {
 		if (!window.chrome) {
 			// The page couldn't be loaded properly because WebExtensions is too slow. Sad.
 			return;
@@ -907,7 +907,7 @@ var newTabTools = {
 			}
 		}).catch(console.error);
 	},
-	getThumbnails: function() {
+	getThumbnails() {
 		chrome.runtime.sendMessage({
 			name: 'Thumbnails.get',
 			urls: Grid.sites.filter(s => s && !s.thumbnail.style.backgroundImage).map(s => s.link.url)
@@ -995,16 +995,16 @@ var newTabTools = {
 		}
 	}
 
-	newTabTools.updateNotice.addEventListener('click', newTabTools.optionsOnClick.bind(newTabTools), false);
+	newTabTools.updateNotice.addEventListener('click', newTabTools.optionsOnClick.bind(newTabTools));
 	newTabTools.lockedToggleButton.addEventListener('click', function() {
 		Prefs.locked = !Prefs.locked;
 		this.blur();
-	}, false);
-	newTabTools.optionsToggleButton.addEventListener('click', newTabTools.toggleOptions.bind(newTabTools), false);
+	});
+	newTabTools.optionsToggleButton.addEventListener('click', newTabTools.toggleOptions.bind(newTabTools));
 	newTabTools.optionsBackground.addEventListener('click', newTabTools.hideOptions.bind(newTabTools));
 	newTabTools.pinURLInput.addEventListener('input', newTabTools.autocomplete.bind(newTabTools));
-	newTabTools.optionsPane.addEventListener('click', newTabTools.optionsOnClick.bind(newTabTools), false);
-	newTabTools.optionsPane.addEventListener('change', newTabTools.optionsOnChange.bind(newTabTools), false);
+	newTabTools.optionsPane.addEventListener('click', newTabTools.optionsOnClick.bind(newTabTools));
+	newTabTools.optionsPane.addEventListener('change', newTabTools.optionsOnChange.bind(newTabTools));
 	newTabTools.optionsPane.addEventListener('transitionend', function() {
 		let extra = document.documentElement.getAttribute('options-extra');
 		if (extra) {

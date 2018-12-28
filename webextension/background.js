@@ -1,4 +1,10 @@
-/* globals Prefs, Tiles, Background, chrome, indexedDB, IDBKeyRange, makeZip, readZip */
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this file,
+ * You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+/* import-globals-from export.js */
+/* import-globals-from prefs.js */
+
 Promise.all([
 	Prefs.init(),
 	initDB()
@@ -33,13 +39,13 @@ Promise.all([
 });
 
 var db;
-const NEW_TAB_URL = chrome.runtime.getURL("newTab.xhtml");
+const NEW_TAB_URL = chrome.runtime.getURL('newTab.xhtml');
 
 function initDB() {
 	return new Promise(function(resolve, reject) {
 		let request = indexedDB.open('newTabTools', 9);
 
-		request.onsuccess = function(/*event*/) {
+		request.onsuccess = function(/* event */) {
 			// console.log(event.type, event);
 			db = this.result;
 			resolve();
@@ -49,7 +55,7 @@ function initDB() {
 			reject(event);
 		};
 
-		request.onupgradeneeded = function(/*event*/) {
+		request.onupgradeneeded = function(/* event */) {
 			// console.log(event.type, event);
 			db = this.result;
 
@@ -90,7 +96,7 @@ function waitForDB() {
 	});
 }
 
-function getTZDateString(date=new Date()) {
+function getTZDateString(date = new Date()) {
 	return [date.getFullYear(), date.getMonth() + 1, date.getDate()].map(p => p.toString().padStart(2, '0')).join('-');
 }
 
@@ -149,10 +155,13 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 		let {url, image} = message;
 		if (url && image) {
 			db.transaction('thumbnails', 'readwrite').objectStore('thumbnails').put({
-				url, image, stored: today, used: today
+				url,
+				image,
+				stored: today,
+				used: today
 			});
 		}
-		return;
+		return false;
 	case 'Thumbnails.get':
 		let map = new Map();
 		db.transaction('thumbnails', 'readwrite').objectStore('thumbnails').openCursor().onsuccess = function() {
@@ -180,6 +189,7 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 		readZip(message.file).then(sendResponse());
 		return true;
 	}
+	return false;
 });
 
 chrome.webNavigation.onCompleted.addListener(function(details) {
@@ -214,9 +224,7 @@ chrome.webNavigation.onCompleted.addListener(function(details) {
 
 chrome.tabs.query({}, function(tabs) {
 	for (let tab of tabs) {
-		/*if (tab.url == "about:blank") {
-			chrome.tabs.update(tab.id, {url: NEW_TAB_URL});
-		} else */if (tab.url == NEW_TAB_URL) {
+		if (tab.url == NEW_TAB_URL) {
 			chrome.tabs.reload(tab.id);
 		} else if (!['http:', 'https:', 'ftp:'].includes(new URL(tab.url).protocol)) {
 			chrome.browserAction.disable(tab.id);

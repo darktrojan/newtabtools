@@ -1,5 +1,9 @@
-/* exported Blocked, Filters, Prefs */
-/* globals chrome, newTabTools, Grid, Updater */
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this file,
+ * You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+/* import-globals-from newTab.js */
+
 var Prefs = {
 	_theme: 'light',
 	_opacity: 80,
@@ -16,7 +20,7 @@ var Prefs = {
 	_versionLastUpdate: new Date(0),
 	_versionLastAck: new Date(0),
 
-	init: function() {
+	init() {
 		chrome.storage.local.remove(['toolbarIcon']);
 
 		let names = [
@@ -51,7 +55,7 @@ var Prefs = {
 			});
 		});
 	},
-	parsePrefs: function(prefs) {
+	parsePrefs(prefs) {
 		if (['light', 'dark'].includes(prefs.theme)) {
 			this._theme = prefs.theme;
 		}
@@ -101,7 +105,7 @@ var Prefs = {
 			this._versionLastAck = new Date(prefs.versionLastAck);
 		}
 	},
-	prefsChanged: function(changes) {
+	prefsChanged(changes) {
 		let prefs = Object.create(null);
 		for (let [name, change] of Object.entries(changes)) {
 			if (change.newValue != change.oldValue) {
@@ -147,24 +151,24 @@ var Prefs = {
 
 var Blocked = {
 	_list: [],
-	_saveList: function() {
+	_saveList() {
 		chrome.storage.local.set({ 'blocked': this._list });
 	},
-	block: function(url) {
+	block(url) {
 		this._list.push(url);
 		this._saveList();
 	},
-	unblock: function(url) {
+	unblock(url) {
 		let index = this._list.indexOf(url);
 		if (index >= 0) {
 			this._list.splice(index, 1);
 		}
 		this._saveList();
 	},
-	isBlocked: function(url) {
+	isBlocked(url) {
 		return this._list.includes(url);
 	},
-	clear: function() {
+	clear() {
 		this._list.length = 0;
 		this._saveList();
 	}
@@ -172,17 +176,17 @@ var Blocked = {
 
 var Filters = {
 	_list: Object.create(null),
-	_saveList: function() {
+	_saveList() {
 		chrome.storage.local.set({ 'filters': this._list });
 	},
-	getList: function() {
+	getList() {
 		let copy = Object.create(null);
 		for (let k of Object.keys(this._list)) {
 			copy[k] = this._list[k];
 		}
 		return copy;
 	},
-	setFilter: function(host, limit) {
+	setFilter(host, limit) {
 		if (limit == -1) {
 			delete this._list[host];
 		} else {
@@ -190,7 +194,7 @@ var Filters = {
 		}
 		this._saveList();
 	},
-	clear: function() {
+	clear() {
 		this._list = Object.create(null);
 		this._saveList();
 	}

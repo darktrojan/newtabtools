@@ -2,7 +2,9 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this file,
  * You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-/* globals DOMRect, Prefs, Tiles, Blocked, newTabTools, chrome */
+/* import-globals-from newTab.js */
+/* import-globals-from prefs.js */
+
 /* exported Page */
 if (!('DOMRect' in window)) {
 	window.DOMRect = function(left, top, width, height) {
@@ -46,7 +48,7 @@ var Transformation = {
 	   * @param node The DOM node.
 	   * @return A Rect instance with the position.
 	   */
-	getNodePosition: function Transformation_getNodePosition(node) {
+	getNodePosition(node) {
 		let {left, top, width, height} = node.getBoundingClientRect();
 		let {offsetLeft, offsetTop} = newTabTools.page.firstElementChild;
 		return new DOMRect(left - offsetLeft, top - offsetTop, width, height);
@@ -57,7 +59,7 @@ var Transformation = {
 	   * @param node The node to fade.
 	   * @param callback The callback to call when finished.
 	   */
-	fadeNodeIn: function Transformation_fadeNodeIn(node, callback) {
+	fadeNodeIn(node, callback) {
 		this._setNodeOpacity(node, 1, function() {
 			// Clear the style property.
 			node.style.opacity = '';
@@ -73,7 +75,7 @@ var Transformation = {
 	   * @param node The node to fade.
 	   * @param callback The callback to call when finished.
 	   */
-	fadeNodeOut: function Transformation_fadeNodeOut(node, callback) {
+	fadeNodeOut(node, callback) {
 		this._setNodeOpacity(node, 0, callback);
 	},
 
@@ -82,7 +84,7 @@ var Transformation = {
 	   * @param site The site to fade.
 	   * @param callback The callback to call when finished.
 	   */
-	showSite: function Transformation_showSite(site, callback) {
+	showSite(site, callback) {
 		this.fadeNodeIn(site.node, callback);
 	},
 
@@ -91,7 +93,7 @@ var Transformation = {
 	   * @param site The site to fade.
 	   * @param callback The callback to call when finished.
 	   */
-	hideSite: function Transformation_hideSite(site, callback) {
+	hideSite(site, callback) {
 		this.fadeNodeOut(site.node, callback);
 	},
 
@@ -100,7 +102,7 @@ var Transformation = {
 	   * @param site The site to re-position.
 	   * @param position The desired position for the given site.
 	   */
-	setSitePosition: function Transformation_setSitePosition(site, position) {
+	setSitePosition(site, position) {
 		let style = site.node.style;
 		let {top, left} = position;
 
@@ -112,7 +114,7 @@ var Transformation = {
 	   * Freezes a site in its current position by positioning it absolute.
 	   * @param site The site to freeze.
 	   */
-	freezeSitePosition: function Transformation_freezeSitePosition(site) {
+	freezeSitePosition(site) {
 		if (this._isFrozen(site)) {
 			return;
 		}
@@ -131,7 +133,7 @@ var Transformation = {
 	   * Unfreezes a site by removing its absolute positioning.
 	   * @param site The site to unfreeze.
 	   */
-	unfreezeSitePosition: function Transformation_unfreezeSitePosition(site) {
+	unfreezeSitePosition(site) {
 		if (!this._isFrozen(site)) {
 			return;
 		}
@@ -150,7 +152,7 @@ var Transformation = {
 	   *        unfreeze - unfreeze the site after sliding
 	   *        callback - the callback to call when finished
 	   */
-	slideSiteTo: function Transformation_slideSiteTo(site, target, options) {
+	slideSiteTo(site, target, options) {
 		let self = this;
 		let callback = options && options.callback;
 
@@ -184,7 +186,7 @@ var Transformation = {
 	   *        unfreeze - unfreeze the site after rearranging
 	   *        callback - the callback to call when finished
 	   */
-	rearrangeSites: function Transformation_rearrangeSites(sites, options) {
+	rearrangeSites(sites, options) {
 		let batch = [];
 		let cells = Grid.cells;
 		let callback = options && options.callback;
@@ -205,7 +207,7 @@ var Transformation = {
 					this.showSite(site, resolve);
 				} else {
 					// The site's position has changed, move it around.
-					this._moveSite(site, index, {unfreeze: unfreeze, callback: resolve});
+					this._moveSite(site, index, {unfreeze, callback: resolve});
 				}
 			}));
 		}, this);
@@ -222,7 +224,7 @@ var Transformation = {
 	   * @param properties The properties we'll wait to be transitioned.
 	   * @param callback The callback to call when finished.
 	   */
-	_whenTransitionEnded: function Transformation_whenTransitionEnded(node, properties, callback) {
+	_whenTransitionEnded(node, properties, callback) {
 		let props = new Set(properties);
 		node.addEventListener('transitionend', function onEnd(e) {
 			if (props.has(e.propertyName)) {
@@ -237,8 +239,8 @@ var Transformation = {
 	   * @param node The node to get the opacity value from.
 	   * @return The node's opacity value.
 	   */
-	_getNodeOpacity: function Transformation_getNodeOpacity(node) {
-		let cstyle = window.getComputedStyle(node, null);
+	_getNodeOpacity(node) {
+		let cstyle = window.getComputedStyle(node);
 		return cstyle.getPropertyValue('opacity');
 	},
 
@@ -248,8 +250,7 @@ var Transformation = {
 	   * @param opacity The opacity value to set.
 	   * @param callback The callback to call when finished.
 	   */
-	_setNodeOpacity: function Transformation_setNodeOpacity(node, opacity, callback) {
-
+	_setNodeOpacity(node, opacity, callback) {
 		if (this._getNodeOpacity(node) == opacity) {
 			if (callback) {
 				callback();
@@ -269,7 +270,7 @@ var Transformation = {
 	   * @param index The target cell's index.
 	   * @param options Options that are directly passed to slideSiteTo().
 	   */
-	_moveSite: function Transformation_moveSite(site, index, options) {
+	_moveSite(site, index, options) {
 		this.freezeSitePosition(site);
 		requestAnimationFrame(function() {
 			// Do this at the end of the event loop to ensure a CSS change happens.
@@ -282,7 +283,7 @@ var Transformation = {
 	   * @param site The site to check.
 	   * @return Whether the given site is frozen.
 	   */
-	_isFrozen: function Transformation_isFrozen(site) {
+	_isFrozen(site) {
 		return site.node.hasAttribute('frozen');
 	}
 };
@@ -295,7 +296,7 @@ var Page = {
 	/**
 	   * Initializes the page.
 	   */
-	init: function Page_init() {
+	init() {
 		this._init();
 
 		addEventListener('resize', Grid.cacheCellPositions);
@@ -305,7 +306,7 @@ var Page = {
 	   * Internally initializes the page. This runs only when/if the feature
 	   * is/gets enabled.
 	   */
-	_init: function Page_init() {
+	_init() {
 		if (this._initialized) {
 			return;
 		}
@@ -321,7 +322,7 @@ var Page = {
 	/**
 	   * Handles all page events.
 	   */
-	handleEvent: function Page_handleEvent(event) {
+	handleEvent(event) {
 		switch (event.type) {
 		case 'dragover':
 			if (Drag.draggedSite) {
@@ -371,7 +372,7 @@ var Grid = {
 	   * Initializes the grid.
 	   * @param selector The query selector of the grid.
 	   */
-	init: function Grid_init() {
+	init() {
 		this._node = document.getElementById('newtab-grid');
 		this._createSiteFragment();
 		this._render();
@@ -383,7 +384,7 @@ var Grid = {
 	   * @param cell The cell that will contain the new site.
 	   * @return The newly created site.
 	   */
-	createSite: function Grid_createSite(link, cell) {
+	createSite(link, cell) {
 		let node = cell.node;
 		node.appendChild(this._siteFragment.cloneNode(true));
 		return new Site(node.firstElementChild, link);
@@ -392,7 +393,7 @@ var Grid = {
 	/**
 	   * Refreshes the grid and re-creates all sites.
 	   */
-	refresh: function Grid_refresh() {
+	refresh() {
 		// Remove all sites.
 		this.cells.forEach(function(cell) {
 			let node = cell.node;
@@ -410,21 +411,21 @@ var Grid = {
 	/**
 	   * Locks the grid to block all pointer events.
 	   */
-	lock: function Grid_lock() {
+	lock() {
 		this.node.setAttribute('locked', 'true');
 	},
 
 	/**
 	   * Unlocks the grid to allow all pointer events.
 	   */
-	unlock: function Grid_unlock() {
+	unlock() {
 		this.node.removeAttribute('locked');
 	},
 
 	/**
 	   * Creates the newtab grid.
 	   */
-	_renderGrid: function Grid_renderGrid() {
+	_renderGrid() {
 		let row = document.createElementNS(HTML_NAMESPACE, 'div');
 		let cell = document.createElementNS(HTML_NAMESPACE, 'div');
 		row.classList.add('newtab-row');
@@ -449,7 +450,7 @@ var Grid = {
 		requestAnimationFrame(this.cacheCellPositions);
 	},
 
-	cacheCellPositions: function Grid_cacheCellPositions() {
+	cacheCellPositions() {
 		for (let c of Grid.cells) {
 			c.position = Transformation.getNodePosition(c.node);
 		}
@@ -464,7 +465,7 @@ var Grid = {
 	/**
 	   * Creates the DOM fragment that is re-used when creating sites.
 	   */
-	_createSiteFragment: function Grid_createSiteFragment() {
+	_createSiteFragment() {
 		this._siteFragment = document.getElementById('newtab-site').content.firstElementChild.cloneNode(true);
 		this._siteFragment.querySelectorAll('[data-title]').forEach(n => {
 			n.title = newTabTools.getString(n.dataset.title);
@@ -474,7 +475,7 @@ var Grid = {
 	/**
 	   * Renders the sites, creates all sites and puts them into their cells.
 	   */
-	_renderSites: function Grid_renderSites() {
+	_renderSites() {
 		let cells = this.cells;
 
 		// Put sites into the cells.
@@ -525,7 +526,7 @@ var Grid = {
 	/**
 	   * Renders the grid.
 	   */
-	_render: function Grid_render() {
+	_render() {
 		if (this._shouldRenderGrid()) {
 			this._renderGrid();
 		}
@@ -533,7 +534,7 @@ var Grid = {
 		return this._renderSites();
 	},
 
-	_shouldRenderGrid: function Grid_shouldRenderGrid() {
+	_shouldRenderGrid() {
 		let rowsLength = this._node.querySelectorAll('.newtab-row').length;
 		let cellsLength = this._node.querySelectorAll('.newtab-cell').length;
 
@@ -553,7 +554,7 @@ function Cell(grid, node) {
 
 	// Register drag-and-drop event handlers.
 	['dragenter', 'dragover', 'dragexit', 'drop'].forEach(function(type) {
-		this._node.addEventListener(type, this, false);
+		this._node.addEventListener(type, this);
 	}, this);
 }
 
@@ -618,7 +619,7 @@ Cell.prototype = {
 	   * Checks whether the cell contains a pinned site.
 	   * @return Whether the cell contains a pinned site.
 	   */
-	containsPinnedSite: function Cell_containsPinnedSite() {
+	containsPinnedSite() {
 		let site = this.site;
 		return site && site.isPinned;
 	},
@@ -627,14 +628,14 @@ Cell.prototype = {
 	   * Checks whether the cell contains a site (is empty).
 	   * @return Whether the cell is empty.
 	   */
-	isEmpty: function Cell_isEmpty() {
+	isEmpty() {
 		return !this.site;
 	},
 
 	/**
 	   * Handles all cell events.
 	   */
-	handleEvent: function Cell_handleEvent(event) {
+	handleEvent(event) {
 		if (!Drag.draggedSite) {
 			return;
 		}
@@ -714,7 +715,7 @@ Site.prototype = {
 	   * Pins the site on its current or a given index.
 	   * @param index The pinned index (optional).
 	   */
-	pin: function Site_pin(index) {
+	pin(index) {
 		if (typeof index == 'undefined') {
 			index = this.cell.index;
 		}
@@ -727,7 +728,7 @@ Site.prototype = {
 	/**
 	   * Unpins the site and calls the given callback when done.
 	   */
-	unpin: function Site_unpin() {
+	unpin() {
 		if (this.isPinned) {
 			this.updateAttributes(false);
 
@@ -760,7 +761,7 @@ Site.prototype = {
 	   * Blocks the site (removes it from the grid) and calls the given callback
 	   * when done.
 	   */
-	block: function Site_block() {
+	block() {
 		if (!Blocked.isBlocked(this._link.url)) {
 			UndoDialog.show(this);
 			Blocked.block(this._link.url);
@@ -776,7 +777,7 @@ Site.prototype = {
 	   * @param selector The query selector.
 	   * @return The DOM node we found.
 	   */
-	_querySelector: function Site_querySelector(selector) {
+	_querySelector(selector) {
 		return this.node.querySelector(selector);
 	},
 
@@ -785,7 +786,7 @@ Site.prototype = {
 	   * pinned or unpinned.
 	   * @param pinned Whether this site is now pinned or unpinned.
 	   */
-	updateAttributes: function(pinned) {
+	updateAttributes(pinned) {
 		let control = this._querySelector('.newtab-control-pin');
 
 		if (pinned) {
@@ -800,7 +801,7 @@ Site.prototype = {
 	/**
 	   * Renders the site's data (fills the HTML fragment).
 	   */
-	_render: function Site_render() {
+	_render() {
 		if (this.isPinned) {
 			this.updateAttributes(true);
 		}
@@ -809,7 +810,7 @@ Site.prototype = {
 		this.addTitle();
 	},
 
-	addTitle: function Site_addTitle() {
+	addTitle() {
 		let url = this.url;
 		let title = this.title || url;
 		let tooltip = title == url ? title : title + '\n' + url;
@@ -825,7 +826,7 @@ Site.prototype = {
 	/**
 	   * Refreshes the thumbnail for the site.
 	   */
-	refreshThumbnail: function Site_refreshThumbnail() {
+	refreshThumbnail() {
 		let thumbnail = this.thumbnail;
 		thumbnail.style.backgroundColor = this.link.backgroundColor || null;
 		if (this.link.image) {
@@ -845,17 +846,17 @@ Site.prototype = {
 	/**
 	   * Adds event handlers for the site and its buttons.
 	   */
-	_addEventHandlers: function Site_addEventHandlers() {
+	_addEventHandlers() {
 		// Register drag-and-drop event handlers.
-		this._node.addEventListener('dragstart', this, false);
-		this._node.addEventListener('dragend', this, false);
-		this._node.addEventListener('click', this, false);
+		this._node.addEventListener('dragstart', this);
+		this._node.addEventListener('dragend', this);
+		this._node.addEventListener('click', this);
 	},
 
 	/**
 	   * Handles site click events.
 	   */
-	_onClick: function Site_onClick(event) {
+	_onClick(event) {
 		let target = event.target;
 		if (target.classList.contains('newtab-link') ||
 		target.parentElement.classList.contains('newtab-link')) {
@@ -875,7 +876,7 @@ Site.prototype = {
 	/**
 	   * Handles all site events.
 	   */
-	handleEvent: function Site_handleEvent(event) {
+	handleEvent(event) {
 		switch (event.type) {
 		case 'click':
 			this._onClick(event);
@@ -923,7 +924,7 @@ var Drag = {
 	   * @param site The site that's being dragged.
 	   * @param event The 'dragstart' event.
 	   */
-	start: function Drag_start(site, event) {
+	start(site, event) {
 		this._draggedSite = site;
 
 		// Mark nodes as being dragged.
@@ -961,7 +962,7 @@ var Drag = {
 	   * @param site The site that's being dragged.
 	   * @param event The 'drag' event.
 	   */
-	drag: function Drag_drag(site, event) {
+	drag(site, event) {
 		// Get the viewport size.
 		let {clientWidth, clientHeight} = document.documentElement;
 		let {offsetLeft, offsetTop} = newTabTools.page.firstElementChild;
@@ -978,7 +979,7 @@ var Drag = {
 		top = Math.min(top, clientHeight - this.cellHeight - border - offsetTop);
 
 		// Update the drag image's position.
-		Transformation.setSitePosition(site, {left: left, top: top});
+		Transformation.setSitePosition(site, {left, top});
 		this._cellLeft = left;
 		this._cellTop = top;
 	},
@@ -988,7 +989,7 @@ var Drag = {
 	   * @param site The site that's being dragged.
 	   * @param event The 'dragend' event.
 	   */
-	end: function Drag_end(site) {
+	end(site) {
 		let nodes = Grid.node.querySelectorAll('[dragged]');
 		for (let i = 0; i < nodes.length; i++) {
 			nodes[i].removeAttribute('dragged');
@@ -1009,7 +1010,7 @@ var Drag = {
 	   * @param site The site that's being dragged.
 	   * @param event The 'dragstart' event.
 	   */
-	_setDragData: function Drag_setDragData(site, event) {
+	_setDragData(site, event) {
 		let {url, title} = site;
 
 		let dt = event.dataTransfer;
@@ -1018,7 +1019,7 @@ var Drag = {
 		dt.setData('text/plain', url);
 		dt.setData('text/uri-list', url);
 		dt.setData('text/x-moz-url', url + '\n' + title);
-		if (url.indexOf('"') >= 0 && url.indexOf('<') >= 0) {
+		if (url.includes('"') && url.includes('<')) {
 			url = url.replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 		}
 		dt.setData('text/html', '<a href="' + url + '">' + url + '</a>');
@@ -1054,7 +1055,7 @@ var Drop = {
 	   * Handles the 'dragenter' event.
 	   * @param cell The drop target cell.
 	   */
-	enter: function Drop_enter(cell) {
+	enter(cell) {
 		this._delayedRearrange(cell);
 	},
 
@@ -1063,7 +1064,7 @@ var Drop = {
 	   * @param cell The drop target cell.
 	   * @param event The 'dragexit' event.
 	   */
-	exit: function Drop_exit(cell, event) {
+	exit(cell, event) {
 		if (event.dataTransfer && !event.dataTransfer.mozUserCancelled) {
 			this._delayedRearrange();
 		} else {
@@ -1078,7 +1079,7 @@ var Drop = {
 	   * @param cell The drop target cell.
 	   * @param event The 'dragexit' event.
 	   */
-	drop: function Drop_drop(cell, event) {
+	drop(cell, event) {
 		// The cell that is the drop target could contain a pinned site. We need
 		// to find out where that site has gone and re-pin it there.
 		if (cell.containsPinnedSite()) {
@@ -1098,7 +1099,7 @@ var Drop = {
 	   * Re-pins all pinned sites in their (new) positions.
 	   * @param cell The drop target cell.
 	   */
-	_repinSitesAfterDrop: function Drop_repinSitesAfterDrop(cell) {
+	_repinSitesAfterDrop(cell) {
 		let sites = DropPreview.rearrange(cell);
 
 		// Filter out pinned sites.
@@ -1114,7 +1115,7 @@ var Drop = {
 	   * Pins the dragged site in its new place.
 	   * @param cell The drop target cell.
 	   */
-	_pinDraggedSite: function Drop_pinDraggedSite(cell) {
+	_pinDraggedSite(cell) {
 		let index = cell.index;
 		let draggedSite = Drag.draggedSite;
 
@@ -1130,7 +1131,7 @@ var Drop = {
 	   * Time a rearrange with a little delay.
 	   * @param cell The drop target cell.
 	   */
-	_delayedRearrange: function Drop_delayedRearrange(cell) {
+	_delayedRearrange(cell) {
 		// The last drop target didn't change so there's no need to re-arrange.
 		if (this._lastDropTarget == cell) {
 			return;
@@ -1153,7 +1154,7 @@ var Drop = {
 	/**
 	   * Cancels a timed rearrange, if any.
 	   */
-	_cancelDelayedArrange: function Drop_cancelDelayedArrange() {
+	_cancelDelayedArrange() {
 		if (this._rearrangeTimeout) {
 			clearTimeout(this._rearrangeTimeout);
 			this._rearrangeTimeout = null;
@@ -1164,7 +1165,7 @@ var Drop = {
 	   * Rearrange all sites in the grid depending on the current drop target.
 	   * @param cell The drop target cell.
 	   */
-	_rearrange: function Drop_rearrange(cell) {
+	_rearrange(cell) {
 		let sites = Grid.sites;
 
 		// We need to rearrange the grid only if there's a current drop target.
@@ -1195,14 +1196,14 @@ var DropTargetShim = {
 	/**
 	   * Initializes the drop target shim.
 	   */
-	init: function() {
+	init() {
 		Grid.node.addEventListener('dragstart', this, true);
 	},
 
 	/**
 	   * Add all event listeners needed during a drag operation.
 	   */
-	_addEventListeners: function() {
+	_addEventListeners() {
 		Grid.node.addEventListener('dragend', this);
 
 		let docElement = document.documentElement;
@@ -1214,7 +1215,7 @@ var DropTargetShim = {
 	/**
 	   * Remove all event listeners that were needed during a drag operation.
 	   */
-	_removeEventListeners: function() {
+	_removeEventListeners() {
 		Grid.node.removeEventListener('dragend', this);
 
 		let docElement = document.documentElement;
@@ -1226,7 +1227,7 @@ var DropTargetShim = {
 	/**
 	   * Handles all shim events.
 	   */
-	handleEvent: function(event) {
+	handleEvent(event) {
 		if (Prefs.locked) {
 			return;
 		}
@@ -1254,7 +1255,7 @@ var DropTargetShim = {
 	   * Handles the 'dragstart' event.
 	   * @param event The 'dragstart' event.
 	   */
-	_dragstart: function(event) {
+	_dragstart(event) {
 		if (event.target.classList.contains('newtab-link')) {
 			Grid.lock();
 			this._addEventListeners();
@@ -1265,7 +1266,7 @@ var DropTargetShim = {
 	   * Handles the 'dragover' event.
 	   * @param event The 'dragover' event.
 	   */
-	_dragover: function(event) {
+	_dragover(event) {
 		// XXX bug 505521 - Use the dragover event to retrieve the
 		//                  current mouse coordinates while dragging.
 		let sourceNode = event.dataTransfer.mozSourceNode.parentNode;
@@ -1285,7 +1286,7 @@ var DropTargetShim = {
 	   * Handles the 'drop' event.
 	   * @param event The 'drop' event.
 	   */
-	_drop: function(event) {
+	_drop(event) {
 		// We're accepting all drops.
 		event.preventDefault();
 
@@ -1301,7 +1302,7 @@ var DropTargetShim = {
 	   * Handles the 'dragend' event.
 	   * @param event The 'dragend' event.
 	   */
-	_dragend: function(event) {
+	_dragend(event) {
 		if (this._lastDropTarget) {
 			if (event.dataTransfer.mozUserCancelled) {
 				// The drag operation was cancelled.
@@ -1323,7 +1324,7 @@ var DropTargetShim = {
 	   * appropriate dragenter, dragexit, and dragleave events.
 	   * @param event The current drag event.
 	   */
-	_updateDropTarget: function(event) {
+	_updateDropTarget(event) {
 		// Let's see if we find a drop target.
 		let target = this._findDropTarget(event);
 
@@ -1346,7 +1347,7 @@ var DropTargetShim = {
 	   * against all cells in the grid.
 	   * @return The currently hovered drop target or null.
 	   */
-	_findDropTarget: function() {
+	_findDropTarget() {
 		// These are the minimum intersection values - we want to use the cell if
 		// the site is >= 50% hovering its position.
 		let minWidth = Drag.cellWidth / 2;
@@ -1373,7 +1374,7 @@ var DropTargetShim = {
 	   * Gets the positions of all cell nodes.
 	   * @return The (cached) cell positions.
 	   */
-	_getCellPositions: function DropTargetShim_getCellPositions() {
+	_getCellPositions() {
 		if (this._cellPositions) {
 			return this._cellPositions;
 		}
@@ -1381,7 +1382,7 @@ var DropTargetShim = {
 		return this._cellPositions = Grid.cells.filter(function(cell) { // jshint ignore:line
 			return !cell.node.hasAttribute('dragged');
 		}).map(function(cell) {
-			return {cell: cell, rect: cell.position};
+			return {cell, rect: cell.position};
 		});
 	},
 
@@ -1391,7 +1392,7 @@ var DropTargetShim = {
 	   * @param type The event type.
 	   * @param target The target node that receives the event.
 	   */
-	_dispatchEvent: function({dataTransfer}, type, target) {
+	_dispatchEvent({dataTransfer}, type, target) {
 		let node = target.node;
 		let event = new DragEvent(type, {dataTransfer});
 		node.dispatchEvent(event);
@@ -1410,7 +1411,7 @@ var DropPreview = {
 	   * @param cell The drop target cell.
 	   * @return The re-arranged array of sites.
 	   */
-	rearrange: function DropPreview_rearrange(cell) {
+	rearrange(cell) {
 		let sites = Grid.sites;
 
 		// Insert the dragged site into the current grid.
@@ -1428,7 +1429,7 @@ var DropPreview = {
 	   * @param sites The array of sites to insert into.
 	   * @param cell The drop target cell.
 	   */
-	_insertDraggedSite: function DropPreview_insertDraggedSite(sites, cell) {
+	_insertDraggedSite(sites, cell) {
 		let dropIndex = cell.index;
 		let draggedSite = Drag.draggedSite;
 
@@ -1454,7 +1455,7 @@ var DropPreview = {
 	   * @param sites The array of sites containing the dragged site.
 	   * @param cell The drop target cell.
 	   */
-	_repositionPinnedSites: function DropPreview_repositionPinnedSites(sites, cell) {
+	_repositionPinnedSites(sites, cell) {
 		// Collect all pinned sites.
 		let pinnedSites = this._filterPinnedSites(sites, cell);
 
@@ -1478,7 +1479,7 @@ var DropPreview = {
 	   * @param cell The drop target cell.
 	   * @return The filtered array of sites.
 	   */
-	_filterPinnedSites: function DropPreview_filterPinnedSites(sites, cell) {
+	_filterPinnedSites(sites, cell) {
 		let draggedSite = Drag.draggedSite;
 
 		// When dropping on a cell that contains a pinned site make sure that all
@@ -1503,7 +1504,7 @@ var DropPreview = {
 	   * @param cell The drop target cell.
 	   * @return The range of pinned cells.
 	   */
-	_getPinnedRange: function DropPreview_getPinnedRange(cell) {
+	_getPinnedRange(cell) {
 		let dropIndex = cell.index;
 		let range = {start: dropIndex, end: dropIndex};
 
@@ -1534,7 +1535,7 @@ var DropPreview = {
 	   * @param cell The drop target cell.
 	   * @return Whether there is an overflowed pinned cell.
 	   */
-	_hasOverflowedPinnedSite: function DropPreview_hasOverflowedPinnedSite(sites, cell) {
+	_hasOverflowedPinnedSite(sites, cell) {
 		// If the drop target isn't pinned there's no way a pinned site has been
 		// pushed out of the grid so we can just exit here.
 		if (!cell.containsPinnedSite()) {
@@ -1561,7 +1562,7 @@ var DropPreview = {
 	   * @param sites The array of sites.
 	   * @param cell The drop target cell.
 	   */
-	_repositionOverflowedPinnedSite: function DropPreview_repositionOverflowedPinnedSite(sites, cell) {
+	_repositionOverflowedPinnedSite(sites, cell) {
 		// Try to find a lower-priority cell (empty or containing an unpinned site).
 		let index = this._indexOfLowerPrioritySite(sites, cell);
 
@@ -1590,7 +1591,7 @@ var DropPreview = {
 	   * @param cell The drop target cell.
 	   * @return The cell's index.
 	   */
-	_indexOfLowerPrioritySite: function DropPreview_indexOfLowerPrioritySite(sites, cell) {
+	_indexOfLowerPrioritySite(sites, cell) {
 		let cells = Grid.cells;
 		let dropIndex = cell.index;
 
@@ -1625,10 +1626,9 @@ var Updater = {
 	   * This removes old, moves existing and creates new sites to fill gaps.
 	   * @param callback The callback to call when finished.
 	   */
-	updateGrid: function Updater_updateGrid(callback) {
+	updateGrid(callback) {
 		// let links = NewTabToolsLinks.getLinks().slice(0, Grid.cells.length);
 		Tiles.getAllTiles().then(links => {
-
 			// Find all sites that remain in the grid.
 			let sites = this._findRemainingSites(links);
 
@@ -1658,10 +1658,9 @@ var Updater = {
 		});
 	},
 
-	fastUpdateGrid: function Updater_fastUpdateGrid() {
+	fastUpdateGrid() {
 		// let links = NewTabToolsLinks.getLinks().slice(0, Grid.cells.length);
 		Tiles.getAllTiles().then(function(links) {
-
 			// Find all sites that remain in the grid.
 			let sites = this._findRemainingSites(links);
 
@@ -1680,7 +1679,7 @@ var Updater = {
 	   * @param links The array of links to find sites for.
 	   * @return Array of sites mapped to the given links (can contain null values).
 	   */
-	_findRemainingSites: function Updater_findRemainingSites(links) {
+	_findRemainingSites(links) {
 		let map = {};
 
 		// Create a map to easily retrieve the site for a given URL.
@@ -1700,7 +1699,7 @@ var Updater = {
 	   * Freezes the given sites' positions.
 	   * @param sites The array of sites to freeze.
 	   */
-	_freezeSitePositions: function Updater_freezeSitePositions(sites) {
+	_freezeSitePositions(sites) {
 		sites.forEach(function(site) {
 			if (site) {
 				Transformation.freezeSitePosition(site);
@@ -1712,7 +1711,7 @@ var Updater = {
 	   * Moves the given sites' DOM nodes to their new positions.
 	   * @param sites The array of sites to move.
 	   */
-	_moveSiteNodes: function Updater_moveSiteNodes(sites) {
+	_moveSiteNodes(sites) {
 		let cells = Grid.cells;
 
 		// Truncate the given array of sites to not have more sites than cells.
@@ -1746,8 +1745,8 @@ var Updater = {
 	   * @param sites The array of sites to re-arrange.
 	   * @param callback The callback to call when finished.
 	   */
-	_rearrangeSites: function Updater_rearrangeSites(sites, callback) {
-		let options = {callback: callback, unfreeze: true};
+	_rearrangeSites(sites, callback) {
+		let options = {callback, unfreeze: true};
 		Transformation.rearrangeSites(sites, options);
 	},
 
@@ -1757,13 +1756,13 @@ var Updater = {
 	   * @param sites The array of sites remaining in the grid.
 	   * @param callback The callback to call when finished.
 	   */
-	_removeLegacySites: function Updater_removeLegacySites(sites, callback) {
+	_removeLegacySites(sites, callback) {
 		let batch = [];
 
 		// Delete sites that were removed from the grid.
 		Grid.sites.forEach(function(site) {
 			// The site must be valid and not in the current grid.
-			if (!site || sites.indexOf(site) != -1) {
+			if (!site || sites.includes(site)) {
 				return;
 			}
 
@@ -1773,7 +1772,7 @@ var Updater = {
 					let node = site.node;
 
 					// Remove the site from the DOM.
-					node.parentNode.removeChild(node);
+					node.remove();
 					resolve();
 				});
 			}));
@@ -1787,7 +1786,7 @@ var Updater = {
 	   * @param links The array of links.
 	   * @param callback The callback to call when finished.
 	   */
-	_fillEmptyCells: function Updater_fillEmptyCells(links, callback) {
+	_fillEmptyCells(links, callback) {
 		let {cells, sites} = Grid;
 
 		// Find empty cells and fill them.
@@ -1832,9 +1831,9 @@ var UndoDialog = {
 	/**
 	   * Initializes the undo dialog.
 	   */
-	init: function UndoDialog_init() {
+	init() {
 		this._undoContainer = document.getElementById('newtab-undo-container');
-		this._undoContainer.addEventListener('click', this, false);
+		this._undoContainer.addEventListener('click', this);
 		this._undoButton = document.getElementById('newtab-undo-button');
 		this._undoCloseButton = document.getElementById('newtab-undo-close-button');
 		this._undoRestoreButton = document.getElementById('newtab-undo-restore-button');
@@ -1844,7 +1843,7 @@ var UndoDialog = {
 	   * Shows the undo dialog.
 	   * @param site The site that just got removed.
 	   */
-	show: function UndoDialog_show(site) {
+	show(site) {
 		if (this._undoData) {
 			clearTimeout(this._undoData.timeout);
 		}
@@ -1867,7 +1866,7 @@ var UndoDialog = {
 	/**
 	   * Hides the undo dialog.
 	   */
-	hide: function UndoDialog_hide() {
+	hide() {
 		if (!this._undoData) {
 			return;
 		}
@@ -1886,7 +1885,7 @@ var UndoDialog = {
 	   * The undo dialog event handler.
 	   * @param event The event to handle.
 	   */
-	handleEvent: function UndoDialog_handleEvent(event) {
+	handleEvent(event) {
 		switch (event.target.id) {
 		case 'newtab-undo-button':
 			this._undo();
@@ -1903,7 +1902,7 @@ var UndoDialog = {
 	/**
 	   * Undo the last blocked site.
 	   */
-	_undo: function UndoDialog_undo() {
+	_undo() {
 		if (!this._undoData) {
 			return;
 		}
@@ -1922,7 +1921,7 @@ var UndoDialog = {
 	/**
 	   * Undo all blocked sites.
 	   */
-	_undoAll: function UndoDialog_undoAll() {
+	_undoAll() {
 		Blocked.clear();
 		Updater.updateGrid();
 		this.hide();

@@ -1,3 +1,7 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this file,
+ * You can obtain one at http://mozilla.org/MPL/2.0/. */
+
 /* exported compareVersions */
 function compareVersions(a, b) {
 	function splitApart(name) {
@@ -27,14 +31,21 @@ function compareVersions(a, b) {
 
 		switch (xType) {
 		case yType:
-			return x == y ? 0 : (x < y ? -1 : 1);
+			if (x == y) {
+				return 0;
+			}
+			return x < y ? -1 : 1;
 		case 'string':
 			return -1;
 		case 'undefined':
-			return yType == 'number' ? (y === 0 ? 0 : -1) : 1;
+			if (yType == 'number') {
+				return y === 0 ? 0 : -1;
+			}
+			return 1;
 		case 'number':
 			return x === 0 && yType == 'undefined' ? 0 : 1;
 		}
+		return 0;
 	}
 	let aParts = splitApart(a);
 	let bParts = splitApart(b);

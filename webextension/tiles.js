@@ -1,26 +1,32 @@
-/* exported initDB, Tiles, Background */
-/* globals Blocked, Filters, Prefs, chrome, compareVersions, db */
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this file,
+ * You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+/* import-globals-from background.js */
+/* import-globals-from common.js */
+/* import-globals-from prefs.js */
+
 var Tiles = {
 	_ready: false,
 	_cache: [],
 	_list: [],
-	ensureReady: function() {
+	ensureReady() {
 		let promise = this._ready ? Promise.resolve(null) : this.getAllTiles();
 		return promise.then(() => {
 			return { cache: this._cache, list: this._list };
 		});
 	},
-	isPinned: function(url) {
+	isPinned(url) {
 		return this._list.includes(url);
 	},
-	getAll: function() {
+	getAll() {
 		return new Promise(function(resolve, reject) {
 			let op = db.transaction('tiles').objectStore('tiles').getAll();
 			op.onsuccess = () => resolve(op.result);
 			op.onerror = reject;
 		});
 	},
-	getAllTiles: function() { // TODO: This is a silly name.
+	getAllTiles() { // TODO: This is a silly name.
 		this._ready = true;
 		let count = Prefs.rows * Prefs.columns;
 		return new Promise(resolve => {
@@ -51,7 +57,7 @@ var Tiles = {
 				let {version} = await browser.runtime.getBrowserInfo();
 				let options;
 				if (compareVersions(version, '63.0a1') >= 0) {
-					options = { limit:100, onePerDomain: false, includeBlocked: true };
+					options = { limit: 100, onePerDomain: false, includeBlocked: true };
 				} else {
 					options = { providers: ['places'] };
 				}
@@ -115,14 +121,14 @@ var Tiles = {
 			};
 		});
 	},
-	getTile: function(url) {
+	getTile(url) {
 		return new Promise(function(resolve, reject) {
 			let op = db.transaction('tiles').objectStore('tiles').index('url').get(url);
 			op.onsuccess = () => resolve(op.result || null);
 			op.onerror = reject;
 		});
 	},
-	putTile: function(tile) {
+	putTile(tile) {
 		if (!this._list.includes(tile.url)) {
 			this._list.push(tile.url);
 		}
@@ -132,7 +138,7 @@ var Tiles = {
 			op.onerror = reject;
 		});
 	},
-	removeTile: function(tile) {
+	removeTile(tile) {
 		let index = this._list.indexOf(tile.url);
 		while (index > -1) {
 			this._list.splice(index, 1);
@@ -144,14 +150,14 @@ var Tiles = {
 			op.onerror = reject;
 		});
 	},
-	clear: function() {
+	clear() {
 		return new Promise(function(resolve, reject) {
 			let op = db.transaction('tiles', 'readwrite').objectStore('tiles').clear();
 			op.onsuccess = () => resolve();
 			op.onerror = reject;
 		});
 	},
-	pinTile: function(title, url) {
+	pinTile(title, url) {
 		if (this.isPinned(url)) {
 			return Promise.resolve();
 		}
@@ -171,7 +177,7 @@ var Tiles = {
 };
 
 var Background = {
-	getBackground: function() {
+	getBackground() {
 		return new Promise(function(resolve) {
 			db.transaction('background').objectStore('background').getAll().onsuccess = function() {
 				if (this.result[0]) {
@@ -181,7 +187,7 @@ var Background = {
 			};
 		});
 	},
-	setBackground: function(file) {
+	setBackground(file) {
 		return new Promise(function(resolve) {
 			let backgroundOS = db.transaction('background', 'readwrite').objectStore('background');
 			backgroundOS.clear().onsuccess = function() {
