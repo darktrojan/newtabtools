@@ -260,5 +260,12 @@
 	},
 	"tileurl_empty": {
 		"message": "Κενό πλακίδιο"
+	},
+	"tile_url_placeholder": {
+		"message": "Πληκτρολογήστε μία νέα διεύθυνση URL"
+	},
+	"tile_url_set": {
+		"message": "Εφαρμογή"
 	}
+	
 }
