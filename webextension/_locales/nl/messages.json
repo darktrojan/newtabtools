@@ -273,4 +273,10 @@
 	"tileurl_empty": {
 		"message": "Lege tegel"
 	}
+	"tile_url_placeholder": {
+		"message": "Typ een nieuwe URL voor de tegel"
+	},
+	"tile_url_set": {
+		"message": "Instellen"
+	}
 }
