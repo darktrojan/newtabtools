@@ -630,6 +630,7 @@ svg {
 #options-pinURL-input,
 #options-url-input,
 #options-title-input {
+	width: 0;
 	flex: 1;
 }
 #options :-moz-ui-invalid {
