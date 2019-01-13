@@ -354,7 +354,6 @@ var newTabTools = {
 		case 'options-backup-restore':
 			this.showOptionsExtra('export');
 			return;
-		case 'options-donate':
 		case 'options-backup':
 			chrome.permissions.request({permissions: ['downloads']}, function(succeeded) {
 				chrome.runtime.sendMessage({name: 'Export:backup'});
@@ -364,6 +363,7 @@ var newTabTools = {
 			let input = newTabTools.optionsPane.querySelector('#options-export input[type="file"]');
 			chrome.runtime.sendMessage({name: 'Import:restore', file: input.files[0]});
 			return;
+		case 'options-donate':
 		case 'newtab-update-donate':
 			window.open('https://darktrojan.github.io/donate.html?newtabtools');
 			Prefs.versionLastAck = new Date();
