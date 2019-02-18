@@ -15,7 +15,7 @@ var newTabTools = {
 	},
 	isValidURL(url) {
 		try {
-			return /^(https?|ftp|moz-extension):\/\//.test(url) && new URL(url);
+			return ['data:', 'ftp:', 'http:', 'https:', 'moz-extension:'].includes(new URL(url).protocol);
 		} catch (ex) {
 			return false;
 		}
