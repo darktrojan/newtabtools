@@ -266,5 +266,11 @@
 	},
 	"tileurl_empty": {
 		"message": "Pusty kafelek"
+	},
+	"tile_url_placeholder": {
+		"message": "Wprowadź nowy adres URL dla kafelka"
+	},
+	"tile_url_set": {
+		"message": "Ustaw"
 	}
 }
