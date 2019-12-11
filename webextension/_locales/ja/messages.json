@@ -260,7 +260,7 @@
 	},
 	"tileurl_empty": {
 		"message": "空のタイル"
-	}
+	},
 	"tile_url_placeholder": {
 		"message": "新しいタイルのURLを入力"
 	},
