@@ -1,11 +1,10 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this file,
- * You can obtain one at http://mozilla.org/MPL/2.0/. */
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, you can obtain one at http://mozilla.org/MPL/2.0/. */
 
-/* import-globals-from prefs.js */
-/* import-globals-from tiles.js */
+/* exported makeZip, readZip */
+/* globals Background, Tiles, zip */
 
-/* globals zip */
 zip.workerScriptsPath = '/lib/';
 
 async function makeZip() {

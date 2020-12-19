@@ -1,8 +1,9 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this file,
- * You can obtain one at http://mozilla.org/MPL/2.0/. */
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, you can obtain one at http://mozilla.org/MPL/2.0/. */
 
-/* import-globals-from newTab.js */
+/* exported Prefs, Blocked, Filters */
+/* globals Grid, newTabTools, Updater */
 
 var Prefs = {
 	_theme: 'light',
@@ -39,8 +40,8 @@ var Prefs = {
 		];
 
 		for (let n of names) {
-			this.__defineGetter__(n, () => this['_' + n]); // jshint ignore:line
-			this.__defineSetter__(n, function(value) { // jshint ignore:line
+			this.__defineGetter__(n, () => this['_' + n]);
+			this.__defineSetter__(n, function(value) {
 				let obj = {};
 				obj[n] = value;
 				chrome.storage.local.set(obj);
@@ -152,25 +153,27 @@ var Prefs = {
 var Blocked = {
 	_list: [],
 	_saveList() {
-		chrome.storage.local.set({ 'blocked': this._list });
+		return new Promise(resolve => {
+			chrome.storage.local.set({ 'blocked': this._list }, resolve);
+		});
 	},
 	block(url) {
 		this._list.push(url);
-		this._saveList();
+		return this._saveList();
 	},
 	unblock(url) {
 		let index = this._list.indexOf(url);
 		if (index >= 0) {
 			this._list.splice(index, 1);
 		}
-		this._saveList();
+		return this._saveList();
 	},
 	isBlocked(url) {
 		return this._list.includes(url);
 	},
 	clear() {
 		this._list.length = 0;
-		this._saveList();
+		return this._saveList();
 	}
 };
 

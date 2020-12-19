@@ -5,30 +5,31 @@
 /* eslint-env node */
 
 module.exports = {
-  root: true,
-  env: {
-    browser: true,
-    es6: true,
-  },
-  extends: [
-    "plugin:mozilla/recommended",
-  ],
-  parserOptions: {
-    ecmaVersion: 9,
-  },
-  globals: {
-    browser: true,
-    chrome: true,
-  },
-  rules: {
-    "comma-dangle": 0,
-    "complexity": 0,
-    "curly": 2,
-    "indent": [2, "tab", { SwitchCase: 0, }],
-    "func-names": [2, "never"],
-    "no-tabs": 0,
-    "object-curly-newline": [2, { multiline: true }],
-    "padded-blocks": [2, "never"],
-    "quotes": [2, "single"]
-  },
+	root: true,
+	env: {
+		browser: true,
+		es6: true,
+		webextensions: true,
+	},
+	extends: ['eslint:recommended'],
+	parserOptions: {
+		ecmaVersion: 9,
+	},
+	globals: {
+		browser: true,
+		chrome: true,
+	},
+	rules: {
+		'comma-dangle': [2, 'only-multiline'],
+		'complexity': 0,
+		'curly': 2,
+		'indent': [2, 'tab', { SwitchCase: 0 }],
+		'func-names': [2, 'never'],
+		'no-case-declarations': 0,
+		'no-tabs': 0,
+		'object-curly-newline': 2,
+		'padded-blocks': [2, 'never'],
+		'quotes': [2, 'single'],
+		'semi': 2,
+	},
 };

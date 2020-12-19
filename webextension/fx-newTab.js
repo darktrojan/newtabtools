@@ -1,11 +1,10 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this file,
- * You can obtain one at http://mozilla.org/MPL/2.0/. */
-
-/* import-globals-from newTab.js */
-/* import-globals-from prefs.js */
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, you can obtain one at http://mozilla.org/MPL/2.0/. */
 
 /* exported Page */
+/* globals Blocked, newTabTools, Prefs, Tiles */
+
 if (!('DOMRect' in window)) {
 	window.DOMRect = function(left, top, width, height) {
 		this.left = left;
@@ -761,14 +760,16 @@ Site.prototype = {
 	   * Blocks the site (removes it from the grid) and calls the given callback
 	   * when done.
 	   */
-	block() {
+	async block() {
 		if (!Blocked.isBlocked(this._link.url)) {
 			UndoDialog.show(this);
-			Blocked.block(this._link.url);
+			await Blocked.block(this._link.url);
 
-			(this.isPinned ? Tiles.removeTile(this._link) : Promise.resolve()).then(() => {
-				Updater.updateGrid();
-			});
+			if (this.isPinned) {
+				await Tiles.removeTile(this._link);
+			}
+
+			Updater.updateGrid();
 		}
 	},
 
@@ -1379,7 +1380,7 @@ var DropTargetShim = {
 			return this._cellPositions;
 		}
 
-		return this._cellPositions = Grid.cells.filter(function(cell) { // jshint ignore:line
+		return this._cellPositions = Grid.cells.filter(function(cell) {
 			return !cell.node.hasAttribute('dragged');
 		}).map(function(cell) {
 			return {cell, rect: cell.position};
@@ -1804,7 +1805,7 @@ var Updater = {
 
 				// Flush all style changes for the dynamically inserted site to make
 				// the fade-in transition work.
-				window.getComputedStyle(site.node).opacity; // jshint ignore:line
+				window.getComputedStyle(site.node).opacity;
 				Transformation.showSite(site, resolve);
 			});
 		})).then(function() {
@@ -1902,13 +1903,13 @@ var UndoDialog = {
 	/**
 	   * Undo the last blocked site.
 	   */
-	_undo() {
+	async _undo() {
 		if (!this._undoData) {
 			return;
 		}
 
 		let {wasPinned, blockedLink} = this._undoData;
-		Blocked.unblock(blockedLink.url);
+		await Blocked.unblock(blockedLink.url);
 
 		if (wasPinned) {
 			Tiles.putTile(blockedLink);
@@ -1921,8 +1922,8 @@ var UndoDialog = {
 	/**
 	   * Undo all blocked sites.
 	   */
-	_undoAll() {
-		Blocked.clear();
+	async _undoAll() {
+		await Blocked.clear();
 		Updater.updateGrid();
 		this.hide();
 	}

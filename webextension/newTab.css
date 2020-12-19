@@ -1,6 +1,6 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this file,
- * You can obtain one at http://mozilla.org/MPL/2.0/. */
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, you can obtain one at http://mozilla.org/MPL/2.0/. */
 
 :root {
 	-moz-appearance: none;
@@ -632,6 +632,12 @@ svg {
 #options-title-input {
 	width: 0;
 	flex: 1;
+}#options input[type="range"] {
+  background-color: transparent;
+}
+
+#options input[type="range"]::-moz-range-track {
+  background-color: ThreeDLightShadow;
 }
 #options :-moz-ui-invalid {
 	box-shadow: 0 0 1.5px #ff0000;

@@ -1,11 +1,8 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this file,
- * You can obtain one at http://mozilla.org/MPL/2.0/. */
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, you can obtain one at http://mozilla.org/MPL/2.0/. */
 
-/* import-globals-from common.js */
-/* import-globals-from fx-newTab.js */
-/* import-globals-from prefs.js */
-/* import-globals-from tiles-shim.js */
+/* globals Background, compareVersions, Filters, Grid, Page, Prefs, Tiles, Transformation, Updater */
 
 var HTML_NAMESPACE = 'http://www.w3.org/1999/xhtml';
 
@@ -355,7 +352,7 @@ var newTabTools = {
 			this.showOptionsExtra('export');
 			return;
 		case 'options-backup':
-			chrome.permissions.request({permissions: ['downloads']}, function(succeeded) {
+			chrome.permissions.request({permissions: ['downloads']}, function() {
 				chrome.runtime.sendMessage({name: 'Export:backup'});
 			});
 			return;
@@ -424,29 +421,25 @@ var newTabTools = {
 			break;
 		}
 	},
-	contextMenuShowing() {
-		let site = document.activeElement;
-		while (site != document && !site.classList.contains('newtab-site')) {
-			site = site.parentNode;
-		}
-		let onSite = site != document;
-		for (let item of newTabTools.contextMenu.querySelectorAll('.tile-context-menu')) {
-			item.hidden = !onSite;
-		}
-		if (onSite) {
-			let pinned = site._newtabSite.isPinned;
-			newTabTools.contextMenuPin.hidden = pinned;
-			newTabTools.contextMenuUnpin.hidden = !pinned;
+	contextMenuShowing(info) {
+		if (info.contexts.includes('link')) {
+			let target = browser.menus.getTargetElement(info.targetElementId);
+			let site = target.closest('.newtab-site');
+			let pinned = site && site._newtabSite.isPinned;
+
+			browser.menus.update('edit', { visible: !!site });
+			browser.menus.update('pin', { visible: !!site && !pinned });
+			browser.menus.update('unpin', { visible: !!site && pinned });
+			browser.menus.update('block', { visible: !!site });
+			browser.menus.refresh();
 		}
 	},
-	contextMenuOnClick(event) {
-		let site = document.activeElement;
-		while (site != document && !site.classList.contains('newtab-site')) {
-			site = site.parentNode;
-		}
+	contextMenuOnClick(info) {
+		let target = browser.menus.getTargetElement(info.targetElementId);
+		let site = target.closest('.newtab-site');
 
-		switch (event.target.id) {
-		case 'newtabtools-edittile':
+		switch (info.menuItemId) {
+		case 'edit':
 			let index = 0;
 			let cell = site.parentNode;
 			while (cell.previousElementSibling) {
@@ -463,16 +456,16 @@ var newTabTools = {
 			newTabTools.selectedSiteIndex = index;
 			break;
 
-		case 'newtabtools-pintile':
+		case 'pin':
 			site._newtabSite.pin();
 			break;
-		case 'newtabtools-unpintile':
+		case 'unpin':
 			site._newtabSite.unpin();
 			break;
-		case 'newtabtools-blocktile':
+		case 'block':
 			site._newtabSite.block();
 			break;
-		case 'newtabtools-options':
+		case 'options':
 			newTabTools.toggleOptions();
 			break;
 		}
@@ -1015,7 +1008,7 @@ var newTabTools = {
 		c.addEventListener('keyup', keyUpHandler);
 	}
 	for (let c of newTabTools.optionsPane.querySelectorAll('input[type="file"]')) {
-		c.addEventListener('change', function() { // jshint ignore:line
+		c.addEventListener('change', function() {
 			c.nextElementSibling.disabled = !c.files.length;
 		});
 	}
@@ -1031,8 +1024,9 @@ var newTabTools = {
 	newTabTools.optionsFilterHost.oninput = newTabTools.optionsFilterCount.oninput = function() {
 		newTabTools.optionsFilterSet.disabled = !newTabTools.optionsFilterHost.checkValidity() || !newTabTools.optionsFilterCount.checkValidity();
 	};
-	document.body.oncontextmenu = newTabTools.contextMenuShowing;
-	newTabTools.contextMenu.onclick = newTabTools.contextMenuOnClick;
+
+	browser.menus.onShown.addListener(newTabTools.contextMenuShowing);
+	browser.menus.onClicked.addListener(newTabTools.contextMenuOnClick);
 
 	window.addEventListener('keydown', function(event) {
 		if (event.key == 'Escape') {
