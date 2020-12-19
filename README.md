@@ -1,6 +1,9 @@
 New Tab Tools add-on
 ====================
 
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/gfonmeedigdbjpgpeojioadpimflbogh.svg)](https://chrome.google.com/webstore/detail/new-tab-tools/gfonmeedigdbjpgpeojioadpimflbogh)
+[![Firefox Add-ons](https://img.shields.io/amo/v/new-tab-tools.svg)](https://addons.mozilla.org/firefox/addon/new-tab-tools/)
+
 Releases
 --------
 
