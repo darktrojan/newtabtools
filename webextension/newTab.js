@@ -1091,4 +1091,7 @@ var newTabTools = {
 		newTabTools.pinURLAutocomplete.hidden = true;
 		event.stopPropagation();
 	}, true);
+	window.addEventListener('resize', function() {
+		newTabTools.refreshRecent();
+	});
 })();
