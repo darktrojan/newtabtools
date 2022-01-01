@@ -183,6 +183,9 @@
 	"options_theme": {
 		"message": "Theme"
 	},
+	"options_theme_auto": {
+		"message": "Use colors from browser theme"
+	},
 	"options_theme_dark": {
 		"message": "Dark theme"
 	},

@@ -79,6 +79,10 @@ var newTabTools = {
 			} else {
 				this.pinURLAutocomplete.appendChild(option);
 			}
+
+			this.getThemedImageURL(type, 'dark').then(url => {
+				option.querySelector('.autocomplete-icon').style.backgroundImage = url ? `url(${url})` : null;
+			});
 			urls.push(item.url);
 		};
 
@@ -414,6 +418,7 @@ var newTabTools = {
 		case 'margin':
 			Prefs.margin = value.split(' ');
 			break;
+		case 'themeAuto':
 		case 'locked':
 		case 'history':
 		case 'recent':
@@ -532,6 +537,155 @@ var newTabTools = {
 			this.removeBackgroundButton.disabled = false;
 		});
 	},
+	parseColour(str) {
+		let parts = /^(hsl|rgb)a?\((\d+),\s*([\d.]+%?),\s*([\d.]+%?)/.exec(str);
+		if (parts && parts[1] == 'rgb') {
+			return {
+				r: parseInt(parts[2], 10),
+				g: parseInt(parts[3], 10),
+				b: parseInt(parts[4], 10),
+			};
+		}
+
+		if (parts && parts[1] == 'hsl') {
+			let h = parseFloat(parts[2]) / 360;
+			let s = parseFloat(parts[3]) / 100;
+			let l = parseFloat(parts[4]) / 100;
+			let r, g, b;
+
+			if (s == 0){
+				r = g = b = l;
+			} else {
+				function hue2rgb(p, q, t) {
+					if (t < 0) {
+						t += 1;
+					}
+					if (t > 1) {
+						t -= 1;
+					}
+					if (t < 1/6) {
+						return p + (q - p) * 6 * t;
+					}
+					if (t < 1/2) {
+						return q;
+					}
+					if (t < 2/3) {
+						return p + (q - p) * (2/3 - t) * 6;
+					}
+					return p;
+				}
+
+				let q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+				let p = 2 * l - q;
+				r = hue2rgb(p, q, h + 1/3);
+				g = hue2rgb(p, q, h);
+				b = hue2rgb(p, q, h - 1/3);
+			}
+
+			return {
+				r: Math.round(r * 255),
+				g: Math.round(g * 255),
+				b: Math.round(b * 255),
+			};
+		}
+
+		parts = /^#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})/i.exec(str);
+		if (parts) {
+			return {
+				r: parseInt(parts[1], 16),
+				g: parseInt(parts[2], 16),
+				b: parseInt(parts[3], 16),
+			};
+		}
+
+		parts = /^#([0-9a-f])([0-9a-f])([0-9a-f])([0-9a-f])?$/i.exec(str);
+		if (parts) {
+			return {
+				r: parseInt(parts[1].repeat(2), 16),
+				g: parseInt(parts[2].repeat(2), 16),
+				b: parseInt(parts[3].repeat(2), 16),
+			};
+		}
+
+		return null;
+	},
+	async updateThemeColours(updateInfo) {
+		let properties = {
+			'--back-opaque': null,
+			'--contrast-opaque': null,
+			'--contrast-transp': null,
+			'--fore-opaque': null,
+			'--fore-trans1': null,
+			'--fore-transp': null,
+			'--page-background': null,
+		};
+
+		if (Prefs.themeAuto) {
+			try {
+				this._theme = updateInfo ? updateInfo.theme : await browser.theme.getCurrent();
+				let back = this.parseColour(this._theme.colors.ntp_background || this._theme.colors.toolbar);
+				let fore = this.parseColour(this._theme.colors.ntp_text || this._theme.colors.toolbar_text);
+
+				if (back && fore) {
+					properties['--back-opaque'] = `rgb(${back.r}, ${back.g}, ${back.b})`;
+					properties['--fore-opaque'] = `rgb(${fore.r}, ${fore.g}, ${fore.b})`;
+					properties['--fore-trans1'] = `rgba(${fore.r}, ${fore.g}, ${fore.b}, 0.1)`;
+					properties['--fore-transp'] = `rgba(${fore.r}, ${fore.g}, ${fore.b}, var(--opacity))`;
+					properties['--page-background'] = `rgb(${back.r}, ${back.g}, ${back.b})`;
+
+					let brightness = 0.299 * fore.r + 0.587 * fore.g + 0.114 * fore.b;
+					if (brightness < 144) {
+						properties['--contrast-opaque'] = 'rgb(255, 255, 255)';
+						properties['--contrast-transp'] = 'rgba(255, 255, 255, var(--opacity))';
+					} else {
+						properties['--contrast-opaque'] = 'rgb(0, 0, 0)';
+						properties['--contrast-transp'] = 'rgba(0, 0, 0, var(--opacity))';
+					}
+				}
+			} catch (ex) {
+				console.debug(ex);
+			}
+		} else {
+			this._theme = null;
+		}
+
+		for (let [key, value] of Object.entries(properties)) {
+			document.documentElement.style.setProperty(key, value);
+		}
+
+		for (let [selector, name] of Object.entries({
+			'.close-button': 'close',
+			'.newtab-control': 'controls',
+			'#options-toggle': 'options',
+			'#locked-toggle': 'unlocked',
+			':root[locked="true"] #locked-toggle': 'locked',
+			'button.arrow': 'arrow',
+		})) {
+			let url = await this.getThemedImageURL(name);
+			for (let element of document.querySelectorAll(selector)) {
+				element.style.backgroundImage = url ? `url(${url})` : null;
+			}
+		}
+	},
+	async getThemedImageURL(name, theme = Prefs.theme) {
+		let fore = document.documentElement.style.getPropertyValue('--fore-opaque');
+		let back = document.documentElement.style.getPropertyValue('--back-opaque');
+
+		if (!fore) {
+			return null;
+		}
+
+		try {
+			let request = await fetch(browser.extension.getURL(`images/${name}-${theme}.svg`));
+			let content = await request.text();
+			content = content.replaceAll('#fff', fore);
+			content = content.replaceAll('#1f364c', back);
+			return 'data:image/svg+xml;base64,' + btoa(content);
+		} catch (ex) {
+			console.debug(ex);
+			return null;
+		}
+	},
 	updateUI(keys) {
 		function setMargin(piece, size) {
 			for (let pieceElement of document.querySelectorAll(piece)) {
@@ -556,6 +710,18 @@ var newTabTools = {
 			document.querySelector('[name="theme"][value="' + theme + '"]').checked = true;
 			document.documentElement.setAttribute('theme', theme);
 			this.darkIcons.disabled = theme == 'light';
+			this.updateThemeColours();
+		}
+
+		if (!keys || keys.includes('themeAuto')) {
+			let themeAuto = Prefs.themeAuto;
+			document.querySelector('[name="themeAuto"]').checked = themeAuto;
+			this.updateThemeColours();
+			if (themeAuto) {
+				browser.theme.onUpdated.addListener(this.updateThemeColours);
+			} else {
+				browser.theme.onUpdated.removeListener(this.updateThemeColours);
+			}
 		}
 
 		if (!keys || keys.includes('locked')) {
@@ -563,8 +729,14 @@ var newTabTools = {
 			document.querySelector('[name="locked"]').checked = locked;
 			if (locked) {
 				document.documentElement.setAttribute('locked', 'true');
+				this.getThemedImageURL('locked').then(url => {
+					this.lockedToggleButton.style.backgroundImage = url ? `url(${url})` : null;
+				});
 			} else {
 				document.documentElement.removeAttribute('locked');
+				this.getThemedImageURL('unlocked').then(url => {
+					this.lockedToggleButton.style.backgroundImage = url ? `url(${url})` : null;
+				});
 			}
 		}
 
@@ -928,6 +1100,7 @@ var newTabTools = {
 };
 
 (function() {
+	newTabTools.updateThemeColours = newTabTools.updateThemeColours.bind(newTabTools);
 	let uiElements = {
 		'darkIcons': 'dark-icons',
 		'backgroundFake': 'background-fake',

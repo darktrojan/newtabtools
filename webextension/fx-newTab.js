@@ -386,6 +386,13 @@ var Grid = {
 	createSite(link, cell) {
 		let node = cell.node;
 		node.appendChild(this._siteFragment.cloneNode(true));
+		if (Prefs.themeAuto) {
+			newTabTools.getThemedImageURL('controls').then(url => {
+				for (let element of this._siteFragment.querySelectorAll('.newtab-control')) {
+					element.style.backgroundImage = url ? `url(${url})` : null;
+				}
+			});
+		}
 		return new Site(node.firstElementChild, link);
 	},
 

@@ -1,4 +1,7 @@
 {
+	"options_theme_auto": {
+		"message": "Use colours from browser theme"
+	},
 	"tile_thumbnail_bgcolor": {
 		"message": "Background colour:"
 	}

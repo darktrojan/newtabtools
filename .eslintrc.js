@@ -26,6 +26,7 @@ module.exports = {
 		'indent': [2, 'tab', { SwitchCase: 0 }],
 		'func-names': [2, 'never'],
 		'no-case-declarations': 0,
+		'no-inner-declarations': 0,
 		'no-tabs': 0,
 		'object-curly-newline': 2,
 		'padded-blocks': [2, 'never'],

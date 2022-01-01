@@ -7,6 +7,7 @@
 
 var Prefs = {
 	_theme: 'light',
+	_themeAuto: false,
 	_opacity: 80,
 	_rows: 3,
 	_columns: 3,
@@ -26,6 +27,7 @@ var Prefs = {
 
 		let names = [
 			'theme',
+			'themeAuto',
 			'opacity',
 			'rows',
 			'columns',
@@ -59,6 +61,9 @@ var Prefs = {
 	parsePrefs(prefs) {
 		if (['light', 'dark'].includes(prefs.theme)) {
 			this._theme = prefs.theme;
+		}
+		if ('themeAuto' in prefs) {
+			this._themeAuto = prefs.themeAuto !== false;
 		}
 		if (Number.isInteger(prefs.opacity) && prefs.opacity >= 0 && prefs.opacity <= 100) {
 			this._opacity = prefs.opacity;
