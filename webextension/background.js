@@ -1,9 +1,8 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this file,
- * You can obtain one at http://mozilla.org/MPL/2.0/. */
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, you can obtain one at http://mozilla.org/MPL/2.0/. */
 
-/* import-globals-from export.js */
-/* import-globals-from prefs.js */
+/* globals Background, compareVersions, makeZip, Prefs, readZip, Tiles */
 
 Promise.all([
 	Prefs.init(),
@@ -232,6 +231,40 @@ chrome.tabs.query({}, function(tabs) {
 			chrome.browserAction.enable(tab.id);
 		}
 	}
+});
+
+browser.menus.create({
+	id: 'edit',
+	title: chrome.i18n.getMessage('contextmenu_edit'),
+	contexts: ['link'],
+});
+browser.menus.create({
+	id: 'pin',
+	title: chrome.i18n.getMessage('contextmenu_pin'),
+	contexts: ['link'],
+});
+browser.menus.create({
+	id: 'unpin',
+	title: chrome.i18n.getMessage('contextmenu_unpin'),
+	contexts: ['link'],
+});
+browser.menus.create({
+	id: 'block',
+	title: chrome.i18n.getMessage('contextmenu_block'),
+	contexts: ['link'],
+});
+browser.menus.create({
+	id: 'options',
+	title: chrome.i18n.getMessage('contextmenu_options'),
+	contexts: ['page'],
+});
+
+browser.menus.onShown.addListener(info => {
+	let visible = info.pageUrl.startsWith(NEW_TAB_URL);
+	for (let id of info.menuIds) {
+		browser.menus.update(id, { visible });
+	}
+	browser.menus.refresh();
 });
 
 function cleanupThumbnails() {

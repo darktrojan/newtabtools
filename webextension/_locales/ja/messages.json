@@ -190,7 +190,7 @@
 		"message": "New Tab Toolsには、履歴とブックマークを使用するための追加のアクセス許可が必要です。"
 	},
 	"pin_url_placeholder": {
-		"message": "URLを入力または選択する"
+		"message": "URLを入力または選択"
 	},
 	"pin_url_request": {
 		"message": "続行…"
@@ -260,5 +260,11 @@
 	},
 	"tileurl_empty": {
 		"message": "空のタイル"
+	},
+	"tile_url_placeholder": {
+		"message": "新しいタイルのURLを入力"
+	},
+	"tile_url_set": {
+		"message": "設定"
 	}
 }

@@ -1,6 +1,6 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this file,
- * You can obtain one at http://mozilla.org/MPL/2.0/. */
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, you can obtain one at http://mozilla.org/MPL/2.0/. */
 
 :root {
 	-moz-appearance: none;
@@ -10,22 +10,22 @@
 
 	--opacity: 0.8;
 
-	--fore-opaque: rgba(255, 255, 255, 1.0);
-	--fore-transp: rgba(255, 255, 255, var(--opacity));
-
-	--page-background: #171b1f;
 	--back-opaque: rgba( 31,  54,  76, 1.0);
-	--back-trans1: rgba( 31,  54,  76, 0.2);
-	--back-trans2: rgba( 31,  54,  76, var(--opacity));
+	--contrast-opaque: rgb(0, 0, 0);
+	--contrast-transp: rgba(0, 0, 0, var(--opacity));
+	--fore-opaque: rgba(255, 255, 255, 1.0);
+	--fore-trans1: rgba(255, 255, 255, 0.1);
+	--fore-transp: rgba(255, 255, 255, var(--opacity));
+	--page-background: #171b1f;
 }
 :root[theme="light"] {
-	--fore-opaque: rgba( 31,  54,  76, 1.0);
-	--fore-transp: rgba( 31,  54,  76, var(--opacity));
-
-	--page-background: #f2f2f2;
 	--back-opaque: rgba(255, 255, 255, 1.0);
-	--back-trans1: rgba(255, 255, 255, 0.2);
-	--back-trans2: rgba(255, 255, 255, var(--opacity));
+	--contrast-opaque: rgb(255, 255, 255);
+	--contrast-transp: rgba(255, 255, 255, var(--opacity));
+	--fore-opaque: rgba( 31,  54,  76, 1.0);
+	--fore-trans1: rgba( 31,  54,  76, 0.1);
+	--fore-transp: rgba( 31,  54,  76, var(--opacity));
+	--page-background: #f2f2f2;
 }
 body {
 	height: 100%;
@@ -75,7 +75,6 @@ input[type="button"] {
 	font-size: smaller;
 	white-space: nowrap;
 	padding: 2px 5px;
-	background-color: var(--back-trans1);
 }
 /* SCROLLBOX */
 #newtab-scrollbox {
@@ -85,6 +84,8 @@ input[type="button"] {
 	-moz-user-focus: normal;
 	flex-direction: column;
 	overflow: auto;
+	text-shadow: 0 0 3px var(--contrast-transp), 0 0 5px var(--contrast-transp);
+	--shadow-opaque: 0 0 3px var(--contrast-opaque), 0 0 5px var(--contrast-opaque);
 }
 /* RECENT TABS */
 #newtab-recent-outer,
@@ -125,7 +126,6 @@ input[type="button"] {
 	-webkit-margin-end: 4px;
 	margin-inline-end: 4px;
 	color: var(--fore-transp);
-	text-shadow: 0 0 3px var(--back-trans2), 0 0 1px var(--back-trans2);
 }
 .recent {
 	padding: 2px 4px;
@@ -143,11 +143,10 @@ input[type="button"] {
 	white-space: nowrap;
 	vertical-align: middle;
 	color: var(--fore-transp);
-	text-shadow: 0 0 3px var(--back-trans2), 0 0 1px var(--back-trans2);
 }
 .recent:hover {
 	color: var(--fore-opaque);
-	text-shadow: 0 0 3px var(--back-opaque), 0 0 1px var(--back-opaque);
+	text-shadow: var(--shadow-opaque);
 }
 /* UNDO */
 #newtab-undo-container {
@@ -361,6 +360,7 @@ svg {
 	top: 0;
 	right: 0;
 	bottom: 0;
+	border-radius: 4px;
 }
 .newtab-thumbnail {
 	opacity: var(--opacity);
@@ -370,13 +370,17 @@ svg {
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center top;
-	background-color: var(--back-trans1);
+	background-color: var(--fore-trans1);
 	margin-bottom: 24px;
 	box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
 }
 .custom-thumbnail {
 	background-size: contain;
 	background-position: 50% 50%;
+}
+.newtab-site:active,
+.newtab-site:hover {
+	text-shadow: var(--shadow-opaque);
 }
 .newtab-thumbnail[dragged],
 .newtab-site:active > .newtab-link > .newtab-thumbnail,
@@ -406,12 +410,10 @@ svg {
 	line-height: 24px;
 	color: var(--fore-transp);
 	text-align: center;
-	text-shadow: 0 0 3px var(--back-trans2), 0 0 1px var(--back-trans2);
 }
 .newtab-site:active .newtab-title,
 .newtab-site:hover .newtab-title {
 	color: var(--fore-opaque);
-	text-shadow: 0 0 3px var(--back-opaque), 0 0 1px var(--back-opaque);
 }
 :root[titlesize="hidden"] .newtab-title {
 	visibility: collapse;
@@ -632,6 +634,12 @@ svg {
 #options-title-input {
 	width: 0;
 	flex: 1;
+}#options input[type="range"] {
+  background-color: transparent;
+}
+
+#options input[type="range"]::-moz-range-track {
+  background-color: ThreeDLightShadow;
 }
 #options :-moz-ui-invalid {
 	box-shadow: 0 0 1.5px #ff0000;
@@ -709,7 +717,7 @@ table {
 	line-height: 27px;
 	vertical-align: middle;
 }
-#options-page td > label:not(:first-child) {
+#options-page td > label + label {
 	-webkit-margin-start: 1em;
 	margin-inline-start: 1em;
 }
@@ -735,7 +743,7 @@ a {
 }
 #options-donate-wrap {
 	border: 1px #b2aeaa solid !important;
-	background-color: var(--back-trans1);
+	background-color: rgba(0, 0, 0, 0.1);
 	text-align: center;
 }
 #options-donate-wrap > div {

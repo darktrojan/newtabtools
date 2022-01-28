@@ -1,8 +1,7 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this file,
- * You can obtain one at http://mozilla.org/MPL/2.0/. */
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, you can obtain one at http://mozilla.org/MPL/2.0/. */
 
-/* globals chrome */
 chrome.storage.local.get({'thumbnailSize': 600}, function(prefs) {
 	let canvas1 = document.createElement('canvas');
 	canvas1.width = prefs.thumbnailSize;
