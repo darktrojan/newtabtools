@@ -8,6 +8,18 @@
 	"action_pin": {
 		"message": "Připnout na nový panel"
 	},
+	"backup_button": {
+		"message": "Zálohovat…"
+	},
+	"backup_description": {
+		"message": "New Tab Tools vytvoří soubor obsahující nastavení, připnuté dlaždice a obrázek na pozadí."
+	},
+	"backup_header": {
+		"message": "Zálohování:"
+	},
+	"backup_restore_button": {
+		"message": "Zálohovat/Obnovit…"
+	},
 	"bg_header": {
 		"message": "Obrázek pozadí:"
 	},
@@ -171,6 +183,9 @@
 	"options_theme": {
 		"message": "Vzhled"
 	},
+	"options_theme_auto": {
+		"message": "Použití barev z motivu prohlížeče"
+	},
 	"options_theme_dark": {
 		"message": "Tmavý motiv"
 	},
@@ -186,11 +201,29 @@
 	"pin_url_header": {
 		"message": "Přidat dlaždici:"
 	},
+	"pin_url_permissions": {
+		"message": "New Tab Tools vyžaduje dodatečná oprávnění pro použití vaší historie a záložek."
+	},
 	"pin_url_placeholder": {
 		"message": "Napište nebo vyberte URL"
 	},
+	"pin_url_request": {
+		"message": "Pokračovat…"
+	},
 	"recently_closed_tabs": {
 		"message": "Nedávno zavřené panely:"
+	},
+	"restore_button": {
+		"message": "Obnovit"
+	},
+	"restore_description": {
+		"message": "Vyberte soubor zálohy New Tab Tools, který chcete importovat."
+	},
+	"restore_header": {
+		"message": "Obnovení:"
+	},
+	"restore_warning": {
+		"message": "Tato funkce přepíše vaše stávající nastavení, připnuté dlaždice a obrázek na pozadí. To nelze vrátit zpět."
 	},
 	"tile_block": {
 		"message": "Odstranit tuto stránku"
@@ -232,7 +265,7 @@
 		"message": "Popisek:"
 	},
 	"tile_title_placeholder": {
-		"message": "Zadejte nový popisek dlaždice"
+		"message": "Zadejte popisek nové dlaždice"
 	},
 	"tile_title_set": {
 		"message": "Nastavit"
@@ -242,5 +275,11 @@
 	},
 	"tileurl_empty": {
 		"message": "Prázdná dlaždice"
+	},
+	"tile_url_placeholder": {
+		"message": "Zadejte URL adresu nové dlaždice"
+	},
+	"tile_url_set": {
+		"message": "Nastavit"
 	}
 }
