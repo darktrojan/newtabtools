@@ -181,7 +181,10 @@
 		"message": "Małe"
 	},
 	"options_theme": {
-		"message": "Temat"
+		"message": "Motyw"
+	},
+	"options_theme_auto": {
+		"message": "Użyj kolorów z motywu przeglądarki"
 	},
 	"options_theme_dark": {
 		"message": "Ciemny"
